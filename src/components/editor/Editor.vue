@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div id="ddei_editor"
-         class="ddei_editor">
+    <div id="ddei_editor" class="ddei_editor">
       <div class="top">
         <TopMenu></TopMenu>
       </div>
@@ -29,7 +28,6 @@ import Toolbox from './toolbox/Toolbox.vue';
 import BottomMenu from './bottommenu/BottomMenu.vue';
 import PropertyView from './propertyview/PropertyView.vue';
 import CanvasView from './canvasview/CanvasView.vue';
-
 export default {
   name: "DDei-Editor",
   extends: null,
@@ -48,9 +46,9 @@ export default {
   },
   computed: {},
   watch: {},
-  created() {},
+  created() { },
   mounted() {
-   
+
   },
 };
 </script>
@@ -60,24 +58,24 @@ export default {
   width: 100%;
   height: calc(100vh);
   display: flex;
-  flex-direction: column;        
+  flex-direction: column;
   background-color: aquamarine;
 }
 
 .ddei_editor .top {
   background: grey;
-  flex: 0 0 175px!important;
+  flex: 0 0 175px !important;
 }
 
 .ddei_editor .body {
-  display: flex; 
+  display: flex;
   flex: 1;
 }
 
 .ddei_editor .body .left {
   text-align: center;
   background: green;
-  flex: 0 0 220px!important;
+  flex: 0 0 220px !important;
 }
 
 .ddei_editor .body .middle {
@@ -86,10 +84,10 @@ export default {
 }
 
 .ddei_editor .body .right {
-  flex: 0 0 275px!important;
+  flex: 0 0 275px !important;
 }
 
 .ddei_editor .bottom {
-  flex: 0 0 60px!important;
+  flex: 0 0 60px !important;
 }
 </style>
