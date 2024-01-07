@@ -4,7 +4,7 @@ import { DDeiCoreToolboxSimplePanel, DDeiCoreTopMenuSimplePanel, DDeiCoreThemeBl
 import { DDeiExtUML } from "@ddei/uml"
 import { DDeiExtSearch } from "@ddei/search"
 import { DDeiFuncCallResult, DDeiUtil, DDeiEditorUtil } from "ddei-framework";
-import DDeiExtQuickStyle from "@ddei/quickstyle"
+import {DDeiExtQuickStyle,DDeiCoreCanvasQuickDialog} from "@ddei/quickstyle"
 import DDeiExtTooltip from "@ddei/tooltip"
 import { DDeiExtQuickControl, QuickChooseControlDialog } from "@ddei/quickcontrol"
 import { defineComponent, markRaw } from "vue";
@@ -13,6 +13,7 @@ import ReplaceDivDemo  from "./ReplaceDivDemo.vue";
 import HtmlTooltipDemo from "./HtmlTooltipDemo.vue";
 import {controls as ControlDefinesDemo,groups as GroupDefinesDemo} from "./controldefinesdemo"
 import TopMenuViewerDemo from "./TopMenuViewerDemo.vue"
+import QuickStyleDemo from "./QuickStyleDemo.vue"
 // import i18nJP from "./langs/ja_JP"
 
 export default defineComponent({
@@ -28,12 +29,18 @@ export default defineComponent({
       currentLayout = "ddei-core-layout-mobile"
     }else{
       exts = [DDeiExtTooltip,
-      DDeiExtQuickStyle]
+        DDeiExtQuickStyle,
+        DDeiCoreCanvasQuickDialog.configuration({
+          changeLevel:{
+            viewer:QuickStyleDemo
+          }
+        }),
+      ]
     }
     const options = markRaw({
       currentLayout: currentLayout,
       config: {
-        // ratio: 1.2, //默认缩放比例为120%
+        ratio: 0.6, //默认缩放比例为120%
         pixel:2, //调整渲染质量
         // readonly:true,
         // readonly:1,
@@ -77,7 +84,13 @@ export default defineComponent({
               // }
             
           ]
-        }
+        },
+        
+      },
+      onMounted: (editor) => {
+        
+        let file = editor.files[editor.currentFileIndex]
+        file.sheets[file.currentSheetIndex].stage.mark = {type:1,data:'新值' }
       },
       // i18n: {  //国际化配置
       //   lang: "ja_JP", //强制设定语言，如果不设置则读取浏览器的语言设置

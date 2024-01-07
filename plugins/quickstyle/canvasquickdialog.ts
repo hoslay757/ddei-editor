@@ -7,7 +7,7 @@ class DDeiCoreCanvasQuickDialog extends DDeiPluginBase {
   /**
    * 缺省实例
    */
-  static defaultIns: DDeiCoreCanvasQuickDialog = new DDeiCoreCanvasQuickDialog(null);
+  static defaultIns: DDeiCoreCanvasQuickDialog = new DDeiCoreCanvasQuickDialog();
 
 
   plugins: object[] = [CanvasQuickDialog]
@@ -44,4 +44,5 @@ class DDeiCoreCanvasQuickDialog extends DDeiPluginBase {
   }
 }
 
+export { DDeiCoreCanvasQuickDialog }
 export default DDeiCoreCanvasQuickDialog
