@@ -1,0 +1,52 @@
+.ddei-editor[theme='ddei-core-theme-default'] {
+  --background: white;
+  --theme: #F5F5F5;
+  --text: black;
+  --dot: #176eff;
+  --hover: #e7e7e7;
+  --icon: #424242;
+  --border:#D5D5DF;
+  --placeholder: #AdAdAd;
+  --scroll-background: var(--theme);
+  --scroll-hover: var(--hover);
+  --scroll-border: var(--border);
+
+  --panel-header:var(--theme);
+  --panel-background: var(--background);
+  --panel-title: var(--text);
+  --panel-border: var(--border);
+  --panel-hover: var(--hover);
+  --panel-disabled: var(--theme);
+  --panel-selected: var(--hover);
+  --panel-title-disabled: #AdAdAd;
+  --panel-title-selected: var(--text);
+
+
+  --toolbox-header:var(--theme);
+  --toolbox-background:var(--background);
+  --toolbox-title:var(--text);
+  --toolbox-hover:var(--hover);
+  --toolbox-control-hover: #EDEFFF;
+  --toolbox-control-hover-outline: 2px solid #BED0EF;
+  --toolbox-control-title: var(--text);
+
+
+  --topmenu-background: var(--background);
+  --topmenu-header: var(--theme);
+
+
+
+  --canvas-rule-background: var(--background);
+  --canvas-rule-border: #E0E3E9;
+  --canvas-scroll-background: var(--background);
+  --canvas-scroll-border: #E0E3E9;
+  --canvas-grid-line: rgb(220, 220, 220);
+  --canvas-grid-dot: rgb(121, 121, 121);
+  --canvas-control-border: black;
+  --canvas-control-background: white;
+  --canvas-control-title: #252525;
+
+  --canvas-mark-title: #252525;
+  --canvas-text-selection: #97bdf2;
+  --canvas-text-cursor: black;
+}

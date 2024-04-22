@@ -1,0 +1,968 @@
+{
+  "id": "4428875",
+  "name": "ddei-规范",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "15727001",
+      "name": "置换",
+      "font_class": "zhihuan",
+      "unicode": "e6dc",
+      "unicode_decimal": 59100
+    },
+    {
+      "icon_id": "38790387",
+      "name": "资源 94",
+      "font_class": "a-ziyuan94",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "658040",
+      "name": "收藏",
+      "font_class": "shoucang",
+      "unicode": "e6db",
+      "unicode_decimal": 59099
+    },
+    {
+      "icon_id": "39184664",
+      "name": "资源 46-copy",
+      "font_class": "icon-text-underline",
+      "unicode": "e700",
+      "unicode_decimal": 59136
+    },
+    {
+      "icon_id": "39331788",
+      "name": "资源 504",
+      "font_class": "a-ziyuan504",
+      "unicode": "e6d4",
+      "unicode_decimal": 59092
+    },
+    {
+      "icon_id": "39331789",
+      "name": "资源 503",
+      "font_class": "a-ziyuan503",
+      "unicode": "e6d5",
+      "unicode_decimal": 59093
+    },
+    {
+      "icon_id": "39331786",
+      "name": "资源 502",
+      "font_class": "a-ziyuan502",
+      "unicode": "e6d6",
+      "unicode_decimal": 59094
+    },
+    {
+      "icon_id": "39331787",
+      "name": "资源 500",
+      "font_class": "a-ziyuan500",
+      "unicode": "e6d7",
+      "unicode_decimal": 59095
+    },
+    {
+      "icon_id": "39331785",
+      "name": "资源 501",
+      "font_class": "a-ziyuan501",
+      "unicode": "e6d8",
+      "unicode_decimal": 59096
+    },
+    {
+      "icon_id": "39331784",
+      "name": "资源 499",
+      "font_class": "a-ziyuan499",
+      "unicode": "e6d9",
+      "unicode_decimal": 59097
+    },
+    {
+      "icon_id": "39325900",
+      "name": "youjian-01-01",
+      "font_class": "youjian-01-01",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
+      "icon_id": "39341434",
+      "name": "border-pencil",
+      "font_class": "border-pencil",
+      "unicode": "e6da",
+      "unicode_decimal": 59098
+    },
+    {
+      "icon_id": "39325876",
+      "name": "新增图标04",
+      "font_class": "icon-copy-file",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "39325872",
+      "name": "新增图标",
+      "font_class": "add-file1-icon",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "39325875",
+      "name": "新增图标02",
+      "font_class": "add-folder-icon",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "39325873",
+      "name": "新增图标05",
+      "font_class": "icon-edit-file",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "39325874",
+      "name": "新增图标03",
+      "font_class": "add-file-icon",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "39184592",
+      "name": "wenjian01",
+      "font_class": "wenjian01",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "39181994",
+      "name": "资源 402",
+      "font_class": "a-ziyuan402",
+      "unicode": "e68a",
+      "unicode_decimal": 59018
+    },
+    {
+      "icon_id": "39181995",
+      "name": "资源 405",
+      "font_class": "a-ziyuan405",
+      "unicode": "e68b",
+      "unicode_decimal": 59019
+    },
+    {
+      "icon_id": "39182000",
+      "name": "资源 401",
+      "font_class": "a-ziyuan401",
+      "unicode": "e68c",
+      "unicode_decimal": 59020
+    },
+    {
+      "icon_id": "39182001",
+      "name": "资源 408",
+      "font_class": "a-ziyuan408",
+      "unicode": "e68d",
+      "unicode_decimal": 59021
+    },
+    {
+      "icon_id": "39182004",
+      "name": "资源 406",
+      "font_class": "a-ziyuan406",
+      "unicode": "e68e",
+      "unicode_decimal": 59022
+    },
+    {
+      "icon_id": "39182005",
+      "name": "资源 409",
+      "font_class": "a-ziyuan409",
+      "unicode": "e68f",
+      "unicode_decimal": 59023
+    },
+    {
+      "icon_id": "39182006",
+      "name": "资源 395",
+      "font_class": "a-ziyuan395",
+      "unicode": "e690",
+      "unicode_decimal": 59024
+    },
+    {
+      "icon_id": "39182007",
+      "name": "资源 412",
+      "font_class": "a-ziyuan412",
+      "unicode": "e691",
+      "unicode_decimal": 59025
+    },
+    {
+      "icon_id": "39182008",
+      "name": "资源 413",
+      "font_class": "a-ziyuan413",
+      "unicode": "e692",
+      "unicode_decimal": 59026
+    },
+    {
+      "icon_id": "39182009",
+      "name": "资源 416",
+      "font_class": "a-ziyuan416",
+      "unicode": "e693",
+      "unicode_decimal": 59027
+    },
+    {
+      "icon_id": "39182010",
+      "name": "资源 419",
+      "font_class": "a-ziyuan419",
+      "unicode": "e694",
+      "unicode_decimal": 59028
+    },
+    {
+      "icon_id": "39182011",
+      "name": "资源 415",
+      "font_class": "a-ziyuan415",
+      "unicode": "e695",
+      "unicode_decimal": 59029
+    },
+    {
+      "icon_id": "39182012",
+      "name": "资源 414",
+      "font_class": "a-ziyuan414",
+      "unicode": "e696",
+      "unicode_decimal": 59030
+    },
+    {
+      "icon_id": "39182013",
+      "name": "资源 422",
+      "font_class": "a-ziyuan422",
+      "unicode": "e697",
+      "unicode_decimal": 59031
+    },
+    {
+      "icon_id": "39182014",
+      "name": "资源 417",
+      "font_class": "a-ziyuan417",
+      "unicode": "e698",
+      "unicode_decimal": 59032
+    },
+    {
+      "icon_id": "39182015",
+      "name": "资源 421",
+      "font_class": "a-ziyuan421",
+      "unicode": "e699",
+      "unicode_decimal": 59033
+    },
+    {
+      "icon_id": "39182016",
+      "name": "资源 423",
+      "font_class": "a-ziyuan423",
+      "unicode": "e69a",
+      "unicode_decimal": 59034
+    },
+    {
+      "icon_id": "39182017",
+      "name": "资源 425",
+      "font_class": "a-ziyuan425",
+      "unicode": "e69b",
+      "unicode_decimal": 59035
+    },
+    {
+      "icon_id": "39182018",
+      "name": "资源 418",
+      "font_class": "a-ziyuan418",
+      "unicode": "e69c",
+      "unicode_decimal": 59036
+    },
+    {
+      "icon_id": "39182019",
+      "name": "资源 420",
+      "font_class": "a-ziyuan420",
+      "unicode": "e69d",
+      "unicode_decimal": 59037
+    },
+    {
+      "icon_id": "39182020",
+      "name": "资源 424",
+      "font_class": "a-ziyuan424",
+      "unicode": "e69e",
+      "unicode_decimal": 59038
+    },
+    {
+      "icon_id": "39182021",
+      "name": "资源 427",
+      "font_class": "a-ziyuan427",
+      "unicode": "e69f",
+      "unicode_decimal": 59039
+    },
+    {
+      "icon_id": "39182022",
+      "name": "资源 426",
+      "font_class": "a-ziyuan426",
+      "unicode": "e6a0",
+      "unicode_decimal": 59040
+    },
+    {
+      "icon_id": "39182023",
+      "name": "资源 428",
+      "font_class": "a-ziyuan428",
+      "unicode": "e6a1",
+      "unicode_decimal": 59041
+    },
+    {
+      "icon_id": "39182024",
+      "name": "资源 431",
+      "font_class": "a-ziyuan431",
+      "unicode": "e6a2",
+      "unicode_decimal": 59042
+    },
+    {
+      "icon_id": "39182025",
+      "name": "资源 430",
+      "font_class": "a-ziyuan430",
+      "unicode": "e6a3",
+      "unicode_decimal": 59043
+    },
+    {
+      "icon_id": "39182026",
+      "name": "资源 432",
+      "font_class": "a-ziyuan432",
+      "unicode": "e6a4",
+      "unicode_decimal": 59044
+    },
+    {
+      "icon_id": "39182027",
+      "name": "资源 429",
+      "font_class": "a-ziyuan429",
+      "unicode": "e6a5",
+      "unicode_decimal": 59045
+    },
+    {
+      "icon_id": "39182028",
+      "name": "资源 438",
+      "font_class": "a-ziyuan438",
+      "unicode": "e6a6",
+      "unicode_decimal": 59046
+    },
+    {
+      "icon_id": "39182029",
+      "name": "资源 433",
+      "font_class": "a-ziyuan433",
+      "unicode": "e6a7",
+      "unicode_decimal": 59047
+    },
+    {
+      "icon_id": "39182030",
+      "name": "资源 434",
+      "font_class": "a-ziyuan434",
+      "unicode": "e6a8",
+      "unicode_decimal": 59048
+    },
+    {
+      "icon_id": "39182031",
+      "name": "资源 437",
+      "font_class": "a-ziyuan437",
+      "unicode": "e6a9",
+      "unicode_decimal": 59049
+    },
+    {
+      "icon_id": "39182032",
+      "name": "资源 435",
+      "font_class": "a-ziyuan435",
+      "unicode": "e6aa",
+      "unicode_decimal": 59050
+    },
+    {
+      "icon_id": "39182033",
+      "name": "资源 439",
+      "font_class": "a-ziyuan439",
+      "unicode": "e6ab",
+      "unicode_decimal": 59051
+    },
+    {
+      "icon_id": "39182034",
+      "name": "资源 440",
+      "font_class": "a-ziyuan440",
+      "unicode": "e6ac",
+      "unicode_decimal": 59052
+    },
+    {
+      "icon_id": "39182035",
+      "name": "资源 442",
+      "font_class": "a-ziyuan442",
+      "unicode": "e6ad",
+      "unicode_decimal": 59053
+    },
+    {
+      "icon_id": "39182036",
+      "name": "资源 441",
+      "font_class": "a-ziyuan441",
+      "unicode": "e6ae",
+      "unicode_decimal": 59054
+    },
+    {
+      "icon_id": "39182037",
+      "name": "资源 443",
+      "font_class": "a-ziyuan443",
+      "unicode": "e6af",
+      "unicode_decimal": 59055
+    },
+    {
+      "icon_id": "39182038",
+      "name": "资源 436",
+      "font_class": "a-ziyuan436",
+      "unicode": "e6b0",
+      "unicode_decimal": 59056
+    },
+    {
+      "icon_id": "39182039",
+      "name": "资源 445",
+      "font_class": "a-ziyuan445",
+      "unicode": "e6b1",
+      "unicode_decimal": 59057
+    },
+    {
+      "icon_id": "39182040",
+      "name": "资源 444",
+      "font_class": "a-ziyuan444",
+      "unicode": "e6b2",
+      "unicode_decimal": 59058
+    },
+    {
+      "icon_id": "39182041",
+      "name": "资源 447",
+      "font_class": "a-ziyuan447",
+      "unicode": "e6b3",
+      "unicode_decimal": 59059
+    },
+    {
+      "icon_id": "39182042",
+      "name": "资源 446",
+      "font_class": "a-ziyuan446",
+      "unicode": "e6b4",
+      "unicode_decimal": 59060
+    },
+    {
+      "icon_id": "39182043",
+      "name": "资源 449",
+      "font_class": "a-ziyuan449",
+      "unicode": "e6b5",
+      "unicode_decimal": 59061
+    },
+    {
+      "icon_id": "39182044",
+      "name": "资源 463",
+      "font_class": "a-ziyuan463",
+      "unicode": "e6b6",
+      "unicode_decimal": 59062
+    },
+    {
+      "icon_id": "39182045",
+      "name": "资源 462",
+      "font_class": "a-ziyuan462",
+      "unicode": "e6b7",
+      "unicode_decimal": 59063
+    },
+    {
+      "icon_id": "39182046",
+      "name": "资源 448",
+      "font_class": "a-ziyuan448",
+      "unicode": "e6b8",
+      "unicode_decimal": 59064
+    },
+    {
+      "icon_id": "39182047",
+      "name": "资源 450",
+      "font_class": "a-ziyuan450",
+      "unicode": "e6b9",
+      "unicode_decimal": 59065
+    },
+    {
+      "icon_id": "39182048",
+      "name": "资源 451",
+      "font_class": "a-ziyuan451",
+      "unicode": "e6ba",
+      "unicode_decimal": 59066
+    },
+    {
+      "icon_id": "39182049",
+      "name": "资源 460",
+      "font_class": "a-ziyuan460",
+      "unicode": "e6bb",
+      "unicode_decimal": 59067
+    },
+    {
+      "icon_id": "39182050",
+      "name": "资源 456",
+      "font_class": "a-ziyuan456",
+      "unicode": "e6bc",
+      "unicode_decimal": 59068
+    },
+    {
+      "icon_id": "39182051",
+      "name": "资源 472",
+      "font_class": "a-ziyuan472",
+      "unicode": "e6bd",
+      "unicode_decimal": 59069
+    },
+    {
+      "icon_id": "39182052",
+      "name": "资源 478",
+      "font_class": "a-ziyuan478",
+      "unicode": "e6be",
+      "unicode_decimal": 59070
+    },
+    {
+      "icon_id": "39182053",
+      "name": "资源 475",
+      "font_class": "a-ziyuan475",
+      "unicode": "e6bf",
+      "unicode_decimal": 59071
+    },
+    {
+      "icon_id": "39182054",
+      "name": "资源 459",
+      "font_class": "a-ziyuan459",
+      "unicode": "e6c0",
+      "unicode_decimal": 59072
+    },
+    {
+      "icon_id": "39182056",
+      "name": "资源 473",
+      "font_class": "a-ziyuan473",
+      "unicode": "e6c1",
+      "unicode_decimal": 59073
+    },
+    {
+      "icon_id": "39182057",
+      "name": "资源 457",
+      "font_class": "a-ziyuan457",
+      "unicode": "e6c2",
+      "unicode_decimal": 59074
+    },
+    {
+      "icon_id": "39182059",
+      "name": "资源 466",
+      "font_class": "a-ziyuan466",
+      "unicode": "e6c3",
+      "unicode_decimal": 59075
+    },
+    {
+      "icon_id": "39182060",
+      "name": "资源 476",
+      "font_class": "a-ziyuan476",
+      "unicode": "e6c4",
+      "unicode_decimal": 59076
+    },
+    {
+      "icon_id": "39182062",
+      "name": "资源 469",
+      "font_class": "a-ziyuan469",
+      "unicode": "e6c5",
+      "unicode_decimal": 59077
+    },
+    {
+      "icon_id": "39182063",
+      "name": "资源 455",
+      "font_class": "a-ziyuan455",
+      "unicode": "e6c6",
+      "unicode_decimal": 59078
+    },
+    {
+      "icon_id": "39182064",
+      "name": "资源 453",
+      "font_class": "a-ziyuan453",
+      "unicode": "e6c7",
+      "unicode_decimal": 59079
+    },
+    {
+      "icon_id": "39182065",
+      "name": "资源 471",
+      "font_class": "a-ziyuan471",
+      "unicode": "e6c8",
+      "unicode_decimal": 59080
+    },
+    {
+      "icon_id": "39182066",
+      "name": "资源 452",
+      "font_class": "a-ziyuan452",
+      "unicode": "e6c9",
+      "unicode_decimal": 59081
+    },
+    {
+      "icon_id": "39182067",
+      "name": "资源 467",
+      "font_class": "a-ziyuan467",
+      "unicode": "e6ca",
+      "unicode_decimal": 59082
+    },
+    {
+      "icon_id": "39182071",
+      "name": "资源 454",
+      "font_class": "a-ziyuan454",
+      "unicode": "e6cb",
+      "unicode_decimal": 59083
+    },
+    {
+      "icon_id": "39182072",
+      "name": "资源 468",
+      "font_class": "a-ziyuan468",
+      "unicode": "e6cc",
+      "unicode_decimal": 59084
+    },
+    {
+      "icon_id": "39182073",
+      "name": "资源 474",
+      "font_class": "a-ziyuan474",
+      "unicode": "e6cd",
+      "unicode_decimal": 59085
+    },
+    {
+      "icon_id": "39182076",
+      "name": "资源 461",
+      "font_class": "a-ziyuan461",
+      "unicode": "e6ce",
+      "unicode_decimal": 59086
+    },
+    {
+      "icon_id": "39182078",
+      "name": "资源 470",
+      "font_class": "a-ziyuan470",
+      "unicode": "e6cf",
+      "unicode_decimal": 59087
+    },
+    {
+      "icon_id": "39182081",
+      "name": "资源 464",
+      "font_class": "a-ziyuan464",
+      "unicode": "e6d0",
+      "unicode_decimal": 59088
+    },
+    {
+      "icon_id": "39182082",
+      "name": "资源 479",
+      "font_class": "a-ziyuan479",
+      "unicode": "e6d1",
+      "unicode_decimal": 59089
+    },
+    {
+      "icon_id": "39182083",
+      "name": "资源 465",
+      "font_class": "a-ziyuan465",
+      "unicode": "e6d2",
+      "unicode_decimal": 59090
+    },
+    {
+      "icon_id": "39182084",
+      "name": "资源 477",
+      "font_class": "a-ziyuan477",
+      "unicode": "e6d3",
+      "unicode_decimal": 59091
+    },
+    {
+      "icon_id": "39181972",
+      "name": "资源 379",
+      "font_class": "a-ziyuan379",
+      "unicode": "e683",
+      "unicode_decimal": 59011
+    },
+    {
+      "icon_id": "39181976",
+      "name": "资源 380",
+      "font_class": "a-ziyuan380",
+      "unicode": "e684",
+      "unicode_decimal": 59012
+    },
+    {
+      "icon_id": "39181974",
+      "name": "资源 381",
+      "font_class": "a-ziyuan381",
+      "unicode": "e685",
+      "unicode_decimal": 59013
+    },
+    {
+      "icon_id": "39181970",
+      "name": "资源 375",
+      "font_class": "a-ziyuan375",
+      "unicode": "e65d",
+      "unicode_decimal": 58973
+    },
+    {
+      "icon_id": "39181969",
+      "name": "资源 374",
+      "font_class": "a-ziyuan374",
+      "unicode": "e686",
+      "unicode_decimal": 59014
+    },
+    {
+      "icon_id": "39181968",
+      "name": "资源 373",
+      "font_class": "a-ziyuan373",
+      "unicode": "e687",
+      "unicode_decimal": 59015
+    },
+    {
+      "icon_id": "39181967",
+      "name": "资源 372",
+      "font_class": "a-ziyuan372",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    },
+    {
+      "icon_id": "39181966",
+      "name": "资源 371",
+      "font_class": "a-ziyuan371",
+      "unicode": "e689",
+      "unicode_decimal": 59017
+    },
+    {
+      "icon_id": "39181992",
+      "name": "资源 397",
+      "font_class": "a-ziyuan397",
+      "unicode": "e664",
+      "unicode_decimal": 58980
+    },
+    {
+      "icon_id": "39181996",
+      "name": "资源 403",
+      "font_class": "a-ziyuan403",
+      "unicode": "e665",
+      "unicode_decimal": 58981
+    },
+    {
+      "icon_id": "39181997",
+      "name": "资源 404",
+      "font_class": "a-ziyuan404",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "39181993",
+      "name": "资源 394",
+      "font_class": "a-ziyuan394",
+      "unicode": "e672",
+      "unicode_decimal": 58994
+    },
+    {
+      "icon_id": "39181989",
+      "name": "资源 398",
+      "font_class": "a-ziyuan398",
+      "unicode": "e673",
+      "unicode_decimal": 58995
+    },
+    {
+      "icon_id": "39181991",
+      "name": "资源 400",
+      "font_class": "a-ziyuan400",
+      "unicode": "e674",
+      "unicode_decimal": 58996
+    },
+    {
+      "icon_id": "39181983",
+      "name": "资源 385",
+      "font_class": "a-ziyuan385",
+      "unicode": "e675",
+      "unicode_decimal": 58997
+    },
+    {
+      "icon_id": "39181987",
+      "name": "资源 396",
+      "font_class": "a-ziyuan396",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    },
+    {
+      "icon_id": "39181988",
+      "name": "资源 392",
+      "font_class": "a-ziyuan392",
+      "unicode": "e677",
+      "unicode_decimal": 58999
+    },
+    {
+      "icon_id": "39181984",
+      "name": "资源 391",
+      "font_class": "a-ziyuan391",
+      "unicode": "e678",
+      "unicode_decimal": 59000
+    },
+    {
+      "icon_id": "39181986",
+      "name": "资源 399",
+      "font_class": "a-ziyuan399",
+      "unicode": "e679",
+      "unicode_decimal": 59001
+    },
+    {
+      "icon_id": "39181985",
+      "name": "资源 390",
+      "font_class": "a-ziyuan390",
+      "unicode": "e67a",
+      "unicode_decimal": 59002
+    },
+    {
+      "icon_id": "39181982",
+      "name": "资源 389",
+      "font_class": "a-ziyuan389",
+      "unicode": "e67b",
+      "unicode_decimal": 59003
+    },
+    {
+      "icon_id": "39181979",
+      "name": "资源 384",
+      "font_class": "a-ziyuan384",
+      "unicode": "e65e",
+      "unicode_decimal": 58974
+    },
+    {
+      "icon_id": "39181977",
+      "name": "资源 382",
+      "font_class": "a-ziyuan382",
+      "unicode": "e67c",
+      "unicode_decimal": 59004
+    },
+    {
+      "icon_id": "39181973",
+      "name": "资源 378",
+      "font_class": "a-ziyuan378",
+      "unicode": "e67d",
+      "unicode_decimal": 59005
+    },
+    {
+      "icon_id": "39181981",
+      "name": "资源 387",
+      "font_class": "a-ziyuan387",
+      "unicode": "e67e",
+      "unicode_decimal": 59006
+    },
+    {
+      "icon_id": "39181980",
+      "name": "资源 377",
+      "font_class": "a-ziyuan377",
+      "unicode": "e67f",
+      "unicode_decimal": 59007
+    },
+    {
+      "icon_id": "39181971",
+      "name": "资源 376",
+      "font_class": "a-ziyuan376",
+      "unicode": "e680",
+      "unicode_decimal": 59008
+    },
+    {
+      "icon_id": "39181978",
+      "name": "资源 386",
+      "font_class": "a-ziyuan386",
+      "unicode": "e681",
+      "unicode_decimal": 59009
+    },
+    {
+      "icon_id": "39181975",
+      "name": "资源 383",
+      "font_class": "a-ziyuan383",
+      "unicode": "e682",
+      "unicode_decimal": 59010
+    },
+    {
+      "icon_id": "39182085",
+      "name": "资源 487",
+      "font_class": "a-ziyuan487",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "39182077",
+      "name": "资源 485",
+      "font_class": "a-ziyuan485",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "39182079",
+      "name": "资源 482",
+      "font_class": "a-ziyuan482",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
+      "icon_id": "39182080",
+      "name": "资源 484",
+      "font_class": "a-ziyuan484",
+      "unicode": "e66a",
+      "unicode_decimal": 58986
+    },
+    {
+      "icon_id": "39182075",
+      "name": "资源 489",
+      "font_class": "a-ziyuan489",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "39182074",
+      "name": "资源 488",
+      "font_class": "a-ziyuan488",
+      "unicode": "e66c",
+      "unicode_decimal": 58988
+    },
+    {
+      "icon_id": "39182069",
+      "name": "资源 490",
+      "font_class": "a-ziyuan490",
+      "unicode": "e66d",
+      "unicode_decimal": 58989
+    },
+    {
+      "icon_id": "39182068",
+      "name": "资源 480",
+      "font_class": "a-ziyuan480",
+      "unicode": "e66e",
+      "unicode_decimal": 58990
+    },
+    {
+      "icon_id": "39182070",
+      "name": "资源 481",
+      "font_class": "a-ziyuan481",
+      "unicode": "e66f",
+      "unicode_decimal": 58991
+    },
+    {
+      "icon_id": "39182058",
+      "name": "资源 483",
+      "font_class": "a-ziyuan483",
+      "unicode": "e670",
+      "unicode_decimal": 58992
+    },
+    {
+      "icon_id": "39182055",
+      "name": "资源 486",
+      "font_class": "a-ziyuan486",
+      "unicode": "e671",
+      "unicode_decimal": 58993
+    },
+    {
+      "icon_id": "39181998",
+      "name": "资源 393",
+      "font_class": "a-ziyuan393",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "39181999",
+      "name": "资源 407",
+      "font_class": "a-ziyuan407",
+      "unicode": "e661",
+      "unicode_decimal": 58977
+    },
+    {
+      "icon_id": "39182002",
+      "name": "资源 411",
+      "font_class": "a-ziyuan411",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "39181990",
+      "name": "资源 388",
+      "font_class": "a-ziyuan388",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
+    },
+    {
+      "icon_id": "39182003",
+      "name": "资源 410",
+      "font_class": "a-ziyuan410",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    }
+  ]
+}

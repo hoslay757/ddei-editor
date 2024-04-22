@@ -1,0 +1,252 @@
+<template>
+  <div class="ddei-core-panel-bottom-changeratio" v-if="allowStageRatio">
+
+    <div v-if="range"
+      :class="{ 'ddei-core-panel-bottom-changeratio__combox': true,'ddei-core-panel-bottom-changeratio__combox__dialog':dialog}"
+      @click="dialog && showChangeRatioDialog($event)">
+      <span>
+        {{ parseInt(editor?.currentStage?.ratio * 100) }}%
+      </span>
+      <svg v-if="dialog" class="icon expbtn" aria-hidden="true">
+        <use xlink:href="#icon-a-ziyuan466"></use>
+      </svg>
+    </div>
+
+    <div @click="addRatio(-delta)">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-a-ziyuan420"></use>
+      </svg>
+    </div>
+    <div v-if="!range"
+      :class="{ 'ddei-core-panel-bottom-changeratio__combox': true, 'ddei-core-panel-bottom-changeratio__combox__dialog': dialog }"
+      @click="dialog && showChangeRatioDialog($event)">
+      <span>
+        {{ parseInt(editor?.currentStage?.ratio * 100) }}%
+      </span>
+      <svg v-if="dialog" class="icon expbtn" aria-hidden="true">
+        <use xlink:href="#icon-a-ziyuan466"></use>
+      </svg>
+    </div>
+    <input v-show="range" type="range" :min="min" :max="max" :step="step" v-model="stageRatio" autocomplete="off"
+      name="ddei-core-panel-bottom-changeratio__range" />
+    <div @click="addRatio(delta)">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-a-ziyuan376"></use>
+      </svg>
+    </div>
+  </div>
+</template>
+<script lang="ts">
+import {DDeiEditor} from "ddei-framework1";
+import {DDeiEditorUtil} from "ddei-framework1";
+import {DDeiEnumBusCommandType} from "ddei-framework1";
+import {DDeiEditorState} from "ddei-framework1";
+
+export default {
+  name: "ddei-core-panel-bottom-changeratio",
+  extends: null,
+  mixins: [],
+  props: {
+    //外部传入的插件扩展参数
+    options: {
+      type: Object,
+      default: null
+    },
+    delta: {
+      type: Number,
+      default: 0.05
+    },
+    min: {
+      type: Number,
+      default: 0.1
+    },
+    max: {
+      type: Number,
+      default: 4
+    },
+    step: {
+      type: Number,
+      default: 0.1
+    },
+    dialog: {
+      type: Boolean,
+      default: true
+    },
+    range: {
+      type: Boolean,
+      default: true
+    },
+  },
+  data() {
+    return {
+      editor: null,
+      ratioInputValue: 0,
+      stageRatio: 1,
+      allowStageRatio: true,
+    };
+  },
+  computed: {},
+  watch: {},
+  created() {
+    // 监听obj对象中prop属性的变化
+    this.$watch("editor.currentStage.ratio", function (newVal, oldVal) {
+      if (
+        DDeiEditorUtil.getConfigValue("GLOBAL_ALLOW_STAGE_RATIO", this.editor)
+      ) {
+
+
+        if (!this.changeCurrentStage) {
+          this.ratioInputValue = parseFloat(newVal) * 100;
+          this.stageRatio = newVal;
+          if (!this.tempSheetChange) {
+            this.changeRatio();
+          } else {
+            delete this.tempSheetChange
+          }
+        } else {
+          this.changeCurrentStage = false;
+        }
+
+      }
+    });
+    this.$watch("stageRatio", function (newVal, oldVal) {
+      if (
+        DDeiEditorUtil.getConfigValue("GLOBAL_ALLOW_STAGE_RATIO", this.editor)
+      ) {
+        this.setRatio(newVal);
+      }
+    });
+  },
+  mounted() {
+    //获取编辑器
+    this.editor = DDeiEditor.ACTIVE_INSTANCE;
+    let file = this.editor?.files[this.editor?.currentFileIndex];
+    let sheet = file?.sheets[file?.currentSheetIndex];
+    this.editor.currentStage = sheet?.stage;
+
+    this.allowStageRatio = DDeiEditorUtil.getConfigValue(
+      "GLOBAL_ALLOW_STAGE_RATIO",
+      this.editor
+    );
+  },
+  methods:{
+    showChangeRatioDialog(evt: Event) {
+      let srcElement = evt.currentTarget;
+      DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-changeratio", {
+        ratio: this.editor.currentStage?.ratio,
+        callback: {
+          ok: this.setRatio,
+        },
+        group: "bottom-dialog"
+      }, { type: 2 }, srcElement)
+      if (DDeiEditor.ACTIVE_INSTANCE.tempDialogData && DDeiEditor.ACTIVE_INSTANCE.tempDialogData["ddei-core-dialog-changeratio"]) {
+        this.editor.changeState(DDeiEditorState.PROPERTY_EDITING);
+      } else {
+        this.editor.changeState(DDeiEditorState.DESIGNING);
+      }
+
+    },
+
+    /**
+     * 增加缩放比率
+     */
+    addRatio(deltaRatio: number) {
+      let ratio = this.editor.currentStage.getStageRatio();
+      let newRatio = parseFloat((ratio + deltaRatio).toFixed(2));
+      if (newRatio < this.min) {
+        newRatio = this.min
+      } else if (newRatio > this.max) {
+        newRatio = this.max;
+      }
+      this.editor?.currentStage?.setStageRatio(newRatio);
+      this.stageRatio = this.editor?.currentStage?.ratio;
+      this.editor.changeState(DDeiEditorState.DESIGNING);
+    },
+
+    /**
+     * 设置缩放比率
+     */
+    setRatio(ratio: number) {
+      if (ratio < this.min) {
+        ratio = this.min
+      } else if (ratio > this.max) {
+        ratio = this.max;
+      }
+      this.editor?.currentStage?.setStageRatio(ratio);
+      this.stageRatio = this.editor?.currentStage?.ratio;
+    },
+    /**
+     * 修改当前的全局缩放比率
+     */
+    changeRatio() {
+      if (this.editor?.currentStage?.ratio || this.editor?.currentStage?.ratio == 0) {
+        if (this.editor?.currentStage?.oldRatio || this.editor?.currentStage?.oldRatio == 0) {
+          this.editor?.bus?.push(
+            DDeiEnumBusCommandType.ChangeStageRatio,
+            {
+              oldValue: this.editor.currentStage.oldRatio,
+              newValue: this.editor.currentStage.ratio,
+            },
+            null
+          );
+          this.editor?.bus?.executeAll();
+        }
+      }
+    },
+  }
+};
+</script>
+
+<style lang="less" scoped>
+.expbtn {
+  font-size: 14px;
+}
+.icon {
+  font-size: 22px;
+}
+.ddei-core-panel-bottom-changeratio {
+    flex: 0 0 157px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    span {
+      float: left;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+  
+    div {
+      float: left;
+      padding-left: 5px;
+      padding-right: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    input {
+      float: left;
+      width: 100px;
+      border-radius: 4px;
+    }
+  
+        &__combox {
+          float: left;
+          padding-left: 5px;
+          padding-right: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+    
+          &__dialog {
+            &:hover {
+              background-color: var(--panel-hover);
+              cursor: pointer;
+            }
+          }
+        }
+
+        
+  }
+</style>

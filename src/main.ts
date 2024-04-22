@@ -1,12 +1,11 @@
+import './utils/flexible.js';
 import './assets/main.css'
-
 import { createApp } from 'vue'
-import App from './App.vue'
-
-
-// 完整引入组件库
-import WeDesign from '@ddei/ddei-framework';
-
-const app = createApp(App);
-// 全局安装
-app.use(WeDesign).mount('#app');
+import App from '@/App.vue'
+import router from '@/router'
+import './assets/fonts/iconfont/iconfont.css'
+import './assets/fonts/iconfont/iconfont.js'
+const app = createApp(App)
+app.use(router)
+app.mount('#app')
+window.$app = app
