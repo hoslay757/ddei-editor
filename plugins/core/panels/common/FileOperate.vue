@@ -26,16 +26,16 @@
   </div>
 </template>
 <script lang="ts">
-import {DDeiStoreLocal} from "ddei-framework1";
-import {DDeiEditor} from "ddei-framework1";
-import {DDeiStage} from "ddei-framework1";
-import {DDeiActiveType} from "ddei-framework1";
-import {DDeiFile} from "ddei-framework1";
-import {DDeiSheet} from "ddei-framework1";
-import {DDeiFileState} from "ddei-framework1";
-import {DDeiEnumBusCommandType} from "ddei-framework1";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
-import {DDeiEditorState} from "ddei-framework1";
+import {DDeiStoreLocal} from "ddei-framework";
+import {DDeiEditor} from "ddei-framework";
+import {DDeiStage} from "ddei-framework";
+import {DDeiActiveType} from "ddei-framework";
+import {DDeiFile} from "ddei-framework";
+import {DDeiSheet} from "ddei-framework";
+import {DDeiFileState} from "ddei-framework";
+import {DDeiEnumBusCommandType} from "ddei-framework";
+import {DDeiEditorEnumBusCommandType} from "ddei-framework";
+import {DDeiEditorState} from "ddei-framework";
 
 export default {
   name: "ddei-core-panel-fileoperate",

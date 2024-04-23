@@ -43,9 +43,9 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework1";
-import {DDeiEnumBusCommandType} from "ddei-framework1";
-import {DDeiConfig} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework";
+import {DDeiEnumBusCommandType} from "ddei-framework";
+import {DDeiConfig} from "ddei-framework";
 import { Matrix3 } from 'three';
 import DialogBase from "./dialog"
 

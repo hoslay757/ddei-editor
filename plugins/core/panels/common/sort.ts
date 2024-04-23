@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import Sort from './Sort.vue';
 
 class DDeiCoreSortPanel extends DDeiPluginBase{

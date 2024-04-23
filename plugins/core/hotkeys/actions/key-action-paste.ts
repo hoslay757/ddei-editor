@@ -1,19 +1,19 @@
-import {DDei} from "ddei-framework1";
-import {DDeiEnumControlState} from "ddei-framework1";
-import {DDeiKeyAction} from "ddei-framework1";
-import {DDeiEnumBusCommandType} from "ddei-framework1";
-import {DDeiUtil} from "ddei-framework1";
-import {DDeiStage} from "ddei-framework1";
-import {DDeiConfig} from "ddei-framework1";
-import {DDeiAbstractShape} from "ddei-framework1";
-import {DDeiTable} from "ddei-framework1";
+import {DDei} from "ddei-framework";
+import {DDeiEnumControlState} from "ddei-framework";
+import {DDeiKeyAction} from "ddei-framework";
+import {DDeiEnumBusCommandType} from "ddei-framework";
+import {DDeiUtil} from "ddei-framework";
+import {DDeiStage} from "ddei-framework";
+import {DDeiConfig} from "ddei-framework";
+import {DDeiAbstractShape} from "ddei-framework";
+import {DDeiTable} from "ddei-framework";
 import { Matrix3, Vector3 } from 'three';
-import {DDeiEnumOperateType} from "ddei-framework1";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
-import {DDeiPolygon} from "ddei-framework1";
-import {DDeiLink} from "ddei-framework1";
-import {DDeiLineLink} from "ddei-framework1";
-import {DDeiEditorState} from "ddei-framework1";
+import {DDeiEnumOperateType} from "ddei-framework";
+import {DDeiEditorEnumBusCommandType} from "ddei-framework";
+import {DDeiPolygon} from "ddei-framework";
+import {DDeiLink} from "ddei-framework";
+import {DDeiLineLink} from "ddei-framework";
+import {DDeiEditorState} from "ddei-framework";
 /**
  * 键行为:粘贴
  * 粘贴剪切板内容

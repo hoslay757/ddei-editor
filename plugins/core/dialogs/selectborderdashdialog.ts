@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import SelectBorderDashDialog from './SelectBorderDashDialog.vue';
 
 class DDeiCoreSelectBorderDashDialog extends DDeiPluginBase{

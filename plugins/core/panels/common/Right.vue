@@ -17,11 +17,11 @@
   </div>
 </template>
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework1";
-import {DDeiEditorUtil} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework";
+import {DDeiEditorUtil} from "ddei-framework";
 import Cookies from 'js-cookie'
-import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
-import {DDeiEditorState} from 'ddei-framework1';
+import {DDeiEditorEnumBusCommandType} from "ddei-framework";
+import {DDeiEditorState} from 'ddei-framework';
 export default {
   name: "ddei-core-panel-right",
   extends: null,

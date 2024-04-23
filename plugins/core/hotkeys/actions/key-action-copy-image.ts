@@ -1,11 +1,11 @@
-import {DDeiConfig} from "ddei-framework1";
-import {DDei} from "ddei-framework1";
-import {DDeiAbstractShape} from "ddei-framework1";
-import {DDeiUtil} from "ddei-framework1";
-import {DDeiEditor} from "ddei-framework1";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
-import {DDeiEditorState} from "ddei-framework1";
-import {DDeiKeyAction} from "ddei-framework1";
+import {DDeiConfig} from "ddei-framework";
+import {DDei} from "ddei-framework";
+import {DDeiAbstractShape} from "ddei-framework";
+import {DDeiUtil} from "ddei-framework";
+import {DDeiEditor} from "ddei-framework";
+import {DDeiEditorEnumBusCommandType} from "ddei-framework";
+import {DDeiEditorState} from "ddei-framework";
+import {DDeiKeyAction} from "ddei-framework";
 
 /**
  * 键行为:复制为图片

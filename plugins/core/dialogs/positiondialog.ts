@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import PositionDialog from './PositionDialog.vue';
 
 class DDeiCorePositionDialog extends DDeiPluginBase{

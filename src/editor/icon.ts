@@ -1,5 +1,5 @@
 
-const modules = import.meta.glob('../icons/*', { eager: true });
+const modules = import.meta.glob('./icons/*', { eager: true });
 
 const ICONS = {};
 for (let i in modules) {

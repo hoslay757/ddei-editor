@@ -54,15 +54,15 @@
   </div>
 </template>
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework1";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
-import {DDeiEditorState} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework";
+import {DDeiEditorEnumBusCommandType} from "ddei-framework";
+import {DDeiEditorState} from "ddei-framework";
 import Cookies from "js-cookie";
-import {DDeiEditorUtil} from "ddei-framework1";
+import {DDeiEditorUtil} from "ddei-framework";
 import { collfile } from "../../lib/api/file";
 import { userinfo } from "../../lib/api/login";
-import {DDeiFileState} from "ddei-framework1";
-import {DDeiUtil} from "ddei-framework1";
+import {DDeiFileState} from "ddei-framework";
+import {DDeiUtil} from "ddei-framework";
 
 export default {
   name: "ddei-core-panel-share",

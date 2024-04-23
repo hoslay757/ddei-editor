@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import QCViewDialog from './QCViewDialog.vue';
 
 class DDeiCoreQCViewDialog extends DDeiPluginBase{

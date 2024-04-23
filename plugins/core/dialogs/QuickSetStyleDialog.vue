@@ -16,9 +16,9 @@
 </template>
 
 <script lang="ts">
-import {DDeiEnumBusCommandType} from "ddei-framework1";
-import {DDeiEditorUtil} from "ddei-framework1";
-import {DDeiUtil} from "ddei-framework1";
+import {DDeiEnumBusCommandType} from "ddei-framework";
+import {DDeiEditorUtil} from "ddei-framework";
+import {DDeiUtil} from "ddei-framework";
 import DialogBase from "./dialog"
 
 export default {

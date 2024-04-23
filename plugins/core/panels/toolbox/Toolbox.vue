@@ -54,22 +54,22 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework1";
-import {DDeiEnumOperateType} from "ddei-framework1";
-import {DDei} from "ddei-framework1";
-import {DDeiEditorState} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework";
+import {DDeiEnumOperateType} from "ddei-framework";
+import {DDei} from "ddei-framework";
+import {DDeiEditorState} from "ddei-framework";
 import { cloneDeep, trim } from "lodash";
-import {DDeiAbstractShape} from "ddei-framework1";
-import {DDeiEditorUtil} from "ddei-framework1";
-import {DDeiEnumControlState} from "ddei-framework1";
+import {DDeiAbstractShape} from "ddei-framework";
+import {DDeiEditorUtil} from "ddei-framework";
+import {DDeiEnumControlState} from "ddei-framework";
 import { Matrix3 } from "three";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
-import {DDeiUtil} from "ddei-framework1";
-import {DDeiRectContainer} from "ddei-framework1";
-import {DDeiLineLink} from "ddei-framework1";
-import {DDeiEnumBusCommandType} from "ddei-framework1";
+import {DDeiEditorEnumBusCommandType} from "ddei-framework";
+import {DDeiUtil} from "ddei-framework";
+import {DDeiRectContainer} from "ddei-framework";
+import {DDeiLineLink} from "ddei-framework";
+import {DDeiEnumBusCommandType} from "ddei-framework";
 import { clone } from 'lodash'
-import {DDeiEnumOperateState} from "ddei-framework1";
+import {DDeiEnumOperateState} from "ddei-framework";
 
 export default {
   name: "ddei-core-panel-toolbox",

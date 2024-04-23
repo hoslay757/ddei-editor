@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import DDeiKeyActionAllSelect from "./actions/key-action-all-select"
 import DDeiKeyActionBrushData from "./actions/key-action-brushdata"
 import DDeiKeyActionCancelCompose from "./actions/key-action-cancel-compose"

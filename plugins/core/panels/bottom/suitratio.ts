@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import SuitRatio from './SuitRatio.vue';
 
 class DDeiCoreSuitRatioPanel extends DDeiPluginBase{

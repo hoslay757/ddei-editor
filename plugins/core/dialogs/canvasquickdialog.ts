@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import CanvasQuickDialog from './CanvasQuickDialog.vue';
 
 class DDeiCoreCanvasQuickDialog extends DDeiPluginBase{

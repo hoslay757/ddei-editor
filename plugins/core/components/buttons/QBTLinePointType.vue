@@ -15,10 +15,10 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditor} from 'ddei-framework1';
-import {DDeiUtil} from 'ddei-framework1';
-import {DDeiEnumBusCommandType} from 'ddei-framework1';
-import {DDeiEditorUtil} from 'ddei-framework1';
+import {DDeiEditor} from 'ddei-framework';
+import {DDeiUtil} from 'ddei-framework';
+import {DDeiEnumBusCommandType} from 'ddei-framework';
+import {DDeiEditorUtil} from 'ddei-framework';
 export default {
   name: "ddei-core-btn-linepointtype",
   extends: null,

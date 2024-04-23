@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import Share from './Share.vue';
 
 class DDeiCoreSharePanel extends DDeiPluginBase{

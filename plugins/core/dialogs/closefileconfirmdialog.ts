@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import CloseFileConfirmDialog from './CloseFileConfirmDialog.vue';
 
 class DDeiCoreCloseFileConfirmDialog extends DDeiPluginBase{

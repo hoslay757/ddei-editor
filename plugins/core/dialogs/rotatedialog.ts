@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import RotateDialog from './RotateDialog.vue';
 
 class DDeiCoreRotateDialog extends DDeiPluginBase{

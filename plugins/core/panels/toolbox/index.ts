@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import Toolbox from './Toolbox.vue';
 
 class DDeiCoreToolboxPanel extends DDeiPluginBase{

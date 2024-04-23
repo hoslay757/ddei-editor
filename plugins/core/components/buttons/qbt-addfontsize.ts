@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import QBTEditAddFontSize from './QBTEditAddFontSize.vue';
 
 class DDeiCoreAddFontSizeButton extends DDeiPluginBase{

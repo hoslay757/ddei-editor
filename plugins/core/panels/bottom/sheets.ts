@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import Sheets from './Sheets.vue';
 
 class DDeiCoreSheetsPanel extends DDeiPluginBase{

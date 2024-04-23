@@ -13,15 +13,15 @@
 
 <script lang="ts">
 
-import {DDeiEditor} from "ddei-framework1";
-import { autoLoadCommand } from "ddei-framework1";
-import {DDeiUtil} from "ddei-framework1";
-import {DDeiEnumBusCommandType} from "ddei-framework1";
-import {DDeiFileState} from "ddei-framework1";
-import {DDeiEditorCommandFileDirty} from "ddei-framework1";
-import {DDeiEditorCommandAddHistroy} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework";
+import { autoLoadCommand } from "ddei-framework";
+import {DDeiUtil} from "ddei-framework";
+import {DDeiEnumBusCommandType} from "ddei-framework";
+import {DDeiFileState} from "ddei-framework";
+import {DDeiEditorCommandFileDirty} from "ddei-framework";
+import {DDeiEditorCommandAddHistroy} from "ddei-framework";
 import MenuDialog from "./MenuDialog.vue";
-import {DDeiEditorUtil} from "ddei-framework1";
+import {DDeiEditorUtil} from "ddei-framework";
 import DDeiCore from "@ddei/core";
 
 import ICONS from "./icon";

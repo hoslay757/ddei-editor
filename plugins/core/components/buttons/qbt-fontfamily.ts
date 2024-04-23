@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import QBTFontFamily from './QBTFontFamily.vue';
 
 class DDeiCoreEditFontFamilyButton extends DDeiPluginBase{

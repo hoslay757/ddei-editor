@@ -6,7 +6,7 @@
   </div>
 </template>
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework";
 
 export default {
   name: "ddei-core-panel-bottom-play",

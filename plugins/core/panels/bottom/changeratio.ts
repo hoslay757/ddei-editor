@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import ChangeRatio from './ChangeRatio.vue';
 
 class DDeiCoreChangeRatioPanel extends DDeiPluginBase{

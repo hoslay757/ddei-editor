@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditorUtil} from "ddei-framework1";
+import {DDeiEditorUtil} from "ddei-framework";
 import DialogBase from "./dialog"
 
 

@@ -11,13 +11,13 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditorArrtibute } from "ddei-framework1";
-import {DDeiEditor} from "ddei-framework1";
-import {DDeiEnumBusCommandType} from "ddei-framework1";
-import {DDeiAbstractArrtibuteParser } from "ddei-framework1";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
-import {DDeiUtil} from "ddei-framework1";
-import {DDeiEnumOperateType} from "ddei-framework1";
+import {DDeiEditorArrtibute } from "ddei-framework";
+import {DDeiEditor} from "ddei-framework";
+import {DDeiEnumBusCommandType} from "ddei-framework";
+import {DDeiAbstractArrtibuteParser } from "ddei-framework";
+import {DDeiEditorEnumBusCommandType} from "ddei-framework";
+import {DDeiUtil} from "ddei-framework";
+import {DDeiEnumOperateType} from "ddei-framework";
 
 export default {
   name: "pv-switch-checkbox",

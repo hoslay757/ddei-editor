@@ -1,5 +1,5 @@
-import {DDeiEnumBusCommandType} from "ddei-framework1";
-import {DDeiMenuBase} from "ddei-framework1";
+import {DDeiEnumBusCommandType} from "ddei-framework";
+import {DDeiMenuBase} from "ddei-framework";
 /**
  * 插入列菜单
  */

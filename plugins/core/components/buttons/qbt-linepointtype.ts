@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import QBTLinePointType from './QBTLinePointType.vue';
 
 class DDeiCoreEditLinePointTypeButton extends DDeiPluginBase{
