@@ -85,8 +85,8 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework1";
-import {DDeiEditorUtil} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework";
+import {DDeiEditorUtil} from "ddei-framework";
 import { register, userinfo } from "@/lib/api/login";
 import Cookies from "js-cookie";
 import DialogBase from "./dialog"

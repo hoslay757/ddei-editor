@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import FileInfo from './FileInfo.vue';
 
 class DDeiCoreFileInfoPanel extends DDeiPluginBase{

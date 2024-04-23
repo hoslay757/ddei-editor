@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import UserRegistryDialog from './UserRegistryDialog.vue';
 
 class DDeiCoreUserRegistryDialog extends DDeiPluginBase{

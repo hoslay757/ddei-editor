@@ -1,4 +1,4 @@
-// import {DDei} from 'ddei-framework1'
+// import {DDei} from 'ddei-framework'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from './routes'
 

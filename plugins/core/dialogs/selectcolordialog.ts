@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import SelectColorDialog from './SelectColorDialog.vue';
 
 class DDeiCoreSelectColorDialog extends DDeiPluginBase{

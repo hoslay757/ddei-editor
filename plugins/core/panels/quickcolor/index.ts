@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import QuickColorView from './QuickColorView.vue';
 
 class DDeiCoreQuickColorViewPanel extends DDeiPluginBase{

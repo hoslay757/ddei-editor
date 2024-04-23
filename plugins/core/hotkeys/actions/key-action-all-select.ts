@@ -1,10 +1,10 @@
-import {DDei} from "ddei-framework1";
-import {DDeiEnumControlState} from "ddei-framework1";
-import {DDeiKeyAction} from "ddei-framework1";
-import {DDeiEnumBusCommandType} from "ddei-framework1";
-import {DDeiUtil} from "ddei-framework1";
-import {DDeiEnumOperateType} from "ddei-framework1";
-import {DDeiEditorState} from "ddei-framework1";
+import {DDei} from "ddei-framework";
+import {DDeiEnumControlState} from "ddei-framework";
+import {DDeiKeyAction} from "ddei-framework";
+import {DDeiEnumBusCommandType} from "ddei-framework";
+import {DDeiUtil} from "ddei-framework";
+import {DDeiEnumOperateType} from "ddei-framework";
+import {DDeiEditorState} from "ddei-framework";
 
 /**
  * 键行为:全选

@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import Style from './Style.vue';
 
 class DDeiCoreStylePanel extends DDeiPluginBase{

@@ -1,9 +1,9 @@
-import {DDei} from "ddei-framework1";
-import {DDeiKeyAction} from "ddei-framework1";
-import {DDeiEnumBusCommandType} from "ddei-framework1";
-import {DDeiEnumControlState} from "ddei-framework1";
-import {DDeiEditorState} from "ddei-framework1";
-import {DDeiEditor} from "ddei-framework1";
+import {DDei} from "ddei-framework";
+import {DDeiKeyAction} from "ddei-framework";
+import {DDeiEnumBusCommandType} from "ddei-framework";
+import {DDeiEnumControlState} from "ddei-framework";
+import {DDeiEditorState} from "ddei-framework";
+import {DDeiEditor} from "ddei-framework";
 
 /**
  * 键行为:取消控件创建

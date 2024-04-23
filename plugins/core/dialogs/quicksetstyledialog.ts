@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import QuickSetStyleDialog from './QuickSetStyleDialog.vue';
 
 class DDeiCoreQuickSetStyleDialog extends DDeiPluginBase{

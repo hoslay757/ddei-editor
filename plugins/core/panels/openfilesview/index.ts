@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import OpenFilesView from './OpenFilesView.vue';
 
 class DDeiCoreOpenFilesViewPanel extends DDeiPluginBase{

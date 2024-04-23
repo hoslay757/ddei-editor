@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import DDeiExtTestStep1Converter from "./teststep1"
 import DDeiExtTestStep2Converter from "./teststep2"
 

@@ -1,4 +1,4 @@
-import {DDeiConverterBase} from "ddei-framework1";
+import {DDeiConverterBase} from "ddei-framework";
 
 class DDeiExtTestStep1Converter extends DDeiConverterBase {
   

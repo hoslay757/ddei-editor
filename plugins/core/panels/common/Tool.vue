@@ -36,9 +36,9 @@
   </div>
 </template>
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework1";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
-import {DDeiEditorState} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework";
+import {DDeiEditorEnumBusCommandType} from "ddei-framework";
+import {DDeiEditorState} from "ddei-framework";
 export default {
   name: "ddei-core-panel-tool",
   extends: null,

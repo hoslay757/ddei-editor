@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import ManageLayers from './ManageLayers.vue';
 
 class DDeiCoreManageLayersPanel extends DDeiPluginBase{

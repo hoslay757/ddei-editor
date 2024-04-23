@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import ExportOptionDialog from './ExportOptionDialog.vue';
 
 class DDeiCoreExportOptionDialog extends DDeiPluginBase{

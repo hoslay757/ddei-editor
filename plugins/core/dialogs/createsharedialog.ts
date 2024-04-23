@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import CreateShareDialog from './CreateShareDialog.vue';
 
 class DDeiCoreCreateShareDialog extends DDeiPluginBase{

@@ -39,14 +39,14 @@ import { loadfile, savefile, publishfile } from "@/lib/api/file";
 import { shortlinklogin } from "@/lib/api/shortlink";
 import Cookies from "js-cookie";
 import DDeiEditor from "@/components/editor/Editor.vue";
-import {DDeiEditorUtil} from "ddei-framework1";
-import {DDeiEditor as DDeiEditorCls} from "ddei-framework1";
-import {DDei} from "ddei-framework1";
-import {DDeiUtil} from "ddei-framework1";
+import {DDeiEditorUtil} from "ddei-framework";
+import {DDeiEditor as DDeiEditorCls} from "ddei-framework";
+import {DDei} from "ddei-framework";
+import {DDeiUtil} from "ddei-framework";
 import { debounce } from "lodash";
 import { markRaw } from "vue";
 
-import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
+import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 
 //引入插件
 import { DDeiCoreTopMenuPanel,DDeiCoreThemeBlack, DDeiCoreControls,DDeiCoreHotkeys,DDeiKeyActionAllSelect,DDeiCorePropertyViewPanel,DDeiCoreToolboxPanel,DDeiCoreSheetsPanel, DDeiCoreChangeRatioPanel, DDeiCoreChangeRatioDialog,DDeiCoreShapeCountPanel, DDeiCoreBottomMenuPanel,DDeiCoreStandLayout, DDeiCoreOpenFilesViewPanel, DDeiCoreQuickColorViewPanel, DDeiCoreAlignDialog } from "@ddei/core";

@@ -27,13 +27,12 @@ export default {
   created() {
     document.body.style.overscrollBehaviorX = "none"
   },
-  mounted() { 
+  mounted() {
   },
   methods: {},
 };
 </script>
 <style>
-
 body {
   display: block;
 }

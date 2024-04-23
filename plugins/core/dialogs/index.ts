@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import DDeiCoreAlignDialog from "./aligndialog"
 import DDeiCoreCanvasQuickDialog from "./canvasquickdialog"
 import DDeiCoreChangeRatioDialog from "./changeratiodialog"

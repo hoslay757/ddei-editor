@@ -19,9 +19,9 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework1";
-import {DDeiEnumBusCommandType} from "ddei-framework1";
-import {DDeiEnumOperateState} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework";
+import {DDeiEnumBusCommandType} from "ddei-framework";
+import {DDeiEnumOperateState} from "ddei-framework";
 export default {
   name: "DDei-Editor-Menu-Dialog",
   extends: null,

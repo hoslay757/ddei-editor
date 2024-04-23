@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import ExportAndImport from './ExportAndImport.vue';
 
 class DDeiCoreExportAndImportPanel extends DDeiPluginBase{

@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import PublishFileConfirmDialog from './PublishFileConfirmDialog.vue';
 
 class DDeiCorePublishFileConfirmDialog extends DDeiPluginBase{

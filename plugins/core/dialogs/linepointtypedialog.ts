@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import LinePointTypeDialog from './LinePointTypeDialog.vue';
 
 class DDeiCoreLinePointTypeDialog extends DDeiPluginBase{

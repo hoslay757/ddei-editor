@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import DDeiCoreTopMenuPanel from './topmenu';
 import DDeiCoreToolboxPanel from './toolbox';
 import DDeiCoreQuickColorViewPanel from './quickcolor';

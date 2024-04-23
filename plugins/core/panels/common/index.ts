@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import DDeiCoreExportAndImportPanel from './exportandimport';
 import DDeiCoreFileInfoPanel from './fileinfo';
 import DDeiCoreFileOperatePanel from './fileoperate';

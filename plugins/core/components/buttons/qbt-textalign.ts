@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import QBTEditTextAlign from './QBTEditTextAlign.vue';
 
 class DDeiCoreEditTextAlignButton extends DDeiPluginBase{

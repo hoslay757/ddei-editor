@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import QBTEditColor from './QBTEditColor.vue';
 
 class DDeiCoreEditColorButton extends DDeiPluginBase{

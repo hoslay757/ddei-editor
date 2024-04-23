@@ -58,8 +58,8 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework1";
-import {DDeiEnumBusCommandType} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework";
+import {DDeiEnumBusCommandType} from "ddei-framework";
 import DialogBase from "./dialog"
 
 export default {

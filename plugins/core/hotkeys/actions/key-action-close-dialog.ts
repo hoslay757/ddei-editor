@@ -1,14 +1,14 @@
-import {DDeiConfig} from "ddei-framework1";
-import {DDei} from "ddei-framework1";
-import {DDeiEnumControlState} from "ddei-framework1";
-import {DDeiEnumOperateState} from "ddei-framework1";
-import {DDeiRectContainer} from "ddei-framework1";
-import {DDeiAbstractShape} from "ddei-framework1";
-import {DDeiKeyAction} from "ddei-framework1";
-import {DDeiEnumBusCommandType} from "ddei-framework1";
-import {DDeiUtil} from "ddei-framework1";
-import {DDeiEditorUtil} from "ddei-framework1";
-import {DDeiEditorState} from "ddei-framework1";
+import {DDeiConfig} from "ddei-framework";
+import {DDei} from "ddei-framework";
+import {DDeiEnumControlState} from "ddei-framework";
+import {DDeiEnumOperateState} from "ddei-framework";
+import {DDeiRectContainer} from "ddei-framework";
+import {DDeiAbstractShape} from "ddei-framework";
+import {DDeiKeyAction} from "ddei-framework";
+import {DDeiEnumBusCommandType} from "ddei-framework";
+import {DDeiUtil} from "ddei-framework";
+import {DDeiEditorUtil} from "ddei-framework";
+import {DDeiEditorState} from "ddei-framework";
 
 /**
  * 键行为:关闭弹出框

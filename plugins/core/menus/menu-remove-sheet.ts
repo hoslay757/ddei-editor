@@ -1,10 +1,10 @@
-import {DDeiEnumBusCommandType} from "ddei-framework1";
-import {DDeiEditor} from "ddei-framework1";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
-import {DDeiEditorState} from "ddei-framework1";
-import {DDeiUtil} from "ddei-framework1";
-import {DDeiEditorUtil} from "ddei-framework1";
-import {DDeiMenuBase} from "ddei-framework1";
+import {DDeiEnumBusCommandType} from "ddei-framework";
+import {DDeiEditor} from "ddei-framework";
+import {DDeiEditorEnumBusCommandType} from "ddei-framework";
+import {DDeiEditorState} from "ddei-framework";
+import {DDeiUtil} from "ddei-framework";
+import {DDeiEditorUtil} from "ddei-framework";
+import {DDeiMenuBase} from "ddei-framework";
 
 /**
  * 插入列菜单

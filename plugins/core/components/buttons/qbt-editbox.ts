@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import QBTEditBox from './QBTEditBox.vue';
 
 class DDeiCoreEditBoxButton extends DDeiPluginBase{

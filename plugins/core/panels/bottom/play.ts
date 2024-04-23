@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework1";
+import {DDeiPluginBase} from "ddei-framework";
 import Play from './Play.vue';
 
 class DDeiCorePlayPanel extends DDeiPluginBase{
