@@ -23,9 +23,7 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
-import DDeiUtil from "../../framework/js/util.ts";
 import DialogBase from "./dialog"
 
 export default {

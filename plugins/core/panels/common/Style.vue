@@ -27,31 +27,23 @@
           Abc
         </div>
         <div class="ddei-core-panel-quickstyle-item-box-template-icon">
-          <!-- <img width="16px" height="16px" src="../../icons/icon-to-up.png" />
-          <img width="16px" height="16px" src="../../icons/icon-to-down.png" />
-          <img width="11px" height="11px" style="margin-left:10px;" src="../../icons/icon-to-down-double.png" /> -->
+         
         </div>
       </div>
     </div>
     <div class="ddei-core-panel-quickstyle-item" style="grid-column: 14/16;">
       <div class="ddei-core-panel-quickstyle-item-box">
-        <!-- <img width="14px" height="14px" src="../../icons/icon-fill.png" />
-        <div>填充</div>
-        <img width="6px" height="6px" style="margin-top:8px" src="../../icons/toolbox-expanded.png" /> -->
+        
       </div>
     </div>
     <div class="ddei-core-panel-quickstyle-item" style="grid-column: 14/16;">
       <div class="ddei-core-panel-quickstyle-item-box">
-        <!-- <img width="14px" height="14px" src="../../icons/icon-style-line.png" />
-        <div>线条</div>
-        <img width="6px" height="6px" style="margin-top:8px" src="../../icons/toolbox-expanded.png" /> -->
+       
       </div>
     </div>
     <div class="ddei-core-panel-quickstyle-item" style="grid-column: 14/16">
       <div class="ddei-core-panel-quickstyle-item-box">
-        <!-- <img width="14px" height="14px" src="../../icons/icon-style-shadow.png" />
-        <div>阴影</div>
-        <img width="6px" height="6px" style="margin-top:8px" src="../../icons/toolbox-expanded.png" /> -->
+       
       </div>
     </div>
     <div class="ddei-core-panel-quickstyle-item" style="grid-column:1/16;">

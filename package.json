@@ -1,6 +1,6 @@
 {
   "name": "ddei-editor",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": false,
   "type": "module",
   "author": "hoslay <3697355039@qq.com>",
@@ -22,7 +22,7 @@
     "url": "https://gitee.com/hoslay/ddei-editor.git"
   },
   "files": [
-    "src/*",
+    "dist/*",
     "README.md",
     "package.json"
   ],
@@ -30,12 +30,12 @@
     "url": "https://gitee.com/hoslay/ddei-editor",
     "email": "3697355039@qq.com"
   },
-  "main": "./dist/ddei-framework.umd.cjs",
+  "main": "./dist/ddei-editor.js",
   "module": "./dist/ddei-framework.js",
   "exports": {
     ".": {
-      "import": "./dist/ddei-framework.js",
-      "require": "./dist/ddei-framework.umd.cjs"
+      "import": "./dist/ddei-editor.js",
+      "require": "./dist/ddei-editor.umd.cjs"
     }
   },
   "engines": {
@@ -49,16 +49,11 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
-    "ant-design-vue": "^4.2.0",
+    "ddei-framework1": "^1.2.6",
     "axios": "^1.6.8",
-    "ddei-autolink": "^1.1.1",
-    "ddei-framework": "^1.2.6",
     "js-cookie": "^3.0.5",
     "jspdf": "^2.5.1",
-    "lodash": "^4.17.21",
-    "postcss-px2rem": "^0.3.0",
-    "three": "^0.156.1",
-    "vue-router": "^4.3.2"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.0",

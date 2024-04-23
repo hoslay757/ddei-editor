@@ -41,7 +41,7 @@
 <script lang="ts">
 import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
-import { login, userinfo } from "@/lib/api/login";
+import { login, userinfo } from "../lib/api/login";
 import Cookies from "js-cookie";
 import {DDeiEditorState} from "ddei-framework";
 import DialogBase from "./dialog"

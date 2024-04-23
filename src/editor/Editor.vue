@@ -5,9 +5,10 @@
     <component v-for="(item, index) in editor?.getDialogs()" :is="item.dialog" :options="item.options"
       v-bind="item.options"></component>
     <MenuDialog v-show="!refreshMenu"></MenuDialog>
+
+    <div :id="id + '_dialog_background_div'" class="dialog-background-div"></div>
+    <div :id="id + '_ddei_cut_img_div'" class="ddei-cut-img-div"></div>
   </div>
-  <div :id="id + '_dialog_background_div'" class="dialog-background-div"></div>
-  <div :id="id + '_ddei_cut_img_div'" class="ddei-cut-img-div"></div>
 </template>
 
 <script lang="ts">
@@ -23,7 +24,7 @@ import MenuDialog from "./MenuDialog.vue";
 import {DDeiEditorUtil} from "ddei-framework";
 import DDeiCore from "@ddei/core";
 
-import ICONS from "./js/icon";
+import ICONS from "./icon";
 import { markRaw } from "vue";
 
 export default {
@@ -230,50 +231,27 @@ export default {
   min-width: 1700px;
   background-color: var(--background);
 
-  
-}
-</style>
-<style lang="less">
-.icon {
-  color: var(--icon);
-}
-.ddei-editor img {
-  -webkit-user-drag: none;
-  user-drag: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+  .icon {
+    color: var(--icon);
+  }
 
-.ddei-editor div {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+  img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 
+  div {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 
-.ddei-cut-img-div {
-  width: 0.1px;
-  height: 0.1px;
-  display: flex;
-}
-
-.dialog-background-div {
-  width: 100%;
-  height: 100vh;
-  opacity: 50%;
-  z-index: 500;
-  left: 0;
-  top: 0;
-  display: none;
-  position: absolute;
-}
-
-.ddei-editor{
-
-  *>{
+  *> {
     &::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -305,4 +283,21 @@ export default {
     }
   }
 }
+.ddei-cut-img-div {
+  width: 0.1px;
+  height: 0.1px;
+  display: flex;
+}
+
+.dialog-background-div {
+  width: 100%;
+  height: 100vh;
+  opacity: 50%;
+  z-index: 500;
+  left: 0;
+  top: 0;
+  display: none;
+  position: absolute;
+}
 </style>
+../icon

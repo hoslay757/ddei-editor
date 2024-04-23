@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="logo">
-        <img src="@/assets/images/logo.png">
+        <img :src="icons['logo']">
       </div>
     </div>
     <div class="tail">
@@ -38,6 +38,7 @@ export default {
       file: {},
       fileNameEditing: false,
       fileDescEditing: false,
+      icons: DDeiEditorUtil.ICONS
     };
   },
   computed: {},

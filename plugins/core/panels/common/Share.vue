@@ -59,8 +59,8 @@ import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
 import Cookies from "js-cookie";
 import {DDeiEditorUtil} from "ddei-framework";
-import { collfile } from "@/lib/api/file";
-import { userinfo } from "@/lib/api/login";
+import { collfile } from "../../lib/api/file";
+import { userinfo } from "../../lib/api/login";
 import {DDeiFileState} from "ddei-framework";
 import {DDeiUtil} from "ddei-framework";
 
