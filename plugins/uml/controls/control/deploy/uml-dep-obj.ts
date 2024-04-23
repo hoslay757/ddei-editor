@@ -1,4 +1,4 @@
-import { ov_link_v_split_point, ov_link_h_split_point } from "ddei-framework";
+import { ov_link_v_split_point, ov_link_h_split_point } from "ddei-framework1";
 export default {
   'id': '304003',
   'name': '对象',

@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import Tool from './Tool.vue';
 
 class DDeiCoreToolPanel extends DDeiPluginBase{

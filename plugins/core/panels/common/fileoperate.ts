@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import FileOperate from './FileOperate.vue';
 
 class DDeiCoreFileOperatePanel extends DDeiPluginBase{

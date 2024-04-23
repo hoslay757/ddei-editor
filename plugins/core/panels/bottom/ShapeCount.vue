@@ -4,7 +4,7 @@
   </div>
 </template>
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework";
+import {DDeiEditor} from "ddei-framework1";
 
 export default {
   name: "ddei-core-panel-bottom-shapecount",

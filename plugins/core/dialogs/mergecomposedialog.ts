@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import MergeComposeDialog from './MergeComposeDialog.vue';
 
 class DDeiCoreMergeComposeDialog extends DDeiPluginBase{

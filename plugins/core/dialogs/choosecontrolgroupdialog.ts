@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import ChooseControlGroupDialog from './ChooseControlGroupDialog.vue';
 
 class DDeiCoreChooseControlGroupDialog extends DDeiPluginBase{

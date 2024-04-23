@@ -53,13 +53,13 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework";
-import {DDeiEnumBusCommandType} from "ddei-framework";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework";
-import {DDeiUtil} from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
-import {DDeiEnumOperateType} from "ddei-framework";
-import {DDeiEditorUtil} from "ddei-framework";
+import {DDeiEditor} from "ddei-framework1";
+import {DDeiEnumBusCommandType} from "ddei-framework1";
+import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
+import {DDeiUtil} from "ddei-framework1";
+import {DDeiEditorState} from "ddei-framework1";
+import {DDeiEnumOperateType} from "ddei-framework1";
+import {DDeiEditorUtil} from "ddei-framework1";
 import DialogBase from "./dialog";
 import Cookies from "js-cookie";
 

@@ -27,9 +27,9 @@
 
 <script lang="ts">
 import { debounce } from "lodash";
-import {DDeiEditorArrtibute } from "ddei-framework";
-import {DDeiEditor} from "ddei-framework";
-import {DDeiUtil} from "ddei-framework";
+import {DDeiEditorArrtibute } from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework1";
+import {DDeiUtil} from "ddei-framework1";
 export default {
   name: "pv-basecombox",
   extends: null,

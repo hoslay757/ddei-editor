@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import DDeiCoreShapeCountPanel from './shapecount';
 import DDeiCoreManageLayersPanel from './managelayers';
 import DDeiCorePlayPanel from './play';

@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import SelectFontDialog from './SelectFontDialog.vue';
 
 class DDeiCoreSelectFontDialog extends DDeiPluginBase{

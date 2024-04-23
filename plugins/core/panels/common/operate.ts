@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import Operate from './Operate.vue';
 
 class DDeiCoreOperatePanel extends DDeiPluginBase{

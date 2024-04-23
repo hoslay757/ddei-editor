@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import ReLoginDialog from './ReLoginDialog.vue';
 
 class DDeiCoreReLoginDialog extends DDeiPluginBase{

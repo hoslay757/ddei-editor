@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import AlignDialog from './AlignDialog.vue';
 
 class DDeiCoreAlignDialog extends DDeiPluginBase{

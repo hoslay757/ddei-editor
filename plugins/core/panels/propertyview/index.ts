@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import PropertyView from './PropertyView.vue';
 
 class DDeiCorePropertyViewPanel extends DDeiPluginBase{

@@ -206,9 +206,9 @@
 </template>
 
 <script lang="ts">
-import {DDeiEnumBusCommandType} from "ddei-framework";
-import {DDeiEditorUtil} from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
+import {DDeiEnumBusCommandType} from "ddei-framework1";
+import {DDeiEditorUtil} from "ddei-framework1";
+import {DDeiEditorState} from "ddei-framework1";
 import DialogBase from "./dialog"
 
 export default {

@@ -68,12 +68,12 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework";
-import {DDeiEditorUtil} from "ddei-framework";
-import {DDeiUtil} from "ddei-framework";
+import {DDeiEditor} from "ddei-framework1";
+import {DDeiEditorUtil} from "ddei-framework1";
+import {DDeiUtil} from "ddei-framework1";
 import JsPDF from "jspdf";
-import {DDeiModelArrtibuteValue} from "ddei-framework";
-import {DDeiConfig} from "ddei-framework";
+import {DDeiModelArrtibuteValue} from "ddei-framework1";
+import {DDeiConfig} from "ddei-framework1";
 import DialogBase from "./dialog"
 
 export default {

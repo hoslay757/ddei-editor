@@ -1,4 +1,4 @@
-import {DDeiThemeBase} from "ddei-framework";
+import {DDeiThemeBase} from "ddei-framework1";
 /**
  * 复制页签
  */

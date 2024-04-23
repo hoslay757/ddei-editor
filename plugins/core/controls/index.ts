@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import { loadControlByFrom, loadAndSortGroup } from "./toolgroup"
 const control_ctx = import.meta.glob('./control/**', { eager: true })
 const group_ctx = import.meta.glob('./group/**', { eager: true })

@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import QBTBorderDash from './QBTBorderDash.vue';
 
 class DDeiCoreBorderDashButton extends DDeiPluginBase{

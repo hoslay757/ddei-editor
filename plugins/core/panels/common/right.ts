@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import Right from './Right.vue';
 
 class DDeiCoreRightPanel extends DDeiPluginBase{

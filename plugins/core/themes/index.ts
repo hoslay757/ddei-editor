@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import DDeiCoreThemeDefault from "./theme-default"
 import DDeiCoreThemeBlack from "./theme-black"
 

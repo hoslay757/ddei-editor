@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import DDeiCoreTextPropEditor from './pv-text';
 import DDeiCoreAlignTypePropEditor from './pv-aligntype';
 import DDeiCoreBorderDashComboPropEditor from './pv-borderdashcombo';

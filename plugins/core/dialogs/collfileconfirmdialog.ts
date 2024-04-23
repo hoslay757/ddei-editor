@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import CollFileConfirmDialog from './CollFileConfirmDialog.vue';
 
 class DDeiCoreCollFileConfirmDialog extends DDeiPluginBase{

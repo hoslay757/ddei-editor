@@ -7,7 +7,7 @@ import DDeiCoreHotkeys from "./hotkeys";
 import DDeiCoreControls from "./controls";
 import DDeiCoreMenus from "./menus";
 import DDeiCoreThemes from "./themes"
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 
 class DDeiCore extends DDeiPluginBase {
   type: string = "package"

@@ -1,10 +1,10 @@
-import {DDei} from "ddei-framework";
-import {DDeiEnumControlState} from "ddei-framework";
-import {DDeiKeyAction} from "ddei-framework";
-import {DDeiEnumBusCommandType} from "ddei-framework";
-import {DDeiEditor} from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
-import {DDeiEnumOperateState} from "ddei-framework";
+import {DDei} from "ddei-framework1";
+import {DDeiEnumControlState} from "ddei-framework1";
+import {DDeiKeyAction} from "ddei-framework1";
+import {DDeiEnumBusCommandType} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework1";
+import {DDeiEditorState} from "ddei-framework1";
+import {DDeiEnumOperateState} from "ddei-framework1";
 
 /**
  * 键行为:清除格式刷格式

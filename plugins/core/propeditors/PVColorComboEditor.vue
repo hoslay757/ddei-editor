@@ -14,14 +14,14 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditorArrtibute } from "ddei-framework";
-import {DDeiEditor} from "ddei-framework";
-import {DDeiUtil} from "ddei-framework";
-import {DDeiEditorUtil} from "ddei-framework";
-import {DDeiEnumOperateType} from "ddei-framework";
-import {DDeiEnumOperateState} from "ddei-framework";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework";
-import {DDeiEnumBusCommandType} from "ddei-framework";
+import {DDeiEditorArrtibute } from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework1";
+import {DDeiUtil} from "ddei-framework1";
+import {DDeiEditorUtil} from "ddei-framework1";
+import {DDeiEnumOperateType} from "ddei-framework1";
+import {DDeiEnumOperateState} from "ddei-framework1";
+import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
+import {DDeiEnumBusCommandType} from "ddei-framework1";
 export default {
   name: "pv-color-combo",
   extends: null,

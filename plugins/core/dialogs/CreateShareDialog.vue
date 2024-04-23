@@ -80,9 +80,9 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditorUtil} from "ddei-framework";
+import {DDeiEditorUtil} from "ddei-framework1";
 import { createshortlink } from "../lib/api/shortlink"
-import {DDeiUtil} from "ddei-framework";
+import {DDeiUtil} from "ddei-framework1";
 import DialogBase from "./dialog"
 
 export default {

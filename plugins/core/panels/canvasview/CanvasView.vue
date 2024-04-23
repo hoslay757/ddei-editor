@@ -6,18 +6,18 @@
 </template>
 
 <script lang="ts">
-import {DDei} from "ddei-framework";
-import {DDeiEditor} from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
-import {DDeiEnumControlState} from "ddei-framework";
-import {DDeiAbstractShape} from "ddei-framework";
-import {DDeiKeyAction} from "ddei-framework";
-import {DDeiEnumOperateState} from "ddei-framework";
-import {DDeiEnumBusCommandType} from "ddei-framework";
-import {DDeiEnumState} from "ddei-framework";
-import {DDeiUtil} from "ddei-framework";
+import {DDei} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework1";
+import {DDeiEditorState} from "ddei-framework1";
+import {DDeiEnumControlState} from "ddei-framework1";
+import {DDeiAbstractShape} from "ddei-framework1";
+import {DDeiKeyAction} from "ddei-framework1";
+import {DDeiEnumOperateState} from "ddei-framework1";
+import {DDeiEnumBusCommandType} from "ddei-framework1";
+import {DDeiEnumState} from "ddei-framework1";
+import {DDeiUtil} from "ddei-framework1";
 import { throttle } from "lodash";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework";
+import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
 
 export default {
   name: "ddei-core-panel-canvasview",

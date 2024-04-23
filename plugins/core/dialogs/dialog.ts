@@ -1,4 +1,4 @@
-import {DDeiEditor} from "ddei-framework";
+import {DDeiEditor} from "ddei-framework1";
 const DialogBase = {
   data: function () {
     return {

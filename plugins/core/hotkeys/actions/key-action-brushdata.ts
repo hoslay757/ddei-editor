@@ -1,10 +1,10 @@
-import {DDei} from "ddei-framework";
-import {DDeiKeyAction} from "ddei-framework";
-import {DDeiEnumBusCommandType} from "ddei-framework";
-import {DDeiEditor} from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework";
-import {DDeiUtil} from "ddei-framework";
+import {DDei} from "ddei-framework1";
+import {DDeiKeyAction} from "ddei-framework1";
+import {DDeiEnumBusCommandType} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework1";
+import {DDeiEditorState} from "ddei-framework1";
+import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
+import {DDeiUtil} from "ddei-framework1";
 import { cloneDeep } from 'lodash'
 
 /**

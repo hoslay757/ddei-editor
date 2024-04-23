@@ -1,5 +1,5 @@
 import DDeiExtUMLControls from "./controls";
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 
 class DDeiExtUML extends DDeiPluginBase {
   type: string = "package"

@@ -1,16 +1,16 @@
-import {DDei} from "ddei-framework";
-import {DDeiEnumControlState} from "ddei-framework";
-import {DDeiKeyAction} from "ddei-framework";
-import {DDeiEnumBusCommandType} from "ddei-framework";
-import {DDeiLayer} from "ddei-framework";
-import {DDeiActiveType} from "ddei-framework";
-import {DDeiFile} from "ddei-framework";
-import {DDeiFileState} from "ddei-framework";
-import {DDeiEditor} from "ddei-framework";
-import {DDeiUtil} from "ddei-framework";
-import {DDeiEditorUtil} from "ddei-framework";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
+import {DDei} from "ddei-framework1";
+import {DDeiEnumControlState} from "ddei-framework1";
+import {DDeiKeyAction} from "ddei-framework1";
+import {DDeiEnumBusCommandType} from "ddei-framework1";
+import {DDeiLayer} from "ddei-framework1";
+import {DDeiActiveType} from "ddei-framework1";
+import {DDeiFile} from "ddei-framework1";
+import {DDeiFileState} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework1";
+import {DDeiUtil} from "ddei-framework1";
+import {DDeiEditorUtil} from "ddei-framework1";
+import {DDeiEditorEnumBusCommandType} from "ddei-framework1";
+import {DDeiEditorState} from "ddei-framework1";
 
 /**
  * 键行为:反撤销

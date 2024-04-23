@@ -60,8 +60,8 @@
   </div>
 </template>
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework";
-import {DDeiEditorUtil} from "ddei-framework";
+import {DDeiEditor} from "ddei-framework1";
+import {DDeiEditorUtil} from "ddei-framework1";
 export default {
   name: "ddei-core-panel-sort",
   extends: null,

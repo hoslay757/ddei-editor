@@ -48,9 +48,9 @@
   </div>
 </template>
 <script lang="ts">
-import {DDeiConfig} from "ddei-framework";
-import {DDeiUtil} from "ddei-framework";
-import {DDeiEditor} from "ddei-framework";
+import {DDeiConfig} from "ddei-framework1";
+import {DDeiUtil} from "ddei-framework1";
+import {DDeiEditor} from "ddei-framework1";
 
 
 export default {

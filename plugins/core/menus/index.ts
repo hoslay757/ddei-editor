@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import MenuCancelMergeCell from "./menu-cancel-merge-cell"
 import MenuCopySheet from "./menu-copy-sheet"
 import MenuInsertCol from "./menu-insert-col"

@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import GoBack from './GoBack.vue';
 
 class DDeiCoreGoBackPanel extends DDeiPluginBase{

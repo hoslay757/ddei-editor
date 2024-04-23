@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import DDeiCoreAddFontSizeButton from "./buttons/qbt-addfontsize"
 import DDeiCoreBorderDashButton from "./buttons/qbt-borderdash"
 import DDeiCoreBorderWeightButton from "./buttons/qbt-borderweight"

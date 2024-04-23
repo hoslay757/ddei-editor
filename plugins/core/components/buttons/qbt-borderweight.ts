@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import QBTBorderWeight from './QBTBorderWeight.vue';
 
 class DDeiCoreBorderWeightButton extends DDeiPluginBase{

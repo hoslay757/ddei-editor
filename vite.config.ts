@@ -10,7 +10,7 @@ export default defineConfig({
     alias: {
     //   '@': fileURLToPath(new URL('./src', import.meta.url)),
       '@ddei': fileURLToPath(new URL('./plugins', import.meta.url)),
-      'ddei-framework': fileURLToPath(new URL('/Users/hoslay/work/ddei/ddei-framework/dist/ddei-framework.js', import.meta.url)),
+      // 'ddei-framework': fileURLToPath(new URL('/Users/hoslay/work/ddei/ddei-framework/dist/ddei-framework.js', import.meta.url)),
     }
 
   },
@@ -26,9 +26,11 @@ export default defineConfig({
         },
       },
     }, 
+    cssCodeSplit:true,
     lib: {
       entry: "./src/editor/index.ts",
       name: "ddei-editor",
+      formats: ['umd'],
     },
   },
 })

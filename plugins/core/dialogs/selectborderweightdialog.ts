@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import SelectBorderWeightDialog from './SelectBorderWeightDialog.vue';
 
 class DDeiCoreSelectBorderWeightDialog extends DDeiPluginBase{

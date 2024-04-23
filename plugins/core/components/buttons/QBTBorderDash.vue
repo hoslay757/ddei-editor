@@ -17,13 +17,13 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditor} from 'ddei-framework';
-import {DDeiUtil} from 'ddei-framework';
-import {DDeiEnumBusCommandType} from 'ddei-framework';
+import {DDeiEditor} from 'ddei-framework1';
+import {DDeiUtil} from 'ddei-framework1';
+import {DDeiEnumBusCommandType} from 'ddei-framework1';
 import { debounce } from 'lodash';
-import {DDeiEnumOperateState} from 'ddei-framework';
-import {DDeiModelArrtibuteValue} from 'ddei-framework';
-import {DDeiEditorUtil} from 'ddei-framework';
+import {DDeiEnumOperateState} from 'ddei-framework1';
+import {DDeiModelArrtibuteValue} from 'ddei-framework1';
+import {DDeiEditorUtil} from 'ddei-framework1';
 export default {
   name: "ddei-core-btn-borderdash",
   extends: null,

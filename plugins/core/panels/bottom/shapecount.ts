@@ -1,4 +1,4 @@
-import {DDeiPluginBase} from "ddei-framework";
+import {DDeiPluginBase} from "ddei-framework1";
 import ShapeCount from './ShapeCount.vue';
 
 class DDeiCoreShapeCountPanel extends DDeiPluginBase{

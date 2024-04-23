@@ -1,6 +1,6 @@
-import {DDeiEditorArrtibute} from 'ddei-framework';
+import {DDeiEditorArrtibute} from 'ddei-framework1';
 import { cloneDeep } from 'lodash'
-import {DDeiUtil} from 'ddei-framework';
+import {DDeiUtil} from 'ddei-framework1';
 
 const ToDefaultPropertys = ["fill.type", "fill.color", "fill.image", "fill.opacity", "border.type", "border.color", "borderOpacity", "borderWidth", "borderDash", "borderRound",
   "font.family", "font.size", "font.color", "fontAlign", "textStyle.feed"
