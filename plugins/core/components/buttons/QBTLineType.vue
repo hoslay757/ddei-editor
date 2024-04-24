@@ -39,11 +39,13 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      //当前编辑器
-      editor: null,
       controlDefine: null,
       attrDefine: null,
       value: null
@@ -57,8 +59,6 @@ export default {
 
   },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     this.refreshEditor();
   },
   methods: {
@@ -80,7 +80,7 @@ export default {
     //打开弹出框
     showDialog(evt) {
       let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-linetype", {
+      DDeiEditorUtil.showOrCloseDialog(this.editor, "ddei-core-dialog-linetype", {
 
         value: this.attrDefine.value,
         dataSource: this.attrDefine.dataSource,

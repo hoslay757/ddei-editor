@@ -1,5 +1,5 @@
 <template>
-  <div :id="dialogId" class="ddei-core-dialog-selectcolor" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-selectcolor" v-if="forceRefresh">
     <div class="content">
       <div class="group">
         <div class="title">最近使用的颜色</div>
@@ -212,7 +212,7 @@ export default {
       if (this.value) {
         DDeiUtil.whiteRecentlyChooseColors(this.value)
       }
-      DDeiEditorUtil.closeDialog(this.dialogId);
+      DDeiEditorUtil.closeDialog(this.editor, "ddei-core-dialog-selectcolor");
     },
 
     clear() {
@@ -220,7 +220,7 @@ export default {
     },
 
     cancel() {
-      DDeiEditorUtil.closeDialog(this.dialogId);
+      DDeiEditorUtil.closeDialog(this.editor, "ddei-core-dialog-selectcolor");
     },
   }
 };

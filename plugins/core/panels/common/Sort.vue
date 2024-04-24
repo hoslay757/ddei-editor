@@ -72,10 +72,13 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      editor: null,
       dialogShow: "",
     };
   },
@@ -83,7 +86,6 @@ export default {
   watch: {},
   created() { },
   mounted() {
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
   },
   methods: {
     /**
@@ -91,26 +93,26 @@ export default {
      */
     showPositionDialog(evt: Event) {
       let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-changeposition", {
+      DDeiEditorUtil.showOrCloseDialog(this.editor, "ddei-core-dialog-changeposition", {
         group: "top-dialog"
       }, { type: 5 }, srcElement)
 
     },
     showAlignDialog(evt: Event) {
       let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog('ddei-core-dialog-align', {
+      DDeiEditorUtil.showOrCloseDialog(this.editor,'ddei-core-dialog-align', {
         group: "top-dialog"
       }, { type: 5 }, srcElement)
     },
     showMergeDialog(evt: Event) {
       let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-changeposition", {
+      DDeiEditorUtil.showOrCloseDialog(this.editor,"ddei-core-dialog-changeposition", {
         group: "top-dialog"
       }, { type: 5 }, srcElement)
     },
     showRotateDialog(evt: Event) {
       let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-changerotate", {
+      DDeiEditorUtil.showOrCloseDialog(this.editor,"ddei-core-dialog-changerotate", {
         group: "top-dialog"
       }, { type: 5 }, srcElement)
     },
@@ -135,8 +137,8 @@ export default {
 <style lang="less" scoped>
 .ddei-core-panel-sort {
   height: 103px;
-  width:237px;
-  flex:0 1 237px;
+  width:230px;
+  flex:0 1 230px;
   display: grid;
   grid-template-rows: 20px 57px 26px;
   grid-template-columns: 1fr;

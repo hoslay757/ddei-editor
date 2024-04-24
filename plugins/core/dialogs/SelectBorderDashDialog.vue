@@ -1,5 +1,5 @@
 <template>
-  <div :id="dialogId" class="ddei-core-dialog-selectborderdash" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-selectborderdash" v-if="forceRefresh">
     <div class="content">
       <div class="group">
         <div class="title">选择线段类型</div>
@@ -7,8 +7,7 @@
           <div :class="{ 'item': true, 'item-selected': JSON.stringify(value) == JSON.stringify(data.value) }"
             v-for="data in dataSource" @click="select(data.value)" @dblclick="selectAndConfirm(data.value)">
             <svg class="div_input">
-              <line x1=0 y1=0 x2="100%" y2=0 stroke-width="3"
-                :stroke-dasharray="data.value">
+              <line x1=0 y1=0 x2="100%" y2=0 stroke-width="3" :stroke-dasharray="data.value">
               </line>
             </svg>
           </div>
@@ -76,11 +75,11 @@ export default {
           this.editor?.tempDialogData[this.dialogId]?.callback?.ok(this.value);
         }
       }
-      DDeiEditorUtil.closeDialog(this.dialogId);
+      DDeiEditorUtil.closeDialog(this.editor, 'ddei-core-dialog-selectborderdash');
     },
 
     cancel() {
-      DDeiEditorUtil.closeDialog(this.dialogId);
+      DDeiEditorUtil.closeDialog(this.editor, 'ddei-core-dialog-selectborderdash');
     },
   }
 };

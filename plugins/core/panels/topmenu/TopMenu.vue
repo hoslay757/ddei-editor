@@ -1,15 +1,12 @@
 <template>
-  <div id="ddei-core-panel-topmenu" v-if="forceRefresh" class="ddei-core-panel-topmenu" @mousedown="changeEditorFocus">
-    <div id="ddei-core-panel-topmenu-quickbox" class="ddei-core-panel-topmenu-quickbox">
-      <component v-for="(item, index) in editor?.getPartPanels(options, 'panels') " :is="item.comp"
+  <div v-if="forceRefresh" class="ddei-core-panel-topmenu" @mousedown="changeEditorFocus">
+    <div class="ddei-core-panel-topmenu-quickbox">
+      <component :editor="editor" v-for="(item, index) in editor?.getPartPanels(options, 'panels') " :is="item.comp"
         :options="item.options" v-bind="item.options"></component>
-
     </div>
-
   </div>
 </template>
 <script lang="ts">
-import Cookies from "js-cookie";
 import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
@@ -24,13 +21,14 @@ export default {
       type: Object,
       default: null
     }
+    ,editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      editor: null,
       file: null,
-      sslink: null,
-      user: null,
       forceRefresh:true,
     };
   },
@@ -60,20 +58,8 @@ export default {
     },
 
     refreshData() {
-      this.editor = DDeiEditor.ACTIVE_INSTANCE;
       this.editor.topMenuViewer = this;
-      let userCookie = Cookies.get("user");
       let file = this.editor?.files[this.editor?.currentFileIndex];
-      if (userCookie && file) {
-        this.user = JSON.parse(userCookie)
-        for (let i = 0; i < this.user?.sslinks?.length; i++) {
-          if (this.user.sslinks[i].file_id == file.id) {
-            this.sslink = this.user.sslinks[i]
-            break;
-          }
-        }
-
-      }
       this.file = file
     },
     /**

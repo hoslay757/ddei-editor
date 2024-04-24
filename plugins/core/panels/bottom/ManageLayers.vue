@@ -20,10 +20,13 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      editor: null,
       allowOpenMultLayers: true,
     };
   },
@@ -31,8 +34,6 @@ export default {
   watch: {},
   created() { },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     this.allowOpenMultLayers = DDeiEditorUtil.getConfigValue(
       "GLOBAL_ALLOW_OPEN_MULT_LAYERS",
       this.editor
@@ -41,7 +42,7 @@ export default {
   methods:{
     showLayersDialog(evt: Event) {
       let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-managerlayers", {
+      DDeiEditorUtil.showOrCloseDialog(this.editor, "ddei-core-dialog-managerlayers", {
         group: "bottom-dialog"
       }, { type: 3 }, srcElement)
       if (DDeiEditor.ACTIVE_INSTANCE.tempDialogData && DDeiEditor.ACTIVE_INSTANCE.tempDialogData["ddei-core-dialog-managerlayers"]) {

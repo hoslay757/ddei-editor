@@ -76,10 +76,13 @@ export default {
       type: Boolean,
       default: true
     },
+    editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      editor: null,
       ratioInputValue: 0,
       stageRatio: 1,
       allowStageRatio: true,
@@ -118,8 +121,6 @@ export default {
     });
   },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     let file = this.editor?.files[this.editor?.currentFileIndex];
     let sheet = file?.sheets[file?.currentSheetIndex];
     this.editor.currentStage = sheet?.stage;
@@ -132,7 +133,7 @@ export default {
   methods:{
     showChangeRatioDialog(evt: Event) {
       let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-changeratio", {
+      DDeiEditorUtil.showOrCloseDialog(this.editor, "ddei-core-dialog-changeratio", {
         ratio: this.editor.currentStage?.ratio,
         callback: {
           ok: this.setRatio,

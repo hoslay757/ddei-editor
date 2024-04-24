@@ -1,10 +1,10 @@
 <template>
-  <div :id="id" class="ddei-editor" @contextmenu.prevent>
-    <component :is="editor?.getLayout()" :options="editor?.getLayoutOptions()">
+  <div :id="id" class="ddei-editor" @contextmenu.prevent @mousedown="mouseDown($event)">
+    <component :is="editor?.getLayout()" :editor="editor" :options="editor?.getLayoutOptions()">
     </component>
-    <component v-for="(item, index) in editor?.getDialogs()" :is="item.dialog" :options="item.options"
+    <component :editor="editor" v-for="(item, index) in editor?.getDialogs()" :is="item.dialog" :options="item.options"
       v-bind="item.options"></component>
-    <MenuDialog v-show="!refreshMenu"></MenuDialog>
+    <MenuDialog :editor="editor" v-show="!refreshMenu"></MenuDialog>
 
     <div :id="id + '_dialog_background_div'" class="dialog-background-div"></div>
     <div :id="id + '_ddei_cut_img_div'" class="ddei-cut-img-div"></div>
@@ -63,22 +63,22 @@ export default {
     autoLoadCommand();
     window.onresize = this.resetSize;
     
-    if (DDeiEditor.ACTIVE_INSTANCE) {
-      this.editor = DDeiEditor.ACTIVE_INSTANCE;
-    } else {
+    // if (DDeiEditor.ACTIVE_INSTANCE) {
+    //   this.editor = DDeiEditor.ACTIVE_INSTANCE;
+    // } else {
       //加载默认初始插件DDeiCore
-      if (!this.options){
-        this.options = markRaw({
-          //配置扩展插件
-          extensions: []});
-      }
-      if (!this.options.extensions){
-        this.options.extensions = []
-      }
-      this.options.extensions.splice(0,0,DDeiCore)
-      this.editor = DDeiEditor.newInstance(this.id, this.id, true, this.options);
-      
+    if (!this.options){
+      this.options = markRaw({
+        //配置扩展插件
+        extensions: []});
     }
+    if (!this.options.extensions){
+      this.options.extensions = []
+    }
+    this.options.extensions.splice(0,0,DDeiCore)
+    this.editor = DDeiEditor.newInstance(this.id, this.id, true, this.options);
+      
+    // }
     //载入局部配置
     if (this.options){
 
@@ -121,6 +121,10 @@ export default {
     }
   },
   methods: {
+
+    mouseDown(event:Event){
+      DDeiEditor.ACTIVE_INSTANCE = this.editor;
+    },
     /**
     * 设置当前菜单
     * @returns 控件ID
@@ -220,7 +224,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .ddei-editor {
 
   width: 100%;
@@ -228,9 +232,8 @@ export default {
   overflow: auto;
   display: flex;
   flex-direction: column;
-  min-width: 1700px;
   background-color: var(--background);
-
+  
   .icon {
     color: var(--icon);
   }

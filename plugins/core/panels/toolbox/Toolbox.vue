@@ -81,6 +81,10 @@ export default {
       type: Object,
       default: null
     },
+    editor: {
+      type: DDeiEditor,
+      default: null,
+    },
     //是否允许自定义控件工具箱
     custom: {
       type: Boolean,
@@ -110,16 +114,12 @@ export default {
       searchOriginGroups: null,
       //搜索控件时用的文本
       searchText: "",
-      //当前编辑器
-      editor: null,
       forceRefresh:true,
     };
   },
   computed: {},
   watch: {},
   created() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
    },
   mounted() {
     this.refreshData();
@@ -223,7 +223,7 @@ export default {
           selectGroups.push(group.id)
         }
       });
-      DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-choosecontrolgroup", {
+      DDeiEditorUtil.showOrCloseDialog(this.editor,"ddei-core-dialog-choosecontrolgroup", {
         selectGroups: selectGroups,
         callback: {
           select: this.groupBoxChoose

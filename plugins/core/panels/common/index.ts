@@ -3,10 +3,7 @@ import DDeiCoreExportAndImportPanel from './exportandimport';
 import DDeiCoreFileInfoPanel from './fileinfo';
 import DDeiCoreFileOperatePanel from './fileoperate';
 import DDeiCoreFontAndTextPanel from './fontandtext';
-import DDeiCoreGoBackPanel from './goback';
 import DDeiCoreOperatePanel from './operate';
-import DDeiCoreRightPanel from './right';
-import DDeiCoreSharePanel from './share';
 import DDeiCoreSortPanel from './sort';
 import DDeiCoreStylePanel from './style';
 import DDeiCoreToolPanel from './tool';
@@ -21,8 +18,8 @@ class DDeiCoreCommonPanels extends DDeiPluginBase{
   static defaultIns:DDeiCoreCommonPanels = new DDeiCoreCommonPanels(null);
 
   plugins: object[] = [DDeiCoreExportAndImportPanel, DDeiCoreFileInfoPanel,
-     DDeiCoreFileOperatePanel, DDeiCoreFontAndTextPanel, DDeiCoreGoBackPanel, DDeiCoreOperatePanel,
-     DDeiCoreOperatePanel, DDeiCoreRightPanel, DDeiCoreSharePanel, DDeiCoreSortPanel, DDeiCoreStylePanel,
+     DDeiCoreFileOperatePanel, DDeiCoreFontAndTextPanel,  DDeiCoreOperatePanel,
+     DDeiCoreOperatePanel,  DDeiCoreSortPanel, DDeiCoreStylePanel,
      DDeiCoreToolPanel]
 
   getPanels(editor){
@@ -58,7 +55,7 @@ class DDeiCoreCommonPanels extends DDeiPluginBase{
 
 
 export {DDeiCoreCommonPanels, DDeiCoreExportAndImportPanel, DDeiCoreFileInfoPanel,
-  DDeiCoreFileOperatePanel, DDeiCoreFontAndTextPanel, DDeiCoreGoBackPanel, DDeiCoreOperatePanel,
-  DDeiCoreRightPanel, DDeiCoreSharePanel, DDeiCoreSortPanel, DDeiCoreStylePanel,
+  DDeiCoreFileOperatePanel, DDeiCoreFontAndTextPanel,  DDeiCoreOperatePanel,
+   DDeiCoreSortPanel, DDeiCoreStylePanel,
   DDeiCoreToolPanel}
 export default DDeiCoreCommonPanels

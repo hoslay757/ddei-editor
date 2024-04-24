@@ -117,7 +117,7 @@ class MenuRemoveSheet extends DDeiMenuBase {
         if (left < 0) {
           left = 0
         }
-        DDeiEditorUtil.showDialog('ddei-core-dialog-quickpop', {
+        DDeiEditorUtil.showDialog(this.editor,'ddei-core-dialog-quickpop', {
           group: "canvas-pop"
         }, { type: 99, left: left, top: top, hiddenMask: true }, null, true, true)
       }

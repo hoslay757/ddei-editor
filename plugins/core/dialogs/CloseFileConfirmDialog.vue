@@ -1,5 +1,5 @@
 <template>
-  <div :id="dialogId" class="ddei-core-dialog-closefile" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-closefile" v-if="forceRefresh">
     <div class="content">
       <div class="header">
         <svg class="icon warn" aria-hidden="true">
@@ -55,19 +55,19 @@ export default {
       if (this.editor?.tempDialogData[this.dialogId]?.callback?.ok) {
         this.editor?.tempDialogData[this.dialogId]?.callback?.ok();
       }
-      DDeiEditorUtil.closeDialog('ddei-core-dialog-closefile');
+      DDeiEditorUtil.closeDialog(this.editor, 'ddei-core-dialog-closefile');
     },
     cancel() {
       if (this.editor?.tempDialogData[this.dialogId]?.callback?.cancel) {
         this.editor.tempDialogData[this.dialogId].callback.cancel();
       }
-      DDeiEditorUtil.closeDialog('ddei-core-dialog-closefile');
+      DDeiEditorUtil.closeDialog(this.editor, 'ddei-core-dialog-closefile');
     },
     abort() {
       if (this.editor?.tempDialogData[this.dialogId]?.callback?.abort) {
         this.editor.tempDialogData[this.dialogId].callback.abort();
       }
-      DDeiEditorUtil.closeDialog('ddei-core-dialog-closefile');
+      DDeiEditorUtil.closeDialog(this.editor, 'ddei-core-dialog-closefile');
     },
   }
 };

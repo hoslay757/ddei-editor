@@ -31,7 +31,7 @@
               }}<span v-if="attrDefine.notNull">*</span>：
             </div>
             <div class="editor" v-if="attrDefine.visiable != false">
-              <component :is="editor?.getPropEditor(attrDefine.controlType)"
+              <component :editor="editor" :is="editor?.getPropEditor(attrDefine.controlType)"
                 v-if="reFresh && attrDefine?.visiable != false" :attrDefine="attrDefine"></component>
             </div>
           </div>
@@ -75,6 +75,10 @@ export default {
       type: Object,
       default: null
     },
+    editor: {
+      type: DDeiEditor,
+      default: null,
+    },
     //是否允许展开收折
     expand:{
       type: Boolean,
@@ -83,8 +87,6 @@ export default {
   },
   data() {
     return {
-      //当前编辑器
-      editor: null,
       //当前被选中控件的引用
       selectedModels: null,
       //属性定义的引用
@@ -140,8 +142,6 @@ export default {
     },
 
     refreshData() {
-      //获取编辑器
-      this.editor = DDeiEditor.ACTIVE_INSTANCE;
       this.editor.properyViewer = this;
       this.refreshAttrs();
     },

@@ -29,12 +29,12 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
-    return {
-      //当前编辑器
-      editor: null,
-    };
   },
   computed: {},
   watch: {},
@@ -49,8 +49,6 @@ export default {
     });
     this.mouseWheelThrottle = throttle(this.mouseWheelThrottle, 10);
     this.mouseMove = throttle(this.mouseMove, 20);
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
 
   },
   mounted() {

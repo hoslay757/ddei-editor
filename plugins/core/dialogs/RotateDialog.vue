@@ -1,5 +1,5 @@
 <template>
-  <div id="ddei-core-dialog-changerotate" class="ddei-core-dialog-changerotate" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-changerotate" v-if="forceRefresh">
     <div class="content">
       <div class="title">翻转</div>
       <div class="group">

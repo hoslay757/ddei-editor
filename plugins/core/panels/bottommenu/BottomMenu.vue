@@ -1,6 +1,6 @@
 <template>
   <div class="ddei-core-panel-bottommenu" v-if="forceRefresh" @mousedown="changeEditorFocus">
-    <component v-for="(item, index) in editor?.getPartPanels(options, 'panels') " :is="item.comp"
+    <component :editor="editor" v-for="(item, index) in editor?.getPartPanels(options, 'panels') " :is="item.comp"
       :options="item.options" v-bind="item.options"></component>
   </div>
 </template>
@@ -20,11 +20,14 @@ export default {
     options: {
       type: Object,
       default: null
-    },
+    }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      editor: null,
       forceRefresh:true,
     };
   },
@@ -51,7 +54,6 @@ export default {
 
     refreshData() {
       //获取编辑器
-      this.editor = DDeiEditor.ACTIVE_INSTANCE;
       this.editor.bottomMenuViewer = this;
     },
     /**

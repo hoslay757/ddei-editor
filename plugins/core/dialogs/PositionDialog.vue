@@ -1,5 +1,5 @@
 <template>
-  <div id="ddei-core-dialog-changeposition" class="ddei-core-dialog-changeposition" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-changeposition" v-if="forceRefresh">
     <div class="content">
       <div class="title">位置</div>
       <div class="group">

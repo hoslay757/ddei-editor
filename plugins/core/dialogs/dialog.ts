@@ -1,8 +1,13 @@
 import {DDeiEditor} from "ddei-framework";
 const DialogBase = {
+  props:{
+    editor: {
+      type: DDeiEditor,
+      default: null
+    }
+  },
   data: function () {
     return {
-      editor:null,
       forceRefresh: false,
     }
   },
@@ -18,8 +23,6 @@ const DialogBase = {
     }
   },
   mounted () {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     this.editor.dialogs[this.dialogId].viewer = this
   }
 };

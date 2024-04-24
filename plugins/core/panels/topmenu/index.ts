@@ -13,9 +13,9 @@ class DDeiCoreTopMenuPanel extends DDeiPluginBase{
   static defaultIns: DDeiCoreTopMenuPanel = new DDeiCoreTopMenuPanel();
 
   defaultOptions: object = {
-    'panels': ["ddei-core-panel-goback", "ddei-core-panel-fileinfo", "ddei-core-panel-share"
-      , "ddei-core-panel-operate", "ddei-core-panel-fontandtext", "ddei-core-panel-tool"
-      , "ddei-core-panel-sort", "ddei-core-panel-eimport", "ddei-core-panel-right"]
+    'panels': ["ddei-core-panel-fileinfo", 
+       "ddei-core-panel-operate", "ddei-core-panel-fontandtext", "ddei-core-panel-tool"
+      , "ddei-core-panel-sort"]
   }
 
 

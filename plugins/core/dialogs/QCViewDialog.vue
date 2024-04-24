@@ -1,5 +1,5 @@
 <template>
-  <div :id="dialogId" class="ddei-core-dialog-qcview" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-qcview" v-if="forceRefresh">
     <div class="items">
       <div class="item" :title="item.text" v-for="item in dataSource" @click="ok(item)">
         <svg class="icon" aria-hidden="true">
@@ -53,13 +53,13 @@ export default {
       if (this.editor?.tempDialogData[this.dialogId]?.callback?.ok) {
         this.editor?.tempDialogData[this.dialogId]?.callback?.ok(item);
       }
-      DDeiEditorUtil.closeDialog(this.dialogId);
+      DDeiEditorUtil.closeDialog(this.editor, "ddei-core-dialog-qcview");
     },
     cancel() {
       if (this.editor?.tempDialogData[this.dialogId]?.callback?.cancel) {
         this.editor.tempDialogData[this.dialogId].callback.cancel();
       }
-      DDeiEditorUtil.closeDialog(this.dialogId);
+      DDeiEditorUtil.closeDialog(this.editor, "ddei-core-dialog-qcview");
     },
   }
 };

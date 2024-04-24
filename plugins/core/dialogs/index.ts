@@ -5,8 +5,6 @@ import DDeiCoreChangeRatioDialog from "./changeratiodialog"
 import DDeiCoreChooseControlGroupDialog from "./choosecontrolgroupdialog"
 import DDeiCoreCloseFileConfirmDialog from "./closefileconfirmdialog"
 import DDeiCoreCollFileConfirmDialog from "./collfileconfirmdialog"
-import DDeiCoreCreateShareDialog from "./createsharedialog"
-import DDeiCoreExportOptionDialog from "./exportoptiondialog"
 import DDeiCoreLinePointTypeDialog from "./linepointtypedialog"
 import DDeiCoreLineTypeDialog from "./linetypedialog"
 import DDeiCoreManageLayersDialog from "./managelayersdialog"
@@ -15,7 +13,6 @@ import DDeiCorePositionDialog from "./positiondialog"
 import DDeiCorePublishFileConfirmDialog from "./publishfileconfirmdialog"
 import DDeiCoreQCViewDialog from "./qcviewdialog"
 import DDeiCoreQuickSetStyleDialog from "./quicksetstyledialog"
-import DDeiCoreReLoginDialog from "./relogindialog"
 import DDeiCoreRotateDialog from "./rotatedialog"
 import DDeiCoreSelectBorderDashDialog from "./selectborderdashdialog"
 import DDeiCoreSelectBorderWeightDialog from "./selectborderweightdialog"
@@ -23,7 +20,6 @@ import DDeiCoreSelectColorDialog from "./selectcolordialog"
 import DDeiCoreSelectFontDialog from "./selectfontdialog"
 import DDeiCoreSelectFontSizeDialog from "./selectfontsizedialog"
 import DDeiCoreTextAlignDialog from "./textaligndialog"
-import DDeiCoreUserRegistryDialog from "./userregistrydialog"
 
 class DDeiCoreDialogs extends DDeiPluginBase {
 
@@ -35,11 +31,11 @@ class DDeiCoreDialogs extends DDeiPluginBase {
 
   plugins: object[] = [DDeiCoreAlignDialog, DDeiCoreCanvasQuickDialog, DDeiCoreChangeRatioDialog,
     DDeiCoreChooseControlGroupDialog, DDeiCoreCloseFileConfirmDialog, DDeiCoreCollFileConfirmDialog,
-    DDeiCoreCreateShareDialog, DDeiCoreExportOptionDialog, DDeiCoreLinePointTypeDialog,
+    DDeiCoreLinePointTypeDialog,
     DDeiCoreLineTypeDialog, DDeiCoreManageLayersDialog, DDeiCoreMergeComposeDialog, DDeiCorePositionDialog,
-    DDeiCorePublishFileConfirmDialog, DDeiCoreQCViewDialog, DDeiCoreQuickSetStyleDialog, DDeiCoreReLoginDialog,
+    DDeiCorePublishFileConfirmDialog, DDeiCoreQCViewDialog, DDeiCoreQuickSetStyleDialog,
     DDeiCoreRotateDialog, DDeiCoreSelectBorderDashDialog, DDeiCoreSelectBorderWeightDialog, DDeiCoreSelectColorDialog,
-    DDeiCoreSelectFontDialog, DDeiCoreSelectFontSizeDialog, DDeiCoreTextAlignDialog, DDeiCoreUserRegistryDialog
+    DDeiCoreSelectFontDialog, DDeiCoreSelectFontSizeDialog, DDeiCoreTextAlignDialog
   ]
 
   getDialogs(editor) {
@@ -76,10 +72,10 @@ class DDeiCoreDialogs extends DDeiPluginBase {
 
 export {DDeiCoreDialogs,DDeiCoreAlignDialog, DDeiCoreCanvasQuickDialog, DDeiCoreChangeRatioDialog,
   DDeiCoreChooseControlGroupDialog, DDeiCoreCloseFileConfirmDialog, DDeiCoreCollFileConfirmDialog,
-  DDeiCoreCreateShareDialog, DDeiCoreExportOptionDialog, DDeiCoreLinePointTypeDialog,
+    DDeiCoreLinePointTypeDialog,
   DDeiCoreLineTypeDialog, DDeiCoreManageLayersDialog, DDeiCoreMergeComposeDialog, DDeiCorePositionDialog,
-  DDeiCorePublishFileConfirmDialog, DDeiCoreQCViewDialog, DDeiCoreQuickSetStyleDialog, DDeiCoreReLoginDialog,
+  DDeiCorePublishFileConfirmDialog, DDeiCoreQCViewDialog, DDeiCoreQuickSetStyleDialog,
   DDeiCoreRotateDialog, DDeiCoreSelectBorderDashDialog, DDeiCoreSelectBorderWeightDialog, DDeiCoreSelectColorDialog,
-  DDeiCoreSelectFontDialog, DDeiCoreSelectFontSizeDialog, DDeiCoreTextAlignDialog, DDeiCoreUserRegistryDialog
+  DDeiCoreSelectFontDialog, DDeiCoreSelectFontSizeDialog, DDeiCoreTextAlignDialog
 }
 export default DDeiCoreDialogs

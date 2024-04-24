@@ -49,17 +49,17 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
-    return {
-      editor: null,
-    };
   },
   computed: {},
   watch: {},
   created() { },
   mounted() {
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
   },
   methods: {
     /**

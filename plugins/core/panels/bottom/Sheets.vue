@@ -1,7 +1,6 @@
 <template>
-  <div class="ddei-core-panel-bottom-addpage" v-show="file?.extData?.owner == 1 || sslink?.can_edit == 1"
-    @click="newSheet"
-    v-if=" (!this.max || (this.editor?.files[this.editor?.currentFileIndex]?.sheets?.length < this.max))">
+  <div class="ddei-core-panel-bottom-addpage" @click="newSheet"
+    v-if="this.new && (!max || (editor?.files[editor?.currentFileIndex]?.sheets?.length < max))">
     <svg class="icon" aria-hidden="true">
       <use xlink:href="#icon-a-ziyuan376"></use>
     </svg>
@@ -11,8 +10,8 @@
       <span></span>
     </div>
     <div @mousedown="drag && sheetDragStart(null, $event)" @click.left="changeSheet(index)"
-      @click.right="(file?.extData?.owner == 1 || sslink?.can_edit == 1) && showMenu(sheet, $event)"
-      @mousemove="drag && sheetDragOver($event)" @dblclick="startChangeSheetName(sheet, $event)"
+      @click.right="showMenu(sheet, $event)" @mousemove="drag && sheetDragOver($event)"
+      @dblclick="rename && startChangeSheetName(sheet, $event)"
       v-show="index >= openIndex && index < openIndex + maxOpenSize"
       :class="{ 'ddei-core-panel-bottom-pages-page': sheet.active == 0, 'ddei-core-panel-bottom-pages-page--selected': sheet.active == 1 }"
       :title="sheet.name" v-for="(sheet, index) in  editor?.files[editor?.currentFileIndex]?.sheets ">
@@ -41,7 +40,6 @@ import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 import {DDeiUtil} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
-import Cookies from "js-cookie";
 import {DDeiStage} from "ddei-framework";
 
 export default {
@@ -61,16 +59,27 @@ export default {
     drag: {
       type: Boolean,
       default: true
+    },
+    new: {
+      type: Boolean,
+      default: true
+    },
+    rename: {
+      type: Boolean,
+      default: true
+    }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
     }
   },
   data() {
     return {
-      editor:null,
       file: null,
       maxOpenSize:0,
       openIndex: 0,
-      sslink: null,
-      user: null,
+      // sslink: null,
+      // user: null,
     };
   },
   computed: {},
@@ -114,22 +123,20 @@ export default {
     // 开始监听目标元素的大小变化
     resizeObserver.observe(this.$refs.bottomSheets);
 
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     let file = this.editor?.files[this.editor?.currentFileIndex];
     let sheet = file?.sheets[file?.currentSheetIndex];
     this.changeCurrentStage = true;
     this.editor.currentStage = sheet?.stage;
-    let userCookie = Cookies.get("user");
-    if (userCookie && file) {
-      this.user = JSON.parse(userCookie)
-      for (let i = 0; i < this.user?.sslinks?.length; i++) {
-        if (this.user.sslinks[i].file_id == file.id) {
-          this.sslink = this.user.sslinks[i]
-          break;
-        }
-      }
-    }
+    // let userCookie = Cookies.get("user");
+    // if (userCookie && file) {
+    //   this.user = JSON.parse(userCookie)
+    //   for (let i = 0; i < this.user?.sslinks?.length; i++) {
+    //     if (this.user.sslinks[i].file_id == file.id) {
+    //       this.sslink = this.user.sslinks[i]
+    //       break;
+    //     }
+    //   }
+    // }
     this.file = file
   },
   methods:{
@@ -371,8 +378,8 @@ export default {
         ddInstance.bus?.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
         ddInstance.bus.executeAll();
 
-        DDeiEditorUtil.closeDialogs(null, true)
-        DDeiEditorUtil.closeDialogs(null, false)
+        DDeiEditorUtil.closeDialogs(this.editor,null, true)
+        DDeiEditorUtil.closeDialogs(this.editor, null, false)
 
         //打开新文件
         let activeIndex = sheets.length - 1;
@@ -410,8 +417,8 @@ export default {
         ddInstance.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
         ddInstance.bus.executeAll();
 
-        DDeiEditorUtil.closeDialogs(null, true)
-        DDeiEditorUtil.closeDialogs(null, false)
+        DDeiEditorUtil.closeDialogs(this.editor, null, true)
+        DDeiEditorUtil.closeDialogs(this.editor, null, false)
         this.showPopPicker(stage)
         this.editor.changeState(DDeiEditorState.DESIGNING);
 
@@ -445,7 +452,7 @@ export default {
           if (left < 0) {
             left = 0
           }
-          DDeiEditorUtil.showDialog('ddei-core-dialog-quickpop', {
+          DDeiEditorUtil.showDialog(this.editor, 'ddei-core-dialog-quickpop', {
             group: "canvas-pop"
           }, { type: 99, left: left, top: top, hiddenMask: true }, null, true, true)
         }

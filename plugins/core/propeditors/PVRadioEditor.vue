@@ -40,11 +40,13 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      //当前编辑器
-      editor: null,
       dataSource: null,
       editBefore: null,
       editAfter: null,
@@ -59,8 +61,6 @@ export default {
     });
   },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     this.getDataSource(this.attrDefine);
 
     this.attrDefine.doCascadeDisplayByValue();

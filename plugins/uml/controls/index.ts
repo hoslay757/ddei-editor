@@ -1,5 +1,6 @@
 import {DDeiPluginBase} from "ddei-framework";
 import { loadControlByFrom, loadAndSortGroup } from "./toolgroup"
+import { cloneDeep } from "lodash"
 const control_ctx = import.meta.glob('./control/**', { eager: true })
 const group_ctx = import.meta.glob('./group/**', { eager: true })
 
@@ -12,31 +13,32 @@ class DDeiExtUMLControls extends DDeiPluginBase{
   controls:Map<string,object>  = new Map()
 
   getControls(editor) {
+    //获取扩展options
+    let extOptions = this.getOptions();
     //加载控件定义
-    let controls:Map<string,object> = new Map();
+    let controls: Map<string, object> = new Map();
     let controls1 = new Map(editor.controls);
     for (let i in control_ctx) {
       let control = control_ctx[i].default;
-      if (control){
-        controls.set(control.id, control);
-        controls1.set(control.id,control);
+
+      if (control) {
+        let c = cloneDeep(control)
+        controls.set(control.id, c);
+        controls1.set(control.id, c);
+
+        if (extOptions && extOptions[control.id]) {
+          for (let x in extOptions[control.id]) {
+            c.define[x] = extOptions[control.id][x]
+          }
+        }
       }
     }
 
-    
     //初始化控件定义
     controls.forEach(control => {
+
       loadControlByFrom(controls1, control)
     });
-    // controls.forEach(control => {
-    //   if (control.define) {
-    //     delete control.define.font
-    //     delete control.define.textStyle
-    //     delete control.define.border
-    //     delete control.define.fill
-    //   }
-    //   delete control.attrs
-    // })
     this.controls = controls;
     return controls
   }

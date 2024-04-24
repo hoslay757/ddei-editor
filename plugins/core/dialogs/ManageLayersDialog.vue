@@ -1,11 +1,11 @@
 <template>
-  <div :id="dialogId" v-if="forceRefresh && allowOpenMultLayers" class="ddei-core-dialog-managerlayers">
+  <div :id="editor?.id+'_'+dialogId" v-if="forceRefresh && allowOpenMultLayers" class="ddei-core-dialog-managerlayers">
     <div class="content">
       <div class="title">图层</div>
       <div class="group">
         <div class="group_content">
           <div class="item" @click="createNewLayer(0)"
-            v-show="(file?.extData?.owner == 1 || sslink?.can_edit == 1) && allowAddLayer">
+            v-show="allowAddLayer">
             <span style="grid-column:1/8;">新建图层</span>
             <svg class="icon extbtn" aria-hidden="true">
               <use xlink:href="#icon-a-ziyuan374"></use>
@@ -22,7 +22,7 @@
             </svg>
             <span style="grid-column:1/4;font-weight:normal">形状:{{ layer.modelNumber }}</span>
             <svg class="icon" aria-hidden="true" @click="createNewLayer(index)"
-              v-show="(file?.extData?.owner == 1 || sslink?.can_edit == 1) && allowAddLayer">
+              v-show="allowAddLayer">
               <use xlink:href="#icon-a-ziyuan374"></use>
             </svg>
             <svg class="icon" @click="displayOrShowLayer(layer)">
@@ -61,7 +61,6 @@ import {DDeiEditorState} from "ddei-framework";
 import {DDeiEnumOperateType} from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
 import DialogBase from "./dialog";
-import Cookies from "js-cookie";
 
 export default {
   name: "ddei-core-dialog-managerlayers",
@@ -80,8 +79,6 @@ export default {
       allowAddLayer: true,
       allowOpenMultLayers: true,
       currentStage: null,
-      sslink: null,
-      user: null,
       file: null,
     };
   },
@@ -109,19 +106,6 @@ export default {
       let file = this.editor?.files[this.editor?.currentFileIndex];
       let sheet = file?.sheets[file?.currentSheetIndex];
       this.currentStage = sheet?.stage;
-
-      let userCookie = Cookies.get("user");
-
-      if (userCookie && file) {
-        this.user = JSON.parse(userCookie)
-        for (let i = 0; i < this.user?.sslinks?.length; i++) {
-          if (this.user.sslinks[i].file_id == file.id) {
-            this.sslink = this.user.sslinks[i]
-            break;
-          }
-        }
-
-      }
       this.file = file
     },
     /**
@@ -322,10 +306,10 @@ export default {
         input.style.position = "absolute";
         document.body.appendChild(input);
         const that = this;
-        input.onblur = function () {
+        input.onblur = ()=> {
           //设置属性值
           if (input.value) {
-            let editor = DDeiEditor.ACTIVE_INSTANCE;
+            let editor = this.editor;
             if (input.value != that.currentChangeLayer.name) {
               that.currentChangeLayer.name = input.value;
               editor.editorViewer?.changeFileModifyDirty();
@@ -338,10 +322,10 @@ export default {
             input.value = "";
           }
         };
-        input.onkeydown = function (e) {
+        input.onkeydown =(e)=> {
           //回车
           if (e.keyCode == 13) {
-            let editor = DDeiEditor.ACTIVE_INSTANCE;
+            let editor = this.editor;
             if (input.value != that.currentChangeLayer.name) {
               that.currentChangeLayer.name = input.value;
               editor.editorViewer?.changeFileModifyDirty();

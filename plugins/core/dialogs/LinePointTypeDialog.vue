@@ -1,5 +1,5 @@
 <template>
-  <div :id="dialogId" class="ddei-core-dialog-linepointtype" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-linepointtype" v-if="forceRefresh">
     <div class="content">
       <div class="group">
         <div class="title">选择端点类型</div>
@@ -75,7 +75,7 @@ export default {
 
     ok() {
 
-      DDeiEditorUtil.closeDialog(this.dialogId);
+      DDeiEditorUtil.closeDialog(this.editor, "ddei-core-dialog-linepointtype");
     },
   }
 };

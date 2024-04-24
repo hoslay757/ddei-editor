@@ -23,10 +23,13 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      editor: null,
       allowStageRatio: true,
     };
   },
@@ -34,8 +37,6 @@ export default {
   watch: {},
   created() { },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     this.allowStageRatio = DDeiEditorUtil.getConfigValue(
       "GLOBAL_ALLOW_STAGE_RATIO",
       this.editor

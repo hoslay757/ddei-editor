@@ -34,12 +34,12 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
-    return {
-      //当前编辑器
-      editor: null,
-    };
   },
   computed: {},
   watch: {},
@@ -50,8 +50,6 @@ export default {
     });
   },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     //判断当前属性是否可编辑
     this.editBefore = DDeiUtil.getConfigValue(
       "EVENT_CONTROL_EDIT_BEFORE",

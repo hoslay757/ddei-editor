@@ -1,5 +1,5 @@
 <template>
-  <div id="ddei-core-dialog-linetype" class="ddei-core-dialog-linetype" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-linetype" v-if="forceRefresh">
     <div class="content">
       <div class="title">线段类型</div>
       <div class="group">
@@ -38,8 +38,6 @@ export default {
   data() {
     return {
       dialogId: 'ddei-core-dialog-linetype',
-      //当前编辑器
-      editor: null,
       value: 1,//当前选中值
     };
   },
@@ -74,7 +72,7 @@ export default {
      */
     ok(v) {
       this.changeType(v)
-      DDeiEditorUtil.closeDialog("ddei-core-dialog-linetype")
+      DDeiEditorUtil.closeDialog(this.editor, "ddei-core-dialog-linetype")
     },
 
   }

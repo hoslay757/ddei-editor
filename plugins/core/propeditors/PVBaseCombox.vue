@@ -57,11 +57,13 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      //当前编辑器
-      editor: null,
       //是否展开
       expanded: false,
       //值
@@ -81,8 +83,6 @@ export default {
   },
 
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     this.destroyDialog();
   },
   methods: {

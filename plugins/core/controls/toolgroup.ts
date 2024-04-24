@@ -9,13 +9,17 @@ const ToDefaultPropertys = ["fill.type", "fill.color", "fill.image", "fill.opaci
 
 //将属性转换为更深的groups中
 const parseAttrsToGroup = function (control) {
-
+  
   if (control.attrs) {
     control.attrs.forEach(curAttr => {
+      
       let attrDefine = new DDeiEditorArrtibute(curAttr);
       //在define中寻找样式值，如果有值，作为属性缺省值，再删除属性
       if (ToDefaultPropertys.indexOf(curAttr.code) != -1) {
         let defValue = DDeiUtil.getDataByPathList(control.define, curAttr.code, curAttr.mapping);
+        // if (control.id == '100001' && curAttr.code == 'border.color') {
+        //   debugger
+        // }
         if (defValue || defValue == 0) {
           attrDefine.defaultValue = defValue
         }

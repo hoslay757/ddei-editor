@@ -24,7 +24,6 @@ import {DDeiUtil} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiEnumOperateState} from "ddei-framework";
 import {DDeiModelArrtibuteValue} from "ddei-framework";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 
 export default {
   name: "ddei-core-btn-fontfamily",
@@ -36,12 +35,14 @@ export default {
     options: {
       type: Object,
       default: null
+    },
+     editor: {
+      type: DDeiEditor,
+      default: null,
     }
   },
   data() {
     return {
-      //当前编辑器
-      editor: null,
       controlDefine: null,
       attrDefine: null,
       dataSource: null,
@@ -65,11 +66,7 @@ export default {
     });
   },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
-
     this.refreshEditor();
-
   },
   methods: {
 
@@ -111,7 +108,7 @@ export default {
     showDialog(evt: Event) {
       let srcElement = evt.currentTarget;
       
-      DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-selectfont", {
+      DDeiEditorUtil.showOrCloseDialog(this.editor, "ddei-core-dialog-selectfont", {
         dataSource: this.dataSource,
         value: this.attrDefine.value,
         group: "property-dialog",

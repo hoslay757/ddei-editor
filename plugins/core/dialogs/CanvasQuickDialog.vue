@@ -1,5 +1,5 @@
 <template>
-  <div v-show="selectedModels?.size > 0" v-if="forceRefresh" :id="dialogId" @mousedown="closeAllDialog()"
+  <div :id="editor?.id + '_' + dialogId" v-show="selectedModels?.size > 0" v-if="forceRefresh" @mousedown="closeAllDialog()"
     class='ddei-core-dialog-quickpop'>
     <div v-if="operateState == 50" class="content">
       <div class="panel12">
@@ -276,18 +276,18 @@ export default {
 
     showSetStyleDialog(evt: Event) {
       let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog('ddei-core-dialog-setstyle', {
+      DDeiEditorUtil.showOrCloseDialog(this.editor,'ddei-core-dialog-setstyle', {
         group: "top-dialog"
       }, { type: 5 }, srcElement, false, true)
     },
 
     closeAllDialog() {
-      DDeiEditorUtil.closeDialogs()
+      DDeiEditorUtil.closeDialogs(this.editor)
     },
 
     showAlignDialog(evt: Event) {
       let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog("ddei-core-align_dialog", {
+      DDeiEditorUtil.showOrCloseDialog(this.editor, "ddei-core-align_dialog", {
         group: "top-dialog"
       }, { type: 5 }, srcElement, false, true)
     },

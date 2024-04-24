@@ -1,5 +1,5 @@
 <template>
-  <div :id="dialogId" class="ddei-core-dialog-selectfontsize" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-selectfontsize" v-if="forceRefresh">
     <div class="content">
       <div class="group">
         <div class="group_content">
@@ -60,7 +60,7 @@ export default {
       if (this.editor?.tempDialogData[this.dialogId]?.callback?.ok) {
         this.editor?.tempDialogData[this.dialogId]?.callback?.ok(data);
       }
-      DDeiEditorUtil.closeDialog("ddei-core-dialog-selectfontsize")
+      DDeiEditorUtil.closeDialog(this.editor, "ddei-core-dialog-selectfontsize")
     },
 
     select(data) {

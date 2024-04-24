@@ -25,7 +25,7 @@
         <use xlink:href="#icon-a-ziyuan422"></use>
       </svg>
     </div>
-    <svg class="icon addfile" v-show="user?.id != '-99'" aria-hidden="true" v-if="new" @click="newFile">
+    <svg class="icon addfile" aria-hidden="true" v-if="new" @click="newFile">
       <use xlink:href="#icon-a-ziyuan376"></use>
     </svg>
     <div style="flex:1 1 1px"></div>
@@ -55,7 +55,6 @@ import {DDeiEditorUtil} from "ddei-framework";
 import {DDeiStoreLocal} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
-import Cookies from "js-cookie";
 import {DDeiStage} from "ddei-framework";
 import {DDeiSheet} from "ddei-framework";
 
@@ -90,18 +89,20 @@ export default {
       type: Boolean,
       default: true
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      //当前编辑器
-      editor: null,
       //当前打开的页的开始下标
       openIndex: 0,
       //最大可以打开的数量
       maxOpenSize: 1,
       tempFile: null,
       unitFileWidth: 160,
-      user: null,
+      // user: null,
       forceRefresh:true
     };
   },
@@ -117,7 +118,7 @@ export default {
         for (let i = 0; i < this.editor.files.length; i++) {
           if (this.editor.files[i].active == DDeiActiveType.ACTIVE) {
             activeIndex = i;
-            this.applyFilePromise(this.editor.files[i])
+            // this.applyFilePromise(this.editor.files[i])
 
             this.editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
               parts: ["toolbox", "property"]
@@ -180,13 +181,11 @@ export default {
     },
 
     refreshData() {
-      //获取编辑器
-      this.editor = DDeiEditor.ACTIVE_INSTANCE;
       this.editor.openFilesViewer = this;
-      let userCookie = Cookies.get("user");
-      if (userCookie) {
-        this.user = JSON.parse(userCookie)
-      }
+      // let userCookie = Cookies.get("user");
+      // if (userCookie) {
+      //   this.user = JSON.parse(userCookie)
+      // }
     },
 
     /**
@@ -459,58 +458,58 @@ export default {
           stage.initRender();
           ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
         }
-        this.applyFilePromise(file)
+        // this.applyFilePromise(file)
         ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
         ddInstance.bus.executeAll();
       }
 
     },
 
-    /**
-     * 设置文件权限
-     */
-    applyFilePromise(file) {
-      if (file) {
-        let ddInstance = this.editor.ddInstance;
-        if (file.extData?.owner != 1) {
-          let canEdit = 0
-          let userCookie = Cookies.get("user");
-          if (userCookie) {
-            let user = JSON.parse(userCookie)
-            let sslink
-            for (let i = 0; i < user?.sslinks?.length; i++) {
-              if (user.sslinks[i].file_id == file.id) {
-                sslink = user.sslinks[i]
-                break;
-              }
-            }
-            if (sslink?.can_edit == 1) {
-              canEdit = 1
-            }
-          }
-          if (!canEdit) {
-            ddInstance["AC_DESIGN_CREATE"] = false
-            ddInstance["AC_DESIGN_EDIT"] = false
-            ddInstance["AC_DESIGN_DRAG"] = false
-            ddInstance["AC_DESIGN_SELECT"] = false
-            ddInstance["AC_DESIGN_LINK"] = false
-          } else {
-            ddInstance["AC_DESIGN_CREATE"] = true
-            ddInstance["AC_DESIGN_EDIT"] = true
-            ddInstance["AC_DESIGN_DRAG"] = true
-            ddInstance["AC_DESIGN_SELECT"] = true
-            ddInstance["AC_DESIGN_LINK"] = true
+    // /**
+    //  * 设置文件权限
+    //  */
+    // applyFilePromise(file) {
+    //   if (file) {
+    //     let ddInstance = this.editor.ddInstance;
+    //     if (file.extData?.owner != 1) {
+    //       let canEdit = 0
+    //       let userCookie = Cookies.get("user");
+    //       if (userCookie) {
+    //         let user = JSON.parse(userCookie)
+    //         let sslink
+    //         for (let i = 0; i < user?.sslinks?.length; i++) {
+    //           if (user.sslinks[i].file_id == file.id) {
+    //             sslink = user.sslinks[i]
+    //             break;
+    //           }
+    //         }
+    //         if (sslink?.can_edit == 1) {
+    //           canEdit = 1
+    //         }
+    //       }
+    //       if (!canEdit) {
+    //         ddInstance["AC_DESIGN_CREATE"] = false
+    //         ddInstance["AC_DESIGN_EDIT"] = false
+    //         ddInstance["AC_DESIGN_DRAG"] = false
+    //         ddInstance["AC_DESIGN_SELECT"] = false
+    //         ddInstance["AC_DESIGN_LINK"] = false
+    //       } else {
+    //         ddInstance["AC_DESIGN_CREATE"] = true
+    //         ddInstance["AC_DESIGN_EDIT"] = true
+    //         ddInstance["AC_DESIGN_DRAG"] = true
+    //         ddInstance["AC_DESIGN_SELECT"] = true
+    //         ddInstance["AC_DESIGN_LINK"] = true
 
-          }
-        } else {
-          ddInstance["AC_DESIGN_CREATE"] = true
-          ddInstance["AC_DESIGN_EDIT"] = true
-          ddInstance["AC_DESIGN_DRAG"] = true
-          ddInstance["AC_DESIGN_SELECT"] = true
-          ddInstance["AC_DESIGN_LINK"] = true
-        }
-      }
-    },
+    //       }
+    //     } else {
+    //       ddInstance["AC_DESIGN_CREATE"] = true
+    //       ddInstance["AC_DESIGN_EDIT"] = true
+    //       ddInstance["AC_DESIGN_DRAG"] = true
+    //       ddInstance["AC_DESIGN_SELECT"] = true
+    //       ddInstance["AC_DESIGN_LINK"] = true
+    //     }
+    //   }
+    // },
 
     /**
      * 放弃并关闭确认弹框
@@ -556,7 +555,7 @@ export default {
         file.state == DDeiFileState.NEW ||
         file.state == DDeiFileState.MODIFY
       ) {
-        DDeiEditorUtil.showDialog("ddei-core-dialog-closefile", {
+        DDeiEditorUtil.showDialog(this.editor, "ddei-core-dialog-closefile", {
           msg: '是否保存对"' + file.name + '"的更改？',
           callback: {
             abort: this.abortAndCloseFileConfirmDialog,

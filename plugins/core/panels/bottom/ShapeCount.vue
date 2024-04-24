@@ -20,18 +20,17 @@ export default {
       type: String,
       default: "形状数: "
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
-    return {
-      editor: null,
-    };
   },
   computed: {},
   watch: {},
   created() { },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
   },
 };
 </script>

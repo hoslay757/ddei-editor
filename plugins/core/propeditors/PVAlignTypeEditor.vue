@@ -72,11 +72,13 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      //当前编辑器
-      editor: null,
       //临时选择的值
       value: null,
     };
@@ -88,8 +90,6 @@ export default {
   watch: {},
   created() { },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     let type = this.getTypeValue();
     let text = this.getTypeText(type.value);
 

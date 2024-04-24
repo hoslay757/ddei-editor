@@ -121,11 +121,12 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
-    return {
-      editor: null,
-    };
   },
   computed: {},
   components: {
@@ -133,7 +134,6 @@ export default {
   watch: {},
   created() { },
   mounted() {
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
   },
 };
 </script>
@@ -141,8 +141,6 @@ export default {
 <style lang="less" scoped>
 .ddei-core-panel-fontandtext {
   height: 103px;
-  width: 418px;
-  flex:0 1 418px;
   display: grid;
   grid-template-rows: 20px 57px 26px;
   grid-template-columns: 1fr;

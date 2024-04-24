@@ -56,11 +56,13 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      //当前编辑器
-      editor: null,
       //临时选择的值
       value: null,
       //已加载的数据源
@@ -80,8 +82,6 @@ export default {
   watch: {},
   created() { },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     let itemWidth = this.attrDefine?.itemStyle?.width
       ? this.attrDefine?.itemStyle?.width
       : 100;

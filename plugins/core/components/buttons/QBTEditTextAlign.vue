@@ -34,11 +34,13 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      //当前编辑器
-      editor: null,
       controlDefine: null,
       attrDefine: null,
       valignAttrDefine: null,
@@ -51,15 +53,13 @@ export default {
 
   },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     this.refreshEditor();
   },
   methods: {
 
     showTextAlignDialog(evt: Event) {
       let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-textalign", {
+      DDeiEditorUtil.showOrCloseDialog(this.editor, "ddei-core-dialog-textalign", {
         group: "top-dialog",
         align: this.attrDefine.value,
         valign: this.valignAttrDefine.value,

@@ -38,11 +38,13 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      //当前编辑器
-      editor: null,
       dataSource: null,
     };
   },
@@ -50,8 +52,6 @@ export default {
   watch: {},
   created() { },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     this.getDataSource(this.attrDefine);
     let type = this.getTypeValue();
     if (type) {

@@ -1,26 +1,29 @@
 <template>
   <div class="ddei-editor-layout-standrad">
     <div class="top" ref="top">
-      <component ref="topComponents" v-for="(item,index) in editor?.getPartPanels(options,'top')" :is="item.comp"
-        v-bind="item.options" :options="item.options"></component>
+      <component ref="topComponents" :editor="editor" v-for="(item,index) in editor?.getPartPanels(options,'top')"
+        :is="item.comp" v-bind="item.options" :options="item.options"></component>
     </div>
     <div class="body">
       <div class="left" ref="left" v-show="toolboxShow">
-        <component ref="leftComponents" v-for="(item, index) in editor?.getPartPanels(options, 'left')" :is="item.comp"
-          :options="item.options" v-bind="item.options"></component>
+        <component ref="leftComponents" :editor="editor" v-for="(item, index) in editor?.getPartPanels(options, 'left')"
+          :is="item.comp" :options="item.options" v-bind="item.options"></component>
       </div>
       <div class="middle" ref="middle">
-        <component ref="middleComponents" v-for="(item, index) in editor?.getPartPanels(options, 'middle')"
-          :is="item.comp" :options="item.options" v-bind="item.options"></component>
+        <component ref="middleComponents" :editor="editor"
+          v-for="(item, index) in editor?.getPartPanels(options, 'middle')" :is="item.comp" :options="item.options"
+          v-bind="item.options"></component>
       </div>
       <div class="right" ref="right" v-show="propertyViewShow">
-        <component ref="rightComponents" v-for="(item, index) in editor?.getPartPanels(options, 'right')"
-          :is="item.comp" :options="item.options" v-bind="item.options"></component>
+        <component ref="rightComponents" :editor="editor"
+          v-for="(item, index) in editor?.getPartPanels(options, 'right')" :is="item.comp" :options="item.options"
+          v-bind="item.options"></component>
       </div>
     </div>
     <div class="bottom" ref="bottom">
-      <component ref="bottomComponents" v-for="(item, index) in editor?.getPartPanels(options, 'bottom')"
-        :is="item.comp" :options="item.options" v-bind="item.options"></component>
+      <component ref="bottomComponents" :editor="editor"
+        v-for="(item, index) in editor?.getPartPanels(options, 'bottom')" :is="item.comp" :options="item.options"
+        v-bind="item.options"></component>
     </div>
   </div>
 </template>
@@ -40,11 +43,14 @@ export default {
     options: {
       type: Object,
       default: null
+    },
+    editor:{
+      type:DDeiEditor,
+      default:null,
     }
   },
   data() {
     return {
-      editor: null,
       dragObj: null,
       changeIndex: -1,
       allowOpenMultFiles: true,
@@ -61,7 +67,6 @@ export default {
   computed: {},
   watch: {},
   created() {
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
 
     // 监听obj对象中prop属性的变化
     this.$watch("editor.leftWidth", function (newVal, oldVal) {
@@ -174,15 +179,15 @@ export default {
   height: calc(100vh);
   display: flex;
   flex-direction: column;
-  min-width: 1700px;
 
   .top {
-    // flex: 0 0 103px
+    border: 0.5px solid var(--border);
+    border-bottom: none;
   }
 
   .bottom {
-    // flex: 0 0 50px;
-    border: 1px solid var(--border);
+    border: 0.5px solid var(--border);
+    border-top: none;
   }
 
   .body {

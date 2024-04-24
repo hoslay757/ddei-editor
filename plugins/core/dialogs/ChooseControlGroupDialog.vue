@@ -1,5 +1,5 @@
 <template>
-  <div id="ddei-core-dialog-choosecontrolgroup" class="ddei-core-dialog-choosecontrolgroup" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-choosecontrolgroup" v-if="forceRefresh">
     <div class="content">
       <div class="title">选择需要的图形</div>
       <div class="group">

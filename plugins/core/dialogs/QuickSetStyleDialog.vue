@@ -1,5 +1,5 @@
 <template>
-  <div id='ddei-core-dialog-setstyle' class='ddei-core-dialog-setstyle' v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class='ddei-core-dialog-setstyle' v-if="forceRefresh">
     <div class="content">
       <div class="title">快捷设置样式</div>
       <div class="group">
@@ -195,7 +195,7 @@ export default {
      */
     ok(data) {
       this.select(data)
-      DDeiEditorUtil.closeDialog('ddei-core-dialog-setstyle')
+      DDeiEditorUtil.closeDialog(this.editor, 'ddei-core-dialog-setstyle')
     },
 
   }

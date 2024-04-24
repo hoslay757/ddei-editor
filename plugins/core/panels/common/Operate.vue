@@ -63,10 +63,13 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      editor: null,
       hasClipData: false,
       displayBrush: false,
     };
@@ -75,8 +78,6 @@ export default {
   watch: {},
   created() { },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     this.hasClipboard();
     this.isDisplayBrush();
   },
@@ -152,8 +153,8 @@ export default {
 <style lang="less" scoped>
 .ddei-core-panel-operate {
   height: 103px;
-  width:234px;
-  flex:0 1 234px;
+  width:230px;
+  flex:0 1 230px;
   display: grid;
   grid-template-rows: 20px 57px 26px;
   grid-template-columns: 1fr;

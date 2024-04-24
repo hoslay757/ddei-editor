@@ -1,5 +1,5 @@
 <template>
-  <div :id="dialogId" class="ddei-core-dialog-publishfile" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-publishfile" v-if="forceRefresh">
     <div class="content">
       <div class="header">
         <svg class="icon warn" aria-hidden="true">
@@ -53,13 +53,13 @@ export default {
       if (this.editor?.tempDialogData[this.dialogId]?.callback?.ok) {
         this.editor?.tempDialogData[this.dialogId]?.callback?.ok();
       }
-      DDeiEditorUtil.closeDialog('ddei-core-dialog-publishfile');
+      DDeiEditorUtil.closeDialog(this.editor, 'ddei-core-dialog-publishfile');
     },
     cancel() {
       if (this.editor?.tempDialogData[this.dialogId]?.callback?.cancel) {
         this.editor.tempDialogData[this.dialogId].callback.cancel();
       }
-      DDeiEditorUtil.closeDialog('ddei-core-dialog-publishfile');
+      DDeiEditorUtil.closeDialog(this.editor, 'ddei-core-dialog-publishfile');
     },
   }
 };

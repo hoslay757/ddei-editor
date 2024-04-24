@@ -26,19 +26,18 @@ export default {
   name: "DDei-Editor-Menu-Dialog",
   extends: null,
   mixins: [],
-  props: {},
+  props: {
+    editor: {
+      type: DDeiEditor,
+      default: null,
+    }
+  },
   data() {
-    return {
-      //当前编辑器
-      editor: null,
-    };
   },
   computed: {},
   components: {},
   watch: {},
   created() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
   },
   mounted() {
 

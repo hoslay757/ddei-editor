@@ -1,24 +1,8 @@
 <template>
-  <div class="ddei-core-panel-fileinfo" v-if="file?.extData?.owner == 1">
+  <div class="ddei-core-panel-fileinfo">
     <div class="header"></div>
     <div class="content">
-      <div class="part">
-        <div class="button-h">
-          <div class="button" @click="newFile" title="新建">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan490"></use>
-            </svg>
-            <div class="text">新建</div>
-          </div>
-          <div class="button" @click="openFile" title="打开">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan489"></use>
-            </svg>
-            <div class="text">打开</div>
-          </div>
-        </div>
-      </div>
-      <div class="part">
+      <!-- <div class="part">
         <div class="button-h">
           <div class="button" title="导入">
             <svg class="icon" aria-hidden="true">
@@ -33,8 +17,23 @@
             <div class="text">导出</div>
           </div>
         </div>
+      </div> -->
+      <div class="part">
+        <div class="button-v" @click="newFile" title="新建">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-a-ziyuan490"></use>
+          </svg>
+          <div class="text">新建</div>
+        </div>
       </div>
-
+      <div class="part">
+        <div class="button-v" @click="openFile" title="打开">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-a-ziyuan489"></use>
+          </svg>
+          <div class="text">打开</div>
+        </div>
+      </div>
       <div class="part">
         <div class="button-v" @click="save" title="保存">
           <svg class="icon" aria-hidden="true">
@@ -43,6 +42,15 @@
           <div class="text">保存</div>
         </div>
       </div>
+      <div class="part">
+        <div class="button-v" @click="download" title="下载">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-a-ziyuan424"></use>
+          </svg>
+          <div class="text">下载</div>
+        </div>
+      </div>
+
     </div>
     <div class="tail">
       文件
@@ -72,10 +80,13 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      editor: null,
       file: {},
       fileNameEditing: false,
       fileDescEditing: false,
@@ -85,30 +96,28 @@ export default {
   watch: {},
   created() { },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
     this.file = this.editor?.files[this.editor?.currentFileIndex];
   },
   methods: {
 
-    showExportDialog(evt: Event) {
-      let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-exportoption", {
-        callback: {
-        },
-        mode: 1,
-        group: "top-dialog",
-        background: "white",
-        opacity: "1%",
-        event: -1
-      }, {}, srcElement)
+    // showExportDialog(evt: Event) {
+    //   let srcElement = evt.currentTarget;
+    //   DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-exportoption", {
+    //     callback: {
+    //     },
+    //     mode: 1,
+    //     group: "top-dialog",
+    //     background: "white",
+    //     opacity: "1%",
+    //     event: -1
+    //   }, {}, srcElement)
 
-      if (DDeiEditor.ACTIVE_INSTANCE.tempDialogData && DDeiEditor.ACTIVE_INSTANCE.tempDialogData["ddei-core-dialog-exportoption"]) {
-        this.editor.changeState(DDeiEditorState.PROPERTY_EDITING);
-      } else {
-        this.editor.changeState(DDeiEditorState.DESIGNING);
-      }
-    },
+    //   if (DDeiEditor.ACTIVE_INSTANCE.tempDialogData && DDeiEditor.ACTIVE_INSTANCE.tempDialogData["ddei-core-dialog-exportoption"]) {
+    //     this.editor.changeState(DDeiEditorState.PROPERTY_EDITING);
+    //   } else {
+    //     this.editor.changeState(DDeiEditorState.DESIGNING);
+    //   }
+    // },
     /**
      * 保存
      * @param evt
@@ -118,6 +127,35 @@ export default {
       this.editor.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
       this.editor.bus.push(DDeiEditorEnumBusCommandType.SaveFile, {}, evt);
       this.editor.bus.executeAll();
+    },
+
+    /**
+     * 下载文件
+     */
+    download(evt) {
+      if (this.editor?.ddInstance?.stage) {
+        //获取json信息
+        let file = this.editor?.files[this.editor?.currentFileIndex];
+        if (file) {
+          let json = file.toJSON();
+          if (json) {
+            // 创建隐藏的可下载链接
+            let eleLink = document.createElement("a");
+            eleLink.download = file.name + ".dei";
+            eleLink.style.display = "none";
+            // 字符内容转变成blob地址
+            let blob = new Blob([JSON.stringify(json)]);
+            eleLink.href = URL.createObjectURL(blob);
+            // 触发点击
+            document.body.appendChild(eleLink);
+            eleLink.click();
+            // 然后移除
+            document.body.removeChild(eleLink);
+            this.editor.changeState(DDeiEditorState.DESIGNING);
+          }
+        }
+
+      }
     },
 
     /**
@@ -309,8 +347,8 @@ export default {
 <style lang="less" scoped>
 .ddei-core-panel-fileinfo {
   height: 103px;
-  width: 172px;
-  flex:0 1 172px;
+  width: 230px;
+  flex:0 1 230px;
   display: grid;
   grid-template-rows: 20px 57px 26px;
   grid-template-columns: 1fr;

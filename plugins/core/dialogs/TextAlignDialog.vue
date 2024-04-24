@@ -1,5 +1,6 @@
 <template>
-  <div id="ddei-core-dialog-textalign" class="ddei-core-dialog-textalign" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-textalign"
+    v-if="forceRefresh">
     <div class="content">
       <div class="title">文本对齐</div>
       <div class="group">
@@ -117,7 +118,7 @@ export default {
      */
     ok(v) {
       this.changeAlign(v)
-      DDeiEditorUtil.closeDialog("ddei-core-dialog-textalign")
+      DDeiEditorUtil.closeDialog(this.editor, "ddei-core-dialog-textalign")
     },
 
   }

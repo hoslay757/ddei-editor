@@ -1,5 +1,5 @@
 <template>
-  <div class="ddei-editor-qcview" v-show="show">
+  <div class="ddei-editor-qcview">
     <div class="ddei-editor-qcview-type" v-for="item in dataSource" v-show="item.value == mode"
       @click="showDialog($event)" :title="item.text">
       <svg class="icon" aria-hidden="true">
@@ -29,11 +29,14 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
       colors: [],
-      editor: null,
       //当前编辑的模式，1填充，2边框，3字体
       mode: 1,
       dataSource: [
@@ -41,24 +44,14 @@ export default {
         { value: 2, text: "边框", img: "#icon-border-pencil" },
         { value: 3, text: "字体", img: "#icon-a-ziyuan463" },
       ],
-      show: true,
     };
   },
   computed: {},
   watch: {},
   created() {
-    // 监听obj对象中prop属性的变化
-    this.$watch("editor.files.length", function (newVal, oldVal) {
-      if (newVal == 0) {
-        this.show = false;
-      } else {
-        this.show = true;
-      }
-    });
+   
   },
   mounted() {
-    //获取编辑器
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
 
     this.colors = [
       "#FFB6C1",
@@ -168,7 +161,7 @@ export default {
         }
       });
       let el = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-qcview", {
+      DDeiEditorUtil.showOrCloseDialog(this.editor,"ddei-core-dialog-qcview", {
         dataSource: dataSource,
         callback: {
           ok: this.changeMode,

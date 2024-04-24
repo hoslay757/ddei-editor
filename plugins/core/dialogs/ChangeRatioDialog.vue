@@ -1,5 +1,5 @@
 <template>
-  <div :id="dialogId" class="ddei-core-dialog-changeratio" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-changeratio" v-if="forceRefresh">
     <div class="content">
       <div class="title">{{title}}</div>
       <div class="group">

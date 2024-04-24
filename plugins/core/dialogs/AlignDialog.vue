@@ -1,5 +1,5 @@
 <template>
-  <div id='ddei-core-dialog-align' class="ddei-core-dialog-align" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-align" v-if="forceRefresh">
     <div class="content">
       <div class="title">对齐</div>
       <div class="group">

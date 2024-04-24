@@ -1,5 +1,5 @@
 <template>
-  <div class="ddei-core-panel-eimport" v-if="file?.extData?.owner == 1">
+  <div class="ddei-core-panel-eimport">
     <div class="header"></div>
     <div class="content">
       <div class="part">
@@ -10,33 +10,16 @@
           <div class="text">下载</div>
         </div>
       </div>
-      <div class="part">
+      <!-- <div class="part">
         <div class="button-v" @click="showExportDialog($event)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-a-ziyuan501"></use>
           </svg>
           <div class="text">打印</div>
         </div>
-      </div>
-      <div class="part">
-        <div class="button-v" @click="showShareDialog($event)">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan378"></use>
-          </svg>
-          <div class="text">分享</div>
-        </div>
-      </div>
-
-      <div class="part">
-        <div class="button-v" @click="publish">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan425"></use>
-          </svg>
-          <div class="text">发布</div>
-        </div>
-      </div>
+      </div> -->
     </div>
-    <div class="tail">发布</div>
+    <div class="tail"></div>
   </div>
 </template>
 <script lang="ts">
@@ -44,7 +27,6 @@ import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
-import Cookies from "js-cookie";
 
 export default {
   name: "ddei-core-panel-eimport",
@@ -56,11 +38,13 @@ export default {
       type: Object,
       default: null
     }
+    , editor: {
+      type: DDeiEditor,
+      default: null,
+    }
   },
   data() {
     return {
-      editor: null,
-      user: null,
       file:null,
     };
   },
@@ -68,65 +52,29 @@ export default {
   watch: {},
   created() { },
   mounted() {
-    this.editor = DDeiEditor.ACTIVE_INSTANCE;
-    let userCookie = Cookies.get("user");
-    if (userCookie) {
-      this.user = JSON.parse(userCookie)
-    }
     this.file = this.editor?.files[this.editor?.currentFileIndex];
 
   },
   methods: {
 
-    showExportDialog(evt: Event) {
-      let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-exportoption", {
-        callback: {
-        },
-        mode: 2,
-        group: "top-dialog",
-        background: "white",
-        opacity: "1%",
-        event: -1
-      }, {}, srcElement)
+    // showExportDialog(evt: Event) {
+    //   let srcElement = evt.currentTarget;
+    //   DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-exportoption", {
+    //     callback: {
+    //     },
+    //     mode: 2,
+    //     group: "top-dialog",
+    //     background: "white",
+    //     opacity: "1%",
+    //     event: -1
+    //   }, {}, srcElement)
 
-      if (this.editor.tempDialogData && this.editor.tempDialogData["ddei-core-dialog-exportoption"]) {
-        this.editor.changeState(DDeiEditorState.PROPERTY_EDITING);
-      } else {
-        this.editor.changeState(DDeiEditorState.DESIGNING);
-      }
-    },
-
-    showShareDialog(evt: Event) {
-      let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-createshare", {
-        callback: {
-        },
-        group: "top-dialog",
-        background: "white",
-        opacity: "1%",
-        event: -1
-      }, {}, srcElement)
-
-
-      if (DDeiEditor.ACTIVE_INSTANCE.tempDialogData && DDeiEditor.ACTIVE_INSTANCE.tempDialogData["ddei-core-dialog-createshare"]) {
-        this.editor.changeState(DDeiEditorState.PROPERTY_EDITING);
-      } else {
-        this.editor.changeState(DDeiEditorState.DESIGNING);
-      }
-    },
-    /**
-     * 发布
-     * @param evt
-     */
-    publish(evt) {
-      this.editor.changeState(DDeiEditorState.DESIGNING);
-      this.editor.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
-      this.editor.bus.push(DDeiEditorEnumBusCommandType.SaveFile, {
-        publish: 1,
-      });
-      this.editor.bus.executeAll();
-    },
+    //   if (this.editor.tempDialogData && this.editor.tempDialogData["ddei-core-dialog-exportoption"]) {
+    //     this.editor.changeState(DDeiEditorState.PROPERTY_EDITING);
+    //   } else {
+    //     this.editor.changeState(DDeiEditorState.DESIGNING);
+    //   }
+    // },
     /**
      * 下载文件
      */
@@ -155,8 +103,6 @@ export default {
         
       }
     },
-
-
   },
 };
 </script>

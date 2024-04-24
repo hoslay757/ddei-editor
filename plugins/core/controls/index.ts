@@ -1,5 +1,6 @@
 import {DDeiPluginBase} from "ddei-framework";
 import { loadControlByFrom, loadAndSortGroup } from "./toolgroup"
+import { cloneDeep } from "lodash"
 const control_ctx = import.meta.glob('./control/**', { eager: true })
 const group_ctx = import.meta.glob('./group/**', { eager: true })
 
@@ -19,13 +20,15 @@ class DDeiCoreControls extends DDeiPluginBase{
     let controls1 = new Map(editor.controls);
     for (let i in control_ctx) {
       let control = control_ctx[i].default;
+      
       if (control) {
-        controls.set(control.id, control);
-        controls1.set(control.id, control);
+        let c = cloneDeep(control)
+        controls.set(control.id, c);
+        controls1.set(control.id, c);
         
         if (extOptions && extOptions[control.id]){
           for (let x in extOptions[control.id]){
-            control.define[x] = extOptions[control.id][x]
+            c.define[x] = extOptions[control.id][x]
           }
         }
       }
@@ -33,6 +36,7 @@ class DDeiCoreControls extends DDeiPluginBase{
 
     //初始化控件定义
     controls.forEach(control => {
+      
       loadControlByFrom(controls1, control)
     });
     this.controls = controls;
