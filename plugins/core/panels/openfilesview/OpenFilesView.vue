@@ -213,7 +213,6 @@ export default {
           },
           { currentDdInstance: ddInstance }
         );
-        file.extData.owner = 1
         file.local = 1
         //添加文件
         if (this.editor.currentFileIndex != -1) {
@@ -272,6 +271,13 @@ export default {
             let file = editor?.files[editor?.currentFileIndex];
             if (input.value != file.name) {
               file.name = input.value;
+              if (file.path) {
+                if (file.path.indexOf("/") != -1) {
+                  file.path = file.path.substring(0, file.path.lastIndexOf("/")) + "/" + file.name
+                } else {
+                  file.path = file.name;
+                }
+              }
               editor.editorViewer?.changeFileModifyDirty();
               editor.bus.push(DDeiEditorEnumBusCommandType.AddFileHistroy);
               editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
@@ -293,6 +299,14 @@ export default {
             let file = editor?.files[editor?.currentFileIndex];
             if (input.value != file.name) {
               file.name = input.value;
+              if (file.path){
+                if (file.path.indexOf("/") != -1){
+                  file.path = file.path.substring(0, file.path.lastIndexOf("/"))+"/"+file.name
+                }else{
+                  file.path = file.name;
+                }
+              }
+              
               editor.editorViewer?.changeFileModifyDirty();
               editor.bus.push(DDeiEditorEnumBusCommandType.AddFileHistroy);
               editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {

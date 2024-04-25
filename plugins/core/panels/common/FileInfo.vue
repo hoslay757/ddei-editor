@@ -139,6 +139,7 @@ export default {
         if (file) {
           let json = file.toJSON();
           if (json) {
+            debugger
             // 创建隐藏的可下载链接
             let eleLink = document.createElement("a");
             eleLink.download = file.name + ".dei";
@@ -187,9 +188,8 @@ export default {
         });
         let openedFiles = this.editor.files;
         let openedFileIndex = -1
-
         for (let fi = 0; fi < openedFiles.length; fi++) {
-          if (openedFiles[fi].id == file.id) {
+          if ((openedFiles[fi].id && openedFiles[fi].id == file.id) || openedFiles[fi].path == file.path) {
             openedFileIndex = fi
             break;
           }
@@ -197,7 +197,6 @@ export default {
         if (openedFileIndex == -1) {
           file.localFileHandler = openFileHandle[0]
           file.local = 1
-          file.extData.owner = 1
           this.editor.addFile(file);
           for (let x = 0; x < this.editor.files.length; x++) {
             this.editor.files[x].active = DDeiActiveType.NONE;
@@ -248,7 +247,7 @@ export default {
             ddInstance?.bus?.executeAll();
           }
         } else {
-
+          
           file = this.editor.files[openedFileIndex]
           if (file && ddInstance) {
             for (let x = 0; x < this.editor.files.length; x++) {
@@ -302,7 +301,6 @@ export default {
           },
           { currentDdInstance: ddInstance }
         );
-        file.extData.owner = 1
         //添加文件
         if (this.editor.currentFileIndex != -1) {
           this.editor.files[this.editor.currentFileIndex].active =

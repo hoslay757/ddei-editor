@@ -16,7 +16,7 @@
             @dragover="layerDragOver($event)" @drop="layerDragDrop($event)" @dragleave="layerDragCancel($event)">
             <span style="grid-column:1/8;" @dblclick="startChangeLayerName(layer, $event)">{{ layer.name ? layer.name :
               '图层' }}</span>
-            <svg class="icon" aria-hidden="true" v-show="file?.extData?.owner == 1 || sslink?.can_edit == 1"
+            <svg class="icon" aria-hidden="true"
               @click="removeLayer(index)">
               <use xlink:href="#icon-a-ziyuan401"></use>
             </svg>
