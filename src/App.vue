@@ -1,6 +1,6 @@
 <script lang="ts">
 import DDeiEditorView from "./editor/Editor.vue";
-import { DDeiCoreTopMenuPanel, DDeiCoreThemeBlack, DDeiCoreControls, DDeiCoreHotkeys, DDeiKeyActionAllSelect, DDeiCorePropertyViewPanel, DDeiCoreToolboxPanel, DDeiCoreSheetsPanel, DDeiCoreChangeRatioPanel, DDeiCoreChangeRatioDialog, DDeiCoreShapeCountPanel, DDeiCoreBottomMenuPanel, DDeiCoreStandLayout, DDeiCoreOpenFilesViewPanel } from "@ddei/core";
+import { DDeiCoreTopMenuPanel, DDeiCoreThemeBlack, DDeiCoreControls, DDeiCoreHotkeys, DDeiKeyActionAllSelect, DDeiCorePropertyViewPanel, DDeiCoreToolboxPanel, DDeiCoreSheetsPanel, DDeiCoreChangeRatioPanel, DDeiCoreChangeRatioDialog, DDeiCoreShapeCountPanel, DDeiCoreBottomMenuPanel, DDeiCoreStandLayout, DDeiCoreOpenFilesViewPanel, DDeiCoreThemeDefault } from "@ddei/core";
 import { DDeiExtUML } from "@ddei/uml"
 import { defineComponent, markRaw } from "vue";
 export default defineComponent({
@@ -97,12 +97,69 @@ export default defineComponent({
       },
       //配置扩展插件
       extensions: [
-        
+
+      ],
+    })
+    const options2 = markRaw({
+      config: {
+
+      },
+      //配置扩展插件
+      extensions: [
+        //布局的配置
+        DDeiCoreStandLayout.configuraton({
+          //配置插件
+          'top': [],
+          'middle': ['ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],
+          'bottom': [],
+          'left': [],
+          'right': []
+        }),
+      ],
+    })
+    const options3 = markRaw({
+      config: {
+
+      },
+      //配置扩展插件
+      extensions: [
+        //布局的配置
+        DDeiCoreStandLayout.configuraton({
+          //配置插件
+          'top': [],
+          'middle': ['ddei-core-panel-canvasview'],
+          'bottom': [],
+          'left': [],
+          'right': []
+        }),
+        DDeiCoreThemeBlack.configuraton({
+          default: true
+        }),
+      ],
+    })
+    const options4 = markRaw({
+      config: {
+
+      },
+      //配置扩展插件
+      extensions: [
+        //布局的配置
+        DDeiCoreStandLayout.configuraton({
+          //配置插件
+          'top': [],
+          'middle': ['ddei-core-panel-canvasview'],
+          'bottom': [],
+          'left': [],
+          'right': []
+        }),
       ],
     })
     return {
       options,
       options1,
+      options2,
+      options3,
+      options4,
     };
   },
 });
@@ -112,6 +169,15 @@ export default defineComponent({
 <template>
   <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
   <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
+  <div style="width:400px;height:400px;float:left">
+    <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>
+  </div>
+  <div style="width:400px;height:400px;float:left">
+    <DDeiEditorView ref="editorViewer4" :options="options3" id="ddei_editor_4"></DDeiEditorView>
+  </div>
+  <div style="width:400px;height:400px;float:left">
+    <DDeiEditorView ref="editorViewer5" :options="options4" id="ddei_editor_5"></DDeiEditorView>
+  </div>
 </template>
 
 <style>

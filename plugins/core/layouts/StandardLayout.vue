@@ -1,29 +1,26 @@
 <template>
   <div class="ddei-editor-layout-standrad">
-    <div class="top" ref="top">
-      <component ref="topComponents" :editor="editor" v-for="(item,index) in editor?.getPartPanels(options,'top')"
-        :is="item.comp" v-bind="item.options" :options="item.options"></component>
+    <div class="top" ref="top" v-show="topComponents?.length > 0">
+      <component ref="topComponents" :editor="editor" v-for="(item,index) in topComponents" :is="item.comp"
+        v-bind="item.options" :options="item.options"></component>
     </div>
     <div class="body">
-      <div class="left" ref="left" v-show="toolboxShow">
-        <component ref="leftComponents" :editor="editor" v-for="(item, index) in editor?.getPartPanels(options, 'left')"
-          :is="item.comp" :options="item.options" v-bind="item.options"></component>
+      <div class="left" ref="left" v-show="toolboxShow && leftComponents?.length > 0">
+        <component ref="leftComponents" :editor="editor" v-for="(item, index) in leftComponents" :is="item.comp"
+          :options="item.options" v-bind="item.options"></component>
       </div>
-      <div class="middle" ref="middle">
-        <component ref="middleComponents" :editor="editor"
-          v-for="(item, index) in editor?.getPartPanels(options, 'middle')" :is="item.comp" :options="item.options"
-          v-bind="item.options"></component>
+      <div class="middle" ref="middle" v-show="middleComponents?.length > 0">
+        <component ref="middleComponents" :editor="editor" v-for="(item, index) in middleComponents" :is="item.comp"
+          :options="item.options" v-bind="item.options"></component>
       </div>
-      <div class="right" ref="right" v-show="propertyViewShow">
-        <component ref="rightComponents" :editor="editor"
-          v-for="(item, index) in editor?.getPartPanels(options, 'right')" :is="item.comp" :options="item.options"
-          v-bind="item.options"></component>
+      <div class="right" ref="right" v-show="propertyViewShow && rightComponents?.length > 0">
+        <component ref="rightComponents" :editor="editor" v-for="(item, index) in rightComponents" :is="item.comp"
+          :options="item.options" v-bind="item.options"></component>
       </div>
     </div>
-    <div class="bottom" ref="bottom">
-      <component ref="bottomComponents" :editor="editor"
-        v-for="(item, index) in editor?.getPartPanels(options, 'bottom')" :is="item.comp" :options="item.options"
-        v-bind="item.options"></component>
+    <div class="bottom" ref="bottom" v-show="bottomComponents?.length > 0">
+      <component ref="bottomComponents" :editor="editor" v-for="(item, index) in bottomComponents" :is="item.comp"
+        :options="item.options" v-bind="item.options"></component>
     </div>
   </div>
 </template>
@@ -59,6 +56,11 @@ export default {
       initRightWidth: 0,
       toolboxShow: true,
       propertyViewShow: true,
+      leftComponents: [],
+      rightComponents: [],
+      topComponents: [],
+      bottomComponents: [],
+      middleComponents: [],
     };
   },
   //注册组件
@@ -94,9 +96,16 @@ export default {
     this.$watch("editor.bottomHeight", function (newVal, oldVal) {
       this.$refs.bottom.style.flexBasis = newVal + "px";
     });
+    this.leftComponents = this.editor.getPartPanels(this.options, 'left');
+    this.rightComponents = this.editor.getPartPanels(this.options, 'right');
+    this.topComponents = this.editor.getPartPanels(this.options, 'top');
+    this.bottomComponents = this.editor.getPartPanels(this.options, 'bottom');
+    this.middleComponents = this.editor.getPartPanels(this.options, 'middle');
   },
   mounted() {
     this.editor.layoutViewer = this;
+    
+    
 
     // 获取要监听的 div 元素
     let middleCanvas = document.getElementById(this.editor.id+"_canvas");
