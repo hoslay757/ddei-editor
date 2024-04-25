@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="subcontent" id="ddei-core-dialog-choosecontrolgroup_subcontent">
+    <div class="subcontent" v-show="subGroups?.length > 0" :id="editor?.id + '_ddei-core-dialog-choosecontrolgroup_subcontent'">
       <div class="group">
         <div class="item" v-for="group in subGroups" @click="chooseGroup(group.id)">
           <input type="checkbox" v-model="group.selected" style="pointer-events: none;" :name="group.id"
@@ -92,8 +92,8 @@ export default {
         })
         this.subGroups = groups
         this.menuId = menuid
-        let dialogEle = document.getElementById("ddei-core-dialog-choosecontrolgroup");
-        let subContentEle = document.getElementById("ddei-core-dialog-choosecontrolgroup_subcontent");
+        let dialogEle = document.getElementById(this.editor.id+"_ddei-core-dialog-choosecontrolgroup");
+        let subContentEle = document.getElementById(this.editor.id + "_ddei-core-dialog-choosecontrolgroup_subcontent");
         subContentEle.style.display = "block";
         let srcElement = evt.currentTarget;
         let dialogDomPos = DDeiUtil.getDomAbsPosition(dialogEle)

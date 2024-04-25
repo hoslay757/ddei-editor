@@ -2,13 +2,20 @@
 import DDeiEditorView from "./editor/Editor.vue";
 import { DDeiCoreTopMenuPanel, DDeiCoreThemeBlack, DDeiCoreControls, DDeiCoreHotkeys, DDeiKeyActionAllSelect, DDeiCorePropertyViewPanel, DDeiCoreToolboxPanel, DDeiCoreSheetsPanel, DDeiCoreChangeRatioPanel, DDeiCoreChangeRatioDialog, DDeiCoreShapeCountPanel, DDeiCoreBottomMenuPanel, DDeiCoreStandLayout, DDeiCoreOpenFilesViewPanel, DDeiCoreThemeDefault } from "@ddei/core";
 import { DDeiExtUML } from "@ddei/uml"
-import { defineComponent, markRaw } from "vue";
+import { defineComponent, markRaw, getCurrentInstance } from "vue";
 export default defineComponent({
   name: "APP",
   components: { DDeiEditorView },
-  setup() {
+  data() {
+    
     const options = markRaw({
       config: {
+        STAGE_WIDTH: 2000,
+        STAGE_HEIGHT:2000,
+        EXT_STAGE_WIDTH:false,
+        GLOBAL_HELP_LINE_ENABLE:false,
+        GLOBAL_ALLOW_STAGE_RATIO:false,
+        STAGE_RATIO:1.5,
         
       },
       //配置扩展插件
@@ -93,16 +100,40 @@ export default defineComponent({
     })
     const options1 = markRaw({
       config: {
-
+        // "readonly":true,
+        // "mask": "水印文本",
+        // "rule": "显示",
+        // "grid": "点阵",
+        // "paper": "A4",
+        // "background": "#123456",
+        // "theme": "black",
+        controls: [
+          {
+            id: "rect_1",
+            model: "102010",
+            code: "active_01",
+            width: 200,
+            height: 100,
+            text: "第一步"
+          },
+          {
+            id: "rect_2",
+            model: "102010",
+            code: "active_02",
+            width: 200,
+            height: 100,
+            text: "第二步"
+          }
+        ]
       },
       //配置扩展插件
       extensions: [
 
       ],
     })
+
     const options2 = markRaw({
       config: {
-
       },
       //配置扩展插件
       extensions: [
@@ -117,9 +148,29 @@ export default defineComponent({
         }),
       ],
     })
+    
     const options3 = markRaw({
       config: {
-
+        EXT_STAGE_WIDTH:false,
+        EXT_STAGE_HEIGHT:false,
+        controls: [
+          {
+            id: "rect_1",
+            model: "102010",
+            code: "active_01",
+            width: 200,
+            height: 100,
+            text: "第一步"
+          },
+          {
+            id: "rect_2",
+            model: "102010",
+            code: "active_02",
+            width: 200,
+            height: 100,
+            text: "第二步"
+          }
+        ]
       },
       //配置扩展插件
       extensions: [
@@ -154,14 +205,20 @@ export default defineComponent({
         }),
       ],
     })
+    
     return {
-      options,
-      options1,
-      options2,
-      options3,
-      options4,
+      options:options,
+      options1:options1,
+      options2:options2,
+      options3:options3,
+      options4:options4
     };
   },
+
+  methods:{
+  }
+
+  
 });
 </script>
 
@@ -172,7 +229,7 @@ export default defineComponent({
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>
   </div>
-  <div style="width:400px;height:400px;float:left">
+  <div style="width:500px;height:500px;float:left">
     <DDeiEditorView ref="editorViewer4" :options="options3" id="ddei_editor_4"></DDeiEditorView>
   </div>
   <div style="width:400px;height:400px;float:left">

@@ -1,5 +1,5 @@
 <template>
-  <div class="ddei-editor-layout-standrad">
+  <div class="ddei-editor-layout-standrad" ref="layoutRoot">
     <div class="top" ref="top" v-show="topComponents?.length > 0">
       <component ref="topComponents" :editor="editor" v-for="(item,index) in topComponents" :is="item.comp"
         v-bind="item.options" :options="item.options"></component>
@@ -116,6 +116,7 @@ export default {
         // 获取宽度和高度
         const { width, height } = entry.contentRect;
         if (width != 0 && height != 0) {
+          
           this.editor.ddInstance.render.setSize(
             width,
             height,
@@ -124,6 +125,12 @@ export default {
           );
           this.editor.ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
           this.editor.ddInstance.bus.executeAll();
+          this.editor.leftWidth = this.$refs.left.offsetWidth;
+          this.editor.rightWidth = this.$refs.right.offsetWidth;
+          this.editor.topHeight = this.$refs.top.offsetHeight;
+          this.editor.bottomHeight = this.$refs.bottom.offsetHeight;
+          this.editor.middleWidth = this.$refs.middle.offsetWidth;
+          this.editor.middleHeight = this.$refs.middle.offsetHeight;
         }
 
       }
@@ -178,6 +185,43 @@ export default {
         }
       })
     },
+
+    // resetSize() {
+    //   let layoutRoot = this.$refs.layoutRoot;
+    //   let width = layoutRoot.scrollWidth
+    //   let height = layoutRoot.scrollHeight
+    //   if (!window.upSizeWidth || !window.upSizeHeight) {
+    //     window.upSizeWidth = width;
+    //     window.upSizeHeight = height;
+    //   } else {
+    //     let deltaWidth = width - window.upSizeWidth;
+    //     let deltaHeight = height - window.upSizeHeight;
+    //     if (this.editor.middleWidth + deltaWidth >= 305) {
+    //       window.upSizeWidth = width;
+    //       this.editor.middleWidth += deltaWidth;
+    //       this.editor.maxWidth =
+    //         this.editor.leftWidth +
+    //         this.editor.rightWidth +
+    //         this.editor.middleWidth;
+    //     }
+    //     if (this.editor.middleHeight + deltaHeight >= 305) {
+    //       window.upSizeHeight = height;
+    //       this.editor.middleHeight += deltaHeight;
+    //       this.editor.maxHeight =
+    //         this.editor.leftHeight +
+    //         this.editor.rightHeight +
+    //         this.editor.middleHeight;
+    //     }
+    //     this.editor.ddInstance.render.setSize(
+    //       this.editor.middleWidth,
+    //       this.editor.middleHeight,
+    //       0,
+    //       0
+    //     );
+    //     this.editor.ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+    //     this.editor.ddInstance.bus.executeAll();
+    //   }
+    // },
   }
 };
 </script>
@@ -185,7 +229,7 @@ export default {
 <style lang="less" scoped>
 .ddei-editor-layout-standrad {
   width: 100%;
-  height: calc(100vh);
+  height: 100%;
   display: flex;
   flex-direction: column;
 

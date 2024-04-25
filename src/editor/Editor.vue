@@ -61,7 +61,6 @@ export default {
   watch: {},
   created() {
     autoLoadCommand();
-    window.onresize = this.resetSize;
     
     // if (DDeiEditor.ACTIVE_INSTANCE) {
     //   this.editor = DDeiEditor.ACTIVE_INSTANCE;
@@ -185,41 +184,7 @@ export default {
       this.editor.bus.executeAll();
     },
 
-    resetSize() {
-      let width = document.body.scrollWidth
-      let height = document.body.scrollHeight
-      if (!window.upSizeWidth || !window.upSizeHeight) {
-        window.upSizeWidth = width;
-        window.upSizeHeight = height;
-      } else {
-        let deltaWidth = width - window.upSizeWidth;
-        let deltaHeight = height - window.upSizeHeight;
-        if (this.editor.middleWidth + deltaWidth >= 305) {
-          window.upSizeWidth = width;
-          this.editor.middleWidth += deltaWidth;
-          this.editor.maxWidth =
-            this.editor.leftWidth +
-            this.editor.rightWidth +
-            this.editor.middleWidth;
-        }
-        if (this.editor.middleHeight + deltaHeight >= 305) {
-          window.upSizeHeight = height;
-          this.editor.middleHeight += deltaHeight;
-          this.editor.maxHeight =
-            this.editor.leftHeight +
-            this.editor.rightHeight +
-            this.editor.middleHeight;
-        }
-        this.editor.ddInstance.render.setSize(
-          this.editor.middleWidth,
-          this.editor.middleHeight,
-          0,
-          0
-        );
-        this.editor.ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
-        this.editor.ddInstance.bus.executeAll();
-      }
-    },
+    
   },
 };
 </script>
@@ -228,7 +193,7 @@ export default {
 .ddei-editor {
 
   width: 100%;
-  height: calc(100vh);
+  height:100%;
   overflow: auto;
   display: flex;
   flex-direction: column;

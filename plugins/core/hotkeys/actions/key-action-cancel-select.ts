@@ -2,7 +2,7 @@ import {DDei} from "ddei-framework";
 import {DDeiKeyAction} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiEnumControlState} from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
+import { DDeiEditorState, DDeiEnumOperateState } from "ddei-framework";
 
 /**
  * 键行为:取消全选
@@ -20,7 +20,7 @@ class DDeiKeyActionCancelSelect extends DDeiKeyAction {
   defaultOptions: object = {
     'keys': [
       //取消全选,500毫秒内，连续按两下esc键
-      { keys: "27", times: 2, interval: 500, editorState: DDeiEditorState.DESIGNING },
+      { keys: "27", times: 2, interval: 500, editorState: DDeiEditorState.DESIGNING,operateState:DDeiEnumOperateState.NONE },
     ]
   }
 
