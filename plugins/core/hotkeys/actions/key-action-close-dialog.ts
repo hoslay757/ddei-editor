@@ -59,7 +59,7 @@ class DDeiKeyActionCloseDialog extends DDeiKeyAction {
   }
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei): void {
-    DDeiEditorUtil.closeDialogs(this.editor,["bottom-dialog", "property-dialog", "top-dialog", "toolbox-dialog"])
+    DDeiEditorUtil.closeDialogs(DDeiEditorUtil.getEditorInsByDDei(ddInstance),["bottom-dialog", "property-dialog", "top-dialog", "toolbox-dialog"])
   }
 
 }

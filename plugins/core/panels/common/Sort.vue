@@ -106,7 +106,7 @@ export default {
     },
     showMergeDialog(evt: Event) {
       let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog(this.editor,"ddei-core-dialog-changeposition", {
+      DDeiEditorUtil.showOrCloseDialog(this.editor,"ddei-core-dialog-mergecompose", {
         group: "top-dialog"
       }, { type: 5 }, srcElement)
     },

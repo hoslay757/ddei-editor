@@ -116,8 +116,8 @@ export default {
     this.editor.bus.interceptor[DDeiEnumBusCommandType.TextEditorChangeSelectPos] = {
       execute: [this.textEditorChangeSelectPos],
     };
-    if (!DDeiUtil.setCurrentMenu) {
-      DDeiUtil.setCurrentMenu = this.setCurrentMenu;
+    if (!this.editor.setCurrentMenu) {
+      this.editor.setCurrentMenu = this.setCurrentMenu;
     }
   },
   methods: {

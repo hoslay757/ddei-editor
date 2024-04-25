@@ -464,7 +464,7 @@ export default {
      * 显示右键菜单
      */
     showMenu(sheet, evt) {
-      DDeiUtil.showContextMenu(sheet, evt);
+      DDeiUtil.showContextMenu(sheet,this.editor.ddInstance, evt);
       evt.preventDefault();
       return false;
     },

@@ -39,14 +39,14 @@ export default {
   computed: {},
   watch: {},
   created() {
-    // 监听obj对象中prop属性的变化
-    this.$watch("editor.files.length", function (newVal, oldVal) {
-      if (newVal == 0) {
-        this.editor?.ddInstance?.render?.hidden();
-      } else {
-        this.editor?.ddInstance?.render?.show();
-      }
-    });
+    // // 监听obj对象中prop属性的变化
+    // this.$watch("editor.files.length", function (newVal, oldVal) {
+    //   if (newVal == 0) {
+    //     this.editor?.ddInstance?.render?.hidden();
+    //   } else {
+    //     this.editor?.ddInstance?.render?.show();
+    //   }
+    // });
     this.mouseWheelThrottle = throttle(this.mouseWheelThrottle, 10);
     this.mouseMove = throttle(this.mouseMove, 20);
 

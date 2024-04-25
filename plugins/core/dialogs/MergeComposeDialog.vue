@@ -1,5 +1,5 @@
 <template>
-  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-changeposition" v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-mergecompose" v-if="forceRefresh">
     <div class="content">
       <div class="title">组合</div>
       <div class="group">
@@ -29,7 +29,7 @@ import {DDeiEnumBusCommandType} from "ddei-framework";
 import DialogBase from "./dialog"
 
 export default {
-  name: "ddei-core-dialog-changeposition",
+  name: "ddei-core-dialog-mergecompose",
   extends: null,
   mixins: [DialogBase],
   props: {
@@ -41,7 +41,7 @@ export default {
   },
   data() {
     return {
-      dialogId: 'ddei-core-dialog-changeposition',
+      dialogId: 'ddei-core-dialog-mergecompose',
     };
   },
   computed: {},
@@ -113,7 +113,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.ddei-core-dialog-changeposition {
+.ddei-core-dialog-mergecompose {
   border: 1px solid var(--panel-border);
    box-shadow: 0px 2px 24px 0px hsl(0deg 0% 0% /0.25);
   border-radius: 6px;
