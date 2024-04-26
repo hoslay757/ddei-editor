@@ -10,13 +10,15 @@ export default defineComponent({
     
     const options = markRaw({
       config: {
-        STAGE_WIDTH: 2000,
-        STAGE_HEIGHT:2000,
+        width: 2000,
+        height:2000,
+        ratio: 1.5,
+        theme: "black",
         EXT_STAGE_WIDTH:false,
         GLOBAL_HELP_LINE_ENABLE:false,
         GLOBAL_ALLOW_STAGE_RATIO:false,
-        STAGE_RATIO:1.5,
-        
+        GLOBAL_KEYBOARD_ALIGN_ENABLE:false,
+        GLOBAL_ALLOW_OPEN_MULT_LAYERS:false,
       },
       //配置扩展插件
       extensions: [
@@ -100,13 +102,14 @@ export default defineComponent({
     })
     const options1 = markRaw({
       config: {
-        // "readonly":true,
-        // "mask": "水印文本",
-        // "rule": "显示",
-        // "grid": "点阵",
-        // "paper": "A4",
-        // "background": "#123456",
-        // "theme": "black",
+        "readonly":true,
+        "mark": "水印文本",
+        "grid": 2,
+        "paper": {type:"A6",direct:1},
+        // "paper":"A5",
+        "ruler": true,
+        "background": {color:"#123456",opacity:0.5},
+        "theme": "ddei-core-theme-black",
         controls: [
           {
             id: "rect_1",
@@ -224,9 +227,9 @@ export default defineComponent({
 
 
 <template>
-  <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
+  <!-- <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView> -->
   <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
-  <div style="width:400px;height:400px;float:left">
+  <!-- <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>
   </div>
   <div style="width:500px;height:500px;float:left">
@@ -234,7 +237,7 @@ export default defineComponent({
   </div>
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer5" :options="options4" id="ddei_editor_5"></DDeiEditorView>
-  </div>
+  </div> -->
 </template>
 
 <style>

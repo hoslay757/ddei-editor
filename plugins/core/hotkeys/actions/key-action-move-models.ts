@@ -1,4 +1,4 @@
-import {DDeiConfig} from "ddei-framework";
+import {DDeiEditor} from "ddei-framework";
 import {DDei} from "ddei-framework";
 import {DDeiKeyAction} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
@@ -61,7 +61,7 @@ class DDeiKeyActionMoveModels extends DDeiKeyAction {
     return DDeiKeyActionMoveModels;
   }
   // ============================ 方法 ===============================
-  action(evt: Event, ddInstance: DDei): void {
+  action(evt: Event, ddInstance: DDei,editor:DDeiEditor): void {
     //修改当前操作控件坐标
     if (ddInstance && ddInstance.stage) {
       let selectedModels = ddInstance.stage.selectedModels;
@@ -109,7 +109,7 @@ class DDeiKeyActionMoveModels extends DDeiKeyAction {
             models[0].tempDragCell.setState(DDeiEnumControlState.SELECTED)
           }
         }
-      } else {
+      } else if (editor.GLOBAL_KEYBOARD_ALIGN_ENABLE){
         let moveSize = 1;
 
         let isShift = DDei.KEY_DOWN_STATE.get("shift");

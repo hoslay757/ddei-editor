@@ -83,7 +83,7 @@ export default {
 
       this.editor.applyConfig(this.options.config);
       this.editor.extConfig = this.options.config;
-      this.editor.ddInstance.applyConfig(this.editor.extConfig);
+      this.editor.ddInstance.applyConfig(this.options.config);
     }
     
     window.onbeforeunload = this.beforeUnload;
