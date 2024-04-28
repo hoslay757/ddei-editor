@@ -22,11 +22,13 @@ import {DDeiEditorCommandFileDirty} from "ddei-framework";
 import {DDeiEditorCommandAddHistroy} from "ddei-framework";
 import MenuDialog from "./MenuDialog.vue";
 import {DDeiEditorUtil} from "ddei-framework";
+import { DDeiModelArrtibuteValue } from 'ddei-framework'
 import DDeiCore from "@ddei/core";
 
 import ICONS from "./icon";
 import { markRaw } from "vue";
 
+import { Matrix3 ,Vector3} from "three"
 export default {
   name: "DDei-Editor",
   extends: null,
@@ -96,8 +98,10 @@ export default {
     this.editor.bindEvent();
     this.editor.changeTheme('');
     DDeiEditorUtil.getControlIcons(this.editor);
+    if(this.options?.config?.controls){
+      this.editor.addControls(this.options?.config?.controls)
+    }
 
-    
     //初始化拦截器
     //以下为拦截器的配置
     this.editor.bus.interceptor[DDeiEnumBusCommandType.NodifyChange] = {
