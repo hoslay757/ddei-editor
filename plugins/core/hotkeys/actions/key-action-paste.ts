@@ -7,9 +7,8 @@ import {DDeiStage} from "ddei-framework";
 import {DDeiConfig} from "ddei-framework";
 import {DDeiAbstractShape} from "ddei-framework";
 import {DDeiTable} from "ddei-framework";
-import { Matrix3, Vector3 } from 'three';
+import { Matrix3 } from 'three';
 import {DDeiEnumOperateType} from "ddei-framework";
-import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 import {DDeiPolygon} from "ddei-framework";
 import {DDeiLink} from "ddei-framework";
 import {DDeiLineLink} from "ddei-framework";
@@ -86,7 +85,6 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     //剪切板中的数据
     let blobData = null;
     let type = null;
-
     if (DDeiConfig.ALLOW_CLIPBOARD || DDeiConfig.ALLOW_CLIPBOARD == undefined) {
       try {
         //读取剪切板数据
@@ -267,7 +265,7 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     }
 
     //如果没有粘贴到表格在最外层容器的鼠标位置，创建rectangle控件
-    if (this.accessCreate && createControl) {
+    if (createControl) {
       stage.idIdx++
       hasChange = true;
 
