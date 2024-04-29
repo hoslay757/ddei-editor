@@ -100,15 +100,15 @@ export default {
     DDeiEditorUtil.getControlIcons(this.editor);
     
     //初始化控件
-    if(this.options?.config?.controls){
+    if(this.options?.config?.initData){
       //调用转换器，将输入内容转换为设计器能够识别的格式
-      let controls = this.options?.config?.controls;
-      let converters = this.editor.getEnabledConverters(controls, 1);
+      let initData = this.options?.config?.initData
+      let converters = this.editor.getEnabledConverters(initData, 1);
       //依次调用converters
       converters?.forEach(converter => {
-        controls = converter.input(controls)
+        initData = converter.input(initData)
       });
-      this.editor.addControls(controls)
+      this.editor.addControls(initData.controls)
     }
     if (this.options?.config?.access){
       this.editor.setAccessInfo(this.options?.config?.access)

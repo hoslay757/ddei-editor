@@ -110,25 +110,27 @@ export default defineComponent({
         "ruler": true,
         "background": {color:"#123456",opacity:0.1},
         // "theme": "ddei-core-theme-black",
-        controls: [
-          {
-            id: "act_1",
-            model: "102010",
-            code: "active_01",
-            text: "第一步",
-            border:{color:"yellow",dash:[10,10,5,5],width:5},
-            fill:{color:"grey"},
-          },
-          {
-            id: "act_2",
-            model: "102010",
-            code: "active_02",
-            width: 200,
-            height: 100,
-            text: "第二步",
-            y: -70,
-          }
-        ]
+        initData: {
+          controls:[
+            {
+              id: "act_1",
+              model: "102010",
+              code: "active_01",
+              text: "第一步",
+              border:{color:"yellow",dash:[10,10,5,5],width:5},
+              fill:{color:"grey"},
+            },
+            {
+              id: "act_2",
+              model: "102010",
+              code: "active_02",
+              width: 200,
+              height: 100,
+              text: "第二步",
+              y: -70,
+            }
+          ]
+        }
       },
       //配置扩展插件
       extensions: [
@@ -144,24 +146,26 @@ export default defineComponent({
         access:{"DEL":false},
         "paper":"A5",
         "ruler": true,
-        controls: [
-          {
-            id: "act_1",
-            model: "102010",
-            code: "active_01",
-            text: "第一步",
-            y: 70,
-          },
-          {
-            id: "act_2",
-            model: "102010",
-            code: "active_02",
-            width: 200,
-            height: 100,
-            text: "第二步",
-            y: -70,
-          }
-        ]
+        initData: {
+          controls: [
+            {
+              id: "act_1",
+              model: "102010",
+              code: "active_01",
+              text: "第一步",
+              y: 70,
+            },
+            {
+              id: "act_2",
+              model: "102010",
+              code: "active_02",
+              width: 200,
+              height: 100,
+              text: "第二步",
+              y: -70,
+            }
+          ]
+        }
       },
       //配置扩展插件
       extensions: [
@@ -183,24 +187,26 @@ export default defineComponent({
         EXT_STAGE_HEIGHT:false,
         ruler:0,
         grid: 0,
-        controls: [
-          {
-            id: "rect_1",
-            model: "102010",
-            code: "active_01",
-            width: 200,
-            height: 100,
-            text: "第一步"
-          },
-          {
-            id: "rect_2",
-            model: "102010",
-            code: "active_02",
-            width: 200,
-            height: 100,
-            text: "第二步"
-          }
-        ]
+        initData: {
+          controls: [
+            {
+              id: "rect_1",
+              model: "102010",
+              code: "active_01",
+              width: 200,
+              height: 100,
+              text: "第一步"
+            },
+            {
+              id: "rect_2",
+              model: "102010",
+              code: "active_02",
+              width: 200,
+              height: 100,
+              text: "第二步"
+            }
+          ]
+        }
       },
       //配置扩展插件
       extensions: [
