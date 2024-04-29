@@ -137,8 +137,11 @@ export default defineComponent({
     })
 
     const options2 = markRaw({
+      
       config: {
-        "readonly": true,
+        EXT_STAGE_WIDTH:false,
+        // "readonly": true,
+        access:{"DEL":false},
         "paper":"A5",
         "ruler": true,
         controls: [

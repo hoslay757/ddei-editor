@@ -98,8 +98,22 @@ export default {
     this.editor.bindEvent();
     this.editor.changeTheme('');
     DDeiEditorUtil.getControlIcons(this.editor);
+    
+    //初始化控件
     if(this.options?.config?.controls){
-      this.editor.addControls(this.options?.config?.controls)
+      //调用转换器，将输入内容转换为设计器能够识别的格式
+      let controls = this.options?.config?.controls;
+      let converters = this.editor.getEnabledConverters(controls, 1);
+      //依次调用converters
+      converters?.forEach(converter => {
+        controls = converter.input(controls)
+      });
+      this.editor.addControls(controls)
+    }
+    if (this.options?.config?.access){
+      this.editor.setAccessInfo(this.options?.config?.access)
+    } else if (this.options?.config?.readonly == true || this.options?.config?.readonly == false) {
+      this.editor.setEditable(false)
     }
 
     //初始化拦截器
