@@ -4,48 +4,48 @@
     <div v-if="operateState == 50" class="content">
       <div class="panel12">
         <div class="panel12-content-1">
-          <component :is="editor?.panels['ddei-core-btn-fontfamily']"></component>
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-fontfamily']"></component>
         </div>
         <div class="panel12-content-2">
-          <component :is="editor?.panels['ddei-core-btn-fontsize']"></component>
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-fontsize']"></component>
         </div>
         <div class="panel12-content-5">
-          <component :is="editor?.panels['ddei-core-btn-addfontsize']" :addValue="1" attrCode="font.size"
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-addfontsize']" :addValue="1" attrCode="font.size"
             img="icon-a-ziyuan456" extcls="magtop-2"></component>
         </div>
         <div class="panel12-content-5">
-          <component :is="editor?.panels['ddei-core-btn-addfontsize']" :addValue="-1" attrCode="font.size"
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-addfontsize']" :addValue="-1" attrCode="font.size"
             img="icon-a-ziyuan455" extcls="magtop-1"></component>
         </div>
 
         <div class="panel12-content-3">
-          <component :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.bold"
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.bold"
             img="icon-a-ziyuan461"></component>
         </div>
         <div class="panel12-content-3">
-          <component :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.italic"
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.italic"
             img="icon-a-ziyuan459"></component>
         </div>
         <div class="panel12-content-3">
-          <component :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.underline"
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.underline"
             img="icon-icon-text-underline" extcls="ext-underline"></component>
         </div>
         <div class="panel12-content-3">
-          <component :is="editor?.panels['ddei-core-btn-editbox']" electedValue="1" attrCode="textStyle.deleteline"
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" electedValue="1" attrCode="textStyle.deleteline"
             img="icon-a-ziyuan457">
           </component>
         </div>
         <div class="panel12-content-3">
-          <component :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" :onlyQuickEdit="true"
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" :onlyQuickEdit="true"
             attrCode="textStyle.subtype" img="icon-a-ziyuan394" extcls="magtop-1">
           </component>
         </div>
         <div class="panel12-split-3 panel12-content-4 panel1-split-4">
-          <component :is="editor?.panels['ddei-core-btn-color']" attrCode="textStyle.bgcolor" img="icon-a-ziyuan452">
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-color']" attrCode="textStyle.bgcolor" img="icon-a-ziyuan452">
           </component>
         </div>
         <div class="panel12-content-4">
-          <component :is="editor?.panels['ddei-core-btn-color']" attrCode="font.color" img="icon-a-ziyuan463">
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-color']" attrCode="font.color" img="icon-a-ziyuan463">
           </component>
         </div>
       </div>
@@ -62,7 +62,7 @@
     <div v-if="operateState != 50 && allLine" class="content">
       <div class="panel6">
         <div class="panel6-content1 pointtype">
-          <component :is="editor?.panels['ddei-core-btn-linepointtype']" attrCode="sp.type">
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-linepointtype']" attrCode="sp.type">
           </component>
           <div class="text">起点</div>
         </div>
@@ -72,30 +72,30 @@
           </svg>
         </div>
         <div class="panel6-content1 pointtype">
-          <component :is="editor?.panels['ddei-core-btn-linepointtype']" attrCode="ep.type">
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-linepointtype']" attrCode="ep.type">
           </component>
           <div class="text">终点</div>
         </div>
       </div>
       <div class="panel6" style="border-left:1px solid #E2E2EB;">
         <div class="panel6-content type">
-          <component :is="editor?.panels['ddei-core-btn-linetype']" attrCode="type" img="icon-a-ziyuan430">
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-linetype']" attrCode="type" img="icon-a-ziyuan430">
           </component>
           <div class="text">类型</div>
         </div>
         <div class="panel6-content color2">
-          <component :is="editor?.panels['ddei-core-btn-color']" attrCode="color" img="icon-border-pencil">
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-color']" attrCode="color" img="icon-border-pencil">
           </component>
           <div class="text">颜色</div>
         </div>
         <div class="panel6-content dash">
-          <component :is="editor?.panels['ddei-core-btn-borderweight']" attrCode="weight" hiddenCombo="1">
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-borderweight']" attrCode="weight" hiddenCombo="1">
           </component>
 
           <div class="text">粗细</div>
         </div>
         <div class="panel6-content dash">
-          <component :is="editor?.panels['ddei-core-btn-borderdash']" attrCode="dash" hiddenCombo="1">
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-borderdash']" attrCode="dash" hiddenCombo="1">
           </component>
           <div class="text">虚线</div>
         </div>
@@ -114,29 +114,29 @@
     <div v-if="operateState != 50 && !allLine" class="content">
       <div class="panel1">
         <div class="panel1-content-1">
-          <component :is="editor?.panels['ddei-core-btn-fontfamily']"></component>
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-fontfamily']"></component>
         </div>
         <div class="panel1-content-2">
-          <component :is="editor?.panels['ddei-core-btn-fontsize']"></component>
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-fontsize']"></component>
         </div>
         <div class="panel1-content-3">
-          <component :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.bold"
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.bold"
             img="icon-a-ziyuan461"></component>
         </div>
         <div class="panel1-content-3">
-          <component :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.italic"
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.italic"
             img="icon-a-ziyuan459"></component>
         </div>
         <div class="panel1-content-3">
-          <component :is="editor?.panels['ddei-core-btn-textalign']" img="icon-a-ziyuan440"></component>
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-textalign']" img="icon-a-ziyuan440"></component>
 
         </div>
         <div class="panel1-split-3 panel1-content-4 panel1-split-4">
-          <component :is="editor?.panels['ddei-core-btn-color']" attrCode="textStyle.bgcolor" img="icon-a-ziyuan452">
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-color']" attrCode="textStyle.bgcolor" img="icon-a-ziyuan452">
           </component>
         </div>
         <div class="panel1-content-4 ">
-          <component :is="editor?.panels['ddei-core-btn-color']" attrCode="font.color" img="icon-a-ziyuan463">
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-color']" attrCode="font.color" img="icon-a-ziyuan463">
           </component>
         </div>
       </div>
@@ -156,12 +156,12 @@
           <div class="text">样式</div>
         </div>
         <div class="panel3-content i2">
-          <component :is="editor?.panels['ddei-core-btn-color']" attrCode="fill.color" img="icon-a-ziyuan419">
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-color']" attrCode="fill.color" img="icon-a-ziyuan419">
           </component>
           <div class="text">填充</div>
         </div>
         <div class="panel3-content i3">
-          <component :is="editor?.panels['ddei-core-btn-color']" attrCode="border.color" img="icon-border-pencil">
+          <component :editor="editor" :is="editor?.panels['ddei-core-btn-color']" attrCode="border.color" img="icon-border-pencil">
           </component>
           <div class="text">线条</div>
         </div>

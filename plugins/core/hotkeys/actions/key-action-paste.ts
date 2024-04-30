@@ -960,23 +960,14 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
       }
     });
     //加载事件的配置
-
-    let createBefore = DDeiUtil.getConfigValue(
-      "EVENT_CONTROL_CREATE_BEFORE",
-      stage.ddInstance
-    );
-    let dragBefore = DDeiUtil.getConfigValue(
-      "EVENT_CONTROL_DRAG_BEFORE",
-      stage.ddInstance
-    );
+    let rsState = -1
+    if(mode == 'copy'){
+      rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { models: models }, stage.ddInstance)
+    } else if (mode == 'cut') {
+      rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_DRAG_BEFORE", DDeiEnumOperateType.DRAG, { models: models }, stage.ddInstance)
+    }
     //选中前
-    if ((mode == 'copy' &&
-      (!createBefore ||
-        createBefore(DDeiEnumOperateType.CREATE, models, null, stage.ddInstance))) ||
-      (mode == 'cut' &&
-        (!dragBefore ||
-          dragBefore(DDeiEnumOperateType.DRAG, models, null, stage.ddInstance)))
-    ) {
+    if (rsState != -1) {
       //重新计算坐标，基于粘贴的中心点
       let outRect = DDeiAbstractShape.getOutRectByPV(models);
 
@@ -1067,13 +1058,7 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
           models: models,
         });
       } else if (mode == 'cut') {
-        let dragAfter = DDeiUtil.getConfigValue(
-          "EVENT_CONTROL_DRAG_AFTER",
-          stage.ddInstance
-        );
-        if (dragAfter) {
-          dragAfter(DDeiEnumOperateType.DRAG, models, null, stage.ddInstance, evt)
-        }
+        DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_DRAG_AFTER", DDeiEnumOperateType.DRAG, { models: models }, stage.ddInstance, evt)
       }
     }
   }

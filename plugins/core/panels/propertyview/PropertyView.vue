@@ -425,9 +425,9 @@ export default {
           //判断当前属性是否可编辑
           let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_VIEW_BEFORE", DDeiEnumOperateType.VIEW, { models: models, propName: attd?.code }, this.editor.ddInstance, null)
           if (rsState == 0 || rsState == 1) {
-            attd.forceHidden = true;
-          } else {
             attd.forceHidden = false;
+          } else {
+            attd.forceHidden = true;
           }
         });
         this.currentSubGroup = pData;
