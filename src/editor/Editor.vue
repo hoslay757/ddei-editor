@@ -77,8 +77,8 @@ export default {
       this.options.extensions = []
     }
     this.options.extensions.splice(0,0,DDeiCore)
-    this.editor = DDeiEditor.newInstance(this.id, this.id, true, this.options);
-      
+    let editor = DDeiEditor.newInstance(this.id, this.id, true, this.options);
+    this.editor = editor
     // }
     //载入局部配置
     if (this.options){
@@ -87,7 +87,6 @@ export default {
       this.editor.extConfig = this.options.config;
       this.editor.ddInstance.applyConfig(this.options.config);
     }
-    
     window.onbeforeunload = this.beforeUnload;
     DDeiEditorUtil.ICONS = ICONS;
 
@@ -113,7 +112,7 @@ export default {
     if (this.options?.config?.access){
       this.editor.setAccessInfo(this.options?.config?.access)
     } else if (this.options?.config?.readonly == true || this.options?.config?.readonly == false) {
-      this.editor.setEditable(false)
+      this.editor.setEditable(!this.options?.config?.readonly)
     }
 
     //初始化拦截器

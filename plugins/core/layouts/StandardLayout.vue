@@ -31,7 +31,7 @@ import {DDeiUtil} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
 import {DDeiEnumOperateType} from "ddei-framework";
-
+import { markRaw } from "vue";
 export default {
   name: "ddei-core-layout-standard",
   extends: null,
@@ -96,11 +96,11 @@ export default {
     this.$watch("editor.bottomHeight", function (newVal, oldVal) {
       this.$refs.bottom.style.flexBasis = newVal + "px";
     });
-    this.leftComponents = this.editor.getPartPanels(this.options, 'left');
-    this.rightComponents = this.editor.getPartPanels(this.options, 'right');
-    this.topComponents = this.editor.getPartPanels(this.options, 'top');
-    this.bottomComponents = this.editor.getPartPanels(this.options, 'bottom');
-    this.middleComponents = this.editor.getPartPanels(this.options, 'middle');
+    this.leftComponents = markRaw(this.editor.getPartPanels(this.options, 'left'));
+    this.rightComponents = markRaw(this.editor.getPartPanels(this.options, 'right'));
+    this.topComponents = markRaw(this.editor.getPartPanels(this.options, 'top'));
+    this.bottomComponents = markRaw(this.editor.getPartPanels(this.options, 'bottom'));
+    this.middleComponents = markRaw(this.editor.getPartPanels(this.options, 'middle'));
   },
   mounted() {
     this.editor.layoutViewer = this;

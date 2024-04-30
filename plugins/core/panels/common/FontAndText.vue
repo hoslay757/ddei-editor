@@ -134,6 +134,7 @@ export default {
     }
   },
   data() {
+    return {}
   },
   computed: {},
   components: {
