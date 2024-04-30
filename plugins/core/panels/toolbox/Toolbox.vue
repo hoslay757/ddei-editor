@@ -334,22 +334,11 @@ export default {
       let models = DDeiEditorUtil.createControl(control,this.editor)
 
       //加载事件的配置
-      let createBefore = DDeiUtil.getConfigValue(
-        "EVENT_CONTROL_CREATE_BEFORE",
-        ddInstance
-      );
-      //选中前
-      if (
-        !createBefore ||
-        createBefore(DDeiEnumOperateType.CREATE, models, null, ddInstance)
-      ) {
-        let mouseOpSPI = DDeiUtil.getConfigValue(
-          "EVENT_MOUSE_OPERATING",
-          ddInstance
-        );
-        if (mouseOpSPI) {
-          mouseOpSPI(DDeiEnumOperateType.CREATE, null, ddInstance, e);
-        }
+      
+      let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { models: models }, ddInstance, e)
+      if (rsState == 0 || rsState == 1) {
+        //选中前
+        DDeiUtil.invokeCallbackFunc("EVENT_MOUSE_OPERATING", DDeiEnumOperateType.CREATE, null, ddInstance, e)
         let stageRatio = stage.getStageRatio();
         let moveMatrix = new Matrix3(
           1,

@@ -178,21 +178,7 @@ export default {
       this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape);
       this.editor.bus.executeAll();
       //编辑完成后的回调函数
-      if (!this.editAfter) {
-        this.editAfter = DDeiUtil.getConfigValue(
-          "EVENT_CONTROL_EDIT_AFTER",
-          this.editor.ddInstance
-        );
-      }
-      if (this.editAfter) {
-        this.editAfter(
-          DDeiEnumOperateType.EDIT,
-          mds,
-          this.attrDefine?.code,
-          this.editor.ddInstance,
-          null
-        );
-      }
+      DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_EDIT_AFTER", DDeiEnumOperateType.EDIT, { models: mds, propName: this.attrDefine?.code }, this.editor.ddInstance, null)
     }
 
   },

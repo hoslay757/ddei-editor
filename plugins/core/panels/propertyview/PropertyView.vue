@@ -423,20 +423,8 @@ export default {
         }
         pData?.children?.forEach((attd) => {
           //判断当前属性是否可编辑
-          let viewBefore = DDeiUtil.getConfigValue(
-            "EVENT_CONTROL_VIEW_BEFORE",
-            this.editor.ddInstance
-          );
-          if (
-            viewBefore &&
-            !viewBefore(
-              DDeiEnumOperateType.VIEW,
-              models,
-              attd?.code,
-              this.editor.ddInstance,
-              null
-            )
-          ) {
+          let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_VIEW_BEFORE", DDeiEnumOperateType.VIEW, { models: models, propName: attd?.code }, this.editor.ddInstance, null)
+          if (rsState == 0 || rsState == 1) {
             attd.forceHidden = true;
           } else {
             attd.forceHidden = false;

@@ -76,12 +76,8 @@ class DDeiKeyActionAllSelect extends DDeiKeyAction {
         //当前激活的图层
         let layer = ddInstance.stage.layers[ddInstance.stage.layerIndex]
         //加载事件的配置
-        let selectBefore = DDeiUtil.getConfigValue(
-          "EVENT_CONTROL_SELECT_BEFORE",
-          ddInstance
-        );
-
-        if (!selectBefore || selectBefore(DDeiEnumOperateType.SELECT, Array.from(layer.models.values()), null, ddInstance, evt)) {
+        let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_SELECT_BEFORE", DDeiEnumOperateType.SELECT, { models: Array.from(layer.models.values()) }, ddInstance, evt)
+        if (rsState == 0 || rsState == 1) {
           ddInstance?.bus?.push(DDeiEnumBusCommandType.ModelChangeSelect, { models: layer.models, value: DDeiEnumControlState.SELECTED }, evt);
           ddInstance?.bus?.push(DDeiEnumBusCommandType.StageChangeSelectModels, {}, evt);
         }

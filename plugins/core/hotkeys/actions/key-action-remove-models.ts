@@ -61,12 +61,8 @@ class DDeiKeyActionRemoveModels extends DDeiKeyAction {
       if (optContainer) {
         let selectedModels = optContainer.getSelectedModels();
         //加载事件的配置
-        let removeBefore = DDeiUtil.getConfigValue(
-          "EVENT_CONTROL_DEL_BEFORE",
-          ddInstance
-        );
-
-        if (!removeBefore || removeBefore(DDeiEnumOperateType.DEL, Array.from(selectedModels.values()), null, ddInstance, evt)) {
+        let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_DEL_BEFORE", DDeiEnumOperateType.DEL, { models: Array.from(selectedModels.values()) }, ddInstance, evt)
+        if (rsState == 0 || rsState == 1) {
           let models = Array.from(selectedModels.values())
           models[0].layer.opPoints = [];
 
@@ -90,14 +86,7 @@ class DDeiKeyActionRemoveModels extends DDeiKeyAction {
           ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
 
           ddInstance.bus.executeAll();
-          //加载事件的配置
-          let removeAfter = DDeiUtil.getConfigValue(
-            "EVENT_CONTROL_DEL_AFTER",
-            ddInstance
-          );
-          if (removeAfter) {
-            removeAfter(DDeiEnumOperateType.DEL, Array.from(selectedModels.values()), null, ddInstance, evt)
-          }
+          DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_DEL_AFTER", DDeiEnumOperateType.DEL, { models: Array.from(selectedModels.values()) }, ddInstance, evt)
         }
       }
     }

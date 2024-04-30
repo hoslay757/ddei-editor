@@ -53,15 +53,7 @@ export default {
   mounted() {
     this.attrDefine.doCascadeDisplayByValue();
     //判断当前属性是否可编辑
-    this.editBefore = DDeiUtil.getConfigValue(
-      "EVENT_CONTROL_EDIT_BEFORE",
-      this.editor.ddInstance
-    );
-
-    if (
-      this.editBefore &&
-      this.editor?.ddInstance?.stage?.selectedModels?.size > 0
-    ) {
+    if (this.editor?.ddInstance?.stage?.selectedModels?.size > 0) {
       let mds = [];
       if (this.editor?.ddInstance?.stage?.selectedModels?.size > 0) {
         mds = Array.from(
@@ -71,13 +63,8 @@ export default {
       if (this.attrDefine?.model && mds.indexOf(this.attrDefine.model) == -1) {
         mds.push(this.attrDefine.model);
       }
-      this.attrDefine.readonly = !this.editBefore(
-        DDeiEnumOperateType.EDIT,
-        mds,
-        this.attrDefine?.code,
-        this.editor.ddInstance,
-        null
-      );
+      let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_EDIT_BEFORE", DDeiEnumOperateType.EDIT, { models: mds, propName: this.attrDefine?.code }, this.editor.ddInstance)
+      this.attrDefine.readonly = rsState == -1
     }
   },
   methods: {
