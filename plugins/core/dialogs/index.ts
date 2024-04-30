@@ -1,6 +1,5 @@
 import {DDeiPluginBase} from "ddei-framework";
 import DDeiCoreAlignDialog from "./aligndialog"
-import DDeiCoreCanvasQuickDialog from "./canvasquickdialog"
 import DDeiCoreChangeRatioDialog from "./changeratiodialog"
 import DDeiCoreChooseControlGroupDialog from "./choosecontrolgroupdialog"
 import DDeiCoreCloseFileConfirmDialog from "./closefileconfirmdialog"
@@ -29,7 +28,7 @@ class DDeiCoreDialogs extends DDeiPluginBase {
    */
   static defaultIns: DDeiCoreDialogs = new DDeiCoreDialogs(null);
 
-  plugins: object[] = [DDeiCoreAlignDialog, DDeiCoreCanvasQuickDialog, DDeiCoreChangeRatioDialog,
+  plugins: object[] = [DDeiCoreAlignDialog, DDeiCoreChangeRatioDialog,
     DDeiCoreChooseControlGroupDialog, DDeiCoreCloseFileConfirmDialog, DDeiCoreCollFileConfirmDialog,
     DDeiCoreLinePointTypeDialog,
     DDeiCoreLineTypeDialog, DDeiCoreManageLayersDialog, DDeiCoreMergeComposeDialog, DDeiCorePositionDialog,
@@ -70,7 +69,7 @@ class DDeiCoreDialogs extends DDeiPluginBase {
 }
 
 
-export {DDeiCoreDialogs,DDeiCoreAlignDialog, DDeiCoreCanvasQuickDialog, DDeiCoreChangeRatioDialog,
+export {DDeiCoreDialogs,DDeiCoreAlignDialog, DDeiCoreChangeRatioDialog,
   DDeiCoreChooseControlGroupDialog, DDeiCoreCloseFileConfirmDialog, DDeiCoreCollFileConfirmDialog,
     DDeiCoreLinePointTypeDialog,
   DDeiCoreLineTypeDialog, DDeiCoreManageLayersDialog, DDeiCoreMergeComposeDialog, DDeiCorePositionDialog,

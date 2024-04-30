@@ -1,8 +1,8 @@
-import {DDeiPluginBase} from "ddei-framework";
+import { DDeiPluginBase } from "ddei-framework";
 import CanvasQuickDialog from './CanvasQuickDialog.vue';
 
-class DDeiCoreCanvasQuickDialog extends DDeiPluginBase{
-  
+class DDeiCoreCanvasQuickDialog extends DDeiPluginBase {
+
   name: string = CanvasQuickDialog.name
   /**
    * 缺省实例
@@ -12,7 +12,7 @@ class DDeiCoreCanvasQuickDialog extends DDeiPluginBase{
 
   plugins: object[] = [CanvasQuickDialog]
 
-  getDialogs(editor){
+  getDialogs(editor) {
     return this.plugins;
   }
 

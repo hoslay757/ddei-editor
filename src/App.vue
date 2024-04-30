@@ -2,7 +2,9 @@
 import DDeiEditorView from "./editor/Editor.vue";
 import { DDeiCoreTopMenuPanel, DDeiCoreThemeBlack, DDeiCoreControls, DDeiCoreHotkeys, DDeiKeyActionAllSelect, DDeiCorePropertyViewPanel, DDeiCoreToolboxPanel, DDeiCoreSheetsPanel, DDeiCoreChangeRatioPanel, DDeiCoreChangeRatioDialog, DDeiCoreShapeCountPanel, DDeiCoreBottomMenuPanel, DDeiCoreStandLayout, DDeiCoreOpenFilesViewPanel, DDeiCoreThemeDefault } from "@ddei/core";
 import { DDeiExtUML } from "@ddei/uml"
-import { defineComponent, markRaw, getCurrentInstance } from "vue";
+import { DDeiFuncCallResult } from "ddei-framework";
+import DDeiExtQuickStyle from "@ddei/quickstyle"
+import { defineComponent, markRaw } from "vue";
 export default defineComponent({
   name: "APP",
   components: { DDeiEditorView },
@@ -19,6 +21,12 @@ export default defineComponent({
         GLOBAL_ALLOW_STAGE_RATIO:false,
         GLOBAL_KEYBOARD_ALIGN_ENABLE:false,
         GLOBAL_ALLOW_OPEN_MULT_LAYERS:false,
+        EVENT_CONTROL_SELECT_AFTER: function(){
+          console.log("select-after")
+          let rs = DDeiFuncCallResult
+          rs.state = 1;
+          return rs
+        }
       },
       //配置扩展插件
       extensions: [
@@ -97,7 +105,10 @@ export default defineComponent({
 
 
         //加载UML插件
-        DDeiExtUML
+        DDeiExtUML,
+
+        //加载快捷编辑栏
+        DDeiExtQuickStyle
       ],
     })
     const options1 = markRaw({

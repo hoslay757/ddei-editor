@@ -139,7 +139,6 @@ export default {
         if (file) {
           let json = file.toJSON();
           if (json) {
-            debugger
             // 创建隐藏的可下载链接
             let eleLink = document.createElement("a");
             eleLink.download = file.name + ".dei";

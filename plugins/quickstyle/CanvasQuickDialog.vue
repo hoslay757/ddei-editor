@@ -206,19 +206,21 @@
 </template>
 
 <script lang="ts">
-import {DDeiEnumBusCommandType} from "ddei-framework";
+import {DDeiEditor,DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
-import DialogBase from "./dialog"
 
 export default {
   name: 'ddei-core-dialog-quickpop',
   extends: null,
-  mixins: [DialogBase],
   props: {
     //外部传入的插件扩展参数
     options: {
       type: Object,
+      default: null
+    },
+    editor: {
+      type: DDeiEditor,
       default: null
     }
   },
@@ -231,6 +233,7 @@ export default {
       operateState: null,
       //全部都是线条
       allLine: false,
+      forceRefresh: false,
     };
   },
   computed: {},
@@ -242,9 +245,20 @@ export default {
 
   },
   mounted() {
-   this.refreshData()
+    this.editor.dialogs[this.dialogId].viewer = this
+    this.refreshData()
   },
   methods: {
+
+    forceRefreshView: function () {
+      this.forceRefresh = false
+      this.$nextTick(() => {
+        this.forceRefresh = true;
+        if (this.refreshData) {
+          this.refreshData();
+        }
+      });
+    },
     refreshData(){
       let stage = this.editor.ddInstance.stage
       if (stage) {
