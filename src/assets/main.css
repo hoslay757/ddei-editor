@@ -8,18 +8,6 @@
   font-weight: normal;
 }
 
-.iconfont {
-  font-family: 'iconfont' !important;
-  font-size: 24px;
-  color: #424242;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.iconfont-small {
-  font-size: 6px !important;
-}
 
 /* 
 [data-dpr="2"] .iconfont {

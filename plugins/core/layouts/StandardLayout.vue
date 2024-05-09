@@ -74,19 +74,7 @@ export default {
     this.$watch("editor.leftWidth", function (newVal, oldVal) {
       this.$refs.left.style.flexBasis = newVal + "px";
     });
-    this.$watch("editor.middleWidth", function (newVal, oldVal) {
-      
-      //重新设置画布大小
-      this.editor.ddInstance.render.setSize(
-        this.editor.middleWidth,
-        this.editor.middleHeight,
-        0,
-        0
-      );
-      this.editor.ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape)
-      this.editor.ddInstance.bus.executeAll()
-      this.editor.changeState(DDeiEditorState.DESIGNING);
-    });
+ 
     this.$watch("editor.rightWidth", function (newVal, oldVal) {
       this.$refs.right.style.flexBasis = newVal + "px";
     });
@@ -125,18 +113,12 @@ export default {
           );
           this.editor.ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
           this.editor.ddInstance.bus.executeAll();
-          this.editor.leftWidth = this.$refs.left.offsetWidth;
-          this.editor.rightWidth = this.$refs.right.offsetWidth;
-          this.editor.topHeight = this.$refs.top.offsetHeight;
-          this.editor.bottomHeight = this.$refs.bottom.offsetHeight;
-          this.editor.middleWidth = this.$refs.middle.offsetWidth;
-          this.editor.middleHeight = this.$refs.middle.offsetHeight;
         }
 
       }
     });
 
-    // 开始监听目标元素的大小变化
+    //开始监听目标元素的大小变化
     resizeObserver.observe(middleCanvas);
 
     this.editor.leftWidth = this.$refs.left.offsetWidth;
@@ -255,7 +237,7 @@ export default {
     }
 
     .middle {
-      flex: 1;
+      flex: 1 1 auto;
       display: flex;
       flex-direction: column;
     }

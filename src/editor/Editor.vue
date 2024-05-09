@@ -22,13 +22,15 @@ import {DDeiEditorCommandFileDirty} from "ddei-framework";
 import {DDeiEditorCommandAddHistroy} from "ddei-framework";
 import MenuDialog from "./MenuDialog.vue";
 import {DDeiEditorUtil} from "ddei-framework";
-import { DDeiModelArrtibuteValue } from 'ddei-framework'
 import DDeiCore from "@ddei/core";
 
 import ICONS from "./icon";
 import { markRaw } from "vue";
 
-import { Matrix3 ,Vector3} from "three"
+import '@/assets/ddei.css'
+import '@/assets/fonts/iconfont/iconfont.css'
+import '@/assets/fonts/iconfont/iconfont.js'
+
 export default {
   name: "DDei-Editor",
   extends: null,
@@ -87,7 +89,6 @@ export default {
       this.editor.extConfig = this.options.config;
       this.editor.ddInstance.applyConfig(this.options.config);
     }
-    window.onbeforeunload = this.beforeUnload;
     DDeiEditorUtil.ICONS = ICONS;
 
   },
@@ -154,21 +155,7 @@ export default {
     },
 
 
-    beforeUnload(e) {
-      let files = this.editor?.files
-
-      let hasDirty = false;
-      for (let i = 0; i < files?.length; i++) {
-        if (files[i].state != DDeiFileState.NONE) {
-          hasDirty = true;
-          break;
-        }
-      }
-      if (hasDirty) {
-        var e = window.event || e;
-        e.returnValue = ("确定离开当前页面吗（未保存数据将会丢失）？");
-      }
-    },
+    
 
 
    

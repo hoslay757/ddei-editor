@@ -271,8 +271,8 @@ export default defineComponent({
 
 
 <template>
-  <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
-  <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
+  <DDeiEditorView ref="editorViewer1" :options="{}" id="ddei_editor_1"></DDeiEditorView>
+  <!-- <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>
   </div>
@@ -282,7 +282,7 @@ export default defineComponent({
   </div>
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer5" :options="options4" id="ddei_editor_5"></DDeiEditorView>
-  </div>
+  </div> -->
 </template>
 
 <style>
