@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" class="ddei-editor" @contextmenu.prevent @mousedown="mouseDown($event)">
+  <div :id="id" ref="editor_div" class="ddei-editor" @contextmenu.prevent @mousedown="mouseDown($event)">
     <component :is="editor?.getLayout()" :editor="editor" :options="editor?.getLayoutOptions()">
     </component>
     <component :editor="editor" v-for="(item, index) in editor?.getDialogs()" :is="item.dialog" :options="item.options"
@@ -99,6 +99,13 @@ export default {
     this.editor.changeTheme('');
     DDeiEditorUtil.getControlIcons(this.editor);
     
+    //初始化大小
+    if (this.options?.config?.width) {
+      this.$refs.editor_div.style.width = this.options?.config?.width + "px";
+    }
+    if (this.options?.config?.height) {
+      this.$refs.editor_div.style.height = this.options?.config?.height + "px";
+    }
     //初始化控件
     if(this.options?.config?.initData){
       //调用转换器，将输入内容转换为设计器能够识别的格式
