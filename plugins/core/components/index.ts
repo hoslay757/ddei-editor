@@ -42,13 +42,13 @@ class DDeiCoreComponents extends DDeiPluginBase{
 
   
 
-  static configuraton(options) {
+  static configuration(options) {
     //解析options，只使用自己相关的
     if (options) {
       //解析options，只使用自己相关的
       let components = new DDeiCoreComponents(options);
       for (let i = 0; i < components.plugins?.length; i++) {
-        components.plugins[i] = components.plugins[i].configuraton(options, true)
+        components.plugins[i] = components.plugins[i].configuration(options, true)
       }
       return components;
     }

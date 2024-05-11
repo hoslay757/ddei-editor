@@ -26,7 +26,7 @@ class DDeiCoreStandLayout extends DDeiPluginBase{
     return this.plugins
   }
   
-  static configuraton(options,fullConfig:boolean = false ) {
+  static configuration(options,fullConfig:boolean = false ) {
     //解析options，只使用自己相关的
     if (options) {
       let newOptions = Object.assign({}, {}, DDeiCoreStandLayout.defaultIns.defaultOptions)

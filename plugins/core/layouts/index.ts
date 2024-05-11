@@ -33,10 +33,10 @@ class DDeiCoreLayouts extends DDeiPluginBase{
   }
 
 
-  static configuraton(options) {
+  static configuration(options) {
     let layouts = new DDeiCoreLayouts(options);
     for (let i = 0; i < layouts.plugins?.length;i++){
-      layouts.plugins[i] = layouts.plugins[i].configuraton(options,true)
+      layouts.plugins[i] = layouts.plugins[i].configuration(options,true)
     }
     return layouts;
   }

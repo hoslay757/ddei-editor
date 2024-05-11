@@ -130,17 +130,17 @@ class DDeiCore extends DDeiPluginBase {
     }
   }
 
-  static configuraton(options) {
+  static configuration(options) {
     let core = new DDeiCore(options);
-    core.layouts = core.layouts.configuraton(options,true)
-    core.panels = core.panels.configuraton(options,true)
-    core.components = core.components.configuraton(options, true)
-    core.dialogs = core.dialogs.configuraton(options, true)
-    core.propeditors = core.propeditors.configuraton(options, true)
-    core.hotkeys = core.hotkeys.configuraton(options, true)
-    core.controls = core.controls.configuraton(options, true)
-    core.menus = core.menus.configuraton(options, true)
-    core.themes = core.themes.configuraton(options, true)
+    core.layouts = core.layouts.configuration(options,true)
+    core.panels = core.panels.configuration(options,true)
+    core.components = core.components.configuration(options, true)
+    core.dialogs = core.dialogs.configuration(options, true)
+    core.propeditors = core.propeditors.configuration(options, true)
+    core.hotkeys = core.hotkeys.configuration(options, true)
+    core.controls = core.controls.configuration(options, true)
+    core.menus = core.menus.configuration(options, true)
+    core.themes = core.themes.configuration(options, true)
     return core;
   }
 }

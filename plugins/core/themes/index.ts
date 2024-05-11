@@ -36,10 +36,10 @@ class DDeiCoreThemes extends DDeiPluginBase{
   }
 
 
-  static configuraton(options) {
+  static configuration(options) {
     let themes = new DDeiCoreThemes(options);
     for (let i = 0; i < themes.plugins?.length;i++){
-      themes.plugins[i] = themes.plugins[i].configuraton(options,true)
+      themes.plugins[i] = themes.plugins[i].configuration(options,true)
     }
     return themes;
   }

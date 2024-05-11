@@ -32,10 +32,10 @@ class DDeiExtQuickStyle extends DDeiPluginBase {
   }
 
 
-  static configuraton(options) {
+  static configuration(options) {
     let core = new DDeiExtQuickStyle(options);
-    core.dialogs = core.dialogs.configuraton(options, true)
-    core.lifecyclies = core.lifecyclies.configuraton(options, true)
+    core.dialogs = core.dialogs.configuration(options, true)
+    core.lifecyclies = core.lifecyclies.configuration(options, true)
     return core;
   }
 }

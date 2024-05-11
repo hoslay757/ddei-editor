@@ -38,12 +38,12 @@ class DDeiCorePanels extends DDeiPluginBase{
 
  
 
-  static configuraton(options) {
+  static configuration(options) {
     if (options){
       //解析options，只使用自己相关的
       let panels = new DDeiCorePanels(options);
       for (let i = 0; i < panels.plugins?.length;i++){
-        panels.plugins[i] = panels.plugins[i].configuraton(options,true)
+        panels.plugins[i] = panels.plugins[i].configuration(options,true)
       }
       return panels;
     }

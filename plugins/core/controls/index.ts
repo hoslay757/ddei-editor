@@ -57,7 +57,7 @@ class DDeiCoreControls extends DDeiPluginBase{
     return groups;
   } 
 
-  static configuraton(options) {
+  static configuration(options) {
     if (options){
       let controls = new DDeiCoreControls(options);
       return controls;

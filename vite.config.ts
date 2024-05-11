@@ -6,6 +6,9 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
+  server: {
+    port: 0 // 你想要的新端口号
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

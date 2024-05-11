@@ -42,9 +42,9 @@ class DDeiExtUML extends DDeiPluginBase {
     }
   }
 
-  static configuraton(options) {
+  static configuration(options) {
     let core = new DDeiExtUML(options);
-    core.controls = core.controls.configuraton(controls, true)
+    core.controls = core.controls.configuration(controls, true)
     return core;
   }
 }

@@ -31,15 +31,15 @@ export default defineComponent({
       //配置扩展插件
       extensions: [
         //布局的配置
-        DDeiCoreStandLayout.configuraton({
+        DDeiCoreStandLayout.configuration({
           //配置插件
           'top': [DDeiCoreTopMenuPanel],
-          'middle': [DDeiCoreOpenFilesViewPanel.configuraton({
+          'middle': [DDeiCoreOpenFilesViewPanel.configuration({
             drag: true
           }), 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],
         }),
         //特殊控件的配置
-        DDeiCoreControls.configuraton({
+        DDeiCoreControls.configuration({
           '100002': {
             border: { color: 'red', width: 3 }
           },
@@ -48,11 +48,11 @@ export default defineComponent({
           }
         }),
 
-        DDeiCoreThemeBlack.configuraton({
+        DDeiCoreThemeBlack.configuration({
           default: true
         }),
         //批量快捷键配置
-        DDeiCoreHotkeys.configuraton({
+        DDeiCoreHotkeys.configuration({
           "ddei-core-keyaction-all-select": {
             'keys': [
               { keys: "68" },
@@ -60,7 +60,7 @@ export default defineComponent({
           },
         }),
         //某个快捷键的配置
-        DDeiKeyActionAllSelect.configuraton({
+        DDeiKeyActionAllSelect.configuration({
           'keys': [
             {
               ctrl: 1, keys: "66"
@@ -69,18 +69,18 @@ export default defineComponent({
         }),
 
         // DDeiCoreBottomMenuPanel,
-        DDeiCoreBottomMenuPanel.configuraton({
-          'panels': [DDeiCoreSheetsPanel.configuraton({
+        DDeiCoreBottomMenuPanel.configuration({
+          'panels': [DDeiCoreSheetsPanel.configuration({
             max: 10
-          }), , DDeiCoreShapeCountPanel.configuraton({
+          }), , DDeiCoreShapeCountPanel.configuration({
             title: "图形数:"
           }),
             "ddei-core-panel-bottom-managelayers",
-          DDeiCoreChangeRatioPanel.configuraton({
+          DDeiCoreChangeRatioPanel.configuration({
             delta: 0.1, min: 1, max: 4, step: 0.2, dialog: true, range: false
           })]
         }),
-        DDeiCoreChangeRatioDialog.configuraton({
+        DDeiCoreChangeRatioDialog.configuration({
           dataSource: [
             { text: "200%", value: 2 },
             { text: "150%", value: 1.5 },
@@ -92,13 +92,13 @@ export default defineComponent({
           input: true,
           min: 1, max: 4, title: "缩放比例"
         }),
-        // DDeiCoreToolboxPanel.configuraton({
+        // DDeiCoreToolboxPanel.configuration({
         //   custom: false,
         //   search: false,
         //   // customGroups: [302, 301, 102, 101],
         //   expand: false
         // }),
-        DDeiCorePropertyViewPanel.configuraton({
+        DDeiCorePropertyViewPanel.configuration({
 
           expand: false
         }),
@@ -181,7 +181,7 @@ export default defineComponent({
       //配置扩展插件
       extensions: [
         //布局的配置
-        DDeiCoreStandLayout.configuraton({
+        DDeiCoreStandLayout.configuration({
           //配置插件
           'top': [],
           'middle': ['ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],
@@ -196,7 +196,7 @@ export default defineComponent({
       config: {
         EXT_STAGE_WIDTH:false,
         EXT_STAGE_HEIGHT:false,
-        ruler:0,
+        ruler:false,
         grid: 0,
         initData: {
           controls: [
@@ -222,7 +222,7 @@ export default defineComponent({
       //配置扩展插件
       extensions: [
         //布局的配置
-        DDeiCoreStandLayout.configuraton({
+        DDeiCoreStandLayout.configuration({
           //配置插件
           'top': [],
           'middle': ['ddei-core-panel-canvasview'],
@@ -230,7 +230,7 @@ export default defineComponent({
           'left': [],
           'right': []
         }),
-        DDeiCoreThemeBlack.configuraton({
+        DDeiCoreThemeBlack.configuration({
           default: true
         }),
       ],
@@ -242,7 +242,7 @@ export default defineComponent({
       //配置扩展插件
       extensions: [
         //布局的配置
-        DDeiCoreStandLayout.configuraton({
+        DDeiCoreStandLayout.configuration({
           //配置插件
           'top': [],
           'middle': ['ddei-core-panel-canvasview'],
@@ -272,7 +272,7 @@ export default defineComponent({
 
 <template>
   <DDeiEditorView ref="editorViewer1" :options="{}" id="ddei_editor_1"></DDeiEditorView>
-  <!-- <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
+  <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>
   </div>
@@ -282,7 +282,7 @@ export default defineComponent({
   </div>
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer5" :options="options4" id="ddei_editor_5"></DDeiEditorView>
-  </div> -->
+  </div>
 </template>
 
 <style>

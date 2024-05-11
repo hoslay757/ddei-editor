@@ -66,10 +66,10 @@ class DDeiCoreHotkeys extends DDeiPluginBase{
   }
 
 
-  static configuraton(options) {
+  static configuration(options) {
     let hotkeys = new DDeiCoreHotkeys(options);
     for (let i = 0; i < hotkeys.plugins?.length;i++){
-      hotkeys.plugins[i] = hotkeys.plugins[i].configuraton(options,true)
+      hotkeys.plugins[i] = hotkeys.plugins[i].configuration(options,true)
     }
     return hotkeys;
   }

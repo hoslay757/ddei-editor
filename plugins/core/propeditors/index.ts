@@ -50,12 +50,12 @@ class DDeiCorePVEditors extends DDeiPluginBase {
     return pves
   }
 
-  static configuraton(options) {
+  static configuration(options) {
     if (options){
       //解析options，只使用自己相关的
       let pves = new DDeiCorePVEditors(options);
       for (let i = 0; i < pves.plugins?.length; i++) {
-        pves.plugins[i] = pves.plugins[i].configuraton(options, true)
+        pves.plugins[i] = pves.plugins[i].configuration(options, true)
       }
       return pves;
     }
