@@ -12,104 +12,13 @@ export default defineComponent({
     
     const options = markRaw({
       config: {
-        width: 2000,
-        height:2000,
-        ratio: 1.5,
-        theme: "black",
-        EXT_STAGE_WIDTH:false,
-        GLOBAL_HELP_LINE_ENABLE:false,
-        GLOBAL_ALLOW_STAGE_RATIO:false,
-        GLOBAL_KEYBOARD_ALIGN_ENABLE:false,
-        GLOBAL_ALLOW_OPEN_MULT_LAYERS:false,
-        EVENT_CONTROL_SELECT_AFTER: function(){
-          console.log("select-after")
-          let rs = DDeiFuncCallResult
-          rs.state = 1;
-          return rs
-        }
+      
       },
-      //配置扩展插件
       extensions: [
-        //布局的配置
-        DDeiCoreStandLayout.configuration({
-          //配置插件
-          'top': [DDeiCoreTopMenuPanel],
-          'middle': [DDeiCoreOpenFilesViewPanel.configuration({
-            drag: true
-          }), 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],
-        }),
-        //特殊控件的配置
-        DDeiCoreControls.configuration({
-          '100002': {
-            border: { color: 'red', width: 3 }
-          },
-          '100001': {
-            border: { color: 'yellow' }
-          }
-        }),
-
         DDeiCoreThemeBlack.configuration({
           default: true
         }),
-        //批量快捷键配置
-        DDeiCoreHotkeys.configuration({
-          "ddei-core-keyaction-all-select": {
-            'keys': [
-              { keys: "68" },
-            ]
-          },
-        }),
-        //某个快捷键的配置
-        DDeiKeyActionAllSelect.configuration({
-          'keys': [
-            {
-              ctrl: 1, keys: "66"
-            }
-          ]
-        }),
-
-        // DDeiCoreBottomMenuPanel,
-        DDeiCoreBottomMenuPanel.configuration({
-          'panels': [DDeiCoreSheetsPanel.configuration({
-            max: 10
-          }), , DDeiCoreShapeCountPanel.configuration({
-            title: "图形数:"
-          }),
-            "ddei-core-panel-bottom-managelayers",
-          DDeiCoreChangeRatioPanel.configuration({
-            delta: 0.1, min: 1, max: 4, step: 0.2, dialog: true, range: false
-          })]
-        }),
-        DDeiCoreChangeRatioDialog.configuration({
-          dataSource: [
-            { text: "200%", value: 2 },
-            { text: "150%", value: 1.5 },
-            { text: "125%", value: 1.25 },
-            { text: "100%", value: 1 },
-            { text: "75%", value: 0.75 },
-            { text: "50%", value: 0.5 },
-          ],
-          input: true,
-          min: 1, max: 4, title: "缩放比例"
-        }),
-        // DDeiCoreToolboxPanel.configuration({
-        //   custom: false,
-        //   search: false,
-        //   // customGroups: [302, 301, 102, 101],
-        //   expand: false
-        // }),
-        DDeiCorePropertyViewPanel.configuration({
-
-          expand: false
-        }),
-
-
-        //加载UML插件
-        DDeiExtUML,
-
-        //加载快捷编辑栏
-        DDeiExtQuickStyle
-      ],
+      ]
     })
     const options1 = markRaw({
       config: {
@@ -271,7 +180,7 @@ export default defineComponent({
 
 
 <template>
-  <DDeiEditorView ref="editorViewer1" :options="{}" id="ddei_editor_1"></DDeiEditorView>
+  <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
   <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>

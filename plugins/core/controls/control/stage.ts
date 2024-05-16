@@ -136,7 +136,7 @@ export default {
       },
       'itemStyle': { width: 80, height: 25, col: 2, row: 0, imgWidth: 20, imgHeight: 20 },
       'canSearch': true,
-      'defaultValue': "Microsoft YaHei",
+      'defaultValue': "",
     },
     {
       'code': 'mark.font.size',

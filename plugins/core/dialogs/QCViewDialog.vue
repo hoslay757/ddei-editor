@@ -73,11 +73,13 @@ export default {
   left: 0px;
   display: none;
   bottom: 16px;
-  height: 34px;
+  height: 48px;
 
 
   .icon {
     font-size: 18px;
+    width:18px;
+    height:18px;
   }
 
   .items {

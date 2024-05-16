@@ -31,6 +31,7 @@ export default {
   data() {
     return {
       allowStageRatio: true,
+      currentStage:null,
     };
   },
   computed: {},
@@ -41,6 +42,9 @@ export default {
       "GLOBAL_ALLOW_STAGE_RATIO",
       this.editor
     );
+    let file = this.editor?.files[this.editor?.currentFileIndex];
+    let sheet = file?.sheets[file?.currentSheetIndex];
+    this.currentStage = sheet?.stage;
   },
   methods:{
     /**
@@ -94,6 +98,18 @@ export default {
           }, 10);
         }
       }
+    },
+
+    /**
+     * 设置缩放比率
+     */
+    setRatio(ratio: number) {
+      if (ratio < this.min) {
+        ratio = this.min
+      } else if (ratio > this.max) {
+        ratio = this.max;
+      }
+      this.currentStage?.setStageRatio(ratio);
     },
   }
 };

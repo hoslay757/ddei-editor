@@ -8,6 +8,8 @@
 .icon {
   font-family: "iconfont" !important;
   font-size: 26px;
+  width: 26px;
+  height: 26px;
   color: #424242;
   font-style: normal;
   -webkit-font-smoothing: antialiased;

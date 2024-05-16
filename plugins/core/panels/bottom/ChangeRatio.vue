@@ -5,7 +5,7 @@
       :class="{ 'ddei-core-panel-bottom-changeratio__combox': true,'ddei-core-panel-bottom-changeratio__combox__dialog':dialog}"
       @click="dialog && showChangeRatioDialog($event)">
       <span>
-        {{ parseInt(editor?.currentStage?.ratio * 100) }}%
+        {{ parseInt(currentStage?.ratio * 100) }}%
       </span>
       <svg v-if="dialog" class="icon expbtn" aria-hidden="true">
         <use xlink:href="#icon-a-ziyuan466"></use>
@@ -21,7 +21,7 @@
       :class="{ 'ddei-core-panel-bottom-changeratio__combox': true, 'ddei-core-panel-bottom-changeratio__combox__dialog': dialog }"
       @click="dialog && showChangeRatioDialog($event)">
       <span>
-        {{ parseInt(editor?.currentStage?.ratio * 100) }}%
+        {{ parseInt(currentStage?.ratio * 100) }}%
       </span>
       <svg v-if="dialog" class="icon expbtn" aria-hidden="true">
         <use xlink:href="#icon-a-ziyuan466"></use>
@@ -86,13 +86,14 @@ export default {
       ratioInputValue: 0,
       stageRatio: 1,
       allowStageRatio: true,
+      currentStage:null,
     };
   },
   computed: {},
   watch: {},
   created() {
     // 监听obj对象中prop属性的变化
-    this.$watch("editor.currentStage.ratio", function (newVal, oldVal) {
+    this.$watch("currentStage.ratio", function (newVal, oldVal) {
       if (
         DDeiEditorUtil.getConfigValue("GLOBAL_ALLOW_STAGE_RATIO", this.editor)
       ) {
@@ -123,8 +124,7 @@ export default {
   mounted() {
     let file = this.editor?.files[this.editor?.currentFileIndex];
     let sheet = file?.sheets[file?.currentSheetIndex];
-    this.editor.currentStage = sheet?.stage;
-
+    this.currentStage = sheet?.stage;
     this.allowStageRatio = DDeiEditorUtil.getConfigValue(
       "GLOBAL_ALLOW_STAGE_RATIO",
       this.editor
@@ -134,7 +134,7 @@ export default {
     showChangeRatioDialog(evt: Event) {
       let srcElement = evt.currentTarget;
       DDeiEditorUtil.showOrCloseDialog(this.editor, "ddei-core-dialog-changeratio", {
-        ratio: this.editor.currentStage?.ratio,
+        ratio: this.currentStage?.ratio,
         callback: {
           ok: this.setRatio,
         },
@@ -152,15 +152,15 @@ export default {
      * 增加缩放比率
      */
     addRatio(deltaRatio: number) {
-      let ratio = this.editor.currentStage.getStageRatio();
+      let ratio = this.currentStage?.getStageRatio();
       let newRatio = parseFloat((ratio + deltaRatio).toFixed(2));
       if (newRatio < this.min) {
         newRatio = this.min
       } else if (newRatio > this.max) {
         newRatio = this.max;
       }
-      this.editor?.currentStage?.setStageRatio(newRatio);
-      this.stageRatio = this.editor?.currentStage?.ratio;
+      this.currentStage?.setStageRatio(newRatio);
+      this.stageRatio = this.currentStage?.ratio;
       this.editor.changeState(DDeiEditorState.DESIGNING);
     },
 
@@ -173,20 +173,20 @@ export default {
       } else if (ratio > this.max) {
         ratio = this.max;
       }
-      this.editor?.currentStage?.setStageRatio(ratio);
-      this.stageRatio = this.editor?.currentStage?.ratio;
+      this.currentStage?.setStageRatio(ratio);
+      this.stageRatio = this.currentStage?.ratio;
     },
     /**
      * 修改当前的全局缩放比率
      */
     changeRatio() {
-      if (this.editor?.currentStage?.ratio || this.editor?.currentStage?.ratio == 0) {
-        if (this.editor?.currentStage?.oldRatio || this.editor?.currentStage?.oldRatio == 0) {
+      if (this.currentStage?.ratio || this.currentStage?.ratio == 0) {
+        if (this.currentStage?.oldRatio || this.currentStage?.oldRatio == 0) {
           this.editor?.bus?.push(
             DDeiEnumBusCommandType.ChangeStageRatio,
             {
-              oldValue: this.editor.currentStage.oldRatio,
-              newValue: this.editor.currentStage.ratio,
+              oldValue: this.currentStage.oldRatio,
+              newValue: this.currentStage.ratio,
             },
             null
           );
@@ -200,10 +200,13 @@ export default {
 
 <style lang="less" scoped>
 .expbtn {
+  width: 14px;
   font-size: 14px;
 }
 .icon {
   font-size: 22px;
+  width:22px;
+  height:22px;
 }
 .ddei-core-panel-bottom-changeratio {
     flex: 0 0 157px;

@@ -167,7 +167,7 @@ export default {
           ok: this.changeMode,
         }
       },
-        { type: 2, dy: -el.clientHeight }, el)
+        { type: 2 }, el)
     },
     /**
      * 改变模型颜色
