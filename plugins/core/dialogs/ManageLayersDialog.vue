@@ -298,13 +298,16 @@ export default {
     startChangeLayerName(layer, evt) {
       let ele = evt.target;
       let domPos = DDeiUtil.getDomAbsPosition(ele);
-      let input = document.getElementById("change_layer_name_input");
+      let editor = DDeiEditor.ACTIVE_INSTANCE;
+      let editorEle = document.getElementById(editor.id);
+      let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
+      let input = document.getElementById(editor.id+"_change_layer_name_input");
       this.currentChangeLayer = layer;
       if (!input) {
         input = document.createElement("input");
-        input.setAttribute("id", "change_layer_name_input");
+        input.setAttribute("id", editor.id +"_change_layer_name_input");
         input.style.position = "absolute";
-        document.body.appendChild(input);
+        editorEle.appendChild(input);
         const that = this;
         input.onblur = ()=> {
           //设置属性值
@@ -346,9 +349,9 @@ export default {
       }
       input.style.width = ele.offsetWidth + "px";
       input.style.height = ele.offsetHeight + "px";
-      input.style.left = domPos.left + "px";
+      input.style.left = (domPos.left - editorDomPos.left) + "px";
       input.style.fontSize = "16px";
-      input.style.top = domPos.top + "px";
+      input.style.top = (domPos.top - editorDomPos.top) + "px";
       input.style.outline = "1px solid #017fff";
       input.style.border = "none";
       input.style.borderRadius = "1px";
@@ -357,6 +360,8 @@ export default {
       input.style.display = "block";
       input.selectionStart = 0; // 选中开始位置
       input.selectionEnd = input.value.length; // 获取输入框里的长度。
+      input.style.background = "var(--background)";
+      input.style.color = "var(--text)";
       input.focus();
       //修改编辑器状态为快捷编辑中
       this.editor.changeState(DDeiEditorState.PROPERTY_EDITING);
