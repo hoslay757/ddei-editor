@@ -25,7 +25,7 @@
         <use xlink:href="#icon-a-ziyuan422"></use>
       </svg>
     </div>
-    <svg class="icon addfile" aria-hidden="true" v-if="create && (!max || editor?.files?.length <= max)"
+    <svg class="icon addfile" aria-hidden="true" v-if="create && (!max || editor?.files?.length < max)"
       @click="newFile">
       <use xlink:href="#icon-a-ziyuan376"></use>
     </svg>
@@ -263,12 +263,15 @@ export default {
     startChangeFileName(file, evt) {
       let ele = evt.target;
       let domPos = DDeiUtil.getDomAbsPosition(ele);
-      let input = document.getElementById("change_file_name_input");
+      let editor = DDeiEditor.ACTIVE_INSTANCE;
+      let editorEle = document.getElementById(editor.id);
+      let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
+      let input = document.getElementById(editor.id+"_change_file_name_input");
       if (!input) {
         input = document.createElement("input");
-        input.setAttribute("id", "change_file_name_input");
+        input.setAttribute("id", editor.id +"_change_file_name_input");
         input.style.position = "absolute";
-        document.body.appendChild(input);
+        editorEle.appendChild(input);
         input.onblur = function () {
           //设置属性值
           if (input.value) {
@@ -336,8 +339,8 @@ export default {
       }
       input.style.width = ele.offsetWidth + "px";
       input.style.height = ele.offsetHeight - 3 + "px";
-      input.style.left = domPos.left + "px";
-      input.style.top = (domPos.top + 2) + "px";
+      input.style.left = domPos.left - editorDomPos.left + "px";
+      input.style.top = (domPos.top + 2 - editorDomPos.top) + "px";
       input.style.border = "none";
       input.style.outline = "none";
       input.style.borderBottom = "1px solid #1F72FF";
@@ -346,6 +349,8 @@ export default {
       input.style.display = "block";
       input.selectionStart = 0; // 选中开始位置
       input.selectionEnd = input.value.length; // 获取输入框里的长度。
+      input.style.background = "var(--background)";
+      input.style.color = "var(--text)";
       input.focus();
       //修改编辑器状态为快捷编辑中
       this.editor.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);

@@ -1,6 +1,6 @@
 <template>
   <div class="ddei-core-panel-bottom-addpage" @click="newSheet"
-    v-if="this.new && (!max || (editor?.files[editor?.currentFileIndex]?.sheets?.length < max))">
+    v-if="create && (!max || (editor?.files[editor?.currentFileIndex]?.sheets?.length < max))">
     <svg class="icon" aria-hidden="true">
       <use xlink:href="#icon-a-ziyuan376"></use>
     </svg>
@@ -60,7 +60,7 @@ export default {
       type: Boolean,
       default: true
     },
-    new: {
+    create: {
       type: Boolean,
       default: true
     },
@@ -257,12 +257,15 @@ export default {
     startChangeSheetName(sheet, evt) {
       let ele = evt.target;
       let domPos = DDeiUtil.getDomAbsPosition(ele);
-      let input = document.getElementById("change_sheet_name_input");
+      let editor = DDeiEditor.ACTIVE_INSTANCE;
+      let editorEle = document.getElementById(editor.id);
+      let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
+      let input = document.getElementById(editor.id +"_change_sheet_name_input");
       if (!input) {
         input = document.createElement("input");
-        input.setAttribute("id", "change_sheet_name_input");
+        input.setAttribute("id", editor.id +"_change_sheet_name_input");
         input.style.position = "absolute";
-        document.body.appendChild(input);
+        editorEle.appendChild(input);
         input.onblur = function () {
           //设置属性值
           if (input.value) {
@@ -317,13 +320,15 @@ export default {
       }
       input.style.width = ele.offsetWidth + "px";
       input.style.height = ele.offsetHeight + "px";
-      input.style.left = domPos.left + "px";
-      input.style.top = domPos.top + "px";
+      input.style.left = (domPos.left - editorDomPos.left) + "px";
+      input.style.top = (domPos.top - editorDomPos.top) + "px";
       input.style.outline = "1px solid #017fff";
       input.style.border = "none";
       input.style.borderRadius = "1px";
       input.value = sheet.name;
       input.style.display = "block";
+      input.style.background = "var(--background)";
+      input.style.color = "var(--text)";
       input.selectionStart = 0; // 选中开始位置
       input.selectionEnd = input.value.length; // 获取输入框里的长度。
       input.focus();
