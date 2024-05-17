@@ -73,7 +73,7 @@ export default defineComponent({
       config: {
         EXT_STAGE_WIDTH:false,
         // "readonly": true,
-        access:{"DEL":false},
+        access: { "DEL": false, "SCALE": false, "ROTATE": false },
         "paper":"A5",
         "ruler": true,
         initData: {

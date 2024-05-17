@@ -20,17 +20,17 @@
       <div class="group">
         <div class="title">旋转:</div>
         <div class="group_content">
-          <div class="item" @click="doRotate(90)">
+          <div :class="{ 'item': canRotate(), 'item_disabled': !canRotate() }" @click="canRotate() && doRotate(90)">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-a-ziyuan377"></use>
             </svg>
           </div>
-          <div class="item" @click="doRotate(-90)">
+          <div :class="{ 'item': canRotate(), 'item_disabled': !canRotate() }" @click="canRotate() && doRotate(-90)">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-a-ziyuan382"></use>
             </svg>
           </div>
-          <div class="item" @click="doRotate(-1)">
+          <div :class="{ 'item': canRotate(), 'item_disabled': !canRotate() }" @click="canRotate() && doRotate(-1)">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-a-ziyuan373"></use>
             </svg>
@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework";
+import { DDeiEditor, DDei, DDeiEnumOperateType } from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiConfig} from "ddei-framework";
 import { Matrix3 } from 'three';
@@ -70,13 +70,26 @@ export default {
   watch: {},
   created() { },
   mounted() {
-
+    
   },
   methods: {
 
     //是否可以镜像
     canMirror() {
       return false;
+    },
+
+    canRotate() {
+      let models = null;
+      if (this.editor.ddInstance.stage?.selectedModels?.size > 0) {
+        models = Array.from(this.editor.ddInstance.stage?.selectedModels.values())
+      }
+      let canRotate = DDei.beforeOperateValid(DDeiEnumOperateType.ROTATE, { models: models }, this.editor.ddInstance, null);
+      if (!(canRotate == 0 || canRotate == 1)) {
+        return false
+      }else{
+        return true
+      }
     },
 
 
