@@ -97,7 +97,6 @@ export default {
     //设置默认风格
     this.editor.bindEvent();
     this.editor.changeTheme('');
-    DDeiEditorUtil.getControlIcons(this.editor);
     
     //初始化大小
     if (this.options?.config?.width) {
@@ -142,6 +141,9 @@ export default {
     };
     if (!this.editor.setCurrentMenu) {
       this.editor.setCurrentMenu = this.setCurrentMenu;
+    }
+    if(this.editor.needControlIcon){
+      DDeiEditorUtil.getControlIcons(this.editor);
     }
   },
   methods: {

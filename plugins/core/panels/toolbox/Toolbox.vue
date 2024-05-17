@@ -140,6 +140,7 @@ export default {
     },
 
     refreshData(){
+      this.editor.needControlIcon = true;
       this.editor.toolBarViewer = this;
       if (this.editor.ddInstance && !this.editor.ddInstance.render) {
         this.editor.ddInstance.initRender()

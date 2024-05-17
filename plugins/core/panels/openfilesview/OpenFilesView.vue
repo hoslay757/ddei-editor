@@ -25,7 +25,8 @@
         <use xlink:href="#icon-a-ziyuan422"></use>
       </svg>
     </div>
-    <svg class="icon addfile" aria-hidden="true" v-if="new" @click="newFile">
+    <svg class="icon addfile" aria-hidden="true" v-if="create && (!max || editor?.files?.length <= max)"
+      @click="newFile">
       <use xlink:href="#icon-a-ziyuan376"></use>
     </svg>
     <div style="flex:1 1 1px"></div>
@@ -71,9 +72,9 @@ export default {
     //是否允许展开收折
     expand: {
       type: Boolean,
-      default: true
+      default: false
     },
-    new: {
+    create: {
       type: Boolean,
       default: true
     },
@@ -88,6 +89,10 @@ export default {
     drag: {
       type: Boolean,
       default: true
+    },
+    max:{
+      type: Number,
+      default: 0
     }
     , editor: {
       type: DDeiEditor,

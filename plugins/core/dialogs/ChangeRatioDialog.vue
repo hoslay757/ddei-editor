@@ -4,12 +4,12 @@
       <div class="title">{{title}}</div>
       <div class="group">
         <div class="group_content">
-          <div v-for="data in dataSource" v-show="data?.value >=min && data?.value <=max"
+          <div v-for="data in dataSource" v-show="data?.value >= iMin && data?.value <=iMax"
             :class="{ 'item': true, 'item_selected': ratioInputValue / 100 == data.value }" @click="ok(data.value)">
             {{ data.text}}
           </div>
           <div v-if="input" class="item" style="flex:1;border-top: 1px solid var(--panel-border)">
-            百分比：<input type="number" :min="min*100" :max="max*100" v-model="ratioInputValue" @blur="ratioInputChange()"
+            百分比：<input type="number" :min="iMin*100" :max="iMax*100" v-model="ratioInputValue" @blur="ratioInputChange()"
               autocomplete="off" name="ddei_bottom_input" />%
           </div>
         </div>
@@ -66,6 +66,8 @@ export default {
     return {
       dialogId: 'ddei-core-dialog-changeratio',
       ratioInputValue: 100,
+      iMin:0.1,
+      iMax:10,
     };
   },
   computed: {},
@@ -74,12 +76,28 @@ export default {
   created() { },
   mounted() {
     this.refreshData()
-    
   },
   methods: {
     refreshData(){
       if (this.editor?.tempDialogData && this.editor?.tempDialogData[this.dialogId]) {
-        this.ratioInputValue = this.editor?.tempDialogData[this.dialogId]?.ratio * 100
+        if (this.editor.tempDialogData[this.dialogId].min || this.editor.tempDialogData[this.dialogId].min == 0) {
+          this.iMin = this.editor.tempDialogData[this.dialogId].min;
+        } else if (this.min || this.min == 0){
+          this.iMin = this.min
+        }
+        if (this.editor.tempDialogData[this.dialogId].max || this.editor.tempDialogData[this.dialogId].max == 0) {
+          this.iMax = this.editor.tempDialogData[this.dialogId].max;
+        } else if (this.max || this.max == 0){
+          this.iMax = this.max
+        }
+        if (this.editor.tempDialogData[this.dialogId].ratio > this.iMax){
+          this.ratioInputValue = this.iMax * 100
+        } else if (this.editor.tempDialogData[this.dialogId].ratio < this.iMin) {
+          this.ratioInputValue = this.iMin * 100
+        }else{
+          this.ratioInputValue = this.editor.tempDialogData[this.dialogId].ratio * 100
+        }
+        
       }
     },
 

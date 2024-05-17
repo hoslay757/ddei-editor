@@ -27,7 +27,7 @@
         <use xlink:href="#icon-a-ziyuan466"></use>
       </svg>
     </div>
-    <input v-show="range" type="range" :min="min" :max="max" :step="step" v-model="stageRatio" autocomplete="off"
+    <input v-show="range" type="range" :min="min" :max="max" :step="delta" v-model="stageRatio" autocomplete="off"
       name="ddei-core-panel-bottom-changeratio__range" />
     <div @click="addRatio(delta)">
       <svg class="icon" aria-hidden="true">
@@ -63,10 +63,6 @@ export default {
     max: {
       type: Number,
       default: 4
-    },
-    step: {
-      type: Number,
-      default: 0.1
     },
     dialog: {
       type: Boolean,
@@ -122,6 +118,7 @@ export default {
     });
   },
   mounted() {
+    this.editor.ddInstance.ratioWatch = true
     let file = this.editor?.files[this.editor?.currentFileIndex];
     let sheet = file?.sheets[file?.currentSheetIndex];
     this.currentStage = sheet?.stage;
@@ -135,6 +132,8 @@ export default {
       let srcElement = evt.currentTarget;
       DDeiEditorUtil.showOrCloseDialog(this.editor, "ddei-core-dialog-changeratio", {
         ratio: this.currentStage?.ratio,
+        min:this.min,
+        max:this.max,
         callback: {
           ok: this.setRatio,
         },
