@@ -43,11 +43,14 @@ export default {
     , editor: {
       type: DDeiEditor,
       default: null,
+    },
+    controlDefine: {
+      type: Object,
+      default: null,
     }
   },
   data() {
     return {
-      controlDefine: null,
       attrDefine: null,
       value: null
     };
@@ -69,17 +72,14 @@ export default {
   },
   methods: {
     refreshEditor() {
-      if (this.editor?.currentControlDefine) {
-        this.controlDefine = this.editor.currentControlDefine;
-        if (this.controlDefine) {
-          this.attrDefine = this.controlDefine.attrDefineMap.get(this.attrCode);
-          let valueDefine = this.getDataValue();
-          if (valueDefine && !valueDefine.isDefault) {
-            this.value = valueDefine.value;
-          }
-        } else {
-          this.attrDefine = null
+      if (this.controlDefine) {
+        this.attrDefine = this.controlDefine.attrDefineMap.get(this.attrCode);
+        let valueDefine = this.getDataValue();
+        if (valueDefine && !valueDefine.isDefault) {
+          this.value = valueDefine.value;
         }
+      } else {
+        this.attrDefine = null
       }
     },
 

@@ -26,9 +26,11 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
             if (models?.length > 0) {
               let height = 100;
               //计算弹出框的显示位置，这里需要把模型的坐标转换为dom的坐标
+              let editorEle = document.getElementById(editor.id);
+              let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
               let modelPos = DDeiUtil.getModelsDomAbsPosition(models)
-              let left = modelPos.left + 20
-              let top = modelPos.top
+              let left = (modelPos.left - editorDomPos.left) + 20
+              let top = (modelPos.top - editorDomPos.top)
               if (modelPos.top - height <= modelPos.cTop) {
                 if (modelPos.height > 400) {
                   top = top + height + 20
@@ -57,6 +59,7 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
      * 选择后，在选择控件的合适位置显示快捷编辑框
      */
   showQuickEditPicker(operateType, data, ddInstance, evt): DDeiFuncCallResult {
+    
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"]) {
       let models = data?.models;
       let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
@@ -68,9 +71,11 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
       if (models?.length > 0) {
         let height = 100;
         //计算弹出框的显示位置，这里需要把模型的坐标转换为dom的坐标
+        let editorEle = document.getElementById(editor.id);
+        let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
         let modelPos = DDeiUtil.getModelsDomAbsPosition(models)
-        let left = modelPos.left + (modelPos.width / 2)
-        let top = modelPos.top + (modelPos.height / 2)
+        let left = (modelPos.left - editorDomPos.left) + (modelPos.width / 2)
+        let top = (modelPos.top - editorDomPos.top) + (modelPos.height / 2)
         if (modelPos.top - height <= modelPos.cTop) {
           if (modelPos.height > 400) {
             top = top + height + 20

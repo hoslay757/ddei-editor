@@ -47,11 +47,14 @@ export default {
     , editor: {
       type: DDeiEditor,
       default: null,
+    },
+    controlDefine: {
+      type: Object,
+      default: null,
     }
   },
   data() {
     return {
-      controlDefine: null,
       attrDefine: null,
       value: 0
     };
@@ -75,19 +78,17 @@ export default {
 
     refreshEditor() {
       this.value = 0;
-      if (this.editor?.currentControlDefine) {
-        this.controlDefine = this.editor.currentControlDefine;
-        if (this.controlDefine) {
-          this.attrDefine = this.controlDefine.attrDefineMap.get(this.attrCode);
-          let valueDefine = this.getDataValue();
+      if (this.controlDefine) {
+        this.attrDefine = this.controlDefine.attrDefineMap.get(this.attrCode);
+        let valueDefine = this.getDataValue();
 
-          if (valueDefine) {
-            this.value = valueDefine.value;
-          }
-        } else {
-          this.attrDefine = null
+        if (valueDefine) {
+          this.value = valueDefine.value;
         }
+      } else {
+        this.attrDefine = null
       }
+      
     },
 
     //获取数据值

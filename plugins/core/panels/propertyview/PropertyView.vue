@@ -31,8 +31,9 @@
               }}<span v-if="attrDefine.notNull">*</span>：
             </div>
             <div class="editor" v-if="attrDefine.visiable != false">
-              <component :editor="editor" :is="editor?.getPropEditor(attrDefine.controlType)"
-                v-if="reFresh && attrDefine?.visiable != false" :attrDefine="attrDefine"></component>
+              <component :editor="editor" :controlDefine="controlDefine"
+                :is="editor?.getPropEditor(attrDefine.controlType)" v-if="reFresh && attrDefine?.visiable != false"
+                :attrDefine="attrDefine"></component>
             </div>
           </div>
         </div>
@@ -58,7 +59,7 @@
 <script lang="ts">
 import {DDeiEditorUtil} from "ddei-framework";
 import {DDeiEditor} from "ddei-framework";
-import { cloneDeep } from "lodash";
+import { cloneDeep, first } from "lodash";
 import {DDeiUtil} from "ddei-framework";
 import {DDeiAbstractShape} from "ddei-framework";
 import {DDeiEditorArrtibute } from "ddei-framework";
@@ -162,72 +163,22 @@ export default {
     },
 
     refreshAttrs(newVal, oldVal) {
-      this.selectedModels = this.editor.ddInstance.stage.selectedModels;
-      let models: DDeiAbstractShape[] = null;
-      let firstModel: DDeiAbstractShape = null;
-      if (this.selectedModels?.size > 0) {
-        //获取当前所有组件的公共属性定义
-        models = Array.from(this.selectedModels.values());
-        firstModel = models[0];
-      } else {
-        //获取当前所有组件的公共属性定义
-        models = [this.editor.ddInstance.stage];
+      let firstControlDefine;
+      let firstModel;
+      if (!this.editor.currentControlDefine) {
+        let models: DDeiAbstractShape[] = [this.editor.ddInstance.stage];
         firstModel = models[0];
         this.selectedModels = models;
+        firstControlDefine = cloneDeep(
+          this.editor.controls.get(firstModel?.modelCode)
+        );
+      } else {
+        this.selectedModels = this.editor.ddInstance.stage.selectedModels;
+        firstModel = Array.from(this.selectedModels.values());
+        firstControlDefine = this.editor.currentControlDefine
       }
-
-      let firstControlDefine = cloneDeep(
-        this.editor.controls.get(firstModel?.modelCode)
-      );
       //获取第一个组件及其定义
       if (firstControlDefine) {
-        //如果同时有多个组件被选中，则以第一个组件为基准，对属性定义进行过滤，属性值相同则采用相同值，属性值不同采用空值
-        let removeKeys = [];
-        for (let i = 0; i < models.length; i++) {
-          let curModel: DDeiAbstractShape = models[i];
-          let curDefine = this.editor.controls.get(curModel.modelCode);
-
-          firstControlDefine.attrDefineMap.forEach(
-            (firstAttrDefine, attrKey) => {
-              //key不存在
-              if (!curDefine.attrDefineMap.has(attrKey)) {
-                removeKeys.push(attrKey);
-                firstAttrDefine.model = curModel;
-              }
-              //隐藏
-              else if (!firstAttrDefine.visiable) {
-                removeKeys.push(attrKey);
-                firstAttrDefine.model = curModel;
-              }
-              //key存在，进一步比较值
-              else {
-                //当前属性的定义
-                let curAttrDefine = curDefine.attrDefineMap.get(attrKey);
-                //记录属性值
-                if (i == 0) {
-                  firstAttrDefine.value = DDeiUtil.getDataByPathList(
-                    firstModel,
-                    curAttrDefine.code,
-                    curAttrDefine.mapping
-                  );
-                  firstAttrDefine.model = firstModel;
-                }
-                //根据属性定义，从model获取值
-                let curAttrValue = DDeiUtil.getDataByPathList(
-                  curModel,
-                  curAttrDefine.code,
-                  curAttrDefine.mapping
-                );
-                if (firstAttrDefine.value != curAttrValue) {
-                  //记录备选值
-                  firstAttrDefine.diffValues.push(curAttrValue);
-                }
-              }
-            }
-          );
-        }
-        //清除不同的属性
-        this.deleteAttrDefineByKeys(firstControlDefine, removeKeys);
         let topGroups = null;
         if (firstControlDefine.type == "DDeiStage") {
           //加载layer的配置
@@ -305,7 +256,6 @@ export default {
             }
           }
           this.changeSubGroup(currentSubGroup);
-          this.editor.currentControlDefine = this.controlDefine;
         } else {
           //清除信息
           this.controlDefine = null;
@@ -318,22 +268,7 @@ export default {
           }
           this.editor.currentControlDefine = null;
         }
-
-
-      } else {
-        //清除信息
-        this.controlDefine = null;
-        this.topGroups = null;
-        if (this.currentTopGroup) {
-          this.currentTopGroup.subGroups = null;
-        }
-        if (this.currentSubGroup) {
-          this.currentSubGroup.children = null;
-        }
-        this.editor.currentControlDefine = null;
       }
-      
-
     },
 
     getFirstChildAttrsGroup(control) {
@@ -437,49 +372,6 @@ export default {
       }, 100);
     },
 
-    /**
-     * 移除属性定义中的属性
-     * @param firstControlDefine
-     * @param removeKeys
-     */
-    deleteAttrDefineByKeys(firstControlDefine: object, removeKeys: string[]) {
-      //移除属性
-      removeKeys.forEach((item) => {
-        firstControlDefine.attrDefineMap.delete(item);
-        firstControlDefine.groups?.forEach(group => {
-          this.deleteGroupAttrsByKey(group, item);
-        });
-
-      });
-    },
-
-    deleteGroupAttrsByKey(pData: object, key: string): void {
-      let rmglist = [];
-      pData.subGroups.forEach((group) => {
-        let rmlist = [];
-        for (let gci = 0; gci < group.children.length; gci++) {
-          if (group.children[gci].code == key) {
-            rmlist.push(group.children[gci]);
-          }
-        }
-        rmlist.forEach((rm) => {
-          let index = group.children.indexOf(rm);
-          if (index > -1) {
-            group.children.splice(index, 1);
-          }
-        });
-        //如果group被清空，则删除group
-        if (group.children.length == 0) {
-          rmglist.push(group);
-        }
-      });
-      rmglist.forEach((rmg) => {
-        let index = pData.subGroups.indexOf(rmg);
-        if (index > -1) {
-          pData.subGroups.splice(index, 1);
-        }
-      });
-    },
 
     syncAttrsToGroup(firstControlDefine: object, pData: object): void {
       let newChildren = [];

@@ -204,10 +204,10 @@ export default {
 
 <style lang="less">
 .ddei-editor {
-  position:sticky;
+  position:relative;
   width: 100%;
   height:100%;
-  overflow: auto;
+  // overflow: auto;
   display: flex;
   flex-direction: column;
   background-color: var(--background);

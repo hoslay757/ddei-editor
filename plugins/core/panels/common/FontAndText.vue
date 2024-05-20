@@ -4,34 +4,38 @@
     <div class="content">
       <div class="buttons">
         <div class="b1">
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-fontfamily']"></component>
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-fontfamily']"></component>
         </div>
         <div class="b2">
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-fontsize']"></component>
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-fontsize']"></component>
         </div>
         <div>
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-addfontsize']" :addValue="1"
-            attrCode="font.size" img="icon-a-ziyuan456" extcls="magtop-2"></component>
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-addfontsize']" :addValue="1" attrCode="font.size" img="icon-a-ziyuan456"
+            extcls="magtop-2"></component>
         </div>
         <div>
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-addfontsize']" :addValue="-1"
-            attrCode="font.size" img="icon-a-ziyuan455" extcls="magtop-1"></component>
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-addfontsize']" :addValue="-1" attrCode="font.size" img="icon-a-ziyuan455"
+            extcls="magtop-1"></component>
         </div>
 
         <div>
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1"
-            :supportQuickEdit="false" attrCode="textStyle.align" img="icon-a-ziyuan440" extcls="magtop-1"
-            :unSelectValue="2"></component>
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" :supportQuickEdit="false"
+            attrCode="textStyle.align" img="icon-a-ziyuan440" extcls="magtop-1" :unSelectValue="2"></component>
         </div>
         <div>
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="2"
-            :supportQuickEdit="false" attrCode="textStyle.align" img="icon-a-ziyuan437" extcls="magtop-1"
-            :unSelectValue="2"></component>
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="2" :supportQuickEdit="false"
+            attrCode="textStyle.align" img="icon-a-ziyuan437" extcls="magtop-1" :unSelectValue="2"></component>
         </div>
         <div>
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="3"
-            :supportQuickEdit="false" attrCode="textStyle.align" img="icon-a-ziyuan439" extcls="magtop-1"
-            :unSelectValue="2"></component>
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="3" :supportQuickEdit="false"
+            attrCode="textStyle.align" img="icon-a-ziyuan439" extcls="magtop-1" :unSelectValue="2"></component>
         </div>
 
 
@@ -39,71 +43,78 @@
       </div>
       <div class="buttons">
         <div class="mg14">
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1"
-            attrCode="textStyle.bold" img="icon-a-ziyuan461"></component>
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.bold"
+            img="icon-a-ziyuan461"></component>
         </div>
         <div class="mg16">
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1"
-            attrCode="textStyle.italic" img="icon-a-ziyuan459"></component>
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.italic"
+            img="icon-a-ziyuan459"></component>
         </div>
         <div class="mg16">
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1"
-            attrCode="textStyle.underline" img="icon-icon-text-underline" extcls="ext-underline"></component>
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.underline"
+            img="icon-icon-text-underline" extcls="ext-underline"></component>
         </div>
         <div class="mg165">
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" electedValue="1"
-            attrCode="textStyle.deleteline" img="icon-a-ziyuan457">
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-editbox']" electedValue="1" attrCode="textStyle.deleteline"
+            img="icon-a-ziyuan457">
           </component>
 
         </div>
 
         <div class="mg17">
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1"
-            :onlyQuickEdit="true" attrCode="textStyle.subtype" img="icon-a-ziyuan394" extcls="magtop-1">
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" :onlyQuickEdit="true"
+            attrCode="textStyle.subtype" img="icon-a-ziyuan394" extcls="magtop-1">
           </component>
 
         </div>
         <div class="mg17">
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="2"
-            :onlyQuickEdit="true" attrCode="textStyle.subtype" img="icon-a-ziyuan393" extcls="magtop-1">
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="2" :onlyQuickEdit="true"
+            attrCode="textStyle.subtype" img="icon-a-ziyuan393" extcls="magtop-1">
           </component>
 
         </div>
         <div class="b4">
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="3"
-            :onlyQuickEdit="true" attrCode="textStyle.subtype" img="icon-a-ziyuan392" extcls="magtop-1">
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="3" :onlyQuickEdit="true"
+            attrCode="textStyle.subtype" img="icon-a-ziyuan392" extcls="magtop-1">
           </component>
         </div>
         <div class="b5">
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-color']" attrCode="textStyle.bgcolor"
-            img="icon-a-ziyuan452">
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-color']" attrCode="textStyle.bgcolor" img="icon-a-ziyuan452">
           </component>
         </div>
         <div class="b6">
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-color']" attrCode="font.color"
-            img="icon-a-ziyuan463">
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-color']" attrCode="font.color" img="icon-a-ziyuan463">
           </component>
         </div>
 
 
         <div>
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1"
-            :supportQuickEdit="false" attrCode="textStyle.valign" img="icon-a-ziyuan440" extcls="rotate-90"
-            :unSelectValue="2">
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" :supportQuickEdit="false"
+            attrCode="textStyle.valign" img="icon-a-ziyuan440" extcls="rotate-90" :unSelectValue="2">
           </component>
 
         </div>
         <div>
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="2"
-            :supportQuickEdit="false" attrCode="textStyle.valign" img="icon-a-ziyuan437" extcls="rotate-90"
-            :unSelectValue="2">
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="2" :supportQuickEdit="false"
+            attrCode="textStyle.valign" img="icon-a-ziyuan437" extcls="rotate-90" :unSelectValue="2">
           </component>
 
         </div>
         <div>
-          <component :editor="editor" :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="3"
-            :supportQuickEdit="false" attrCode="textStyle.valign" img="icon-a-ziyuan439" extcls="rotate-90"
-            :unSelectValue="2">
+          <component :editor="editor" :controlDefine="editor.currentControlDefine"
+            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="3" :supportQuickEdit="false"
+            attrCode="textStyle.valign" img="icon-a-ziyuan439" extcls="rotate-90" :unSelectValue="2">
           </component>
 
         </div>

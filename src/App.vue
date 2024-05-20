@@ -18,11 +18,11 @@ export default defineComponent({
         //布局的配置
         DDeiCoreStandLayout.configuration({
           //配置插件
-          'top': [],
-          'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],
-          'bottom': [],
-          'left': [],
-          'right': []
+          // 'top': [],
+          // 'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],
+          // 'bottom': [],
+          // 'left': [],
+          // 'right': []
         }),
         // DDeiCoreThemeBlack.configuration({
         //   default: true
@@ -117,6 +117,7 @@ export default defineComponent({
         EXT_STAGE_HEIGHT:false,
         ruler:false,
         grid: 0,
+        // readonly:true,
         initData: {
           controls: [
             {
@@ -152,6 +153,7 @@ export default defineComponent({
         DDeiCoreThemeBlack.configuration({
           default: true
         }),
+        DDeiExtQuickStyle
       ],
     })
     const options4 = markRaw({

@@ -37,11 +37,14 @@ export default {
     , editor: {
       type: DDeiEditor,
       default: null,
+    },
+    controlDefine: {
+      type: Object,
+      default: null,
     }
   },
   data() {
     return {
-      controlDefine: null,
       attrDefine: null,
       dataSource: null,
       value: null,
@@ -67,30 +70,27 @@ export default {
   methods: {
 
     refreshEditor() {
-      if (this.editor?.currentControlDefine) {
-        this.controlDefine = this.editor.currentControlDefine;
-        if (this.controlDefine) {
-          this.attrDefine = this.controlDefine.attrDefineMap.get("font.size");
-        } else {
-          this.attrDefine = null;
-        }
-        if (this.attrDefine) {
-          this.getDataSource(this.attrDefine);
-          let type = this.getDataValue()
+      if (this.controlDefine) {
+        this.attrDefine = this.controlDefine.attrDefineMap.get("font.size");
+      } else {
+        this.attrDefine = null;
+      }
+      if (this.attrDefine) {
+        this.getDataSource(this.attrDefine);
+        let type = this.getDataValue()
 
-          let define = this.getDataDefine(type.value);
-          if (!type.isDefault) {
-            this.attrDefine.value = type.value;
-            this.text = define.text;
-          } else {
-            this.defaultText = define.text;
-          }
-          if (this.attrDefine.value) {
-            this.value = this.attrDefine.value;
-            this.text = this.attrDefine.value;
-          } else {
-            this.value = type.value;
-          }
+        let define = this.getDataDefine(type.value);
+        if (!type.isDefault) {
+          this.attrDefine.value = type.value;
+          this.text = define.text;
+        } else {
+          this.defaultText = define.text;
+        }
+        if (this.attrDefine.value) {
+          this.value = this.attrDefine.value;
+          this.text = this.attrDefine.value;
+        } else {
+          this.value = type.value;
         }
       }
     },

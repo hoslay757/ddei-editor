@@ -39,11 +39,14 @@ export default {
      editor: {
       type: DDeiEditor,
       default: null,
+    },
+    controlDefine:{
+      type:Object,
+      default:null,
     }
   },
   data() {
     return {
-      controlDefine: null,
       attrDefine: null,
       dataSource: null,
       value: null,
@@ -71,29 +74,26 @@ export default {
   methods: {
 
     refreshEditor() {
-      if (this.editor?.currentControlDefine) {
-        this.controlDefine = this.editor.currentControlDefine;
-
-        if (this.controlDefine) {
-          this.attrDefine = this.controlDefine.attrDefineMap.get("font.family");
-        } else {
-          this.attrDefine = null;
-        }
-
-        this.getDataSource(this.attrDefine);
-        let type = this.getDataValue();
-        let define = this.getDataDefine(type.value);
-        if (!type.isDefault) {
-          this.attrDefine.value = type.value;
-          this.text = define.text;
-          if (define.img) {
-            this.$refs.combox.img = define.img;
-          }
-        } else {
-          this.defaultText = define.text;
-        }
-        this.value = type.value;
+      if (this.controlDefine) {
+        this.attrDefine = this.controlDefine.attrDefineMap.get("font.family");
+      } else {
+        this.attrDefine = null;
       }
+
+      this.getDataSource(this.attrDefine);
+      let type = this.getDataValue();
+      let define = this.getDataDefine(type.value);
+      if (!type.isDefault) {
+        this.attrDefine.value = type.value;
+        this.text = define.text;
+        if (define.img) {
+          this.$refs.combox.img = define.img;
+        }
+      } else {
+        this.defaultText = define.text;
+      }
+      this.value = type.value;
+      
     },
 
 

@@ -37,11 +37,14 @@ export default {
     , editor: {
       type: DDeiEditor,
       default: null,
+    },
+    controlDefine: {
+      type: Object,
+      default: null,
     }
   },
   data() {
     return {
-      controlDefine: null,
       attrDefine: null,
       valignAttrDefine: null,
       value: false,
@@ -70,21 +73,19 @@ export default {
     },
 
     refreshEditor() {
-      if (this.editor?.currentControlDefine) {
-        this.controlDefine = this.editor.currentControlDefine;
-        if (this.controlDefine) {
-          this.attrDefine = this.controlDefine.attrDefineMap.get(
-            "textStyle.align"
-          );
-          this.valignAttrDefine = this.controlDefine.attrDefineMap.get(
-            "textStyle.valign"
-          );
+      if (this.controlDefine) {
+        this.attrDefine = this.controlDefine.attrDefineMap.get(
+          "textStyle.align"
+        );
+        this.valignAttrDefine = this.controlDefine.attrDefineMap.get(
+          "textStyle.valign"
+        );
 
-        } else {
-          this.attrDefine = null;
-          this.valignAttrDefine = null;
-        }
+      } else {
+        this.attrDefine = null;
+        this.valignAttrDefine = null;
       }
+      
     },
 
 

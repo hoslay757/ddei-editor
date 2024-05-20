@@ -1,8 +1,9 @@
 <template>
   <div v-if="forceRefresh" class="ddei-core-panel-topmenu" @mousedown="changeEditorFocus">
     <div class="ddei-core-panel-topmenu-quickbox">
-      <component :editor="editor" v-for="(item, index) in editor?.getPartPanels(options, 'panels') " :is="item.comp"
-        :options="item.options" v-bind="item.options"></component>
+      <component :editor="editor" :controlDefine="editor.currentControlDefine"
+        v-for="(item, index) in editor?.getPartPanels(options, 'panels') " :is="item.comp" :options="item.options"
+        v-bind="item.options"></component>
     </div>
   </div>
 </template>
