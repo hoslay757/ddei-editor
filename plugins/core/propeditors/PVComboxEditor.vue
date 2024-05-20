@@ -128,19 +128,19 @@ export default {
     this.value = type.value;
     this.attrDefine.doCascadeDisplayByValue();
     //判断当前属性是否可编辑
+    let mds;
     if (this.editor?.ddInstance?.stage?.selectedModels?.size > 0) {
-      let mds = [];
-      if (this.editor?.ddInstance?.stage?.selectedModels?.size > 0) {
-        mds = Array.from(
-          this.editor?.ddInstance?.stage?.selectedModels?.values()
-        );
-      }
-      if (this.attrDefine?.model && mds.indexOf(this.attrDefine.model) == -1) {
-        mds.push(this.attrDefine.model);
-      }
-      let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_EDIT_BEFORE", DDeiEnumOperateType.EDIT, { models: mds, propName: this.attrDefine?.code }, this.editor.ddInstance)
-      this.attrDefine.readonly = rsState == -1
+      mds = Array.from(
+        this.editor?.ddInstance?.stage?.selectedModels?.values()
+      );
+    } else {
+      mds = [this.editor?.ddInstance?.stage]
     }
+    if (this.attrDefine?.model && mds.indexOf(this.attrDefine.model) == -1) {
+      mds.push(this.attrDefine.model);
+    }
+    let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_EDIT_BEFORE", DDeiEnumOperateType.EDIT, { models: mds, propName: this.attrDefine?.code }, this.editor.ddInstance)
+    this.attrDefine.readonly = rsState == -1
   },
   methods: {
     /**
@@ -188,6 +188,9 @@ export default {
     },
 
     valueChange(value, evt) {
+      if (!this.attrDefine?.model) {
+        return;
+      }
       if (this.attrDefine?.readonly) {
         return;
       }

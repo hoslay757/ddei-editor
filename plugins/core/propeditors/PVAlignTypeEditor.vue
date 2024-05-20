@@ -172,6 +172,9 @@ export default {
     },
 
     valueChange(type, evt) {
+      if (!this.attrDefine?.model) {
+        return;
+      }
       if (this.attrDefine?.readonly) {
         return;
       }
