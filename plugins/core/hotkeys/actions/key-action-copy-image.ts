@@ -110,29 +110,18 @@ class DDeiKeyActionCopyImage extends DDeiKeyAction {
 
       containerDiv.appendChild(canvas)
       models.forEach(item => {
+        item.render.clearCachedValue()
         item.render.drawShape();
       })
 
       ddInstance.render.ratio = oldRat1
       let dataURL = canvas.toDataURL()
-      // let img = new Image()
-      // img.setAttribute("style", "position:absolute;left:320px;top:300px;")
-      // img.src = dataURL
-      // img.onload = function () {
-      //   document.body.appendChild(img)
-      // }
+      
       containerDiv.removeChild(canvas)
 
       let blob = DDeiUtil.dataURLtoBlob(dataURL)
 
-      // let img1 = new Image()
-      // img1.setAttribute("style", "position:absolute;left:420px;top:300px;")
-      // img1.src = URL.createObjectURL(blob);
-      // img1.onload = function () {
-      //   document.body.appendChild(img1)
-      // }
-
-      // canvas.toBlob(blob => {
+      
       let cbData = navigator.clipboard;
       //得到blob对象
 
@@ -150,7 +139,6 @@ class DDeiKeyActionCopyImage extends DDeiKeyAction {
         //清空临时canvas
         ddInstance.render.tempCanvas = null;
       });
-      // }, 'image/png', 1)
     } catch (e) {
       console.error(e)
       DDeiConfig.ALLOW_CLIPBOARD = false
