@@ -405,6 +405,19 @@ export default {
       'readonly': true,
     },
     {
+      'code': 'text1',
+      'name': '文本1',
+      'desc': '控件的主体显示文本',
+      'controlType': 'excheckbox',
+      'dataType': 'integer',
+      'dataSource': [{ 'text': '文本', 'value': 0 }, { 'text': '数字', 'value': 1 }, { 'text': '金额', 'value': 2 }, { 'text': '时间', 'value': 3 }],
+      'itemStyle': { width: 80, height: 25, col: 2, row: 0, imgWidth: 20, imgHeight: 20 },
+      'isArray':true,
+      'defaultValue': [1,2],
+      'type': [1, 2], //类别，1图形，2业务，3事件
+      'readonly': true,
+    },
+    {
       'code': 'fmt.type',
       'name': '格式',
       'desc': '文本的显示格式',
@@ -521,7 +534,7 @@ export default {
       subGroups: [
         {
           name: "基础信息",
-          attrs: ["code", "text", "fmt.type", "fmt.nscale", "fmt.tmark", "fmt.mmark", "fmt.munit", "fmt.mrmb", "fmt.dtype", "fmt.format"]
+          attrs: ["code", "text", "text1", "fmt.type", "fmt.nscale", "fmt.tmark", "fmt.mmark", "fmt.munit", "fmt.mrmb", "fmt.dtype", "fmt.format"]
         },
 
       ]

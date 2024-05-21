@@ -108,8 +108,9 @@ export default {
       let dialogId = this.getShowDialogId(this.attrDefine.code)
       let dialog = document.getElementById(dialogId);
       let haveElement = false;
-      for (let i = 0; i < document.body.children.length; i++) {
-        if (document.body.children[i] == dialog) {
+      let ele = document.getElementById(this.editor.containerid)
+      for (let i = 0; i < ele.children.length; i++) {
+        if (ele.children[i] == dialog) {
           haveElement = true;
         }
       }
@@ -176,7 +177,6 @@ export default {
 </script>
 
 <style scoped>
-/**以下为range属性编辑器 */
 .ddei-pv-base-combox {
   height: 28px;
   padding-right: 10px;
@@ -209,7 +209,6 @@ export default {
   outline: none;
   font-size: 15px;
   background: transparent;
-  color:var(--panel-title);
   margin-top: 1px;
 }
 

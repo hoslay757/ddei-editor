@@ -1,6 +1,7 @@
 <template>
   <div class="ddei-pv-editor-aligntype">
-    <PVBaseCombox :attrDefine="attrDefine" ref="combox" :canSearch="false">
+    <PVBaseCombox :editor="editor" :controlDefine="controlDefine" :attrDefine="attrDefine" ref="combox"
+      :canSearch="false">
       <div class="ddei-pv-editor-aligntype-items">
         <div :class="{ 'ddei-pv-editor-aligntype-item': true, 'ddei-pv-editor-aligntype-item--selected': value == 1 }"
           style="text-align:left" @click="valueChange(1, $event)">
@@ -350,12 +351,13 @@ export default {
     }
 
     &:hover {
-      border: 1px solid var(-dot);
+      border: 1px solid var(--dot);
+      background: var(--panel-hover);
       cursor: pointer;
     }
 
     &--selected {
-      border: 1px solid var(-dot);
+      border: 1px solid var(--dot);
     }
   }
 

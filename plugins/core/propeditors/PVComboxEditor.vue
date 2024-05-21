@@ -1,11 +1,12 @@
 <template>
   <div :class="{ 'ddei-pv-editor-combox': true, 'ddei-pv-editor-combox--disabled': !attrDefine || attrDefine.readonly }"
     :style="{ 'pointer-events': attrDefine.readonly ? 'none' : '' }">
-    <PVBaseCombox :attrDefine="attrDefine" :searchMethod="doSearch" ref="combox" :canSearch="attrDefine?.canSearch">
+    <PVBaseCombox :editor="editor" :controlDefine="controlDefine" :attrDefine="attrDefine" :searchMethod="doSearch"
+      ref="combox" :canSearch="attrDefine?.canSearch">
       <div class="itemboxs"
         :style="{ width: width ? width + 'px' : '', height: height ? height + 'px' : '', 'grid-template-columns': gridTemplateColumns, 'grid-template-rows': gridTemplateRows }">
         <div :style="{ width: attrDefine?.itemStyle?.width + 'px', height: attrDefine?.itemStyle?.height + 'px' }"
-          :class="{ 'itembox': true, 'itembox_selected': item.value == attrDefine.value, 'itembox_deleted': item.deleted, 'itembox_disabled': item.disabled, 'itembox_underline': item.underline, 'itembox_bold': item.bold }"
+          :class="{ 'itembox': true, 'itembox--selected': item.value == attrDefine.value, 'itembox--deleted': item.deleted, 'itembox--disabled': item.disabled, 'itembox--underline': item.underline, 'itembox--bold': item.bold }"
           v-for="item in dataSource" @click="!item.disabled && valueChange(item.value, $event)" :title="item.desc">
           <div v-if="item.img" class="itembox_img">
             <img
@@ -377,28 +378,28 @@ export default {
   vertical-align: middle;
 }
 
-.ddei-combox-show-dialog-content .itembox_selected {
+.ddei-combox-show-dialog-content .itembox--selected {
   background-color: var(panel-title) !important;
 }
 
-.ddei-combox-show-dialog-content .itembox_deleted {
+.ddei-combox-show-dialog-content .itembox--deleted {
   text-decoration: line-through;
 }
 
-.ddei-combox-show-dialog-content .itembox_disabled {
+.ddei-combox-show-dialog-content .itembox--disabled {
   color: rgb(210, 210, 210);
   text-decoration: line-through;
 }
 
-.ddei-combox-show-dialog-content .itembox_disabled:hover {
+.ddei-combox-show-dialog-content .itembox--disabled:hover {
   cursor: not-allowed !important;
 }
 
-.ddei-combox-show-dialog-content .itembox_underline {
+.ddei-combox-show-dialog-content .itembox--underline {
   text-decoration: underline;
 }
 
-.ddei-combox-show-dialog-content .itembox_bold .itembox_text {
+.ddei-combox-show-dialog-content .itembox--bold .itembox_text {
   font-weight: bold;
 }
 </style>

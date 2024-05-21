@@ -1,11 +1,13 @@
 <template>
-  <div :class="{ 'ddei_pv_editor_excheckbox': true, 'ddei_pv_editor_excheckbox_disabled': attrDefine.readonly }"
+  <div :class="{ 'ddei-pv-editor-excheckbox': true, 'ddei-pv-editor-excheckbox--disabled': attrDefine.readonly }"
     :style="{ 'pointer-events': attrDefine.readonly ? 'none' : '' }">
-    <PVBaseCombox :attrDefine="attrDefine" :searchMethod="doSearch" ref="combox" :canSearch="attrDefine.canSearch">
+    <PVBaseCombox :editor="editor" :controlDefine="controlDefine" :attrDefine="attrDefine" :searchMethod="doSearch"
+      ref="combox" :canSearch="attrDefine.canSearch">
       <div class="itemboxs"
         :style="{ width: width ? width + 'px' : '', height: height ? height + 'px' : '', 'grid-template-columns': gridTemplateColumns, 'grid-template-rows': gridTemplateRows }">
+
         <div :style="{ width: attrDefine?.itemStyle?.width + 'px', height: attrDefine?.itemStyle?.height + 'px' }"
-          :class="{ 'itembox': true, 'itembox_selected': attrDefine?.value && attrDefine?.value?.indexOf(item.value) != -1, 'itembox_deleted': item.deleted, 'itembox_disabled': item.disabled || (attrDefine?.itemStyle?.maxSelect && attrDefine?.itemStyle?.maxSelect <= attrDefine?.value?.length && attrDefine?.value?.indexOf(item.value) == -1), 'itembox_underline': item.underline, 'itembox_bold': item.bold }"
+          :class="{ 'itembox': true, 'itembox--selected': attrDefine?.value && attrDefine?.value?.indexOf(item.value) != -1, 'itembox--deleted': item.deleted, 'itembox--disabled': item.disabled || (attrDefine?.itemStyle?.maxSelect && attrDefine?.itemStyle?.maxSelect <= attrDefine?.value?.length && attrDefine?.value?.indexOf(item.value) == -1), 'itembox--underline': item.underline, 'itembox--bold': item.bold }"
           v-for="item in dataSource"
           @click="!item.disabled && (!attrDefine?.itemStyle?.maxSelect || attrDefine?.itemStyle?.maxSelect > attrDefine?.value?.length || attrDefine?.value?.indexOf(item.value) != -1) && valueChange(item.value, $event)"
           :title="item.desc">
@@ -188,15 +190,21 @@ export default {
     },
 
     valueChange(value, evt) {
+      
       if (!this.attrDefine?.model) {
         return;
       }
       if (this.attrDefine?.readonly) {
         return;
       }
-      if (!value) {
+      if (this.attrDefine.dataType.toLocaleLowerCase() == 'integer' || this.attrDefine.dataType.toLocaleLowerCase() == 'float' || this.attrDefine.dataType.toLocaleLowerCase() == 'number') {
+        if (!value && value != 0) {
+          return;
+        }
+      }else if(!value){
         return;
       }
+      
       let mds = [];
       if (this.editor?.ddInstance?.stage?.selectedModels?.size > 0) {
         mds = Array.from(
@@ -221,7 +229,8 @@ export default {
       if (!this.value) {
         this.value = [];
       }
-      let strValue = "" + value;
+      let strValue =  value;
+     
       if (this.value.indexOf(strValue) == -1) {
         this.value.push(strValue);
       } else {
@@ -230,7 +239,6 @@ export default {
           this.value.splice(index, 1);
         }
       }
-
       this.attrDefine.value = this.value;
       let itemDefine = this.getDataDefine(this.value);
       if (itemDefine?.length > 0) {
@@ -243,6 +251,10 @@ export default {
           this.$refs.combox.img = itemDefine[0].img;
         }
         this.$refs.combox.value = itemDefine[0].value;
+      }else{
+        this.$refs.combox.text = null;
+        this.$refs.combox.value = null
+        this.$refs.combox.img = null;
       }
       //通过解析器获取有效值
       let parser: DDeiAbstractArrtibuteParser = this.attrDefine.getParser();
@@ -315,65 +327,66 @@ export default {
 
 <style scoped>
 /**以下为combox属性编辑器 */
-.ddei_pv_editor_excheckbox {
+.ddei-pv-editor-excheckbox {
   margin-top: 4px;
 }
 
-.ddei_pv_editor_excheckbox_disabled {}
+.ddei-pv-editor-excheckbox--disabled {}
 
-.ddei-combox-show-dialog_content .itemboxs {
+.ddei-combox-show-dialog-content .itemboxs {
   border-radius: 4px;
   margin-top: 4px;
   display: grid;
   gap: 4px;
   overflow: auto;
-  color: black;
+  color: var(--panel-title);
   font-size: 13px;
 }
 
-.ddei-combox-show-dialog_content .itemboxs .itembox {
+.ddei-combox-show-dialog-content .itemboxs .itembox {
   outline: none;
   font-size: 13px;
   margin: auto;
   background: transparent;
+  border: 1px solid var(--panel-title);
   display: table;
   border-radius: 4px;
 }
 
-.ddei-combox-show-dialog_content .itemboxs .itembox:hover {
-  background-color: rgb(245, 245, 245);
+.ddei-combox-show-dialog-content .itemboxs .itembox:hover {
+  background-color: var(--panel-hover);
   cursor: pointer;
 }
 
-.ddei-combox-show-dialog_content .itemboxs .itembox .itembox_img {
+.ddei-combox-show-dialog-content .itemboxs .itembox .itembox_img {
   display: table-cell;
   padding-left: 5px;
   vertical-align: middle;
 }
 
-.ddei-combox-show-dialog_content .itemboxs .itembox .itembox_img img {
+.ddei-combox-show-dialog-content .itemboxs .itembox .itembox_img img {
   text-align: center;
   vertical-align: middle;
 }
 
-.ddei-combox-show-dialog_content .itemboxs .itembox .itembox_text {
+.ddei-combox-show-dialog-content .itemboxs .itembox .itembox_text {
   text-align: center;
   display: table-cell;
   width: 100%;
   vertical-align: middle;
 }
 
-.ddei-combox-show-dialog_content .itembox_selected {
-  border: 1px solid #017fff;
+.ddei-combox-show-dialog-content .itembox--selected {
+  border: 1px solid var(--dot);
   overflow: hidden;
   position: relative;
 }
 
-.ddei-combox-show-dialog_content .itembox_selected::before {
+.ddei-combox-show-dialog-content .itembox--selected::before {
   position: absolute;
   content: "";
   -webkit-font-smoothing: antialiased;
-  background-color: #017fff;
+  background-color: var(--dot);
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
@@ -383,7 +396,7 @@ export default {
   height: 15px;
 }
 
-.ddei-combox-show-dialog_content .itembox_selected::after {
+.ddei-combox-show-dialog-content .itembox--selected::after {
   font-size: 12px;
   line-height: 12px;
   right: -3px;
@@ -397,23 +410,23 @@ export default {
   color: #fff;
 }
 
-.ddei-combox-show-dialog_content .itembox_deleted {
+.ddei-combox-show-dialog-content .itembox--deleted {
   text-decoration: line-through;
 }
 
-.ddei-combox-show-dialog_content .itembox_disabled {
+.ddei-combox-show-dialog-content .itembox--disabled {
   color: rgb(210, 210, 210);
 }
 
-.ddei-combox-show-dialog_content .itembox_disabled:hover {
+.ddei-combox-show-dialog-content .itembox--disabled:hover {
   cursor: not-allowed !important;
 }
 
-.ddei-combox-show-dialog_content .itembox_underline {
+.ddei-combox-show-dialog-content .itembox--underline {
   text-decoration: underline;
 }
 
-.ddei-combox-show-dialog_content .itembox_bold .itembox_text {
+.ddei-combox-show-dialog-content .itembox--bold .itembox_text {
   font-weight: bold;
 }
 </style>

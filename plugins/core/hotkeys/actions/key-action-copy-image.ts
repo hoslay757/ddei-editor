@@ -109,10 +109,16 @@ class DDeiKeyActionCopyImage extends DDeiKeyAction {
       ctx.translate(-outRect.x * rat1 + addWidth / 2, -outRect.y * rat1 + addWidth / 2)
 
       containerDiv.appendChild(canvas)
-      models.forEach(item => {
-        item.render.clearCachedValue()
-        item.render.drawShape();
+      
+      models[0].pModel.midList.forEach(mid=>{
+        models.forEach(item => {
+          if (item.id == mid){
+            item.render.clearCachedValue()
+            item.render.drawShape({});
+          }
+        })
       })
+     
 
       ddInstance.render.ratio = oldRat1
       let dataURL = canvas.toDataURL()

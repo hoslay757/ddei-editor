@@ -64,13 +64,24 @@ class DDeiKeyActionCopy extends DDeiKeyAction {
       let selectedControls = ddInstance.stage.selectedModels;
       //存在选中控件
       if (selectedControls?.size > 0) {
+        //按照midlist排序输出
+        let models = Array.from(selectedControls.values())
+        let sortedModels = []
+        models[0].pModel.midList.forEach(mid => {
+          models.forEach(item => {
+            if (item.id == mid) {
+              sortedModels.push(item)
+            }
+          })
+        })
         //生成控件HTML
         let copyHtml = '<html><head>';
         copyHtml += '<meta source="ddei">'
         let jsonStr = '['
         let jsonLinksStr = '['
         let innerHTML = ''
-        selectedControls?.forEach((model, key) => {
+        
+        sortedModels?.forEach((model, key) => {
           if (selectedControls?.size == 1) {
             if (model.baseModelType == "DDeiTable") {
               if (model.curRow == -1 && model.curCol == -1) {
