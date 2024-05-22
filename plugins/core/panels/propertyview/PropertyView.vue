@@ -174,8 +174,10 @@ export default {
         );
       } else {
         this.selectedModels = this.editor.ddInstance.stage.selectedModels;
-        firstModel = Array.from(this.selectedModels.values());
-        firstControlDefine = this.editor.currentControlDefine
+        if (this.selectedModels?.size > 0){
+          firstModel = Array.from(this.selectedModels.values());
+          firstControlDefine = this.editor.currentControlDefine
+        }
       }
       //获取第一个组件及其定义
       if (firstControlDefine) {

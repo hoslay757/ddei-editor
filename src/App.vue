@@ -12,7 +12,9 @@ export default defineComponent({
     
     const options = markRaw({
       config: {
-      
+        paper:"A6",
+        // EXT_STAGE_WIDTH: false,
+        // EXT_STAGE_HEIGHT: false,
       },
       extensions: [
         //布局的配置
@@ -32,10 +34,10 @@ export default defineComponent({
     })
     const options1 = markRaw({
       config: {
-        "readonly":true,
+        // "readonly":true,
         "mark": "水印文本",
         "grid": 2,
-        "paper": {type:"A6",direct:1},
+        "paper": {type:"A6",direct:2},
         // "paper":"A5",
         "ruler": true,
         "background": {color:"#123456",opacity:0.1},
@@ -49,6 +51,7 @@ export default defineComponent({
               text: "第一步",
               border:{color:"yellow",dash:[10,10,5,5],width:5},
               fill:{color:"grey"},
+        
             },
             {
               id: "act_2",
