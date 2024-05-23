@@ -93,6 +93,10 @@ export default {
     max:{
       type: Number,
       default: 0
+    },
+    beforeCloseFile:{
+      type: Function,
+      default: null
     }
     , editor: {
       type: DDeiEditor,
@@ -105,7 +109,7 @@ export default {
       openIndex: 0,
       //最大可以打开的数量
       maxOpenSize: 1,
-      tempFile: null,
+      // tempFile: null,
       unitFileWidth: 160,
       // user: null,
       forceRefresh:true
@@ -123,8 +127,6 @@ export default {
         for (let i = 0; i < this.editor.files.length; i++) {
           if (this.editor.files[i].active == DDeiActiveType.ACTIVE) {
             activeIndex = i;
-            // this.applyFilePromise(this.editor.files[i])
-
             this.editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
               parts: ["toolbox", "property"]
             });
@@ -227,6 +229,7 @@ export default {
         this.editor.addFile(file);
         this.editor.currentFileIndex = this.editor.files.length - 1;
         let sheets = file?.sheets;
+        
         if (file && sheets && ddInstance) {
           let stage = sheets[0].stage;
           stage.ddInstance = ddInstance;
@@ -253,6 +256,11 @@ export default {
 
           this.editor.changeState(DDeiEditorState.DESIGNING);
           ddInstance?.bus?.executeAll();
+        }
+        if (this.editor.files.length == 0) {
+          ddInstance.disabled = true
+        } else {
+          ddInstance.disabled = false
         }
       }
     },
@@ -486,43 +494,48 @@ export default {
         ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
         ddInstance.bus.executeAll();
       }
-
-    },
-
-
-    /**
-     * 放弃并关闭确认弹框
-     */
-    abortAndCloseFileConfirmDialog() {
-      this.tempFile.state = DDeiFileState.NONE;
-      this.closeFile(this.tempFile);
-    },
-
-    /**
-     * 保存
-     * @param evt
-     */
-    saveAndCloseFileConfirmDialog() {
-      if (this.tempFile) {
-        //获取json信息
-        let file = this.tempFile;
-        if (file) {
-          let json = file.toJSON();
-          if (json) {
-
-            //执行保存
-            let storeIns = new DDeiStoreLocal();
-            json.state = DDeiFileState.NONE;
-            storeIns.save(file.id, json).then((data) => {
-              //回写ID
-              file.id = data;
-              file.state = DDeiFileState.NONE;
-              this.closeFile(this.tempFile);
-            });
-          }
-        }
+      if (this.editor.files.length == 0) {
+        ddInstance.disabled = true
+      } else {
+        ddInstance.disabled = false
       }
+
     },
+
+
+    // /**
+    //  * 放弃并关闭确认弹框
+    //  */
+    // abortAndCloseFileConfirmDialog() {
+    //   this.tempFile.state = DDeiFileState.NONE;
+    //   this.closeFile(this.tempFile);
+    // },
+
+    // /**
+    //  * 保存
+    //  * @param evt
+    //  */
+    // saveAndCloseFileConfirmDialog() {
+    //   if (this.tempFile) {
+    //     //获取json信息
+    //     let file = this.tempFile;
+    //     if (file) {
+    //       let json = file.toJSON();
+    //       if (json) {
+
+    //         //执行保存
+    //         let storeIns = new DDeiStoreLocal();
+    //         json.state = DDeiFileState.NONE;
+    //         storeIns.save(file.id, json).then((data) => {
+    //           //回写ID
+    //           file.id = data;
+    //           file.state = DDeiFileState.NONE;
+    //           this.closeFile(this.tempFile);
+    //         });
+    //       }
+    //     }
+    //   }
+    // },
 
     /**
      * 关闭文件
@@ -530,22 +543,29 @@ export default {
      */
     closeFile(file, evt) {
       //如果文件为脏状态，询问是否保存，放弃，或取消
-      if (
-        file.state == DDeiFileState.NEW ||
-        file.state == DDeiFileState.MODIFY
-      ) {
-        DDeiEditorUtil.showDialog(this.editor, "ddei-core-dialog-closefile", {
-          msg: '是否保存对"' + file.name + '"的更改？',
-          callback: {
-            abort: this.abortAndCloseFileConfirmDialog,
-            ok: this.saveAndCloseFileConfirmDialog,
-          },
-          background: "white",
-          opacity: "1%",
-          event: -1
-        })
-        this.tempFile = file;
-      } else {
+      let canClose = true;
+      if (this.beforeCloseFile){
+        canClose = this.beforeCloseFile(file)
+      }
+      if(canClose){
+
+   
+      // if (
+      //   file.state == DDeiFileState.NEW ||
+      //   file.state == DDeiFileState.MODIFY
+      // ) {
+        // DDeiEditorUtil.showDialog(this.editor, "ddei-core-dialog-closefile", {
+        //   msg: '是否保存对"' + file.name + '"的更改？',
+        //   callback: {
+        //     abort: this.abortAndCloseFileConfirmDialog,
+        //     ok: this.saveAndCloseFileConfirmDialog,
+        //   },
+        //   background: "white",
+        //   opacity: "1%",
+        //   event: -1
+        // })
+        // this.tempFile = file;
+      // } else {
         //刷新画布
         let index = this.editor.files.indexOf(file);
         this.editor.removeFile(file);
@@ -571,6 +591,7 @@ export default {
           }
         }
       }
+      // }
     },
     /**
      * 在存在显示隐藏的情况下移动tab

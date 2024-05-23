@@ -179,10 +179,21 @@ export default {
           firstControlDefine = this.editor.currentControlDefine
         }
       }
+      
       //获取第一个组件及其定义
       if (firstControlDefine) {
         let topGroups = null;
         if (firstControlDefine.type == "DDeiStage") {
+          firstControlDefine.attrDefineMap.forEach((attrDefine, attrKey) => {
+            //当前属性的定义
+
+            attrDefine.value = DDeiUtil.getDataByPathList(
+              firstModel,
+              attrDefine.code,
+              attrDefine.mapping
+            );
+            attrDefine.model = firstModel;
+          });
           //加载layer的配置
           let layerControlDefine = cloneDeep(
             this.editor.controls.get("DDeiLayer")
@@ -190,6 +201,7 @@ export default {
           let layer = firstModel.layers[firstModel.layerIndex];
           layerControlDefine.attrDefineMap.forEach((attrDefine, attrKey) => {
             //当前属性的定义
+            
             attrDefine.value = DDeiUtil.getDataByPathList(
               layer,
               attrDefine.code,
