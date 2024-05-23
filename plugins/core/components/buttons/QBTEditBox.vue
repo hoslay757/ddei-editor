@@ -15,7 +15,7 @@ import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiEnumOperateState} from "ddei-framework";
 import {DDeiModelArrtibuteValue} from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
+import { DDeiEditorState, DDeiEnumOperateType } from "ddei-framework";
 
 export default {
   name: "ddei-core-btn-editbox",
@@ -96,17 +96,23 @@ export default {
       }
       this.value = false;
       if (this.controlDefine) {
-        this.attrDefine = this.controlDefine.attrDefineMap.get(
-          this.attrCode
-        );
-        let valueDefine = this.getDataValue();
-        if (
-          valueDefine &&
-          !valueDefine.isDefault &&
-          valueDefine.value + "" == this.selectedValue + ""
-        ) {
-          this.value = true;
+        let attrD = this.controlDefine.attrDefineMap.get(this.attrCode);
+        let mds = []
+        if (this.editor.ddInstance.stage.selectedModels?.size > 0) {
+          mds = Array.from(this.editor.ddInstance.stage.selectedModels.values())
         }
+        let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_EDIT_BEFORE", DDeiEnumOperateType.EDIT, { models: mds, propName: attrD?.code }, this.editor.ddInstance)
+        if (rsState != -1) {
+          this.attrDefine = attrD
+          let valueDefine = this.getDataValue();
+          if (
+            valueDefine &&
+            !valueDefine.isDefault &&
+            valueDefine.value + "" == this.selectedValue + ""
+          ) {
+            this.value = true;
+          }
+        }        
       } else {
         this.attrDefine = null;
       }
@@ -260,8 +266,9 @@ export default {
   &--disabled {
     background-color: var(--panel-disabled);
     pointer-events: none;
-    color: var(--panel-title-disabled);
     cursor: not-allowed;
+    filter: grayscale(1);
+     opacity: 40%;
   }
 
   .rotate-90 {

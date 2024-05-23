@@ -21,7 +21,7 @@ import {DDeiEditorUtil} from "ddei-framework";
 import {DDeiUtil} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiEnumOperateState} from "ddei-framework";
-import {DDeiModelArrtibuteValue} from "ddei-framework";
+import { DDeiModelArrtibuteValue, DDeiEnumOperateType } from "ddei-framework";
 
 export default {
   name: "ddei-core-btn-fontsize",
@@ -71,7 +71,15 @@ export default {
 
     refreshEditor() {
       if (this.controlDefine) {
-        this.attrDefine = this.controlDefine.attrDefineMap.get("font.size");
+        let attrD = this.controlDefine.attrDefineMap.get("font.size");
+        let mds = []
+        if (this.editor.ddInstance.stage.selectedModels?.size > 0) {
+          mds = Array.from(this.editor.ddInstance.stage.selectedModels.values())
+        }
+        let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_EDIT_BEFORE", DDeiEnumOperateType.EDIT, { models: mds, propName: attrD?.code }, this.editor.ddInstance)
+        if (rsState != -1) {
+          this.attrDefine = attrD
+        }
       } else {
         this.attrDefine = null;
       }

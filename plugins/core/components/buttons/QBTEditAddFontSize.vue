@@ -14,7 +14,7 @@ import {DDeiEnumBusCommandType} from 'ddei-framework';
 import {DDeiEnumOperateState} from 'ddei-framework';
 import {DDeiModelArrtibuteValue} from 'ddei-framework';
 import {DDeiEditorEnumBusCommandType} from 'ddei-framework';
-import {DDeiEditorState} from 'ddei-framework';
+import { DDeiEditorState, DDeiEnumOperateType } from 'ddei-framework';
 
 export default {
   name: "ddei-core-btn-addfontsize",
@@ -79,12 +79,21 @@ export default {
     refreshEditor() {
       this.value = 0;
       if (this.controlDefine) {
-        this.attrDefine = this.controlDefine.attrDefineMap.get(this.attrCode);
-        let valueDefine = this.getDataValue();
-
-        if (valueDefine) {
-          this.value = valueDefine.value;
+        let attrD = this.controlDefine.attrDefineMap.get(this.attrCode);
+        let mds = []
+        if (this.editor.ddInstance.stage.selectedModels?.size > 0) {
+          mds = Array.from(this.editor.ddInstance.stage.selectedModels.values())
         }
+        let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_EDIT_BEFORE", DDeiEnumOperateType.EDIT, { models: mds, propName: attrD?.code }, this.editor.ddInstance)
+        if (rsState != -1) {
+          this.attrDefine = attrD
+          let valueDefine = this.getDataValue();
+
+          if (valueDefine) {
+            this.value = valueDefine.value;
+          }
+        }
+        
       } else {
         this.attrDefine = null
       }
@@ -206,7 +215,8 @@ export default {
 
   &--disabled {
     pointer-events: none;
-    color: var(--panel-title-disabled);
+    filter: grayscale(1);
+    opacity: 40%;
     background:var(--panel-disabled);
     cursor: not-allowed;
   }

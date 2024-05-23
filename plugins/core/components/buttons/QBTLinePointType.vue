@@ -18,7 +18,7 @@
 import {DDeiEditor} from 'ddei-framework';
 import {DDeiUtil} from 'ddei-framework';
 import {DDeiEnumBusCommandType} from 'ddei-framework';
-import {DDeiEditorUtil} from 'ddei-framework';
+import { DDeiEditorUtil, DDeiEnumOperateType } from 'ddei-framework';
 export default {
   name: "ddei-core-btn-linepointtype",
   extends: null,
@@ -84,10 +84,18 @@ export default {
     },
     refreshEditor() {
       if (this.controlDefine) {
-        this.attrDefine = this.controlDefine.attrDefineMap.get(this.attrCode);
-        let valueDefine = this.getDataValue();
-        if (valueDefine && !valueDefine.isDefault) {
-          this.value = valueDefine.value;
+        let attrD = this.controlDefine.attrDefineMap.get(this.attrCode);
+        let mds = []
+        if (this.editor.ddInstance.stage.selectedModels?.size > 0) {
+          mds = Array.from(this.editor.ddInstance.stage.selectedModels.values())
+        }
+        let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_EDIT_BEFORE", DDeiEnumOperateType.EDIT, { models: mds, propName: attrD?.code }, this.editor.ddInstance)
+        if (rsState != -1) {
+          this.attrDefine = attrD
+          let valueDefine = this.getDataValue();
+          if (valueDefine && !valueDefine.isDefault) {
+            this.value = valueDefine.value;
+          }
         }
 
       } else {

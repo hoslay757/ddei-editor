@@ -489,51 +489,6 @@ export default {
 
     },
 
-    // /**
-    //  * 设置文件权限
-    //  */
-    // applyFilePromise(file) {
-    //   if (file) {
-    //     let ddInstance = this.editor.ddInstance;
-    //     if (file.extData?.owner != 1) {
-    //       let canEdit = 0
-    //       let userCookie = Cookies.get("user");
-    //       if (userCookie) {
-    //         let user = JSON.parse(userCookie)
-    //         let sslink
-    //         for (let i = 0; i < user?.sslinks?.length; i++) {
-    //           if (user.sslinks[i].file_id == file.id) {
-    //             sslink = user.sslinks[i]
-    //             break;
-    //           }
-    //         }
-    //         if (sslink?.can_edit == 1) {
-    //           canEdit = 1
-    //         }
-    //       }
-    //       if (!canEdit) {
-    //         ddInstance["AC_DESIGN_CREATE"] = false
-    //         ddInstance["AC_DESIGN_EDIT"] = false
-    //         ddInstance["AC_DESIGN_DRAG"] = false
-    //         ddInstance["AC_DESIGN_SELECT"] = false
-    //         ddInstance["AC_DESIGN_LINK"] = false
-    //       } else {
-    //         ddInstance["AC_DESIGN_CREATE"] = true
-    //         ddInstance["AC_DESIGN_EDIT"] = true
-    //         ddInstance["AC_DESIGN_DRAG"] = true
-    //         ddInstance["AC_DESIGN_SELECT"] = true
-    //         ddInstance["AC_DESIGN_LINK"] = true
-
-    //       }
-    //     } else {
-    //       ddInstance["AC_DESIGN_CREATE"] = true
-    //       ddInstance["AC_DESIGN_EDIT"] = true
-    //       ddInstance["AC_DESIGN_DRAG"] = true
-    //       ddInstance["AC_DESIGN_SELECT"] = true
-    //       ddInstance["AC_DESIGN_LINK"] = true
-    //     }
-    //   }
-    // },
 
     /**
      * 放弃并关闭确认弹框

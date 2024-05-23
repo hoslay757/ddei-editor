@@ -4,8 +4,8 @@
     <div class="content">
       <div class="part">
         <div
-          :class="{ 'button-v-selected': editor?.ddInstance?.stage?.copyMode == 'cut', 'button-v': editor?.ddInstance?.stage?.selectedModels?.size > 0, 'button-v-disabled': editor?.ddInstance?.stage?.selectedModels?.size == 0 || !editor?.ddInstance?.stage?.selectedModels }"
-          title="剪切" @click="editor?.ddInstance?.stage?.selectedModels?.size > 0 && execShearAction($event)">
+          :class="{ 'button-v--selected': editor?.ddInstance?.stage?.copyMode == 'cut', 'button-v': editor?.ddInstance?.stage?.selectedModels?.size > 0, 'button-v--disabled': !canEdit || editor?.ddInstance?.stage?.selectedModels?.size == 0 || !editor?.ddInstance?.stage?.selectedModels }"
+          title="剪切" @click="canEdit && editor?.ddInstance?.stage?.selectedModels?.size > 0 && execShearAction($event)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-a-ziyuan486"></use>
           </svg>
@@ -15,7 +15,7 @@
 
       <div class="part">
         <div
-          :class="{ 'button-v-selected': editor?.ddInstance?.stage?.copyMode == 'copy', 'button-v': editor?.ddInstance?.stage?.selectedModels?.size > 0, 'button-v-disabled': editor?.ddInstance?.stage?.selectedModels?.size == 0 || !editor?.ddInstance?.stage?.selectedModels }"
+          :class="{ 'button-v--selected': editor?.ddInstance?.stage?.copyMode == 'copy', 'button-v': editor?.ddInstance?.stage?.selectedModels?.size > 0, 'button-v--disabled': editor?.ddInstance?.stage?.selectedModels?.size == 0 || !editor?.ddInstance?.stage?.selectedModels }"
           title="复制" @click="editor?.ddInstance?.stage?.selectedModels?.size > 0 && execCopyAction($event)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-a-ziyuan484"></use>
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="part">
-        <div :class="{ 'button-v': hasClipData, 'button-v-disabled': !hasClipData }" title="粘贴">
+        <div :class="{ 'button-v': hasClipData, 'button-v--disabled': !canEdit || !hasClipData }" title="粘贴">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-a-ziyuan488"></use>
           </svg>
@@ -33,8 +33,9 @@
       </div>
       <div class="part">
         <div
-          :class="{ 'button-v-selected': editor?.ddInstance?.stage?.brushData, 'button-v': displayBrush, 'button-v-disabled': !displayBrush }"
-          title="格式刷" @click="editor?.ddInstance?.stage?.selectedModels?.size == 1 && execBrushAction($event)">
+          :class="{ 'button-v--selected': canEdit && editor?.ddInstance?.stage?.brushData, 'button-v': canEdit && displayBrush, 'button-v--disabled': !canEdit || !displayBrush }"
+          title="格式刷"
+          @click="canEdit && editor?.ddInstance?.stage?.selectedModels?.size == 1 && execBrushAction($event)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-a-ziyuan485"></use>
           </svg>
@@ -50,7 +51,7 @@
 <script lang="ts">
 import {DDeiConfig} from "ddei-framework";
 import {DDeiUtil} from "ddei-framework";
-import {DDeiEditor} from "ddei-framework";
+import { DDeiEditor, DDeiEnumOperateType } from "ddei-framework";
 
 
 export default {
@@ -72,12 +73,21 @@ export default {
     return {
       hasClipData: false,
       displayBrush: false,
+      canEdit:true
     };
   },
   computed: {},
   watch: {},
   created() { },
   mounted() {
+    let mds = []
+    if (this.editor.ddInstance.stage.selectedModels?.size > 0) {
+      mds = Array.from(this.editor.ddInstance.stage.selectedModels.values())
+    }
+    let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_EDIT_BEFORE", DDeiEnumOperateType.EDIT, { models: mds }, this.editor.ddInstance)
+    if (rsState == -1) {
+      this.canEdit = false
+    }
     this.hasClipboard();
     this.isDisplayBrush();
   },
@@ -189,7 +199,7 @@ export default {
       }
 
 
-      .button-v-selected {
+      .button-v--selected {
         flex: 1;
         height: 50px;
         display: flex;
@@ -201,7 +211,7 @@ export default {
         }
       }
 
-      .button-v-disabled {
+      .button-v--disabled {
         flex: 1;
         height: 50px;
         display: flex;

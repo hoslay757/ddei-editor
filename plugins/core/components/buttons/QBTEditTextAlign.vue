@@ -12,7 +12,7 @@
 import {DDeiEditor} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
-import {DDeiEditorUtil} from "ddei-framework";
+import { DDeiEditorUtil, DDeiEnumOperateType, DDeiUtil } from "ddei-framework";
 
 export default {
   name: "ddei-core-btn-textalign",
@@ -74,13 +74,18 @@ export default {
 
     refreshEditor() {
       if (this.controlDefine) {
-        this.attrDefine = this.controlDefine.attrDefineMap.get(
-          "textStyle.align"
-        );
-        this.valignAttrDefine = this.controlDefine.attrDefineMap.get(
-          "textStyle.valign"
-        );
-
+        let attrD = this.controlDefine.attrDefineMap.get("textStyle.align");
+        let mds = []
+        if (this.editor.ddInstance.stage.selectedModels?.size > 0) {
+          mds = Array.from(this.editor.ddInstance.stage.selectedModels.values())
+        }
+        let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_EDIT_BEFORE", DDeiEnumOperateType.EDIT, { models: mds, propName: attrD?.code }, this.editor.ddInstance)
+        if (rsState != -1) {
+          this.attrDefine = attrD
+          this.valignAttrDefine = this.controlDefine.attrDefineMap.get(
+            "textStyle.valign"
+          );
+        }
       } else {
         this.attrDefine = null;
         this.valignAttrDefine = null;

@@ -4,8 +4,8 @@
     <div class="content">
       <div class="part">
         <div
-          :class="{ 'button-v-disabled': !isButtonEnable(), 'button-v-selected': isButtonEnable() && dialogShow == 'ddei-core-panel-sort_ddei-core-dialog-changeposition', 'button-v': isButtonEnable() }"
-          @click="isButtonEnable() && showPositionDialog($event)">
+          :class="{ 'button-v--disabled': !canEdit || !isButtonEnable(), 'button-v--selected': canEdit && isButtonEnable() && dialogShow == 'ddei-core-panel-sort-ddei-core-dialog-changeposition', 'button-v': canEdit && isButtonEnable() }"
+          @click="canEdit && isButtonEnable() && showPositionDialog($event)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-a-ziyuan429"></use>
           </svg>
@@ -17,8 +17,8 @@
       </div>
       <div class="part">
         <div
-          :class="{ 'button-v-disabled': !isButtonEnable(2), 'button-v-selected': isButtonEnable(2) && dialogShow == 'ddei-core-panel-sort_align_dialog', 'button-v': isButtonEnable(2) }"
-          @click="isButtonEnable(2) && showAlignDialog($event)">
+          :class="{ 'button-v--disabled': !canEdit || !isButtonEnable(2), 'button-v--selected': canEdit && isButtonEnable(2) && dialogShow == 'ddei-core-panel-sort-align-dialog', 'button-v': canEdit && isButtonEnable(2) }"
+          @click="canEdit && isButtonEnable(2) && showAlignDialog($event)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-a-ziyuan428"></use>
           </svg>
@@ -30,8 +30,8 @@
       </div>
       <div class="part">
         <div
-          :class="{ 'button-v-disabled': !isButtonEnable(), 'button-v-selected': isButtonEnable() && dialogShow == 'ddei-core-panel-sort_merge_dialog', 'button-v': isButtonEnable() }"
-          @click="isButtonEnable() && showMergeDialog($event)">
+          :class="{ 'button-v--disabled': !canEdit || !isButtonEnable(), 'button-v--selected': canEdit && isButtonEnable() && dialogShow == 'ddei-core-panel-sort-merge-dialog', 'button-v': canEdit && isButtonEnable() }"
+          @click="canEdit && isButtonEnable() && showMergeDialog($event)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-a-ziyuan427"></use>
           </svg>
@@ -44,8 +44,8 @@
 
       <div class="part">
         <div
-          :class="{ 'button-v-disabled': !isButtonEnable(), 'button-v-selected': isButtonEnable() && dialogShow == 'ddei-core-panel-sort_ddei-core-dialog-changerotate', 'button-v': isButtonEnable() }"
-          @click="isButtonEnable() && showRotateDialog($event)">
+          :class="{ 'button-v--disabled': !canEdit || !isButtonEnable(), 'button-v--selected': canEdit && isButtonEnable() && dialogShow == 'ddei-core-panel-sort-ddei-core-dialog-changerotate', 'button-v': canEdit && isButtonEnable() }"
+          @click="canEdit && isButtonEnable() && showRotateDialog($event)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-a-ziyuan426"></use>
           </svg>
@@ -61,7 +61,7 @@
 </template>
 <script lang="ts">
 import {DDeiEditor} from "ddei-framework";
-import {DDeiEditorUtil} from "ddei-framework";
+import { DDeiEditorUtil, DDeiEnumOperateType ,DDeiUtil} from "ddei-framework";
 export default {
   name: "ddei-core-panel-sort",
   extends: null,
@@ -80,12 +80,22 @@ export default {
   data() {
     return {
       dialogShow: "",
+      canEdit: true
     };
   },
   computed: {},
   watch: {},
   created() { },
   mounted() {
+    let mds = [this.editor.currentStage]
+    if (this.editor.ddInstance.stage.selectedModels?.size > 0) {
+      mds = Array.from(this.editor.ddInstance.stage.selectedModels.values())
+    }
+
+    let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_EDIT_BEFORE", DDeiEnumOperateType.EDIT, { models: mds }, this.editor.ddInstance)
+    if (rsState == -1) {
+      this.canEdit = false
+    }
   },
   methods: {
     /**
@@ -169,7 +179,7 @@ export default {
         background-color: var(--panel-hover);
       }
 
-      .button-v-selected {
+      .button-v--selected {
         flex: 1;
         height: 50px;
         background-color: var(--panel-selected);
@@ -179,7 +189,7 @@ export default {
         }
       }
 
-      .button-v-disabled {
+      .button-v--disabled {
         flex: 1;
         height: 50px;
         cursor: not-allowed;

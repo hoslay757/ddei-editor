@@ -34,10 +34,10 @@ export default defineComponent({
     })
     const options1 = markRaw({
       config: {
-        // "readonly":true,
+        "readonly":true,
         "mark": "水印文本",
         "grid": 2,
-        "paper": {type:"A6",direct:2},
+        "paper": {type:"A6",direct:1},
         // "paper":"A5",
         "ruler": true,
         "background": {color:"#123456",opacity:0.1},
@@ -67,7 +67,16 @@ export default defineComponent({
       },
       //配置扩展插件
       extensions: [
-        
+        //布局的配置
+        DDeiCoreStandLayout.configuration({
+          //配置插件
+          // 'top': [],
+          'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],
+          // 'bottom': [],
+          // 'left': [],
+          // 'right': []
+        }),
+        DDeiExtQuickStyle
       ],
     })
 

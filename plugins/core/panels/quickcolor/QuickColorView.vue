@@ -19,7 +19,7 @@
 <script lang="ts">
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiEditor} from "ddei-framework";
-import {DDeiEditorUtil} from "ddei-framework";
+import { DDeiEditorUtil, DDeiUtil, DDeiEnumOperateType } from "ddei-framework";
 export default {
   name: "ddei-core-panel-quickcolorview",
   extends: null,
@@ -43,7 +43,7 @@ export default {
         { value: 1, text: "填充", img: "#icon-a-ziyuan453" },
         { value: 2, text: "边框", img: "#icon-border-pencil" },
         { value: 3, text: "字体", img: "#icon-a-ziyuan463" },
-      ],
+      ]
     };
   },
   computed: {},
@@ -52,7 +52,7 @@ export default {
    
   },
   mounted() {
-
+    
     this.colors = [
       "#FFB6C1",
       "#FFC0CB",
@@ -177,58 +177,62 @@ export default {
       if (stage && color) {
         let selectedModels = stage.selectedModels;
         if (selectedModels?.size > 0) {
-          switch (this.mode) {
-            case 1:
-              selectedModels.forEach((element) => {
-                //推送信息进入总线
-                this.editor.bus.push(
-                  DDeiEnumBusCommandType.ModelChangeValue,
-                  { mids: [element.id], paths: ["fill.color"], value: color },
-                  evt,
-                  true
-                );
-              });
-              break;
-            case 2:
-              selectedModels.forEach((element) => {
-                //推送信息进入总线
-                this.editor.bus.push(
-                  DDeiEnumBusCommandType.ModelChangeValue,
-                  {
-                    mids: [element.id],
-                    paths: [
-                      "border.color",
-                      "border.top.color",
-                      "border.bottom.color",
-                      "border.left.color",
-                      "border.right.color",
-                    ],
-                    value: color,
-                  },
-                  evt,
-                  true
-                );
-              });
-              break;
-            case 3:
-              selectedModels.forEach((element) => {
-                //推送信息进入总线
-                this.editor.bus.push(
-                  DDeiEnumBusCommandType.ModelChangeValue,
-                  { mids: [element.id], paths: ["font.color"], value: color },
-                  evt,
-                  true
-                );
-              });
-              break;
+          let mds = Array.from(selectedModels.values())
+          let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_EDIT_BEFORE", DDeiEnumOperateType.EDIT, { models: mds }, this.editor.ddInstance)
+          if (rsState != -1) {
+            switch (this.mode) {
+              case 1:
+                selectedModels.forEach((element) => {
+                  //推送信息进入总线
+                  this.editor.bus.push(
+                    DDeiEnumBusCommandType.ModelChangeValue,
+                    { mids: [element.id], paths: ["fill.color"], value: color },
+                    evt,
+                    true
+                  );
+                });
+                break;
+              case 2:
+                selectedModels.forEach((element) => {
+                  //推送信息进入总线
+                  this.editor.bus.push(
+                    DDeiEnumBusCommandType.ModelChangeValue,
+                    {
+                      mids: [element.id],
+                      paths: [
+                        "border.color",
+                        "border.top.color",
+                        "border.bottom.color",
+                        "border.left.color",
+                        "border.right.color",
+                      ],
+                      value: color,
+                    },
+                    evt,
+                    true
+                  );
+                });
+                break;
+              case 3:
+                selectedModels.forEach((element) => {
+                  //推送信息进入总线
+                  this.editor.bus.push(
+                    DDeiEnumBusCommandType.ModelChangeValue,
+                    { mids: [element.id], paths: ["font.color"], value: color },
+                    evt,
+                    true
+                  );
+                });
+                break;
+            }
+            this.editor.bus.push(
+              DDeiEnumBusCommandType.StageChangeSelectModels,
+              null,
+              evt
+            );
+            this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape, null, evt);
+            this.editor.bus.executeAll();
           }
-          this.editor.bus.push(
-            DDeiEnumBusCommandType.StageChangeSelectModels,
-            null,
-            evt
-          );
-          this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape, null, evt);
-          this.editor.bus.executeAll();
         }
       }
     },

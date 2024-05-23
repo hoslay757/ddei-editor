@@ -3,7 +3,7 @@
     <div class="header"></div>
     <div class="content">
       <div class="part">
-        <div :class="{ 'button-v-selected': editor?.editMode == 1, 'button-v': editor?.editMode != 1 }" title="选择"
+        <div :class="{ 'button-v--selected': editor?.editMode == 1, 'button-v': editor?.editMode != 1 }" title="选择"
           @click="changeEditMode(1)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-a-ziyuan432"></use>
@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="part">
-        <div :class="{ 'button-v-selected': editor?.editMode == 2, 'button-v': editor?.editMode != 2 }" title="平移画布"
+        <div :class="{ 'button-v--selected': editor?.editMode == 2, 'button-v': editor?.editMode != 2 }" title="平移画布"
           @click="changeEditMode(2)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-a-ziyuan431"></use>
@@ -21,8 +21,9 @@
         </div>
       </div>
       <div class="part">
-        <div :class="{ 'button-v-selected': editor?.editMode == 4, 'button-v': editor?.editMode != 4 }" title="连接线"
-          @click="changeEditMode(4)">
+        <div
+          :class="{ 'button-v--selected': canEdit && editor?.editMode == 4, 'button-v': canEdit && editor?.editMode != 4, 'button-v--disabled': !canEdit }"
+          title="连接线" @click="canEdit && changeEditMode(4)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-a-ziyuan430"></use>
           </svg>
@@ -38,7 +39,7 @@
 <script lang="ts">
 import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
+import { DDeiEditorState, DDeiEnumOperateType, DDeiUtil } from "ddei-framework";
 export default {
   name: "ddei-core-panel-tool",
   extends: null,
@@ -55,12 +56,23 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      canEdit:true
+    }
   },
   computed: {},
   watch: {},
   created() { },
   mounted() {
+    let mds = [this.editor.currentStage]
+    if (this.editor.ddInstance.stage.selectedModels?.size > 0) {
+      mds = Array.from(this.editor.ddInstance.stage.selectedModels.values())
+    }
+
+    let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_EDIT_BEFORE", DDeiEnumOperateType.EDIT, { models: mds }, this.editor.ddInstance)
+    if (rsState == -1) {
+      this.canEdit = false
+    }
   },
   methods: {
     /**
@@ -115,7 +127,7 @@ export default {
         background-color: var(--panel-hover);
       }
 
-      .button-v-selected {
+      .button-v--selected {
         flex: 1;
         display: flex;
         flex-direction: column;
@@ -128,18 +140,18 @@ export default {
         }
       }
 
-      .button-v-disabled {
-
+      .button-v--disabled {
         flex: 1;
+        height: 50px;
         display: flex;
         flex-direction: column;
-        height: 50px;
         cursor: not-allowed;
         align-items: center;
         background-color: var(--panel-disabled);
 
-        >span {
-          color: var(--panel-title-disabled);
+        .icon {
+          filter: grayscale(1);
+          opacity: 40%;
         }
 
         .text {
