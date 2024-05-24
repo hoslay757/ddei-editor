@@ -60,7 +60,7 @@ export default defineComponent({
               width: 200,
               height: 100,
               text: "第二步",
-              y: -70,
+              offsetY: -70,
             }
           ]
         }
