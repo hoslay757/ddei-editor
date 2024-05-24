@@ -1,40 +1,74 @@
-# ddei-editor
+# DDei-在线设计器简介
 
-This template should help get you started developing with Vue 3 in Vite.
+## 概述
 
-## Recommended IDE Setup
+&emsp;&emsp;DDei是一个遵循Apache2.0开源协议开发的设计器组件，允许用户通过拖拉拽等方式创建和编辑图形。
+使用者可以通过组件引用的方式，将其嵌入到应用的任意位置，使之拥有在线绘图的能力。
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Type Support for `.vue` Imports in TS
+## 功能特性
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+&emsp;&emsp;DDei以组件的方式提供使用，功能强大且易于集成，大多数功能都可以通过初始化配置和引入插件完成，无需复杂编码。以下是DDei的功能特性
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+**画布大小**
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+&emsp;&emsp;支持设置设计器的大小。
 
-## Customize configuration
+**背景**
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+&emsp;&emsp;支持空白、图片、纯色以及透明度设置。
 
-## Project Setup
+**纸张**
 
-```sh
-npm install
-```
+&emsp;&emsp;开启后会在背景上显示纸张。允许设置纸张的大小（如：A4、A5、自定义）以及方向（横向、纵向）。
 
-### Compile and Hot-Reload for Development
+**标尺**
 
-```sh
-npm run dev
-```
+&emsp;&emsp;开启后会在绘图区域的周围显示标尺，同时会影响辅助网格的尺寸。支持毫米、厘米、米、英寸、像素等单位。
 
-### Type-Check, Compile and Minify for Production
+**辅助对齐**
 
-```sh
-npm run build
-```
+&emsp;&emsp;开启后拖拽时会显示对齐辅助线。
+
+**辅助网格**
+
+&emsp;&emsp;开启后会在背景上绘制用于对齐的辅助网格线。支持点阵和网格两种类型。
+
+**水印**
+
+&emsp;&emsp;开启后图形上方显示水印。支持文字、图像两种水印类型，可以调整水印的字体、文本、图片、方向、颜色和透明度。
+
+**无限画布**
+
+&emsp;&emsp;开启后在操作超出画布大小时会自动扩展画布。可以限制扩展方向（横向或纵向）。
+
+**权限控制**
+
+&emsp;&emsp;可以配置操作权限。支持全局只读设置，或到图形实例级的创建、修改、选择、删除、连线等权限。
+**多文件**
+
+&emsp;&emsp;可以配置插件实现多文件编辑。
+
+**多页签**
+
+&emsp;&emsp;可以配置插件实现多页签编辑。
+
+**多图层**
+
+&emsp;&emsp;开启后可以创建多个图层，并在不同图层之间切换、锁定或删除图层。
+
+**数据驱动**
+
+&emsp;&emsp;DDei采用数据驱动，图形的绘制与JSON模型绑定，图形操作和模型数据会相互同步。可以通过API获取图形的JSON数据，或通过已有的JSON数据显示加载画布。
+
+
+**插件机制**
+&emsp;&emsp;DDei提供了插件机制，使用者可以通过扩展插件对设计器功能进行装载或卸载。也可以通过自定义插件扩展个性化功能，从而满足使用需求。
+
+
+## 安装、示例与API
+&emsp;&emsp;作者提供了完整的安装指南和示例，请进入[DDei官网]https://www.ddei.top查看最新文档。
+
+
+## 技术支持
+<center>QQ:3697355039 &emsp;&emsp;&emsp;&emsp;邮箱：3697355039@qq.com</center>
