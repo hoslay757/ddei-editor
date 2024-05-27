@@ -147,10 +147,14 @@ export default {
       // entries 是一个 ResizeObserverEntry 对象数组，包含目标元素的大小信息
       for (const entry of entries) {
         // 获取宽度和高度
-        const { width, height } = entry.contentRect;
+        let { width, height } = entry.contentRect;
+        if(width == 0 || height == 0){
+          width = this.$refs.openFilesView.clientWidth
+          height = this.$refs.openFilesView.clientHeight
+        }
         if (width != 0 && height != 0) { 
           //获取单个tab大小
-          let fileEles = document.getElementsByClassName("ddei-core-panel-openfilesview-item")
+          let fileEles = this.$refs.openFilesView.getElementsByClassName("ddei-core-panel-openfilesview-item")
           let fileWidth = 0;
           if (fileEles.length > 0) {
             fileWidth = fileEles[0].clientWidth

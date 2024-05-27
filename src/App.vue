@@ -20,16 +20,16 @@ export default defineComponent({
         //布局的配置
         DDeiCoreStandLayout.configuration({
           //配置插件
-          // 'top': [],
-          // 'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],
-          // 'bottom': [],
-          // 'left': [],
-          // 'right': []
+          'top': [],
+          'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],// [!code ++]
+          'bottom': [],
+          'left': [],
+          'right': []
         }),
         // DDeiCoreThemeBlack.configuration({
         //   default: true
         // }),
-        DDeiCoreOpenFilesViewPanel.configuration({ max: 3 })
+        // DDeiCoreOpenFilesViewPanel.configuration({ max: 3 })
       ]
     })
     const options1 = markRaw({
