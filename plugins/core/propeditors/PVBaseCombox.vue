@@ -125,13 +125,8 @@ export default {
         let attrEditor = document.getElementById(
           this.getEditorId(this.attrDefine.code)
         );
-        let position = DDeiUtil.getDomAbsPosition(attrEditor);
-        dialog.style.left =
-          position.left -
-          dialog.offsetWidth +
-          attrEditor.offsetWidth -
-          9.5 +
-          "px";
+        let position = DDeiUtil.getDomAbsPosition(attrEditor, this.editor);
+        dialog.style.left = position.left - dialog.offsetWidth + attrEditor.offsetWidth -9.5 + "px";
         dialog.style.top = position.top + attrEditor.offsetHeight + "px";
 
         this.expanded = true;
