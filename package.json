@@ -1,25 +1,67 @@
 {
   "name": "ddei-editor",
-  "version": "0.0.1",
-  "private": true,
+  "version": "1.2.13",
+  "private": false,
+  "type": "module",
+  "author": "hoslay <3697355039@qq.com>",
+  "license": "Apache License 2.0",
+  "description": "ddei在线设计器，提供在线图形设计工具及扩展API，支持用户自己创建页面、每个页面中可以创建多个页签、在页签中通过拖拉拽的方式绘制UML、数据库设计图、软件架构图等多种类型的设计图形。支持等圆形、矩形、三角形、平行四边形等多边形绘图；支持流程图、思维导图、组织架构图的在线绘制；支持多文件、多页签编辑；支持复制、粘贴、复制样式、修改字体大小、颜色等特性；提供扩展API，能够允许外部程序调用扩展能力",
+  "keywords": [
+    "ddei",
+    "ddei-plugin",
+    "ddei-editor",
+    "图形框架",
+    "流程图",
+    "思维导图",
+    "插件扩展",
+    "在线设计器"
+  ],
+  "homepage": "https://www.ddei.top",
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/hoslay/ddei-editor.git"
+  },
+  "files": [
+    "dist/*",
+    "README.md",
+    "package.json"
+  ],
+  "bugs": {
+    "url": "https://gitee.com/hoslay/ddei-editor",
+    "email": "3697355039@qq.com"
+  },
+  "main": "./dist/ddei-editor.umd.cjs",
+  "module": "./dist/ddei-editor.umd.cjs",
+  "exports": {
+    ".": {
+      "import": "./dist/ddei-editor.umd.cjs",
+      "require": "./dist/ddei-editor.umd.cjs"
+    }
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check build-only",
+    "dev": "vite --host=0.0.0.0",
+    "build": "vite build",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
-    "vue": "^3.3.4"
+    "ddei-framework": "^1.2.37"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.0",
-    "@types/node": "^18.17.0",
+    "@types/lodash": "^4.14.197",
+    "@types/node": "^18.17.6",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/tsconfig": "^0.4.0",
+    "less": "^4.2.0",
     "npm-run-all": "^4.1.5",
     "typescript": "~5.1.6",
     "vite": "^4.4.6",
+    "vite-plugin-compression": "^0.5.1",
     "vue-tsc": "^1.8.6"
   }
 }
