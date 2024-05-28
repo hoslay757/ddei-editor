@@ -8,6 +8,24 @@
   font-weight: normal;
 }
 
+
+/* 
+[data-dpr="2"] .iconfont {
+  font-size: 24px;
+}
+
+[data-dpr="3"] .iconfont {
+  font-size: 36px;
+}
+
+[data-dpr="2"] .iconfont-small {
+  font-size: 6px;
+}
+
+[data-dpr="3"] .iconfont-small {
+  font-size: 8px;
+} */
+
 a,
 .green {
   text-decoration: none;
@@ -32,4 +50,26 @@ a,
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
+}
+
+/* 常用样式 */
+.m-t-80 {
+  margin-top: 80px;
+}
+
+.m-t-40 {
+  margin-top: 40px;
+}
+
+.m-t-20 {
+  margin-top: 20px;
+}
+
+.m-t-10 {
+  margin-top: 10px;
+}
+
+.m-h-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
