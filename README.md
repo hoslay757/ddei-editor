@@ -67,7 +67,8 @@
 
 
 ## 安装、示例与API
-&emsp;&emsp;作者提供了完整的安装指南和示例，请进入[DDei文档]http://docs.ddei.top查看最新文档。
+&emsp;&emsp;作者提供了完整的安装指南和示例，请进入[DDei文档](http://docs.ddei.top)查看最新文档。
+
 
 
 ## 技术支持
