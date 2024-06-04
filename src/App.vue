@@ -20,12 +20,13 @@ export default defineComponent({
         //布局的配置
         DDeiCoreStandLayout.configuration({
           //配置插件
-          'top': [],
+          // 'top': [],
           'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],// [!code ++]
-          'bottom': [],
-          'left': [],
-          'right': []
+          // 'bottom': [],
+          // 'left': [],
+          // 'right': []
         }),
+        DDeiExtUML
         // DDeiCoreThemeBlack.configuration({
         //   default: true
         // }),
@@ -191,11 +192,19 @@ export default defineComponent({
       options1:options1,
       options2:options2,
       options3:options3,
-      options4:options4
+      options4:options4,
+      jsontext:"无JSON"
     };
   },
 
   methods:{
+    getData(){
+      //获取编辑器实例
+      let editor = this.$refs["editorViewer3"].editor;
+      //获取整个editor的JSON
+      let editorJSON = editor.toJSON();
+      this.jsontext = JSON.stringify(editorJSON);
+    }
   }
 
   
@@ -204,12 +213,20 @@ export default defineComponent({
 
 
 <template>
-  <!-- <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView> -->
+  <!--<DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
+
   <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
-  <!-- <div style="width:400px;height:400px;float:left">
+  -->
+  <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>
   </div>
 
+  <button @click="getData" style="border:1px solid grey;margin-left:5px;padding:5px">获取JSON</button>
+  <div style="width:400px;height:400px;margin:100px auto;">
+    <textarea :value="jsontext"
+      style="border:1px solid grey;margin-left:5px;padding:5px;width:100%;height:100%"></textarea>
+  </div>
+  <!--
   <div style="width:500px;height:500px;float:left">
     <DDeiEditorView ref="editorViewer4" :options="options3" id="ddei_editor_4"></DDeiEditorView>
   </div>

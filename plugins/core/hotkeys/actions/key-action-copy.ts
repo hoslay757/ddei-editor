@@ -1,7 +1,6 @@
 import {DDeiConfig} from "ddei-framework";
 import {DDei} from "ddei-framework";
-import {DDeiAbstractShape} from "ddei-framework";
-import {DDeiUtil} from "ddei-framework";
+import { DDeiModelArrtibuteValue} from "ddei-framework";
 import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
@@ -131,6 +130,31 @@ class DDeiKeyActionCopy extends DDeiKeyAction {
             jsonLinksStr = jsonLinksStr.substring(0, jsonLinksStr.length - 1)
             jsonLinksStr += ']'
             jsonStr += " , \"links\":" + jsonLinksStr
+          }
+          //读取当前单位
+          //标尺单位
+          let ruleDisplay
+          let ruleInit
+          if (ddInstance.stage.ruler?.display || ddInstance.stage.ruler?.display == 0 || ddInstance.stage.ruler?.display == false) {
+            ruleDisplay = ddInstance.stage.ruler.display;
+          } else if (ddInstance.ruler != null && ddInstance.ruler != undefined) {
+            if (typeof (ddInstance.ruler) == 'boolean') {
+              ruleDisplay = ddInstance.ruler ? 1 : 0;
+            } else {
+              ruleInit = ddInstance.ruler
+              ruleDisplay = ruleInit.display;
+            }
+          } else {
+            ruleDisplay = DDeiModelArrtibuteValue.getAttrValueByState(ddInstance.stage, "ruler.display", true);
+          }
+
+
+          //处理点坐标变换
+          if (ruleDisplay) {
+            //写入unit用于单位换算还原
+            // json.dpi = this.ddInstance?.dpi?.x;
+            let unit = DDeiModelArrtibuteValue.getAttrValueByState(ddInstance.stage, "ruler.unit", true, ruleInit);
+            jsonStr += ',"unit":"'+unit+'"'
           }
           jsonStr += "}"
 

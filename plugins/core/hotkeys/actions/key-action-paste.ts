@@ -374,10 +374,56 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
       //对内部复制的对象进行反序列化处理
       let mode = ddeiJson.mode
       let jsonArray = ddeiJson.data
+      
       let jsonLinkArray = ddeiJson.links
       if (!Array.isArray(jsonArray)) {
         jsonArray = [jsonArray]
       }
+      let unit = ddeiJson.unit
+      //只有保存了unit才需要转换,并且unit为像素也不需要转换
+      if (unit && unit != 'px') {
+        //对model的坐标进行处理
+        jsonArray.forEach(model => {
+          if (model.cpv) {
+            let cpv = DDeiUtil.toPageCoord({ x: model.cpv.x, y: model.cpv.y }, stage, unit)
+            model.cpv.x = cpv.x
+            model.cpv.y = cpv.y
+          }
+
+          if (model.bpv) {
+            let bpv = DDeiUtil.toPageCoord({ x: model.bpv.x, y: model.bpv.y }, stage, unit)
+            model.bpv.x = bpv.x
+            model.bpv.y = bpv.y
+          }
+          if (model.hpv) {
+            for (let k = 0; k < model.hpv.length; k++) {
+              let hpv = DDeiUtil.toPageCoord({ x: model.hpv[k].x, y: model.hpv[k].y }, stage, unit)
+              model.hpv[k].x = hpv.x
+              model.hpv[k].y = hpv.y
+            }
+          }
+          if (model.exPvs) {
+            for (let k in model.exPvs) {
+              let pv = DDeiUtil.toPageCoord({ x: model.exPvs[k].x, y: model.exPvs[k].y }, stage, unit)
+              model.exPvs[k].x = pv.x
+              model.exPvs[k].y = pv.y
+            }
+          }
+          if (model.pvs) {
+            for (let k = 0; k < model.pvs.length; k++) {
+              let pv = DDeiUtil.toPageCoord({ x: model.pvs[k].x, y: model.pvs[k].y }, stage, unit)
+              model.pvs[k].x = pv.x
+              model.pvs[k].y = pv.y
+            }
+          }
+
+
+
+          //如果是容器则递归处理其子控件
+          DDeiUtil.convertChildrenJsonUnit(model, stage, unit);
+        });
+      }
+      
       //当前选中控件是否为1且有表格，且选中表格的单元格，则作为表格单元格的内容粘贴
       let createControl = true;
       if (stage.selectedModels?.size == 1) {
