@@ -213,10 +213,10 @@ export default defineComponent({
 
 
 <template>
-  <!--<DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
-
+  <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
+  <!--
   <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
-  -->
+ 
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>
   </div>
@@ -226,7 +226,7 @@ export default defineComponent({
     <textarea :value="jsontext"
       style="border:1px solid grey;margin-left:5px;padding:5px;width:100%;height:100%"></textarea>
   </div>
-  <!--
+
   <div style="width:500px;height:500px;float:left">
     <DDeiEditorView ref="editorViewer4" :options="options3" id="ddei_editor_4"></DDeiEditorView>
   </div>
