@@ -381,6 +381,7 @@ export default {
         ddInstance.bus?.push(DDeiEditorEnumBusCommandType.AddFileHistroy);
         ddInstance.bus?.push(DDeiEnumBusCommandType.RefreshShape);
         ddInstance.bus?.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
+        ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
         ddInstance.bus.executeAll();
 
         DDeiEditorUtil.closeDialogs(this.editor,null, true)
@@ -420,6 +421,7 @@ export default {
 
         ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
         ddInstance.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
+        ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
         ddInstance.bus.executeAll();
 
         DDeiEditorUtil.closeDialogs(this.editor, null, true)
