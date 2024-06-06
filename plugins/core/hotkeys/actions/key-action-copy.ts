@@ -66,10 +66,27 @@ class DDeiKeyActionCopy extends DDeiKeyAction {
         //按照midlist排序输出
         let models = Array.from(selectedControls.values())
         let sortedModels = []
+        let modelLines = [];
+        let selectedSubAllModels = new Map()
         models[0].pModel.midList.forEach(mid => {
           models.forEach(item => {
             if (item.id == mid) {
               sortedModels.push(item)
+              if(item.baseModelType == 'DDeiContainer'){
+                let subLines = item.getModelsByBaseType("DDeiLine")
+                let subModels = item.getSubModels(null,100)
+                if (subModels?.length > 0){
+                  subModels.forEach(element => {
+                    selectedSubAllModels.set(element.id, element)
+                  });
+                  
+                }
+                if (subLines?.length > 0){
+                  modelLines.push(...subLines)
+                }
+              }else if(item.baseModelType == 'DDeiLine'){
+                modelLines.push(item)
+              }
             }
           })
         })
@@ -99,26 +116,29 @@ class DDeiKeyActionCopy extends DDeiKeyAction {
             let json = model.toJSON();
             jsonStr += JSON.stringify(json) + ","
           }
+        })
+        
+        modelLines.forEach(line=>{
+          
           //如果控件为线段，则复制linkModels
-          if (model.baseModelType == "DDeiLine") {
-            let distModelLinks = ddInstance.stage?.getDistModelLinks(model.id)
-            //如果被复制的控件也在linkmodels里面，则需要复制linkModel信息
-            distModelLinks?.forEach(link => {
-              if (selectedControls?.has(link?.sm?.id)) {
-                jsonLinksStr += JSON.stringify(link) + ","
+          let distModelLinks = ddInstance.stage?.getDistModelLinks(line.id)
+          //如果被复制的控件也在linkmodels里面，则需要复制linkModel信息
+          distModelLinks?.forEach(link => {
+            if (selectedControls?.has(link?.sm?.id) || selectedSubAllModels?.has(link?.sm?.id)) {
+              jsonLinksStr += JSON.stringify(link) + ","
+            }
+          })
+          //需要进一步复制其linkModels
+          line.linkModels?.forEach(lineLM => {
+            if (lineLM.dm) {
+              if (!selectedControls.has(lineLM.dm.id) && !selectedSubAllModels.has(lineLM.dm.id)) {
+                //添加到复制的model中
+                let json = lineLM.dm.toJSON();
+                jsonStr += JSON.stringify(json) + ","
               }
-            })
-            //需要进一步复制其linkModels
-            model.linkModels?.forEach(lineLM => {
-              if (lineLM.dm) {
-                if (!selectedControls.has(lineLM.dm.id)) {
-                  //添加到复制的model中
-                  let json = lineLM.dm.toJSON();
-                  jsonStr += JSON.stringify(json) + ","
-                }
-              }
-            });
-          }
+            }
+          });
+          
         })
         if (jsonStr.length > 1) {
 
