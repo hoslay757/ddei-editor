@@ -187,8 +187,9 @@ export default {
         });
         let openedFiles = this.editor.files;
         let openedFileIndex = -1
+        
         for (let fi = 0; fi < openedFiles.length; fi++) {
-          if ((openedFiles[fi].id && openedFiles[fi].id == file.id) || openedFiles[fi].path == file.path) {
+          if ((openedFiles[fi].id && openedFiles[fi].id == file.id) || (openedFiles[fi].path && file.path && (openedFiles[fi].path == file.path))) {
             openedFileIndex = fi
             break;
           }
