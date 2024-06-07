@@ -2,6 +2,7 @@
 import DDeiEditorView from "./editor/Editor.vue";
 import { DDeiCoreTopMenuPanel, DDeiCoreThemeBlack, DDeiCoreControls, DDeiCoreHotkeys, DDeiKeyActionAllSelect, DDeiCorePropertyViewPanel, DDeiCoreToolboxPanel, DDeiCoreSheetsPanel, DDeiCoreChangeRatioPanel, DDeiCoreChangeRatioDialog, DDeiCoreShapeCountPanel, DDeiCoreBottomMenuPanel, DDeiCoreStandLayout, DDeiCoreOpenFilesViewPanel, DDeiCoreThemeDefault } from "@ddei/core";
 import { DDeiExtUML } from "@ddei/uml"
+import { DDeiExtSearch } from "@ddei/search"
 import { DDeiFuncCallResult } from "ddei-framework";
 import DDeiExtQuickStyle from "@ddei/quickstyle"
 import { defineComponent, markRaw } from "vue";
@@ -26,7 +27,9 @@ export default defineComponent({
           // 'left': [],
           // 'right': []
         }),
-        DDeiExtUML
+        DDeiExtUML,
+        DDeiExtSearch,
+        DDeiExtQuickStyle
         // DDeiCoreThemeBlack.configuration({
         //   default: true
         // }),
