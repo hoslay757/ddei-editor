@@ -1,36 +1,43 @@
 <template>
   <div class="ddei-ext-panel-search">
-    <div :class="{ 'ddei-ext-panel-search-mode': true, 'ddei-ext-panel-search-mode__expand':mode== 2}"
+    <div :class="{ 'ddei-ext-panel-search-mode': true, 'ddei-ext-panel-search-mode__expand':editor.search?.mode== 2}"
       @click="changeReplace">
       <svg class="icon" aria-hidden="true">
-        <use v-if="mode==1" xlink:href="#icon-a-ziyuan477"></use>
-        <use v-if="mode==2" xlink:href="#icon-a-ziyuan478"></use>
+        <use v-if="editor.search?.mode==1" xlink:href="#icon-a-ziyuan477"></use>
+        <use v-if="editor.search?.mode==2" xlink:href="#icon-a-ziyuan478"></use>
       </svg>
     </div>
     <div class="ddei-ext-panel-search-box">
-      <input class="ddei-ext-panel-search-box-input" :placeholder="搜索" autocomplete="off" />
-      <div class="ddei-ext-panel-search-box-btn">
+      <input class="ddei-ext-panel-search-box-input" v-model="searchText" ref="searchBoxInput" @keydown="executeQuery"
+        @focus="changeEditorState" placeholder="搜索" autocomplete="off" />
+      <div @click="changeMatchCase()"
+        :class="{ 'ddei-ext-panel-search-box-btn': true, 'ddei-ext-panel-search-box-btn__selected': editor.search?.matchCase == 1 }">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-a-ziyuan454"></use>
         </svg>
       </div>
-      <div class="ddei-ext-panel-search-box-btn">
+      <div @click="changeMatchAll()"
+        :class="{ 'ddei-ext-panel-search-box-btn': true, 'ddei-ext-panel-search-box-btn__selected': editor.search?.matchAll == 1 }">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-all-match"></use>
         </svg>
       </div>
     </div>
     <div class="ddei-ext-panel-search-result">
-      第3项，共3项
+      第{{ resultIndex }}项，共{{ result.length }}项
     </div>
 
     <div class="ddei-ext-panel-search-buttons">
-      <div class="ddei-ext-panel-search-buttons-btn">
+      <div
+        :class="{ 'ddei-ext-panel-search-buttons-btn': true, 'ddei-ext-panel-search-buttons-btn__disabled': resultIndex >= result.length - 1}"
+        @click="moveToNextResult()">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-a-ziyuan483"></use>
         </svg>
       </div>
-      <div class="ddei-ext-panel-search-buttons-btn">
+      <div
+        :class="{ 'ddei-ext-panel-search-buttons-btn': true, 'ddei-ext-panel-search-buttons-btn__disabled': resultIndex == 0 || result.length == 0 }"
+        @click="moveToUpResult()">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-a-ziyuan482"></use>
         </svg>
@@ -42,10 +49,11 @@
       </div>
     </div>
 
-    <div v-if="mode==2" class="ddei-ext-panel-search-box">
-      <input class="ddei-ext-panel-search-box-input" :placeholder="替换" autocomplete="off" />
+    <div v-if="editor.search?.mode==2" class="ddei-ext-panel-search-box">
+      <input class="ddei-ext-panel-search-box-input" @focus="changeEditorState"
+        placeholder="替换" autocomplete="off" />
     </div>
-    <div v-if="mode == 2" class="ddei-ext-panel-search-replace-buttons">
+    <div v-if="editor.search?.mode == 2" class="ddei-ext-panel-search-replace-buttons">
       <div class="ddei-ext-panel-search-replace-buttons-btn">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-replace"></use>
@@ -64,6 +72,7 @@ import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
+import { debounce } from "lodash";
 
 export default {
   name: "ddei-ext-panel-search",
@@ -82,28 +91,72 @@ export default {
   },
   data() {
     return {
-      mode:1
+      searchText:'',
+      resultIndex:0,
+      result:[]
     };
   },
   computed: {},
   watch: {},
   created() {
-
+    this.executeQuery = debounce(this.executeQuery,300)
   },
   mounted() {
+    if (!this.editor.search) {
+      this.editor.search = {}
+    }
+    if(!this.editor.search.mode){
+      this.editor.search.mode = 1
+    }
+    setTimeout(() => {
+      this.$refs.searchBoxInput.focus();
+    }, 200);
     
   },
   methods:{
-    changeReplace(){
-      if (this.mode == 1){
-        this.mode = 2;
-      }else{
-        this.mode = 1;
+    changeReplace() {
+      if (this.editor.search.mode == 1) {
+        this.editor.search.mode = 2;
+      } else {
+        this.editor.search.mode = 1;
       }
+    },
+
+    changeMatchCase() {
+      if (this.editor.search.matchCase == true) {
+        this.editor.search.matchCase = false;
+      } else {
+        this.editor.search.matchCase = true;
+      }
+    },
+
+    changeMatchAll() {
+      if (this.editor.search.matchAll == true) {
+        this.editor.search.matchAll = false;
+      } else {
+        this.editor.search.matchAll = true;
+      }
+    },
+
+    executeQuery(){
+      let rs = this.editor.searchModels(this.searchText,"text",false,1,this.matchCase,this.matchAll)
+      if(rs?.length > 0){
+        this.result = rs;
+        this.resultIndex = 0
+      }else{
+        this.result = []
+        this.resultIndex = 0
+      }
+      return true
+    },
+
+    changeEditorState(){
+      this.editor.changeState(DDeiEditorState.PROPERTY_EDITING);
     },
 
     closeDialog(){
       DDeiEditorUtil.closeDialog(this.editor,"ddei-ext-dialog-search",true)
+      this.editor.changeState(DDeiEditorState.DESIGNING);
     }
   }
 };
@@ -158,6 +211,8 @@ export default {
         background: none;
         border:none;
         outline: none;
+        
+        
       }
 
       &-btn{
@@ -169,14 +224,16 @@ export default {
         justify-content: center;
 
         &:hover {
-          background-color: var(--panel-hover);
-          filter: brightness(85%);
+          background-color: var(--dot);
+          filter: brightness(130%);
           cursor: pointer;
+          border-radius: 4px;
         }
 
         &__selected {
-          background-color: var(--panel-hover);
-          filter: brightness(85%);
+          background-color: var(--dot);
+          filter: brightness(130%);
+          border-radius: 4px;
         }
       }
     }
@@ -218,6 +275,12 @@ export default {
       
         &__selected {
           background-color: var(--panel-header);
+        }
+
+        &__disabled {
+          .icon{
+            filter: opacity(0.5)
+          }
         }
 
         .icon{

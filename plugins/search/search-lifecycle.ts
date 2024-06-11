@@ -22,7 +22,7 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
     let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
     if (editor.tempPopData && editor.tempPopData['ddei-ext-dialog-search']){
       DDeiEditorUtil.hiddenDialog(editor,'ddei-ext-dialog-search')
-      if (operateType == "CHANGE_RATIO" || operateType == "DRAG" || operateType == "CREATE" || operateType == "CHANGE_WPV" || operateType == "CHANGE_BOUNDS" || operateType == "CHANGE_ROTATE") {
+      if (operateType == "CHANGE_RATIO" || operateType == "SELECT_WORKING" || operateType == "DRAG" || operateType == "CREATE" || operateType == "CHANGE_WPV" || operateType == "CHANGE_BOUNDS" || operateType == "CHANGE_ROTATE") {
         DDeiExtSearchLifeCycle.displaySearchDialog(editor);
       }
     }

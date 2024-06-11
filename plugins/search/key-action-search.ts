@@ -70,7 +70,7 @@ class DDeiKeyActionSearch extends DDeiKeyAction {
         let left = canvasPos.left + srcElement.offsetWidth-500
         let top = canvasPos.top
         DDeiEditorUtil.showDialog(editor, 'ddei-ext-dialog-search', {
-          group: "canvas-pop-search"
+          group: "ddei-core-search"
         }, { type: 99, left: left, top: top, hiddenMask: true }, null, true, true)
         editor?.changeState(curState)
       }
