@@ -476,25 +476,9 @@ export default {
         ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
         ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
         ddInstance.bus.executeAll();
-      } else if (file.active != DDeiActiveType.ACTIVE) {
-        this.editor.files.forEach((item) => {
-          item.active = DDeiActiveType.NONE;
-        });
-        file.active = DDeiActiveType.ACTIVE;
-        //刷新画布
-        this.editor.currentFileIndex = this.editor?.files?.indexOf(file);
-        let sheets = file?.sheets;
-
-        if (file && sheets && ddInstance) {
-          let stage = sheets[file.currentSheetIndex].stage;
-          stage.ddInstance = ddInstance;
-          //刷新页面
-          ddInstance.stage = stage;
-          //加载场景渲染器
-          stage.initRender();
-          ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
-        }
-        // this.applyFilePromise(file)
+      }else{
+        this.editor.changeFile(this.editor.files.indexOf(file))
+        ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
         ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
         ddInstance.bus.executeAll();
       }
@@ -503,6 +487,7 @@ export default {
       } else {
         ddInstance.disabled = false
       }
+      
 
     },
 

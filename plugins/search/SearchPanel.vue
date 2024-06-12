@@ -8,8 +8,8 @@
       </svg>
     </div>
     <div class="ddei-ext-panel-search-box">
-      <input class="ddei-ext-panel-search-box-input" v-model="searchText" ref="searchBoxInput" @keydown="executeQuery"
-        @focus="changeEditorState" placeholder="搜索" autocomplete="off" />
+      <input class="ddei-ext-panel-search-box-input" v-model="editor.search.keywords" :id="searchInputId" ref="searchBoxInput"
+        @keydown="executeQuery($event)" @focus="changeEditorState" placeholder="搜索" autocomplete="off" />
       <div @click="changeMatchCase()"
         :class="{ 'ddei-ext-panel-search-box-btn': true, 'ddei-ext-panel-search-box-btn__selected': editor.search?.matchCase == 1 }">
         <svg class="icon" aria-hidden="true">
@@ -24,19 +24,19 @@
       </div>
     </div>
     <div class="ddei-ext-panel-search-result">
-      第{{ resultIndex }}项，共{{ result.length }}项
+      第{{ editor.search?.resultIndex+1 }}项，共{{ editor.search?.result?.length }}项
     </div>
 
     <div class="ddei-ext-panel-search-buttons">
       <div
-        :class="{ 'ddei-ext-panel-search-buttons-btn': true, 'ddei-ext-panel-search-buttons-btn__disabled': resultIndex >= result.length - 1}"
+        :class="{ 'ddei-ext-panel-search-buttons-btn': true, 'ddei-ext-panel-search-buttons-btn__disabled': !editor.search || editor.search?.resultIndex >= editor.search?.result?.length - 1}"
         @click="moveToNextResult()">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-a-ziyuan483"></use>
         </svg>
       </div>
       <div
-        :class="{ 'ddei-ext-panel-search-buttons-btn': true, 'ddei-ext-panel-search-buttons-btn__disabled': resultIndex == 0 || result.length == 0 }"
+        :class="{ 'ddei-ext-panel-search-buttons-btn': true, 'ddei-ext-panel-search-buttons-btn__disabled': !editor.search || editor.search?.resultIndex == 0 || editor.search?.result?.length == 0 }"
         @click="moveToUpResult()">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-a-ziyuan482"></use>
@@ -50,8 +50,7 @@
     </div>
 
     <div v-if="editor.search?.mode==2" class="ddei-ext-panel-search-box">
-      <input class="ddei-ext-panel-search-box-input" @focus="changeEditorState"
-        placeholder="替换" autocomplete="off" />
+      <input class="ddei-ext-panel-search-box-input" @focus="changeEditorState" placeholder="替换" autocomplete="off" />
     </div>
     <div v-if="editor.search?.mode == 2" class="ddei-ext-panel-search-replace-buttons">
       <div class="ddei-ext-panel-search-replace-buttons-btn">
@@ -68,7 +67,7 @@
   </div>
 </template>
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework";
+import { DDeiEditor, DDeiEditorEnumBusCommandType, DDeiUtil } from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
@@ -91,26 +90,32 @@ export default {
   },
   data() {
     return {
-      searchText:'',
-      resultIndex:0,
-      result:[]
+      searchInputId:''
     };
   },
   computed: {},
   watch: {},
   created() {
+    if (!this.editor.search) {
+      this.editor.search = {
+        resultIndex: -1,
+        result: []
+      }
+    }
     this.executeQuery = debounce(this.executeQuery,300)
   },
   mounted() {
-    if (!this.editor.search) {
-      this.editor.search = {}
-    }
+    
     if(!this.editor.search.mode){
       this.editor.search.mode = 1
     }
+    this.searchInputId = this.editor.id+"_search_input";
+    if(this.editor?.search?.result?.length > 0){
+      this.changeFileSheetSelectAndModel()
+    }
     setTimeout(() => {
       this.$refs.searchBoxInput.focus();
-    }, 200);
+    }, 300);
     
   },
   methods:{
@@ -128,6 +133,7 @@ export default {
       } else {
         this.editor.search.matchCase = true;
       }
+      this.executeQuery();
     },
 
     changeMatchAll() {
@@ -136,26 +142,131 @@ export default {
       } else {
         this.editor.search.matchAll = true;
       }
+      this.executeQuery();
     },
 
-    executeQuery(){
-      let rs = this.editor.searchModels(this.searchText,"text",false,1,this.matchCase,this.matchAll)
-      if(rs?.length > 0){
-        this.result = rs;
-        this.resultIndex = 0
-      }else{
-        this.result = []
-        this.resultIndex = 0
+    executeQuery(evt:Event){
+      if (evt.keyCode != 13 && evt.keyCode != '27'){
+        let rs = this.editor.searchModels(this.editor.search?.keywords, "text", false, 3, this.editor.search?.matchCase, this.editor.search?.matchAll)
+        if(rs?.length > 0){
+          this.editor.search.result = rs;
+          this.editor.search.resultIndex = -1
+        }else{
+          this.editor.search.result = []
+          this.editor.search.resultIndex = -1
+        }
+        this.moveToNextResult();
+        return true
       }
-      return true
+      this.editor.search.inActive = false
+    },
+
+    moveToNextResult() {
+      this.editor.search.resultIndex++;
+      this.changeFileSheetSelectAndModel()
+    },
+
+    moveToUpResult() {
+      this.editor.search.resultIndex--;
+      this.changeFileSheetSelectAndModel()
+    },
+
+    changeFileSheetSelectAndModel(clearSpt:boolean = false){
+      this.editor.search.inActive = false
+      if (this.editor.search.resultIndex >= this.editor.search.result.length - 1) {
+        this.editor.search.resultIndex = this.editor.search.result.length - 1
+      } else if (this.editor.search.resultIndex < 0) {
+        this.editor.search.resultIndex = 0
+      }
+      let ddInstance = this.editor.ddInstance
+      let rsData = this.editor.search.result[this.editor.search.resultIndex]
+      let skipIndex = [this.editor.search.resultIndex]
+      let textSelectColor = DDeiUtil.getStyleValue("canvas-text-selection", this.editor.ddInstance);
+      if (rsData?.model) {
+        //切换文件和sheet
+        let file = this.editor.files[rsData.fileIndex];
+
+        if (file) {
+          let sheetIndex = rsData.sheetIndex;
+          if (sheetIndex >= 0) {
+            this.editor.changeFile(rsData.fileIndex, sheetIndex)
+            //选中并中心化控件
+            this.editor.centerModels(ddInstance.stage, rsData.model.id)
+            rsData.model?.render?.controlSelect();
+            if (!clearSpt){
+              //绘制选择效果
+              let sptStyle = {}
+              for (let i = 0; i < rsData.len; i++) {
+                sptStyle["" + (rsData.index + i)] = { textStyle: { bgcolor: textSelectColor } }
+              }
+              //向前、向后查找当前控件，设置特殊样式并标记跳过
+              for (let k = this.editor.search.resultIndex - 1; k > 0; k--) {
+                if (this.editor.search.result[k].model == rsData.model) {
+                  let rsd1 = this.editor.search.result[k]
+                  for (let ki = 0; ki < rsd1.len; ki++) {
+                    sptStyle["" + (rsd1.index + ki)] = { textStyle: { bgcolor: "#ebebeb" } }
+                  }
+                  skipIndex.push(k);
+                } else {
+                  break;
+                }
+              }
+              for (let k = this.editor.search.resultIndex + 1; k < this.editor.search.result.length; k++) {
+                if (this.editor.search.result[k].model == rsData.model) {
+                  let rsd1 = this.editor.search.result[k]
+                  for (let ki = 0; ki < rsd1.len; ki++) {
+                    sptStyle["" + (rsd1.index + ki)] = { textStyle: { bgcolor: "#ebebeb" } }
+                  }
+                  skipIndex.push(k);
+                } else {
+                  break;
+                }
+              }
+              
+              rsData.model?.render?.drawShape({ border: { type: 1, color: "#017fff", width: 1, dash: [10, 10] }, sptStyle: sptStyle });
+            }else{
+              rsData.model?.render?.enableRefreshShape();
+            }
+          }
+        }
+      }
+      
+      for (let ri = 0; ri < this.editor.search.result.length; ri++) {
+        let rsData = this.editor.search.result[ri]
+        if (rsData?.model) {
+          //切换文件和sheet
+          let file = this.editor.files[rsData.fileIndex];
+          if (file) {
+            let sheetIndex = rsData.sheetIndex;
+            if (sheetIndex >= 0) {
+              if (skipIndex.indexOf(ri) == -1) {    
+                if (!clearSpt) {
+                  //绘制选择效果
+                  let sptStyle = {}
+                  for (let i = 0; i < rsData.len; i++) {
+                    sptStyle["" + (rsData.index + i)] = { textStyle: { bgcolor: "#ebebeb" } }
+                  }
+                  rsData.model?.render?.drawShape({ sptStyle: sptStyle });
+                } else {
+                  rsData.model?.render?.enableRefreshShape();
+                }
+              }
+            }
+          }
+        }
+      }
+      ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+      ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
+      ddInstance.bus.executeAll();
     },
 
     changeEditorState(){
-      this.editor.changeState(DDeiEditorState.PROPERTY_EDITING);
+      this.editor.changeState("ddei-search");
     },
 
     closeDialog(){
       DDeiEditorUtil.closeDialog(this.editor,"ddei-ext-dialog-search",true)
+      this.changeFileSheetSelectAndModel(true);
       this.editor.changeState(DDeiEditorState.DESIGNING);
     }
   }
@@ -280,6 +391,11 @@ export default {
         &__disabled {
           .icon{
             filter: opacity(0.5)
+          }
+
+          &:hover{
+            background:none;
+            cursor: default;
           }
         }
 

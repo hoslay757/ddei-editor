@@ -7,12 +7,12 @@ import {DDeiEditorState} from "ddei-framework";
 import {DDeiKeyAction} from "ddei-framework";
 
 /**
- * 键行为:剪切
- * 剪切当前的已选控件
+ * 键行为:搜索
+ * 弹出搜索框
  */
 class DDeiKeyActionSearch extends DDeiKeyAction {
 
-  name: string = "ddei-core-keyaction-search"
+  name: string = "ddei-ext-keyaction-search"
 
 
   /**
@@ -22,7 +22,7 @@ class DDeiKeyActionSearch extends DDeiKeyAction {
 
   defaultOptions: object = {
     'keys': [
-      { ctrl: 1, keys: "70", editorState: DDeiEditorState.DESIGNING },
+      { ctrl: 1, keys: "70"},
     ]
   }
 
@@ -56,23 +56,35 @@ class DDeiKeyActionSearch extends DDeiKeyAction {
 
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei, editor: DDeiEditor): void {
+    
     if (!editor.tempPopData || !editor.tempPopData['ddei-ext-dialog-search']){
       let srcElement = document.getElementById(editor.id +"_canvas")
       if (srcElement){
         let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
-        let curState = editor.state
         //隐藏弹出框
-        DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-search')
+        DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-search',true)
 
         //显示弹出框
         let canvasPos = DDeiUtil.getDomAbsPosition(srcElement)
         
         let left = canvasPos.left + srcElement.offsetWidth-500
         let top = canvasPos.top
+        if (editor.search?.result){
+          editor.search.inActive = true
+        }
         DDeiEditorUtil.showDialog(editor, 'ddei-ext-dialog-search', {
           group: "ddei-core-search"
         }, { type: 99, left: left, top: top, hiddenMask: true }, null, true, true)
-        editor?.changeState(curState)
+        editor.changeState("ddei-search");
+      }
+      
+    }else{
+      let searchInput = document.getElementById(editor.id +"_search_input")
+      if (searchInput){
+        searchInput.focus();
+        editor.search.inActive = false
+        
+        editor.changeState("ddei-search");
       }
     }
   }

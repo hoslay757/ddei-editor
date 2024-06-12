@@ -1,7 +1,7 @@
 import {DDeiPluginBase} from "ddei-framework";
 import SearchDialog from "./searchdialog"
 import SearchPanel from "./searchpanel"
-import KeyActionSearch from "./key-action-search"
+import DDeiExtSearchHotkeys from "./hotkeys"
 import DDeiExtSearchLifeCycle from "./search-lifecycle"
 
 class DDeiExtSearch extends DDeiPluginBase {
@@ -17,7 +17,7 @@ class DDeiExtSearch extends DDeiPluginBase {
 
   panels: object = SearchPanel;
 
-  hotkeys: object = KeyActionSearch;
+  hotkeys: object = DDeiExtSearchHotkeys;
 
   lifecyclies: object = DDeiExtSearchLifeCycle;
 
