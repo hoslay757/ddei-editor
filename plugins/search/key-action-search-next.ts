@@ -3,7 +3,7 @@ import {DDei} from "ddei-framework";
 import { DDeiUtil } from "ddei-framework";
 import {DDeiEditor} from "ddei-framework";
 import { DDeiEnumBusCommandType, DDeiEditorEnumBusCommandType } from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
+import { DDeiEnumControlState } from "ddei-framework";
 import {DDeiKeyAction} from "ddei-framework";
 
 /**
@@ -57,10 +57,50 @@ class DDeiKeyActionSearchNext extends DDeiKeyAction {
   action(evt: Event, ddInstance: DDei, editor: DDeiEditor): void {
     if (editor.tempPopData && editor.tempPopData['ddei-ext-dialog-search']){
       if (!editor.search?.inActive) {
+        //检查replace_input 是否为激活状态
+        let replaceInput = document.getElementById(editor.id + "_search_replace_input");
+        if (replaceInput && document.activeElement == replaceInput){
+          this.executeReplace(editor, replaceInput)
+        }
         editor.search.resultIndex++;
         this.changeFileSheetSelectAndModel(editor);
       }else{
         editor.search.inActive = false
+      }
+    }
+  }
+
+  executeReplace(editor,textInput) {
+    if (editor.search?.result?.length > 0) {
+      let rsData = editor.search?.result[editor.search?.resultIndex]
+      if (rsData.model) {
+        editor.replaceModelsData([rsData.model], "text", rsData.index, rsData.index + rsData.len, textInput.value)
+        //长度增加量
+        for (let k = editor.search.resultIndex+1; k<editor.search.result?.length; k++){
+          if (editor.search.result[k].model == rsData.model){
+            let lenDelta = textInput.value.length - rsData.len
+            if (lenDelta != 0){
+              editor.search.result[k].index += lenDelta
+              if (editor.search.result[k].index < 0){
+                editor.search.result[k].index = 0
+              }
+            }
+          }else{
+            break;
+          }
+          
+        }
+        editor.search.result.splice(editor.search?.resultIndex, 1)
+        if (editor.search.result.length > editor.search.resultIndex){
+          editor.search.resultIndex--
+          if (editor.search.resultIndex < 0) {
+            editor.search.resultIndex = 0
+          }
+        }
+        if (editor.search.result.length == 0){
+          editor.search.resultIndex = 0
+          rsData.model?.render?.clearCachedValue();
+        }
       }
     }
   }

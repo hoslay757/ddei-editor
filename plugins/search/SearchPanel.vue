@@ -8,8 +8,9 @@
       </svg>
     </div>
     <div class="ddei-ext-panel-search-box">
-      <input class="ddei-ext-panel-search-box-input" v-model="editor.search.keywords" :id="searchInputId" ref="searchBoxInput"
-        @keydown="executeQuery($event)" @focus="changeEditorState" placeholder="搜索" autocomplete="off" />
+      <input class="ddei-ext-panel-search-box-input" v-model="editor.search.keywords" :id="searchInputId"
+        ref="searchBoxInput" @keydown="executeQuery($event)" @focus="changeEditorState" placeholder="搜索"
+        autocomplete="off" />
       <div @click="changeMatchCase()"
         :class="{ 'ddei-ext-panel-search-box-btn': true, 'ddei-ext-panel-search-box-btn__selected': editor.search?.matchCase == 1 }">
         <svg class="icon" aria-hidden="true">
@@ -50,15 +51,16 @@
     </div>
 
     <div v-if="editor.search?.mode==2" class="ddei-ext-panel-search-box">
-      <input class="ddei-ext-panel-search-box-input" @focus="changeEditorState" placeholder="替换" autocomplete="off" />
+      <input :id="replaceInputId" ref="searchReplaceBoxInput" class="ddei-ext-panel-search-box-input"
+        v-model="replaceText" @focus="changeEditorState" placeholder="替换" autocomplete="off" />
     </div>
     <div v-if="editor.search?.mode == 2" class="ddei-ext-panel-search-replace-buttons">
-      <div class="ddei-ext-panel-search-replace-buttons-btn">
+      <div class="ddei-ext-panel-search-replace-buttons-btn" @click="executeReplace(editor)">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-replace"></use>
         </svg>
       </div>
-      <div class="ddei-ext-panel-search-replace-buttons-btn">
+      <div class="ddei-ext-panel-search-replace-buttons-btn" @click="executeReplaceAll(editor)">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-replace-all"></use>
         </svg>
@@ -90,7 +92,9 @@ export default {
   },
   data() {
     return {
-      searchInputId:''
+      searchInputId:'',
+      replaceInputId:'',
+      replaceText:''
     };
   },
   computed: {},
@@ -102,19 +106,24 @@ export default {
         result: []
       }
     }
-    this.executeQuery = debounce(this.executeQuery,300)
+    this.executeQuery = debounce(this.executeQuery, 300)
   },
   mounted() {
     
     if(!this.editor.search.mode){
       this.editor.search.mode = 1
     }
-    this.searchInputId = this.editor.id+"_search_input";
+    this.searchInputId = this.editor.id + "_search_input";
+    this.replaceInputId = this.editor.id + "_search_replace_input";
     if(this.editor?.search?.result?.length > 0){
       this.changeFileSheetSelectAndModel()
     }
     setTimeout(() => {
-      this.$refs.searchBoxInput.focus();
+      if (this.editor.search.mode == 2){
+        this.$refs.searchReplaceBoxInput.focus();
+      } else{
+        this.$refs.searchBoxInput.focus();
+      }
     }, 300);
     
   },
@@ -156,9 +165,9 @@ export default {
           this.editor.search.resultIndex = -1
         }
         this.moveToNextResult();
-        return true
       }
       this.editor.search.inActive = false
+      return true
     },
 
     moveToNextResult() {
@@ -269,6 +278,81 @@ export default {
       ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
       ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
       ddInstance.bus.executeAll();
+    },
+
+
+    executeReplace(editor) {
+      if (editor.search?.result?.length > 0) {
+        let rsData = editor.search?.result[editor.search?.resultIndex]
+        if (rsData.model) {
+          editor.replaceModelsData([rsData.model], "text", rsData.index, rsData.index + rsData.len, this.replaceText)
+          //长度增加量
+          for (let k = editor.search.resultIndex + 1; k < editor.search.result?.length; k++) {
+            if (editor.search.result[k].model == rsData.model) {
+              let lenDelta = this.replaceText.length - rsData.len
+              if (lenDelta != 0) {
+                editor.search.result[k].index += lenDelta
+                if (editor.search.result[k].index < 0) {
+                  editor.search.result[k].index = 0
+                }
+              }
+            } else {
+              break;
+            }
+
+          }
+          editor.search.result.splice(editor.search?.resultIndex, 1)
+          if (editor.search.result.length > editor.search.resultIndex) {
+            editor.search.resultIndex--
+            if (editor.search.resultIndex < 0) {
+              editor.search.resultIndex = 0
+            }
+          }
+          if (editor.search.result.length == 0) {
+            editor.search.resultIndex = 0
+            rsData.model?.render?.clearCachedValue();
+          }
+        }
+        this.changeFileSheetSelectAndModel();
+        let ddInstance = editor.ddInstance
+        ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+        ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
+        ddInstance.bus.executeAll();
+      }
+      editor.search.inActive = false
+      return true
+    },
+
+    executeReplaceAll(editor) {
+      while (editor.search?.result?.length > 0) {
+        let rsData = editor.search?.result[0]
+        if (rsData.model) {
+          editor.replaceModelsData([rsData.model], "text", rsData.index, rsData.index + rsData.len, this.replaceText)
+          //长度增加量
+          for (let k = 1; k < editor.search.result?.length; k++) {
+            if (editor.search.result[k].model == rsData.model) {
+              let lenDelta = this.replaceText.length - rsData.len
+              if (lenDelta != 0) {
+                editor.search.result[k].index += lenDelta
+                if (editor.search.result[k].index < 0) {
+                  editor.search.result[k].index = 0
+                }
+              }
+            } else {
+              break;
+            }
+          }
+          editor.search.result.splice(editor.search?.resultIndex, 1)
+          rsData.model?.render?.clearCachedValue();
+        }
+      }
+      editor.search.resultIndex = -1
+      let ddInstance = editor.ddInstance
+      ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+      ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
+      ddInstance.bus.executeAll();
+      editor.search.inActive = false
+      return true
     },
 
     changeEditorState(){

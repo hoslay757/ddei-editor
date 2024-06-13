@@ -22,7 +22,8 @@ class DDeiKeyActionSearch extends DDeiKeyAction {
 
   defaultOptions: object = {
     'keys': [
-      { ctrl: 1, keys: "70"},
+      { ctrl: 1, keys: "70", type:"search" },
+      { ctrl: 1, keys: "72", type:"replace" },
     ]
   }
 
@@ -55,8 +56,19 @@ class DDeiKeyActionSearch extends DDeiKeyAction {
   }
 
   // ============================ 方法 ===============================
-  action(evt: Event, ddInstance: DDei, editor: DDeiEditor): void {
-    
+  action(evt: Event, ddInstance: DDei, editor: DDeiEditor,item:object): void {
+    //1搜索，2替换
+    let mode = 1;
+    if (item?.type == 'replace'){
+      mode = 2;
+    }
+    if (!editor.search) {
+      editor.search = {
+        resultIndex: -1,
+        result: []
+      }
+    }
+    editor.search.mode = mode
     if (!editor.tempPopData || !editor.tempPopData['ddei-ext-dialog-search']){
       let srcElement = document.getElementById(editor.id +"_canvas")
       if (srcElement){
@@ -79,12 +91,22 @@ class DDeiKeyActionSearch extends DDeiKeyAction {
       }
       
     }else{
-      let searchInput = document.getElementById(editor.id +"_search_input")
-      if (searchInput){
-        searchInput.focus();
-        editor.search.inActive = false
-        
-        editor.changeState("ddei-search");
+      if (mode == 2){
+        let searchReplaceInput = document.getElementById(editor.id + "_search_replace_input")
+        if (searchReplaceInput) {
+          searchReplaceInput.focus();
+          editor.search.inActive = false
+
+          editor.changeState("ddei-search");
+        }
+      }else{
+        let searchInput = document.getElementById(editor.id + "_search_input")
+        if (searchInput){
+          searchInput.focus();
+          editor.search.inActive = false
+          
+          editor.changeState("ddei-search");
+        }
       }
     }
   }
