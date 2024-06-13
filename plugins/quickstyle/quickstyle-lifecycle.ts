@@ -1,4 +1,4 @@
-import { DDeiLifeCycle, DDeiFuncData, DDeiEditorUtil, DDeiUtil, DDeiFuncCallResult } from "ddei-framework";
+import { DDeiLifeCycle, DDeiFuncData, DDeiEditorUtil, DDeiUtil, DDeiFuncCallResult, DDeiEditorState } from "ddei-framework";
 import { debounce } from "lodash";
 
 class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
@@ -23,8 +23,7 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"]) {
       let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
       DDeiEditorUtil.hiddenDialog(editor,'ddei-core-dialog-quickpop')
-      
-      if (operateType == "CHANGE_RATIO" || operateType == "CHANGE_WPV" || operateType == "CHANGE_BOUNDS" || operateType == "CHANGE_ROTATE") {
+      if (operateType == "SCROLL_WORKING" || operateType == "CHANGE_RATIO" || operateType == "CHANGE_WPV" || operateType == "CHANGE_BOUNDS" || operateType == "CHANGE_ROTATE") {
         
         DDeiCoreCanvasLifeCycle.displayQuickDialog(editor);
       }
@@ -32,35 +31,35 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
   }
 
   static displayQuickDialog(editor) {
-  if (editor?.ddInstance?.stage?.selectedModels?.size > 0) {
-    let models = Array.from(editor.ddInstance.stage?.selectedModels.values())
-    if (models?.length > 0) {
-      let height = 100;
-      //计算弹出框的显示位置，这里需要把模型的坐标转换为dom的坐标
-      let editorEle = document.getElementById(editor.id);
-      let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
-      let modelPos = DDeiUtil.getModelsDomAbsPosition(models)
-      let left = (modelPos.left - editorDomPos.left) + 20
-      let top = (modelPos.top - editorDomPos.top)
-      if (modelPos.top - height <= modelPos.cTop) {
-        if (modelPos.height > 400) {
-          top = top + height + 20
+    if (editor.state == DDeiEditorState.DESIGNING && editor?.ddInstance?.stage?.selectedModels?.size > 0) {
+      let models = Array.from(editor.ddInstance.stage?.selectedModels.values())
+      if (models?.length > 0) {
+        let height = 100;
+        //计算弹出框的显示位置，这里需要把模型的坐标转换为dom的坐标
+        let editorEle = document.getElementById(editor.id);
+        let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
+        let modelPos = DDeiUtil.getModelsDomAbsPosition(models)
+        let left = (modelPos.left - editorDomPos.left) + 20
+        let top = (modelPos.top - editorDomPos.top)
+        if (modelPos.top - height <= modelPos.cTop) {
+          if (modelPos.height > 400) {
+            top = top + height + 20
+          } else {
+            top = top + modelPos.height + 20;
+          }
         } else {
-          top = top + modelPos.height + 20;
+          top = top - height;
         }
-      } else {
-        top = top - height;
+        if (top < 0) {
+          top = modelPos.cTop + modelPos.cHeight / 2
+        }
+        if (left < 0) {
+          left = 0
+        }
+        DDeiEditorUtil.displayDialog(editor, 'ddei-core-dialog-quickpop', null, { type: 99, left: left, top: top, hiddenMask: true })
       }
-      if (top < 0) {
-        top = modelPos.cTop + modelPos.cHeight / 2
-      }
-      if (left < 0) {
-        left = 0
-      }
-      DDeiEditorUtil.displayDialog(editor, 'ddei-core-dialog-quickpop', null, { type: 99, left: left, top: top, hiddenMask: true })
     }
   }
-}
   /**
      * 选择后，在选择控件的合适位置显示快捷编辑框
      */
@@ -69,39 +68,41 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"]) {
       let models = data?.models;
       let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
-      let curState = editor.state
-      //隐藏弹出框
-      DDeiEditorUtil.closeDialog(editor,'ddei-core-dialog-quickpop')
+      if (editor.state == DDeiEditorState.DESIGNING){
+        let curState = editor.state
+        //隐藏弹出框
+        DDeiEditorUtil.closeDialog(editor,'ddei-core-dialog-quickpop')
 
-      //显示弹出框
-      if (models?.length > 0) {
-        let height = 100;
-        //计算弹出框的显示位置，这里需要把模型的坐标转换为dom的坐标
-        let editorEle = document.getElementById(editor.id);
-        let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
-        let modelPos = DDeiUtil.getModelsDomAbsPosition(models)
-        let left = (modelPos.left - editorDomPos.left) + (modelPos.width / 2)
-        let top = (modelPos.top - editorDomPos.top) + (modelPos.height / 2)
-        if (modelPos.top - height <= modelPos.cTop) {
-          if (modelPos.height > 400) {
-            top = top + height + 20
+        //显示弹出框
+        if (models?.length > 0) {
+          let height = 100;
+          //计算弹出框的显示位置，这里需要把模型的坐标转换为dom的坐标
+          let editorEle = document.getElementById(editor.id);
+          let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
+          let modelPos = DDeiUtil.getModelsDomAbsPosition(models)
+          let left = (modelPos.left - editorDomPos.left) + (modelPos.width / 2)
+          let top = (modelPos.top - editorDomPos.top) + (modelPos.height / 2)
+          if (modelPos.top - height <= modelPos.cTop) {
+            if (modelPos.height > 400) {
+              top = top + height + 20
+            } else {
+              top = top + modelPos.height / 2 + 20;
+            }
           } else {
-            top = top + modelPos.height / 2 + 20;
+            top = top - height;
           }
-        } else {
-          top = top - height;
-        }
-        if (top < 0) {
-          top = modelPos.cTop + modelPos.cHeight / 2
-        }
+          if (top < 0) {
+            top = modelPos.cTop + modelPos.cHeight / 2
+          }
 
-        if (left < 0) {
-          left = 0
+          if (left < 0) {
+            left = 0
+          }
+          DDeiEditorUtil.showDialog(editor,'ddei-core-dialog-quickpop', {
+            group: "canvas-pop"
+          }, { type: 99, left: left, top: top, hiddenMask: true }, null, true, true)
+          editor?.changeState(curState)
         }
-        DDeiEditorUtil.showDialog(editor,'ddei-core-dialog-quickpop', {
-          group: "canvas-pop"
-        }, { type: 99, left: left, top: top, hiddenMask: true }, null, true, true)
-        editor?.changeState(curState)
       }
     }
   }

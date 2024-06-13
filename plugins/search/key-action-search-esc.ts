@@ -21,7 +21,7 @@ class DDeiKeyActionSearchEsc extends DDeiKeyAction {
 
   defaultOptions: object = {
     'keys': [
-      { keys: "27",editorState: "ddei-search" },
+      { keys: "27" },
     ]
   }
 

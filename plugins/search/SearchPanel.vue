@@ -146,7 +146,7 @@ export default {
     },
 
     executeQuery(evt:Event){
-      if (evt.keyCode != 13 && evt.keyCode != '27'){
+      if (evt.keyCode != 13 && evt.keyCode != 27){
         let rs = this.editor.searchModels(this.editor.search?.keywords, "text", false, 3, this.editor.search?.matchCase, this.editor.search?.matchAll)
         if(rs?.length > 0){
           this.editor.search.result = rs;
@@ -245,6 +245,17 @@ export default {
                   let sptStyle = {}
                   for (let i = 0; i < rsData.len; i++) {
                     sptStyle["" + (rsData.index + i)] = { textStyle: { bgcolor: "#ebebeb" } }
+                  }
+                  for (let k = ri+1; k < this.editor.search.result.length; k++) {
+                    if (this.editor.search.result[k].model == rsData.model) {
+                      let rsd1 = this.editor.search.result[k]
+                      for (let ki = 0; ki < rsd1.len; ki++) {
+                        sptStyle["" + (rsd1.index + ki)] = { textStyle: { bgcolor: "#ebebeb" } }
+                      }
+                    } else {
+                      ri = k-1
+                      break;
+                    }
                   }
                   rsData.model?.render?.drawShape({ sptStyle: sptStyle });
                 } else {

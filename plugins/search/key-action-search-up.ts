@@ -58,37 +58,7 @@ class DDeiKeyActionSearchUp extends DDeiKeyAction {
     if (editor.tempPopData && editor.tempPopData['ddei-ext-dialog-search']) {
       if (!editor.search?.inActive){
         editor.search.resultIndex--;
-        if (editor.search.resultIndex >= editor.search.result.length - 1) {
-          editor.search.resultIndex = editor.search.result.length - 1
-        } else if (editor.search.resultIndex < 0) {
-          editor.search.resultIndex = 0
-        }
-        let rsData = editor.search.result[editor.search.resultIndex]
-        if (rsData?.model) {
-          //切换文件和sheet
-          let file = editor.files[rsData.fileIndex];
-          if (file) {
-            let sheetIndex = rsData.sheetIndex;
-            if (sheetIndex >= 0) {
-              let ddInstance = editor.ddInstance
-
-              editor.changeFile(rsData.fileIndex, sheetIndex)
-              //选中并中心化控件
-              editor.centerModels(ddInstance.stage, rsData.model.id)
-              rsData.model?.render?.controlSelect();
-              //绘制选择效果
-              let sptStyle = {}
-              for (let i = 0; i < rsData.len; i++) {
-                sptStyle["" + (rsData.index + i)] = { textStyle: { bgcolor: "#017fff" } }
-              }
-              rsData.model?.render?.drawShape({ border: { type: 1, color: "#017fff", width: 1, dash: [10, 10] }, sptStyle: sptStyle });
-              ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
-              ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
-              ddInstance.bus.executeAll();
-
-            }
-          }
-        }
+        this.changeFileSheetSelectAndModel(editor)
       }else{
         editor.search.inActive = false
       }
@@ -96,7 +66,98 @@ class DDeiKeyActionSearchUp extends DDeiKeyAction {
   }
 
 
-  
+  changeFileSheetSelectAndModel(editor: DDeiEditor): void {
+    editor.search.inActive = false
+    if (editor.search.resultIndex >= editor.search.result.length - 1) {
+      editor.search.resultIndex = editor.search.result.length - 1
+    } else if (editor.search.resultIndex < 0) {
+      editor.search.resultIndex = 0
+    }
+    let ddInstance = editor.ddInstance
+    let rsData = editor.search.result[editor.search.resultIndex]
+    let skipIndex = [editor.search.resultIndex]
+    let textSelectColor = DDeiUtil.getStyleValue("canvas-text-selection", editor.ddInstance);
+    if (rsData?.model) {
+      //切换文件和sheet
+      let file = editor.files[rsData.fileIndex];
+
+      if (file) {
+        let sheetIndex = rsData.sheetIndex;
+        if (sheetIndex >= 0) {
+          editor.changeFile(rsData.fileIndex, sheetIndex)
+          //选中并中心化控件
+          editor.centerModels(ddInstance.stage, rsData.model.id)
+          rsData.model?.render?.controlSelect();
+          //绘制选择效果
+          let sptStyle = {}
+          for (let i = 0; i < rsData.len; i++) {
+            sptStyle["" + (rsData.index + i)] = { textStyle: { bgcolor: textSelectColor } }
+          }
+          //向前、向后查找当前控件，设置特殊样式并标记跳过
+          for (let k = editor.search.resultIndex - 1; k > 0; k--) {
+            if (editor.search.result[k].model == rsData.model) {
+              let rsd1 = editor.search.result[k]
+              for (let ki = 0; ki < rsd1.len; ki++) {
+                sptStyle["" + (rsd1.index + ki)] = { textStyle: { bgcolor: "#ebebeb" } }
+              }
+              skipIndex.push(k);
+            } else {
+              break;
+            }
+          }
+          for (let k = editor.search.resultIndex + 1; k < editor.search.result.length; k++) {
+            if (editor.search.result[k].model == rsData.model) {
+              let rsd1 = editor.search.result[k]
+              for (let ki = 0; ki < rsd1.len; ki++) {
+                sptStyle["" + (rsd1.index + ki)] = { textStyle: { bgcolor: "#ebebeb" } }
+              }
+              skipIndex.push(k);
+            } else {
+              break;
+            }
+          }
+
+          rsData.model?.render?.drawShape({ border: { type: 1, color: "#017fff", width: 1, dash: [10, 10] }, sptStyle: sptStyle });
+
+        }
+      }
+    }
+
+    for (let ri = 0; ri < editor.search.result.length; ri++) {
+      let rsData = editor.search.result[ri]
+      if (rsData?.model) {
+        //切换文件和sheet
+        let file = editor.files[rsData.fileIndex];
+        if (file) {
+          let sheetIndex = rsData.sheetIndex;
+          if (sheetIndex >= 0) {
+            if (skipIndex.indexOf(ri) == -1) {
+              //绘制选择效果
+              let sptStyle = {}
+              for (let i = 0; i < rsData.len; i++) {
+                sptStyle["" + (rsData.index + i)] = { textStyle: { bgcolor: "#ebebeb" } }
+              }
+              for (let k = ri + 1; k < editor.search.result.length; k++) {
+                if (editor.search.result[k].model == rsData.model) {
+                  let rsd1 = editor.search.result[k]
+                  for (let ki = 0; ki < rsd1.len; ki++) {
+                    sptStyle["" + (rsd1.index + ki)] = { textStyle: { bgcolor: "#ebebeb" } }
+                  }
+                } else {
+                  ri = k - 1
+                  break;
+                }
+              }
+              rsData.model?.render?.drawShape({ sptStyle: sptStyle });
+            }
+          }
+        }
+      }
+    }
+    ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+    ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
+    ddInstance.bus.executeAll();
+  }
 
 
 
