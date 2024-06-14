@@ -32,9 +32,11 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
   static displaySearchDialog(editor) {
     //计算弹出框的显示位置，这里需要把模型的坐标转换为dom的坐标
     let srcElement = document.getElementById(editor.id + "_canvas");
+    let editorEle = document.getElementById(editor.id);
+    let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
     let canvasPos = DDeiUtil.getDomAbsPosition(srcElement);
-    let left = canvasPos.left + srcElement.offsetWidth - 500
-    let top = canvasPos.top
+    let left = canvasPos.left - editorDomPos.left + srcElement.offsetWidth - 500
+    let top = canvasPos.top - editorDomPos.top
     DDeiEditorUtil.displayDialog(editor, 'ddei-ext-dialog-search', null, { type: 99, left: left, top: top, hiddenMask: true })
   }
 

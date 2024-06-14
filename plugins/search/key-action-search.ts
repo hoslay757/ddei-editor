@@ -77,10 +77,12 @@ class DDeiKeyActionSearch extends DDeiKeyAction {
         DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-search',true)
 
         //显示弹出框
+        let editorEle = document.getElementById(editor.id);
+        let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
         let canvasPos = DDeiUtil.getDomAbsPosition(srcElement)
         
-        let left = canvasPos.left + srcElement.offsetWidth-500
-        let top = canvasPos.top
+        let left = canvasPos.left - editorDomPos.left + srcElement.offsetWidth-500
+        let top = canvasPos.top - editorDomPos.top
         if (editor.search?.result){
           editor.search.inActive = true
         }

@@ -21,7 +21,8 @@ class DDeiKeyActionSearchNext extends DDeiKeyAction {
 
   defaultOptions: object = {
     'keys': [
-      { keys: "13",editorState: "ddei-search" },
+      { keys: "13", editorState: "ddei-search" },
+      { ctrl: 1, keys: "13", editorState: "ddei-search", type:"searchAll" },
     ]
   }
 
@@ -54,13 +55,17 @@ class DDeiKeyActionSearchNext extends DDeiKeyAction {
   }
 
   // ============================ 方法 ===============================
-  action(evt: Event, ddInstance: DDei, editor: DDeiEditor): void {
+  action(evt: Event, ddInstance: DDei, editor: DDeiEditor,item:object): void {
     if (editor.tempPopData && editor.tempPopData['ddei-ext-dialog-search']){
       if (!editor.search?.inActive) {
         //检查replace_input 是否为激活状态
         let replaceInput = document.getElementById(editor.id + "_search_replace_input");
         if (replaceInput && document.activeElement == replaceInput){
-          this.executeReplace(editor, replaceInput)
+          if (item?.type == 'replaceAll'){
+            return;
+          }else{
+            this.executeReplace(editor, replaceInput)
+          }
         }
         editor.search.resultIndex++;
         this.changeFileSheetSelectAndModel(editor);
