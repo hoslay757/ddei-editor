@@ -22,7 +22,7 @@ class DDeiKeyActionSearchNext extends DDeiKeyAction {
   defaultOptions: object = {
     'keys': [
       { keys: "13", editorState: "ddei-search" },
-      { ctrl: 1, keys: "13", editorState: "ddei-search", type:"searchAll" },
+      { ctrl: 1, keys: "13", editorState: "ddei-search", type:"replaceAll" },
     ]
   }
 
@@ -62,6 +62,7 @@ class DDeiKeyActionSearchNext extends DDeiKeyAction {
         let replaceInput = document.getElementById(editor.id + "_search_replace_input");
         if (replaceInput && document.activeElement == replaceInput){
           if (item?.type == 'replaceAll'){
+            this.executeReplaceAll(editor, replaceInput)
             return;
           }else{
             this.executeReplace(editor, replaceInput)
@@ -204,6 +205,36 @@ class DDeiKeyActionSearchNext extends DDeiKeyAction {
     ddInstance.bus.executeAll();
   }
 
+
+  executeReplaceAll(editor, textInput) {
+    while (editor.search?.result?.length > 0) {
+      let rsData = editor.search?.result[0]
+      if (rsData.model) {
+        editor.replaceModelsData([rsData.model], "text", rsData.index, rsData.index + rsData.len, textInput.value)
+        //长度增加量
+        for (let k = 1; k < editor.search.result?.length; k++) {
+          if (editor.search.result[k].model == rsData.model) {
+            let lenDelta = textInput.value.length - rsData.len
+            if (lenDelta != 0) {
+              editor.search.result[k].index += lenDelta
+              if (editor.search.result[k].index < 0) {
+                editor.search.result[k].index = 0
+              }
+            }
+          } else {
+            break;
+          }
+        }
+        editor.search.result.splice(editor.search?.resultIndex, 1)
+        rsData.model?.render?.clearCachedValue();
+      }
+    }
+    editor.search.resultIndex = -1
+    let ddInstance = editor.ddInstance
+    ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+    ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
+    ddInstance.bus.executeAll();
+  }
 
 }
 
