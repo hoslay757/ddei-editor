@@ -1,29 +1,26 @@
 <template>
   <div class="ddei-ext-panel-quickcontrol" ref="quickControlDiv">
-    <div class="ddei-ext-panel-quickcontrol-left">
-      <svg width="16" height="11" @mouseenter="mouseEnter(4,$el,$event)" 
-        style="transform: rotate(-90deg);">
+    <div class="ddei-ext-panel-quickcontrol-left" :style="leftOffset">
+      <svg width="16" height="11" @mouseenter="mouseEnter(4,$el,$event)" style="transform: rotate(-90deg);">
         <polygon points="8,0 0,10 16,10" />
       </svg>
     </div>
     <div class="ddei-ext-panel-quickcontrol-middle">
-      <div class="ddei-ext-panel-quickcontrol-middle-top">
-        <svg width="16" height="11" @mouseenter="mouseEnter(1, $el, $event)" >
+      <div class="ddei-ext-panel-quickcontrol-middle-top" :style="topOffset">
+        <svg width="16" height="11" @mouseenter="mouseEnter(1, $el, $event)">
           <polygon points="8,0 0,10 16,10" />
         </svg>
       </div>
       <div class="ddei-ext-panel-quickcontrol-middle-middle">
       </div>
-      <div class="ddei-ext-panel-quickcontrol-middle-bottom">
-        <svg width="16" height="11" @mouseenter="mouseEnter(3, $el, $event)" 
-          style="transform: rotate(180deg);">
+      <div class="ddei-ext-panel-quickcontrol-middle-bottom" :style="bottomOffset">
+        <svg width="16" height="11" @mouseenter="mouseEnter(3, $el, $event)" style="transform: rotate(180deg);">
           <polygon points="8,0 0,10 16,10" />
         </svg>
       </div>
     </div>
-    <div class="ddei-ext-panel-quickcontrol-right">
-      <svg width="16" height="11" @mouseenter="mouseEnter(2, $el, $event)" 
-        style="transform: rotate(90deg);">
+    <div class="ddei-ext-panel-quickcontrol-right" :style="rightOffset">
+      <svg width="16" height="11" @mouseenter="mouseEnter(2, $el, $event)" style="transform: rotate(90deg);">
         <polygon points="8,0 0,10 16,10" />
       </svg>
     </div>
@@ -53,7 +50,10 @@ export default {
   },
   data() {
     return {
-      
+      leftOffset: null,
+      rightOffset: null,
+      topOffset: null,
+      bottomOffset: null
     };
   },
   computed: {},
@@ -71,6 +71,11 @@ export default {
       height = height || height == 0 ? height : 40;
       this.$refs.quickControlDiv.style.width = (model.width + width)+"px";
       this.$refs.quickControlDiv.style.height = (model.height + height) + "px";
+      this.leftOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.left;
+      this.rightOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.right;
+      this.topOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.top;
+      this.bottomOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.bottom;
+     
     }
   },
   methods:{
@@ -97,7 +102,8 @@ export default {
       }
       
       DDeiEditorUtil.showDialog(this.editor, 'ddei-ext-dialog-quickchoosecontrol', {
-        group: "canvas-pop-1"
+        group: "canvas-pop-quickcreatecontrol",
+        type:type
       }, { type: 99, left: left, top: top, hiddenMask: true }, null, true, true)
       this.editor.changeState("ext-quickchoosecontrol");
     },
