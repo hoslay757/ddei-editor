@@ -10,7 +10,7 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
   static defaultIns: DDeiExtSearchLifeCycle = new DDeiExtSearchLifeCycle(null);
 
 
-  EVENT_MOUSE_MOVE_IN_CONTROL: DDeiFuncData | null = new DDeiFuncData("quickcontrol-ext-show", 1, DDeiExtSearchLifeCycle.showQuickControlDialog);
+  EVENT_MOUSE_MOVE_IN_CONTROL: DDeiFuncData | null = new DDeiFuncData("quickcontrol-ext-show", 1, this.moveInControl);
 
   EVENT_MOUSE_MOVE_IN_LAYER: DDeiFuncData | null = new DDeiFuncData("quickcontrol-ext-close", 1, this.closeQuickControlDialog);
   
@@ -18,6 +18,13 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
   
   EVENT_MOUSE_OPERATING: DDeiFuncData | null = new DDeiFuncData("quickstyle-ext-close", 1, this.mouseOperating);
   
+
+  moveInControl(operateType, data, ddInstance, evt){
+    if (ddInstance && ddInstance["AC_DESIGN_EDIT"] && data?.models?.length > 0) {
+      data.model = data.models[0]
+      DDeiExtSearchLifeCycle.showQuickControlDialog(operateType, data, ddInstance, evt)
+    }
+  }
 
   /**
      * 正在进行鼠标操作
@@ -56,7 +63,7 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
   static showQuickControlDialog(operateType, data, ddInstance, evt): DDeiFuncCallResult {
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"] && data?.model) {
       let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
-      if (!editor.tempPopData || !editor.tempPopData['ddei-ext-dialog-quickcontrol'] || editor.tempPopData['ddei-ext-dialog-quickcontrol'].model != data.model){
+      if (data.model?.baseModelType != 'DDeiLine' && (!editor.tempPopData || !editor.tempPopData['ddei-ext-dialog-quickcontrol'] || editor.tempPopData['ddei-ext-dialog-quickcontrol'].model != data.model)){
         //隐藏弹出框
         DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickcontrol', true)
         DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickchoosecontrol', true)

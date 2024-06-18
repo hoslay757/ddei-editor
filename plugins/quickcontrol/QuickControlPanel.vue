@@ -1,27 +1,31 @@
 <template>
   <div class="ddei-ext-panel-quickcontrol" ref="quickControlDiv">
     <div class="ddei-ext-panel-quickcontrol-left" :style="leftOffset">
-      <svg width="16" height="11" @mouseenter="mouseEnter(4,$el,$event)" style="transform: rotate(-90deg);">
-        <polygon points="8,0 0,10 16,10" />
+      <svg width="16" height="11" v-if="leftState != 1" @mouseenter="mouseEnter(4,$el,$event)" @mousedown="createLineOk"
+        @mouseleave="mouseleave" style="transform: rotate(-90deg);">
+        <polygon points="8,0 1,10 15,10" />
       </svg>
     </div>
     <div class="ddei-ext-panel-quickcontrol-middle">
       <div class="ddei-ext-panel-quickcontrol-middle-top" :style="topOffset">
-        <svg width="16" height="11" @mouseenter="mouseEnter(1, $el, $event)">
-          <polygon points="8,0 0,10 16,10" />
+        <svg width="16" height="11" v-if="topState != 1" @mouseenter="mouseEnter(1, $el, $event)"
+          @mouseleave="mouseleave" @mousedown="createLineOk">
+          <polygon points="8,0 1,10 15,10" />
         </svg>
       </div>
       <div class="ddei-ext-panel-quickcontrol-middle-middle">
       </div>
       <div class="ddei-ext-panel-quickcontrol-middle-bottom" :style="bottomOffset">
-        <svg width="16" height="11" @mouseenter="mouseEnter(3, $el, $event)" style="transform: rotate(180deg);">
-          <polygon points="8,0 0,10 16,10" />
+        <svg width="16" height="11" v-if="bottomState != 1" @mouseenter="mouseEnter(3, $el, $event)"
+          @mouseleave="mouseleave" @mousedown="createLineOk" style="transform: rotate(180deg);">
+          <polygon points="8,0 1,10 15,10" />
         </svg>
       </div>
     </div>
     <div class="ddei-ext-panel-quickcontrol-right" :style="rightOffset">
-      <svg width="16" height="11" @mouseenter="mouseEnter(2, $el, $event)" style="transform: rotate(90deg);">
-        <polygon points="8,0 0,10 16,10" />
+      <svg width="16" height="11" v-if="rightState != 1" @mouseenter="mouseEnter(2, $el, $event)"
+        @mouseleave="mouseleave" @mousedown="createLineOk" style="transform: rotate(90deg);">
+        <polygon points="8,0 1,10 15,10" />
       </svg>
     </div>
   </div>
@@ -29,7 +33,7 @@
 <script lang="ts">
 import { DDeiEditor, DDeiEditorEnumBusCommandType, DDeiUtil } from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
-import {DDeiEnumBusCommandType} from "ddei-framework";
+import { DDeiAbstractShape } from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
 import { debounce } from "lodash";
 
@@ -53,7 +57,12 @@ export default {
       leftOffset: null,
       rightOffset: null,
       topOffset: null,
-      bottomOffset: null
+      bottomOffset: null,
+      //四个方向的状态，0无连线，1有连线
+      leftState: 0,
+      rightState: 0,
+      bottomState: 0,
+      topState: 0
     };
   },
   computed: {},
@@ -61,55 +70,142 @@ export default {
   created() {
   },
   mounted() {
-    //获取model
-    
-    let model = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].model
-    if (model){
-      let width = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].width;
-      width = width || width == 0 ? width : 40;
-      let height = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].height;
-      height = height || height == 0 ? height : 40;
-      this.$refs.quickControlDiv.style.width = (model.width + width)+"px";
-      this.$refs.quickControlDiv.style.height = (model.height + height) + "px";
-      this.leftOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.left;
-      this.rightOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.right;
-      this.topOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.top;
-      this.bottomOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.bottom;
-     
-    }
+    this.refreshData();
   },
   methods:{
+    refreshData(){
+      //获取model
+
+      let model = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].model
+      if (model) {
+        let outRect = DDeiAbstractShape.getOutRectByPV([model])
+        let width = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].width;
+        width = width || width == 0 ? width : 40;
+        let height = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].height;
+        height = height || height == 0 ? height : 40;
+        this.$refs.quickControlDiv.style.width = (model.width + width) + "px";
+        this.$refs.quickControlDiv.style.height = (model.height + height) + "px";
+        this.leftOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.left;
+        this.rightOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.right;
+        this.topOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.top;
+        this.bottomOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.bottom;
+        //查询当前控件的四个方向是否有线存在，控制显示状态
+        for (let i in model.exPvs) {
+          let mlPoint = model.exPvs[i]
+          if (parseInt(mlPoint.y) == parseInt(outRect.y)) {
+            this.topState = 1
+          } else if (parseInt(mlPoint.x) == parseInt(outRect.x1)) {
+            this.rightState = 1
+          } else if (parseInt(mlPoint.y) == parseInt(outRect.y1)) {
+            this.bottomState = 1
+          } else if (parseInt(mlPoint.x) == parseInt(outRect.x)) {
+            this.leftState = 1
+          }
+        }
+      }
+    },
+
     mouseEnter(type,el,evt) {
       //显示弹出框
       let editorEle = document.getElementById(this.editor.id);
       let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
       let elPos = evt.currentTarget.getBoundingClientRect()
-    
-      let left = elPos.left - editorDomPos.left;
-      let top = elPos.top - editorDomPos.top
-      if(type == 1){
-        left -= 120 - elPos.width / 2
-        top -= 240 + elPos.height / 2
-      } else if (type == 2) {
-        left += evt.currentTarget.parentElement.clientWidth
-        top -= 120 - elPos.height / 2
-      } else if (type == 3) {
-        left -= 120 - elPos.width / 2
-        top  += elPos.height * 1.5
-      } else if (type == 4) {
-        left -= 240 + evt.currentTarget.parentElement.clientWidth/2
-        top -= 120 - elPos.height/2
+      //向上区间寻找，是否有控件
+      let existsControl = null;
+      let model = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].model
+      let outRect = DDeiAbstractShape.getOutRectByPV([model])
+      if (type == 1) {
+        let controls = this.editor.ddInstance.stage.getLayerModels([model.id], 100, { x: outRect.x, y: outRect.y-150, x1: outRect.x1, y1: outRect.y})
+        if (controls?.length > 0){
+          existsControl = controls[0];
+        }
       }
-      
-      DDeiEditorUtil.showDialog(this.editor, 'ddei-ext-dialog-quickchoosecontrol', {
-        group: "canvas-pop-quickcreatecontrol",
-        type:type
-      }, { type: 99, left: left, top: top, hiddenMask: true }, null, true, true)
-      this.editor.changeState("ext-quickchoosecontrol");
-    },
-    mouseleave(type,el,evt) {
-      if (this.editor.state == "desiging"){
+      //如果没有控件，弹出创建控件框
+      if (!existsControl){
+        if (this.editor.tempLineModel){
+          this.editor.ddInstance.stage.removeModel(this.editor.tempLineModel,true)
+          delete this.editor.tempLineModel
+        }
+
+        let left = elPos.left - editorDomPos.left;
+        let top = elPos.top - editorDomPos.top
+        if(type == 1){
+          left -= 120 - elPos.width / 2
+          top -= 240 + elPos.height / 2
+        } else if (type == 2) {
+          left += evt.currentTarget.parentElement.clientWidth
+          top -= 120 - elPos.height / 2
+        } else if (type == 3) {
+          left -= 120 - elPos.width / 2
+          top  += elPos.height * 1.5
+        } else if (type == 4) {
+          left -= 240 + evt.currentTarget.parentElement.clientWidth/2
+          top -= 120 - elPos.height/2
+        }
+        
+        DDeiEditorUtil.showDialog(this.editor, 'ddei-ext-dialog-quickchoosecontrol', {
+          group: "canvas-pop-quickcreatecontrol",
+          type:type,
+          model: this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].model
+        }, { type: 99, left: left, top: top, hiddenMask: true }, null, true, true)
+        this.editor.changeState("ext-quickchoosecontrol");
+      }
+      //如果有控件，创建连线(影子控件)
+      else if (!this.editor.tempLineModel){
+        //添加后的控件坐标，将其移动到特定位置
+        let outRect1 = DDeiAbstractShape.getOutRectByPV([existsControl])
+        let sx, sy, ex, ey
+        let startSita, endSita
+        //创建控件
+        if (type == 1) {
+          sx = (outRect.x + outRect.x1) / 2
+          sy = outRect.y
+          ex = (outRect1.x + outRect1.x1) / 2
+          ey = outRect1.y1
+          startSita = -90
+          endSita = 90
+        } else if (type == 2) {
+         
+          startSita = 0
+          endSita = 180
+        } else if (type == 3) {
+          sx = (outRect.x + outRect.x1) / 2
+          sy = outRect.y1
+          ex = (outRect1.x + outRect1.x1) / 2
+          ey = outRect1.y
+          startSita = 90
+          endSita = -90
+        } else if (type == 4) {
+          
+          startSita = 180
+          endSita = 0
+        }
+        //创建连线
+        let lines = this.editor.addLines([
+          {
+            model: '100401',
+            type: 2,
+            dash:[10,5],
+            startPoint: { x: sx, y: sy },
+            endPoint: { x: ex, y: ey },
+            smodel: { id: model.id, x: sx, y: sy, rate: 0.5, sita: startSita },
+            emodel: { id: existsControl.id, x: ex, y: ey, rate: 0.5, sita: endSita }
+          },
+        ],false)
+        this.editor.tempLineModel = lines[0];
         DDeiEditorUtil.closeDialog(this.editor, 'ddei-ext-dialog-quickchoosecontrol', true)
+      }
+    },
+
+    createLineOk(){
+      delete this.editor.tempLineModel
+      this.refreshData();
+    },
+
+    mouseleave(){
+      if (this.editor.tempLineModel) {
+        this.editor.ddInstance.stage.removeModel(this.editor.tempLineModel,true)
+        delete this.editor.tempLineModel
       }
     }
   }
