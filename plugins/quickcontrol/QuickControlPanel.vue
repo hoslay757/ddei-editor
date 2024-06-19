@@ -35,7 +35,7 @@ import { DDeiEditor, DDeiEditorEnumBusCommandType, DDeiUtil } from "ddei-framewo
 import {DDeiEditorUtil} from "ddei-framework";
 import { DDeiAbstractShape } from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
-import { debounce } from "lodash";
+import { DDeiEnumBusCommandType } from "ddei-framework";
 
 export default {
   name: "ddei-ext-panel-quickcontrol",
@@ -106,98 +106,124 @@ export default {
     },
 
     mouseEnter(type,el,evt) {
-      //显示弹出框
-      let editorEle = document.getElementById(this.editor.id);
-      let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
-      let elPos = evt.currentTarget.getBoundingClientRect()
-      //向上区间寻找，是否有控件
-      let existsControl = null;
-      let model = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].model
-      let outRect = DDeiAbstractShape.getOutRectByPV([model])
-      if (type == 1) {
-        let controls = this.editor.ddInstance.stage.getLayerModels([model.id], 100, { x: outRect.x, y: outRect.y-150, x1: outRect.x1, y1: outRect.y})
-        if (controls?.length > 0){
-          existsControl = controls[0];
-        }
-      }
-      //如果没有控件，弹出创建控件框
-      if (!existsControl){
-        if (this.editor.tempLineModel){
-          this.editor.ddInstance.stage.removeModel(this.editor.tempLineModel,true)
-          delete this.editor.tempLineModel
-        }
-
-        let left = elPos.left - editorDomPos.left;
-        let top = elPos.top - editorDomPos.top
-        if(type == 1){
-          left -= 120 - elPos.width / 2
-          top -= 240 + elPos.height / 2
-        } else if (type == 2) {
-          left += evt.currentTarget.parentElement.clientWidth
-          top -= 120 - elPos.height / 2
-        } else if (type == 3) {
-          left -= 120 - elPos.width / 2
-          top  += elPos.height * 1.5
-        } else if (type == 4) {
-          left -= 240 + evt.currentTarget.parentElement.clientWidth/2
-          top -= 120 - elPos.height/2
-        }
-        
-        DDeiEditorUtil.showDialog(this.editor, 'ddei-ext-dialog-quickchoosecontrol', {
-          group: "canvas-pop-quickcreatecontrol",
-          type:type,
-          model: this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].model
-        }, { type: 99, left: left, top: top, hiddenMask: true }, null, true, true)
-        this.editor.changeState("ext-quickchoosecontrol");
-      }
-      //如果有控件，创建连线(影子控件)
-      else if (!this.editor.tempLineModel){
-        //添加后的控件坐标，将其移动到特定位置
-        let outRect1 = DDeiAbstractShape.getOutRectByPV([existsControl])
-        let sx, sy, ex, ey
-        let startSita, endSita
-        //创建控件
+      if (this.editor.tempPopData['ddei-ext-dialog-quickcontrol']){
+        //显示弹出框
+        let editorEle = document.getElementById(this.editor.id);
+        let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
+        let elPos = evt.currentTarget.getBoundingClientRect()
+        //向上区间寻找，是否有控件
+        let existsControl = null;
+        let model = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].model
+        let outRect = DDeiAbstractShape.getOutRectByPV([model])
         if (type == 1) {
-          sx = (outRect.x + outRect.x1) / 2
-          sy = outRect.y
-          ex = (outRect1.x + outRect1.x1) / 2
-          ey = outRect1.y1
-          startSita = -90
-          endSita = 90
+          let controls = this.editor.ddInstance.stage.getLayerModels([model.id], 100, { x: outRect.x, y: outRect.y-150, x1: outRect.x1, y1: outRect.y})
+          if (controls?.length > 0){
+            existsControl = controls[0];
+          }
         } else if (type == 2) {
-         
-          startSita = 0
-          endSita = 180
+          let controls = this.editor.ddInstance.stage.getLayerModels([model.id], 100, { x: outRect.x1, y: outRect.y, x1: outRect.x1+150, y1: outRect.y1 })
+          if (controls?.length > 0) {
+            existsControl = controls[0];
+          }
         } else if (type == 3) {
-          sx = (outRect.x + outRect.x1) / 2
-          sy = outRect.y1
-          ex = (outRect1.x + outRect1.x1) / 2
-          ey = outRect1.y
-          startSita = 90
-          endSita = -90
+          let controls = this.editor.ddInstance.stage.getLayerModels([model.id], 100, { x: outRect.x, y: outRect.y1, x1: outRect.x1, y1: outRect.y1+150 })
+          if (controls?.length > 0) {
+            existsControl = controls[0];
+          }
         } else if (type == 4) {
-          
-          startSita = 180
-          endSita = 0
+          let controls = this.editor.ddInstance.stage.getLayerModels([model.id], 100, { x: outRect.x-150, y: outRect.y, x1: outRect.x, y1: outRect.y1 })
+          if (controls?.length > 0) {
+            existsControl = controls[0];
+          }
         }
-        //创建连线
-        let lines = this.editor.addLines([
-          {
-            model: '100401',
-            type: 2,
-            dash:[10,5],
-            startPoint: { x: sx, y: sy },
-            endPoint: { x: ex, y: ey },
-            smodel: { id: model.id, x: sx, y: sy, rate: 0.5, sita: startSita },
-            emodel: { id: existsControl.id, x: ex, y: ey, rate: 0.5, sita: endSita }
-          },
-        ],false)
-        this.editor.tempLineModel = lines[0];
-        DDeiEditorUtil.closeDialog(this.editor, 'ddei-ext-dialog-quickchoosecontrol', true)
+        //如果没有控件，弹出创建控件框
+        if (!existsControl){
+          if (this.editor.tempLineModel){
+            this.editor.ddInstance.stage.removeModel(this.editor.tempLineModel,true)
+            delete this.editor.tempLineModel
+          }
+          let left = elPos.left - editorDomPos.left;
+          let top = elPos.top - editorDomPos.top
+          if(type == 1){
+            left -= 120 - elPos.width / 2
+            top -= 240 + elPos.height / 2
+          } else if (type == 2) {
+            left += evt.currentTarget.parentElement.clientWidth
+            top -= 120 - elPos.height / 2
+          } else if (type == 3) {
+            left -= 120 - elPos.width / 2
+            top  += elPos.height * 1.5
+          } else if (type == 4) {
+            left -= 240 + evt.currentTarget.parentElement.clientWidth/2
+            top -= 120 - elPos.height/2
+          }
+          
+          DDeiEditorUtil.showDialog(this.editor, 'ddei-ext-dialog-quickchoosecontrol', {
+            group: "canvas-pop-quickcreatecontrol",
+            type:type,
+            model: this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].model
+          }, { type: 99, left: left, top: top, hiddenMask: true }, null, true, true)
+          this.editor.changeState("ext-quickchoosecontrol");
+        }
+        //如果有控件，创建连线(影子控件)
+        else if (!this.editor.tempLineModel){
+          //添加后的控件坐标，将其移动到特定位置
+          let outRect1 = DDeiAbstractShape.getOutRectByPV([existsControl])
+          let sx, sy, ex, ey
+          let startSita, endSita
+          //创建控件
+          if (type == 1) {
+            sx = (outRect.x + outRect.x1) / 2
+            sy = outRect.y
+            ex = (outRect1.x + outRect1.x1) / 2
+            ey = outRect1.y1
+            startSita = -90
+            endSita = 90
+          } else if (type == 2) {
+            sx = outRect.x1
+            sy = (outRect.y+outRect.y1)/2
+            ex = outRect1.x
+            ey = (outRect1.y + outRect1.y1) / 2
+            startSita = 0
+            endSita = 180
+          } else if (type == 3) {
+            sx = (outRect.x + outRect.x1) / 2
+            sy = outRect.y1
+            ex = (outRect1.x + outRect1.x1) / 2
+            ey = outRect1.y
+            startSita = 90
+            endSita = -90
+          } else if (type == 4) {
+            sx = outRect.x
+            sy = (outRect.y + outRect.y1) / 2
+            ex = outRect1.x1
+            ey = (outRect1.y + outRect1.y1) / 2
+            startSita = 180
+            endSita = 0
+          }
+          //创建连线
+          let lines = this.editor.addLines([
+            {
+              model: '100401',
+              type: 2,
+              dash:[10,5],
+              startPoint: { x: sx, y: sy },
+              endPoint: { x: ex, y: ey },
+              smodel: { id: model.id, x: sx, y: sy, rate: 0.5, sita: startSita },
+              emodel: { id: existsControl.id, x: ex, y: ey, rate: 0.5, sita: endSita }
+            },
+          ],false)
+          this.editor.tempLineModel = lines[0];
+          DDeiEditorUtil.closeDialog(this.editor, 'ddei-ext-dialog-quickchoosecontrol', true)
+          this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape);
+          this.editor.bus.executeAll();
+        }
       }
     },
 
     createLineOk(){
+      delete this.editor.tempLineModel.dash
+      this.editor.tempLineModel.render?.clearCachedValue()
       delete this.editor.tempLineModel
       this.refreshData();
     },
