@@ -18,7 +18,7 @@
       </svg>
 
       <span class="textcontent">
-        <div class="text" @dblclick="rename && startChangeFileName(item, $event)">{{ item.name }}</div>
+        <div class="text"  @dblclick="rename && startChangeFileName(item, $event)">{{ item.name }}</div>
         <div class="dirty" v-show="item.state != 0">ꔷ</div>
       </span>
       <svg @click.prevent.stop="closeFile(item, $event)" v-if="close" class="icon close" aria-hidden="true">
@@ -349,6 +349,7 @@ export default {
           }
         };
       }
+      
       input.style.width = ele.offsetWidth + "px";
       input.style.height = ele.offsetHeight - 3 + "px";
       input.style.left = domPos.left - editorDomPos.left + "px";
@@ -477,10 +478,12 @@ export default {
         ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
         ddInstance.bus.executeAll();
       }else{
-        this.editor.changeFile(this.editor.files.indexOf(file))
-        ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
-        ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
-        ddInstance.bus.executeAll();
+        if (this.editor.files.indexOf(file) != this.editor.currentFileIndex){
+          this.editor.changeFile(this.editor.files.indexOf(file))
+          ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+          ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
+          ddInstance.bus.executeAll();
+        }
       }
       if (this.editor.files.length == 0) {
         ddInstance.disabled = true
