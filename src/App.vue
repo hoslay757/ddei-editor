@@ -5,7 +5,7 @@ import { DDeiExtUML } from "@ddei/uml"
 import { DDeiExtSearch } from "@ddei/search"
 import { DDeiFuncCallResult } from "ddei-framework";
 import DDeiExtQuickStyle from "@ddei/quickstyle"
-import DDeiExtQuickControl from "@ddei/quickcontrol"
+import { DDeiExtQuickControl, QuickChooseControlDialog } from "@ddei/quickcontrol"
 import { defineComponent, markRaw } from "vue";
 export default defineComponent({
   name: "APP",
@@ -31,7 +31,9 @@ export default defineComponent({
         DDeiExtUML,
         DDeiExtSearch,
         DDeiExtQuickStyle,
-        DDeiExtQuickControl
+        DDeiExtQuickControl,
+        QuickChooseControlDialog.configuration({ customGroups: ['101', '102'] })
+        // QuickChooseControlDialog.configuration({ customControls: ['100001', '100002','100003']})
         // DDeiCoreThemeBlack.configuration({
         //   default: true
         // }),
@@ -84,6 +86,7 @@ export default defineComponent({
         }),
         DDeiExtSearch,
         DDeiExtQuickStyle,
+        DDeiExtQuickControl,
         
       ],
     })
@@ -221,9 +224,9 @@ export default defineComponent({
 
 <template>
   <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
-  <!--
-  <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
 
+  <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
+  <!--
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>
   </div>

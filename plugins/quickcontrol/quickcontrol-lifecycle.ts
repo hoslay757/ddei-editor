@@ -22,7 +22,10 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
   moveInControl(operateType, data, ddInstance, evt){
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"] && data?.models?.length > 0) {
       data.model = data.models[0]
-      DDeiExtSearchLifeCycle.showQuickControlDialog(operateType, data, ddInstance, evt)
+      let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
+      if (editor.state == 'designing'){
+        DDeiExtSearchLifeCycle.showQuickControlDialog(operateType, data, ddInstance, evt)
+      }
     }
   }
 
@@ -32,10 +35,12 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
   mouseOperating(operateType, data, ddInstance, evt): DDeiFuncCallResult {
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"]) {
       let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
-      let oldState = editor.state;
-      DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickcontrol', true)
-      DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickchoosecontrol', true)
-      editor.changeState(oldState);
+      if (editor.state == 'designing') {
+        let oldState = editor.state;
+        DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickcontrol', true)
+        DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickchoosecontrol', true)
+        editor.changeState(oldState);
+      }
     }
   }
 
@@ -47,12 +52,13 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
   closeAndShowQuickControlDialog(operateType, data, ddInstance, evt): DDeiFuncCallResult {
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"]) {
       let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
-      DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickcontrol', true)
-      DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickchoosecontrol', true)
-      if(data.models?.length > 0){
-        data.model = data.models[0]
-
-        DDeiExtSearchLifeCycle.showQuickControlDialog(operateType, data, ddInstance, evt)
+      if (editor.state == 'designing') {
+        DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickcontrol', true)
+        DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickchoosecontrol', true)
+        if(data.models?.length > 0){
+          data.model = data.models[0]
+          DDeiExtSearchLifeCycle.showQuickControlDialog(operateType, data, ddInstance, evt)
+        }
       }
     }
   }

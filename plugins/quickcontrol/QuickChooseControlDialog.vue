@@ -1,7 +1,8 @@
 <template>
   <div :id="editor?.id + '_' + dialogId" class="ddei-ext-dialog-quickchoosecontrol" v-if="forceRefresh">
     <div v-for="group in groups" v-show="group.display == true" class="ddei-ext-dialog-quickchoosecontrol-group">
-      <div class="ddei-ext-dialog-quickchoosecontrol-group-itempanel" v-if="group.expand == true">
+      <div class="ddei-ext-dialog-quickchoosecontrol-group-itempanel"
+        v-if="customControls || customGroups || group.expand == true">
         <div class="ddei-ext-dialog-quickchoosecontrol-group-itempanel-item" :title="control.desc"
           v-for="control in group.controls" @click="quickCreateControl(control.id)">
           <img class="icon" :src="editor?.icons[control.id]" />
@@ -31,6 +32,11 @@ export default {
       type: Array,
       default: null
     },
+    //定义控件
+    customControls: {
+      type: Array,
+      default: null
+    },
   },
   data() {
     return {
@@ -50,40 +56,54 @@ export default {
     refreshData(){
       
       //加载工具栏
-      DDeiEditorUtil.readRecentlyToolGroups()
-      let hisGroups = DDeiEditorUtil.recentlyToolGroups;
-      if (hisGroups?.length > 0) {
-        let groups = []
-        hisGroups.forEach(hg => {
-          let group = null;
-          for (let i = 0; i < this.editor.groups.length; i++) {
-            if (this.editor.groups[i].id == hg.id) {
-              group = this.editor.groups[i]
-              break;
+      let groups = this.editor.groups
+      if (this.customControls) {
+        let controls = []
+        let gps = [{display:true,controls:controls}]
+        let hasControlids = {}
+        groups.forEach(group => {
+          group?.controls?.forEach(control => {
+            if (!hasControlids[control.id] && this.customControls.indexOf(control.id) != -1){
+              hasControlids[control.id] = true
+              controls.push(control)
             }
-          }
-          if (group) {
-            group.expand = hg.expand
-            groups.push(group)
-          }
+          });
         })
-        this.groups = groups;
-      } else {
-        this.groups = clone(this.editor.groups)
-        DDeiEditorUtil.whiteRecentlyToolGroups(this.groups)
-      }
-      if (this.customGroups) {
+        this.groups = gps
+      }else if (this.customGroups) {
         let newGroups = []
         this.customGroups?.forEach(cg => {
-          for (let i = 0; i < this.groups.length; i++) {
-            if (this.groups[i].id == cg) {
-              newGroups.push(this.groups[i])
+          for (let i = 0; i < groups.length; i++) {
+            if (groups[i].id == cg) {
+              newGroups.push(groups[i])
               break;
             }
           }
 
         });
         this.groups = newGroups
+      }else{
+        DDeiEditorUtil.readRecentlyToolGroups()
+        let hisGroups = DDeiEditorUtil.recentlyToolGroups;
+        let gps = []
+        if (hisGroups?.length > 0) {
+
+          hisGroups.forEach(hg => {
+            let group = null;
+            for (let i = 0; i < groups.length; i++) {
+              if (groups[i].id == hg.id) {
+                group = groups[i]
+                break;
+              }
+            }
+            if (group) {
+              group.expand = hg.expand
+              gps.push(group)
+            }
+          })
+          
+          this.groups = gps;
+        }
       }
     },
 

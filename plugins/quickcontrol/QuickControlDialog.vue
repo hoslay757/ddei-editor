@@ -1,6 +1,6 @@
 <template>
   <div :id="editor?.id + '_' + dialogId" class="ddei-ext-dialog-quickcontrol" v-if="forceRefresh">
-    <QuickControlPanel :editor="editor" :options="options"></QuickControlPanel>
+    <QuickControlPanel :editor="editor" v-bind="options" :options="options"></QuickControlPanel>
   </div>
 </template>
 

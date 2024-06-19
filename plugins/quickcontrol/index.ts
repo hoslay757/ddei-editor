@@ -66,4 +66,9 @@ class DDeiExtQuickControl extends DDeiPluginBase {
 }
 
 export {DDeiExtQuickControl}
+export * from "./dialogs"
+export * from "./quickcontrolpanel"
+export * from "./hotkeys";
+export * from "./dialogs";
+export * from "./quickcontrol-lifecycle";
 export default DDeiExtQuickControl;
