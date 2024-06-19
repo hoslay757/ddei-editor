@@ -39,23 +39,31 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
         let editorEle = document.getElementById(editor.id);
         let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
         let modelPos = DDeiUtil.getModelsDomAbsPosition(models)
-        let left = (modelPos.left - editorDomPos.left) + 20
+        let left = (modelPos.left - editorDomPos.left) + (modelPos.width / 2) + 40
         let top = (modelPos.top - editorDomPos.top)
         if (modelPos.top - height <= modelPos.cTop) {
           if (modelPos.height > 400) {
-            top = top + height + 20
+            top = top + height + 40
           } else {
-            top = top + modelPos.height + 20;
+            top = top + modelPos.height + 40;
           }
         } else {
           top = top - height;
         }
-        if (top < 0) {
-          top = modelPos.cTop + modelPos.cHeight / 2
+
+        let canvasEle = document.getElementById(editor.id + "_canvas");
+        if (top < canvasEle.offsetTop) {
+          top = modelPos.offsetTop
+        } else if (top + 80 > canvasEle.offsetTop + canvasEle.clientHeight){
+          top = canvasEle.offsetTop + canvasEle.clientHeight - 80
         }
-        if (left < 0) {
-          left = 0
+        
+        if (left < canvasEle.offsetLeft) {
+          left = canvasEle.offsetLeft
+        } else if (left + 550 > canvasEle.offsetLeft + canvasEle.clientWidth){
+          left = canvasEle.offsetLeft + canvasEle.clientWidth-550
         }
+        
         DDeiEditorUtil.displayDialog(editor, 'ddei-core-dialog-quickpop', null, { type: 99, left: left, top: top, hiddenMask: true })
       }
     }
@@ -80,23 +88,28 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
           let editorEle = document.getElementById(editor.id);
           let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
           let modelPos = DDeiUtil.getModelsDomAbsPosition(models)
-          let left = (modelPos.left - editorDomPos.left) + (modelPos.width / 2)
+          let left = (modelPos.left - editorDomPos.left) + (modelPos.width / 2) + 40
           let top = (modelPos.top - editorDomPos.top) + (modelPos.height / 2)
           if (modelPos.top - height <= modelPos.cTop) {
             if (modelPos.height > 400) {
-              top = top + height + 20
+              top = top + height + 40
             } else {
-              top = top + modelPos.height / 2 + 20;
+              top = top + modelPos.height / 2 + 40;
             }
           } else {
             top = top - height;
           }
-          if (top < 0) {
-            top = modelPos.cTop + modelPos.cHeight / 2
+          let canvasEle = document.getElementById(editor.id + "_canvas");
+          if (top < canvasEle.offsetTop) {
+            top = modelPos.offsetTop
+          } else if (top + 80 > canvasEle.offsetTop + canvasEle.clientHeight) {
+            top = canvasEle.offsetTop + canvasEle.clientHeight - 80
           }
 
-          if (left < 0) {
-            left = 0
+          if (left < canvasEle.offsetLeft) {
+            left = canvasEle.offsetLeft
+          } else if (left + 550 > canvasEle.offsetLeft + canvasEle.clientWidth) {
+            left = canvasEle.offsetLeft + canvasEle.clientWidth - 550
           }
           DDeiEditorUtil.showDialog(editor,'ddei-core-dialog-quickpop', {
             group: "canvas-pop"
