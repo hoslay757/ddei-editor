@@ -56,7 +56,11 @@ class DDeiKeyActionSearchUp extends DDeiKeyAction {
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei, editor: DDeiEditor): void {
     if (editor.tempPopData && editor.tempPopData['ddei-ext-dialog-search']) {
+      
       if (!editor.search?.inActive){
+        if (editor.search.resultIndex <= 0) {
+          return;
+        }
         editor.search.resultIndex--;
         this.changeFileSheetSelectAndModel(editor)
       }else{

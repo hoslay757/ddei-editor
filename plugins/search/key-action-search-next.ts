@@ -57,10 +57,14 @@ class DDeiKeyActionSearchNext extends DDeiKeyAction {
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei, editor: DDeiEditor,item:object): void {
     if (editor.tempPopData && editor.tempPopData['ddei-ext-dialog-search']){
+      
       if (!editor.search?.inActive) {
+        if (editor.search.resultIndex >= editor.search.result.length - 1) {
+          return;
+        }
         //检查replace_input 是否为激活状态
         let replaceInput = document.getElementById(editor.id + "_search_replace_input");
-        if (replaceInput && document.activeElement == replaceInput){
+        if (replaceInput && document.activeElement == replaceInput && ddInstance && ddInstance["AC_DESIGN_EDIT"]) {
           if (item?.type == 'replaceAll'){
             this.executeReplaceAll(editor, replaceInput)
             return;
@@ -201,7 +205,7 @@ class DDeiKeyActionSearchNext extends DDeiKeyAction {
       }
     }
     ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
-    ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
+    // ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
     ddInstance.bus.executeAll();
   }
 

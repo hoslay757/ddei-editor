@@ -42,7 +42,7 @@ export default defineComponent({
     })
     const options1 = markRaw({
       config: {
-        // "readonly":true,
+        "readonly":true,
         "mark": "水印文本",
         "grid": 2,
         "paper": {type:"A6",direct:1},

@@ -59,7 +59,7 @@ class DDeiKeyActionSearch extends DDeiKeyAction {
   action(evt: Event, ddInstance: DDei, editor: DDeiEditor,item:object): void {
     //1搜索，2替换
     let mode = 1;
-    if (item?.type == 'replace'){
+    if (item?.type == 'replace' && ddInstance && ddInstance["AC_DESIGN_EDIT"]) {
       mode = 2;
     }
     if (!editor.search) {

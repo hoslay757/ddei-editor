@@ -129,7 +129,7 @@ export default {
   },
   methods:{
     changeReplace() {
-      if (this.editor.search.mode == 1) {
+      if (this.editor.search.mode == 1 && this.editor.ddInstance && this.editor.ddInstance["AC_DESIGN_EDIT"]) {
         this.editor.search.mode = 2;
       } else {
         this.editor.search.mode = 1;

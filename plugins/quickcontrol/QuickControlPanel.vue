@@ -109,8 +109,6 @@ export default {
       if(this.editor.state == 'designing'){
         if (this.editor.tempPopData['ddei-ext-dialog-quickcontrol']){
           //显示弹出框
-          let editorEle = document.getElementById(this.editor.id);
-          let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
           let elPos = evt.currentTarget.getBoundingClientRect()
           //向上区间寻找，是否有控件
           let existsControl = null;
