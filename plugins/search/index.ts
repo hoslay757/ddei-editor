@@ -66,4 +66,8 @@ class DDeiExtSearch extends DDeiPluginBase {
 }
 
 export {DDeiExtSearch}
+export * from "./searchdialog"
+export * from "./searchpanel"
+export * from "./hotkeys"
+export * from "./search-lifecycle"
 export default DDeiExtSearch;

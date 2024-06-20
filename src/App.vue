@@ -5,6 +5,7 @@ import { DDeiExtUML } from "@ddei/uml"
 import { DDeiExtSearch } from "@ddei/search"
 import { DDeiFuncCallResult } from "ddei-framework";
 import DDeiExtQuickStyle from "@ddei/quickstyle"
+import DDeiExtTooltip from "@ddei/tooltip"
 import { DDeiExtQuickControl, QuickChooseControlDialog } from "@ddei/quickcontrol"
 import { defineComponent, markRaw } from "vue";
 export default defineComponent({
@@ -32,7 +33,8 @@ export default defineComponent({
         DDeiExtSearch,
         DDeiExtQuickStyle,
         DDeiExtQuickControl,
-        QuickChooseControlDialog.configuration({ customGroups: ['101', '102'] })
+        QuickChooseControlDialog.configuration({ customGroups: ['101', '102'] }),
+        DDeiExtTooltip
         // QuickChooseControlDialog.configuration({ customControls: ['100001', '100002','100003']})
         // DDeiCoreThemeBlack.configuration({
         //   default: true
@@ -87,6 +89,7 @@ export default defineComponent({
         DDeiExtSearch,
         DDeiExtQuickStyle,
         DDeiExtQuickControl,
+        DDeiExtTooltip
         
       ],
     })
