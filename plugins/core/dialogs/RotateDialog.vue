@@ -5,12 +5,12 @@
       <div class="group">
         <div class="title">镜像:</div>
         <div class="group_content">
-          <div :class="{ 'item': canMirror(), 'item_disabled': !canMirror() }" @click="canMirror() && doMirror(true,false)">
+          <div :class="{ 'item': canMirror(), 'item_disabled': !canMirror() }" @click="canMirror() && doMirror(1)">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-a-ziyuan441"></use>
             </svg>
           </div>
-          <div :class="{ 'item': canMirror(), 'item_disabled': !canMirror() }" @click="canMirror() && doMirror(false,true)">
+          <div :class="{ 'item': canMirror(), 'item_disabled': !canMirror() }" @click="canMirror() && doMirror(2)">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-a-ziyuan442"></use>
             </svg>
@@ -158,13 +158,26 @@ export default {
       }
     },
 
-    doMirror(x,y) {
+    doMirror(mirrorType) {
       let file = this.editor.files[this.editor.currentFileIndex];
       let sheet = file?.sheets[file?.currentSheetIndex];
       let stage = sheet?.stage;
       if (stage?.selectedModels?.size > 0) {
         stage.selectedModels.forEach((model) => {
-          model.mirror(x,y)
+          if (mirrorType == 1){
+            if (!model.mirrorX){
+              model.mirrorX = 1
+            }else{
+              delete model.mirrorX
+            }
+          }else if(mirrorType == 2){
+            if (!model.mirrorY) {
+              model.mirrorY = 1
+            } else {
+              delete model.mirrorY
+            }
+          }
+          
           model.render?.enableRefreshShape();
         });
         this.editor.bus.push(DDeiEnumBusCommandType.UpdateSelectorBounds);

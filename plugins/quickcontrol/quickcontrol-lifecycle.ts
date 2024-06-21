@@ -69,7 +69,7 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
   static showQuickControlDialog(operateType, data, ddInstance, evt): DDeiFuncCallResult {
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"] && data?.model) {
       let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
-      if (data.model?.baseModelType != 'DDeiLine' && (!editor.tempPopData || !editor.tempPopData['ddei-ext-dialog-quickcontrol'] || editor.tempPopData['ddei-ext-dialog-quickcontrol'].model != data.model)){
+      if (!data.model?.rotate && data.model?.baseModelType != 'DDeiLine' && (!editor.tempPopData || !editor.tempPopData['ddei-ext-dialog-quickcontrol'] || editor.tempPopData['ddei-ext-dialog-quickcontrol'].model != data.model)){
         //隐藏弹出框
         DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickcontrol', true)
         DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickchoosecontrol', true)

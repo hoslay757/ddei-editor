@@ -27,7 +27,6 @@ class DDeiExtTooltipLifeCycle extends DDeiLifeCycle {
       if (editor.tempHoverModel != data.models[0]){
         
         if (!editor.tempHoverX || !editor.tempHoverY || Math.abs(editor.tempHoverX - data.x) > 10 || Math.abs(editor.tempHoverY - data.y) > 10){
-          console.log(editor.id+"---1")
           //隐藏弹出框
           if (editor.tempPopData && editor.tempPopData['ddei-ext-dialog-tooltip']) {
             DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-tooltip', true)
@@ -38,7 +37,6 @@ class DDeiExtTooltipLifeCycle extends DDeiLifeCycle {
           editor.tempHoverTime = new Date().getTime()
         }
       }else{
-        console.log(editor.tempHoverTime)
         if(new Date().getTime() - editor.tempHoverTime >= this.options.time){
           data.model = editor.tempHoverModel
    
