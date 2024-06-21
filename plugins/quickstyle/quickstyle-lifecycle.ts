@@ -34,7 +34,7 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
     if (editor.state == DDeiEditorState.DESIGNING && editor?.ddInstance?.stage?.selectedModels?.size > 0) {
       let models = Array.from(editor.ddInstance.stage?.selectedModels.values())
       if (models?.length > 0) {
-        let height = 100;
+        let height = 130;
         //计算弹出框的显示位置，这里需要把模型的坐标转换为dom的坐标
         let editorEle = document.getElementById(editor.id);
         let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
@@ -83,13 +83,14 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
 
         //显示弹出框
         if (models?.length > 0) {
-          let height = 100;
+          let height = 130;
           //计算弹出框的显示位置，这里需要把模型的坐标转换为dom的坐标
           let editorEle = document.getElementById(editor.id);
           let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
           let modelPos = DDeiUtil.getModelsDomAbsPosition(models)
           let left = (modelPos.left - editorDomPos.left) + (modelPos.width / 2) + 40
           let top = (modelPos.top - editorDomPos.top) + (modelPos.height / 2)
+
           if (modelPos.top - height <= modelPos.cTop) {
             if (modelPos.height > 400) {
               top = top + height + 40
@@ -100,6 +101,7 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
             top = top - height;
           }
           let canvasEle = document.getElementById(editor.id + "_canvas");
+          
           if (top < canvasEle.offsetTop) {
             top = modelPos.offsetTop
           } else if (top + 80 > canvasEle.offsetTop + canvasEle.clientHeight) {

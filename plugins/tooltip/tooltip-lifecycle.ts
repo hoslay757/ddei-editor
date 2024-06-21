@@ -14,6 +14,9 @@ class DDeiExtTooltipLifeCycle extends DDeiLifeCycle {
   EVENT_MOUSE_IN_AREA: DDeiFuncData | null = new DDeiFuncData("tooltip-show", 1, (operateType, data, ddInstance, evt)=>{
     this.showTooltip(operateType, data, ddInstance, evt)
   });
+
+  EVENT_MOUSE_OPERATING: DDeiFuncData | null = new DDeiFuncData("tooltip-hidden", 1, this.mouseOperating);
+
   
   showTooltip(operateType, data, ddInstance, evt): DDeiFuncCallResult {
     
@@ -72,7 +75,6 @@ class DDeiExtTooltipLifeCycle extends DDeiLifeCycle {
       let editorEle = document.getElementById(editor.id);
       let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
       let modelPos = DDeiUtil.getModelsDomAbsPosition([data.model])
-      debugger
       let left = modelPos.left - editorDomPos.left+modelPos.width+10
       let top = modelPos.top - editorDomPos.top - 10
       DDeiEditorUtil.showDialog(editor, 'ddei-ext-dialog-tooltip', {
@@ -81,6 +83,18 @@ class DDeiExtTooltipLifeCycle extends DDeiLifeCycle {
       }, { type: 99, left: left, top: top, hiddenMask: true }, null, true, true)
     }
     
+  }
+
+  mouseOperating(operateType, data, ddInstance, evt): DDeiFuncCallResult {
+    let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
+    if (editor.tempPopData && editor.tempPopData['ddei-ext-dialog-tooltip']) {
+      DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-tooltip', true)
+      
+    }
+    delete editor.tempHoverModel
+    delete editor.tempHoverTime
+    delete editor.tempHoverX
+    delete editor.tempHoverY
   }
 }
 

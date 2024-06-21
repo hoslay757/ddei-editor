@@ -5,12 +5,12 @@
       <div class="group">
         <div class="title">镜像:</div>
         <div class="group_content">
-          <div :class="{ 'item': canMirror(), 'item_disabled': !canMirror() }" @click="canMirror() && doMirror()">
+          <div :class="{ 'item': canMirror(), 'item_disabled': !canMirror() }" @click="canMirror() && doMirror(true,false)">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-a-ziyuan441"></use>
             </svg>
           </div>
-          <div :class="{ 'item': canMirror(), 'item_disabled': !canMirror() }" @click="canMirror() && doMirror()">
+          <div :class="{ 'item': canMirror(), 'item_disabled': !canMirror() }" @click="canMirror() && doMirror(false,true)">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-a-ziyuan442"></use>
             </svg>
@@ -76,7 +76,16 @@ export default {
 
     //是否可以镜像
     canMirror() {
-      return false;
+      let models = null;
+      if (this.editor.ddInstance.stage?.selectedModels?.size > 0) {
+        models = Array.from(this.editor.ddInstance.stage?.selectedModels.values())
+      }
+      let canMirror = DDei.beforeOperateValid(DDeiEnumOperateType.MIRROR, { models: models }, this.editor.ddInstance, null);
+      if (!(canMirror == 0 || canMirror == 1)) {
+        return true
+      } else {
+        return false
+      }
     },
 
     canRotate() {
@@ -86,9 +95,9 @@ export default {
       }
       let canRotate = DDei.beforeOperateValid(DDeiEnumOperateType.ROTATE, { models: models }, this.editor.ddInstance, null);
       if (!(canRotate == 0 || canRotate == 1)) {
-        return false
-      }else{
         return true
+      }else{
+        return false
       }
     },
 
@@ -139,6 +148,23 @@ export default {
             m1.premultiply(move2Matrix)
             model.transVectors(m1)
           }
+          model.render?.enableRefreshShape();
+        });
+        this.editor.bus.push(DDeiEnumBusCommandType.UpdateSelectorBounds);
+        this.editor.bus.push(DDeiEnumBusCommandType.NodifyChange);
+        this.editor.bus.push(DDeiEnumBusCommandType.AddHistroy);
+        this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape);
+        this.editor.bus.executeAll();
+      }
+    },
+
+    doMirror(x,y) {
+      let file = this.editor.files[this.editor.currentFileIndex];
+      let sheet = file?.sheets[file?.currentSheetIndex];
+      let stage = sheet?.stage;
+      if (stage?.selectedModels?.size > 0) {
+        stage.selectedModels.forEach((model) => {
+          model.mirror(x,y)
           model.render?.enableRefreshShape();
         });
         this.editor.bus.push(DDeiEnumBusCommandType.UpdateSelectorBounds);
