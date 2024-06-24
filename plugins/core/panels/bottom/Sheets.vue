@@ -381,6 +381,7 @@ export default {
         ddInstance.bus?.push(DDeiEditorEnumBusCommandType.AddFileHistroy);
         ddInstance.bus?.push(DDeiEnumBusCommandType.RefreshShape);
         ddInstance.bus?.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
+        ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
         ddInstance.bus.executeAll();
 
         DDeiEditorUtil.closeDialogs(this.editor,null, true)
@@ -408,25 +409,27 @@ export default {
         ddInstance &&
         (index >= 0 || index < sheets.length)
       ) {
-        this.tempSheetChange = true;
-        file.changeSheet(index);
-        let stage = sheets[index].stage;
-        stage.ddInstance = ddInstance;
-        //刷新页面
-        ddInstance.stage = stage;
-        this.editor.currentStage = stage;
-        //加载场景渲染器
-        stage.initRender();
+        if (index != file.currentSheetIndex){
+          this.tempSheetChange = true;
+          file.changeSheet(index);
+          let stage = sheets[index].stage;
+          stage.ddInstance = ddInstance;
+          //刷新页面
+          ddInstance.stage = stage;
+          this.editor.currentStage = stage;
+          //加载场景渲染器
+          stage.initRender();
 
-        ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
-        ddInstance.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
-        ddInstance.bus.executeAll();
+          ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+          ddInstance.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
+          ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
+          ddInstance.bus.executeAll();
 
-        DDeiEditorUtil.closeDialogs(this.editor, null, true)
-        DDeiEditorUtil.closeDialogs(this.editor, null, false)
-        this.showPopPicker(stage)
-        this.editor.changeState(DDeiEditorState.DESIGNING);
-
+          DDeiEditorUtil.closeDialogs(this.editor, null, true)
+          DDeiEditorUtil.closeDialogs(this.editor, null, false)
+          this.showPopPicker(stage)
+          this.editor.changeState(DDeiEditorState.DESIGNING);
+        }
       }
     },
 

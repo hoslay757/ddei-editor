@@ -146,8 +146,9 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
         //当前激活的图层
         let layer = stage.layers[stage.layerIndex];
         //获取当前的鼠标落点
-        let offsetX = DDeiUtil.offsetX;
-        let offsetY = DDeiUtil.offsetY;
+        
+        let offsetX = stage.ddInstance.render.inAreaX - stage.wpv.x;
+        let offsetY = stage.ddInstance.render.inAreaY - stage.wpv.y;
         //当前选中控件是否为1且有表格，且选中表格的单元格，则作为表格单元格的内容粘贴
         let createControl = true;
         let hasChange = false;
@@ -224,8 +225,8 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     //当前激活的图层
     let layer = stage.layers[stage.layerIndex];
     //获取当前的鼠标落点
-    let offsetX = DDeiUtil.offsetX;
-    let offsetY = DDeiUtil.offsetY;
+    let offsetX = stage.ddInstance.render.inAreaX - stage.wpv.x;
+    let offsetY = stage.ddInstance.render.inAreaY - stage.wpv.y;
     //当前选中控件是否为1且有表格，且选中表格的单元格，则作为表格单元格的内容粘贴
     let createControl = true;
     let hasChange = false;
@@ -350,8 +351,8 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     //当前激活的图层
     let layer = stage.layers[stage.layerIndex];
     //获取当前的鼠标落点
-    let offsetX = DDeiUtil.offsetX;
-    let offsetY = DDeiUtil.offsetY;
+    let offsetX = stage.ddInstance.render.inAreaX - stage.wpv.x;
+    let offsetY = stage.ddInstance.render.inAreaY - stage.wpv.y;
     //识别粘贴的内容来自于外部还是内部
     let ddeiJson = null;
 
@@ -374,10 +375,22 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
       //对内部复制的对象进行反序列化处理
       let mode = ddeiJson.mode
       let jsonArray = ddeiJson.data
+      
       let jsonLinkArray = ddeiJson.links
       if (!Array.isArray(jsonArray)) {
         jsonArray = [jsonArray]
       }
+      let unit = ddeiJson.unit
+      
+      //只有保存了unit才需要转换,并且unit为像素也不需要转换
+      if (unit && unit != 'px') {
+        //对model的坐标进行处理
+        jsonArray.forEach(model => {
+          //如果是容器则递归处理其子控件
+          DDeiUtil.convertChildrenJsonUnit(model, stage, unit);
+        });
+      }
+      
       //当前选中控件是否为1且有表格，且选中表格的单元格，则作为表格单元格的内容粘贴
       let createControl = true;
       if (stage.selectedModels?.size == 1) {
@@ -948,17 +961,20 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     //当前激活的图层
     let layer = stage.layers[stage.layerIndex];
     let models: DDeiAbstractShape[] = []
+    let oldIdMap = {}
     jsonArray.forEach(json => {
       if (mode == 'copy') {
         let copyModel = stage.ddInstance.controlModelClasses[json.modelType].loadFromJSON(json, { currentDdInstance: stage.ddInstance, currentStage: stage, currentLayer: layer, currentContainer: container });
-
         models.push(copyModel);
-
+        this.loadJsonModelToMap(copyModel,stage,mode, oldIdMap)
+        this.changeModelId(stage, copyModel)
       } else if (mode == 'cut') {
         let model = stage.getModelById(json.id);
         models.push(model);
+        this.loadJsonModelToMap(model, stage, mode, oldIdMap)
       }
     });
+    
     //加载事件的配置
     let rsState = -1
     if(mode == 'copy'){
@@ -970,27 +986,7 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     if (rsState != -1) {
       //重新计算坐标，基于粘贴的中心点
       let outRect = DDeiAbstractShape.getOutRectByPV(models);
-
       outRect = { x: outRect.x + outRect.width / 2, y: outRect.y + outRect.height / 2 }
-      let oldIdMap = {}
-      models.forEach(item => {
-        let oldModelId = item.id
-        if (mode == 'copy') {
-          this.changeModelId(stage, item)
-        }
-        oldIdMap[oldModelId] = item
-        let cpx = item.cpv.x;
-        let cpy = item.cpv.y;
-        let dx = outRect.x - cpx;
-        let dy = outRect.y - cpy;
-        let moveMatrix = new Matrix3(
-          1, 0, x - dx - cpx,
-          0, 1, y - dy - cpy,
-          0, 0, 1
-        )
-        item.transVectors(moveMatrix)
-
-      })
       //处理links信息,构建新的link信息
       if (mode == 'copy') {
         let appendExPvs = {}
@@ -1024,7 +1020,9 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
           });
           stage.links.push(link);
         })
-        models.forEach(item => {
+        
+        for (let m in oldIdMap) {
+          let item = oldIdMap[m];
           item.exPvs = {}
           if (appendExPvs[item.id]) {
             item.exPvs = appendExPvs[item.id]
@@ -1044,11 +1042,26 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
             }
             item.linkModels = linkModels
           }
-        })
+        }
 
 
         stage.refreshLinkCache()
       }
+      models.forEach(item => {
+        
+        let cpx = item.cpv.x;
+        let cpy = item.cpv.y;
+        let dx = outRect.x - cpx;
+        let dy = outRect.y - cpy;
+        let moveMatrix = new Matrix3(
+          1, 0, x - dx - cpx,
+          0, 1, y - dy - cpy,
+          0, 0, 1
+        )
+        item.transVectors(moveMatrix)
+
+      })
+     
 
       stage.ddInstance.bus.push(DDeiEnumBusCommandType.ModelChangeContainer, { newContainer: container, models: models }, evt);
       stage.ddInstance.bus.push(DDeiEnumBusCommandType.CancelCurLevelSelectedModels, null, evt);
@@ -1157,6 +1170,18 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     stage.ddInstance.bus.push(DDeiEnumBusCommandType.CancelCurLevelSelectedModels, null, evt);
     stage.ddInstance.bus.push(DDeiEnumBusCommandType.ModelChangeSelect, { models: [model], value: DDeiEnumControlState.SELECTED }, evt);
     stage.ddInstance.bus.push(DDeiEnumBusCommandType.StageChangeSelectModels);
+  }
+
+
+  loadJsonModelToMap(json,stage,mode,map){
+    map[json.id] = json
+    
+    if(json.baseModelType == 'DDeiContainer'){
+      json.models.forEach(item => {
+        this.loadJsonModelToMap(item,stage,mode,map)
+      });
+        
+    }
   }
 }
 

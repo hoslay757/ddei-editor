@@ -7,7 +7,7 @@ export default defineConfig({
     vue(),
   ],
   server: {
-    port: 0 // 你想要的新端口号
+    port: 5273 // 你想要的新端口号
   },
   resolve: {
     alias: {

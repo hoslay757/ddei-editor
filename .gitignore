@@ -21,3 +21,4 @@ node_modules
 *.history
 *.zip
 yarn.*
+package-lock.json

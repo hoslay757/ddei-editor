@@ -18,7 +18,7 @@
       </svg>
 
       <span class="textcontent">
-        <div class="text" @dblclick="rename && startChangeFileName(item, $event)">{{ item.name }}</div>
+        <div class="text"  @dblclick="rename && startChangeFileName(item, $event)">{{ item.name }}</div>
         <div class="dirty" v-show="item.state != 0">ꔷ</div>
       </span>
       <svg @click.prevent.stop="closeFile(item, $event)" v-if="close" class="icon close" aria-hidden="true">
@@ -214,7 +214,7 @@ export default {
               new DDeiSheet({
                 name: "页面-1",
                 desc: "页面-1",
-                stage: DDeiStage.initByJSON({ id: "stage_1" }),
+                stage: DDeiStage.initByJSON({ id: "stage_1" }, { currentDdInstance :ddInstance}),
                 active: DDeiActiveType.ACTIVE,
               }),
             ],
@@ -349,6 +349,7 @@ export default {
           }
         };
       }
+      
       input.style.width = ele.offsetWidth + "px";
       input.style.height = ele.offsetHeight - 3 + "px";
       input.style.left = domPos.left - editorDomPos.left + "px";
@@ -476,33 +477,20 @@ export default {
         ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
         ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
         ddInstance.bus.executeAll();
-      } else if (file.active != DDeiActiveType.ACTIVE) {
-        this.editor.files.forEach((item) => {
-          item.active = DDeiActiveType.NONE;
-        });
-        file.active = DDeiActiveType.ACTIVE;
-        //刷新画布
-        this.editor.currentFileIndex = this.editor?.files?.indexOf(file);
-        let sheets = file?.sheets;
-
-        if (file && sheets && ddInstance) {
-          let stage = sheets[file.currentSheetIndex].stage;
-          stage.ddInstance = ddInstance;
-          //刷新页面
-          ddInstance.stage = stage;
-          //加载场景渲染器
-          stage.initRender();
+      }else{
+        if (this.editor.files.indexOf(file) != this.editor.currentFileIndex){
+          this.editor.changeFile(this.editor.files.indexOf(file))
           ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+          ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
+          ddInstance.bus.executeAll();
         }
-        // this.applyFilePromise(file)
-        ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
-        ddInstance.bus.executeAll();
       }
       if (this.editor.files.length == 0) {
         ddInstance.disabled = true
       } else {
         ddInstance.disabled = false
       }
+      
 
     },
 
