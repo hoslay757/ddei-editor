@@ -11,7 +11,7 @@ export default {
     height: 160,
     //扩展采样信息，用于在原有的基础上增加采样，或者覆盖采样的部分信息
     ext: {
-      //追加一个从中间切开的采样点，用于横向切割
+      
       sample: {
         rules: [
 
@@ -26,10 +26,11 @@ export default {
               pvs.push({x:-50,y:(ovs[0].y-model.cpv.y),stroke:1,end:1});
             }
           }`,
+          //追加一个从中间切开的采样点，用于横向切割
           `(i, sample, pvs, model,ovs){
             if(i == 0){
-              pvs.push({begin:1,x:-50,y:(ovs[1].y-model.cpv.y),stroke:1,type:1});
-              pvs.push({end:1,x:50,y:(ovs[1].y-model.cpv.y),stroke:1,type:1});
+              pvs.push({x:-50,y:(ovs[1].y-model.cpv.y),stroke:1,type:1});
+              pvs.push({x:50,y:(ovs[1].y-model.cpv.y),stroke:1,type:1});
             }
           }`
         ]

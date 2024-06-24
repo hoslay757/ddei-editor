@@ -1,7 +1,6 @@
 import {DDeiConfig} from "ddei-framework";
 import {DDei} from "ddei-framework";
-import {DDeiAbstractShape} from "ddei-framework";
-import {DDeiUtil} from "ddei-framework";
+import { DDeiModelArrtibuteValue } from "ddei-framework";
 import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
@@ -63,13 +62,39 @@ class DDeiKeyActionCut extends DDeiKeyAction {
       let selectedControls = ddInstance.stage.selectedModels;
       //存在选中控件
       if (selectedControls?.size > 0) {
+        let models = Array.from(selectedControls.values())
+        let sortedModels = []
+        let modelLines = [];
+        let selectedSubAllModels = new Map()
+        models[0].pModel.midList.forEach(mid => {
+          models.forEach(item => {
+            if (item.id == mid) {
+              sortedModels.push(item)
+              if (item.baseModelType == 'DDeiContainer') {
+                let subLines = item.getModelsByBaseType("DDeiLine")
+                let subModels = item.getSubModels(null, 100)
+                if (subModels?.length > 0) {
+                  subModels.forEach(element => {
+                    selectedSubAllModels.set(element.id, element)
+                  });
+
+                }
+                if (subLines?.length > 0) {
+                  modelLines.push(...subLines)
+                }
+              } else if (item.baseModelType == 'DDeiLine') {
+                modelLines.push(item)
+              }
+            }
+          })
+        })
         //生成控件HTML
         let copyHtml = '<html><head>';
         copyHtml += '<meta source="ddei">'
         let jsonStr = '['
         let jsonLinksStr = '['
         let innerHTML = ''
-        selectedControls?.forEach((model, key) => {
+        sortedModels?.forEach((model, key) => {
           if (selectedControls?.size == 1) {
             if (model.baseModelType == "DDeiTable") {
               if (model.curRow == -1 && model.curCol == -1) {
@@ -88,26 +113,28 @@ class DDeiKeyActionCut extends DDeiKeyAction {
             let json = model.toJSON();
             jsonStr += JSON.stringify(json) + ","
           }
+        })
+        modelLines.forEach(line => {
+
           //如果控件为线段，则复制linkModels
-          if (model.baseModelType == "DDeiLine") {
-            let distModelLinks = ddInstance.stage?.getDistModelLinks(model.id)
-            //如果被复制的控件也在linkmodels里面，则需要复制linkModel信息
-            distModelLinks?.forEach(link => {
-              if (selectedControls?.has(link?.sm?.id)) {
-                jsonLinksStr += JSON.stringify(link) + ","
+          let distModelLinks = ddInstance.stage?.getDistModelLinks(line.id)
+          //如果被复制的控件也在linkmodels里面，则需要复制linkModel信息
+          distModelLinks?.forEach(link => {
+            if (selectedControls?.has(link?.sm?.id) || selectedSubAllModels?.has(link?.sm?.id)) {
+              jsonLinksStr += JSON.stringify(link) + ","
+            }
+          })
+          //需要进一步复制其linkModels
+          line.linkModels?.forEach(lineLM => {
+            if (lineLM.dm) {
+              if (!selectedControls.has(lineLM.dm.id) && !selectedSubAllModels.has(lineLM.dm.id)) {
+                //添加到复制的model中
+                let json = lineLM.dm.toJSON();
+                jsonStr += JSON.stringify(json) + ","
               }
-            })
-            //需要进一步复制其linkModels
-            model.linkModels?.forEach(lineLM => {
-              if (lineLM.dm) {
-                if (!selectedControls.has(lineLM.dm.id)) {
-                  //添加到复制的model中
-                  let json = lineLM.dm.toJSON();
-                  jsonStr += JSON.stringify(json) + ","
-                }
-              }
-            });
-          }
+            }
+          });
+
         })
         if (jsonStr.length > 1) {
 
@@ -119,6 +146,31 @@ class DDeiKeyActionCut extends DDeiKeyAction {
             jsonLinksStr = jsonLinksStr.substring(0, jsonLinksStr.length - 1)
             jsonLinksStr += ']'
             jsonStr += " , \"links\":" + jsonLinksStr
+          }
+          //读取当前单位
+          //标尺单位
+          let ruleDisplay
+          let ruleInit
+          if (ddInstance.stage.ruler?.display || ddInstance.stage.ruler?.display == 0 || ddInstance.stage.ruler?.display == false) {
+            ruleDisplay = ddInstance.stage.ruler.display;
+          } else if (ddInstance.ruler != null && ddInstance.ruler != undefined) {
+            if (typeof (ddInstance.ruler) == 'boolean') {
+              ruleDisplay = ddInstance.ruler ? 1 : 0;
+            } else {
+              ruleInit = ddInstance.ruler
+              ruleDisplay = ruleInit.display;
+            }
+          } else {
+            ruleDisplay = DDeiModelArrtibuteValue.getAttrValueByState(ddInstance.stage, "ruler.display", true);
+          }
+
+
+          //处理点坐标变换
+          if (ruleDisplay) {
+            //写入unit用于单位换算还原
+            // json.dpi = this.ddInstance?.dpi?.x;
+            let unit = DDeiModelArrtibuteValue.getAttrValueByState(ddInstance.stage, "ruler.unit", true, ruleInit);
+            jsonStr += ',"unit":"' + unit + '"'
           }
           jsonStr += "}"
 

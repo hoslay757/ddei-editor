@@ -16,11 +16,11 @@ export default {
           `(i, sample, pvs, model, ovs){
             if(i == 0){
               if(sample.direct == 1){
-                pvs.push({begin:1,x:-50,y:sample.pvalue,stroke:1,type:1});
-                pvs.push({end:1,x:50,y:sample.pvalue,stroke:1,type:1});
+                pvs.push({x:-50,y:sample.pvalue,stroke:1,type:1});
+                pvs.push({x:50,y:sample.pvalue,stroke:1,type:1});
               }else{
-                pvs.push({begin:1,x:sample.pvalue,y:-50,stroke:1,type:1});
-                pvs.push({end:1,x:sample.pvalue,y:50,stroke:1,type:1});
+                pvs.push({x:sample.pvalue,y:-50,stroke:1,type:1});
+                pvs.push({x:sample.pvalue,y:50,stroke:1,type:1});
               }
             }
           }`

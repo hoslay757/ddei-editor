@@ -19,8 +19,8 @@ export default {
         rules: [
           `(i, sample, pvs, model,ovs){
             if(i == 0){
-              pvs.push({begin:1,x:-50,y:(ovs[0].y-model.cpv.y),stroke:1,type:1});
-              pvs.push({end:1,x:50,y:(ovs[0].y-model.cpv.y),stroke:1,type:1});
+              pvs.push({x:-50,y:(ovs[0].y-model.cpv.y),stroke:1,type:1});
+              pvs.push({x:50,y:(ovs[0].y-model.cpv.y),stroke:1,type:1});
             }
           }`
         ]

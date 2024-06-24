@@ -1,19 +1,19 @@
-import {DDeiPluginBase} from "ddei-framework";
-import CanvasQuickDialog from "./canvasquickdialog"
-import DDeiCoreCanvasLifeCycle from "./quickstyle-lifecycle"
+import { DDeiPluginBase } from "ddei-framework";
+import DDeiCoreTooltipDialog from "./tooltipdialog"
+import DDeiExtTooltipLifeCycle from "./tooltip-lifecycle"
 
-class DDeiExtQuickStyle extends DDeiPluginBase {
+class DDeiExtTooltip extends DDeiPluginBase {
   type: string = "package"
 
-  
+
   /**
    * 缺省实例
    */
-  static defaultIns: DDeiExtQuickStyle = new DDeiExtQuickStyle(null);
+  static defaultIns: DDeiExtTooltip = new DDeiExtTooltip(null);
 
-  dialogs: object = CanvasQuickDialog;
+  dialogs: object = DDeiCoreTooltipDialog;
 
-  lifecyclies: object = DDeiCoreCanvasLifeCycle;
+  lifecyclies: object = DDeiExtTooltipLifeCycle;
 
   getDialogs(editor) {
     if (DDeiPluginBase.isSubclass(this.dialogs, DDeiPluginBase)) {
@@ -33,14 +33,14 @@ class DDeiExtQuickStyle extends DDeiPluginBase {
 
 
   static configuration(options) {
-    let core = new DDeiExtQuickStyle(options);
+    let core = new DDeiExtTooltip(options);
     core.dialogs = core.dialogs.configuration(options, true)
     core.lifecyclies = core.lifecyclies.configuration(options, true)
     return core;
   }
 }
 
-export {DDeiExtQuickStyle}
-export * from "./canvasquickdialog"
-export * from "./quickstyle-lifecycle"
-export default DDeiExtQuickStyle;
+export { DDeiExtTooltip }
+export * from "./tooltipdialog"
+export * from "./tooltip-lifecycle"
+export default DDeiExtTooltip;
