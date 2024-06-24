@@ -166,13 +166,13 @@ export default {
         stage.selectedModels.forEach((model) => {
           if (mirrorType == 1){
             if (!model.mirrorX){
-              model.mirrorX = 1
+              model.mirrorX = true
             }else{
               delete model.mirrorX
             }
           }else if(mirrorType == 2){
             if (!model.mirrorY) {
-              model.mirrorY = 1
+              model.mirrorY = true
             } else {
               delete model.mirrorY
             }

@@ -21,8 +21,9 @@ class DDeiExtTooltipLifeCycle extends DDeiLifeCycle {
   showTooltip(operateType, data, ddInstance, evt): DDeiFuncCallResult {
     
     let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
+    let stage = editor.ddInstance?.stage
     //如果悬停时间大于400，显示tooltip
-    if (data.models?.length > 0 && data.models[0]){
+    if (stage?.render?.operateState == 0 && data.models?.length > 0 && data.models[0]){
      
       if (editor.tempHoverModel != data.models[0]){
         

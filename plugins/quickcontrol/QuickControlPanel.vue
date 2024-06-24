@@ -116,22 +116,22 @@ export default {
           let outRect = DDeiAbstractShape.getOutRectByPV([model])
           if (type == 1) {
             let controls = this.editor.ddInstance.stage.getLayerModels([model.id], 100, { x: outRect.x, y: outRect.y-150, x1: outRect.x1, y1: outRect.y})
-            if (controls?.length > 0){
+            if (this.validControls(controls)){
               existsControl = controls[0];
             }
           } else if (type == 2) {
             let controls = this.editor.ddInstance.stage.getLayerModels([model.id], 100, { x: outRect.x1, y: outRect.y, x1: outRect.x1+150, y1: outRect.y1 })
-            if (controls?.length > 0) {
+            if (this.validControls(controls)) {
               existsControl = controls[0];
             }
           } else if (type == 3) {
             let controls = this.editor.ddInstance.stage.getLayerModels([model.id], 100, { x: outRect.x, y: outRect.y1, x1: outRect.x1, y1: outRect.y1+150 })
-            if (controls?.length > 0) {
+            if (this.validControls(controls)) {
               existsControl = controls[0];
             }
           } else if (type == 4) {
             let controls = this.editor.ddInstance.stage.getLayerModels([model.id], 100, { x: outRect.x-150, y: outRect.y, x1: outRect.x, y1: outRect.y1 })
-            if (controls?.length > 0) {
+            if (this.validControls(controls)) {
               existsControl = controls[0];
             }
           }
@@ -234,6 +234,17 @@ export default {
         this.editor.ddInstance.stage.removeModel(this.editor.tempLineModel,true)
         delete this.editor.tempLineModel
       }
+    },
+
+    validControls(controls){
+      if(controls?.length > 0){
+        for(let i = 0;i < controls.length;i++){
+          if (controls[i].baseModelType != 'DDeiLine'){
+            return true;
+          }
+        }
+      }
+      return false
     }
   }
 };
