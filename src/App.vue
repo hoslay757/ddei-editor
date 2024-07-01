@@ -98,9 +98,10 @@ export default defineComponent({
       
       config: {
         EXT_STAGE_WIDTH:false,
+        GLOBAL_ALLOW_BACK_ACTIVE:true,
         // "readonly": true,
         access: { "DEL": false, "SCALE": false, "ROTATE": false },
-        "paper":"A5",
+        "paper":"无",
         "ruler": true,
         initData: {
           controls: [
