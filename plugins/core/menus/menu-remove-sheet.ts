@@ -129,7 +129,8 @@ class MenuRemoveSheet extends DDeiMenuBase {
    * 判定是否显示的方法
    */
   isVisiable(model: object): boolean {
-    if (!this.disabled && model?.modelType == 'DDeiSheet') {
+    let allowEditSheet = model.stage.ddInstance?.AC_DESIGN_EDIT != false ? true : false
+    if (allowEditSheet && !this.disabled && model?.modelType == 'DDeiSheet') {
       //将sheet插入文件
       let editor = DDeiEditor.ACTIVE_INSTANCE
       let file = editor?.files[editor.currentFileIndex];

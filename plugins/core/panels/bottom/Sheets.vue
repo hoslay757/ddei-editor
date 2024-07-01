@@ -1,6 +1,6 @@
 <template>
   <div class="ddei-core-panel-bottom-addpage" @click="newSheet"
-    v-if="create && (!max || (editor?.files[editor?.currentFileIndex]?.sheets?.length < max))">
+    v-if="allowEditSheet && create && (!max || (editor?.files[editor?.currentFileIndex]?.sheets?.length < max))">
     <svg class="icon" aria-hidden="true">
       <use xlink:href="#icon-a-ziyuan376"></use>
     </svg>
@@ -9,9 +9,9 @@
     <div class="ddei-core-panel-bottom-pages-page" v-if="maxOpenSize == 0">
       <span></span>
     </div>
-    <div @mousedown="drag && sheetDragStart(null, $event)" @click.left="changeSheet(index)"
+    <div @mousedown="allowEditSheet && drag && sheetDragStart(null, $event)" @click.left="changeSheet(index)"
       @click.right="showMenu(sheet, $event)" @mousemove="drag && sheetDragOver($event)"
-      @dblclick="rename && startChangeSheetName(sheet, $event)"
+      @dblclick="allowEditSheet && rename && startChangeSheetName(sheet, $event)"
       v-show="index >= openIndex && index < openIndex + maxOpenSize"
       :class="{ 'ddei-core-panel-bottom-pages-page': sheet.active == 0, 'ddei-core-panel-bottom-pages-page--selected': sheet.active == 1 }"
       :title="sheet.name" v-for="(sheet, index) in  editor?.files[editor?.currentFileIndex]?.sheets ">
@@ -78,6 +78,7 @@ export default {
       file: null,
       maxOpenSize:0,
       openIndex: 0,
+      allowEditSheet:true//是否允许编辑页签
       // sslink: null,
       // user: null,
     };
@@ -85,8 +86,7 @@ export default {
   computed: {},
   watch: {},
   created() {
-    
-   },
+  },
   mounted() {
     // 创建 ResizeObserver 实例
     const resizeObserver = new ResizeObserver(entries => {
@@ -137,6 +137,7 @@ export default {
     //     }
     //   }
     // }
+    this.allowEditSheet = this.editor.ddInstance?.AC_DESIGN_EDIT != false ? true : false
     this.file = file
   },
   methods:{

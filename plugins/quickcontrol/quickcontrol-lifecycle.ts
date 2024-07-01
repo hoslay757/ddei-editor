@@ -77,8 +77,9 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
         let editorEle = document.getElementById(editor.id);
         let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
         let modelPos = DDeiUtil.getModelsDomAbsPosition([data.model])
-        let width = 50;
-        let height = 50;
+        
+        let width = 50
+        let height = 50
         let left = modelPos.left - editorDomPos.left - width/2
         let top = modelPos.top - editorDomPos.top - height/2
         let offset = null

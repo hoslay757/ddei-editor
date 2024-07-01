@@ -84,7 +84,8 @@ class MenuCopySheet extends DDeiMenuBase {
    * 判定是否显示的方法
    */
   isVisiable(model: object): boolean {
-    return !this.disabled;
+    let allowEditSheet = model.stage.ddInstance?.AC_DESIGN_EDIT != false ? true : false
+    return allowEditSheet && !this.disabled;
   }
 
 }

@@ -44,7 +44,7 @@ export default defineComponent({
     })
     const options1 = markRaw({
       config: {
-        "readonly":true,
+        // "readonly":true,
         "mark": "水印文本",
         "grid": 2,
         "paper": {type:"A6",direct:1},
@@ -226,8 +226,13 @@ export default defineComponent({
 
 
 <template>
-  <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
-  <!--
+  
+  <div style="width:500px;height:500px;overflow: auto;margin:auto;margin-top:200px;">
+    <div style="width:80vw;height:80vh;">
+      <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
+    </div>
+  </div>
+
   <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
 
   <div style="width:400px;height:400px;float:left">
@@ -245,7 +250,7 @@ export default defineComponent({
   </div>
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer5" :options="options4" id="ddei_editor_5"></DDeiEditorView>
-  </div> -->
+  </div> 
 </template>
 
 <style>
