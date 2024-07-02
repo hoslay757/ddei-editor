@@ -75,34 +75,36 @@ export default {
   methods:{
     refreshData(){
       //获取model
-      let model = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].model
-      if (model) {
-        let outRect = DDeiAbstractShape.getOutRectByPV([model])
-        let width = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].width;
-        width = width || width == 0 ? width : 40;
-        let height = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].height;
-        height = height || height == 0 ? height : 40;
-        
-        this.$refs.quickControlDiv.style.width = (outRect.width + width) + "px";
-        this.$refs.quickControlDiv.style.height = (outRect.height + height) + "px";
+      if (this.editor.tempPopData && this.editor.tempPopData['ddei-ext-dialog-quickcontrol'] && this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].model){
+        let model = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].model
+        if (model) {
+          let outRect = DDeiAbstractShape.getOutRectByPV([model])
+          let width = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].width;
+          width = width || width == 0 ? width : 40;
+          let height = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].height;
+          height = height || height == 0 ? height : 40;
+          
+          this.$refs.quickControlDiv.style.width = (outRect.width + width) + "px";
+          this.$refs.quickControlDiv.style.height = (outRect.height + height) + "px";
 
-   
+    
 
-        this.leftOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.left;
-        this.rightOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.right;
-        this.topOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.top;
-        this.bottomOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.bottom;
-        //查询当前控件的四个方向是否有线存在，控制显示状态
-        for (let i in model.exPvs) {
-          let mlPoint = model.exPvs[i]
-          if (parseInt(mlPoint.y) == parseInt(outRect.y)) {
-            this.topState = 1
-          } else if (parseInt(mlPoint.x) == parseInt(outRect.x1)) {
-            this.rightState = 1
-          } else if (parseInt(mlPoint.y) == parseInt(outRect.y1)) {
-            this.bottomState = 1
-          } else if (parseInt(mlPoint.x) == parseInt(outRect.x)) {
-            this.leftState = 1
+          this.leftOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.left;
+          this.rightOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.right;
+          this.topOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.top;
+          this.bottomOffset = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].offset?.bottom;
+          //查询当前控件的四个方向是否有线存在，控制显示状态
+          for (let i in model.exPvs) {
+            let mlPoint = model.exPvs[i]
+            if (parseInt(mlPoint.y) == parseInt(outRect.y)) {
+              this.topState = 1
+            } else if (parseInt(mlPoint.x) == parseInt(outRect.x1)) {
+              this.rightState = 1
+            } else if (parseInt(mlPoint.y) == parseInt(outRect.y1)) {
+              this.bottomState = 1
+            } else if (parseInt(mlPoint.x) == parseInt(outRect.x)) {
+              this.leftState = 1
+            }
           }
         }
       }

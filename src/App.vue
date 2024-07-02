@@ -227,15 +227,15 @@ export default defineComponent({
 
 
 <template>
-  
+  <!--
   <div style="width:500px;height:500px;overflow: auto;margin:auto;margin-top:200px;">
     <div style="width:80vw;height:80vh;">
       <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
     </div>
   </div>
-
+  -->
   <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
-
+  <!--
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>
   </div>
@@ -252,6 +252,7 @@ export default defineComponent({
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer5" :options="options4" id="ddei_editor_5"></DDeiEditorView>
   </div> 
+  -->
 </template>
 
 <style>
