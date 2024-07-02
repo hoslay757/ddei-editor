@@ -59,7 +59,7 @@ export default defineComponent({
             {
               id: "act_1",
               model: "102010",
-              code: "emp_1",
+              type: "emp_1",
               text: "第一步",
               border:{color:"yellow",dash:[10,10,5,5],width:5},
               fill:{color:"grey"},
@@ -67,7 +67,7 @@ export default defineComponent({
             {
               id: "act_2",
               model: "102010",
-              code: "emp_2",
+              type: "emp_2",
               width: 200,
               height: 100,
               text: "第二步",
@@ -92,21 +92,23 @@ export default defineComponent({
         DDeiExtQuickControl,
         DDeiExtTooltip,
         DDeiExtHtmlViewer.configuration({
+          matchField: "type",
           "emp_1":{
-            code:"emp_1",
+            type:"emp_1",
             name: "张三",
             viewer: ReplaceDivDemo
           },
           "emp_2": {
-            code: "emp_2",
+            type: "emp_2",
             name: "李四",
             viewer: ReplaceDivDemo
           },
           "emp_3": {
-            code: "emp_3",
+            type: "emp_3",
             name: "王五",
             viewer: ReplaceDivDemo
           },
+          
         })
         
       ],

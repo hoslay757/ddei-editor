@@ -3,7 +3,7 @@
     ondragstart="return false;" @wheel="mouseWheel($event)" @mousemove="mouseMove($event)" @mouseup="mouseUp($event)"
     @dblclick="canvasDBClick" @contextmenu.prevent>
     <div class="ddei-editor-canvasview-renderviewers">
-      <component :editor="editor" v-for="(item, index) in editor?.renderViewers" :is="item.viewer" v-bind="item">
+      <component :editor="editor" v-for="(item, index) in editor?.renderViewers" :is="item.viewer" v-bind="item" >
       </component>
     </div>
   </div>

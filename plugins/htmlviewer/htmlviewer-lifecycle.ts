@@ -7,7 +7,9 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
   /**
    * 缺省实例
    */
-  static defaultIns: DDeiExtHtmlViewerLifeCycle = new DDeiExtHtmlViewerLifeCycle();
+  static defaultIns: DDeiExtHtmlViewerLifeCycle = new DDeiExtHtmlViewerLifeCycle({
+    matchField:"code"
+  });
 
   EVENT_CONTROL_VIEW_BEFORE: DDeiFuncData | null = new DDeiFuncData("htmlviewer-drawshape", 1, (operateType, data, ddInstance, evt) => {
     return this.htmlDrawShape(operateType, data, ddInstance, evt)
@@ -15,7 +17,7 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
 
   static configuration(options) {
     //解析options，只使用自己相关的
-   
+    
     if (options && Object.keys(options).length !== 0) {
       let lcs = new DDeiExtHtmlViewerLifeCycle(options);
       return lcs;
@@ -28,6 +30,7 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
     //添加viewer到editor
     for(let i in this.options){
       if (this.options[i] && this.options[i].viewer){
+        this.options[i].matchField = this.options.matchField
         editor.renderViewers.push(this.options[i])
       }
     }
@@ -41,9 +44,10 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
     if (editor){
       let canvasEle = document.getElementById(editor.id + "_canvas");
       let canvasDomPos = DDeiUtil.getDomAbsPosition(canvasEle);
+      let field = this.options.matchField
       for (let i = 0; i < models?.length; i++) {
-        if (models[i].code) {
-          let displayDiv = editor.renderViewerIns[models[i].code]
+        if (models[i][field]) {
+          let displayDiv = editor.renderViewerIns[models[i][field]]
           if (displayDiv) {
             let modelPos = DDeiUtil.getModelsDomAbsPosition([models[i]])
             let rat1 = window.remRatio
