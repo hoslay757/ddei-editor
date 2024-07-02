@@ -3,14 +3,16 @@ import DDeiEditorView from "./editor/Editor.vue";
 import { DDeiCoreTopMenuPanel, DDeiCoreThemeBlack, DDeiCoreControls, DDeiCoreHotkeys, DDeiKeyActionAllSelect, DDeiCorePropertyViewPanel, DDeiCoreToolboxPanel, DDeiCoreSheetsPanel, DDeiCoreChangeRatioPanel, DDeiCoreChangeRatioDialog, DDeiCoreShapeCountPanel, DDeiCoreBottomMenuPanel, DDeiCoreStandLayout, DDeiCoreOpenFilesViewPanel, DDeiCoreThemeDefault } from "@ddei/core";
 import { DDeiExtUML } from "@ddei/uml"
 import { DDeiExtSearch } from "@ddei/search"
-import { DDeiFuncCallResult } from "ddei-framework";
+import { DDeiFuncCallResult, DDeiUtil, DDeiEditorUtil } from "ddei-framework";
 import DDeiExtQuickStyle from "@ddei/quickstyle"
 import DDeiExtTooltip from "@ddei/tooltip"
 import { DDeiExtQuickControl, QuickChooseControlDialog } from "@ddei/quickcontrol"
 import { defineComponent, markRaw } from "vue";
+import DDeiExtHtmlViewer from "@ddei/htmlviewer"
+import ReplaceDivDemo  from "./ReplaceDivDemo.vue";
 export default defineComponent({
   name: "APP",
-  components: { DDeiEditorView },
+  components: { DDeiEditorView, ReplaceDivDemo },
   data() {
     
     const options = markRaw({
@@ -57,16 +59,15 @@ export default defineComponent({
             {
               id: "act_1",
               model: "102010",
-              code: "active_01",
+              code: "emp_1",
               text: "第一步",
               border:{color:"yellow",dash:[10,10,5,5],width:5},
               fill:{color:"grey"},
-        
             },
             {
               id: "act_2",
               model: "102010",
-              code: "active_02",
+              code: "emp_2",
               width: 200,
               height: 100,
               text: "第二步",
@@ -89,7 +90,24 @@ export default defineComponent({
         DDeiExtSearch,
         DDeiExtQuickStyle,
         DDeiExtQuickControl,
-        DDeiExtTooltip
+        DDeiExtTooltip,
+        DDeiExtHtmlViewer.configuration({
+          "emp_1":{
+            code:"emp_1",
+            name: "张三",
+            viewer: ReplaceDivDemo
+          },
+          "emp_2": {
+            code: "emp_2",
+            name: "李四",
+            viewer: ReplaceDivDemo
+          },
+          "emp_3": {
+            code: "emp_3",
+            name: "王五",
+            viewer: ReplaceDivDemo
+          },
+        })
         
       ],
     })
@@ -200,6 +218,8 @@ export default defineComponent({
         }),
       ],
     })
+
+   
     
     return {
       options:options,
@@ -227,15 +247,26 @@ export default defineComponent({
 
 
 <template>
-  <!--
+  <div v-for="data in demoData" :id="'demo_replace_div_' + data.code" :ref="'demo_replace_div_' + data.code"
+    style="display: flex;flex-direction:column;text-align:center;align-items: center;text-align: center;width:200px;background: white;color:black;position: absolute;display: none;">
+    <div style="width:100%;display: flex;text-align:center;align-items: center;">
+      <div style="flex:1">代码</div>
+      <div style="flex:1">{{ data.code }}</div>
+    </div>
+    <div style="width:100%;display: flex;text-align:center;align-items: center;">
+      <div style="flex:1">名称</div>
+      <div style="flex:1">{{ data.name }}</div>
+    </div>
+  </div>
+
   <div style="width:500px;height:500px;overflow: auto;margin:auto;margin-top:200px;">
     <div style="width:80vw;height:80vh;">
       <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
     </div>
   </div>
-  -->
+ 
   <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
-  <!--
+  
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>
   </div>
@@ -252,7 +283,7 @@ export default defineComponent({
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer5" :options="options4" id="ddei_editor_5"></DDeiEditorView>
   </div> 
-  -->
+
 </template>
 
 <style>

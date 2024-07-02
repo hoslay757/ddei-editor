@@ -1,7 +1,11 @@
 <template>
-  <div :id="editor?.id+'_canvas'" ref="middleCanvas" class="ddei-editor-canvasview" @mousedown="mouseDown($event)" ondragstart="return false;"
-    @wheel="mouseWheel($event)" @mousemove="mouseMove($event)" @mouseup="mouseUp($event)"
+  <div :id="editor?.id+'_canvas'" ref="middleCanvas" class="ddei-editor-canvasview" @mousedown="mouseDown($event)"
+    ondragstart="return false;" @wheel="mouseWheel($event)" @mousemove="mouseMove($event)" @mouseup="mouseUp($event)"
     @dblclick="canvasDBClick" @contextmenu.prevent>
+    <div class="ddei-editor-canvasview-renderviewers">
+      <component :editor="editor" v-for="(item, index) in editor?.renderViewers" :is="item.viewer" v-bind="item">
+      </component>
+    </div>
   </div>
 </template>
 
@@ -53,9 +57,8 @@ export default {
 
   },
   mounted() {
-   
+    
     let ddInstance = this.editor.ddInstance;
-  
     ddInstance.initRender()
     //设置视窗位置到中央
     if (!ddInstance.stage.wpv) {
@@ -466,9 +469,18 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .ddei-editor-canvasview {
   flex: 1;
   overflow: hidden;
+  position: relative;
+  &-renderviewers{
+    overflow: hidden;
+    width:100%;
+    height:100%;
+    z-index: 200;
+    position: absolute;
+    pointer-events:none;
+  }
 }
 </style>
