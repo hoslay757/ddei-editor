@@ -55,25 +55,25 @@ export default defineComponent({
         "background": {color:"#123456",opacity:0.1},
         // "theme": "ddei-core-theme-black",
         initData: {
-          controls:[
-            {
-              id: "act_1",
-              model: "102010",
-              type: "emp_1",
-              text: "第一步",
-              border:{color:"yellow",dash:[10,10,5,5],width:5},
-              fill:{color:"grey"},
-            },
-            {
-              id: "act_2",
-              model: "102010",
-              type: "emp_2",
-              width: 200,
-              height: 100,
-              text: "第二步",
-              offsetY: -70,
-            }
-          ]
+          // controls:[
+          //   {
+          //     id: "act_1",
+          //     model: "102010",
+          //     type: "emp_1",
+          //     text: "第一步",
+          //     border:{color:"yellow",dash:[10,10,5,5],width:5},
+          //     fill:{color:"grey"},
+          //   },
+          //   {
+          //     id: "act_2",
+          //     model: "102010",
+          //     type: "emp_2",
+          //     width: 200,
+          //     height: 100,
+          //     text: "第二步",
+          //     offsetY: -70,
+          //   }
+          // ]
         }
       },
       //配置扩展插件
@@ -88,28 +88,29 @@ export default defineComponent({
           // 'right': []
         }),
         DDeiExtSearch,
+        DDeiExtUML,
         DDeiExtQuickStyle,
         DDeiExtQuickControl,
         DDeiExtTooltip,
-        DDeiExtHtmlViewer.configuration({
-          matchField: "type",
-          "emp_1":{
-            type:"emp_1",
-            name: "张三",
-            viewer: ReplaceDivDemo
-          },
-          "emp_2": {
-            type: "emp_2",
-            name: "李四",
-            viewer: ReplaceDivDemo
-          },
-          "emp_3": {
-            type: "emp_3",
-            name: "王五",
-            viewer: ReplaceDivDemo
-          },
+        // DDeiExtHtmlViewer.configuration({
+        //   matchField: "type",
+        //   "emp_1":{
+        //     type:"emp_1",
+        //     name: "张三",
+        //     viewer: ReplaceDivDemo
+        //   },
+        //   "emp_2": {
+        //     type: "emp_2",
+        //     name: "李四",
+        //     viewer: ReplaceDivDemo
+        //   },
+        //   "emp_3": {
+        //     type: "emp_3",
+        //     name: "王五",
+        //     viewer: ReplaceDivDemo
+        //   },
           
-        })
+        // })
         
       ],
     })
@@ -260,15 +261,15 @@ export default defineComponent({
       <div style="flex:1">{{ data.name }}</div>
     </div>
   </div>
-
+  <!--
   <div style="width:500px;height:500px;overflow: auto;margin:auto;margin-top:200px;">
     <div style="width:80vw;height:80vh;">
       <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
     </div>
   </div>
- 
+ -->
   <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
-  
+  <!--
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>
   </div>
@@ -284,8 +285,8 @@ export default defineComponent({
   </div>
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer5" :options="options4" id="ddei_editor_5"></DDeiEditorView>
-  </div> 
-
+  </div>
+-->
 </template>
 
 <style>

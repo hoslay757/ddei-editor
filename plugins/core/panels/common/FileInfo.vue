@@ -68,7 +68,7 @@ import {DDeiFileState} from "ddei-framework";
 import {DDeiFile} from "ddei-framework";
 import {DDeiStage} from "ddei-framework";
 import {DDeiSheet} from "ddei-framework";
-import {DDeiEditorUtil} from "ddei-framework";
+import { DDeiUtil } from "ddei-framework";
 
 export default {
   name: "ddei-core-panel-fileinfo",
@@ -187,13 +187,13 @@ export default {
         });
         let openedFiles = this.editor.files;
         let openedFileIndex = -1
-        
         for (let fi = 0; fi < openedFiles.length; fi++) {
           if ((openedFiles[fi].id && openedFiles[fi].id == file.id) || (openedFiles[fi].path && file.path && (openedFiles[fi].path == file.path))) {
             openedFileIndex = fi
             break;
           }
         }
+        
         if (openedFileIndex == -1) {
           file.localFileHandler = openFileHandle[0]
           file.local = 1
@@ -210,7 +210,9 @@ export default {
             file.changeSheet(file.currentSheetIndex);
 
             let stage = sheets[file.currentSheetIndex].stage;
+            
             stage.ddInstance = ddInstance;
+            ddInstance.disabled = false
             //记录文件初始日志
             file.initHistroy();
             file.histroy[0].isNew = true;
@@ -259,6 +261,7 @@ export default {
             stage.ddInstance = ddInstance;
             //刷新页面
             ddInstance.stage = stage;
+            ddInstance.disabled = false
             //加载场景渲染器
             stage.initRender();
             this.editor.changeState(DDeiEditorState.DESIGNING);
