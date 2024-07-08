@@ -187,8 +187,11 @@ export default {
         });
         let openedFiles = this.editor.files;
         let openedFileIndex = -1
+        if(!file.id){
+          file.id = DDeiUtil.getUniqueCode()
+        }
         for (let fi = 0; fi < openedFiles.length; fi++) {
-          if ((openedFiles[fi].id && openedFiles[fi].id == file.id) || (openedFiles[fi].path && file.path && (openedFiles[fi].path == file.path))) {
+          if ((openedFiles[fi].id && openedFiles[fi].id == file.id)) {
             openedFileIndex = fi
             break;
           }
