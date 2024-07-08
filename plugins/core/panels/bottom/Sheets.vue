@@ -348,51 +348,54 @@ export default {
       }
       let ddInstance = this.editor?.ddInstance;
       if (file && sheets && ddInstance) {
-        let i = sheets.length + 1;
+        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_ADD_SHEET", "ADD_SHEET", null, ddInstance, null)
+        if (rsState != -1) {
+          let i = sheets.length + 1;
 
-        let stage = DDeiStage.initByJSON(
-          { id: "stage" },
-          { currentDdInstance: ddInstance }
-        );
-        sheets.push(
-          new DDeiSheet({
-            name: "页面-" + i,
-            desc: "页面-" + i,
-            stage: stage,
-          })
-        );
-        file.changeSheet(sheets.length - 1);
-        //刷新页面
-        ddInstance.stage = stage;
-        this.editor.currentStage = stage;
-        //加载场景渲染器
-        stage.initRender();
-        //设置视窗位置到中央
-        if (!stage.wpv) {
-          //缺省定位在画布中心点位置
-          stage.wpv = {
-            x: -(stage.width - ddInstance.render.container.clientWidth) / 2,
-            y: -(stage.height - ddInstance.render.container.clientHeight) / 2,
-            z: 0,
-          };
-        }
+          let stage = DDeiStage.initByJSON(
+            { id: "stage" },
+            { currentDdInstance: ddInstance }
+          );
+          sheets.push(
+            new DDeiSheet({
+              name: "页面-" + i,
+              desc: "页面-" + i,
+              stage: stage,
+            })
+          );
+          file.changeSheet(sheets.length - 1);
+          //刷新页面
+          ddInstance.stage = stage;
+          this.editor.currentStage = stage;
+          //加载场景渲染器
+          stage.initRender();
+          //设置视窗位置到中央
+          if (!stage.wpv) {
+            //缺省定位在画布中心点位置
+            stage.wpv = {
+              x: -(stage.width - ddInstance.render.container.clientWidth) / 2,
+              y: -(stage.height - ddInstance.render.container.clientHeight) / 2,
+              z: 0,
+            };
+          }
+          DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_ADD_SHEET", "ADD_SHEET", null, ddInstance, null)
+          this.editor.changeState(DDeiEditorState.DESIGNING);
+          this.editor.editorViewer?.changeFileModifyDirty();
+          ddInstance.bus?.push(DDeiEditorEnumBusCommandType.AddFileHistroy);
+          ddInstance.bus?.push(DDeiEnumBusCommandType.RefreshShape);
+          ddInstance.bus?.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
+          ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
+          ddInstance.bus.executeAll();
 
-        this.editor.changeState(DDeiEditorState.DESIGNING);
-        this.editor.editorViewer?.changeFileModifyDirty();
-        ddInstance.bus?.push(DDeiEditorEnumBusCommandType.AddFileHistroy);
-        ddInstance.bus?.push(DDeiEnumBusCommandType.RefreshShape);
-        ddInstance.bus?.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
-        ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
-        ddInstance.bus.executeAll();
+          DDeiEditorUtil.closeDialogs(this.editor,null, true)
+          DDeiEditorUtil.closeDialogs(this.editor, null, false)
 
-        DDeiEditorUtil.closeDialogs(this.editor,null, true)
-        DDeiEditorUtil.closeDialogs(this.editor, null, false)
-
-        //打开新文件
-        let activeIndex = sheets.length - 1;
-        this.openIndex = activeIndex + 1 - this.maxOpenSize;
-        if (this.openIndex < 0) {
-          this.openIndex = 0;
+          //打开新文件
+          let activeIndex = sheets.length - 1;
+          this.openIndex = activeIndex + 1 - this.maxOpenSize;
+          if (this.openIndex < 0) {
+            this.openIndex = 0;
+          }
         }
       }
     },
@@ -411,25 +414,29 @@ export default {
         (index >= 0 || index < sheets.length)
       ) {
         if (index != file.currentSheetIndex){
-          this.tempSheetChange = true;
-          file.changeSheet(index);
-          let stage = sheets[index].stage;
-          stage.ddInstance = ddInstance;
-          //刷新页面
-          ddInstance.stage = stage;
-          this.editor.currentStage = stage;
-          //加载场景渲染器
-          stage.initRender();
+          let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_CHANGE_SHEET", "CHANGE_SHEET", null, ddInstance, null)
+          if (rsState != -1) {
+            this.tempSheetChange = true;
+            file.changeSheet(index);
+            let stage = sheets[index].stage;
+            stage.ddInstance = ddInstance;
+            //刷新页面
+            ddInstance.stage = stage;
+            this.editor.currentStage = stage;
+            //加载场景渲染器
+            stage.initRender();
 
-          ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
-          ddInstance.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
-          ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
-          ddInstance.bus.executeAll();
+            DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_CHANGE_SHEET", "CHANGE_SHEET", null, ddInstance, null)
+            ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+            ddInstance.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
+            ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
+            ddInstance.bus.executeAll();
 
-          DDeiEditorUtil.closeDialogs(this.editor, null, true)
-          DDeiEditorUtil.closeDialogs(this.editor, null, false)
-          this.showPopPicker(stage)
-          this.editor.changeState(DDeiEditorState.DESIGNING);
+            DDeiEditorUtil.closeDialogs(this.editor, null, true)
+            DDeiEditorUtil.closeDialogs(this.editor, null, false)
+            this.showPopPicker(stage)
+            this.editor.changeState(DDeiEditorState.DESIGNING);
+          }
         }
       }
     },

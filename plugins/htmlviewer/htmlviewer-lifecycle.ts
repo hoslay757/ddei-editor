@@ -15,6 +15,34 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
     return this.htmlDrawShape(operateType, data, ddInstance, evt)
   });
 
+  EVENT_BEFORE_CLOSE_FILE: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
+    return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
+  });
+
+  EVENT_BEFORE_CHANGE_FILE: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
+    return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
+  });
+
+  EVENT_BEFORE_ADD_FILE: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
+    return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
+  });
+
+  EVENT_BEFORE_CLOSE_SHEET: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
+    return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
+  });
+
+  EVENT_BEFORE_CHANGE_SHEET: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
+    return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
+  });
+
+  EVENT_BEFORE_ADD_SHEET: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
+    return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
+  });
+
+  EVENT_CONTROL_DEL_AFTER: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
+    return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
+  });
+
   static configuration(options) {
     //解析options，只使用自己相关的
     
@@ -35,6 +63,15 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
       }
     }
   }
+
+  hiddenAllHtmlShape(operate, data, ddInstance, evt) {
+    let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
+    for (let i in editor.renderViewerIns){
+      if (editor.renderViewerIns[i]){
+        editor.renderViewerIns[i].style.display = "none"
+      }
+    }
+  }
   
   htmlDrawShape(operate, data, ddInstance, evt){
     let rs = new DDeiFuncCallResult();
@@ -46,7 +83,7 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
       let canvasDomPos = DDeiUtil.getDomAbsPosition(canvasEle);
       let field = this.options.matchField
       for (let i = 0; i < models?.length; i++) {
-        if (models[i][field]) {
+        if (models[i] && models[i][field]) {
           let displayDiv = editor.renderViewerIns[models[i][field]]
           if (displayDiv) {
             if(operate == 'VIEW'){

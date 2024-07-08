@@ -401,10 +401,12 @@ export default {
         ex -= stage.wpv.x;
         ey -= stage.wpv.y;
         if (this.editor.creatingControls) {
+          
           let isAlt = DDei.KEY_DOWN_STATE.get("alt");
           let ddInstance: DDei = this.editor.ddInstance;
           ddInstance.stage.idIdx++;
           let layer = ddInstance.stage.layers[ddInstance.stage.layerIndex];
+          
           //如果按下了alt键，则移入容器
           if (isAlt) {
             //寻找鼠标落点当前所在的容器

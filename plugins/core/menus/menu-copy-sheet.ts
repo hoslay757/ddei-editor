@@ -3,7 +3,7 @@ import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
 import {DDeiSheet} from "ddei-framework";
-import {DDeiMenuBase} from "ddei-framework";
+import { DDeiMenuBase, DDeiEditorUtil, DDeiUtil } from "ddei-framework";
 /**
  * 复制页签
  */
@@ -58,25 +58,46 @@ class MenuCopySheet extends DDeiMenuBase {
       let editor = DDeiEditor.ACTIVE_INSTANCE
       let file = editor?.files[editor.currentFileIndex];
       let ddInstance = model.stage.ddInstance
-      let sheetJson = model.toJSON()
-      let newSheet = DDeiSheet.loadFromJSON(sheetJson, { currentDdInstance: ddInstance });
-      file.sheets.splice(file?.currentSheetIndex + 1, 0, newSheet);
-      newSheet.name = "页面-" + file.sheets.length
-      file.changeSheet(file.currentSheetIndex + 1);
-      let stage = newSheet.stage;
-      stage.ddInstance = ddInstance;
-      //刷新页面
-      ddInstance.stage = stage;
-      //加载场景渲染器
-      stage.initRender();
-      editor.changeState(DDeiEditorState.DESIGNING);
-      editor.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
-      editor.bus.push(DDeiEnumBusCommandType.RefreshShape, null, null);
-      //记录日志
-      editor.bus.push(DDeiEnumBusCommandType.AddHistroy)
-      editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, { parts: ["bottommenu"] })
-      editor.bus?.executeAll();
-      editor.editorViewer?.changeFileModifyDirty();
+      let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_ADD_SHEET", "ADD_SHEET", null, ddInstance, null)
+      if (rsState != -1) {
+        
+        let sheetJson = model.toJSON()
+        //获取当前dpi缩放，不同终端编辑可能造成dpi不一致，因此需要对比还原
+        let dpi = ddInstance.dpi?.x
+        //执行转换，将存储的标尺坐标转换为网页坐标
+        if (!sheetJson.stage.dpi) {
+          sheetJson.stage.dpi = dpi;
+        }
+        let unit = sheetJson.stage.unit;
+        //只有保存了dpi和unit才需要转换,并且unit为像素也不需要转换
+        if (dpi && unit && unit != 'px') {
+          sheetJson.stage?.layers?.forEach(layer => {
+            DDeiUtil.convertChildrenJsonUnit(layer, sheetJson.stage, unit);
+          });
+        }
+        
+        let newSheet = DDeiSheet.loadFromJSON(sheetJson, { currentDdInstance: ddInstance });
+
+        
+        file.sheets.splice(file?.currentSheetIndex + 1, 0, newSheet);
+        newSheet.name = "页面-" + file.sheets.length
+        file.changeSheet(file.currentSheetIndex + 1);
+        let stage = newSheet.stage;
+        stage.ddInstance = ddInstance;
+        //刷新页面
+        ddInstance.stage = stage;
+        
+        //加载场景渲染器
+        stage.initRender();
+        editor.changeState(DDeiEditorState.DESIGNING);
+        editor.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
+        editor.bus.push(DDeiEnumBusCommandType.RefreshShape, null, null);
+        //记录日志
+        editor.bus.push(DDeiEnumBusCommandType.AddHistroy)
+        editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, { parts: ["bottommenu"] })
+        editor.bus?.executeAll();
+        editor.editorViewer?.changeFileModifyDirty();
+      }
     }
   }
 
@@ -84,8 +105,11 @@ class MenuCopySheet extends DDeiMenuBase {
    * 判定是否显示的方法
    */
   isVisiable(model: object): boolean {
-    let allowEditSheet = model.stage.ddInstance?.AC_DESIGN_EDIT != false ? true : false
-    return allowEditSheet && !this.disabled;
+    if(model){
+      let allowEditSheet = model.stage.ddInstance?.AC_DESIGN_EDIT != false ? true : false
+      return allowEditSheet && !this.disabled;
+    }
+    return false
   }
 
 }
