@@ -49,18 +49,30 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
         if (models[i][field]) {
           let displayDiv = editor.renderViewerIns[models[i][field]]
           if (displayDiv) {
-            let modelPos = DDeiUtil.getModelsDomAbsPosition([models[i]])
-            let rat1 = window.remRatio
-            displayDiv.style.position = 'absolute'
-            displayDiv.style.left = (modelPos.left * rat1 - canvasDomPos.left) + "px"
-            displayDiv.style.top = (modelPos.top * rat1 - canvasDomPos.top) + "px"
-            displayDiv.style.display = "block"
-            displayDiv.style.zIndex = 300;
-            displayDiv.style.width = (modelPos.width * rat1) + "px";
-            displayDiv.style.height = (modelPos.height * rat1) + "px";
-            displayDiv.style.pointerEvents = "none"
-            rs.state = -1;
-            return rs
+            if(operate == 'VIEW'){
+              let ruleWeight = 0
+              
+              if (ddInstance.stage.render.tempRuleDisplay == 1 || ddInstance.stage.render.tempRuleDisplay == '1'){
+                ruleWeight = 15
+              }
+              
+              let modelPos = DDeiUtil.getModelsDomAbsPosition([models[i]])
+              let rat1 = window.remRatio
+              displayDiv.style.position = 'absolute'
+              displayDiv.style.left = (modelPos.left * rat1 - canvasDomPos.left - ruleWeight) + "px"
+              displayDiv.style.top = (modelPos.top * rat1 - canvasDomPos.top - ruleWeight) + "px"
+              displayDiv.style.display = "block"
+              displayDiv.style.zIndex = 300;
+              displayDiv.style.width = (modelPos.width * rat1) + "px";
+              displayDiv.style.height = (modelPos.height * rat1) + "px";
+              displayDiv.style.pointerEvents = "none"
+              rs.state = -1;
+              return rs
+            }else if(operate == 'VIEW-HIDDEN'){
+              displayDiv.style.display = 'none'
+              rs.state = -1;
+              return rs
+            }
           }
         }
       }

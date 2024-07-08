@@ -29,7 +29,7 @@
 import {DDeiEditor} from "ddei-framework";
 import {DDeiUtil} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
+import { DDeiModelArrtibuteValue } from "ddei-framework";
 import {DDeiEnumOperateType} from "ddei-framework";
 import { markRaw } from "vue";
 export default {
@@ -111,6 +111,8 @@ export default {
             0,
             0
           );
+          
+          
           this.editor.ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
           this.editor.ddInstance.bus.executeAll();
         }

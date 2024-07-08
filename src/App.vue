@@ -92,25 +92,25 @@ export default defineComponent({
         DDeiExtQuickStyle,
         DDeiExtQuickControl,
         DDeiExtTooltip,
-        // DDeiExtHtmlViewer.configuration({
-        //   matchField: "type",
-        //   "emp_1":{
-        //     type:"emp_1",
-        //     name: "张三",
-        //     viewer: ReplaceDivDemo
-        //   },
-        //   "emp_2": {
-        //     type: "emp_2",
-        //     name: "李四",
-        //     viewer: ReplaceDivDemo
-        //   },
-        //   "emp_3": {
-        //     type: "emp_3",
-        //     name: "王五",
-        //     viewer: ReplaceDivDemo
-        //   },
+        DDeiExtHtmlViewer.configuration({
+          matchField: "type",
+          "emp_1":{
+            type:"emp_1",
+            name: "张三",
+            viewer: ReplaceDivDemo
+          },
+          "emp_2": {
+            type: "emp_2",
+            name: "李四",
+            viewer: ReplaceDivDemo
+          },
+          "emp_3": {
+            type: "emp_3",
+            name: "王五",
+            viewer: ReplaceDivDemo
+          },
           
-        // })
+        })
         
       ],
     })
