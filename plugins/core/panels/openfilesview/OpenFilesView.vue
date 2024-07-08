@@ -582,6 +582,15 @@ export default {
             this.openIndex = 0;
           }
         }
+
+        let ddInstance = this.editor.ddInstance;
+        DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_CLOSE_FILE", "CLOSE_FILE", null, ddInstance, evt)
+        ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+        ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
+          parts: ["bottommenu", "topmenu"],
+        });
+        this.editor.changeState(DDeiEditorState.DESIGNING);
+        ddInstance?.bus?.executeAll();
       }
       // }
     },

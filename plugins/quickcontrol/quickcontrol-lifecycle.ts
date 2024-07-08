@@ -18,6 +18,7 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
   
   EVENT_MOUSE_OPERATING: DDeiFuncData | null = new DDeiFuncData("quickstyle-ext-close", 1, this.mouseOperating);
   
+  EVENT_AFTER_CLOSE_FILE: DDeiFuncData | null = new DDeiFuncData("quickcontrol-ext-close", 1, this.closeDialogs);
 
   moveInControl(operateType, data, ddInstance, evt){
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"] && data?.models?.length > 0) {
@@ -109,9 +110,9 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"]) {
       //如果离开当前操作区域，则隐藏
       let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
-      
+
       if (editor.tempPopData && editor.tempPopData['ddei-ext-dialog-quickcontrol']?.model) {
-        
+
         let model = editor.tempPopData['ddei-ext-dialog-quickcontrol']?.model;
         let type = editor.tempPopData['ddei-ext-dialog-quickchoosecontrol']?.type;
         let modelPos = DDeiUtil.getModelsDomAbsPosition([model])
@@ -124,7 +125,7 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
         modelPos.x1 += width
         modelPos.y -= height
         modelPos.y1 += height
-        if(type == 1){
+        if (type == 1) {
           modelPos.y -= 15
         } else if (type == 2) {
           modelPos.x1 += 10
@@ -134,13 +135,13 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
           modelPos.x -= 10
         }
         //不在控件的区域里
-        if (!(modelPos.x <= data.ex && modelPos.x1 >= data.ex && modelPos.y <= data.ey && modelPos.y1 >= data.ey)){
+        if (!(modelPos.x <= data.ex && modelPos.x1 >= data.ex && modelPos.y <= data.ey && modelPos.y1 >= data.ey)) {
           let selectedModels = ddInstance.stage.selectedModels;
           if (selectedModels?.size == 1 && Array.from(selectedModels.values())[0] == editor.tempPopData['ddei-ext-dialog-quickcontrol']?.model) {
             DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickchoosecontrol', true)
-          }else{
-            let quickChooseControlDialog = document.getElementById(editor.id+"_ddei-ext-dialog-quickchoosecontrol")
-            if (quickChooseControlDialog){
+          } else {
+            let quickChooseControlDialog = document.getElementById(editor.id + "_ddei-ext-dialog-quickchoosecontrol")
+            if (quickChooseControlDialog) {
               let quickChooseControlDialogPos = DDeiUtil.getDomAbsPosition(quickChooseControlDialog);
               let dx1 = quickChooseControlDialogPos.left + quickChooseControlDialog?.clientWidth;
               let dy1 = quickChooseControlDialogPos.top + quickChooseControlDialog?.clientHeight;
@@ -151,12 +152,27 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
                 DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickcontrol', true)
                 DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickchoosecontrol', true)
               }
-            }else{
+            } else {
               DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickcontrol', true)
             }
           }
         }
-        
+
+      }
+    }
+  }
+
+  /**
+   * 鼠标进入画布
+   */
+  closeDialogs(operateType, data, ddInstance, evt): DDeiFuncCallResult {
+    if (ddInstance && ddInstance["AC_DESIGN_EDIT"]) {
+      //如果离开当前操作区域，则隐藏
+      let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
+
+      if (editor.tempPopData && editor.tempPopData['ddei-ext-dialog-quickcontrol']?.model) {
+        DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickcontrol', true)
+        DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickchoosecontrol', true)
       }
     }
   }
