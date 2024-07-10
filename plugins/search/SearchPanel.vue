@@ -155,7 +155,7 @@ export default {
     },
 
     executeQuery(evt:Event){
-      if (evt.keyCode != 13 && evt.keyCode != 27){
+      if (evt?.keyCode != 13 && evt?.keyCode != 27){
         let rs = this.editor.searchModels(this.editor.search?.keywords, "text", false, 3, this.editor.search?.matchCase, this.editor.search?.matchAll)
         if(rs?.length > 0){
           this.editor.search.result = rs;
@@ -372,22 +372,24 @@ export default {
 .ddei-ext-panel-search {
     width:500px;
     background-color: var(--panel-background);
-    height: 36px;
+    
     .icon{
       color:var(--icon);
       font-size: 16px;
+      width:16px;
+      height:16px;
     }
   
     &-mode {
       float: left;
-      height:36px;
+      height:32px;
       width:24px;
       display:flex;
       align-items: center;
       justify-content: center;
 
       &__expand {
-          height: 69px;
+          height: 64px;
       }
 
       &:hover{
@@ -398,7 +400,6 @@ export default {
 
     &-box {
       float: left;
-      margin-top:3px;
       height: 30px;
       width: 200px;
       display: flex;
@@ -413,6 +414,7 @@ export default {
       }
       &-input{
         flex: 1;
+        color:var(--panel-title);
         height:30px;
         background: none;
         border:none;
@@ -446,7 +448,6 @@ export default {
 
     &-result {
       float: left;
-      margin-top: 3px;
       margin-left:5px;
       height: 30px;
       width: 150px;
@@ -458,7 +459,7 @@ export default {
     }
     &-buttons {
       float: left;
-      margin-top: 3px;
+      margin-bottom:3px;
       margin-left: 5px;
       height: 30px;
       width: 110px;
@@ -496,7 +497,8 @@ export default {
 
         .icon{
           font-size: 18px;
-           
+          width:18px;
+          height:18px
         }
       }
     }
@@ -504,7 +506,7 @@ export default {
     &-replace{
       &-buttons {
         float: left;
-        margin-top: 3px;
+        margin-bottom: 3px;
         margin-left: 5px;
         height: 30px;
         width: 110px;
@@ -528,7 +530,8 @@ export default {
 
           .icon {
             font-size: 16px;
-
+            width: 16px;
+            height: 16px
           }
         }
       }

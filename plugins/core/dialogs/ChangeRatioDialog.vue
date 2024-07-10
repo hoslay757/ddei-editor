@@ -9,8 +9,8 @@
             {{ data.text}}
           </div>
           <div v-if="input" class="item" style="flex:1;border-top: 1px solid var(--panel-border)">
-            百分比：<input type="number" :min="iMin*100" :max="iMax*100" v-model="ratioInputValue" @blur="ratioInputChange()"
-              autocomplete="off" name="ddei_bottom_input" />%
+            百分比：<input type="number" :min="iMin*100" :max="iMax*100" @keydown="ratioInputChange($event)"
+              v-model="ratioInputValue" @blur="ratioInputChange()" autocomplete="off" name="ddei_bottom_input" />%
           </div>
         </div>
       </div>
@@ -112,14 +112,16 @@ export default {
 
     },
 
-    ratioInputChange() {
-      if (this.ratioInputValue > this.max * 100) {
-        this.ratioInputValue = this.max * 100;
-      }else if (this.ratioInputValue < this.min * 100) {
-        this.ratioInputValue = this.min * 100;
-      }
-      if (this.editor?.tempDialogData[this.dialogId]?.callback?.ok) {
-        this.editor?.tempDialogData[this.dialogId]?.callback?.ok(this.ratioInputValue / 100);
+    ratioInputChange(evt) {
+      if (!evt || evt.keyCode == 13){
+        if (this.ratioInputValue > this.max * 100) {
+          this.ratioInputValue = this.max * 100;
+        }else if (this.ratioInputValue < this.min * 100) {
+          this.ratioInputValue = this.min * 100;
+        }
+        if (this.editor?.tempDialogData[this.dialogId]?.callback?.ok) {
+          this.editor?.tempDialogData[this.dialogId]?.callback?.ok(this.ratioInputValue / 100);
+        }
       }
     },
 

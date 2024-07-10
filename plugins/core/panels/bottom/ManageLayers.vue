@@ -8,7 +8,7 @@
 <script lang="ts">
 import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
+import { DDeiEditorState, DDeiEnumOperateType, DDeiUtil } from "ddei-framework";
 
 export default {
   name: "ddei-core-panel-bottom-managelayers",
@@ -27,13 +27,14 @@ export default {
   },
   data() {
     return {
-      allowOpenMultLayers: true,
+      allowOpenMultLayers: true
     };
   },
   computed: {},
   watch: {},
   created() { },
   mounted() {
+
     this.allowOpenMultLayers = DDeiEditorUtil.getConfigValue(
       "GLOBAL_ALLOW_OPEN_MULT_LAYERS",
       this.editor

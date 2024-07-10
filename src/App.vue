@@ -3,14 +3,16 @@ import DDeiEditorView from "./editor/Editor.vue";
 import { DDeiCoreTopMenuPanel, DDeiCoreThemeBlack, DDeiCoreControls, DDeiCoreHotkeys, DDeiKeyActionAllSelect, DDeiCorePropertyViewPanel, DDeiCoreToolboxPanel, DDeiCoreSheetsPanel, DDeiCoreChangeRatioPanel, DDeiCoreChangeRatioDialog, DDeiCoreShapeCountPanel, DDeiCoreBottomMenuPanel, DDeiCoreStandLayout, DDeiCoreOpenFilesViewPanel, DDeiCoreThemeDefault } from "@ddei/core";
 import { DDeiExtUML } from "@ddei/uml"
 import { DDeiExtSearch } from "@ddei/search"
-import { DDeiFuncCallResult } from "ddei-framework";
+import { DDeiFuncCallResult, DDeiUtil, DDeiEditorUtil } from "ddei-framework";
 import DDeiExtQuickStyle from "@ddei/quickstyle"
 import DDeiExtTooltip from "@ddei/tooltip"
 import { DDeiExtQuickControl, QuickChooseControlDialog } from "@ddei/quickcontrol"
 import { defineComponent, markRaw } from "vue";
+import DDeiExtHtmlViewer from "@ddei/htmlviewer"
+import ReplaceDivDemo  from "./ReplaceDivDemo.vue";
 export default defineComponent({
   name: "APP",
-  components: { DDeiEditorView },
+  components: { DDeiEditorView, ReplaceDivDemo },
   data() {
     
     const options = markRaw({
@@ -43,54 +45,55 @@ export default defineComponent({
       ]
     })
     const options1 = markRaw({
-      config: {
-        "readonly":true,
-        "mark": "水印文本",
-        "grid": 2,
-        "paper": {type:"A6",direct:1},
-        // "paper":"A5",
-        "ruler": true,
-        "background": {color:"#123456",opacity:0.1},
-        // "theme": "ddei-core-theme-black",
-        initData: {
-          controls:[
-            {
-              id: "act_1",
-              model: "102010",
-              code: "active_01",
-              text: "第一步",
-              border:{color:"yellow",dash:[10,10,5,5],width:5},
-              fill:{color:"grey"},
-        
-            },
-            {
-              id: "act_2",
-              model: "102010",
-              code: "active_02",
-              width: 200,
-              height: 100,
-              text: "第二步",
-              offsetY: -70,
-            }
-          ]
-        }
-      },
+      // config: {
+      //   // "readonly":true,
+      //   "mark": "水印文本",
+      //   "grid": 2,
+      //   "paper": {type:"A6",direct:1},
+      //   // "paper":"A5",
+      //   "ruler": true,
+      //   "background": {color:"#123456",opacity:0.1},
+      //   // "theme": "ddei-core-theme-black",
+      //   initData: {
+      //     controls:[
+      //       {
+      //         id: "act_1",
+      //         model: "102010",
+      //         type: "emp_1",
+      //         text: "第一步",
+      //         border:{color:"yellow",dash:[10,10,5,5],width:5},
+      //         fill:{color:"grey"},
+      //       },
+      //       {
+      //         id: "act_2",
+      //         model: "102010",
+      //         type: "emp_2",
+      //         width: 200,
+      //         height: 100,
+      //         text: "第二步",
+      //         offsetY: -70,
+      //       }
+      //     ]
+      //   }
+      // },
       //配置扩展插件
       extensions: [
-        //布局的配置
-        DDeiCoreStandLayout.configuration({
+        DDeiExtUML,
+        //使用插件，配置每个子插件
+        DDeiCoreTopMenuPanel.configuration({
+          'panels': ["ddei-core-panel-fileinfo",
+             "ddei-core-panel-operate", "ddei-core-panel-fontandtext", "ddei-core-panel-tool"
+            , "ddei-core-panel-sort"]
+        }),
+        // DDeiCoreStandLayout.configuration({
           //配置插件
           // 'top': [],
-          'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],
+          // 'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],
           // 'bottom': [],
           // 'left': [],
           // 'right': []
-        }),
-        DDeiExtSearch,
-        DDeiExtQuickStyle,
-        DDeiExtQuickControl,
-        DDeiExtTooltip
-        
+        // }),
+
       ],
     })
 
@@ -98,9 +101,10 @@ export default defineComponent({
       
       config: {
         EXT_STAGE_WIDTH:false,
+        GLOBAL_ALLOW_BACK_ACTIVE:true,
         // "readonly": true,
         access: { "DEL": false, "SCALE": false, "ROTATE": false },
-        "paper":"A5",
+        "paper":"无",
         "ruler": true,
         initData: {
           controls: [
@@ -199,6 +203,8 @@ export default defineComponent({
         }),
       ],
     })
+
+   
     
     return {
       options:options,
@@ -226,10 +232,26 @@ export default defineComponent({
 
 
 <template>
-  <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
+  <div v-for="data in demoData" :id="'demo_replace_div_' + data.code" :ref="'demo_replace_div_' + data.code"
+    style="display: flex;flex-direction:column;text-align:center;align-items: center;text-align: center;width:200px;background: white;color:black;position: absolute;display: none;">
+    <div style="width:100%;display: flex;text-align:center;align-items: center;">
+      <div style="flex:1">代码</div>
+      <div style="flex:1">{{ data.code }}</div>
+    </div>
+    <div style="width:100%;display: flex;text-align:center;align-items: center;">
+      <div style="flex:1">名称</div>
+      <div style="flex:1">{{ data.name }}</div>
+    </div>
+  </div>
   <!--
+  <div style="width:500px;height:500px;overflow: auto;margin:auto;margin-top:200px;">
+    <div style="width:80vw;height:80vh;">
+      <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
+    </div>
+  </div>
+ -->
   <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
-
+  <!--
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>
   </div>
@@ -245,7 +267,8 @@ export default defineComponent({
   </div>
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer5" :options="options4" id="ddei_editor_5"></DDeiEditorView>
-  </div> -->
+  </div>
+-->
 </template>
 
 <style>

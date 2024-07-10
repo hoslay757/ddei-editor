@@ -44,6 +44,7 @@ export default {
   display: none;
   overflow: hidden;
   position: absolute;
+  padding-top:3px;
   background-color: var(--panel-background);
   z-index: 999;
 }

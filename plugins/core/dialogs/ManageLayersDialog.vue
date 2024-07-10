@@ -4,25 +4,25 @@
       <div class="title">图层</div>
       <div class="group">
         <div class="group_content">
-          <div class="item" @click="createNewLayer(0)"
-            v-show="allowAddLayer">
+          <div class="item" @click="createNewLayer(0)" v-show="allowAddLayer">
             <span style="grid-column:1/8;">新建图层</span>
             <svg class="icon extbtn" aria-hidden="true">
               <use xlink:href="#icon-a-ziyuan374"></use>
             </svg>
           </div>
           <div :class="{ 'item': true, 'current': currentStage?.layerIndex === index }"
-            v-for="(layer, index) in currentStage?.layers" draggable="true" @dragstart="layerDragStart(index, $event)"
-            @dragover="layerDragOver($event)" @drop="layerDragDrop($event)" @dragleave="layerDragCancel($event)">
-            <span style="grid-column:1/8;" @dblclick="startChangeLayerName(layer, $event)">{{ layer.name ? layer.name :
+            v-for="(layer, index) in currentStage?.layers" :draggable="allowEditLayes"
+            @dragstart="layerDragStart(index, $event)" @dragover="layerDragOver($event)"
+            @drop="layerDragDrop($event)" @dragleave="layerDragCancel($event)">
+            <span style="grid-column:1/8;" @dblclick="allowEditLayes && startChangeLayerName(layer, $event)">{{
+              layer.name
+              ? layer.name :
               '图层' }}</span>
-            <svg class="icon" aria-hidden="true"
-              @click="removeLayer(index)">
+            <svg class="icon" aria-hidden="true" v-show="allowEditLayes" @click="removeLayer(index)">
               <use xlink:href="#icon-a-ziyuan401"></use>
             </svg>
             <span style="grid-column:1/4;font-weight:normal">形状:{{ layer.modelNumber }}</span>
-            <svg class="icon" aria-hidden="true" @click="createNewLayer(index)"
-              v-show="allowAddLayer">
+            <svg class="icon" aria-hidden="true" @click="createNewLayer(index)" v-show="allowAddLayer">
               <use xlink:href="#icon-a-ziyuan374"></use>
             </svg>
             <svg class="icon" @click="displayOrShowLayer(layer)">
@@ -77,6 +77,7 @@ export default {
     return {
       dialogId: 'ddei-core-dialog-managerlayers',
       allowAddLayer: true,
+      allowEditLayes: true,//是否允许编辑多图层
       allowOpenMultLayers: true,
       currentStage: null,
       file: null,
@@ -97,7 +98,9 @@ export default {
         "GLOBAL_ALLOW_OPEN_MULT_LAYERS",
         this.editor
       );
-      this.allowAddLayer = DDeiUtil.isAccess(
+      this.allowEditLayes = this.editor.ddInstance?.AC_DESIGN_EDIT != false ? true : false
+
+      this.allowAddLayer = this.allowEditLayes && DDeiUtil.isAccess(
         DDeiEnumOperateType.CREATE,
         { modelType: "DDeiLayer" },
         DDeiUtil.getConfigValue("MODE_NAME", this.editor.ddInstance),

@@ -16,17 +16,28 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
   EVENT_CONTROL_SELECT_AFTER: DDeiFuncData | null = new DDeiFuncData("quickstyle-show", 1, this.showQuickEditPicker);
   EVENT_MOUSE_OPERATING: DDeiFuncData | null = new DDeiFuncData("quickstyle-hidden", 1, this.mouseOperating);
 
+  EVENT_AFTER_CLOSE_FILE: DDeiFuncData | null = new DDeiFuncData("quickstyle-hidden", 1, this.closeDialog);
   /**
      * 正在进行鼠标操作
      */
   mouseOperating(operateType, data, ddInstance, evt): DDeiFuncCallResult {
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"]) {
       let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
-      DDeiEditorUtil.hiddenDialog(editor,'ddei-core-dialog-quickpop')
+      DDeiEditorUtil.hiddenDialog(editor, 'ddei-core-dialog-quickpop')
       if (operateType == "SCROLL_WORKING" || operateType == "CHANGE_RATIO" || operateType == "CHANGE_WPV" || operateType == "CHANGE_BOUNDS" || operateType == "CHANGE_ROTATE") {
-        
+
         DDeiCoreCanvasLifeCycle.displayQuickDialog(editor);
       }
+    }
+  }
+
+  /**
+     * 正在进行鼠标操作
+     */
+  closeDialog(operateType, data, ddInstance, evt): DDeiFuncCallResult {
+    if (ddInstance && ddInstance["AC_DESIGN_EDIT"]) {
+      let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
+      DDeiEditorUtil.closeDialog(editor, 'ddei-core-dialog-quickpop')
     }
   }
 

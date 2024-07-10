@@ -99,18 +99,23 @@ export default {
   user-select: none;
   color: var(--panel-title);
   &-row{
-    width:160px;
+    min-width:160px;
     min-height:30px;
     display: flex;
     align-items: center;
     justify-content: center;
     &-title {
       flex: 1;
-      text-align: center;
+      padding-left: 5px;
+      padding-right: 5px;
+      text-align: left;
+      font-weight: bolder;
     }
 
     &-data {
       flex: 1;
+      padding-left: 5px;
+      padding-right: 5px;
       text-align: center;
     }
   }

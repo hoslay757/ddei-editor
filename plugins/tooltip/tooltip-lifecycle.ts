@@ -17,6 +17,7 @@ class DDeiExtTooltipLifeCycle extends DDeiLifeCycle {
 
   EVENT_MOUSE_OPERATING: DDeiFuncData | null = new DDeiFuncData("tooltip-hidden", 1, this.mouseOperating);
 
+  EVENT_AFTER_CLOSE_FILE: DDeiFuncData | null = new DDeiFuncData("tooltip-close", 1, this.mouseOperating);
   
   showTooltip(operateType, data, ddInstance, evt): DDeiFuncCallResult {
     
@@ -74,8 +75,8 @@ class DDeiExtTooltipLifeCycle extends DDeiLifeCycle {
       let editorEle = document.getElementById(editor.id);
       let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
       let modelPos = DDeiUtil.getModelsDomAbsPosition([data.model])
-      let left = modelPos.left - editorDomPos.left+modelPos.width+10
-      let top = modelPos.top - editorDomPos.top - 10
+      let left = modelPos.left - editorDomPos.left+modelPos.width+20
+      let top = modelPos.top - editorDomPos.top - 20
       DDeiEditorUtil.showDialog(editor, 'ddei-ext-dialog-tooltip', {
         group: "canvas-pop-tooltip",
         model: data.model
@@ -95,6 +96,7 @@ class DDeiExtTooltipLifeCycle extends DDeiLifeCycle {
     delete editor.tempHoverX
     delete editor.tempHoverY
   }
+
 }
 
 export default DDeiExtTooltipLifeCycle

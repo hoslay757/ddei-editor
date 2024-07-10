@@ -59,34 +59,39 @@ class MenuRemoveSheet extends DDeiMenuBase {
       let file = editor?.files[editor.currentFileIndex];
       if (file.sheets.length > 1) {
         let ddInstance = model.stage.ddInstance
-        let currentIndex = -1;
-        for (let i = 0; i < file?.sheets?.length; i++) {
-          if (file.sheets[i].unicode == model.unicode) {
-            currentIndex = i;
-            break;
+        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_DEL_SHEET", "DEL_SHEET", null, ddInstance, null)
+        if (rsState != -1) {
+          let currentIndex = -1;
+          for (let i = 0; i < file?.sheets?.length; i++) {
+            if (file.sheets[i].unicode == model.unicode) {
+              currentIndex = i;
+              break;
+            }
           }
+
+          file.sheets.splice(currentIndex, 1);
+
+          if (currentIndex <= file.currentSheetIndex) {
+            file.changeSheet(file.currentSheetIndex - 1);
+          }
+          let stage = file.sheets[file?.currentSheetIndex].stage;
+          stage.ddInstance = ddInstance;
+          //刷新页面
+          ddInstance.stage = stage;
+          //加载场景渲染器
+          stage.initRender();
+
+          DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_DEL_SHEET", "DEL_SHEET", null, ddInstance, null)
+
+          editor.editorViewer?.changeFileModifyDirty();
+          editor.bus.push(DDeiEnumBusCommandType.RefreshShape, null, null);
+          //记录日志
+          editor.bus.push(DDeiEnumBusCommandType.AddHistroy)
+          editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, { parts: ["bottommenu"] })
+          editor.bus?.executeAll();
+          MenuRemoveSheet.showPopPicker(stage)
+          editor.changeState(DDeiEditorState.DESIGNING);
         }
-
-        file.sheets.splice(currentIndex, 1);
-
-        if (currentIndex <= file.currentSheetIndex) {
-          file.changeSheet(file.currentSheetIndex - 1);
-        }
-        let stage = file.sheets[file?.currentSheetIndex].stage;
-        stage.ddInstance = ddInstance;
-        //刷新页面
-        ddInstance.stage = stage;
-        //加载场景渲染器
-        stage.initRender();
-
-        editor.editorViewer?.changeFileModifyDirty();
-        editor.bus.push(DDeiEnumBusCommandType.RefreshShape, null, null);
-        //记录日志
-        editor.bus.push(DDeiEnumBusCommandType.AddHistroy)
-        editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, { parts: ["bottommenu"] })
-        editor.bus?.executeAll();
-        MenuRemoveSheet.showPopPicker(stage)
-        editor.changeState(DDeiEditorState.DESIGNING);
       }
     }
   }
@@ -129,12 +134,15 @@ class MenuRemoveSheet extends DDeiMenuBase {
    * 判定是否显示的方法
    */
   isVisiable(model: object): boolean {
-    if (!this.disabled && model?.modelType == 'DDeiSheet') {
-      //将sheet插入文件
-      let editor = DDeiEditor.ACTIVE_INSTANCE
-      let file = editor?.files[editor.currentFileIndex];
-      if (file.sheets.length > 1) {
-        return true
+    if(model){
+      let allowEditSheet = model.stage.ddInstance?.AC_DESIGN_EDIT != false ? true : false
+      if (allowEditSheet && !this.disabled && model?.modelType == 'DDeiSheet') {
+        //将sheet插入文件
+        let editor = DDeiEditor.ACTIVE_INSTANCE
+        let file = editor?.files[editor.currentFileIndex];
+        if (file.sheets.length > 1) {
+          return true
+        }
       }
     }
     return false;
