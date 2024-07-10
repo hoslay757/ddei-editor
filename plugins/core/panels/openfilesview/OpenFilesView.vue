@@ -205,66 +205,70 @@ export default {
      */
     newFile(evt) {
       if (this.editor?.ddInstance) {
-        let ddInstance = this.editor.ddInstance;
-        let file = DDeiFile.loadFromJSON(
-          {
-            name: "新建文件_NEW",
-            path: "/新建文件_NEW",
-            sheets: [
-              new DDeiSheet({
-                name: "页面-1",
-                desc: "页面-1",
-                stage: DDeiStage.initByJSON({ id: "stage_1" }, { currentDdInstance :ddInstance}),
-                active: DDeiActiveType.ACTIVE,
-              }),
-            ],
-            currentSheetIndex: 0,
-            state: DDeiFileState.NEW,
-            active: DDeiActiveType.ACTIVE,
-          },
-          { currentDdInstance: ddInstance }
-        );
-        file.local = 1
-        //添加文件
-        if (this.editor.currentFileIndex != -1) {
-          this.editor.files[this.editor.currentFileIndex].active =
-            DDeiActiveType.NONE;
-        }
-        this.editor.addFile(file);
-        this.editor.currentFileIndex = this.editor.files.length - 1;
-        let sheets = file?.sheets;
-        
-        if (file && sheets && ddInstance) {
-          let stage = sheets[0].stage;
-          stage.ddInstance = ddInstance;
-          //刷新页面
-          ddInstance.stage = stage;
-          //记录文件初始日志
-          file.initHistroy();
-          //设置视窗位置到中央
-          if (!stage.wpv) {
-            //缺省定位在画布中心点位置
-            stage.wpv = {
-              x: -(stage.width - ddInstance.render.canvas.width / ddInstance.render.ratio) / 2,
-              y: -(stage.height - ddInstance.render.canvas.height / ddInstance.render.ratio) / 2,
-              z: 0,
-            };
+        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_ADD_FILE", "ADD_FILE", null, this.editor.ddInstance, null)
+        if (rsState != -1) {
+          let ddInstance = this.editor.ddInstance;
+          let file = DDeiFile.loadFromJSON(
+            {
+              name: "新建文件_NEW",
+              path: "/新建文件_NEW",
+              sheets: [
+                new DDeiSheet({
+                  name: "页面-1",
+                  desc: "页面-1",
+                  stage: DDeiStage.initByJSON({ id: "stage_1" }, { currentDdInstance :ddInstance}),
+                  active: DDeiActiveType.ACTIVE,
+                }),
+              ],
+              currentSheetIndex: 0,
+              state: DDeiFileState.NEW,
+              active: DDeiActiveType.ACTIVE,
+            },
+            { currentDdInstance: ddInstance }
+          );
+          file.local = 1
+          //添加文件
+          if (this.editor.currentFileIndex != -1) {
+            this.editor.files[this.editor.currentFileIndex].active =
+              DDeiActiveType.NONE;
           }
-          //加载场景渲染器
-          stage.initRender();
-          ddInstance.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
-          ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
-          ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
-            parts: ["bottommenu", "topmenu"],
-          });
+          this.editor.addFile(file);
+          this.editor.currentFileIndex = this.editor.files.length - 1;
+          let sheets = file?.sheets;
+          
+          if (file && sheets && ddInstance) {
+            let stage = sheets[0].stage;
+            stage.ddInstance = ddInstance;
+            //刷新页面
+            ddInstance.stage = stage;
+            //记录文件初始日志
+            file.initHistroy();
+            //设置视窗位置到中央
+            if (!stage.wpv) {
+              //缺省定位在画布中心点位置
+              stage.wpv = {
+                x: -(stage.width - ddInstance.render.canvas.width / ddInstance.render.ratio) / 2,
+                y: -(stage.height - ddInstance.render.canvas.height / ddInstance.render.ratio) / 2,
+                z: 0,
+              };
+            }
+            //加载场景渲染器
+            stage.initRender();
+            ddInstance.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
+            ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+            ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
+              parts: ["bottommenu", "topmenu"],
+            });
 
-          this.editor.changeState(DDeiEditorState.DESIGNING);
-          ddInstance?.bus?.executeAll();
-        }
-        if (this.editor.files.length == 0) {
-          ddInstance.disabled = true
-        } else {
-          ddInstance.disabled = false
+            this.editor.changeState(DDeiEditorState.DESIGNING);
+            ddInstance?.bus?.executeAll();
+          }
+          DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_ADD_FILE", "ADD_FILE", null, this.editor.ddInstance, null)
+          if (this.editor.files.length == 0) {
+            ddInstance.disabled = true
+          } else {
+            ddInstance.disabled = false
+          }
         }
       }
     },
@@ -479,10 +483,14 @@ export default {
         ddInstance.bus.executeAll();
       }else{
         if (this.editor.files.indexOf(file) != this.editor.currentFileIndex){
-          this.editor.changeFile(this.editor.files.indexOf(file))
-          ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
-          ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
-          ddInstance.bus.executeAll();
+          let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_CHANGE_FILE", "CHANGE_FILE", null, ddInstance, null)
+          if (rsState != -1) {
+            this.editor.changeFile(this.editor.files.indexOf(file))
+            DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_CHANGE_FILE", "CHANGE_FILE", null, ddInstance, null)
+            ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+            ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
+            ddInstance.bus.executeAll();
+          }
         }
       }
       if (this.editor.files.length == 0) {
@@ -536,51 +544,65 @@ export default {
     closeFile(file, evt) {
       //如果文件为脏状态，询问是否保存，放弃，或取消
       let canClose = true;
+      
       if (this.beforeCloseFile){
         canClose = this.beforeCloseFile(file)
       }
+      
+     
       if(canClose){
+        let ddInstance = this.editor.ddInstance;
+        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_CLOSE_FILE", "CLOSE_FILE", null, ddInstance, evt)
+        if (rsState != -1) {
+    
+        // if (
+        //   file.state == DDeiFileState.NEW ||
+        //   file.state == DDeiFileState.MODIFY
+        // ) {
+          // DDeiEditorUtil.showDialog(this.editor, "ddei-core-dialog-closefile", {
+          //   msg: '是否保存对"' + file.name + '"的更改？',
+          //   callback: {
+          //     abort: this.abortAndCloseFileConfirmDialog,
+          //     ok: this.saveAndCloseFileConfirmDialog,
+          //   },
+          //   background: "white",
+          //   opacity: "1%",
+          //   event: -1
+          // })
+          // this.tempFile = file;
+        // } else {
+          //刷新画布
+          let index = this.editor.files.indexOf(file);
+          this.editor.removeFile(file);
+          if (index < this.editor.currentFileIndex) {
+            this.editor.currentFileIndex--;
+          } else if (index == this.editor.currentFileIndex) {
+            if (index > 0) {
+              this.changeFile(
+                this.editor.files[this.editor.currentFileIndex - 1]
+              );
+            } else if (this.editor.files.length > 0) {
+              this.changeFile(this.editor.files[0]);
+            }
+          }
+          if (this.editor.files.length == 0) {
+            this.changeFile(null);
+            this.editor.currentFileIndex = -1;
+          }
+          if (index > this.openIndex) {
+            this.openIndex--;
+            if (this.openIndex < 0) {
+              this.openIndex = 0;
+            }
+          }
 
-   
-      // if (
-      //   file.state == DDeiFileState.NEW ||
-      //   file.state == DDeiFileState.MODIFY
-      // ) {
-        // DDeiEditorUtil.showDialog(this.editor, "ddei-core-dialog-closefile", {
-        //   msg: '是否保存对"' + file.name + '"的更改？',
-        //   callback: {
-        //     abort: this.abortAndCloseFileConfirmDialog,
-        //     ok: this.saveAndCloseFileConfirmDialog,
-        //   },
-        //   background: "white",
-        //   opacity: "1%",
-        //   event: -1
-        // })
-        // this.tempFile = file;
-      // } else {
-        //刷新画布
-        let index = this.editor.files.indexOf(file);
-        this.editor.removeFile(file);
-        if (index < this.editor.currentFileIndex) {
-          this.editor.currentFileIndex--;
-        } else if (index == this.editor.currentFileIndex) {
-          if (index > 0) {
-            this.changeFile(
-              this.editor.files[this.editor.currentFileIndex - 1]
-            );
-          } else if (this.editor.files.length > 0) {
-            this.changeFile(this.editor.files[0]);
-          }
-        }
-        if (this.editor.files.length == 0) {
-          this.changeFile(null);
-          this.editor.currentFileIndex = -1;
-        }
-        if (index > this.openIndex) {
-          this.openIndex--;
-          if (this.openIndex < 0) {
-            this.openIndex = 0;
-          }
+          DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_CLOSE_FILE", "CLOSE_FILE", null, ddInstance, evt)
+          ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+          ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
+            parts: ["bottommenu", "topmenu"],
+          });
+          this.editor.changeState(DDeiEditorState.DESIGNING);
+          ddInstance?.bus?.executeAll();
         }
       }
       // }

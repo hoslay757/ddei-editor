@@ -60,6 +60,7 @@ class DDeiKeyActionAllSelect extends DDeiKeyAction {
   action(evt: Event, ddInstance: DDei): void {
     //修改当前操作控件坐标
     if (ddInstance && ddInstance.stage) {
+      
       let models = []
       if (ddInstance.stage.selectedModels?.size > 0) {
         models = Array.from(ddInstance.stage.selectedModels?.values());

@@ -96,12 +96,12 @@ class DDeiKeyActionCopy extends DDeiKeyAction {
         let jsonStr = '['
         let jsonLinksStr = '['
         let innerHTML = ''
-        
         sortedModels?.forEach((model, key) => {
           if (selectedControls?.size == 1) {
             if (model.baseModelType == "DDeiTable") {
               if (model.curRow == -1 && model.curCol == -1) {
                 let json = model.toJSON();
+                
                 jsonStr += JSON.stringify(json) + ","
               }
               let html = model.render.getHTML();

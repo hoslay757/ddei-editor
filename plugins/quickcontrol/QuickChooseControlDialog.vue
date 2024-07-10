@@ -51,6 +51,7 @@ export default {
   created() { },
   mounted() {
     this.refreshData();
+    
   },
   methods: {
     refreshData(){
@@ -117,7 +118,7 @@ export default {
             {
               model: controlId
             },
-          ],false)
+          ],true,false)
           //添加后的控件坐标，将其移动到特定位置
           let outRect1 = DDeiAbstractShape.getOutRectByPV(controls)
           let x,y,sx,sy,ex,ey
@@ -172,7 +173,7 @@ export default {
               smodel: { id: model.id,x:sx,y:sy ,rate:0.5,sita:startSita},
               emodel:{id:controls[0].id,x:ex,y:ey,rate:0.5,sita:endSita}
             },
-          ],false)
+          ],false,false)
           this.editor.ddInstance.stage.makeSelectModels(controls);
           this.editor.ddInstance.stage.notifyChange()
         }

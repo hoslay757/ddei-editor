@@ -964,6 +964,7 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     let oldIdMap = {}
     jsonArray.forEach(json => {
       if (mode == 'copy') {
+        
         let copyModel = stage.ddInstance.controlModelClasses[json.modelType].loadFromJSON(json, { currentDdInstance: stage.ddInstance, currentStage: stage, currentLayer: layer, currentContainer: container });
         models.push(copyModel);
         this.loadJsonModelToMap(copyModel,stage,mode, oldIdMap)

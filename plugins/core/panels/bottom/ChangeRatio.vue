@@ -94,19 +94,19 @@ export default {
         DDeiEditorUtil.getConfigValue("GLOBAL_ALLOW_STAGE_RATIO", this.editor)
       ) {
 
-
-        if (!this.changeCurrentStage) {
-          this.ratioInputValue = parseFloat(newVal) * 100;
-          this.stageRatio = newVal;
-          if (!this.tempSheetChange) {
-            this.changeRatio();
+        if (oldVal && oldVal!= newVal){
+          if (!this.changeCurrentStage) {
+            this.ratioInputValue = parseFloat(newVal) * 100;
+            this.stageRatio = newVal;
+            if (!this.tempSheetChange) {
+              this.changeRatio();
+            } else {
+              delete this.tempSheetChange
+            }
           } else {
-            delete this.tempSheetChange
+            this.changeCurrentStage = false;
           }
-        } else {
-          this.changeCurrentStage = false;
         }
-
       }
     });
     this.$watch("stageRatio", function (newVal, oldVal) {

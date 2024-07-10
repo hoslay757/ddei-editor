@@ -89,12 +89,13 @@ export default {
   background-color: var(--panel-background);
   font-size: 13px;
   color: var(--panel-title);
-  border: 0.3px solid var(--panel-border);
+  
   display: none;
   position: absolute;
   font-weight: bolder;
   z-index: 999;
   border-radius: 4px;
+  border: 0.3px solid var(--panel-border);
   box-shadow: -3px 3px 3px hsl(0deg 0% 0% /0.25);
 
   &-item {
