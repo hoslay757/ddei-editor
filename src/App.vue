@@ -45,37 +45,37 @@ export default defineComponent({
       ]
     })
     const options1 = markRaw({
-      // config: {
-      //   // "readonly":true,
-      //   "mark": "水印文本",
-      //   "grid": 2,
-      //   "paper": {type:"A6",direct:1},
-      //   // "paper":"A5",
-      //   "ruler": true,
-      //   "background": {color:"#123456",opacity:0.1},
-      //   // "theme": "ddei-core-theme-black",
-      //   initData: {
-      //     controls:[
-      //       {
-      //         id: "act_1",
-      //         model: "102010",
-      //         type: "emp_1",
-      //         text: "第一步",
-      //         border:{color:"yellow",dash:[10,10,5,5],width:5},
-      //         fill:{color:"grey"},
-      //       },
-      //       {
-      //         id: "act_2",
-      //         model: "102010",
-      //         type: "emp_2",
-      //         width: 200,
-      //         height: 100,
-      //         text: "第二步",
-      //         offsetY: -70,
-      //       }
-      //     ]
-      //   }
-      // },
+      config: {
+        // "readonly":true,
+        "mark": "水印文本",
+        "grid": 2,
+        "paper": {type:"A6",direct:1},
+        // "paper":"A5",
+        "ruler": true,
+        "background": {color:"#123456",opacity:0.1},
+        // "theme": "ddei-core-theme-black",
+        initData: {
+          controls:[
+            {
+              id: "act_1",
+              model: "102010",
+              type: "emp_1",
+              text: "第一步",
+              border:{color:"yellow",dash:[10,10,5,5],width:5},
+              fill:{color:"grey"},
+            },
+            {
+              id: "act_2",
+              model: "102010",
+              type: "emp_2",
+              width: 200,
+              height: 100,
+              text: "第二步",
+              offsetY: -70,
+            }
+          ]
+        }
+      },
       //配置扩展插件
       extensions: [
         DDeiExtUML,
@@ -85,6 +85,25 @@ export default defineComponent({
              "ddei-core-panel-operate", "ddei-core-panel-fontandtext", "ddei-core-panel-tool"
             , "ddei-core-panel-sort"]
         }),
+        DDeiExtHtmlViewer.configuration({
+          matchField: "type",
+          "emp_1": {
+            type: "emp_1",
+            name: "张三",
+            viewer: ReplaceDivDemo
+          },
+          "emp_2": {
+            type: "emp_2",
+            name: "李四",
+            viewer: ReplaceDivDemo
+          },
+          "emp_3": {
+            type: "emp_3",
+            name: "王五",
+            viewer: ReplaceDivDemo
+          }
+        })
+
         // DDeiCoreStandLayout.configuration({
           //配置插件
           // 'top': [],
