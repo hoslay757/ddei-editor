@@ -62,22 +62,18 @@ class DDeiKeyActionCopyImage extends DDeiKeyAction {
         //当前激活的图层
         let selectedControls = ddInstance.stage.selectedModels;
         //存在选中控件
-        let models
-        let allLayers = false
+        let models = null
         if (selectedControls?.size > 0) {
           models = Array.from(selectedControls?.values());
-        }else{
-          models = ddInstance.stage.getLayerModels(null,100)
-          allLayers = true
         }
-        this.copyToImage(editor, ddInstance, models, allLayers)
+        this.copyToImage(editor, ddInstance, models)
       }
 
 
     }
   }
 
-  copyToImage(editor, ddInstance, models, allLayers) {
+  copyToImage(editor, ddInstance, models) {
     try {
       //转换为图片
       // let canvas = document.createElement('canvas');
