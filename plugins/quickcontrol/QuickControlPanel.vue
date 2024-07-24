@@ -244,7 +244,7 @@ export default {
                 smodel: { id: model.id, x: sx, y: sy, rate: 0.5, sita: startSita },
                 emodel: { id: existsControl.id, x: ex, y: ey, rate: 0.5, sita: endSita }
               },
-            ],false,false)
+            ],true,false,false)
             this.editor.tempLineModel = lines[0];
             DDeiEditorUtil.closeDialog(this.editor, 'ddei-ext-dialog-quickchoosecontrol', true)
             this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape);

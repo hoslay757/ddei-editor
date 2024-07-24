@@ -33,10 +33,10 @@ export default defineComponent({
         }),
         DDeiExtUML,
         DDeiExtSearch,
-        DDeiExtQuickStyle,
+        // DDeiExtQuickStyle,
         DDeiExtQuickControl,
         QuickChooseControlDialog.configuration({ customGroups: ['101', '102'] }),
-        DDeiExtTooltip
+        // DDeiExtTooltip
         // QuickChooseControlDialog.configuration({ customControls: ['100001', '100002','100003']})
         // DDeiCoreThemeBlack.configuration({
         //   default: true
@@ -223,7 +223,9 @@ export default defineComponent({
       ],
     })
 
-   
+    const jsontext2 = `
+    {"name":"新建文件_NEW","desc":"","extData":{},"state":1,"publish":"0","lastUpdateTime":1721721532072,"path":"/新建文件_NEW","sheets":[{"name":"页面-1","desc":"页面-1","stage":{"id":"stage_1","layers":[{"id":"layer_default","name":"图层","models":{"task_1":{"id":"task_1","modelCode":"102010","modelType":"DDeiPolygon","cpv":{"x":148.5,"y":105,"z":1},"hpv":[{"x":148.5,"y":105,"z":1},{"x":174.95833333333334,"y":105,"z":1}],"exPvs":{"_37ac7604d8c4643f80da10b3ac3cac6e":{"x":163.05208333333331,"y":107.72499999999997,"z":1,"rate":0.6471316085489304,"sita":10.60628276121123,"index":3,"id":"_37ac7604d8c4643f80da10b3ac3cac6e"}},"poly":2,"mirrorX":false,"mirrorY":false,"sptStyle":{},"text":"初始化图形","bpv":{"x":177.60416666666669,"y":123.52083333333333,"z":1},"model":"102010"},"task_7":{"id":"task_7","modelCode":"102010","modelType":"DDeiPolygon","cpv":{"x":166.35416666666663,"y":105.60833333333332,"z":1},"hpv":[{"x":166.35416666666663,"y":105.60833333333332,"z":1},{"x":192.81250000000003,"y":105.60833333333332,"z":1}],"exPvs":{},"poly":2,"mirrorX":false,"mirrorY":false,"sptStyle":{},"text":"初始化图形","bpv":{"x":195.45833333333334,"y":124.12916666666663,"z":1},"model":"102010"},"line_8":{"id":"line_8","modelCode":"100401","modelType":"DDeiLine","hpv":[{"x":163.05208333333331,"y":107.72499999999997,"z":1},{"x":189.51041666666666,"y":107.72499999999997,"z":1}],"pvs":[{"x":163.05208333333331,"y":107.72499999999997,"z":1,"isVector3":true},{"x":182.75833333333333,"y":107.72499999999997,"z":1,"isVector3":true}],"exPvs":{},"mirrorX":false,"mirrorY":false,"sptStyle":{},"type":2,"freeze":0},"task_9":{"id":"task_9","modelCode":"102010","modelType":"DDeiPolygon","cpv":{"x":183.55208333333331,"y":110.10624999999997,"z":1},"hpv":[{"x":183.55208333333331,"y":110.10624999999997,"z":1},{"x":210.01041666666663,"y":110.10624999999997,"z":1}],"exPvs":{},"poly":2,"mirrorX":false,"mirrorY":false,"sptStyle":{},"text":"初始化图形","bpv":{"x":212.65624999999997,"y":128.62708333333327,"z":1},"model":"102010"},"task_10":{"id":"task_10","modelCode":"102010","modelType":"DDeiPolygon","cpv":{"x":184.3458333333333,"y":112.22291666666665,"z":1},"hpv":[{"x":184.3458333333333,"y":112.22291666666665,"z":1},{"x":210.80416666666665,"y":112.22291666666665,"z":1}],"exPvs":{},"poly":2,"mirrorX":false,"mirrorY":false,"sptStyle":{},"text":"初始化图形","bpv":{"x":213.44999999999996,"y":130.74374999999995,"z":1},"model":"102010"},"task_11":{"id":"task_11","modelCode":"102010","modelType":"DDeiPolygon","cpv":{"x":184.3458333333333,"y":112.22291666666665,"z":1},"hpv":[{"x":184.3458333333333,"y":112.22291666666665,"z":1},{"x":210.80416666666665,"y":112.22291666666665,"z":1}],"exPvs":{},"poly":2,"mirrorX":false,"mirrorY":false,"sptStyle":{},"text":"初始化图形","bpv":{"x":213.44999999999996,"y":130.74374999999995,"z":1},"model":"102010"},"task_12":{"id":"task_12","modelCode":"102010","modelType":"DDeiPolygon","cpv":{"x":156.03541666666663,"y":104.8145833333333,"z":1},"hpv":[{"x":156.03541666666663,"y":104.8145833333333,"z":1},{"x":182.49374999999998,"y":104.8145833333333,"z":1}],"exPvs":{},"poly":2,"mirrorX":false,"mirrorY":false,"sptStyle":{},"text":"初始化图形","bpv":{"x":185.13958333333332,"y":123.33541666666662,"z":1},"model":"102010"}},"midList":["task_1","task_7","line_8","task_9","task_10","task_11","task_12"],"modelType":"DDeiLayer","baseModelType":"DDeiLayer","index":-1,"background":null,"display":1,"lock":false,"print":true,"centerOpPoints":[],"modelCode":"DDeiLayer","modelChanged":true,"modelNumber":0}],"layerIndex":0,"idIdx":12,"modelType":"DDeiStage","ratio":1,"width":2245.0393700787404,"height":1587.4015748031497,"wpv":{"x":-615,"y":-375,"z":0},"links":[{"smid":"task_1","dmid":"line_8","smpath":"exPvs._37ac7604d8c4643f80da10b3ac3cac6e","dmpath":"startPoint"}],"spv":{"x":561.2598425196851,"y":396.85039370078744,"z":1},"modelCode":"DDeiStage","drawing":true,"copyMode":"copy","tempCursorOPpoint":{"x":1200,"y":813,"z":1,"isMiddle":true,"sita":180,"rate":0.5,"index":1,"plLength":0,"model":{"id":"task_9","modelCode":"102010","modelType":"DDeiPolygon","cpv":{"x":183.55208333333331,"y":110.10624999999997,"z":1},"hpv":[{"x":183.55208333333331,"y":110.10624999999997,"z":1},{"x":210.01041666666663,"y":110.10624999999997,"z":1}],"exPvs":{},"poly":2,"mirrorX":false,"mirrorY":false,"sptStyle":{},"text":"初始化图形","bpv":{"x":212.65624999999997,"y":128.62708333333327,"z":1},"model":"102010"},"mode":null},"unit":"mm"},"active":1,"modelType":"DDeiSheet","unicode":"0551c7341e1166a9b9000932cd46a41e"}],"currentSheetIndex":0,"modelType":"DDeiFile","modelNumber":0,"unicode":"22641afa27d069c986e615cae9600d0d","ddeiVersion":1237}
+`
     
     return {
       options:options,
@@ -231,6 +233,7 @@ export default defineComponent({
       options2:options2,
       options3:options3,
       options4:options4,
+      jsontext2: jsontext2,
       jsontext:"无JSON"
     };
   },
@@ -242,6 +245,16 @@ export default defineComponent({
       //获取整个editor的JSON
       let editorJSON = editor.toJSON();
       this.jsontext = JSON.stringify(editorJSON);
+    },
+
+    loadDataToEditor(){
+      
+      //获取编辑器实例
+      let editor = this.$refs["editorViewer1"].editor;
+      //获取整个editor的JSON
+      let fileJSON = JSON.parse(this.jsontext2)
+      editor.loadData(fileJSON)
+      
     }
   }
 
@@ -251,26 +264,19 @@ export default defineComponent({
 
 
 <template>
-  <div v-for="data in demoData" :id="'demo_replace_div_' + data.code" :ref="'demo_replace_div_' + data.code"
-    style="display: flex;flex-direction:column;text-align:center;align-items: center;text-align: center;width:200px;background: white;color:black;position: absolute;display: none;">
-    <div style="width:100%;display: flex;text-align:center;align-items: center;">
-      <div style="flex:1">代码</div>
-      <div style="flex:1">{{ data.code }}</div>
-    </div>
-    <div style="width:100%;display: flex;text-align:center;align-items: center;">
-      <div style="flex:1">名称</div>
-      <div style="flex:1">{{ data.name }}</div>
-    </div>
+
+  <div style="width:500px;flex: 0 0 500px">
+    <textarea :value="jsontext2" placeholder="粘贴JSON到框中"
+      style="border:1px solid grey;margin-left:5px;padding:5px;width:100%;height:100%"></textarea>
+      <button @click="loadDataToEditor">加载</button>
   </div>
+
+  <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
+
+
   <!--
-  <div style="width:500px;height:500px;overflow: auto;margin:auto;margin-top:200px;">
-    <div style="width:80vw;height:80vh;">
-      <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
-    </div>
-  </div>
- -->
   <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
-  <!--
+
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>
   </div>
