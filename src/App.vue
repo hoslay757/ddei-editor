@@ -265,12 +265,6 @@ export default defineComponent({
 
 <template>
 
-  <div style="width:500px;flex: 0 0 500px">
-    <textarea :value="jsontext2" placeholder="粘贴JSON到框中"
-      style="border:1px solid grey;margin-left:5px;padding:5px;width:100%;height:100%"></textarea>
-      <button @click="loadDataToEditor">加载</button>
-  </div>
-
   <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
 
 
