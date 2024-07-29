@@ -69,6 +69,7 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
       let editState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_EDIT_BEFORE", DDeiEnumOperateType.EDIT, { models: [model] }, ddInstance, null)
       if (editState == 0 || editState== 1){
         let stage = ddInstance.stage;
+        let stageRatio = stage.getStageRatio()
         if (model?.render) {
           let ex = -1;
           let ey = -1;
@@ -79,6 +80,8 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
             ey /= window.remRatio
             ex -= stage.wpv.x;
             ey -= stage.wpv.y;
+            ex = ex / stageRatio
+            ey = ey / stageRatio
 
           }
           if (model.baseModelType == 'DDeiTable') {

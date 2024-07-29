@@ -126,7 +126,7 @@ export default {
 
             let stage = this.editor?.ddInstance?.stage;
             let rat1 = stage.ddInstance.render.ratio;
-
+            let stageRatio = stage.getStageRatio()
             //由于绘制缓存中的文本位置乘以了调整系数，因此这里判断时，需要利用这个系数反向判断
             let scaleSize = DDeiUtil.DRAW_TEMP_CANVAS && rat1 < 2 ? 2 / rat1 : 1
             let ex = evt.offsetX;
@@ -135,11 +135,14 @@ export default {
             ey /= window.remRatio
             ex -= stage.wpv.x;
             ey -= stage.wpv.y;
+            let ex2 = ex / stageRatio
+            let ey2 = ey / stageRatio
+
             let shadowControl =
               this.editor?.ddInstance?.stage?.render?.editorShadowControl;
-            if (shadowControl?.isInTextArea(ex, ey)) {
-              let cx = (ex - shadowControl.cpv.x) * rat1;
-              let cy = (ey - shadowControl.cpv.y) * rat1;
+            if (shadowControl?.isInTextArea(ex2, ey2)) {
+              let cx = (ex2 - shadowControl.cpv.x) * rat1 * stageRatio;
+              let cy = (ey2 - shadowControl.cpv.y) * rat1 * stageRatio;
               //先判断行，再判断具体位置
               //textUsedArea记录的是基于中心点的偏移量
               let startIndex = 0;
@@ -239,8 +242,6 @@ export default {
         ey /= window.remRatio
         ex -= stage.wpv.x;
         ey -= stage.wpv.y;
-        ex /= stageRatio;
-        ey /= stageRatio;
         if (this.editor.creatingControls) {
           //当前激活的图层
           let layer = stage.layers[stage.layerIndex];
