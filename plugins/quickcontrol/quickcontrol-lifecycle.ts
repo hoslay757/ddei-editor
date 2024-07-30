@@ -79,10 +79,12 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
         let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
         let modelPos = DDeiUtil.getModelsDomAbsPosition([data.model])
         
+        let stageRatio = ddInstance.stage.getStageRatio()
         let width = 50
         let height = 50
         let left = modelPos.left - editorDomPos.left - width/2
         let top = modelPos.top - editorDomPos.top - height/2
+        
         let offset = null
         if (data.model.state == DDeiEnumControlState.SELECTED) {
           height = 70
