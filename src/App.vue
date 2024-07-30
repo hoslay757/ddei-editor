@@ -33,10 +33,10 @@ export default defineComponent({
         }),
         DDeiExtUML,
         DDeiExtSearch,
-        // DDeiExtQuickStyle,
+        DDeiExtQuickStyle,
         DDeiExtQuickControl,
         QuickChooseControlDialog.configuration({ customGroups: ['101', '102'] }),
-        // DDeiExtTooltip
+        DDeiExtTooltip
         // QuickChooseControlDialog.configuration({ customControls: ['100001', '100002','100003']})
         // DDeiCoreThemeBlack.configuration({
         //   default: true
