@@ -94,6 +94,7 @@ export default {
   },
   mounted() {
     this.editor.editorViewer = this;
+    this.editor.htmlElement = this.$refs.editor_div;
     //设置默认风格
     this.editor.bindEvent();
     this.editor.changeTheme('');
