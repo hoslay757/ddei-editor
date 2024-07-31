@@ -18,6 +18,7 @@ export default defineComponent({
     const options = markRaw({
       config: {
         paper:"A6",
+        "mark": "水印文本",
         // EXT_STAGE_WIDTH: false,
         // EXT_STAGE_HEIGHT: false,
       },
