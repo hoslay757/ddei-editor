@@ -279,9 +279,8 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
         { modelCode: "100002" },
         searchPaths
       );
-      let stageRatio = stage.getStageRatio()
       //获取文本高度宽度
-      let size = DDeiUtil.measureTextSize(stage.ddInstance, textData, configAtrs.get('font.family').data, configAtrs.get('font.size').data * stageRatio)
+      let size = DDeiUtil.measureTextSize(stage.ddInstance, textData, configAtrs.get('font.family').data, configAtrs.get('font.size').data+1)
 
 
       let dataJson = {
