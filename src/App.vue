@@ -10,9 +10,11 @@ import { DDeiExtQuickControl, QuickChooseControlDialog } from "@ddei/quickcontro
 import { defineComponent, markRaw } from "vue";
 import DDeiExtHtmlViewer from "@ddei/htmlviewer"
 import ReplaceDivDemo  from "./ReplaceDivDemo.vue";
+import {controls as ControlDefinesDemo,groups as GroupDefinesDemo} from "./controldefinesdemo"
+
 export default defineComponent({
   name: "APP",
-  components: { DDeiEditorView, ReplaceDivDemo },
+  components: { DDeiEditorView },
   data() {
     
     const options = markRaw({
@@ -21,6 +23,10 @@ export default defineComponent({
         "mark": "水印文本",
         // EXT_STAGE_WIDTH: false,
         // EXT_STAGE_HEIGHT: false,
+        // 自定义控件，接收一个object[]。由于定义内容较多，提取到外部，便于维护
+        controlDefines: ControlDefinesDemo,
+        // 自定义分组，接收一个object[]。由于定义内容较多，提取到外部，便于维护
+        groupDefines: GroupDefinesDemo
       },
       extensions: [
         //布局的配置

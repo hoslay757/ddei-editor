@@ -109,6 +109,7 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
       type = 'text/html'
       blobData = window.DDEI_CLIPBOARD
     }
+    
     if (blobData) {
       switch (type) {
         //剪切板中是文本
