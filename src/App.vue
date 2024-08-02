@@ -32,6 +32,14 @@ export default defineComponent({
           controls: [
             {
               model: "9999002"
+            },
+            {
+              id: "act_1",
+              model: "102010",
+              type: "emp_1",
+              text: "第一步",
+              border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
+              fill: { color: "grey" },
             }
           ]
         }

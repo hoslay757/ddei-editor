@@ -62,7 +62,6 @@ class DDeiExtTooltipLifeCycle extends DDeiLifeCycle {
           editor.tempHoverTime = new Date().getTime()
         }
       }else{
-        console.log(this.options.time)
         if(new Date().getTime() - editor.tempHoverTime >= this.options.time){
           data.model = editor.tempHoverModel
    

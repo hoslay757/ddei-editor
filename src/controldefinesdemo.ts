@@ -13,6 +13,7 @@ const controls: object[] = [
       }
     }
   },
+  //复写已有的配置
   {
     'id': '102010',
     'define': {

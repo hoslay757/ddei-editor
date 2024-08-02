@@ -94,6 +94,19 @@ export default {
     if (this.options?.config?.controlDefines?.length > 0) {
       //加载控件定义
       this.options?.config?.controlDefines.forEach(control => {
+        if (this.editor.controls.has(control.id)){
+          let oldControl = this.editor.controls.get(control.id)
+          //合并控件自身与from组件的define、menu
+          //复写属性
+          if (control.define) {
+            for (let n in control.define) {
+              if (control.define[n] || control.define[n] == 0) {
+                oldControl.define[n] = control.define[n]
+              }
+            }
+          }
+          control = oldControl
+        }
         this.editor.controls.set(control.id, control);
         loadControlByFrom(this.editor.controls, control)
       });
