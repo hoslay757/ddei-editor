@@ -1,45 +1,43 @@
-import { DDeiLifeCycle, DDeiFuncData, DDeiEditorUtil, DDeiUtil, DDeiFuncCallResult, DDeiEditorState } from "ddei-framework";
+import { DDeiLifeCycle, DDeiFuncData, DDeiEditorUtil, DDeiUtil, DDeiFuncCallResult, DDeiEditorEnumBusCommandType, DDeiEnumBusCommandType } from "ddei-framework";
 import { debounce } from "lodash";
 
-class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
+class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
   
-  name:string = "ddei-ext-htmlviewer-lifecycle"
+  name:string = "ddei-core-renderviewer-lifecycle"
   /**
    * 缺省实例
    */
-  static defaultIns: DDeiExtHtmlViewerLifeCycle = new DDeiExtHtmlViewerLifeCycle({
-    matchField:"code"
-  });
+  static defaultIns: DDeiCoreRenderLifeCycle = new DDeiCoreRenderLifeCycle();
 
-  EVENT_CONTROL_VIEW_BEFORE: DDeiFuncData | null = new DDeiFuncData("htmlviewer-drawshape", 1, (operateType, data, ddInstance, evt) => {
+  EVENT_CONTROL_VIEW_BEFORE: DDeiFuncData | null = new DDeiFuncData("render-drawshape", 1, (operateType, data, ddInstance, evt) => {
     return this.htmlDrawShape(operateType, data, ddInstance, evt)
   });
 
-  EVENT_BEFORE_CLOSE_FILE: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
+  EVENT_BEFORE_CLOSE_FILE: DDeiFuncData | null = new DDeiFuncData("render-hidden", 1, (operateType, data, ddInstance, evt) => {
     return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
   });
 
-  EVENT_BEFORE_CHANGE_FILE: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
+  EVENT_BEFORE_CHANGE_FILE: DDeiFuncData | null = new DDeiFuncData("render-hidden", 1, (operateType, data, ddInstance, evt) => {
     return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
   });
 
-  EVENT_BEFORE_ADD_FILE: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
+  EVENT_BEFORE_ADD_FILE: DDeiFuncData | null = new DDeiFuncData("render-hidden", 1, (operateType, data, ddInstance, evt) => {
     return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
   });
 
-  EVENT_BEFORE_CLOSE_SHEET: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
+  EVENT_BEFORE_CLOSE_SHEET: DDeiFuncData | null = new DDeiFuncData("render-hidden", 1, (operateType, data, ddInstance, evt) => {
     return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
   });
 
-  EVENT_BEFORE_CHANGE_SHEET: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
+  EVENT_BEFORE_CHANGE_SHEET: DDeiFuncData | null = new DDeiFuncData("render-hidden", 1, (operateType, data, ddInstance, evt) => {
     return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
   });
 
-  EVENT_BEFORE_ADD_SHEET: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
+  EVENT_BEFORE_ADD_SHEET: DDeiFuncData | null = new DDeiFuncData("render-hidden", 1, (operateType, data, ddInstance, evt) => {
     return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
   });
 
-  EVENT_CONTROL_DEL_AFTER: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
+  EVENT_CONTROL_DEL_AFTER: DDeiFuncData | null = new DDeiFuncData("render-hidden", 1, (operateType, data, ddInstance, evt) => {
     this.deleteHtmlShape(operateType, data, ddInstance, evt)
     return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
   });
@@ -48,24 +46,14 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
     //解析options，只使用自己相关的
     
     if (options && Object.keys(options).length !== 0) {
-      let lcs = new DDeiExtHtmlViewerLifeCycle(options);
+      let lcs = new DDeiCoreRenderLifeCycle(options);
       return lcs;
     }
     
-    return DDeiExtHtmlViewerLifeCycle;
+    return DDeiCoreRenderLifeCycle;
   }
 
-  installed(editor:DDeiEditorState):void{
-    //添加viewer到editor
-    for(let i in this.options){
-      if (this.options[i] && this.options[i].viewer){
-        this.options[i].matchField = this.options.matchField
-        editor.renderViewers.push(this.options[i])
-      }
-    }
-  }
-
-  deleteHtmlShape(operate, data, ddInstance, evt) {
+  deleteHtmlShape(operate, data, ddInstance, evt) { 
     let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
     if (editor) {
       let models = data?.models
@@ -74,7 +62,7 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
           editor.renderViewerIns[models[i].id] = null
           for (let n = 0; n < editor.renderViewers.length; n++) {
             if (editor.renderViewers[n].model.id == models[i].id) {
-              editor.renderViewers.splice(n, 1)
+              editor.renderViewers.splice(n,1)
               editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
                 parts: ["renderviewers"],
               });
@@ -104,10 +92,10 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
     if (editor){
       let canvasEle = document.getElementById(editor.id + "_canvas");
       let canvasDomPos = DDeiUtil.getDomAbsPosition(canvasEle);
-      let field = this.options.matchField
       for (let i = 0; i < models?.length; i++) {
-        if (models[i] && models[i][field]) {
-          let displayDiv = editor.renderViewerIns[models[i][field]]
+        if (models[i].modelType != 'DDeiStage' && models[i].modelType != 'DDeiLayer' && models[i] && models[i].id) {
+          let displayDiv = editor.renderViewerIns[models[i].id]
+         
           if (displayDiv) {
             if(operate == 'VIEW'){
               let ruleWeight = 0
@@ -133,6 +121,29 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
               rs.state = -1;
               return rs
             }
+          } else {
+            //识别是否需要添加控件
+            let modelDefine = DDeiEditorUtil.getControlDefine(models[i]);
+            if (modelDefine?.viewer) {
+              let finded = false
+              for (let n = 0; n < editor.renderViewers.length;n++){
+                if (editor.renderViewers[n].model.id == models[i].id){
+                  finded = true
+                  break;
+                }
+              }
+              if (!finded){
+                editor.renderViewers.push({ model: models[i], viewer: modelDefine.viewer })
+              }
+              editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
+                parts: ["renderviewers"],
+              });
+              
+              editor.bus.executeAll();
+              rs.state = -1;
+              return rs
+            }
+            
           }
         }
       }
@@ -142,4 +153,4 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
   }
 }
 
-export default DDeiExtHtmlViewerLifeCycle
+export default DDeiCoreRenderLifeCycle

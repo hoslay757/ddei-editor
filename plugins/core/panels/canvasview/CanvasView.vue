@@ -3,7 +3,8 @@
     ondragstart="return false;" @wheel="mouseWheel($event)" @mousemove="mouseMove($event)" @mouseup="mouseUp($event)"
     @dblclick="canvasDBClick" @contextmenu.prevent>
     <div class="ddei-editor-canvasview-renderviewers">
-      <component :editor="editor" v-for="(item, index) in editor?.renderViewers" :is="item.viewer" :options="item" v-bind="item" >
+      <component v-if="forceRefreshRenderViewers" :editor="editor" v-for="(item, index) in editor?.renderViewers"
+        :is="item.viewer" :options="item" v-bind="item">
       </component>
     </div>
   </div>
@@ -39,7 +40,9 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      forceRefreshRenderViewers:true
+    }
   },
   computed: {},
   watch: {},
@@ -73,6 +76,16 @@ export default {
     ddInstance.bus.executeAll();
   },
   methods: {
+    //强制刷新当前以及下层组件
+    forceRefreshParts(parts) {
+      if (!parts || parts == 'renderviewers' || parts.indexOf('renderviewers') != -1) {
+        this.forceRefreshRenderViewers = false
+        this.$nextTick(() => {
+          this.forceRefreshRenderViewers = true;
+        });
+      }
+    },
+
     /**
      * 画布双击
      */

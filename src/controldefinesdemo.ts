@@ -1,3 +1,4 @@
+import HtmlViewerDemo from "./HtmlViewerDemo.vue";
 //控件定义
 const controls: object[] = [
   {
@@ -21,8 +22,44 @@ const controls: object[] = [
     'define': {
       fill: {
         color: "#ffc0be"
+      },
+      ext: {
+        attrs: [
+          {
+            'code': 'text1',
+            'name': '文本1',
+            'desc': '控件的主体显示文本',
+            'controlType': 'excheckbox',
+            'dataType': 'integer',
+            'dataSource': [{ 'text': '文本', 'value': 0 }, { 'text': '数字', 'value': 1 }, { 'text': '金额', 'value': 2 }, { 'text': '时间', 'value': 3 }],
+            'itemStyle': { width: 80, height: 25, col: 2, row: 0, imgWidth: 20, imgHeight: 20 },
+            'isArray': true,
+            'defaultValue': [1, 2],
+            'type': [1, 2], //类别，1图形，2业务，3事件
+            'readonly': true,
+          },
+        ],
+        groups: [
+          {
+            name: "数据",
+            icon: 'icon-a-ziyuan409',
+            subGroups: [
+              {
+                name: "分组1",
+                attrs: ["code", "text1"]
+              },
+              {
+                name: "分组2",
+                attrs: ["text"]
+              },
+
+            ]
+          },
+        ]
       }
-    }
+    },
+    viewer: HtmlViewerDemo
+
   }
 ]
 
