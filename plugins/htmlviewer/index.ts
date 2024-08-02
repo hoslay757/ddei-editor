@@ -13,6 +13,8 @@ class DDeiExtHtmlViewer extends DDeiPluginBase {
 
   lifecyclies: object = DDeiExtHtmlViewerLifeCycle;
 
+  
+
   getLifeCyclies(editor:DDeiEditor) {
     if (DDeiPluginBase.isSubclass(this.lifecyclies, DDeiPluginBase)) {
       return this.lifecyclies.defaultIns.getLifeCyclies(editor);

@@ -14,6 +14,16 @@ const controls: object[] = [
     }
   },
   {
+    'id': '102010',
+    'define': {
+      fill: {
+        color: "#e1b348"
+      },
+      width:150,
+      height:100
+    }
+  },
+  {
     'id': '9999002',
     'name': '自定义2',
     'code': 'cust_2',

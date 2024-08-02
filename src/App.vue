@@ -10,6 +10,7 @@ import { DDeiExtQuickControl, QuickChooseControlDialog } from "@ddei/quickcontro
 import { defineComponent, markRaw } from "vue";
 import DDeiExtHtmlViewer from "@ddei/htmlviewer"
 import ReplaceDivDemo  from "./ReplaceDivDemo.vue";
+import HtmlTooltipDemo from "./HtmlTooltipDemo.vue";
 import {controls as ControlDefinesDemo,groups as GroupDefinesDemo} from "./controldefinesdemo"
 
 export default defineComponent({
@@ -50,7 +51,11 @@ export default defineComponent({
         DDeiExtQuickStyle,
         DDeiExtQuickControl,
         QuickChooseControlDialog.configuration({ customGroups: ['101', '102'] }),
-        DDeiExtTooltip
+        DDeiExtTooltip.configuration({
+          'ddei-ext-dialog-tooltip':{
+            viewer: HtmlTooltipDemo
+          }
+        })
         // QuickChooseControlDialog.configuration({ customControls: ['100001', '100002','100003']})
         // DDeiCoreThemeBlack.configuration({
         //   default: true

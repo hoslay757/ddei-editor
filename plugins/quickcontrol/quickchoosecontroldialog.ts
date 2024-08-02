@@ -22,9 +22,9 @@ class DDeiExtQuickChooseControlDialog extends DDeiPluginBase{
       let newOptions = {}
       if (fullConfig) {
         if (fullConfig) {
-          if (options[AlignDialog.name]) {
-            for (let i in options[AlignDialog.name]) {
-              newOptions[i] = options[AlignDialog.name][i]
+          if (options[QuickChooseControlDialog.name]) {
+            for (let i in options[QuickChooseControlDialog.name]) {
+              newOptions[i] = options[QuickChooseControlDialog.name][i]
             }
           }
         }
