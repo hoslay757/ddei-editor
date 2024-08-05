@@ -4,13 +4,13 @@ import DDeiKeyActionQuickControlEsc from "./key-action-quickcontrol-esc"
 /**
  * 快捷键扩展
  */
-class DDeiExtSearchHotkeys extends DDeiPluginBase {
+class DDeiExtQuickControlHotkeys extends DDeiPluginBase {
 
   type: string = "package"
   /**
    * 缺省实例
    */
-  static defaultIns: DDeiExtSearchHotkeys = new DDeiExtSearchHotkeys(null);
+  static defaultIns: DDeiExtQuickControlHotkeys = new DDeiExtQuickControlHotkeys(null);
 
 
   plugins: object[] = [DDeiKeyActionQuickControlEsc]
@@ -35,7 +35,7 @@ class DDeiExtSearchHotkeys extends DDeiPluginBase {
 
 
   static configuration(options) {
-    let hotkeys = new DDeiExtSearchHotkeys(options);
+    let hotkeys = new DDeiExtQuickControlHotkeys(options);
     for (let i = 0; i < hotkeys.plugins?.length; i++) {
       hotkeys.plugins[i] = hotkeys.plugins[i].configuration(options, true)
     }
@@ -43,6 +43,6 @@ class DDeiExtSearchHotkeys extends DDeiPluginBase {
   }
 }
 export {
-  DDeiExtSearchHotkeys, DDeiKeyActionQuickControlEsc
+  DDeiExtQuickControlHotkeys, DDeiKeyActionQuickControlEsc
 }
-export default DDeiExtSearchHotkeys
+export default DDeiExtQuickControlHotkeys

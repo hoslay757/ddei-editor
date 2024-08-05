@@ -173,7 +173,7 @@ export default {
               smodel: { id: model.id,x:sx,y:sy ,rate:0.5,sita:startSita},
               emodel:{id:controls[0].id,x:ex,y:ey,rate:0.5,sita:endSita}
             },
-          ],false,false)
+          ],true,true,false)
           this.editor.ddInstance.stage.makeSelectModels(controls);
           this.editor.ddInstance.stage.notifyChange()
         }

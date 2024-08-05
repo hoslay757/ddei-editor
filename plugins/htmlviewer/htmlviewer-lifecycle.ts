@@ -1,4 +1,4 @@
-import { DDeiLifeCycle, DDeiFuncData, DDeiEditorUtil, DDeiUtil, DDeiFuncCallResult, DDeiEditorState } from "ddei-framework";
+import { DDeiLifeCycle, DDeiFuncData, DDeiEditorUtil, DDeiUtil, DDeiFuncCallResult, DDeiEditorState, DDeiEditorEnumBusCommandType } from "ddei-framework";
 import { debounce } from "lodash";
 
 class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {

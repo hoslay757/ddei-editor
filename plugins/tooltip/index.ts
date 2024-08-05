@@ -5,7 +5,6 @@ import DDeiExtTooltipLifeCycle from "./tooltip-lifecycle"
 class DDeiExtTooltip extends DDeiPluginBase {
   type: string = "package"
 
-
   /**
    * 缺省实例
    */
@@ -14,6 +13,10 @@ class DDeiExtTooltip extends DDeiPluginBase {
   dialogs: object = DDeiCoreTooltipDialog;
 
   lifecyclies: object = DDeiExtTooltipLifeCycle;
+
+  getOptions(): object {
+    return this.options;
+  }
 
   getDialogs(editor) {
     if (DDeiPluginBase.isSubclass(this.dialogs, DDeiPluginBase)) {
@@ -34,8 +37,8 @@ class DDeiExtTooltip extends DDeiPluginBase {
 
   static configuration(options) {
     let core = new DDeiExtTooltip(options);
-    core.dialogs = core.dialogs.configuration(options, true)
-    core.lifecyclies = core.lifecyclies.configuration(options, true)
+    core.dialogs = core.dialogs.configuration(options,true)
+    core.lifecyclies = core.lifecyclies.configuration(options,true)
     return core;
   }
 }

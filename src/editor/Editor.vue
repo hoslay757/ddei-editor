@@ -23,6 +23,7 @@ import {DDeiEditorCommandAddHistroy} from "ddei-framework";
 import MenuDialog from "./MenuDialog.vue";
 import {DDeiEditorUtil} from "ddei-framework";
 import DDeiCore from "@ddei/core";
+import { loadControlByFrom, loadAndSortGroup } from "./grouputil";
 
 import ICONS from "./icon";
 import { markRaw } from "vue";
@@ -84,16 +85,92 @@ export default {
     // }
     //载入局部配置
     if (this.options){
-
       this.editor.applyConfig(this.options.config);
       this.editor.extConfig = this.options.config;
       this.editor.ddInstance.applyConfig(this.options.config);
     }
+    //加载自定义控件以及分组
+    if (this.options?.config?.controlDefines?.length > 0) {
+      //加载控件定义
+      this.options?.config?.controlDefines.forEach(control => {
+        if (this.editor.controls.has(control.id)){
+          let oldControl = this.editor.controls.get(control.id)
+          //合并控件自身与from组件的define、menu
+          //复写属性
+          if (control.define) {
+            for (let n in control.define) {
+              if (control.define[n] || control.define[n] == 0) {
+                oldControl.define[n] = control.define[n]
+              }
+            }
+          }
+          control = oldControl
+        }
+        this.editor.controls.set(control.id, control);
+        loadControlByFrom(this.editor.controls, control)
+      });
+    }
+    //加载自定义控件以及分组
+    if (this.options?.config?.groupDefines?.length > 0) {
+      loadAndSortGroup(this.options?.config?.groupDefines, this.editor.controls)
+      this.options.config.groupDefines.forEach(group => {
+        let finded = false;
+        for (let i = 0; i < this.editor.groups.length; i++) {
+          if (this.editor.groups[i].id == group.id) {
+            this.editor.groups[i] = group
+            finded = true
+            break;
+          }
+        }
+        if (!finded) {
+          this.editor.groups.push(group)
+        }
+      });
+      this.editor.groups.sort((a,b)=>{
+        return a.orderNo - b.orderNo
+      })
+      this.options.config.groupDefines.forEach(group => {
+        group.controls.forEach(control => {
+          if (control.define) {
+            delete control.define.font
+            delete control.define.textStyle
+            delete control.define.border
+            delete control.define.fill
+          }
+          delete control.attrs
+        });
+      })
+    }
+
+    this.editor.controls?.forEach(control => {
+      if (control.menus) {
+        if (!editorInstance.menuMapping[control.id]) {
+          editorInstance.menuMapping[control.id] = control.menus
+        }
+        let menus = editorInstance.menuMapping[control.id];
+        for (let i = 0; i < menus.length; i++) {
+          for (let j in editorInstance.menus) {
+            if (editorInstance.menus[j].name == menus[i].name) {
+              menus[i] = editorInstance.menus[j];
+              break;
+            }
+          }
+        }
+      }
+      if (control.define) {
+        delete control.define.font
+        delete control.define.textStyle
+        delete control.define.border
+        delete control.define.fill
+      }
+      delete control.attrs
+    })
     DDeiEditorUtil.ICONS = ICONS;
 
   },
   mounted() {
     this.editor.editorViewer = this;
+    this.editor.htmlElement = this.$refs.editor_div;
     //设置默认风格
     this.editor.bindEvent();
     this.editor.changeTheme('');
@@ -105,6 +182,7 @@ export default {
     if (this.options?.config?.height) {
       this.$refs.editor_div.style.height = this.options?.config?.height + "px";
     }
+    
     //初始化控件
     if(this.options?.config?.initData){
       //调用转换器，将输入内容转换为设计器能够识别的格式
@@ -116,6 +194,7 @@ export default {
       });
       this.editor.addControls(initData.controls)
     }
+    
     if (this.options?.config?.access){
       this.editor.setAccessInfo(this.options?.config?.access)
     } else if (this.options?.config?.readonly == true || this.options?.config?.readonly == false) {

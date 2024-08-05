@@ -62,91 +62,23 @@ class DDeiKeyActionCopyImage extends DDeiKeyAction {
         //当前激活的图层
         let selectedControls = ddInstance.stage.selectedModels;
         //存在选中控件
-        let models
-        let allLayers = false
+        let models = null
         if (selectedControls?.size > 0) {
           models = Array.from(selectedControls?.values());
-        }else{
-          models = ddInstance.stage.getLayerModels(null,100)
-          allLayers = true
         }
-        this.copyToImage(editor, ddInstance, models, allLayers)
+        this.copyToImage(editor, ddInstance, models)
       }
 
 
     }
   }
 
-  copyToImage(editor, ddInstance, models, allLayers) {
+  copyToImage(editor, ddInstance, models) {
     try {
-      //转换为图片
-      // let canvas = document.createElement('canvas');
-      // //获得 2d 上下文对象
-      // let ctx = canvas.getContext('2d');
-      // //获取缩放比例
-      // let oldRat1 = ddInstance.render.ratio
-
-      // //如果高清屏，rat一般大于2印此系数为1保持不变，如果非高清则扩大为2倍保持清晰
-      // let scaleSize = oldRat1 < 2 ? 2 / oldRat1 : 1
-      // let rat1 = oldRat1 * scaleSize
-      // let rat2 = oldRat1 / window.remRatio
-      // ddInstance.render.ratio = rat1
-      // ddInstance.render.tempCanvas = canvas;
-      // //所选择区域的最大范围
-      // let outRect = DDeiAbstractShape.getOutRectByPV(models);
-      // let lineOffset = models[0].render.getCachedValue("border.width");
-      // let addWidth = 0;
-      // if (lineOffset) {
-      //   addWidth = lineOffset * rat1
-      //   if (models.length > 1) {
-      //     addWidth = lineOffset * 2
-      //   }
-      // }
-      // let editorId = DDeiUtil.getEditorId(ddInstance);
-      // let containerDiv = document.getElementById(editorId+"_ddei_cut_img_div")
-
-      // canvas.setAttribute("style", "-webkit-font-smoothing:antialiased;-moz-transform-origin:left top;-moz-transform:scale(" + (1 / rat2) + ");display:block;zoom:" + (1 / rat2));
-      // let cW = outRect.width * oldRat1 + addWidth
-      // let cH = outRect.height * oldRat1 + addWidth
-      // canvas.setAttribute("width", cW)
-      // canvas.setAttribute("height", cH)
-      // ctx.scale(1 / scaleSize, 1 / scaleSize)
-      // ctx.translate(-outRect.x * rat1 + addWidth / 2, -outRect.y * rat1 + addWidth / 2)
-
-      // containerDiv.appendChild(canvas)
-      
-      // if(allLayers){
-      //   let layers = ddInstance.stage.layers;
-      //   layers.forEach(ly => {
-      //     ly.midList.forEach(mid => {
-      //       let model = ly.models.get(mid)
-      //       model?.render?.clearCachedValue()
-      //       model?.render?.drawShape({});
-      //     })
-      //   });
-      // }else{
-      //   models[0].pModel.midList.forEach(mid=>{
-      //     models.forEach(item => {
-      //       if (item.id == mid){
-      //         item.render.clearCachedValue()
-      //         item.render.drawShape({});
-      //       }
-      //     })
-      //   })
-      // }
-     
-
-      // ddInstance.render.ratio = oldRat1
-      // let dataURL = canvas.toDataURL()
-      
-      // containerDiv.removeChild(canvas)
       let dataURL = ddInstance.stage.toImageDataUrl(models)
       let blob = DDeiUtil.dataURLtoBlob(dataURL)
-
-      
       let cbData = navigator.clipboard;
       //得到blob对象
-
       let writeDatas = [new ClipboardItem({ [blob.type]: blob })]
       cbData.write(writeDatas).then(function () {
         editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {

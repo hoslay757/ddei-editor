@@ -79,6 +79,14 @@ export default {
         let model = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].model
         if (model) {
           let outRect = DDeiAbstractShape.getOutRectByPV([model])
+          let stageRatio = model.stage?.getStageRatio();
+          outRect.x *= stageRatio
+          outRect.x1 *= stageRatio
+          outRect.y *= stageRatio
+          outRect.y1 *= stageRatio
+          outRect.width *= stageRatio
+          outRect.height *= stageRatio
+          
           let width = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].width;
           width = width || width == 0 ? width : 40;
           let height = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].height;
@@ -244,7 +252,7 @@ export default {
                 smodel: { id: model.id, x: sx, y: sy, rate: 0.5, sita: startSita },
                 emodel: { id: existsControl.id, x: ex, y: ey, rate: 0.5, sita: endSita }
               },
-            ],false,false)
+            ],true,true,false)
             this.editor.tempLineModel = lines[0];
             DDeiEditorUtil.closeDialog(this.editor, 'ddei-ext-dialog-quickchoosecontrol', true)
             this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape);

@@ -109,6 +109,7 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
       type = 'text/html'
       blobData = window.DDEI_CLIPBOARD
     }
+    
     if (blobData) {
       switch (type) {
         //剪切板中是文本
@@ -147,8 +148,8 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
         let layer = stage.layers[stage.layerIndex];
         //获取当前的鼠标落点
         
-        let offsetX = stage.ddInstance.render.inAreaX - stage.wpv.x;
-        let offsetY = stage.ddInstance.render.inAreaY - stage.wpv.y;
+        let offsetX = stage.ddInstance.render.inAreaX
+        let offsetY = stage.ddInstance.render.inAreaY
         //当前选中控件是否为1且有表格，且选中表格的单元格，则作为表格单元格的内容粘贴
         let createControl = true;
         let hasChange = false;
@@ -225,8 +226,8 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     //当前激活的图层
     let layer = stage.layers[stage.layerIndex];
     //获取当前的鼠标落点
-    let offsetX = stage.ddInstance.render.inAreaX - stage.wpv.x;
-    let offsetY = stage.ddInstance.render.inAreaY - stage.wpv.y;
+    let offsetX = stage.ddInstance.render.inAreaX
+    let offsetY = stage.ddInstance.render.inAreaY
     //当前选中控件是否为1且有表格，且选中表格的单元格，则作为表格单元格的内容粘贴
     let createControl = true;
     let hasChange = false;
@@ -278,9 +279,8 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
         { modelCode: "100002" },
         searchPaths
       );
-      let stageRatio = stage.getStageRatio()
       //获取文本高度宽度
-      let size = DDeiUtil.measureTextSize(stage.ddInstance, textData, configAtrs.get('font.family').data, configAtrs.get('font.size').data * stageRatio)
+      let size = DDeiUtil.measureTextSize(stage.ddInstance, textData, configAtrs.get('font.family').data, configAtrs.get('font.size').data+1)
 
 
       let dataJson = {
@@ -351,8 +351,8 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     //当前激活的图层
     let layer = stage.layers[stage.layerIndex];
     //获取当前的鼠标落点
-    let offsetX = stage.ddInstance.render.inAreaX - stage.wpv.x;
-    let offsetY = stage.ddInstance.render.inAreaY - stage.wpv.y;
+    let offsetX = stage.ddInstance.render.inAreaX
+    let offsetY = stage.ddInstance.render.inAreaY
     //识别粘贴的内容来自于外部还是内部
     let ddeiJson = null;
 

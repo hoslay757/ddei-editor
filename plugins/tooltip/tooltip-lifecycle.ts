@@ -11,6 +11,29 @@ class DDeiExtTooltipLifeCycle extends DDeiLifeCycle {
     time:400
   });
 
+  static configuration(options, fullConfig: boolean = false) {
+    //解析options，只使用自己相关的
+    if (options) {
+      let newOptions = {}
+      if (fullConfig) {
+        if (fullConfig) {
+          if (options[DDeiExtTooltipLifeCycle.name]) {
+            for (let i in options[DDeiExtTooltipLifeCycle.name]) {
+              newOptions[i] = options[DDeiExtTooltipLifeCycle.name][i]
+            }
+          }
+        }
+      } else {
+        newOptions = options
+      }
+      if (newOptions && Object.keys(newOptions).length !== 0) {
+        let panels = new DDeiExtTooltipLifeCycle(newOptions);
+        return panels;
+      }
+    }
+    return DDeiExtTooltipLifeCycle;
+  }
+
   EVENT_MOUSE_IN_AREA: DDeiFuncData | null = new DDeiFuncData("tooltip-show", 1, (operateType, data, ddInstance, evt)=>{
     this.showTooltip(operateType, data, ddInstance, evt)
   });
