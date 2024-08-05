@@ -1,4 +1,4 @@
-import { DDeiLifeCycle, DDeiFuncData, DDeiEditorUtil, DDeiUtil, DDeiFuncCallResult, DDeiEditorState } from "ddei-framework";
+import { DDeiLifeCycle, DDeiFuncData, DDeiEditorUtil, DDeiUtil, DDeiFuncCallResult, DDeiEditorState, DDeiEditorEnumBusCommandType } from "ddei-framework";
 import { debounce } from "lodash";
 
 class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
@@ -40,7 +40,6 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
   });
 
   EVENT_CONTROL_DEL_AFTER: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
-    this.deleteHtmlShape(operateType, data, ddInstance, evt)
     return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
   });
 
@@ -61,28 +60,6 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
       if (this.options[i] && this.options[i].viewer){
         this.options[i].matchField = this.options.matchField
         editor.renderViewers.push(this.options[i])
-      }
-    }
-  }
-
-  deleteHtmlShape(operate, data, ddInstance, evt) {
-    let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
-    if (editor) {
-      let models = data?.models
-      for (let i = 0; i < models?.length; i++) {
-        if (models[i].modelType != 'DDeiStage' && models[i].modelType != 'DDeiLayer' && models[i] && models[i].id) {
-          editor.renderViewerIns[models[i].id] = null
-          for (let n = 0; n < editor.renderViewers.length; n++) {
-            if (editor.renderViewers[n].model.id == models[i].id) {
-              editor.renderViewers.splice(n, 1)
-              editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
-                parts: ["renderviewers"],
-              });
-              editor.bus.executeAll();
-              break;
-            }
-          }
-        }
       }
     }
   }

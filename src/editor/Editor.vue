@@ -85,7 +85,6 @@ export default {
     // }
     //载入局部配置
     if (this.options){
-
       this.editor.applyConfig(this.options.config);
       this.editor.extConfig = this.options.config;
       this.editor.ddInstance.applyConfig(this.options.config);
@@ -129,6 +128,17 @@ export default {
       });
       this.editor.groups.sort((a,b)=>{
         return a.orderNo - b.orderNo
+      })
+      this.options.config.groupDefines.forEach(group => {
+        group.controls.forEach(control => {
+          if (control.define) {
+            delete control.define.font
+            delete control.define.textStyle
+            delete control.define.border
+            delete control.define.fill
+          }
+          delete control.attrs
+        });
       })
     }
 

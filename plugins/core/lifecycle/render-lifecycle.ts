@@ -61,7 +61,7 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
         if (models[i].modelType != 'DDeiStage' && models[i].modelType != 'DDeiLayer' && models[i] && models[i].id) {
           editor.renderViewerIns[models[i].id] = null
           for (let n = 0; n < editor.renderViewers.length; n++) {
-            if (editor.renderViewers[n].model.id == models[i].id) {
+            if (editor.renderViewers[n]?.model?.id == models[i].id) {
               editor.renderViewers.splice(n,1)
               editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
                 parts: ["renderviewers"],
