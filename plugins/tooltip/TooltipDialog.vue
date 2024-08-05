@@ -1,27 +1,30 @@
 <template>
   <div :id="editor?.id + '_' + dialogId" v-if="forceRefresh" class='ddei-ext-dialog-tooltip fade-in'>
-    <div class="ddei-ext-dialog-tooltip-row">
-      <div class="ddei-ext-dialog-tooltip-row-title" v-if="model?.id">
-        ID
+    <component v-if="options.viewer" :editor="editor" :options="options" :model="model" :is="options.viewer"></component>
+    <div v-if="!options.viewer">
+      <div class="ddei-ext-dialog-tooltip-row">
+        <div class="ddei-ext-dialog-tooltip-row-title" v-if="model?.id">
+          ID
+        </div>
+        <div class="ddei-ext-dialog-tooltip-row-data" v-if="model?.id">
+          {{ model?.id }}
+        </div>
       </div>
-      <div class="ddei-ext-dialog-tooltip-row-data" v-if="model?.id">
-        {{ model?.id }}
+      <div class="ddei-ext-dialog-tooltip-row" v-if="model?.code">
+        <div class="ddei-ext-dialog-tooltip-row-title">
+          CODE
+        </div>
+        <div class="ddei-ext-dialog-tooltip-row-data">
+          {{ model?.code }}
+        </div>
       </div>
-    </div>
-    <div class="ddei-ext-dialog-tooltip-row" v-if="model?.code">
-      <div class="ddei-ext-dialog-tooltip-row-title">
-        CODE
-      </div>
-      <div class="ddei-ext-dialog-tooltip-row-data">
-        {{ model?.code }}
-      </div>
-    </div>
-    <div class="ddei-ext-dialog-tooltip-row" v-if="model?.text">
-      <div class="ddei-ext-dialog-tooltip-row-title">
-        文本
-      </div>
-      <div class="ddei-ext-dialog-tooltip-row-data">
-        {{ model?.text }}
+      <div class="ddei-ext-dialog-tooltip-row" v-if="model?.text">
+        <div class="ddei-ext-dialog-tooltip-row-title">
+          文本
+        </div>
+        <div class="ddei-ext-dialog-tooltip-row-data">
+          {{ model?.text }}
+        </div>
       </div>
     </div>
   </div>
@@ -58,7 +61,6 @@ export default {
 
   },
   created() {
-
   },
   mounted() {
     this.editor.dialogs[this.dialogId].viewer = this

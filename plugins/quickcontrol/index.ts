@@ -21,6 +21,7 @@ class DDeiExtQuickControl extends DDeiPluginBase {
 
   lifecyclies: object = DDeiExtQuickControlLifeCycle;
 
+
   getDialogs(editor) {
     if (DDeiPluginBase.isSubclass(this.dialogs, DDeiPluginBase)) {
       return this.dialogs.defaultIns.getDialogs(editor);

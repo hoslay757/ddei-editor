@@ -6,6 +6,7 @@
   </div>
 </template>
 <script lang="ts">
+import stage from "@ddei/core/controls/control/stage";
 import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
 import {DDeiAbstractShape} from "ddei-framework";
@@ -58,6 +59,7 @@ export default {
           this.editor.ddInstance.stage.getLayerModels()
         );
         if (maxOutRect.width > 0 && maxOutRect.height > 0) {
+
           //获取canvas窗体大小
           let canvas = this.editor.ddInstance.render.canvas;
           let rat1 = this.editor.ddInstance.render.ratio;
@@ -82,8 +84,8 @@ export default {
           let cWidth = canvas.width / rat1 - ruleWeight - vscrollWeight;
           let cHeight = canvas.height / rat1 - ruleWeight - hscrollWeight;
           //比例
-          let wScale = maxOutRect.width / cWidth;
-          let hScale = maxOutRect.height / cHeight;
+          let wScale = maxOutRect.width * stageRatio / cWidth;
+          let hScale = maxOutRect.height * stageRatio / cHeight;
           let scale = wScale;
           if (wScale < hScale) {
             scale = hScale;
