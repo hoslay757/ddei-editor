@@ -9,5 +9,6 @@ export * from "@ddei/search";
 export * from "@ddei/tooltip";
 export * from "@ddei/quickcontrol";
 export * from "@ddei/htmlviewer";
+export * from "./grouputil";
 export { DDeiEditorView};
 export default DDeiEditorView;

@@ -9,7 +9,7 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
    */
   static defaultIns: DDeiCoreRenderLifeCycle = new DDeiCoreRenderLifeCycle();
 
-  EVENT_CONTROL_VIEW_BEFORE: DDeiFuncData | null = new DDeiFuncData("render-drawshape", 1, (operateType, data, ddInstance, evt) => {
+  EVENT_CONTROL_VIEW: DDeiFuncData | null = new DDeiFuncData("render-drawshape", 1, (operateType, data, ddInstance, evt) => {
     return this.htmlDrawShape(operateType, data, ddInstance, evt)
   });
 
@@ -60,6 +60,7 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
       for (let i = 0; i < models?.length; i++) {
         if (models[i].modelType != 'DDeiStage' && models[i].modelType != 'DDeiLayer' && models[i] && models[i].id) {
           editor.renderViewerIns[models[i].id] = null
+          editor.renderViewerElements[models[i].id] = null
           for (let n = 0; n < editor.renderViewers.length; n++) {
             if (editor.renderViewers[n]?.model?.id == models[i].id) {
               editor.renderViewers.splice(n,1)
@@ -77,9 +78,9 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
 
   hiddenAllHtmlShape(operate, data, ddInstance, evt) {
     let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
-    for (let i in editor.renderViewerIns){
-      if (editor.renderViewerIns[i]){
-        editor.renderViewerIns[i].style.display = "none"
+    for (let i in editor.renderViewerElements){
+      if (editor.renderViewerElements[i]){
+        editor.renderViewerElements[i].style.display = "none"
       }
     }
   }
@@ -94,26 +95,13 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
       let canvasDomPos = DDeiUtil.getDomAbsPosition(canvasEle);
       for (let i = 0; i < models?.length; i++) {
         if (models[i].modelType != 'DDeiStage' && models[i].modelType != 'DDeiLayer' && models[i] && models[i].id) {
-          let displayDiv = editor.renderViewerIns[models[i].id]
+          let displayViewer = editor.renderViewerIns[models[i].id]
+          
          
-          if (displayDiv) {
+          if (displayViewer) {
+            let displayDiv = editor.renderViewerElements[models[i].id]
             if(operate == 'VIEW'){
-              let ruleWeight = 0
-              
-              if (ddInstance.stage.render.tempRuleDisplay == 1 || ddInstance.stage.render.tempRuleDisplay == '1'){
-                ruleWeight = 15
-              }
-              
-              let modelPos = DDeiUtil.getModelsDomAbsPosition([models[i]])
-              let rat1 = window.remRatio
-              displayDiv.style.position = 'absolute'
-              displayDiv.style.left = (modelPos.left * rat1 - canvasDomPos.left - ruleWeight) + "px"
-              displayDiv.style.top = (modelPos.top * rat1 - canvasDomPos.top - ruleWeight) + "px"
-              displayDiv.style.display = "block"
-              displayDiv.style.zIndex = 300;
-              displayDiv.style.width = (modelPos.width * rat1) + "px";
-              displayDiv.style.height = (modelPos.height * rat1) + "px";
-              displayDiv.style.pointerEvents = "none"
+              this.refreshView(models[i], displayDiv,data.tempShape, data.composeRender)
               rs.state = -1;
               return rs
             }else if(operate == 'VIEW-HIDDEN'){
@@ -150,6 +138,99 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
     }
 
     return rs;
+  }
+
+  //刷新数据
+  refreshView(model, shapeElement ,tempShape, composeRender) {
+    let stage = model.stage
+    let ddInstance = stage.ddInstance
+    let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance)
+
+    let render = model.render
+    let ruleWeight = 0
+    if (stage.render.tempRuleDisplay == 1 || stage.render.tempRuleDisplay == '1') {
+      ruleWeight = 15
+    }
+    //位置
+    let canvasEle = document.getElementById(editor.id + "_canvas");
+    let canvasDomPos = DDeiUtil.getDomAbsPosition(canvasEle);
+
+    let stageRatio = model.getStageRatio()
+    //创建图形，修改图形大小、旋转、边框等属性，以及移动图形位置
+
+    //获取model的绝对位置
+    let modelPos = DDeiUtil.getModelsDomAbsPosition([model])
+
+    let rat1 = window.remRatio
+
+    //大小
+    shapeElement.style.width = (model.width * rat1) + "px"
+    shapeElement.style.height = (model.height * rat1) + "px"
+
+    //旋转,缩放
+    let transform = ""
+    if (stageRatio > 0 && stageRatio != 1) {
+      transform += " scale(" + stageRatio + ")"
+    }
+
+    if (model.rotate) {
+      transform += " rotate(" + model.rotate + "deg)"
+    }
+    if (transform) {
+      shapeElement.style.transform = transform
+    }
+
+    //边框
+    let type = tempShape?.border?.type || tempShape?.border?.type == 0 ? tempShape?.border?.type : render.getCachedValue("border.type")
+    let opacity = tempShape?.border?.opacity || tempShape?.border?.opacity == 0 ? tempShape?.border?.opacity : render.getCachedValue("border.opacity");
+    let width = tempShape?.border?.width || tempShape?.border?.width == 0 ? tempShape?.border?.width : render.getCachedValue("border.width");
+    let dash = tempShape?.border?.dash || tempShape?.border?.dash == 0 ? tempShape?.border?.dash : render.getCachedValue("border.dash");
+    let color = tempShape?.border?.color || tempShape?.border?.color == 0 ? tempShape?.border?.color : render.getCachedValue("border.color");
+    let drawLine = ((type == 1 || type == '1') && width > 0)
+    if (drawLine) {
+      let type = !dash || dash.length == 0 ? "solid" : "dashed"
+      if (!color) {
+        color = "var(--border)"
+      }
+      if (opacity >= 0 && opacity < 1) {
+        let value16 = parseInt(opacity * 255)
+        color += value16.toString(16);
+      }
+      shapeElement.style.setProperty("--borderColor", color)
+      shapeElement.style.setProperty("--borderType", type)
+      shapeElement.style.setProperty("--borderWidth", width + "px")
+    }
+
+    shapeElement.style.left = ((modelPos.left + (model.width * stageRatio - model.width) / 2 - 2 - width / 2) * rat1 - canvasDomPos.left - ruleWeight) + "px"
+    shapeElement.style.top = ((modelPos.top + (model.height * stageRatio - model.height) / 2 - 2 - width / 2) * rat1 - canvasDomPos.top - ruleWeight) + "px"
+
+
+    //背景
+    //如果被选中，使用选中的颜色填充,没被选中，则使用默认颜色填充
+    let fillColor = tempShape?.fill?.color ? tempShape.fill.color : render.getCachedValue("fill.color");
+    if (!fillColor) {
+      fillColor = DDeiUtil.getStyleValue("canvas-control-background", ddInstance);
+    }
+    let fillOpacity = tempShape?.fill?.opacity ? tempShape.fill.opacity : render.getCachedValue("fill.opacity");
+
+    let fillType = tempShape?.fill?.type ? tempShape.fill.type : render.getCachedValue("fill.type");
+    if (fillType == 1) {
+
+      if (fillOpacity >= 0 && fillOpacity < 1) {
+        let value16 = parseInt(fillOpacity * 255)
+        fillColor += value16.toString(16);
+      }
+      shapeElement.style.setProperty("--fillColor", fillColor)
+    }
+    //圆角
+    let round = tempShape?.border?.round ? tempShape?.border?.round : render.getCachedValue("border.round");
+    if (round){
+      shapeElement.style.setProperty("--borderRound", round+"px")
+    }
+    //zIndex
+    shapeElement.style.zIndex = model.render.tempZIndex
+
+    shapeElement.style.display = "block"
   }
 }
 

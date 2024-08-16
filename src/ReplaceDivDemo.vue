@@ -37,7 +37,8 @@ export default {
   },
   mounted() {
     let field = this.matchField;
-    this.editor.renderViewerIns[this[field]] = this.$refs['divElement']
+    this.editor.renderViewerIns[this[field]] = this
+    this.editor.renderViewerElements[this[field]] = this.$refs['divElement']
   },
   methods: {
     

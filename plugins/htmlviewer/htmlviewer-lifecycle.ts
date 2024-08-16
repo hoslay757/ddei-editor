@@ -11,7 +11,7 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
     matchField:"code"
   });
 
-  EVENT_CONTROL_VIEW_BEFORE: DDeiFuncData | null = new DDeiFuncData("htmlviewer-drawshape", 1, (operateType, data, ddInstance, evt) => {
+  EVENT_CONTROL_VIEW: DDeiFuncData | null = new DDeiFuncData("htmlviewer-drawshape", 1, (operateType, data, ddInstance, evt) => {
     return this.htmlDrawShape(operateType, data, ddInstance, evt)
   });
 
@@ -66,9 +66,9 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
 
   hiddenAllHtmlShape(operate, data, ddInstance, evt) {
     let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
-    for (let i in editor.renderViewerIns){
-      if (editor.renderViewerIns[i]){
-        editor.renderViewerIns[i].style.display = "none"
+    for (let i in editor.renderViewerElements){
+      if (editor.renderViewerElements[i]){
+        editor.renderViewerElements[i].style.display = "none"
       }
     }
   }

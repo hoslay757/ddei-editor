@@ -13,7 +13,8 @@ export default {
     }
   },
   mounted() {
-    this.editor.renderViewerIns[this.model.id] = this.$refs['divElement']
+    this.editor.renderViewerIns[this.model.id] = this
+    this.editor.renderViewerElements[this.model.id] = this.$refs['divElement']
     this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape);
     this.editor.bus.executeAll();
   }
