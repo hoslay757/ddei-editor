@@ -4,7 +4,7 @@ export default {
   'code': 'branch',
   'desc': 'UML的状态的分叉',
   'from': '100002',
-  'icon': 'toolbox-shape-circle',
+  
   'define': {
     width: 100,
     height: 10,

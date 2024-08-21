@@ -4,7 +4,7 @@ export default {
   'code': 'constr',
   'desc': 'UML的约束',
   'from': '103005',
-  'icon': 'toolbox-shape-circle',
+  
   'define': {
     width: 140,
     height: 90,

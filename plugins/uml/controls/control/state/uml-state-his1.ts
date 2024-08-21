@@ -4,7 +4,7 @@ export default {
   'code': 'his',
   'desc': 'UML状态机详细历史',
   'from': '100003',
-  'icon': 'toolbox-shape-circle',
+  
   'define': {
     width: 40,
     height: 40,

@@ -1,7 +1,7 @@
 <template>
   <div @mousedown="changeEditorFocus()" v-if="forceRefresh" @mouseup="drag && fileDragDrop($event)" ref="openFilesView"
     class="ddei-core-panel-openfilesview">
-    <div v-show="this.editor?.leftWidth == 0 && expand" class="ddei-core-panel-openfilesview-expandbox"
+    <div v-show="this.editor?.leftWidth == 0 " class="ddei-core-panel-openfilesview-expandbox"
       @click="expandToolBox">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-a-ziyuan474"></use>
@@ -287,6 +287,7 @@ export default {
         input = document.createElement("input");
         input.setAttribute("id", editor.id +"_change_file_name_input");
         input.style.position = "absolute";
+        input.style.fontSize = "16px"
         editorEle.appendChild(input);
         input.onblur = function () {
           //设置属性值
@@ -659,18 +660,18 @@ export default {
   align-items: center;
 
   &-expandbox {
-    flex: 0 0 30px;
+    flex: 0 0 28px;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    height:100%;
+    
     &:hover {
       background: var(--panel-hover);
       cursor: pointer;
     }
-    img {
-      filter: brightness(60%);
-      margin-top: 3px;
+    .icon{
+      font-size:18px;
     }
   }
   .addfile {

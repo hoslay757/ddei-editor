@@ -211,7 +211,6 @@ export default {
 
 .ddei-pv-editor-image .textinput:hover {
   border: 1px solid var(--dot);
-  box-sizing: border-box;
 }
 
 .ddei-pv-editor-image--disabled .textinput {

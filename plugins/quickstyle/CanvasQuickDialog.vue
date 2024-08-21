@@ -453,7 +453,7 @@ export default {
     display: flex;
     justify-content: start;
     align-items: center;
-
+    font-size:14px;
 
     .panel1 {
       margin-top: 20px;
@@ -781,14 +781,14 @@ export default {
 
       .exchange {
         flex: 0 0 20px !important;
-        margin-top: -20px;
+        margin-top: -15px;
         padding: 0px 2px;
         &:hover {
           background-color: var(--panel-hover);
           cursor: pointer
         }
         .icon {
-          font-size: 22px;
+          font-size: 18px;
         }
       }
 

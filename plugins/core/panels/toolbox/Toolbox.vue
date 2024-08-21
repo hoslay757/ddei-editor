@@ -44,7 +44,8 @@
         <div class="ddei-core-panel-toolbox-groups-group-itempanel" v-if="group.expand == true">
           <div class="ddei-core-panel-toolbox-groups-group-itempanel-item" :title="control.desc"
             @mousedown="createControlPrepare(control, $event)" v-for="control in group.controls">
-            <img class="icon" :src="editor?.icons[control.id]" />
+            <img class="icon" v-if="!control.icon" :src="editor?.icons[control.id]" />
+            <div v-if="control.icon" v-html="control.icon"></div>
             <div class="text">{{ control.name }}</div>
           </div>
         </div>

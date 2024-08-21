@@ -4,7 +4,7 @@ export default {
   'code': 'ptap',
   'desc': '纸带',
   'from': '100500',
-  'icon': 'toolbox-shape-square',
+  
   'define': {
     width: 100,
     height: 60,

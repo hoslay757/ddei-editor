@@ -4,7 +4,7 @@ export default {
   'code': 'actbreak',
   'desc': '激活中断',
   'from': '100500',
-  'icon': 'toolbox-shape-square',
+  
   'define': {
     width: 20,
     height: 200,

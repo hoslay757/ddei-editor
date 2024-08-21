@@ -122,6 +122,7 @@ export default {
         border: none;
         margin-top: 5px;
         margin-bottom: 5px;
+        box-sizing: border-box;
       }
 
       .group_content {
@@ -130,6 +131,7 @@ export default {
         display: grid;
         gap: 5px;
         grid-template-columns: 1fr 1fr;
+        box-sizing: border-box;
       }
 
       .item {

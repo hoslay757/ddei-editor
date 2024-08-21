@@ -4,7 +4,7 @@ export default {
   'code': 'coop',
   'desc': 'UML的用例图-协作',
   'from': '100201',
-  'icon': 'toolbox-shape-circle',
+  
   'define': {
     width: 400,
     height: 300,

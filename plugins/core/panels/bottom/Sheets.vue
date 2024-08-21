@@ -266,6 +266,7 @@ export default {
         input = document.createElement("input");
         input.setAttribute("id", editor.id +"_change_sheet_name_input");
         input.style.position = "absolute";
+        input.style.fontSize = "16px"
         editorEle.appendChild(input);
         input.onblur = function () {
           //设置属性值

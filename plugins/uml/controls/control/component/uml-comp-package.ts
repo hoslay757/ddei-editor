@@ -6,7 +6,7 @@ export default {
   'code': 'pkg',
   'desc': '包',
   'from': '100500',
-  'icon': 'toolbox-shape-square',
+  
   'define': {
     width: 200,
     height: 160,

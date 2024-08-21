@@ -209,6 +209,7 @@ export default {
   .textinput {
     width: 100%;
     padding-right: 5px;
+    box-sizing: border-box;
     border: 0.5px solid var(--panel-title);
     border-radius: 4px;
     display: flex;

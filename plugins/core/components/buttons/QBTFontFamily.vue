@@ -287,6 +287,7 @@ export default {
   align-items: center;
   border: 1px solid var(--panel-border);//darken(var(--panel-header), 13%);
   border-right: none;
+  box-sizing:border-box;
 
   &:hover {
     border: 0.5px solid var(--dot);

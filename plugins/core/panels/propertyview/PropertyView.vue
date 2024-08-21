@@ -22,7 +22,7 @@
             @mouseup="changeSubGroup(subGroup)">{{
             subGroup.name }}</div>
         </div>
-        <div class="propertyview-subgroup-tabpanel" @mousewheel="mouseWheel($event)" :style="panelStyle">
+        <div class="propertyview-subgroup-tabpanel" @mousewheel="mouseWheel($event)">
           <div
             :class="{ 'propertyview-subgroup-tabpanel-editors-column': attrDefine.display == 'column', 'propertyview-subgroup-tabpanel-editors-row': attrDefine.display != 'column', 'empty-value': attrDefine.value ? false : true }"
             v-for="attrDefine in currentSubGroup?.children" :title="attrDefine.desc"
@@ -100,7 +100,6 @@ export default {
       propertyDisabled: false,
       propertyViewShow: true,
       pvGroupWidth: 0,
-      panelStyle: "height:calc(100vh - 202px)",
       rightRate: 0,//右边部分所占的比例
       forceRefresh:true,
     };
@@ -459,6 +458,7 @@ export default {
   background: var(--panel-background);
   display: flex;
   user-select: none;
+  height:100%;
 
   &-header {
     background: var(--panel-header);
@@ -542,7 +542,7 @@ export default {
       flex: 1 1 auto;
       color: var(--panel-title);
       font-size: 15px;
-
+      height: 100px;
       span {
         color: red;
       }

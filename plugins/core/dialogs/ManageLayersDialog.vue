@@ -310,6 +310,8 @@ export default {
         input = document.createElement("input");
         input.setAttribute("id", editor.id +"_change_layer_name_input");
         input.style.position = "absolute";
+        input.style.fontSize = "14px";
+        input.style.zIndex = 999;
         editorEle.appendChild(input);
         const that = this;
         input.onblur = ()=> {
@@ -353,13 +355,13 @@ export default {
       input.style.width = ele.offsetWidth + "px";
       input.style.height = ele.offsetHeight + "px";
       input.style.left = (domPos.left - editorDomPos.left) + "px";
-      input.style.fontSize = "16px";
+     
       input.style.top = (domPos.top - editorDomPos.top) + "px";
       input.style.outline = "1px solid #017fff";
       input.style.border = "none";
       input.style.borderRadius = "1px";
       input.value = layer.name;
-      input.style.zIndex = 999;
+      
       input.style.display = "block";
       input.selectionStart = 0; // 选中开始位置
       input.selectionEnd = input.value.length; // 获取输入框里的长度。

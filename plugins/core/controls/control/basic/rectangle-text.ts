@@ -35,6 +35,7 @@ export default {
       }
     }
 
-  }
+  },
+  icon:`<div>1234</div>`
 
 }

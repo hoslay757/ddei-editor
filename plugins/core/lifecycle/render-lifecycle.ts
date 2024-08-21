@@ -224,8 +224,58 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
     }
     //圆角
     let round = tempShape?.border?.round ? tempShape?.border?.round : render.getCachedValue("border.round");
-    if (round){
-      shapeElement.style.setProperty("--borderRound", round+"px")
+    if (round) {
+      shapeElement.style.setProperty("--borderRound", round + "px")
+    }
+
+    //字体
+    let fiFamily = tempShape?.font?.family ? tempShape?.font?.family : render.getCachedValue("font.family");
+    let fiSize = tempShape?.font?.size ? tempShape?.font?.size : render.getCachedValue("font.size");
+    let fiColor = tempShape?.font?.color ? tempShape?.font?.color : render.getCachedValue("font.color");
+    if (!fiColor) {
+      fiColor = DDeiUtil.getStyleValue("canvas-control-title", ddInstance);
+    }
+    if (fiFamily) {
+      shapeElement.style.setProperty("--fontFamily", fiFamily)
+    }
+    if (fiSize) {
+      shapeElement.style.setProperty("--fontSize", fiSize+"px")
+    }
+    if (fiColor) {
+      shapeElement.style.setProperty("--fontColor", fiColor)
+    }
+    //粗体
+    let bold = tempShape?.textStyle?.bold ? tempShape?.textStyle?.bold : render.getCachedValue("textStyle.bold");
+    if (bold == 1 || bold == '1') {
+      shapeElement.style.setProperty("--fontWeight", "bold")
+    }
+    //斜体
+    let italic = tempShape?.textStyle?.italic ? tempShape?.textStyle?.italic : render.getCachedValue("textStyle.italic"); 
+    if (italic == 1 || italic == '1') {
+      shapeElement.style.setProperty("--fontStyle", "italic")
+    }
+    //下划线
+    let underline = tempShape?.textStyle?.underline ? tempShape?.textStyle?.underline : render.getCachedValue("textStyle.underline");
+    if (underline == '1' || underline == 1) {
+      shapeElement.style.setProperty("--textDecoration", "underline")
+    }else{
+      //删除线
+      let deleteline = tempShape?.textStyle?.deleteline ? tempShape?.textStyle?.deleteline : render.getCachedValue("textStyle.deleteline");
+      if (deleteline == '1' || deleteline == 1) {
+        shapeElement.style.setProperty("--textDecoration", "line-through")
+      }else{
+        //上画线
+        let overline = tempShape?.textStyle?.topline ? tempShape?.textStyle?.topline : render.getCachedValue("textStyle.topline");
+        if (overline == '1' || overline == 1) {
+          shapeElement.style.setProperty("--textDecoration", "overline")
+        }
+      }
+    }
+    
+    //文本背景色
+    let textBgColor = tempShape?.textStyle?.bgcolor ? tempShape?.textStyle?.bgcolor : render.getCachedValue("textStyle.bgcolor");
+    if (textBgColor) {
+      shapeElement.style.setProperty("--textBgColor", textBgColor)
     }
     //zIndex
     shapeElement.style.zIndex = model.render.tempZIndex

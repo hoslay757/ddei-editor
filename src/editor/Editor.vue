@@ -291,6 +291,7 @@ export default {
   flex-direction: column;
   background-color: var(--background);
   
+  
   .icon {
     color: var(--icon);
   }
@@ -312,6 +313,10 @@ export default {
   }
 
   *> {
+    box-sizing: border-box;
+    margin: 0;
+    font-weight: normal;
+    
     &::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -360,4 +365,3 @@ export default {
   position: absolute;
 }
 </style>
-../icon

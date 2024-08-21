@@ -4,7 +4,7 @@ export default {
   'code': 'pkg',
   'desc': '包',
   'from': '305003',
-  'icon': 'toolbox-shape-square',
+  
 
 }
 

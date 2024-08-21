@@ -4,7 +4,7 @@ export default {
   'code': 'end',
   'desc': 'UML流程终止',
   'from': '100500',
-  'icon': 'toolbox-shape-circle',
+  
   'define': {
     width: 40,
     height: 40,

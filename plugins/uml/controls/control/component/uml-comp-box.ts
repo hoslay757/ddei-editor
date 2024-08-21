@@ -4,7 +4,7 @@ export default {
   'code': 'cbox',
   'desc': 'UML的组件盒节点',
   'from': '100008',
-  'icon': 'toolbox-shape-square',
+  
   'define': {
     width: 160,
     height: 100,

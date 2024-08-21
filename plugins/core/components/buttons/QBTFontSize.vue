@@ -317,7 +317,6 @@ export default {
 
   &:hover {
     border: 0.5px solid var(--dot);
-    box-sizing: border-box;
   }
 
   &--disabled:hover {

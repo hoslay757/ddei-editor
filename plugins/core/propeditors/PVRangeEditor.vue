@@ -181,11 +181,9 @@ export default {
   .textinput {
     flex: 0 0 80px;
     margin-left: 10px;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding:2px 5px 0px 5px;
     border: 0.5px solid var(--panel-title);
     border-radius: 4px;
-
     input {
       width: 100%;
       border: transparent;

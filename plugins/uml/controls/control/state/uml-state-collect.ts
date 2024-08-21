@@ -4,5 +4,5 @@ export default {
   'code': 'coll',
   'desc': 'UML的状态的汇聚',
   'from': '301012',
-  'icon': 'toolbox-shape-circle',
+  
 }

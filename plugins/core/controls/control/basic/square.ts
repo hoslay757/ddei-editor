@@ -4,7 +4,7 @@ export default {
   'code': 'square',
   'desc': '由4个点组成的正方形',
   'from': '100500',
-  'icon': 'toolbox-shape-square',
+  
   'define': {
 
     width: 100,

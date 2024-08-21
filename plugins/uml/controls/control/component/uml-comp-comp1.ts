@@ -4,7 +4,7 @@ export default {
   'code': 'cmp',
   'desc': 'UML的组件节点',
   'from': '100500',
-  'icon': 'toolbox-shape-square',
+  
   'define': {
     width: 100,
     height: 100,

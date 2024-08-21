@@ -185,6 +185,7 @@ export default {
 .ddei-pv-base-combox .textinput {
   width: 100%;
   padding-right: 5px;
+  box-sizing: border-box;
   border: 0.5px solid var(--panel-title);
   border-radius: 4px;
   display: flex;
@@ -245,6 +246,9 @@ export default {
   background: var(--panel-background);
   padding: 10px;
   box-shadow: 4px 4px 4px hsl(0deg 0% 0% /0.25);
+  display:flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .icon {

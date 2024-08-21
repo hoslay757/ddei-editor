@@ -255,6 +255,7 @@ export default {
         color: var(--panel-title);
         flex: 0 0 30px;
         width: 100%;
+        box-sizing: border-box;
         display: flex;
         justify-content: start;
         align-items: center;
@@ -274,6 +275,7 @@ export default {
       .color2 {
         display: grid;
         grid-template-rows: 20px 20px 20px 20px 20px 20px 20px;
+        gap:1px;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
         margin: 10px 0px;
       }
@@ -283,7 +285,7 @@ export default {
         justify-content: start;
         align-items: center;
         margin-top: -5px;
-
+        margin-left: 10px;
         >input {
           width: 80px;
           height: 24px;
@@ -305,7 +307,7 @@ export default {
       .group_content {
         width: 100%;
         padding: 0px 15px;
-        
+        box-sizing: border-box;
       }
 
       .item {

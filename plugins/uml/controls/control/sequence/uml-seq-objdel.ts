@@ -4,7 +4,7 @@ export default {
   'code': 'objdel',
   'desc': '对象删除',
   'from': '100500',
-  'icon': 'toolbox-shape-circle',
+  
   'define': {
     width: 40,
     height: 40,

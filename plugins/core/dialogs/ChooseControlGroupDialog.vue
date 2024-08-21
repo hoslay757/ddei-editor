@@ -92,14 +92,18 @@ export default {
         })
         this.subGroups = groups
         this.menuId = menuid
-        let dialogEle = document.getElementById(this.editor.id+"_ddei-core-dialog-choosecontrolgroup");
-        let subContentEle = document.getElementById(this.editor.id + "_ddei-core-dialog-choosecontrolgroup_subcontent");
-        subContentEle.style.display = "block";
         let srcElement = evt.currentTarget;
-        let dialogDomPos = DDeiUtil.getDomAbsPosition(dialogEle)
-        let domPos = DDeiUtil.getDomAbsPosition(srcElement)
-        subContentEle.style.left = (domPos.left - dialogDomPos.left + srcElement.clientWidth) + "px";
-        subContentEle.style.top = (domPos.top - dialogDomPos.top) + "px";
+        setTimeout(() => {
+          let dialogEle = document.getElementById(this.editor.id + "_ddei-core-dialog-choosecontrolgroup");
+          let subContentEle = document.getElementById(this.editor.id + "_ddei-core-dialog-choosecontrolgroup_subcontent");
+          subContentEle.style.display = "block";
+          
+          let dialogDomPos = DDeiUtil.getDomAbsPosition(dialogEle)
+          let domPos = DDeiUtil.getDomAbsPosition(srcElement)
+          subContentEle.style.left = (domPos.left - dialogDomPos.left + srcElement.clientWidth) + "px";
+          subContentEle.style.top = (domPos.top - dialogDomPos.top) + "px";
+        }, 50);
+        
       }
     },
 

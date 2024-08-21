@@ -223,7 +223,7 @@ export default {
     align-items: center;
     padding-left: 5px;
     height: 28px;
-
+    box-sizing: border-box;
     &:hover {
       border: 1px solid var(--dot);
       box-sizing: border-box;

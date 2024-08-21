@@ -284,6 +284,7 @@ export default {
   font-size: 15px;
   margin: 0;
   padding-top: 2px;
+  box-sizing: border-box;
   background: transparent;
 }
 

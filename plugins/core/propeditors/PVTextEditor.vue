@@ -163,6 +163,7 @@ export default {
   height: 28px;
   margin-right: 10px;
   padding: 0 5px;
+  box-sizing: border-box;
 }
 
 .ddei-pv-editor-text--disabled {
