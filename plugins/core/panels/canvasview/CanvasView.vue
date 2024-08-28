@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts">
-import {DDei} from "ddei-framework";
+import { DDei, DDeiEnumOperateType } from "ddei-framework";
 import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
 import {DDeiEnumControlState} from "ddei-framework";
@@ -41,7 +41,7 @@ export default {
   },
   data() {
     return {
-      forceRefreshRenderViewers:true
+      forceRefreshRenderViewers: true
     }
   },
   computed: {},
@@ -250,7 +250,6 @@ export default {
         let stage = ddInstance.stage;
         let ex = e.offsetX;
         let ey = e.offsetY;
-        let stageRatio = stage.getStageRatio()
         ex /= window.remRatio
         ey /= window.remRatio
         ex -= stage.wpv.x;
@@ -421,63 +420,66 @@ export default {
         ex /= stageRatio;
         ey /= stageRatio;
         if (this.editor.creatingControls) {
-          
-          let isAlt = DDei.KEY_DOWN_STATE.get("alt");
           let ddInstance: DDei = this.editor.ddInstance;
-          ddInstance.stage.idIdx++;
-          let layer = ddInstance.stage.layers[ddInstance.stage.layerIndex];
-          
-          //如果按下了alt键，则移入容器
-          if (isAlt) {
-            //寻找鼠标落点当前所在的容器
-            let mouseOnContainers: DDeiAbstractShape[] =
-              DDeiAbstractShape.findBottomContainersByArea(layer, ex, ey);
-            let lastOnContainer = layer;
-            if (mouseOnContainers && mouseOnContainers.length > 0) {
-              lastOnContainer = mouseOnContainers[mouseOnContainers.length - 1];
+          let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_DRAG_AFTER", DDeiEnumOperateType.CREATE, { models: this.editor.creatingControls,ex:ex,ey:ey }, ddInstance, null)
+          if (rsState == 0 || rsState == 1) {
+            let isAlt = DDei.KEY_DOWN_STATE.get("alt");
+            ddInstance.stage.idIdx++;
+            let layer = ddInstance.stage.layers[ddInstance.stage.layerIndex];
+            
+            //如果按下了alt键，则移入容器
+            if (isAlt) {
+              //寻找鼠标落点当前所在的容器
+              let mouseOnContainers: DDeiAbstractShape[] =
+                DDeiAbstractShape.findBottomContainersByArea(layer, ex, ey);
+              let lastOnContainer = layer;
+              if (mouseOnContainers && mouseOnContainers.length > 0) {
+                lastOnContainer = mouseOnContainers[mouseOnContainers.length - 1];
+              }
+              //如果最小层容器不是当前容器，执行的移动容器操作
+              if (lastOnContainer != layer) {
+                this.editor.bus.push(
+                  DDeiEnumBusCommandType.ModelChangeContainer,
+                  {
+                    newContainer: lastOnContainer,
+                    oldContainer: layer,
+                    models: this.editor.creatingControls,
+                  }
+                );
+              }
             }
-            //如果最小层容器不是当前容器，执行的移动容器操作
-            if (lastOnContainer != layer) {
-              this.editor.bus.push(
-                DDeiEnumBusCommandType.ModelChangeContainer,
-                {
-                  newContainer: lastOnContainer,
-                  oldContainer: layer,
-                  models: this.editor.creatingControls,
-                }
-              );
+            //移除其他选中
+            this.editor.bus.push(
+              DDeiEnumBusCommandType.CancelCurLevelSelectedModels,
+              { container: layer, curLevel: true }
+            );
+
+            this.editor.bus.push(DDeiEnumBusCommandType.ModelChangeSelect,
+              [{
+                id: this.editor.creatingControls[0].id,
+                value: DDeiEnumControlState.SELECTED,
+              }]
+            );
+
+            this.editor.bus.push(DDeiEnumBusCommandType.StageChangeSelectModels);
+
+            this.editor.bus.push(DDeiEnumBusCommandType.UpdatePaperArea);
+            let mds = {
+              models: this.editor.creatingControls,
             }
+            this.editor.bus.push(DDeiEnumBusCommandType.NodifyControlCreated, mds);
+
+            //清除临时变量
+            this.editor.bus.push(DDeiEnumBusCommandType.ClearTemplateVars);
+            this.editor.bus.push(DDeiEnumBusCommandType.NodifyChange);
+            this.editor.bus.push(DDeiEnumBusCommandType.AddHistroy);
+            //渲染图形
+            this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape);
+            this.editor.creatingControls = null;
+            //切换到设计器
+            this.editor.state = DDeiEditorState.DESIGNING;
+            this.editor.bus.executeAll();
           }
-          //移除其他选中
-          this.editor.bus.push(
-            DDeiEnumBusCommandType.CancelCurLevelSelectedModels,
-            { container: layer, curLevel: true }
-          );
-
-          this.editor.bus.push(DDeiEnumBusCommandType.ModelChangeSelect,
-            [{
-              id: this.editor.creatingControls[0].id,
-              value: DDeiEnumControlState.SELECTED,
-            }]
-          );
-
-          this.editor.bus.push(DDeiEnumBusCommandType.StageChangeSelectModels);
-
-          this.editor.bus.push(DDeiEnumBusCommandType.UpdatePaperArea);
-          this.editor.bus.push(DDeiEnumBusCommandType.NodifyControlCreated, {
-            models: this.editor.creatingControls,
-          });
-
-          //清除临时变量
-          this.editor.bus.push(DDeiEnumBusCommandType.ClearTemplateVars);
-          this.editor.bus.push(DDeiEnumBusCommandType.NodifyChange);
-          this.editor.bus.push(DDeiEnumBusCommandType.AddHistroy);
-          //渲染图形
-          this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape);
-          this.editor.creatingControls = null;
-          //切换到设计器
-          this.editor.state = DDeiEditorState.DESIGNING;
-          this.editor.bus.executeAll();
         }
         e.preventDefault()
       } else if (this.editor.state == DDeiEditorState.DESIGNING || this.editor.state == DDeiEditorState.QUICK_EDITING) {

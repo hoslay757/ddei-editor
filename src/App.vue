@@ -25,24 +25,24 @@ export default defineComponent({
         // EXT_STAGE_WIDTH: false,
         // EXT_STAGE_HEIGHT: false,
         // 自定义控件，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        controlDefines: ControlDefinesDemo,
+        // controlDefines: ControlDefinesDemo,
         // 自定义分组，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        groupDefines: GroupDefinesDemo,
-        initData: {
-          controls: [
-            {
-              model: "9999002"
-            },
-            {
-              id: "act_1",
-              model: "102010",
-              type: "emp_1",
-              text: "第一步",
-              border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
-              fill: { color: "grey" },
-            }
-          ]
-        }
+        // groupDefines: GroupDefinesDemo,
+        // initData: {
+        //   controls: [
+        //     {
+        //       model: "9999002"
+        //     },
+        //     {
+        //       id: "act_1",
+        //       model: "102010",
+        //       type: "emp_1",
+        //       text: "第一步",
+        //       border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
+        //       fill: { color: "grey" },
+        //     }
+        //   ]
+        // }
       },
       extensions: [
         //布局的配置
@@ -56,14 +56,14 @@ export default defineComponent({
         }),
         DDeiExtUML,
         DDeiExtSearch,
-        DDeiExtQuickStyle,
-        DDeiExtQuickControl,
-        QuickChooseControlDialog.configuration({ customGroups: ['101', '102'] }),
-        DDeiExtTooltip.configuration({
-          'ddei-ext-dialog-tooltip':{
-            viewer: HtmlTooltipDemo
-          }
-        })
+        // DDeiExtQuickStyle,
+        // DDeiExtQuickControl,
+        // QuickChooseControlDialog.configuration({ customGroups: ['101', '102'] }),
+        // DDeiExtTooltip.configuration({
+        //   'ddei-ext-dialog-tooltip':{
+        //     viewer: HtmlTooltipDemo
+        //   }
+        // })
         // QuickChooseControlDialog.configuration({ customControls: ['100001', '100002','100003']})
         // DDeiCoreThemeBlack.configuration({
         //   default: true
@@ -318,23 +318,6 @@ export default defineComponent({
 </template>
 
 <style>
-body {
-  display: block;
-}
 
-#app {
-  padding: 0;
-  margin: 0;
-  display: block;
-  max-width: 100%;
-  touch-action: none;
-}
 
-.icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
-}
 </style>

@@ -49,6 +49,7 @@ const parseAttrsToGroup = function (control) {
 
 const loadControlByFrom = function (controlOriginDefinies: Map<string, object>, control: object) {
   if (control.from && !control.def) {
+    
     let fromControl = controlOriginDefinies.get(control.from)
     if (fromControl.from) {
       loadControlByFrom(controlOriginDefinies, fromControl)
@@ -193,7 +194,11 @@ const loadControlByFrom = function (controlOriginDefinies: Map<string, object>, 
 
     control.menus = fromMenus
     control.attrDefineMap = new Map()
-    control.type = fromControl.type
+    if (!control.type && control.type != fromControl.type) {
+      control.type = fromControl.type
+    }
+    
+    
 
 
     controlOriginDefinies.set(control.id, control);

@@ -194,6 +194,12 @@ export default {
       });
       this.editor.addControls(initData.controls)
     }
+    if (this.options?.config?.renderViewers) {
+      this.options.config.renderViewers.forEach(rv => {
+        this.editor.renderViewers.push(rv)
+      });
+      
+    }
     
     if (this.options?.config?.access){
       this.editor.setAccessInfo(this.options?.config?.access)
@@ -294,7 +300,13 @@ export default {
   
   .icon {
     color: var(--icon);
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
   }
+
 
   img {
     -webkit-user-drag: none;
