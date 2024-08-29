@@ -91,13 +91,9 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
     let models = data?.models
     let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
     if (editor){
-      let canvasEle = document.getElementById(editor.id + "_canvas");
-      let canvasDomPos = DDeiUtil.getDomAbsPosition(canvasEle);
       for (let i = 0; i < models?.length; i++) {
         if (models[i].modelType != 'DDeiStage' && models[i].modelType != 'DDeiLayer' && models[i] && models[i].id) {
           let displayViewer = editor.renderViewerIns[models[i].id]
-          
-         
           if (displayViewer) {
             let displayDiv = editor.renderViewerElements[models[i].id]
             if(operate == 'VIEW'){
@@ -145,7 +141,7 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
     let stage = model.stage
     let ddInstance = stage.ddInstance
     let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance)
-
+  
     let render = model.render
     let ruleWeight = 0
     if (stage.render.tempRuleDisplay == 1 || stage.render.tempRuleDisplay == '1') {
@@ -281,7 +277,57 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
     shapeElement.style.zIndex = model.render.tempZIndex
 
     shapeElement.style.display = "block"
+    
+    
+    if (model.baseModelType == 'DDeiContainer') {
+      for (let m = 0; m < model.midList?.length; m++) {
+        let key = model.midList[m];
+        let item = model.models.get(key);
+        if(item?.render){
+          item.render.tempZIndex = model.render.tempZIndex + (m + 1)
+          item.render.drawShape(tempShape, composeRender)
+        }
+      }   
+    }
+    let displayViewer = editor.renderViewerIns[model.id]
+    if (displayViewer.refreshView) {
+      displayViewer.refreshView(model, shapeElement, tempShape, composeRender)
+    }
   }
+
+
+  // loadSubRenderViewers(model, shapeElement, tempShape, composeRender):boolean {
+  //   let modelDefine = DDeiEditorUtil.getControlDefine(model);
+  //   let returnValue = false
+  //   let stage = model.stage
+  //   let ddInstance = stage.ddInstance
+  //   let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance)
+  //   if (modelDefine?.viewer) {
+  //     let finded = false
+  //     for (let n = 0; n < editor.renderViewers.length; n++) {
+  //       if (editor.renderViewers[n].model.id == model.id) {
+  //         finded = true
+  //         break;
+  //       }
+  //     }
+  //     if (!finded) {
+  //       editor.renderViewers.push({ model: model, viewer: modelDefine.viewer })
+  //       returnValue = true
+  //     }
+      
+  //     let displayDiv = editor.renderViewerElements[model.id]
+  //     this.refreshView(model, displayDiv, tempShape, composeRender)
+  //   }
+  //   if (model.baseModelType == 'DDeiContainer') {
+  //     model.models.forEach(subModel => {
+  //       if (this.loadSubRenderViewers(subModel, shapeElement, tempShape, composeRender)) {
+  //         returnValue = true
+  //       }
+  //     });
+  //   }
+  //   return returnValue
+  // }
 }
+
 
 export default DDeiCoreRenderLifeCycle

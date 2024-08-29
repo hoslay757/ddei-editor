@@ -1,6 +1,6 @@
 {
   "name": "ddei-editor",
-  "version": "1.2.41-44",
+  "version": "1.2.41-53",
   "private": false,
   "type": "module",
   "author": "hoslay <3697355039@qq.com>",
@@ -49,7 +49,7 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
-     "ddei-framework": "file:///Users/hoslay/work/ddei/ddei-framework/ddei-framework-1.2.41-44.tgz"
+     "ddei-framework": "file:///Users/hoslay/work/ddei/ddei-framework/ddei-framework-1.2.41-45.tgz"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.0",
