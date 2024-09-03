@@ -28,21 +28,38 @@ export default defineComponent({
         // controlDefines: ControlDefinesDemo,
         // 自定义分组，接收一个object[]。由于定义内容较多，提取到外部，便于维护
         // groupDefines: GroupDefinesDemo,
-        // initData: {
-        //   controls: [
-        //     {
-        //       model: "9999002"
-        //     },
-        //     {
-        //       id: "act_1",
-        //       model: "102010",
-        //       type: "emp_1",
-        //       text: "第一步",
-        //       border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
-        //       fill: { color: "grey" },
-        //     }
-        //   ]
-        // }
+        initData: {
+          // controls: [
+          //   {
+          //     model: "9999002"
+          //   },
+          //   {
+          //     id: "act_1",
+          //     model: "102010",
+          //     type: "emp_1",
+          //     text: "第一步",
+          //     border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
+          //     fill: { color: "grey" },
+          //   }
+          // ]
+          controls: [
+            {
+              id: "act_1",
+              model: "102010",
+              type: "emp_1",
+              text: "第一步",
+              border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
+              fill: { color: "grey" },
+            },
+            {
+              id: "act_2",
+              model: "102010",
+              type: "emp_2",
+              text: "第二步",
+              offsetY: -100,
+            }
+          ]
+        }
       },
       extensions: [
         //布局的配置

@@ -29,7 +29,7 @@ const controls: object[] = [
     'name': '自定义2',
     'code': 'cust_2',
     'desc': '自定义节点2',
-    'from': '302006',
+    'from': '100001',
     'define': {
       fill: {
         color: "#ffc0be"
@@ -86,8 +86,7 @@ const controls: object[] = [
           },
         ]
       }
-    },
-    viewer: HtmlViewerDemo
+    }
 
   }
 ]

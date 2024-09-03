@@ -2,12 +2,14 @@
   <div :id="editor?.id+'_canvas'" ref="middleCanvas" class="ddei-editor-canvasview" @mousedown="mouseDown($event)"
     ondragstart="return false;" @wheel="mouseWheel($event)" @mousemove="mouseMove($event)" @mouseup="mouseUp($event)"
     @dblclick="canvasDBClick" @contextmenu.prevent>
+    <div class="ddei-editor-canvasview-viewers">
+    </div>
     <div class="ddei-editor-canvasview-renderviewers">
       <component v-if="forceRefreshRenderViewers" :editor="editor" v-for="(item, index) in editor?.renderViewers"
         :is="item.viewer" :options="item" v-bind="item">
       </component>
     </div>
-  </div>
+    </div>
 </template>
 
 <script lang="ts">
@@ -498,13 +500,21 @@ export default {
   flex: 1;
   overflow: hidden;
   position: relative;
-  &-renderviewers{
+  &-renderviewers {
     overflow: hidden;
-    width:100%;
-    height:100%;
-    z-index: 200;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
     position: absolute;
-    pointer-events:none;
+    pointer-events: none;
+  }
+  &-viewers {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    position: absolute;
+    pointer-events: none;
   }
 }
 </style>
