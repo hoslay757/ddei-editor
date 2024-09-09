@@ -334,7 +334,6 @@ export default {
 
       //创建并初始化控件以及关系
       let models = DDeiEditorUtil.createControl(control,this.editor)
-      
       //加载事件的配置
       
       let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { models: models }, ddInstance, e)
