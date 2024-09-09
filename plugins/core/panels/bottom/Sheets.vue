@@ -366,8 +366,10 @@ export default {
           );
           file.changeSheet(sheets.length - 1);
           //刷新页面
+          ddInstance.stage.destroyed();
           ddInstance.stage = stage;
           this.editor.currentStage = stage;
+          
           //加载场景渲染器
           stage.initRender();
           //设置视窗位置到中央
@@ -422,6 +424,7 @@ export default {
             let stage = sheets[index].stage;
             stage.ddInstance = ddInstance;
             //刷新页面
+            ddInstance.stage.destroyed()
             ddInstance.stage = stage;
             this.editor.currentStage = stage;
             //加载场景渲染器

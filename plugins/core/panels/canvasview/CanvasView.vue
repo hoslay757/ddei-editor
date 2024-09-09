@@ -7,7 +7,7 @@
         :is="item.viewer" :options="item" v-bind="item">
       </component>
     </div>
-    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -493,11 +493,12 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .ddei-editor-canvasview {
   flex: 1;
   overflow: hidden;
   position: relative;
+  background-color: var(--panel-header);
   &-renderviewers {
     overflow: hidden;
     width: 100%;

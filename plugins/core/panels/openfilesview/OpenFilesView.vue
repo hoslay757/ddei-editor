@@ -237,7 +237,9 @@ export default {
           let sheets = file?.sheets;
           
           if (file && sheets && ddInstance) {
+            ddInstance.stage.destroyed()
             let stage = sheets[0].stage;
+            
             stage.ddInstance = ddInstance;
             //刷新页面
             ddInstance.stage = stage;
