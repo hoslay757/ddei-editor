@@ -45,18 +45,9 @@ export default defineComponent({
           controls: [
             {
               id: "act_1",
-              model: "102010",
+              model: "307012",
               type: "emp_1",
               text: "第一步",
-              border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
-              fill: { color: "grey" },
-            },
-            {
-              id: "act_2",
-              model: "102010",
-              type: "emp_2",
-              text: "第二步",
-              offsetY: -100,
             }
           ]
         }

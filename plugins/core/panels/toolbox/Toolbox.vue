@@ -198,7 +198,7 @@ export default {
           let ddInstance: DDei = this.editor.ddInstance;
           let layer = ddInstance.stage.layers[ddInstance.stage.layerIndex];
           //从layer中移除控件
-          layer.removeModels(this.editor.creatingControls);
+          layer.removeModels(this.editor.creatingControls,true,false);
 
           //清除临时变量
           this.editor.bus.push(DDeiEnumBusCommandType.ClearTemplateVars);
