@@ -27,7 +27,7 @@ import { loadControlByFrom, loadAndSortGroup } from "./grouputil";
 
 import ICONS from "./icon";
 import { markRaw } from "vue";
-
+import {  getCurrentInstance } from "vue"
 import '@/assets/ddei.css'
 import '@/assets/fonts/iconfont/iconfont.css'
 import '@/assets/fonts/iconfont/iconfont.js'
@@ -82,6 +82,8 @@ export default {
     this.options.extensions.splice(0,0,DDeiCore)
     let editor = DDeiEditor.newInstance(this.id, this.id, true, this.options);
     this.editor = editor
+
+    editor.appContext = getCurrentInstance().appContext
     // }
     //载入局部配置
     if (this.options){

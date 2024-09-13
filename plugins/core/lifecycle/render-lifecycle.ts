@@ -1,5 +1,8 @@
 import { DDeiLifeCycle, DDeiFuncData, DDeiEditorUtil, DDeiUtil, DDeiFuncCallResult, DDeiEditorEnumBusCommandType, DDeiEnumBusCommandType } from "ddei-framework";
-import { debounce } from "lodash";
+import { clone, cloneDeep } from "lodash";
+
+import { createVNode,defineComponent, render } from "vue"
+
 
 class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
   
@@ -57,20 +60,15 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
     let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
     if (editor) {
       let models = data?.models
+      
       for (let i = 0; i < models?.length; i++) {
-        if (models[i].modelType != 'DDeiStage' && models[i].modelType != 'DDeiLayer' && models[i] && models[i].id) {
-          editor.renderViewerIns[models[i].id] = null
-          editor.renderViewerElements[models[i].id] = null
-          for (let n = 0; n < editor.renderViewers.length; n++) {
-            if (editor.renderViewers[n]?.model?.id == models[i].id) {
-              editor.renderViewers.splice(n,1)
-              editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
-                parts: ["renderviewers"],
-              });
-              editor.bus.executeAll();
-              break;
-            }
-          }
+        let vNode = editor.viewerMap.get(models[i].id)
+        if (vNode) {
+          
+          vNode.component.isUnmounted = true
+          vNode.component.update()
+          vNode.el.parentElement.remove()
+          editor.viewerMap.delete(models[i].id)
         }
       }
     }
@@ -92,44 +90,43 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
     let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
     if (editor){
       for (let i = 0; i < models?.length; i++) {
-        if (models[i].modelType != 'DDeiStage' && models[i].modelType != 'DDeiLayer' && models[i] && models[i].id) {
-          let displayViewer = editor.renderViewerIns[models[i].id]
-          if (displayViewer) {
-            let displayDiv = editor.renderViewerElements[models[i].id]
-            if(operate == 'VIEW'){
-              this.refreshView(models[i], displayDiv,data.tempShape, data.composeRender)
+        //识别是否需要添加控件
+        let modelDefine = DDeiEditorUtil.getControlDefine(models[i]);
+        if (modelDefine?.viewer) {
+          let vNode = editor.viewerMap.get(models[i].id)
+          if (vNode) {
+            if (operate == 'VIEW') {
+              this.refreshView(models[i], vNode, data.tempShape, data.composeRender)
               rs.state = -1;
               return rs
-            }else if(operate == 'VIEW-HIDDEN'){
-              displayDiv.style.display = 'none'
-              rs.state = -1;
-              return rs
-            }
-          } else {
-            //识别是否需要添加控件
-            let modelDefine = DDeiEditorUtil.getControlDefine(models[i]);
-            if (modelDefine?.viewer) {
-              let finded = false
-              for (let n = 0; n < editor.renderViewers.length;n++){
-                if (editor.renderViewers[n].model.id == models[i].id){
-                  finded = true
-                  break;
-                }
-              }
-              if (!finded){
-                editor.renderViewers.push({ model: models[i], viewer: modelDefine.viewer })
-              }
-              editor.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
-                parts: ["renderviewers"],
-              });
-              
-              editor.bus.executeAll();
+            } else if (operate == 'VIEW-HIDDEN') {
+              vNode.el.style.display = 'none'
               rs.state = -1;
               return rs
             }
             
+          }else {
+            if (!editor.viewerMap.has(models[i].id)) {
+              
+              let parentNode = models[i].layer.render.containerViewer;
+              let div = document.createElement("div")
+              div.setAttribute("mid",models[i].id)
+              parentNode.appendChild(div)
+              
+              let vNode = createVNode(modelDefine.viewer, { editor: editor, model: models[i] });
+              let appContext = editor.appContext;
+
+              vNode.appContext = appContext;
+              //渲染并挂载组件
+              render(vNode, div);
+
+              editor.viewerMap.set(models[i].id,vNode)
+            }
+            rs.state = -1;
+            return rs
           }
         }
+        
       }
     }
 
@@ -137,7 +134,8 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
   }
 
   //刷新数据
-  refreshView(model, shapeElement ,tempShape, composeRender) {
+  refreshView(model, vNode ,tempShape, composeRender) {
+    let shapeElement = vNode.el
     
     let stage = model.stage
     let ddInstance = stage.ddInstance
@@ -200,8 +198,8 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
         shapeElement.style.setProperty("--borderWidth", width + "px")
       }
 
-      shapeElement.style.left = ((modelPos.left + (model.width * stageRatio - model.width) / 2 - 2 - width / 2) * rat1 - canvasDomPos.left - ruleWeight) + "px"
-      shapeElement.style.top = ((modelPos.top + (model.height * stageRatio - model.height) / 2 - 2 - width / 2) * rat1 - canvasDomPos.top - ruleWeight) + "px"
+      shapeElement.style.left = ((modelPos.left + (model.width * stageRatio - model.width) / 2  - width / 2) * rat1 - canvasDomPos.left - ruleWeight) + "px"
+      shapeElement.style.top = ((modelPos.top + (model.height * stageRatio - model.height) / 2  - width / 2) * rat1 - canvasDomPos.top - ruleWeight) + "px"
 
 
       //背景
@@ -293,9 +291,9 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
           }
         }   
       }
-      let displayViewer = editor.renderViewerIns[model.id]
-      if (displayViewer.refreshView) {
-        displayViewer.refreshView(model, shapeElement, tempShape, composeRender)
+      
+      if (vNode.component.ctx.refreshView){
+        vNode.component.ctx.refreshView(model, vNode, tempShape, composeRender)
       }
     }
   }
@@ -332,6 +330,7 @@ class DDeiCoreRenderLifeCycle extends DDeiLifeCycle {
   //   }
   //   return returnValue
   // }
+
 }
 
 

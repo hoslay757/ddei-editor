@@ -86,7 +86,8 @@ const controls: object[] = [
           },
         ]
       }
-    }
+    },
+    viewer: HtmlViewerDemo
 
   }
 ]

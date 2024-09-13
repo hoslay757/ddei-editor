@@ -25,30 +25,22 @@ export default defineComponent({
         // EXT_STAGE_WIDTH: false,
         // EXT_STAGE_HEIGHT: false,
         // 自定义控件，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        // controlDefines: ControlDefinesDemo,
+        controlDefines: ControlDefinesDemo,
         // 自定义分组，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        // groupDefines: GroupDefinesDemo,
+        groupDefines: GroupDefinesDemo,
         initData: {
-          // controls: [
-          //   {
-          //     model: "9999002"
-          //   },
-          //   {
-          //     id: "act_1",
-          //     model: "102010",
-          //     type: "emp_1",
-          //     text: "第一步",
-          //     border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
-          //     fill: { color: "grey" },
-          //   }
-          // ]
           controls: [
             {
-              id: "act_1",
-              model: "307012",
-              type: "emp_1",
-              text: "第一步",
-            }
+              model: "9999002"
+            },
+            // {
+            //   id: "act_1",
+            //   model: "102010",
+            //   type: "emp_1",
+            //   text: "第一步",
+            //   border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
+            //   fill: { color: "grey" },
+            // }
           ]
         }
       },
