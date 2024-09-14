@@ -18,7 +18,7 @@ export default defineComponent({
   components: { DDeiEditorView },
   data() {
     
-    const options = markRaw({
+    const options1 = markRaw({
       config: {
         paper:"A6",
         "mark": "水印文本",
@@ -71,7 +71,7 @@ export default defineComponent({
         // DDeiCoreOpenFilesViewPanel.configuration({ max: 3 })
       ]
     })
-    const options1 = markRaw({
+    const options = markRaw({
       config: {
         // "readonly":true,
         "mark": "水印文本",
@@ -113,19 +113,16 @@ export default defineComponent({
             , "ddei-core-panel-sort"]
         }),
         DDeiExtHtmlViewer.configuration({
-          matchField: "type",
-          "emp_1": {
-            type: "emp_1",
+          matchField: "code",
+          "a1": {
             name: "张三",
             viewer: ReplaceDivDemo
           },
-          "emp_2": {
-            type: "emp_2",
+          "a2": {
             name: "李四",
             viewer: ReplaceDivDemo
           },
-          "emp_3": {
-            type: "emp_3",
+          "a3": {
             name: "王五",
             viewer: ReplaceDivDemo
           }

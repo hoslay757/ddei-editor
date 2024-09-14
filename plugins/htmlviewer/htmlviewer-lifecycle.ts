@@ -1,5 +1,5 @@
 import { DDeiLifeCycle, DDeiFuncData, DDeiEditorUtil, DDeiUtil, DDeiFuncCallResult, DDeiEditorState, DDeiEditorEnumBusCommandType } from "ddei-framework";
-import { debounce } from "lodash";
+import { createVNode,render ,markRaw } from "vue";
 
 class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
   
@@ -15,33 +15,15 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
     return this.htmlDrawShape(operateType, data, ddInstance, evt)
   });
 
-  EVENT_BEFORE_CLOSE_FILE: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
-    return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
-  });
-
-  EVENT_BEFORE_CHANGE_FILE: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
-    return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
-  });
-
-  EVENT_BEFORE_ADD_FILE: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
-    return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
-  });
-
-  EVENT_BEFORE_CLOSE_SHEET: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
-    return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
-  });
-
-  EVENT_BEFORE_CHANGE_SHEET: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
-    return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
-  });
-
-  EVENT_BEFORE_ADD_SHEET: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
-    return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
-  });
-
-  EVENT_CONTROL_DEL_AFTER: DDeiFuncData | null = new DDeiFuncData("htmlviewer-hidden", 1, (operateType, data, ddInstance, evt) => {
-    return this.hiddenAllHtmlShape(operateType, data, ddInstance, evt)
-  });
+  installed(editor: DDeiEditor) {
+    for(let i in this.options){
+      if(i != 'matchField'){
+        if (this.options[i]['viewer']){
+          this.options[i]['viewer'] = markRaw(this.options[i]['viewer'])
+        }
+      }
+    }
+  }
 
   static configuration(options) {
     //解析options，只使用自己相关的
@@ -53,69 +35,30 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
     
     return DDeiExtHtmlViewerLifeCycle;
   }
-
-  installed(editor:DDeiEditorState):void{
-    //添加viewer到editor
-    for(let i in this.options){
-      if (this.options[i] && this.options[i].viewer){
-        this.options[i].matchField = this.options.matchField
-        editor.renderViewers.push(this.options[i])
-      }
-    }
-  }
-
-  hiddenAllHtmlShape(operate, data, ddInstance, evt) {
-    let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
-    for (let i in editor.renderViewerElements){
-      if (editor.renderViewerElements[i]){
-        editor.renderViewerElements[i].style.display = "none"
-      }
-    }
-  }
   
   htmlDrawShape(operate, data, ddInstance, evt){
-    let rs = new DDeiFuncCallResult();
-    rs.state = 1;
     let models = data?.models
     let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
     if (editor){
-      let canvasEle = document.getElementById(editor.id + "_canvas");
-      let canvasDomPos = DDeiUtil.getDomAbsPosition(canvasEle);
       let field = this.options.matchField
       for (let i = 0; i < models?.length; i++) {
-        if (models[i] && models[i][field]) {
-          let displayDiv = editor.renderViewerIns[models[i][field]]
-          if (displayDiv) {
-            if(operate == 'VIEW'){
-              let ruleWeight = 0
-              
-              if (ddInstance.stage.render.tempRuleDisplay == 1 || ddInstance.stage.render.tempRuleDisplay == '1'){
-                ruleWeight = 15
-              }
-              
-              let modelPos = DDeiUtil.getModelsDomAbsPosition([models[i]])
-              let rat1 = window.remRatio
-              displayDiv.style.position = 'absolute'
-              displayDiv.style.left = (modelPos.left * rat1 - canvasDomPos.left - ruleWeight) + "px"
-              displayDiv.style.top = (modelPos.top * rat1 - canvasDomPos.top - ruleWeight) + "px"
-              displayDiv.style.display = "block"
-              displayDiv.style.zIndex = 300;
-              displayDiv.style.width = (modelPos.width * rat1) + "px";
-              displayDiv.style.height = (modelPos.height * rat1) + "px";
-              displayDiv.style.pointerEvents = "none"
-              rs.state = -1;
-              return rs
-            }else if(operate == 'VIEW-HIDDEN'){
-              displayDiv.style.display = 'none'
-              rs.state = -1;
-              return rs
+        let model = models[i]
+        if (model && model[field]) {
+          let option = this.options[model[field]]
+          if (option && option.viewer){
+            if (model.render.tempCanvas){
+              model.render.tempCanvas.remove()
+            }
+            if (model.render.viewerOption != option){
+              //如果已存在则销毁
+              DDeiUtil.removeRenderViewer(model)
+              model.render.viewerOption = option
+              model.render.viewer = option.viewer
             }
           }
         }
       }
     }
-
-    return rs;
   }
 }
 

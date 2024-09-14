@@ -11,16 +11,11 @@ export default {
       type:Object,
       default:null
     }
-  },
-  methods:{
-    testMethod(){
-      console.log(this.model.id)
-    }
   }
 };
 </script>
 <template>
-  <div ref="divElement"
+  <div
     style="display: flex;position:absolute;flex-direction:column;text-align:center;align-items: center;border:1px solid grey;background: white;color:black;display: none;">
     <div style="width:100%;display: flex;text-align:center;align-items: center;">
       <div style="flex:1">ID</div>

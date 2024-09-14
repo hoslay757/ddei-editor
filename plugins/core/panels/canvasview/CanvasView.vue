@@ -2,12 +2,6 @@
   <div :id="editor?.id+'_canvas'" ref="middleCanvas" class="ddei-editor-canvasview" @mousedown="mouseDown($event)"
     ondragstart="return false;" @wheel="mouseWheel($event)" @mousemove="mouseMove($event)" @mouseup="mouseUp($event)"
     @dblclick="canvasDBClick" @contextmenu.prevent>
-      
-      <div class="ddei-editor-canvasview-renderviewers">
-        <component v-if="forceRefreshRenderViewers" :editor="editor" v-for="(item, index) in editor?.renderViewers"
-          :is="item.viewer" :options="item" v-bind="item">
-        </component>
-      </div>
     </div>
 </template>
 
@@ -38,11 +32,6 @@ export default {
     , editor: {
       type: DDeiEditor,
       default: null,
-    }
-  },
-  data() {
-    return {
-      forceRefreshRenderViewers: true
     }
   },
   computed: {},
@@ -77,15 +66,6 @@ export default {
     ddInstance.bus.executeAll();
   },
   methods: {
-    //强制刷新当前以及下层组件
-    forceRefreshParts(parts) {
-      if (!parts || parts == 'renderviewers' || parts.indexOf('renderviewers') != -1) {
-        this.forceRefreshRenderViewers = false
-        this.$nextTick(() => {
-          this.forceRefreshRenderViewers = true;
-        });
-      }
-    },
 
     /**
      * 画布双击
@@ -501,21 +481,13 @@ export default {
   overflow: hidden;
   position: relative;
   background-color: var(--panel-header);
-  &-renderviewers {
+  &-contentlayer {
     overflow: hidden;
     width: 100%;
     height: 100%;
     z-index: 50;
     position: absolute;
-    pointer-events: none;
+    pointer-events:none;
   }
-    &-contentlayer {
-      overflow: hidden;
-      width: 100%;
-      height: 100%;
-      z-index: 50;
-      position: absolute;
-      pointer-events:none;
-    }
 }
 </style>

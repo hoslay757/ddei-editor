@@ -27,7 +27,7 @@ import { loadControlByFrom, loadAndSortGroup } from "./grouputil";
 
 import ICONS from "./icon";
 import { markRaw } from "vue";
-import {  getCurrentInstance } from "vue"
+import { getCurrentInstance, render,createVNode } from "vue"
 import '@/assets/ddei.css'
 import '@/assets/fonts/iconfont/iconfont.css'
 import '@/assets/fonts/iconfont/iconfont.js'
@@ -65,6 +65,8 @@ export default {
   computed: {},
   watch: {},
   created() {
+    DDeiUtil.createRenderViewer = this.createRenderViewer
+    DDeiUtil.removeRenderViewer = this.removeRenderViewer
     autoLoadCommand();
     
     // if (DDeiEditor.ACTIVE_INSTANCE) {
@@ -172,6 +174,7 @@ export default {
   },
   mounted() {
     this.editor.editorViewer = this;
+    
     this.editor.htmlElement = this.$refs.editor_div;
     //设置默认风格
     this.editor.bindEvent();
@@ -195,12 +198,6 @@ export default {
         initData = converter.input(initData)
       });
       this.editor.addControls(initData.controls)
-    }
-    if (this.options?.config?.renderViewers) {
-      this.options.config.renderViewers.forEach(rv => {
-        this.editor.renderViewers.push(rv)
-      });
-      
     }
     
     if (this.options?.config?.access){
@@ -284,6 +281,57 @@ export default {
       this.editor.bus.executeAll();
     },
 
+    createRenderViewer(model, operate, tempShape, composeRender) {
+      //识别是否需要添加控件
+      let editor = this.editor
+      // let modelDefine = DDeiEditorUtil.getControlDefine(model);
+      let vNode = editor.viewerMap.get(model.id)
+      if (vNode) {
+        if (operate == 'VIEW') {
+          model.render.refreshView(editor,vNode, tempShape, composeRender)
+        } else if (operate == 'VIEW-HIDDEN') {
+          vNode.el.style.display = 'none'
+        }
+      } else {
+        let parentNode = model.layer.render.containerViewer;
+        let div = document.createElement("div")
+        div.setAttribute("mid", model.id)
+        parentNode.appendChild(div)
+        let opts = { editor: editor, model: model }
+        if(model.render.viewerOption){
+          for (let k in model.render.viewerOption){
+            if(k != 'viewer'){
+              opts[k] = model.render.viewerOption[k]
+            }
+          }
+        }
+        let vNode = createVNode(model.render.viewer, opts);
+        let appContext = editor.appContext;
+
+        vNode.appContext = appContext;
+        
+        //渲染并挂载组件
+        render(vNode, div);
+
+        editor.viewerMap.set(model.id, vNode)
+        if (operate == 'VIEW') {
+          model.render.refreshView(editor,vNode, tempShape, composeRender)
+        }
+      }
+
+
+    },
+
+    removeRenderViewer(model) {
+      let editor = this.editor
+      let vNode = editor.viewerMap.get(model.id)
+      if (vNode) {
+        vNode.component.isUnmounted = true
+        vNode.component.update()
+        vNode.el.parentElement.remove()
+        editor.viewerMap.delete(model.id)
+      }
+    }
     
   },
 };
@@ -291,15 +339,15 @@ export default {
 
 <style lang="less">
 .ddei-editor {
-  position:relative;
+  position: relative;
   width: 100%;
-  height:100%;
+  height: 100%;
   // overflow: auto;
   display: flex;
   flex-direction: column;
   background-color: var(--background);
-  
-  
+
+
   .icon {
     color: var(--icon);
     width: 1em;
@@ -330,7 +378,7 @@ export default {
     box-sizing: border-box;
     margin: 0;
     font-weight: normal;
-    
+
     &::-webkit-scrollbar {
       width: 6px;
       height: 6px;
