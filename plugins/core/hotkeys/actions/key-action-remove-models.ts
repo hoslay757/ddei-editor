@@ -86,7 +86,6 @@ class DDeiKeyActionRemoveModels extends DDeiKeyAction {
           ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
 
           ddInstance.bus.executeAll();
-          DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_DEL_AFTER", DDeiEnumOperateType.DEL, { models: Array.from(selectedModels.values()) }, ddInstance, evt)
         }
       }
     }

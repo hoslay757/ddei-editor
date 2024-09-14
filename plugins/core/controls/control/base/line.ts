@@ -246,5 +246,11 @@ export default {
     },
 
 
-  ]
+  ],
+
+  filters:{
+    LINE_OBI_FILTER: (model, params)=>{
+      return false
+    }
+  }
 }

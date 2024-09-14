@@ -1,6 +1,7 @@
 import {DDeiEditorArrtibute} from 'ddei-framework';
 import { cloneDeep } from 'lodash'
 import {DDeiUtil} from 'ddei-framework';
+import { markRaw } from "vue"
 
 const ToDefaultPropertys = ["fill.type", "fill.color", "fill.image", "fill.opacity", "border.type", "border.color", "borderOpacity", "borderWidth", "borderDash", "borderRound",
   "font.family", "font.size", "font.color", "fontAlign", "textStyle.feed"
@@ -48,6 +49,7 @@ const parseAttrsToGroup = function (control) {
 }
 
 const loadControlByFrom = function (controlOriginDefinies: Map<string, object>, control: object) {
+  
   if (control.from && !control.def) {
     
     let fromControl = controlOriginDefinies.get(control.from)
@@ -58,6 +60,7 @@ const loadControlByFrom = function (controlOriginDefinies: Map<string, object>, 
     control.groups = cloneDeep(fromControl.groups)
     let fromMenus = cloneDeep(fromControl.menus)
     let fromDefine = cloneDeep(fromControl.define)
+    let fromFilters = cloneDeep(fromControl.filters)
     //合并控件自身与from组件的define、menu
     if (fromDefine) {
       if (!control.define) {
@@ -66,6 +69,18 @@ const loadControlByFrom = function (controlOriginDefinies: Map<string, object>, 
       for (let i in fromDefine) {
         if (!(control.define[i] || control.define[i] == 0)) {
           control.define[i] = fromDefine[i]
+        }
+      }
+      
+    }
+    if (fromFilters){
+      if (!control.filters) {
+        control.filters = fromFilters
+      }else{
+        for (let k in fromFilters){
+          if (!control.filters[k]){
+            control.filters[k] = fromFilters[k]
+          }
         }
       }
     }
@@ -199,9 +214,14 @@ const loadControlByFrom = function (controlOriginDefinies: Map<string, object>, 
     }
     
     
+   
 
+    
 
     controlOriginDefinies.set(control.id, control);
+  }
+  if (control.viewer) {
+    control.viewer = markRaw(control.viewer)
   }
   parseAttrsToGroup(control)
   control.def = true;
