@@ -957,7 +957,7 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
 
 
   //创建新的控件
-  createControl(jsonArray: [], jsonLinkArray: [], x: number, y: number, stage: DDeiStage, container: object, mode: string, evt: Event): void {
+  createControl(jsonArray: [], jsonLinkArray: [] = [], x: number, y: number, stage: DDeiStage, container: object, mode: string, evt: Event): void {
     //当前激活的图层
     let layer = stage.layers[stage.layerIndex];
     let models: DDeiAbstractShape[] = []
@@ -979,9 +979,9 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     //加载事件的配置
     let rsState = -1
     if(mode == 'copy'){
-      rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { models: models }, stage.ddInstance)
+      rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { models: models, links: jsonLinkArray }, stage.ddInstance)
     } else if (mode == 'cut') {
-      rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_DRAG_BEFORE", DDeiEnumOperateType.DRAG, { models: models }, stage.ddInstance)
+      rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_DRAG_BEFORE", DDeiEnumOperateType.DRAG, { models: models, links: jsonLinkArray }, stage.ddInstance)
     }
     //选中前
     if (rsState != -1) {
@@ -992,12 +992,12 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
       if (mode == 'copy') {
         let appendExPvs = {}
         jsonLinkArray?.forEach(lk => {
-          let sm = null;
-          let dm = null;
-          if (lk.smid) {
+          let sm = lk.sm;
+          let dm = lk.dm;
+          if (!sm && lk.smid) {
             sm = oldIdMap[lk.smid]
           }
-          if (lk.dmid) {
+          if (!dm && lk.dmid) {
             dm = oldIdMap[lk.dmid]
           }
           //重命名关联的smpath以及点
@@ -1005,6 +1005,7 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
             let sourcePV = DDeiUtil.getDataByPathList(sm, lk.smpath)
             let newId = "_" + DDeiUtil.getUniqueCode()
             sourcePV.id = newId
+
             if (!appendExPvs[sm.id]) {
               appendExPvs[sm.id] = {}
             }
@@ -1084,13 +1085,20 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
    * @return 新的ID
    */
   changeModelId(stage: DDeiStage, item: DDeiAbstractShape): string {
-    stage.idIdx++
     let newId = ""
-    if (item.id.indexOf("_") != -1) {
-      newId = item.id.substring(0, item.id.lastIndexOf("_")) + "_" + stage.idIdx;
-    } else {
-      newId = item.id + "_cp_" + stage.idIdx;
+    while(true){
+      stage.idIdx++
+      
+      if (item.id.indexOf("_") != -1) {
+        newId = item.id.substring(0, item.id.lastIndexOf("_")) + "_" + stage.idIdx;
+      } else {
+        newId = item.id + "_cp_" + stage.idIdx;
+      }
+      if(!stage.getModelById(newId)){
+        break;
+      }
     }
+    item.oldId = item.id
     item.id = newId
     item.unicode = DDeiUtil.getUniqueCode()
     let accuContainer = item.getAccuContainer()
