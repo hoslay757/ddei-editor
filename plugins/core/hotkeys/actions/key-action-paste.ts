@@ -992,35 +992,37 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
       if (mode == 'copy') {
         let appendExPvs = {}
         jsonLinkArray?.forEach(lk => {
-          let sm = lk.sm;
-          let dm = lk.dm;
-          if (!sm && lk.smid) {
-            sm = oldIdMap[lk.smid]
-          }
-          if (!dm && lk.dmid) {
-            dm = oldIdMap[lk.dmid]
-          }
-          //重命名关联的smpath以及点
-          if (lk.smpath) {
-            let sourcePV = DDeiUtil.getDataByPathList(sm, lk.smpath)
-            let newId = "_" + DDeiUtil.getUniqueCode()
-            sourcePV.id = newId
-
-            if (!appendExPvs[sm.id]) {
-              appendExPvs[sm.id] = {}
+          if (!lk.disabled){
+            let sm = lk.sm;
+            let dm = lk.dm;
+            if (!sm && lk.smid) {
+              sm = oldIdMap[lk.smid]
             }
-            appendExPvs[sm.id][newId] = sourcePV
-            lk.smpath = "exPvs." + newId
+            if (!dm && lk.dmid) {
+              dm = oldIdMap[lk.dmid]
+            }
+            //重命名关联的smpath以及点
+            if (lk.smpath) {
+              let sourcePV = DDeiUtil.getDataByPathList(sm, lk.smpath)
+              let newId = "_" + DDeiUtil.getUniqueCode()
+              sourcePV.id = newId
+
+              if (!appendExPvs[sm.id]) {
+                appendExPvs[sm.id] = {}
+              }
+              appendExPvs[sm.id][newId] = sourcePV
+              lk.smpath = "exPvs." + newId
+            }
+            let link = new DDeiLink({
+              group: lk.group,
+              smpath: lk.smpath,
+              dmpath: lk.dmpath,
+              stage: stage,
+              sm: sm,
+              dm: dm
+            });
+            stage.links.push(link);
           }
-          let link = new DDeiLink({
-            group: lk.group,
-            smpath: lk.smpath,
-            dmpath: lk.dmpath,
-            stage: stage,
-            sm: sm,
-            dm: dm
-          });
-          stage.links.push(link);
         })
         
         for (let m in oldIdMap) {
