@@ -18,7 +18,7 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
   
   EVENT_MOUSE_OPERATING: DDeiFuncData | null = new DDeiFuncData("quickstyle-ext-close", 1, this.mouseOperating);
   
-  EVENT_AFTER_CLOSE_FILE: DDeiFuncData | null = new DDeiFuncData("quickcontrol-ext-close", 1, this.closeDialogs);
+  EVENT_CLOSE_FILE_AFTER: DDeiFuncData | null = new DDeiFuncData("quickcontrol-ext-close", 1, this.closeDialogs);
 
   moveInControl(operateType, data, ddInstance, evt){
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"] && data?.models?.length > 0) {

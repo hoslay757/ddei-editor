@@ -59,7 +59,7 @@ class MenuRemoveSheet extends DDeiMenuBase {
       let file = editor?.files[editor.currentFileIndex];
       if (file.sheets.length > 1) {
         let ddInstance = model.stage.ddInstance
-        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_DEL_SHEET", "DEL_SHEET", null, ddInstance, null)
+        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_DEL_SHEET_BEFORE", "DEL_SHEET", null, ddInstance, null)
         if (rsState != -1) {
           let currentIndex = -1;
           for (let i = 0; i < file?.sheets?.length; i++) {
@@ -82,7 +82,7 @@ class MenuRemoveSheet extends DDeiMenuBase {
           //加载场景渲染器
           stage.initRender();
 
-          DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_DEL_SHEET", "DEL_SHEET", null, ddInstance, null)
+          DDeiEditorUtil.invokeCallbackFunc("EVENT_DEL_SHEET_AFTER", "DEL_SHEET", null, ddInstance, null)
 
           editor.editorViewer?.changeFileModifyDirty();
           editor.bus.push(DDeiEnumBusCommandType.RefreshShape, null, null);

@@ -349,7 +349,7 @@ export default {
       }
       let ddInstance = this.editor?.ddInstance;
       if (file && sheets && ddInstance) {
-        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_ADD_SHEET", "ADD_SHEET", null, ddInstance, null)
+        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_ADD_SHEET_BEFORE", "ADD_SHEET", null, ddInstance, null)
         if (rsState != -1) {
           let i = sheets.length + 1;
 
@@ -381,7 +381,7 @@ export default {
               z: 0,
             };
           }
-          DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_ADD_SHEET", "ADD_SHEET", null, ddInstance, null)
+          DDeiEditorUtil.invokeCallbackFunc("EVENT_ADD_SHEET_AFTER", "ADD_SHEET", null, ddInstance, null)
           this.editor.changeState(DDeiEditorState.DESIGNING);
           this.editor.editorViewer?.changeFileModifyDirty();
           ddInstance.bus?.push(DDeiEditorEnumBusCommandType.AddFileHistroy);
@@ -417,7 +417,7 @@ export default {
         (index >= 0 || index < sheets.length)
       ) {
         if (index != file.currentSheetIndex){
-          let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_CHANGE_SHEET", "CHANGE_SHEET", null, ddInstance, null)
+          let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_CHANGE_SHEET_BEFORE", "CHANGE_SHEET", null, ddInstance, null)
           if (rsState != -1) {
             this.tempSheetChange = true;
             file.changeSheet(index);
@@ -430,7 +430,7 @@ export default {
             //加载场景渲染器
             stage.initRender();
 
-            DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_CHANGE_SHEET", "CHANGE_SHEET", null, ddInstance, null)
+            DDeiEditorUtil.invokeCallbackFunc("EVENT_CHANGE_SHEET_AFTER", "CHANGE_SHEET", null, ddInstance, null)
             ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
             ddInstance.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
             ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});

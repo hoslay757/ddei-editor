@@ -16,7 +16,7 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
   EVENT_CONTROL_SELECT_AFTER: DDeiFuncData | null = new DDeiFuncData("quickstyle-show", 1, this.showQuickEditPicker);
   EVENT_MOUSE_OPERATING: DDeiFuncData | null = new DDeiFuncData("quickstyle-hidden", 1, this.mouseOperating);
 
-  EVENT_AFTER_CLOSE_FILE: DDeiFuncData | null = new DDeiFuncData("quickstyle-hidden", 1, this.closeDialog);
+  EVENT_CLOSE_FILE_AFTER: DDeiFuncData | null = new DDeiFuncData("quickstyle-hidden", 1, this.closeDialog);
   /**
      * 正在进行鼠标操作
      */

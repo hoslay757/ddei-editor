@@ -68,7 +68,7 @@ import {DDeiFileState} from "ddei-framework";
 import {DDeiFile} from "ddei-framework";
 import {DDeiStage} from "ddei-framework";
 import {DDeiSheet} from "ddei-framework";
-import { DDeiUtil } from "ddei-framework";
+import { DDeiUtil, DDeiEditorUtil } from "ddei-framework";
 
 export default {
   name: "ddei-core-panel-fileinfo",
@@ -163,121 +163,125 @@ export default {
      * @param evt
      */
     async openFile(evt) {
-      let openFileHandle = await showOpenFilePicker({
-        description: "DDei Design File",
-        types: [{
-          accept: {
+      let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_ADD_FILE_BEFORE", "LOAD_FILE", null, this.editor.ddInstance, evt)
+      if (rsState != -1) {
+        let openFileHandle = await showOpenFilePicker({
+          description: "DDei Design File",
+          types: [{
+            accept: {
 
-            'text/plain': ['.dei']
-          }
-        }]
-      })
-      //获取图片数据  这个file其实就是和input元素<input type="file" id="file">，document.querySelector("#file").files[0]一样
-      let openFile = await openFileHandle[0].getFile();
-      //转成base64
-      let read = new FileReader();
-      read.readAsText(openFile);
-      read.onload = async () => {
-        //创建img，插入页面中
-        let result = read.result;
-        let resultJSON = JSON.parse(result);
-        let ddInstance = this.editor?.ddInstance;
-        let file = DDeiFile.loadFromJSON(resultJSON, {
-          currentDdInstance: ddInstance,
-        });
-        let openedFiles = this.editor.files;
-        let openedFileIndex = -1
-        if(!file.id){
-          file.id = DDeiUtil.getUniqueCode()
-        }
-        for (let fi = 0; fi < openedFiles.length; fi++) {
-          if ((openedFiles[fi].id && openedFiles[fi].id == file.id)) {
-            openedFileIndex = fi
-            break;
-          }
-        }
-        
-        if (openedFileIndex == -1) {
-          file.localFileHandler = openFileHandle[0]
-          file.local = 1
-          this.editor.addFile(file);
-          for (let x = 0; x < this.editor.files.length; x++) {
-            this.editor.files[x].active = DDeiActiveType.NONE;
-          }
-          this.editor.currentFileIndex = this.editor.files.length - 1;
-          file.state = DDeiFileState.NONE;
-          file.active = DDeiActiveType.ACTIVE;
-          let sheets = file?.sheets;
-
-          if (file && sheets && ddInstance) {
-            file.changeSheet(file.currentSheetIndex);
-
-            let stage = sheets[file.currentSheetIndex].stage;
-            
-            stage.ddInstance = ddInstance;
-            ddInstance.disabled = false
-            //记录文件初始日志
-            file.initHistroy();
-            file.histroy[0].isNew = true;
-            //刷新页面
-            ddInstance.stage = stage;
-            //加载场景渲染器
-            stage.initRender();
-            //设置视窗位置到中央
-            if (!stage.wpv) {
-              //缺省定位在画布中心点位置
-              stage.wpv = {
-                x:
-                  -(
-                    stage.width -
-                    ddInstance.render.container.clientWidth
-                  ) / 2,
-                y:
-                  -(
-                    stage.height -
-                    ddInstance.render.container.clientHeight
-                  ) / 2,
-                z: 0,
-              };
+              'text/plain': ['.dei']
             }
-            this.editor.changeState(DDeiEditorState.DESIGNING);
-            ddInstance.bus.push(
-              DDeiEditorEnumBusCommandType.ClearTemplateUI
-            );
-            ddInstance.bus.push(
-              DDeiEditorEnumBusCommandType.RefreshEditorParts,
-              { parts: ["bottommenu", "topmenu"] }
-            );
-            ddInstance?.bus?.push(DDeiEnumBusCommandType.RefreshShape);
-            ddInstance?.bus?.executeAll();
+          }]
+        })
+        //获取图片数据  这个file其实就是和input元素<input type="file" id="file">，document.querySelector("#file").files[0]一样
+        let openFile = await openFileHandle[0].getFile();
+        //转成base64
+        let read = new FileReader();
+        read.readAsText(openFile);
+        read.onload = async () => {
+          //创建img，插入页面中
+          let result = read.result;
+          let resultJSON = JSON.parse(result);
+          let ddInstance = this.editor?.ddInstance;
+          let file = DDeiFile.loadFromJSON(resultJSON, {
+            currentDdInstance: ddInstance,
+          });
+          let openedFiles = this.editor.files;
+          let openedFileIndex = -1
+          if(!file.id){
+            file.id = DDeiUtil.getUniqueCode()
           }
-        } else {
+          for (let fi = 0; fi < openedFiles.length; fi++) {
+            if ((openedFiles[fi].id && openedFiles[fi].id == file.id)) {
+              openedFileIndex = fi
+              break;
+            }
+          }
           
-          file = this.editor.files[openedFileIndex]
-          if (file && ddInstance) {
+          if (openedFileIndex == -1) {
+            file.localFileHandler = openFileHandle[0]
+            file.local = 1
+            this.editor.addFile(file);
             for (let x = 0; x < this.editor.files.length; x++) {
               this.editor.files[x].active = DDeiActiveType.NONE;
             }
-            file.active = DDeiActiveType.ACTIVE
-            this.editor.currentFileIndex = openedFileIndex;
-            let stage = file.sheets[file.currentSheetIndex].stage;
-            stage.ddInstance = ddInstance;
-            //刷新页面
-            ddInstance.stage = stage;
-            ddInstance.disabled = false
-            //加载场景渲染器
-            stage.initRender();
-            this.editor.changeState(DDeiEditorState.DESIGNING);
-            ddInstance.bus.push(
-              DDeiEditorEnumBusCommandType.ClearTemplateUI
-            );
-            ddInstance.bus.push(
-              DDeiEditorEnumBusCommandType.RefreshEditorParts,
-              { parts: ["bottommenu", "topmenu"] }
-            );
-            ddInstance?.bus?.push(DDeiEnumBusCommandType.RefreshShape);
-            ddInstance?.bus?.executeAll();
+            this.editor.currentFileIndex = this.editor.files.length - 1;
+            file.state = DDeiFileState.NONE;
+            file.active = DDeiActiveType.ACTIVE;
+            let sheets = file?.sheets;
+
+            if (file && sheets && ddInstance) {
+              file.changeSheet(file.currentSheetIndex);
+
+              let stage = sheets[file.currentSheetIndex].stage;
+              
+              stage.ddInstance = ddInstance;
+              ddInstance.disabled = false
+              //记录文件初始日志
+              file.initHistroy();
+              file.histroy[0].isNew = true;
+              //刷新页面
+              ddInstance.stage = stage;
+              //加载场景渲染器
+              stage.initRender();
+              //设置视窗位置到中央
+              if (!stage.wpv) {
+                //缺省定位在画布中心点位置
+                stage.wpv = {
+                  x:
+                    -(
+                      stage.width -
+                      ddInstance.render.container.clientWidth
+                    ) / 2,
+                  y:
+                    -(
+                      stage.height -
+                      ddInstance.render.container.clientHeight
+                    ) / 2,
+                  z: 0,
+                };
+              }
+              this.editor.changeState(DDeiEditorState.DESIGNING);
+              ddInstance.bus.push(
+                DDeiEditorEnumBusCommandType.ClearTemplateUI
+              );
+              ddInstance.bus.push(
+                DDeiEditorEnumBusCommandType.RefreshEditorParts,
+                { parts: ["bottommenu", "topmenu"] }
+              );
+              ddInstance?.bus?.push(DDeiEnumBusCommandType.RefreshShape);
+              ddInstance?.bus?.executeAll();
+            }
+          } else {
+            
+            file = this.editor.files[openedFileIndex]
+            if (file && ddInstance) {
+              for (let x = 0; x < this.editor.files.length; x++) {
+                this.editor.files[x].active = DDeiActiveType.NONE;
+              }
+              file.active = DDeiActiveType.ACTIVE
+              this.editor.currentFileIndex = openedFileIndex;
+              let stage = file.sheets[file.currentSheetIndex].stage;
+              stage.ddInstance = ddInstance;
+              //刷新页面
+              ddInstance.stage = stage;
+              ddInstance.disabled = false
+              //加载场景渲染器
+              stage.initRender();
+              this.editor.changeState(DDeiEditorState.DESIGNING);
+              ddInstance.bus.push(
+                DDeiEditorEnumBusCommandType.ClearTemplateUI
+              );
+              ddInstance.bus.push(
+                DDeiEditorEnumBusCommandType.RefreshEditorParts,
+                { parts: ["bottommenu", "topmenu"] }
+              );
+              ddInstance?.bus?.push(DDeiEnumBusCommandType.RefreshShape);
+              ddInstance?.bus?.executeAll();
+            }
           }
+          DDeiEditorUtil.invokeCallbackFunc("EVENT_ADD_FILE_AFTER", "LOAD_FILE", {file:file}, this.editor.ddInstance, evt)
         }
       }
     },

@@ -205,7 +205,7 @@ export default {
      */
     newFile(evt) {
       if (this.editor?.ddInstance) {
-        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_ADD_FILE", "ADD_FILE", null, this.editor.ddInstance, null)
+        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_ADD_FILE_BEFORE", "ADD_FILE", null, this.editor.ddInstance, null)
         if (rsState != -1) {
           let ddInstance = this.editor.ddInstance;
           let file = DDeiFile.loadFromJSON(
@@ -265,7 +265,7 @@ export default {
             this.editor.changeState(DDeiEditorState.DESIGNING);
             ddInstance?.bus?.executeAll();
           }
-          DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_ADD_FILE", "ADD_FILE", null, this.editor.ddInstance, null)
+          DDeiEditorUtil.invokeCallbackFunc("EVENT_ADD_FILE_AFTER", "ADD_FILE", null, this.editor.ddInstance, null)
           if (this.editor.files.length == 0) {
             ddInstance.disabled = true
           } else {
@@ -486,10 +486,10 @@ export default {
         ddInstance.bus.executeAll();
       }else{
         if (this.editor.files.indexOf(file) != this.editor.currentFileIndex){
-          let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_CHANGE_FILE", "CHANGE_FILE", null, ddInstance, null)
+          let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_CHANGE_FILE_BEFORE", "CHANGE_FILE", null, ddInstance, null)
           if (rsState != -1) {
             this.editor.changeFile(this.editor.files.indexOf(file))
-            DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_CHANGE_FILE", "CHANGE_FILE", null, ddInstance, null)
+            DDeiEditorUtil.invokeCallbackFunc("EVENT_CHANGE_FILE_AFTER", "CHANGE_FILE", null, ddInstance, null)
             ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
             ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
             ddInstance.bus.executeAll();
@@ -555,7 +555,7 @@ export default {
      
       if(canClose){
         let ddInstance = this.editor.ddInstance;
-        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_CLOSE_FILE", "CLOSE_FILE", null, ddInstance, evt)
+        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_CLOSE_FILE_BEFORE", "CLOSE_FILE", null, ddInstance, evt)
         if (rsState != -1) {
     
         // if (
@@ -599,7 +599,7 @@ export default {
             }
           }
 
-          DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_CLOSE_FILE", "CLOSE_FILE", null, ddInstance, evt)
+          DDeiEditorUtil.invokeCallbackFunc("EVENT_CLOSE_FILE_AFTER", "CLOSE_FILE", null, ddInstance, evt)
           ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
           ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
             parts: ["bottommenu", "topmenu"],
