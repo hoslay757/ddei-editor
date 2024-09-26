@@ -74,7 +74,7 @@ export default defineComponent({
       ]
     })
     const options = markRaw({
-      currentLayout: "ddei-core-layout-simple",
+      // currentLayout: "ddei-core-layout-simple",
       config: {
         // "readonly":true,
         "mark": "水印文本",
@@ -110,61 +110,7 @@ export default defineComponent({
       extensions: [
         DDeiExtUML,
         DDeiExtQuickStyle,
-        DDeiExtSearch,
-        DDeiExtQuickControl,
-        DDeiCoreToolboxSimplePanel.configuration({
-          direct: 2,//方向，1纵向，2横向
-          position: 2,//位置1-9顺时针，1为左上角，9为中心
-          drag: 0,//是否允许拖拽位置
-          chooseCreate: 1,//是否在选择控件时创建一个控件
-          groups: [
-            {
-              editMode: 1,
-              desc: "选择",
-              icon: `<svg class="icon" style="width: 28px; height: 28px;margin-left:-1px;margin-top:2px; " aria-hidden="true">
-          <use xlink: href = "#icon-a-ziyuan432">< /use>
-        </svg>`
-            },
-            {
-              editMode: 2,
-              desc: "平移画布",
-              icon: `<svg class="icon" style="width: 28px; height: 28px;margin-left:-1px;margin-top:2px; " aria-hidden="true">
-          <use xlink: href = "#icon-a-ziyuan431">< /use>
-        </svg>`
-            },
-            {
-              controls: [
-                "100103"
-              ]
-            },
-            {
-              controls: [
-                "100001",
-                "100002",
-                "100003",
-                "100004",
-                "100005",
-                "100006",
-                "100007",
-              ]
-            },
-            {
-              controls: [
-                "100040",
-                "100041",
-                "100050",
-                "100051"
-              ]
-            },
-            {
-              editMode: 4,
-              desc: "连线",
-              controls: [
-                "100401"
-              ]
-            }
-          ]
-        })
+        DDeiExtSearch
 
         // DDeiCoreStandLayout.configuration({
           //配置插件

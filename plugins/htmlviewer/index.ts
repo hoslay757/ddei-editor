@@ -4,6 +4,9 @@ import DDeiExtHtmlViewerLifeCycle from "./htmlviewer-lifecycle"
 class DDeiExtHtmlViewer extends DDeiPluginBase {
   type: string = "package"
 
+  order: number = 1
+
+  static order: number = 1
 
   /**
    * 缺省实例

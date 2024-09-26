@@ -5,6 +5,10 @@ import DDeiExtTooltipLifeCycle from "./tooltip-lifecycle"
 class DDeiExtTooltip extends DDeiPluginBase {
   type: string = "package"
 
+  order: number = 2
+
+  static order: number = 2
+
   /**
    * 缺省实例
    */

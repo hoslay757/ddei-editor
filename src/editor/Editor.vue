@@ -82,7 +82,6 @@ export default {
       this.options.extensions = []
     }
     this.options.extensions.splice(0,0,DDeiCore)
-    
     let editor = DDeiEditor.newInstance(this.id, this.id, true, this.options);
     this.editor = editor
 

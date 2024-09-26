@@ -13,6 +13,10 @@ import {DDeiPluginBase} from "ddei-framework";
 class DDeiCore extends DDeiPluginBase {
   type: string = "package"
 
+  order:number = 0
+
+  static order: number = 0
+
   
   /**
    * 缺省实例
