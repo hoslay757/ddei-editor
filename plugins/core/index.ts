@@ -7,6 +7,7 @@ import DDeiCoreHotkeys from "./hotkeys";
 import DDeiCoreControls from "./controls";
 import DDeiCoreMenus from "./menus";
 import DDeiCoreThemes from "./themes"
+import DDeiCoreLifeCycles from "./lifecycles"
 import {DDeiPluginBase} from "ddei-framework";
 
 class DDeiCore extends DDeiPluginBase {
@@ -37,9 +38,11 @@ class DDeiCore extends DDeiPluginBase {
 
   themes: object = DDeiCoreThemes;
 
+  lifecycles: object = DDeiCoreLifeCycles
+
   getOptions(): object {
     let options = {}
-    let array = [this.layouts, this.panels, this.propeditors, this.dialogs, this.components, this.hotkeys, this.controls, this.menus, this.themes]
+    let array = [this.layouts, this.panels, this.propeditors, this.dialogs, this.components, this.hotkeys, this.controls, this.menus, this.themes, this.lifecycles]
     array.forEach(plugin => {
       if (DDeiPluginBase.isSubclass(plugin, DDeiPluginBase)) {
         options = Object.assign({}, options, plugin.defaultIns.getOptions())
@@ -71,6 +74,14 @@ class DDeiCore extends DDeiPluginBase {
       return this.layouts.defaultIns.getLayouts(editor);
     } else if (this.layouts instanceof DDeiPluginBase) {
       return this.layouts.getLayouts(editor);
+    }
+  }
+
+  getLifeCyclies(editor) {
+    if (DDeiPluginBase.isSubclass(this.lifecycles, DDeiPluginBase)) {
+      return this.lifecycles.defaultIns.getLifeCyclies(editor);
+    } else if (this.lifecycles instanceof DDeiPluginBase) {
+      return this.lifecycles.getLifeCyclies(editor);
     }
   }
 
@@ -143,6 +154,7 @@ class DDeiCore extends DDeiPluginBase {
     core.controls = core.controls.configuration(options, true)
     core.menus = core.menus.configuration(options, true)
     core.themes = core.themes.configuration(options, true)
+    core.lifecycles = core.lifecycles.configuration(options, true)
     return core;
   }
 }
@@ -156,5 +168,6 @@ export * from "./hotkeys";
 export * from "./menus"
 export * from "./controls"
 export * from "./themes"
+export * from "./lifecycles"
 export {DDeiCore}
 export default DDeiCore;

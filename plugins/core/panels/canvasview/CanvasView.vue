@@ -381,6 +381,10 @@ export default {
       ) {
         this.editor.ddInstance.render.mouseMove(e);
       }
+      //拖拽UI界面控件
+      else if(this.editor.dragPart){
+        this.editor.dragPart.boxDraging(e)
+      }
       else{
         //事件下发到绘图区
         this.editor.ddInstance.render.mouseMove(e);
@@ -464,7 +468,13 @@ export default {
           }
         }
         e.preventDefault()
-      } else if (this.editor.state == DDeiEditorState.DESIGNING || this.editor.state == DDeiEditorState.QUICK_EDITING) {
+      } 
+      //拖拽UI界面控件
+      else if (this.editor.dragPart) {
+        this.editor.dragPart.boxDragEnd(e)
+        this.editor.changeState(DDeiEditorState.DESIGNING);
+      }
+      else if (this.editor.state == DDeiEditorState.DESIGNING || this.editor.state == DDeiEditorState.QUICK_EDITING) {
         //事件下发到绘图区
         this.editor.ddInstance.render.mouseUp(e);
       }

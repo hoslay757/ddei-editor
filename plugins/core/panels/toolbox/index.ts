@@ -1,43 +1,51 @@
-import {DDeiPluginBase} from "ddei-framework";
-import Toolbox from './Toolbox.vue';
+import { DDeiPluginBase } from "ddei-framework";
+import DDeiCoreToolboxPanel from './toolbox';
+import DDeiCoreToolboxSimplePanel from './toolbox-simple';
 
-class DDeiCoreToolboxPanel extends DDeiPluginBase{
-  name: string = Toolbox.name
+class DDeiCoreToolboxPanels extends DDeiPluginBase {
+
+
+  type: string = "package"
   /**
    * 缺省实例
    */
-  static defaultIns: DDeiCoreToolboxPanel = new DDeiCoreToolboxPanel();
+  static defaultIns: DDeiCoreToolboxPanels = new DDeiCoreToolboxPanels(null);
 
-  plugins: object[] = [Toolbox]
+  plugins: object[] = [DDeiCoreToolboxPanel, DDeiCoreToolboxSimplePanel]
 
-  getPanels(editor){
-    return this.plugins;
+  getPanels(editor) {
+    let panels = []
+    this.plugins?.forEach(plugin => {
+      let ls
+      if (DDeiPluginBase.isSubclass(plugin, DDeiPluginBase)) {
+        ls = plugin.defaultIns.getPanels(editor);
+      } else if (plugin instanceof DDeiPluginBase) {
+        ls = plugin.getPanels(editor);
+      }
+      if (ls?.length > 0) {
+        panels = panels.concat(ls);
+      }
+    })
+    return panels
   }
 
 
-  
-  static configuration(options, fullConfig: boolean = false) {
-    //解析options，只使用自己相关的
+
+  static configuration(options) {
     if (options) {
-      let newOptions = {}
-      if (fullConfig) {
-        if (fullConfig) {
-          if (options[Toolbox.name]) {
-            for (let i in options[Toolbox.name]) {
-              newOptions[i] = options[Toolbox.name][i]
-            }
-          }
-        }
-      } else {
-        newOptions = options
+      //解析options，只使用自己相关的
+      let panels = new DDeiCoreToolboxPanels(options);
+      for (let i = 0; i < panels.plugins?.length; i++) {
+        panels.plugins[i] = panels.plugins[i].configuration(options, true)
       }
-      if (newOptions && Object.keys(newOptions).length !== 0) {
-        let panels = new DDeiCoreToolboxPanel(newOptions);
-        return panels;
-      }
+      return panels;
     }
-    return DDeiCoreToolboxPanel;
+    return DDeiCoreToolboxPanels;
   }
 }
 
-export default DDeiCoreToolboxPanel
+
+export {
+  DDeiCoreToolboxPanels, DDeiCoreToolboxPanel, DDeiCoreToolboxSimplePanel
+}
+export default DDeiCoreToolboxPanels
