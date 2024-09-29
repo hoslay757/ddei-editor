@@ -76,7 +76,7 @@ class MenuRemoveSheet extends DDeiMenuBase {
           }
           let stage = file.sheets[file?.currentSheetIndex].stage;
           stage.ddInstance = ddInstance;
-          ddInstance.stage.destroyed()
+          ddInstance.stage.destroyRender()
           //刷新页面
           ddInstance.stage = stage;
           //加载场景渲染器

@@ -43,6 +43,10 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
 
   static displayQuickDialog(editor) {
     if (editor.state == DDeiEditorState.DESIGNING && editor?.ddInstance?.stage?.selectedModels?.size > 0) {
+      if (editor.ddInstance.stage.render.operateState != 0){
+        DDeiCoreCanvasLifeCycle.displayQuickDialog(editor)
+        return;
+      }
       let models = Array.from(editor.ddInstance.stage?.selectedModels.values())
       if (models?.length > 0) {
         let height = 130;
@@ -85,8 +89,10 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
   showQuickEditPicker(operateType, data, ddInstance, evt): DDeiFuncCallResult {
     
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"]) {
+      
       let models = data?.models;
       let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
+      
       if (editor.state == DDeiEditorState.DESIGNING){
         let curState = editor.state
         //隐藏弹出框

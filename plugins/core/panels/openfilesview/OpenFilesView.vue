@@ -237,7 +237,7 @@ export default {
           let sheets = file?.sheets;
           
           if (file && sheets && ddInstance) {
-            ddInstance.stage.destroyed()
+            ddInstance.stage.destroyRender()
             let stage = sheets[0].stage;
             
             stage.ddInstance = ddInstance;

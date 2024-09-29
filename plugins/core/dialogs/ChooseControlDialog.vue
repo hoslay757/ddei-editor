@@ -4,7 +4,8 @@
       <div class="ddei-core-dialog-choosecontrol-content-itempanel" v-if="group">
         <div @click="ok(control)" :class="{ 'ddei-core-dialog-choosecontrol-content-itempanel-item': true}"
           :title="control.desc" v-for="control in group.controls">
-          <img class="icon" :src="editor?.icons[control.id]" />
+          <img class="icon" v-if="!control.icon" :src="editor?.icons[control.id]" />
+          <div class="icon-html" v-if="control.icon" v-html="control.icon"></div>
           <div class="text">{{ control.name }}</div>
         </div>
       </div>
@@ -113,6 +114,20 @@ export default {
               width: 90%;
               height: 90%;
               object-fit: contain;
+            }
+
+            .icon-html{
+              width: 50px;
+              height: 45px;
+              object-fit: contain;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              >* {
+                width: 28px !important;
+                height: 28px !important;
+                object-fit: contain;
+              }
             }
           }
       }

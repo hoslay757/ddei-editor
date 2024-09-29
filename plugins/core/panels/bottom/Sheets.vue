@@ -349,6 +349,7 @@ export default {
       }
       let ddInstance = this.editor?.ddInstance;
       if (file && sheets && ddInstance) {
+        
         let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_ADD_SHEET_BEFORE", "ADD_SHEET", null, ddInstance, null)
         if (rsState != -1) {
           let i = sheets.length + 1;
@@ -366,7 +367,7 @@ export default {
           );
           file.changeSheet(sheets.length - 1);
           //刷新页面
-          ddInstance.stage.destroyed();
+          ddInstance.stage.destroyRender();
           ddInstance.stage = stage;
           this.editor.currentStage = stage;
           
@@ -424,11 +425,12 @@ export default {
             let stage = sheets[index].stage;
             stage.ddInstance = ddInstance;
             //刷新页面
-            ddInstance.stage.destroyed()
+            ddInstance.stage.destroyRender()
             ddInstance.stage = stage;
             this.editor.currentStage = stage;
             //加载场景渲染器
             stage.initRender();
+            
 
             DDeiEditorUtil.invokeCallbackFunc("EVENT_CHANGE_SHEET_AFTER", "CHANGE_SHEET", null, ddInstance, null)
             ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);

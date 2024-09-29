@@ -181,17 +181,18 @@ export default {
     this.editor.changeTheme('');
     
     //初始化大小
-    if (this.options?.config?.width) {
-      this.$refs.editor_div.style.width = this.options?.config?.width + "px";
+    let options = this.editor.options;
+    if (options?.config?.width) {
+      this.$refs.editor_div.style.width = options?.config?.width + "px";
     }
-    if (this.options?.config?.height) {
-      this.$refs.editor_div.style.height = this.options?.config?.height + "px";
+    if (options?.config?.height) {
+      this.$refs.editor_div.style.height = options?.config?.height + "px";
     }
     
     //初始化控件
-    if(this.options?.config?.initData){
+    if (options?.config?.initData){
       //调用转换器，将输入内容转换为设计器能够识别的格式
-      let initData = this.options?.config?.initData
+      let initData = options.config.initData
       let converters = this.editor.getEnabledConverters(initData, 1);
       //依次调用converters
       converters?.forEach(converter => {
@@ -200,10 +201,10 @@ export default {
       this.editor.addControls(initData.controls)
     }
     
-    if (this.options?.config?.access){
-      this.editor.setAccessInfo(this.options?.config?.access)
-    } else if (this.options?.config?.readonly == true || this.options?.config?.readonly == false) {
-      this.editor.setEditable(!this.options?.config?.readonly)
+    if (options?.config?.access){
+      this.editor.setAccessInfo(options.config.access)
+    } else if (options.config.readonly == true || options.config.readonly == false) {
+      this.editor.setEditable(!options.config.readonly)
     }
 
     //初始化拦截器

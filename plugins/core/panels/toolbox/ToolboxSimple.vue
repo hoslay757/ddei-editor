@@ -5,18 +5,19 @@
       @mousedown="options?.drag == 1 && prepareDragBox()">
     </div>
     <div v-if="forceRefreshGroup" :class="{'item':true,'item-selected':group.editMode == editor.editMode}"
-      :title="group.desc ? group.desc : group.controls[group.currentControlId ? group.currentControlId : 0]?.desc"
+      :title="group.currentControl?.desc ? group.currentControl.desc : group.controls?.length > 0 && group.controls[0]?.desc ? group.controls[0].desc  : group.desc ? group.desc : ''"
       @mouseenter="showGroupControlBox(group,$event)"
       @mousedown="changeEditMode(group?.editMode) && createControlPrepare(group, $event)"
       @click="group.controls?.length > 0 && changeEditMode(group?.editMode) && createControlCenter(group,$event)"
       v-for="group in groups">
       <div v-if="group?.editMode == 1 || group?.editMode == 2" v-html="group.icon"></div>
       <img class="icon"
-        v-if="group.controls?.length > 0 && !group.controls[group.currentControlId ? group.currentControlId : 0]?.icon"
-        :src="editor?.icons[group.currentControlId ? group.currentControlId : group.controls[0].id]" />
-      <div
-        v-if="group.controls?.length > 0 && group.controls[group.currentControlId ? group.currentControlId : 0]?.icon"
-        v-html="group.controls[group.currentControlId ? group.currentControlId : 0]?.icon"></div>
+        v-if="(group.currentControl && !group.currentControl.icon) || (!group.currentControl && group.controls?.length > 0 && !group.controls[0]?.icon)"
+        :src="editor?.icons[group.currentControl ? group.currentControl.id : group.controls[0].id]" />
+      <div class="item-icon-html"
+        v-if="(group.currentControl && group.currentControl.icon) || (!group.currentControl && group.controls?.length > 0 && group.controls[0]?.icon) "
+        v-html="group.currentControl?.icon ? group.currentControl.icon : group.controls?.length > 0 ? group.controls[0]?.icon : ''">
+      </div>
     </div>
     <div class="item-block"></div>
   </div>
@@ -238,15 +239,9 @@ export default {
      * 准备创建
      */
     createControlPrepare(group, e) {
-      let control = group.controls[0]
-      if (group.currentControlId) {
-        for (let n = 0; n < group.controls.length; n++) {
-          if (group.controls[n].id == group.currentControlId) {
-            control = group.controls[n]
-            break;
-          }
-        }
-      }
+      let control = group.currentControl ? group.currentControl : group.controls?.length > 0 ? group.controls[0] : null
+      
+
       let editMode = group.editMode
       //获取当前实例
       let ddInstance: DDei = this.editor.ddInstance;
@@ -258,58 +253,59 @@ export default {
       }
       DDeiEditorUtil.hiddenDialog(this.editor, "ddei-core-dialog-choosecontrol")
       //创建控件
-      if (editMode != 4){
-        //创建并初始化控件以及关系
-        let models = DDeiEditorUtil.createControl(control, this.editor)
-        //加载事件的配置
+      if(control){
+        if (editMode != 4){
+          //创建并初始化控件以及关系
+          let models = DDeiEditorUtil.createControl(control, this.editor)
+          //加载事件的配置
 
-        let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { models: models }, ddInstance, e)
-        if (rsState == 0 || rsState == 1) {
-          //选中前
-          DDeiUtil.invokeCallbackFunc("EVENT_MOUSE_OPERATING", DDeiEnumOperateType.CREATE, null, ddInstance, e)
-          let stageRatio = stage.getStageRatio();
-          let moveMatrix = new Matrix3(
-            1,
-            0,
-            -stage.wpv.x * stageRatio,
-            0,
-            1,
-            -stage.wpv.y * stageRatio,
-            0,
-            0,
-            1
-          );
-          models.forEach(model => {
-            model.transVectors(moveMatrix);
-            model.setState(DDeiEnumControlState.CREATING);
-          })
+          let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { models: models }, ddInstance, e)
+          if (rsState == 0 || rsState == 1) {
+            //选中前
+            DDeiUtil.invokeCallbackFunc("EVENT_MOUSE_OPERATING", DDeiEnumOperateType.CREATE, null, ddInstance, e)
+            let stageRatio = stage.getStageRatio();
+            let moveMatrix = new Matrix3(
+              1,
+              0,
+              -stage.wpv.x * stageRatio,
+              0,
+              1,
+              -stage.wpv.y * stageRatio,
+              0,
+              0,
+              1
+            );
+            models.forEach(model => {
+              model.transVectors(moveMatrix);
+              model.setState(DDeiEnumControlState.CREATING);
+            })
 
 
-          if (models?.length > 0) {
+            if (models?.length > 0) {
 
-            let ddInstance = this.editor.ddInstance;
-            let stage = ddInstance.stage;
-            if (stage?.render?.operateState == DDeiEnumOperateState.QUICK_EDITING && stage?.render?.editorShadowControl) {
-              DDeiUtil.getEditorText()?.enterValue()
+              let ddInstance = this.editor.ddInstance;
+              let stage = ddInstance.stage;
+              if (stage?.render?.operateState == DDeiEnumOperateState.QUICK_EDITING && stage?.render?.editorShadowControl) {
+                DDeiUtil.getEditorText()?.enterValue()
+              }
+              //修改编辑器状态为控件创建中
+              this.editor.changeState(DDeiEditorState.CONTROL_CREATING);
+              //设置正在需要创建的控件
+              this.editor.creatingControls = models;
+              this.editor.bus?.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
+              this.editor.bus?.executeAll();
             }
-            //修改编辑器状态为控件创建中
-            this.editor.changeState(DDeiEditorState.CONTROL_CREATING);
-            //设置正在需要创建的控件
-            this.editor.creatingControls = models;
-            this.editor.bus?.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
-            this.editor.bus?.executeAll();
+            e.preventDefault()
+            e.cancelBubble = true
           }
-          e.preventDefault()
-          e.cancelBubble = true
         }
-      }
-      //切换状态，设置线初始化JSON
-      else{
-        DDeiEditorUtil.lineInitJSON = {
-          modelCode: control.id,
-        };
-        
-        this.editor.changeState(DDeiEditorState.DESIGNING);
+        //切换状态，设置线初始化JSON
+        else{
+          DDeiEditorUtil.lineInitJSON = {
+            modelCode: control.id,
+          };
+          this.editor.changeState(DDeiEditorState.DESIGNING);
+        }
       }
     },
 
@@ -325,7 +321,7 @@ export default {
       if (this.editor.state != DDeiEditorState.CONTROL_CREATING) {
         
 
-        if (group.controls.length > 1){
+        if (group.controls?.length > 1){
           let el = evt.srcElement
           let type = 99;
           if (this.options?.direct == 2) {
@@ -354,7 +350,13 @@ export default {
     },
 
     changeGroupControl(group,control){
-      group.currentControlId = control.id
+      this.changeEditMode(group?.editMode)
+      if(group?.editMode == 4){
+        DDeiEditorUtil.lineInitJSON = {
+          modelCode: control.id,
+        };
+      }
+      group.currentControl = control
       if (this.options?.chooseCreate){
         this.createControlCenter(group)
       }
@@ -423,30 +425,37 @@ export default {
      * 创建控件在中心点处
      */
     createControlCenter(group, e) {
-      let control = group.controls[0]
-      if(group.currentControlId){
-        for(let n = 0;n < group.controls.length;n++){
-          if (group.controls[n].id == group.currentControlId){
-            control = group.controls[n]
-            break;
+      if (group?.editMode != 4){
+        let control = group.currentControl ? group.currentControl : group.controls?.length > 0 ? group.controls[0] : null
+        
+        //修改编辑器状态为控件创建中
+        this.editor.changeState(DDeiEditorState.DESIGNING);
+        this.editor.creatingControls = null;
+        //获取当前实例
+        if (control){
+          let ddInstance: DDei = this.editor.ddInstance;
+          ddInstance.render.inEdge = 0;
+          let stage = ddInstance.stage;
+          let layer = stage.layers[stage.layerIndex];
+          if ((layer.display == 0 && !layer.tempDisplay) || layer.lock) {
+            return;
+          }
+          let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { controls: [control] }, ddInstance, e)
+          if (rsState == 0 || rsState == 1) {
+            let models = this.editor.addControls([{model:control.id}])
+            let pushDatas = []
+            models.forEach((model, key) => {
+              pushDatas.push({ id: model.id, value: DDeiEnumControlState.SELECTED });
+            });
+            this.editor.ddInstance?.bus?.push(DDeiEnumBusCommandType.CancelCurLevelSelectedModels, null, e);
+            this.editor.ddInstance?.bus?.push(DDeiEnumBusCommandType.ModelChangeSelect, pushDatas, e);
+            this.editor.ddInstance?.bus?.push(DDeiEnumBusCommandType.StageChangeSelectModels);
+            this.editor.bus.executeAll()
+            this.editor.changeState(DDeiEditorState.DESIGNING);
+            DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_AFTER", DDeiEnumOperateType.CREATE, { models: models }, ddInstance, e)
+            
           }
         }
-      }
-      //修改编辑器状态为控件创建中
-      this.editor.changeState(DDeiEditorState.DESIGNING);
-      this.editor.creatingControls = null;
-      //获取当前实例
-      let ddInstance: DDei = this.editor.ddInstance;
-      ddInstance.render.inEdge = 0;
-      let stage = ddInstance.stage;
-      let layer = stage.layers[stage.layerIndex];
-      if ((layer.display == 0 && !layer.tempDisplay) || layer.lock) {
-        return;
-      }
-      let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { controls: [control] }, ddInstance, e)
-      if (rsState == 0 || rsState == 1) {
-        let models = this.editor.addControls([{model:control.id}])
-        DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_AFTER", DDeiEnumOperateType.CREATE, { models: models }, ddInstance, e)
       }
     },
 
@@ -496,6 +505,18 @@ export default {
     &:hover {
       background-color: #e2dede;
       cursor: pointer;
+    }
+
+    &-icon-html{
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      >*{
+        width: 28px !important;
+        height: 28px !important;
+      }
     }
   }
   .item-selected {
