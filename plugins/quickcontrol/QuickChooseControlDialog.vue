@@ -166,9 +166,10 @@ export default {
           }
           controls[0].setPosition({x:x,y:y})
           //创建连线
+          let initLine = DDeiEditorUtil.getLineInitJSON()
           this.editor.addLines([
             {
-              model:'100401',
+              model: initLine.modelCode ? initLine.modelCode : initLine.model ? initLine.model : initLine.id ? initLine.id : '100401',
               type:2,
               startPoint: {x:sx,y:sy},
               endPoint: {x:ex,y:ey},

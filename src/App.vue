@@ -110,7 +110,8 @@ export default defineComponent({
       extensions: [
         DDeiExtUML,
         DDeiExtQuickStyle,
-        DDeiExtSearch
+        DDeiExtSearch,
+        DDeiExtQuickControl
 
         // DDeiCoreStandLayout.configuration({
           //配置插件

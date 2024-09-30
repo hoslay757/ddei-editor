@@ -198,7 +198,7 @@ export default {
               break;
             }
           }
-          
+          ddInstance.stage.destroyRender()
           if (openedFileIndex == -1) {
             file.localFileHandler = openFileHandle[0]
             file.local = 1
@@ -264,6 +264,7 @@ export default {
               this.editor.currentFileIndex = openedFileIndex;
               let stage = file.sheets[file.currentSheetIndex].stage;
               stage.ddInstance = ddInstance;
+              
               //刷新页面
               ddInstance.stage = stage;
               ddInstance.disabled = false
