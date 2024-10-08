@@ -302,7 +302,7 @@ export default {
               new DDeiSheet({
                 name: "页面-1",
                 desc: "页面-1",
-                stage: DDeiStage.initByJSON({ id: "stage_1" }),
+                stage: DDeiStage.initByJSON({ id: "stage_1" }, { currentDdInstance: ddInstance }),
                 active: DDeiActiveType.ACTIVE,
               }),
             ],
@@ -321,6 +321,7 @@ export default {
         this.editor.currentFileIndex = this.editor.files.length - 1;
         let sheets = file?.sheets;
         if (file && sheets && ddInstance) {
+          ddInstance.stage.destroyRender()
           let stage = sheets[0].stage;
           stage.ddInstance = ddInstance;
           //刷新页面

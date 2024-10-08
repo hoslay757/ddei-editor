@@ -2,8 +2,11 @@
   <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-choosecontrol" v-if="forceRefresh">
     <div class="ddei-core-dialog-choosecontrol-content">
       <div class="ddei-core-dialog-choosecontrol-content-itempanel" v-if="group">
-        <div @click="ok(control)" :class="{ 'ddei-core-dialog-choosecontrol-content-itempanel-item': true}"
-          :title="control.desc" v-for="control in group.controls">
+        <div @click="ok(control,$event)"
+          @mousedown="prepareDrag(control, $event)"
+          @mousemove="dragMove($event)"
+          :class="{ 'ddei-core-dialog-choosecontrol-content-itempanel-item': true}" :title="control.desc"
+          v-for="control in group.controls">
           <img class="icon" v-if="!control.icon" :src="editor?.icons[control.id]" />
           <div class="icon-html" v-if="control.icon" v-html="control.icon"></div>
           <div class="text">{{ control.name }}</div>
@@ -52,11 +55,33 @@ export default {
       }
     },
 
-    ok(control){
+    ok(control, evt) {
+      delete this.isDrag
+      delete this.dragControl
       if (this.editor?.tempPopData[this.dialogId]?.callback?.ok) {
-        this.editor?.tempPopData[this.dialogId]?.callback?.ok(this.group,control);
+        this.editor?.tempPopData[this.dialogId]?.callback?.ok(this.group, control, evt);
       }
-    }
+    },
+
+    prepareDrag(control, evt) {
+      if (this.editor?.tempPopData[this.dialogId]?.callback?.drag) {
+        this.isDrag = true
+        this.dragControl = control
+      }
+      
+    },
+
+    dragMove(evt) {
+      if (this.isDrag){
+        if (this.editor?.tempPopData[this.dialogId]?.callback?.drag) {
+
+          this.editor?.tempPopData[this.dialogId]?.callback?.drag(this.group, this.dragControl, evt);
+          delete this.isDrag
+          delete this.dragControl
+        }
+      }
+    },
+
 
   }
 };

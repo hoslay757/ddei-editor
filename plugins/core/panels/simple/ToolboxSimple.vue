@@ -251,7 +251,8 @@ export default {
       if ((layer.display == 0 && !layer.tempDisplay) || layer.lock) {
         return;
       }
-      DDeiEditorUtil.hiddenDialog(this.editor, "ddei-core-dialog-choosecontrol")
+      
+      
       //创建控件
       if(control){
         if (editMode != 4){
@@ -307,6 +308,7 @@ export default {
           this.editor.changeState(DDeiEditorState.DESIGNING);
         }
       }
+      DDeiEditorUtil.hiddenDialog(this.editor, "ddei-core-dialog-choosecontrol")
     },
 
     
@@ -340,7 +342,8 @@ export default {
           DDeiEditorUtil.showDialog(this.editor, "ddei-core-dialog-choosecontrol", {
             controlGroup: group,
             callback: {
-              ok: this.changeGroupControl
+              ok: this.changeGroupControl,
+              drag: this.options?.dragCreate == 1 ? this.dragCreateControlPrepare : null
             }
           }, { type: type,hiddenMask: true }, el, true, true)
         }
@@ -349,7 +352,7 @@ export default {
     
     },
 
-    changeGroupControl(group,control){
+    changeGroupControl(group,control,evt){
       this.changeEditMode(group?.editMode)
       if(group?.editMode == 4){
         DDeiEditorUtil.lineInitJSON = {
@@ -361,6 +364,19 @@ export default {
         this.createControlCenter(group)
       }
       DDeiEditorUtil.closeDialog(this.editor, "ddei-core-dialog-choosecontrol")
+      this.forceRefreshGroup = false
+      this.$nextTick(() => {
+        this.forceRefreshGroup = true;
+      });
+    },
+
+    dragCreateControlPrepare(group, control,evt){
+      
+      this.changeEditMode(group?.editMode)
+      group.currentControl = control
+      if (this.options?.dragCreate){
+        this.createControlPrepare(group,evt)
+      }
       this.forceRefreshGroup = false
       this.$nextTick(() => {
         this.forceRefreshGroup = true;

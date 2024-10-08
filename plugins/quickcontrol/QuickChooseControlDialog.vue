@@ -2,7 +2,7 @@
   <div :id="editor?.id + '_' + dialogId" class="ddei-ext-dialog-quickchoosecontrol" v-if="forceRefresh">
     <div v-for="group in groups" v-show="group.display == true" class="ddei-ext-dialog-quickchoosecontrol-group">
       <div class="ddei-ext-dialog-quickchoosecontrol-group-itempanel"
-        v-if="customControls || customGroups || group.expand == true">
+        v-if="customControls || customGroups || group.expand == true || model">
         <div class="ddei-ext-dialog-quickchoosecontrol-group-itempanel-item" :title="control.desc"
           v-for="control in group.controls" @click="quickCreateControl(control.id)">
           <img class="icon" v-if="!control.icon" :src="editor?.icons[control.id]" />
@@ -44,7 +44,8 @@ export default {
     return {
       dialogId: 'ddei-ext-dialog-quickchoosecontrol',
       //分组数据
-      groups: []
+      groups: [],
+      model:null
     };
   },
   computed: {},
@@ -86,28 +87,54 @@ export default {
         });
         this.groups = newGroups
       }else{
-        DDeiEditorUtil.readRecentlyToolGroups()
-        let hisGroups = DDeiEditorUtil.recentlyToolGroups;
-        let gps = []
-        if (hisGroups?.length > 0) {
+        let model = this.editor.tempPopData ? this.editor.tempPopData['ddei-ext-dialog-quickchoosecontrol']?.model : null
+        if (!model){
+          DDeiEditorUtil.readRecentlyToolGroups()
+          let hisGroups = DDeiEditorUtil.recentlyToolGroups;
+          let gps = []
+          if (hisGroups?.length > 0) {
 
-          hisGroups.forEach(hg => {
-            let group = null;
-            for (let i = 0; i < groups.length; i++) {
-              if (groups[i].id == hg.id) {
-                group = groups[i]
+            hisGroups.forEach(hg => {
+              let group = null;
+              for (let i = 0; i < groups.length; i++) {
+                if (groups[i].id == hg.id) {
+                  group = groups[i]
+                  break;
+                }
+              }
+              if (group) {
+                group.expand = hg.expand
+                gps.push(group)
+              }
+            })
+            
+            this.groups = gps;
+          }
+        }else{
+          let newGroups = []
+          
+          for (let i = 0; i < groups.length; i++) {
+            let finded = false
+            for(let c = 0;c < groups[i].controls.length;c++){
+              if (groups[i].controls[c].id == model.modelCode) {
+                finded = true
                 break;
               }
             }
-            if (group) {
-              group.expand = hg.expand
-              gps.push(group)
+            if (finded){
+              newGroups.push(groups[i])
+              break;
             }
-          })
-          
-          this.groups = gps;
+          }
+          this.model = model
+          this.groups = newGroups
         }
       }
+      this.forceRefresh = false
+      this.$nextTick(() => {
+        this.forceRefresh = true;
+
+      });
     },
 
     quickCreateControl(controlId){

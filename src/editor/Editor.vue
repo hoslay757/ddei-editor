@@ -203,7 +203,7 @@ export default {
     
     if (options?.config?.access){
       this.editor.setAccessInfo(options.config.access)
-    } else if (options.config.readonly == true || options.config.readonly == false) {
+    } else if (options?.config?.readonly == true || options?.config?.readonly == false) {
       this.editor.setEditable(!options.config.readonly)
     }
 

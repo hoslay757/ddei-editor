@@ -7,10 +7,11 @@ class DDeiCoreToolboxSimplePanel extends DDeiPluginBase{
    * 缺省实例
    */
   static defaultIns: DDeiCoreToolboxSimplePanel = new DDeiCoreToolboxSimplePanel({
-    direct:2,//方向，1纵向，2横向
-    position:1,//位置1-9顺时针，1为左上角，9为中心
+    direct:1,//方向，1纵向，2横向
+    position:8,//位置1-9顺时针，1为左上角，9为中心
     drag:1,//是否允许拖拽位置
     chooseCreate:0,//是否在选择控件时创建一个控件
+    dragCreate:0,//是否在拖拽时创建控件
     groups:[
       {
         editMode: 1,

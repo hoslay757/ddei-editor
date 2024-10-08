@@ -121,9 +121,6 @@ export default {
     mouseEnter(type,el,evt) {
       if(this.editor.state == 'designing'){
         if (this.editor.tempPopData['ddei-ext-dialog-quickcontrol']){
-          //显示弹出框
-          let elPos = evt.currentTarget.getBoundingClientRect()
-          // let elPos = DDeiUtil.getDomAbsPosition(evt.currentTarget)
           //向上区间寻找，是否有控件
           let existsControl = null;
           let model = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].model
@@ -131,22 +128,26 @@ export default {
           let outRect = DDeiAbstractShape.getOutRectByPV([model])
           if (type == 1) {
             let controls = layer.getSubModels([model.id], 100, { x: outRect.x, y: outRect.y-150, x1: outRect.x1, y1: outRect.y})
-            if (this.validControls(controls)){
+            controls = this.filtControls(model,controls)
+            if (controls.length > 0){
               existsControl = controls[0];
             }
           } else if (type == 2) {
             let controls = layer.getSubModels([model.id], 100, { x: outRect.x1, y: outRect.y, x1: outRect.x1+150, y1: outRect.y1 })
-            if (this.validControls(controls)) {
+            controls = this.filtControls(model,controls)
+            if (controls.length > 0) {
               existsControl = controls[0];
             }
           } else if (type == 3) {
             let controls = layer.getSubModels([model.id], 100, { x: outRect.x, y: outRect.y1, x1: outRect.x1, y1: outRect.y1+150 })
-            if (this.validControls(controls)) {
+            controls = this.filtControls(model,controls)
+            if (controls.length > 0) {
               existsControl = controls[0];
             }
           } else if (type == 4) {
             let controls = layer.getSubModels([model.id], 100, { x: outRect.x-150, y: outRect.y, x1: outRect.x, y1: outRect.y1 })
-            if (this.validControls(controls)) {
+            controls = this.filtControls(model,controls)
+            if (controls.length > 0) {
               existsControl = controls[0];
             }
           }
@@ -279,15 +280,24 @@ export default {
       }
     },
 
-    validControls(controls){
+    filtControls(model,controls){
+      let returnControls = []
       if(controls?.length > 0){
         for(let i = 0;i < controls.length;i++){
           if (controls[i].baseModelType != 'DDeiLine'){
-            return true;
+            let define = DDeiUtil.getControlDefine(controls[i])
+            let filterMethod = null
+            if (define && define.filters && define.filters["LINE_OBI_FILTER"]) {
+              filterMethod = define.filters["LINE_OBI_FILTER"];
+            }
+            if (!filterMethod || filterMethod(model,{model:controls[i]})) {
+              returnControls.push(controls[i]);
+            }
           }
+          
         }
       }
-      return false
+      return returnControls
     }
   }
 };

@@ -75,6 +75,7 @@ class DDeiKeyActionRevoke extends DDeiKeyAction {
             let jsonData = JSON.parse(hisData?.data)
             if (jsonData) {
               let ddInstance = editor?.ddInstance;
+              ddInstance.stage.destroyRender()
               let hisFile = DDeiFile.loadFromJSON(jsonData, {
                 currentDdInstance: ddInstance,
               });
@@ -108,10 +109,12 @@ class DDeiKeyActionRevoke extends DDeiKeyAction {
     } else if (histype == 'stage') {
       //修改当前操作控件坐标
       if (ddInstance && ddInstance.stage) {
+        
         let hisData = ddInstance.stage.revokeHistroyData();
         if (hisData?.data) {
           let jsonData = JSON.parse(hisData?.data)
           if (jsonData) {
+            ddInstance.stage.destroyRender()
             let tempData = { "currentDdInstance": ddInstance, "currentStage": ddInstance.stage }
             tempData[ddInstance.stage.id] = ddInstance.stage
             let layers = [];
