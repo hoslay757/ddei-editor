@@ -4,18 +4,24 @@
       :class="{ 'item-drag': options?.drag == 1 && options?.direct != 2, 'item-drag-2': options?.drag == 1 && options?.direct == 2, 'item-block': options?.drag != 1 }"
       @mousedown="options?.drag == 1 && prepareDragBox()">
     </div>
-    <div class="item" @click="newFile">
+    <div class="item" v-if="!options?.items" @click="newFile">
       新建
     </div>
-    <div class="item" @click="openFile">
+    <div class="item" v-if="!options?.items" @click="openFile">
       打开
     </div>
-    <div class="item" @click="save">
+    <div class="item" v-if="!options?.items" @click="save">
       保存
     </div>
-    <div class="item" @click="download">
+    <div class="item" v-if="!options?.items" @click="download">
       下载
     </div>
+    <div class="item" v-for="menu in options?.items">
+      <div v-if="menu && !menu.viewer && menu.id" @click="internalAction(menu.id,$event)">{{ menu.name }}</div>
+      <div v-if="menu && !menu.viewer && !menu.id" @click="menu.action(editor,$event)">{{ menu.name }}</div>
+      <component v-if="menu && menu.viewer" :is="menu.viewer" :options="options" :editor="editor"></component>
+    </div>
+
     <div class="item-block"></div>
   </div>
 </template>
@@ -79,6 +85,18 @@ export default {
     this.refreshData();
   },
   methods: {
+
+    internalAction(id,evt){
+      if(id == 'ddei-core-save'){
+        this.save(evt)
+      } else if (id == 'ddei-core-open') {
+        this.openFile(evt)
+      } else if (id == 'ddei-core-new') {
+        this.newFile(evt)
+      } else if (id == 'ddei-core-download') {
+        this.download(evt)
+      }
+    },
     /**
      * 保存
      * @param evt
