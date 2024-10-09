@@ -331,9 +331,12 @@ export default {
       if ((layer.display == 0 && !layer.tempDisplay) || layer.lock) {
         return;
       }
-
+      let controlInitJSON = DDeiEditorUtil.getModelInitJSON(this.editor.ddInstance, null, [control])
+      if (!controlInitJSON) {
+        return;
+      }
       //创建并初始化控件以及关系
-      let models = DDeiEditorUtil.createControl(control,this.editor)
+      let models = DDeiEditorUtil.createControl(controlInitJSON[0],this.editor)
       //加载事件的配置
       
       let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { models: models }, ddInstance, e)

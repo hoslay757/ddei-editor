@@ -12,7 +12,7 @@ import {DDeiEnumOperateType} from "ddei-framework";
 import {DDeiPolygon} from "ddei-framework";
 import {DDeiLink} from "ddei-framework";
 import {DDeiLineLink} from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
+import { DDeiEditorState, DDeiEditorUtil } from "ddei-framework";
 /**
  * 键行为:粘贴
  * 粘贴剪切板内容
@@ -390,6 +390,11 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
           DDeiUtil.convertChildrenJsonUnit(model, stage, unit);
         });
       }
+      //创建并初始化控件以及关系
+      let controlInitJSON = DDeiEditorUtil.getModelInitJSON(stage.ddInstance, null, jsonArray)
+      if (!controlInitJSON) {
+        return;
+      }
       
       //当前选中控件是否为1且有表格，且选中表格的单元格，则作为表格单元格的内容粘贴
       let createControl = true;
@@ -400,7 +405,7 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
           let cells = model.getSelectedCells();
           if (cells.length > 0) {
             cells.forEach(cell => {
-              this.createControl(jsonArray, jsonLinkArray, offsetX, offsetY, stage, cell, mode, evt)
+              this.createControl(controlInitJSON, jsonLinkArray, offsetX, offsetY, stage, cell, mode, evt)
             })
             hasChange = true;
             createControl = false
@@ -408,14 +413,14 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
         }
         //添加到容器
         else if (model.baseModelType == 'DDeiContainer') {
-          this.createControl(jsonArray, jsonLinkArray, offsetX, offsetY, stage, model, mode, evt)
+          this.createControl(controlInitJSON, jsonLinkArray, offsetX, offsetY, stage, model, mode, evt)
           createControl = false
           hasChange = true;
         }
       }
       //如果没有粘贴到表格在最外层容器的鼠标位置，反序列化控件，重新设置ID，其他信息保留
       if (createControl) {
-        this.createControl(jsonArray, jsonLinkArray, offsetX, offsetY, stage, layer, mode, evt)
+        this.createControl(controlInitJSON, jsonLinkArray, offsetX, offsetY, stage, layer, mode, evt)
         hasChange = true;
       }
       if (hasChange) {

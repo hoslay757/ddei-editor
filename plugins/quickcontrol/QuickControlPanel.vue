@@ -34,7 +34,7 @@
 import { DDeiEditor, DDeiEnumControlState, DDeiUtil } from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
 import { DDeiAbstractShape } from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
+import { clone } from "lodash";
 import { DDeiEnumBusCommandType } from "ddei-framework";
 
 export default {
@@ -243,22 +243,38 @@ export default {
               endSita = 0
             }
             //创建连线
-            let initLine = DDeiEditorUtil.getLineInitJSON()
-            let lines = this.editor.addLines([
-              {
-                model: initLine.modelCode ? initLine.modelCode : initLine.model ? initLine.model : initLine.id ? initLine.id : '100401',
-                type: 2,
-                dash:[10,5],
-                startPoint: { x: sx, y: sy },
-                endPoint: { x: ex, y: ey },
-                smodel: { id: model.id, x: sx, y: sy, rate: 0.5, sita: startSita },
-                emodel: { id: existsControl.id, x: ex, y: ey, rate: 0.5, sita: endSita }
-              },
-            ],true,true,false)
-            this.editor.tempLineModel = lines[0];
-            DDeiEditorUtil.closeDialog(this.editor, 'ddei-ext-dialog-quickchoosecontrol', true)
-            this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape);
-            this.editor.bus.executeAll();
+            let smodel = { id: model.id, x: sx, y: sy, rate: 0.5, sita: startSita }
+            let emodel = { id: existsControl.id, x: ex, y: ey, rate: 0.5, sita: endSita }
+            let initLine = DDeiEditorUtil.getLineInitJSON(this.editor.ddInstance,smodel, emodel)
+            if (initLine){
+              let initJson = clone(initLine)
+              initJson.model = initLine.modelCode ? initLine.modelCode : initLine.model ? initLine.model : initLine.id ? initLine.id : '100401'
+              if (!initJson.type) {
+                initJson.type = 2
+              }
+              if (!initJson.dash) {
+                initJson.dash = [10, 5]
+              }
+              if (!initJson.startPoint) {
+                initJson.startPoint = { x: sx, y: sy }
+              }
+              if (!initJson.endPoint) {
+                initJson.endPoint = { x: ex, y: ey }
+              }
+              if (!initJson.smodel) {
+                initJson.smodel = smodel
+              }
+              if (!initJson.emodel) {
+                initJson.emodel = emodel
+              }
+              let lines = this.editor.addLines([
+                initJson
+              ],true,true,false)
+              this.editor.tempLineModel = lines[0];
+              DDeiEditorUtil.closeDialog(this.editor, 'ddei-ext-dialog-quickchoosecontrol', true)
+              this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape);
+              this.editor.bus.executeAll();
+            }
           }
         }
       }

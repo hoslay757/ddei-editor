@@ -198,7 +198,10 @@ export default {
       converters?.forEach(converter => {
         initData = converter.input(initData)
       });
-      this.editor.addControls(initData.controls)
+      let controlInitJSON = DDeiEditorUtil.getModelInitJSON(this.editor.ddInstance, null, initData.controls)
+      if (controlInitJSON){
+        this.editor.addControls(controlInitJSON)
+      }
     }
     
     if (options?.config?.access){
