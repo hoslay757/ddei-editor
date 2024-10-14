@@ -23,7 +23,7 @@ import {DDeiEditorCommandAddHistroy} from "ddei-framework";
 import MenuDialog from "./MenuDialog.vue";
 import {DDeiEditorUtil} from "ddei-framework";
 import DDeiCore from "@ddei/core";
-import { loadControlByFrom, loadAndSortGroup } from "./grouputil";
+import { loadControlByFrom, loadAndSortGroup, loadControlDefineExt } from "./grouputil";
 
 import ICONS from "./icon";
 import { markRaw } from "vue";
@@ -107,6 +107,7 @@ export default {
                 oldControl.define[n] = control.define[n]
               }
             }
+            loadControlDefineExt(oldControl)
           }
           control = oldControl
         }

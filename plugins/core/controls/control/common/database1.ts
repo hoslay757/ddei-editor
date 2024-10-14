@@ -70,7 +70,8 @@ export default {
                 pvs.push({r:er,dy:-50,rad:0,stroke:1,type:4,direct:1});
                 pvs.push({r:sample.r});
                 pvs.push({r:10});
-                pvs.push({end:1,x:pvs[0].x,y:pvs[0].y,stroke:1});
+                pvs.push({x:pvs[0].x,y:pvs[0].y,stroke:1});
+                pvs.push({end:1,x:pvs[0].x,y:pvs[0].y});
               break;
             }
         }`,

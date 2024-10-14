@@ -254,6 +254,9 @@ export default {
               }
               if (!initJson.dash) {
                 initJson.dash = [10, 5]
+                this.lockDash = false
+              }else{
+                this.lockDash = true
               }
               if (!initJson.startPoint) {
                 initJson.startPoint = { x: sx, y: sy }
@@ -282,7 +285,10 @@ export default {
 
     createLineOk(){
       if (this.editor.tempLineModel){
-        delete this.editor.tempLineModel.dash
+        if (!this.lockDash){
+          delete this.editor.tempLineModel.dash
+        }
+        delete this.lockDash
         this.editor.tempLineModel.render?.clearCachedValue()
         delete this.editor.tempLineModel
         this.refreshData();

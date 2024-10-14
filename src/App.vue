@@ -19,7 +19,7 @@ export default defineComponent({
   components: { DDeiEditorView },
   data() {
     
-    const options1 = markRaw({
+    const options = markRaw({
       
       config: {
         paper:"A6",
@@ -74,8 +74,8 @@ export default defineComponent({
         // DDeiCoreOpenFilesViewPanel.configuration({ max: 3 })
       ]
     })
-    const options = markRaw({
-      currentLayout: "ddei-core-layout-simple",
+    const options1 = markRaw({
+      // currentLayout: "ddei-core-layout-simple",
       config: {
         // "readonly":true,
         "mark": "水印文本",
@@ -113,34 +113,34 @@ export default defineComponent({
         DDeiExtQuickStyle,
         DDeiExtSearch,
         DDeiExtQuickControl,
-        DDeiCoreTopMenuSimplePanel.configuration({
-          direct: 2,//方向，1纵向，2横向
-          position: 3,//位置1-9顺时针，1为左上角，9为中心
-          drag: 1,//是否允许拖拽位置
-          items:[//自定义菜单
-            {
-              id:"ddei-core-save",
-              name:"Save"
-            },
-            {
-              id: "ddei-core-open",
-              name: "打开"
-            },
-            {
-              viewer: TopMenuViewerDemo
-            },
-            {
-              id: "ddei-core-new",
-              name: "新建"
-            },
-            {
-              name: "测试",
-              action: function (editor) {
-                console.log("测试:" + editor.id)
-              }
-            }
-          ]
-        }),
+        // DDeiCoreTopMenuSimplePanel.configuration({
+        //   direct: 2,//方向，1纵向，2横向
+        //   position: 3,//位置1-9顺时针，1为左上角，9为中心
+        //   drag: 1,//是否允许拖拽位置
+        //   items:[//自定义菜单
+        //     {
+        //       id:"ddei-core-save",
+        //       name:"Save"
+        //     },
+        //     {
+        //       id: "ddei-core-open",
+        //       name: "打开"
+        //     },
+        //     {
+        //       viewer: TopMenuViewerDemo
+        //     },
+        //     {
+        //       id: "ddei-core-new",
+        //       name: "新建"
+        //     },
+        //     {
+        //       name: "测试",
+        //       action: function (editor) {
+        //         console.log("测试:" + editor.id)
+        //       }
+        //     }
+        //   ]
+        // }),
         
     
 

@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { DDeiAbstractShape } from "ddei-framework";
-import { DDeiEditorUtil } from "ddei-framework";
+import { DDeiEditorUtil, DDeiEnumOperateType, DDeiEnumBusCommandType } from "ddei-framework";
 import { clone } from "lodash"
 import DialogBase from "./dialog"
 
@@ -150,79 +150,85 @@ export default {
             },
           ])
           if (controlInitJSON){
-            let controls = this.editor.addControls(controlInitJSON,true,false)
-            //添加后的控件坐标，将其移动到特定位置
-            let outRect1 = DDeiAbstractShape.getOutRectByPV(controls)
-            let x,y,sx,sy,ex,ey
-            let  startSita, endSita
-            let weight = 60
-            //创建控件
-            if(type == 1){
-              x = (outRect.x+outRect.x1)/2
-              y = outRect.y - weight - outRect1.height / 2
-              sx = x
-              sy = outRect.y
-              ex = x
-              ey = y + outRect1.height / 2
-              startSita = -90
-              endSita = 90
-            } else if (type == 2) {
-              x = outRect.x1 + weight + outRect1.width/2,
-              y =(outRect.y1 + outRect.y) / 2 
-              sx = outRect.x1
-              sy = y
-              ex = x - outRect1.width / 2
-              ey = y   
-              startSita = 0
-              endSita = 180
-            } else if (type == 3) {
-              x = (outRect.x + outRect.x1) / 2,
-              y = outRect.y1 + weight + outRect1.height / 2
-              sx = x
-              sy = outRect.y1
-              ex = x
-              ey = y - outRect1.height / 2
-              startSita = 90
-              endSita = -90
-            } else if (type == 4) {
-              x = outRect.x - weight -outRect1.width/2
-              y = (outRect.y1 + outRect.y) / 2  
-              sx = outRect.x 
-              sy = y
-              ex = x+outRect1.width / 2
-              ey = y 
-              startSita = 180
-              endSita = 0
-            }
-            controls[0].setPosition({x:x,y:y})
-            //创建连线
-            let smodel ={ id: model.id, x: sx, y: sy, rate: 0.5, sita: startSita }
-            let emodel = { id: controls[0].id, x: ex, y: ey, rate: 0.5, sita: endSita }
-            let initLine = DDeiEditorUtil.getLineInitJSON(this.editor.ddInstance,smodel,emodel)
-            if (initLine){
-              let initJson = clone(initLine)
-              initJson.model = initLine.modelCode ? initLine.modelCode : initLine.model ? initLine.model : initLine.id ? initLine.id : '100401'
-              if (!initJson.type) {
-                initJson.type = 2
+            let controls = this.editor.addControls(controlInitJSON,true,false,true)
+            if (controls?.length > 0){
+              //添加后的控件坐标，将其移动到特定位置
+              let outRect1 = DDeiAbstractShape.getOutRectByPV(controls)
+              let x,y,sx,sy,ex,ey
+              let  startSita, endSita
+              let weight = 60
+              //创建控件
+              if(type == 1){
+                x = (outRect.x+outRect.x1)/2
+                y = outRect.y - weight - outRect1.height / 2
+                sx = x
+                sy = outRect.y
+                ex = x
+                ey = y + outRect1.height / 2
+                startSita = -90
+                endSita = 90
+              } else if (type == 2) {
+                x = outRect.x1 + weight + outRect1.width/2,
+                y =(outRect.y1 + outRect.y) / 2 
+                sx = outRect.x1
+                sy = y
+                ex = x - outRect1.width / 2
+                ey = y   
+                startSita = 0
+                endSita = 180
+              } else if (type == 3) {
+                x = (outRect.x + outRect.x1) / 2,
+                y = outRect.y1 + weight + outRect1.height / 2
+                sx = x
+                sy = outRect.y1
+                ex = x
+                ey = y - outRect1.height / 2
+                startSita = 90
+                endSita = -90
+              } else if (type == 4) {
+                x = outRect.x - weight -outRect1.width/2
+                y = (outRect.y1 + outRect.y) / 2  
+                sx = outRect.x 
+                sy = y
+                ex = x+outRect1.width / 2
+                ey = y 
+                startSita = 180
+                endSita = 0
               }
-              if (!initJson.startPoint) {
-                initJson.startPoint = { x: sx, y: sy }
+              controls[0].setPosition({x:x,y:y})
+              //创建连线
+              let smodel ={ id: model.id, x: sx, y: sy, rate: 0.5, sita: startSita }
+              let emodel = { id: controls[0].id, x: ex, y: ey, rate: 0.5, sita: endSita }
+              let initLine = DDeiEditorUtil.getLineInitJSON(this.editor.ddInstance,smodel,emodel)
+              let lines = null
+              if (initLine){
+                let initJson = clone(initLine)
+                initJson.model = initLine.modelCode ? initLine.modelCode : initLine.model ? initLine.model : initLine.id ? initLine.id : '100401'
+                if (!initJson.type) {
+                  initJson.type = 2
+                }
+                if (!initJson.startPoint) {
+                  initJson.startPoint = { x: sx, y: sy }
+                }
+                if (!initJson.endPoint) {
+                  initJson.endPoint = { x: ex, y: ey }
+                }
+                if (!initJson.smodel) {
+                  initJson.smodel = smodel
+                }
+                if (!initJson.emodel) {
+                  initJson.emodel = emodel
+                }
+                
+                lines = this.editor.addLines([
+                  initJson
+                ],true,true,false)
               }
-              if (!initJson.endPoint) {
-                initJson.endPoint = { x: ex, y: ey }
-              }
-              if (!initJson.smodel) {
-                initJson.smodel = smodel
-              }
-              if (!initJson.emodel) {
-                initJson.emodel = emodel
-              }
-              
-              this.editor.addLines([
-                initJson
-              ],true,true,false)
+              this.editor.bus.push(DDeiEnumBusCommandType.NodifyControlCreated, { models: controls, lines: lines });
+              this.editor.bus.executeAll()
               this.editor.ddInstance.stage.makeSelectModels(controls);
               this.editor.ddInstance.stage.notifyChange()
+              
             }
           }
         }

@@ -460,7 +460,7 @@ export default {
           if ((layer.display == 0 && !layer.tempDisplay) || layer.lock) {
             return;
           }
-          let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { controls: [control] }, ddInstance, e)
+          let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { models: [control] }, ddInstance, e)
           if (rsState == 0 || rsState == 1) {
             let controlInitJSON = DDeiEditorUtil.getModelInitJSON(this.editor.ddInstance, null, [{ model: control.id }])
             if (controlInitJSON){

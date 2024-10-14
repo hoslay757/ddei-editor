@@ -491,6 +491,7 @@ export default {
   overflow: hidden;
   position: relative;
   background-color: var(--panel-header);
+  
   &-contentlayer {
     overflow: hidden;
     width: 100%;

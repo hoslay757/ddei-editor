@@ -21,7 +21,25 @@ const controls: object[] = [
         color: "#e1b348"
       },
       width:150,
-      height:100
+      height:100,
+      ext: {
+        groups: [
+          {
+            name: "数据",
+            icon: 'icon-a-ziyuan409',
+            subGroups: [
+              {
+                name: "分组1",
+                attrs: ["code", "text1"]
+              },
+              {
+                name: "分组2",
+                attrs: ["text"]
+              },
+            ]
+          },
+        ]
+      }
     }
   },
   {
