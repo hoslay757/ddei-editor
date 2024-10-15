@@ -3,12 +3,12 @@
     <div class="content">
       <div class="header">
         <svg class="icon warn" aria-hidden="true">
-          <use xlink:href="#icon-a-ziyuan425"></use>
+          <use xlink:href="#icon-publish"></use>
         </svg>
         <span>发布文件</span>
         <div style="flex:1"></div>
         <svg class="icon close" aria-hidden="true" @click="cancel">
-          <use xlink:href="#icon-a-ziyuan422"></use>
+          <use xlink:href="#icon-close"></use>
         </svg>
       </div>
       <div class="msg">

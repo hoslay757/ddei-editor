@@ -41,7 +41,7 @@ export default {
         },
         {
           name: "数据",
-          icon: 'icon-a-ziyuan409',
+          icon: 'icon-edit-properies',
           subGroups: [
             {
               name: "数据属性",

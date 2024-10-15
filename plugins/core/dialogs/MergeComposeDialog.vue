@@ -6,14 +6,14 @@
         <div class="group_content">
           <div :class="{ 'item_disabled': !canMerge(), 'item': canMerge() }" @click="canMerge() && doMerge()">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan406"></use>
+              <use xlink:href="#icon-merge"></use>
             </svg>
             <div class="text">组合</div>
           </div>
           <div :class="{ 'item_disabled': !canCancelMerge(), 'item': canCancelMerge() }"
             @click="canCancelMerge() && doCancelMerge()">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan405"></use>
+              <use xlink:href="#icon-cancel-merge"></use>
             </svg>
             <div class="text">取消组合</div>
           </div>

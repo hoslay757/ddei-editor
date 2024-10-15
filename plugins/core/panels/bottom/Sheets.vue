@@ -2,7 +2,7 @@
   <div class="ddei-core-panel-bottom-addpage" @click="newSheet"
     v-if="allowEditSheet && create && (!max || (editor?.files[editor?.currentFileIndex]?.sheets?.length < max))">
     <svg class="icon" aria-hidden="true">
-      <use xlink:href="#icon-a-ziyuan376"></use>
+      <use xlink:href="#icon-add"></use>
     </svg>
   </div>
   <div class="ddei-core-panel-bottom-pages" ref="bottomSheets" @mouseup="drag && sheetDragDrop($event)">
@@ -21,13 +21,13 @@
     <div class="ddei-core-panel-bottom-pages-movebox"
       v-show="editor?.files[editor?.currentFileIndex]?.sheets?.length > maxOpenSize" @click="moveItem(-1)">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan481"></use>
+        <use xlink:href="#icon-left"></use>
       </svg>
     </div>
     <div class="ddei-core-panel-bottom-pages-movebox"
       v-show="editor?.files[editor?.currentFileIndex]?.sheets?.length > maxOpenSize" @click="moveItem(1)">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan480"></use>
+        <use xlink:href="#icon-right"></use>
       </svg>
     </div>
   </div>

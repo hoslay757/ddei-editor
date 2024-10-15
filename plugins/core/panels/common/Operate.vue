@@ -7,7 +7,7 @@
           :class="{ 'button-v--selected': editor?.ddInstance?.stage?.copyMode == 'cut', 'button-v': editor?.ddInstance?.stage?.selectedModels?.size > 0, 'button-v--disabled': !canEdit || editor?.ddInstance?.stage?.selectedModels?.size == 0 || !editor?.ddInstance?.stage?.selectedModels }"
           title="剪切" @click="canEdit && editor?.ddInstance?.stage?.selectedModels?.size > 0 && execShearAction($event)">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan486"></use>
+            <use xlink:href="#icon-cut"></use>
           </svg>
           <div class="text">剪切</div>
         </div>
@@ -18,7 +18,7 @@
           :class="{ 'button-v--selected': editor?.ddInstance?.stage?.copyMode == 'copy', 'button-v': editor?.ddInstance?.stage?.selectedModels?.size > 0, 'button-v--disabled': editor?.ddInstance?.stage?.selectedModels?.size == 0 || !editor?.ddInstance?.stage?.selectedModels }"
           title="复制" @click="editor?.ddInstance?.stage?.selectedModels?.size > 0 && execCopyAction($event)">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan484"></use>
+            <use xlink:href="#icon-copy-file"></use>
           </svg>
           <div class="text">复制</div>
         </div>
@@ -26,7 +26,7 @@
       <div class="part">
         <div :class="{ 'button-v': hasClipData, 'button-v--disabled': !canEdit || !hasClipData }" title="粘贴">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan488"></use>
+            <use xlink:href="#icon-paste"></use>
           </svg>
           <div class="text">粘贴</div>
         </div>
@@ -37,7 +37,7 @@
           title="格式刷"
           @click="canEdit && editor?.ddInstance?.stage?.selectedModels?.size == 1 && execBrushAction($event)">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan485"></use>
+            <use xlink:href="#icon-brush"></use>
           </svg>
           <div class="text">格式刷</div>
         </div>

@@ -209,7 +209,7 @@ export default {
   groups: [
     {
       name: "样式",
-      icon: 'icon-a-ziyuan418',
+      icon: 'icon-setting',
       subGroups: [
         {
           name: "纸张",

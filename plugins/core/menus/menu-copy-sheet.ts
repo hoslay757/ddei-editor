@@ -21,7 +21,7 @@ class MenuCopySheet extends DDeiMenuBase {
   
   defaultOptions: object = {
     'label': '复制',
-    'icon': '#icon-a-ziyuan488',
+    'icon': '#icon-paste',
     'models': ["DDeiSheet"],
     'disabled': false
   }

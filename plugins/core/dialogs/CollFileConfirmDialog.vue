@@ -8,7 +8,7 @@
         <span>收藏文件</span>
         <div style="flex:1"></div>
         <svg class="icon close" aria-hidden="true" @click="cancel">
-          <use xlink:href="#icon-a-ziyuan422"></use>
+          <use xlink:href="#icon-close"></use>
         </svg>
       </div>
       <div class="msg">

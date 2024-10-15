@@ -22,7 +22,7 @@ class MenuRemoveSheet extends DDeiMenuBase {
 
   defaultOptions: object = {
     'label': '删除',
-    'icon': '#icon-a-ziyuan401',
+    'icon': '#icon-remove',
     'models':["DDeiSheet"],
     'disabled': false
   }

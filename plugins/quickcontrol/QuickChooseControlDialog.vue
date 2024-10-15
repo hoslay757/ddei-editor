@@ -150,6 +150,7 @@ export default {
             },
           ])
           if (controlInitJSON){
+            
             let controls = this.editor.addControls(controlInitJSON,true,false,true)
             if (controls?.length > 0){
               //添加后的控件坐标，将其移动到特定位置

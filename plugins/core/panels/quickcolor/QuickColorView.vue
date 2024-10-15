@@ -6,7 +6,7 @@
         <use :xlink:href="item.img"></use>
       </svg>
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan466"></use>
+        <use xlink:href="#icon-btn-down"></use>
       </svg>
     </div>
     <div :class="{ 'ddei-editor-qcview-color': true }" v-for="color in  colors "
@@ -40,9 +40,9 @@ export default {
       //当前编辑的模式，1填充，2边框，3字体
       mode: 1,
       dataSource: [
-        { value: 1, text: "填充", img: "#icon-a-ziyuan453" },
+        { value: 1, text: "填充", img: "#icon-fill" },
         { value: 2, text: "边框", img: "#icon-border-pencil" },
-        { value: 3, text: "字体", img: "#icon-a-ziyuan463" },
+        { value: 3, text: "字体", img: "#icon-font" },
       ]
     };
   },

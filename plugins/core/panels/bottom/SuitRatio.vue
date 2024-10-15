@@ -1,7 +1,7 @@
 <template>
   <div class="ddei-core-panel-bottom-suitratio" v-if="allowStageRatio" @click="autoRatio(1)" title="整页">
     <svg class="icon" aria-hidden="true">
-      <use xlink:href="#icon-a-ziyuan391"></use>
+      <use xlink:href="#icon-suit-ratio"></use>
     </svg>
   </div>
 </template>

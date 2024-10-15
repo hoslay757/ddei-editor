@@ -7,7 +7,7 @@
           <div class="item" @click="createNewLayer(0)" v-show="allowAddLayer">
             <span style="grid-column:1/8;">新建图层</span>
             <svg class="icon extbtn" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan374"></use>
+              <use xlink:href="#icon-add-layer"></use>
             </svg>
           </div>
           <div :class="{ 'item': true, 'current': currentStage?.layerIndex === index }"
@@ -19,20 +19,20 @@
               ? layer.name :
               '图层' }}</span>
             <svg class="icon" aria-hidden="true" v-show="allowEditLayes" @click="removeLayer(index)">
-              <use xlink:href="#icon-a-ziyuan401"></use>
+              <use xlink:href="#icon-remove"></use>
             </svg>
             <span style="grid-column:1/4;font-weight:normal">形状:{{ layer.modelNumber }}</span>
             <svg class="icon" aria-hidden="true" @click="createNewLayer(index)" v-show="allowAddLayer">
-              <use xlink:href="#icon-a-ziyuan374"></use>
+              <use xlink:href="#icon-add-layer"></use>
             </svg>
             <svg class="icon" @click="displayOrShowLayer(layer)">
-              <use xlink:href="#icon-a-ziyuan387" v-if="layer.display == 0 && !layer.tempDisplay"></use>
-              <use xlink:href="#icon-a-ziyuan383" v-if="!(layer.display == 0 && !layer.tempDisplay)"></use>
+              <use xlink:href="#icon-close-eye" v-if="layer.display == 0 && !layer.tempDisplay"></use>
+              <use xlink:href="#icon-open-eye" v-if="!(layer.display == 0 && !layer.tempDisplay)"></use>
             </svg>
 
             <svg class="icon" @click="lockOrUnLockLayer(layer)">
-              <use xlink:href="#icon-a-ziyuan415" v-if="layer.lock"></use>
-              <use xlink:href="#icon-a-ziyuan499" v-if="!layer.lock"></use>
+              <use xlink:href="#icon-lock" v-if="layer.lock"></use>
+              <use xlink:href="#icon-unlock" v-if="!layer.lock"></use>
             </svg>
 
             <input type="radio" :class="{ 'not_temp_display': !layer.tempDisplay }" name="rdo_layers" :value="layer.id"
@@ -40,8 +40,8 @@
               autocomplete="off" />
 
             <svg class="icon" @click="printOrNoPrintLayer(layer)">
-              <use xlink:href="#icon-a-ziyuan500" v-if="!layer.print"></use>
-              <use xlink:href="#icon-a-ziyuan501" v-if="layer.print"></use>
+              <use xlink:href="#icon-print-disabled" v-if="!layer.print"></use>
+              <use xlink:href="#icon-print" v-if="layer.print"></use>
             </svg>
 
           </div>

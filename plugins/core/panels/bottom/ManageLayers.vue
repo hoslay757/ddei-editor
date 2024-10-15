@@ -1,7 +1,7 @@
 <template>
   <div class="ddei-core-panel-bottom-managelayers" v-if="allowOpenMultLayers" @click="showLayersDialog($event)">
     <svg class="icon" aria-hidden="true">
-      <use xlink:href="#icon-a-ziyuan402"></use>
+      <use xlink:href="#icon-layers"></use>
     </svg>
   </div>
 </template>

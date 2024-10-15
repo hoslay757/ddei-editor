@@ -7,12 +7,12 @@
         <div class="group_content">
           <div :class="{ 'item': canMirror(), 'item_disabled': !canMirror() }" @click="canMirror() && doMirror(1)">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan441"></use>
+              <use xlink:href="#icon-mirror-v"></use>
             </svg>
           </div>
           <div :class="{ 'item': canMirror(), 'item_disabled': !canMirror() }" @click="canMirror() && doMirror(2)">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan442"></use>
+              <use xlink:href="#icon-mirror-h"></use>
             </svg>
           </div>
         </div>
@@ -22,17 +22,17 @@
         <div class="group_content">
           <div :class="{ 'item': canRotate(), 'item_disabled': !canRotate() }" @click="canRotate() && doRotate(90)">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan377"></use>
+              <use xlink:href="#icon-rotate-90"></use>
             </svg>
           </div>
           <div :class="{ 'item': canRotate(), 'item_disabled': !canRotate() }" @click="canRotate() && doRotate(-90)">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan382"></use>
+              <use xlink:href="#icon-rotate-270"></use>
             </svg>
           </div>
           <div :class="{ 'item': canRotate(), 'item_disabled': !canRotate() }" @click="canRotate() && doRotate(-1)">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan373"></use>
+              <use xlink:href="#icon-rotate-0"></use>
             </svg>
           </div>
         </div>

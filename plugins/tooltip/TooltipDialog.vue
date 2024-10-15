@@ -1,7 +1,7 @@
 <template>
   <div :id="editor?.id + '_' + dialogId" v-if="forceRefresh" class='ddei-ext-dialog-tooltip fade-in'>
-    <component v-if="options.viewer" :editor="editor" :options="options" :model="model" :is="options.viewer"></component>
-    <div v-if="!options.viewer">
+    <component v-if="options?.viewer" :editor="editor" :options="options" :model="model" :is="options.viewer"></component>
+    <div v-if="!options?.viewer">
       <div class="ddei-ext-dialog-tooltip-row">
         <div class="ddei-ext-dialog-tooltip-row-title" v-if="model?.id">
           ID

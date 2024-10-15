@@ -5,12 +5,12 @@
       <svg aria-hidden="true" v-if="expand"
         :class="{ 'icon': true, 'header-7': propertyViewShow, 'header-7-expand': !propertyViewShow }"
         @click="hidOrShowPV">
-        <use v-if="propertyViewShow" xlink:href="#icon-a-ziyuan474"></use>
-        <use v-if="!propertyViewShow" xlink:href="#icon-a-ziyuan475"></use>
+        <use v-if="propertyViewShow" xlink:href="#icon-expand4"></use>
+        <use v-if="!propertyViewShow" xlink:href="#icon-expand3"></use>
       </svg>
       <div style="flex:1"></div>
       <svg class="icon ding" aria-hidden="true" v-if="propertyViewShow">
-        <use xlink:href="#icon-a-ziyuan410"></use>
+        <use xlink:href="#icon-ding"></use>
       </svg>
     </div>
     <div class="content">

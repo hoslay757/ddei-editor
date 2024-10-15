@@ -22,45 +22,47 @@ export default defineComponent({
     const options = markRaw({
       
       config: {
+        ratio: 1.3, //默认缩放比例为150%
         paper:"A6",
         "mark": "水印文本",
         // EXT_STAGE_WIDTH: false,
         // EXT_STAGE_HEIGHT: false,
         // 自定义控件，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        controlDefines: ControlDefinesDemo,
+        // controlDefines: ControlDefinesDemo,
         // 自定义分组，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        groupDefines: GroupDefinesDemo,
+        // groupDefines: GroupDefinesDemo,
         initData: {
           controls: [
-            {
-              model: "9999002"
-            },
             // {
-            //   id: "act_1",
-            //   model: "102010",
-            //   type: "emp_1",
-            //   text: "第一步",
-            //   border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
-            //   fill: { color: "grey" },
-            // }
+            //   model: "9999002"
+            // },
+            {
+              id: "act_1",
+              model: "102010",
+              type: "emp_1",
+              text: "第一步",
+              border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
+              fill: { color: "grey" },
+            }
           ]
         }
       },
       extensions: [
         //布局的配置
-        // DDeiCoreStandLayout.configuration({
-        //   //配置插件
-        //   // 'top': [],
-        //   'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],// [!code ++]
-        //   // 'bottom': [],
-        //   // 'left': [],
-        //   // 'right': []
-        // }),
+        DDeiCoreStandLayout.configuration({
+          //配置插件
+          // 'top': [],
+          'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],// [!code ++]
+          // 'bottom': [],
+          // 'left': [],
+          // 'right': []
+        }),
         DDeiCoreSimpleLayout,
         DDeiExtUML,
         DDeiExtSearch,
-        // DDeiExtQuickStyle,
-        // DDeiExtQuickControl,
+        DDeiExtTooltip,
+        DDeiExtQuickStyle,
+        DDeiExtQuickControl,
         // QuickChooseControlDialog.configuration({ customGroups: ['101', '102'] }),
         // DDeiExtTooltip.configuration({
         //   'ddei-ext-dialog-tooltip':{

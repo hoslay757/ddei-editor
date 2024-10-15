@@ -6,13 +6,13 @@
         <div class="button-h">
           <div class="button" title="导入">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan371"></use>
+              <use xlink:href="#icon-import"></use>
             </svg>
             <div class="text">导入</div>
           </div>
           <div class="button" @click="showExportDialog($event)" title="导出">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan423"></use>
+              <use xlink:href="#icon-share"></use>
             </svg>
             <div class="text">导出</div>
           </div>
@@ -21,7 +21,7 @@
       <div class="part">
         <div class="button-v" @click="newFile" title="新建">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan490"></use>
+            <use xlink:href="#icon-new-file"></use>
           </svg>
           <div class="text">新建</div>
         </div>
@@ -29,7 +29,7 @@
       <div class="part">
         <div class="button-v" @click="openFile" title="打开">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan489"></use>
+            <use xlink:href="#icon-folder"></use>
           </svg>
           <div class="text">打开</div>
         </div>
@@ -37,7 +37,7 @@
       <div class="part">
         <div class="button-v" @click="save" title="保存">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan487"></use>
+            <use xlink:href="#icon-save"></use>
           </svg>
           <div class="text">保存</div>
         </div>
@@ -45,7 +45,7 @@
       <div class="part">
         <div class="button-v" @click="download" title="下载">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan424"></use>
+            <use xlink:href="#icon-download"></use>
           </svg>
           <div class="text">下载</div>
         </div>

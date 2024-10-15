@@ -5,20 +5,20 @@
       <div class="group">
         <div class="item" @mousemove="expandSubMenu('basic', $event)">
           <svg class="icon groupicon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan503"></use>
+            <use xlink:href="#icon-shapes-catalogy"></use>
           </svg>
           <div class="groupname">基本</div>
           <svg class="icon expand" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan465"></use>
+            <use xlink:href="#icon-btn-right"></use>
           </svg>
         </div>
         <div class="item" @mousemove="expandSubMenu('uml', $event)">
           <svg class="icon groupicon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan384"></use>
+            <use xlink:href="#icon-groups"></use>
           </svg>
           <div class="groupname">UML</div>
           <svg class="icon expand" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan465"></use>
+            <use xlink:href="#icon-btn-right"></use>
           </svg>
         </div>
       </div>

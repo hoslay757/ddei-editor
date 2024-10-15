@@ -13,29 +13,29 @@
         </div>
         <div class="panel12-content-5">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
-            :is="editor?.panels['ddei-core-btn-addfontsize']" :addValue="1" attrCode="font.size" img="icon-a-ziyuan456"
+            :is="editor?.panels['ddei-core-btn-addfontsize']" :addValue="1" attrCode="font.size" img="icon-add-fontsize"
             extcls="magtop-2"></component>
         </div>
         <div class="panel12-content-5">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
-            :is="editor?.panels['ddei-core-btn-addfontsize']" :addValue="-1" attrCode="font.size" img="icon-a-ziyuan455"
+            :is="editor?.panels['ddei-core-btn-addfontsize']" :addValue="-1" attrCode="font.size" img="icon-reduce-fontsize"
             extcls="magtop-1"></component>
         </div>
 
         <div class="panel12-content-3">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.bold"
-            img="icon-a-ziyuan461"></component>
+            img="icon-bold"></component>
         </div>
         <div class="panel12-content-3">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.italic"
-            img="icon-a-ziyuan459"></component>
+            img="icon-font-italic"></component>
         </div>
         <div class="panel12-content-3">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.underline"
-            img="icon-icon-text-underline" extcls="ext-underline"></component>
+            img="icon-text-underline" extcls="ext-underline"></component>
         </div>
         <div class="panel12-content-3">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
@@ -46,7 +46,7 @@
         <div class="panel12-content-3">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" :onlyQuickEdit="true"
-            attrCode="textStyle.subtype" img="icon-a-ziyuan394" extcls="magtop-1">
+            attrCode="textStyle.subtype" img="icon-text-subtype-2" extcls="magtop-1">
           </component>
         </div>
         <div class="panel12-split-3 panel12-content-4 panel1-split-4">
@@ -56,7 +56,7 @@
         </div>
         <div class="panel12-content-4">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
-            :is="editor?.panels['ddei-core-btn-color']" attrCode="font.color" img="icon-a-ziyuan463">
+            :is="editor?.panels['ddei-core-btn-color']" attrCode="font.color" img="icon-font">
           </component>
         </div>
       </div>
@@ -64,7 +64,7 @@
       <div class="panel2" title="格式刷" style="border-right:none" @click="execBrushAction($event)">
         <div :class="{ 'panel2-content': true, 'brush-selected': editor?.ddInstance?.stage?.brushDataText }">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan485"></use>
+            <use xlink:href="#icon-brush"></use>
           </svg>
           <div class="text">格式刷</div>
         </div>
@@ -93,7 +93,7 @@
       <div class="panel6" style="border-left:1px solid #E2E2EB;">
         <div class="panel6-content type">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
-            :is="editor?.panels['ddei-core-btn-linetype']" attrCode="type" img="icon-a-ziyuan430">
+            :is="editor?.panels['ddei-core-btn-linetype']" attrCode="type" img="icon-link-line">
           </component>
           <div class="text">类型</div>
         </div>
@@ -121,7 +121,7 @@
         <div :class="{ 'panel6-content brush': true, 'brush-selected': editor?.ddInstance?.stage?.brushData }"
           @click="execBrushAction($event)">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan485"></use>
+            <use xlink:href="#icon-brush"></use>
           </svg>
           <div class="text">格式刷</div>
         </div>
@@ -141,16 +141,16 @@
         <div class="panel1-content-3">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.bold"
-            img="icon-a-ziyuan461"></component>
+            img="icon-bold"></component>
         </div>
         <div class="panel1-content-3">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.italic"
-            img="icon-a-ziyuan459"></component>
+            img="icon-font-italic"></component>
         </div>
         <div class="panel1-content-3">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
-            :is="editor?.panels['ddei-core-btn-textalign']" img="icon-a-ziyuan440">
+            :is="editor?.panels['ddei-core-btn-textalign']" img="icon-text-align-left">
           </component>
 
         </div>
@@ -161,14 +161,14 @@
         </div>
         <div class="panel1-content-4 ">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
-            :is="editor?.panels['ddei-core-btn-color']" attrCode="font.color" img="icon-a-ziyuan463">
+            :is="editor?.panels['ddei-core-btn-color']" attrCode="font.color" img="icon-font">
           </component>
         </div>
       </div>
       <div class="panel2" title="格式刷" @click="execBrushAction($event)">
         <div :class="{ 'panel2-content': true, 'brush-selected': editor?.ddInstance?.stage?.brushData }">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan485"></use>
+            <use xlink:href="#icon-brush"></use>
           </svg>
           <div class="text">格式刷</div>
         </div>
@@ -176,13 +176,13 @@
       <div class="panel3">
         <div class="panel3-content i1" @click="showSetStyleDialog($event)">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan94"></use>
+            <use xlink:href="#icon-shapes"></use>
           </svg>
           <div class="text">样式</div>
         </div>
         <div class="panel3-content i2">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
-            :is="editor?.panels['ddei-core-btn-color']" attrCode="fill.color" img="icon-a-ziyuan419">
+            :is="editor?.panels['ddei-core-btn-color']" attrCode="fill.color" img="icon-background">
           </component>
           <div class="text">填充</div>
         </div>
@@ -196,13 +196,13 @@
       <div class="panel4">
         <div class="panel4-content" @click="doPush('top')">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan435"></use>
+            <use xlink:href="#icon-move-top"></use>
           </svg>
           <div class="text">置于顶层</div>
         </div>
         <div class="panel4-content" @click="doPush('bottom')">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan436"></use>
+            <use xlink:href="#icon-move-bottom"></use>
           </svg>
           <div class="text">置于底层</div>
         </div>
@@ -211,13 +211,13 @@
       <div class="panel5" :style="{ 'display': canMerge() || canCancelMerge() ? '' : 'none' }">
         <div class="panel5-content" v-show="canMerge()" @click="canMerge() && doMerge()">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan406"></use>
+            <use xlink:href="#icon-merge"></use>
           </svg>
           <div class="text">组合</div>
         </div>
         <div class="panel5-content" v-show="canCancelMerge()" @click="canCancelMerge() && doCancelMerge()">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan405"></use>
+            <use xlink:href="#icon-cancel-merge"></use>
           </svg>
           <div class="text">取消组合</div>
         </div>

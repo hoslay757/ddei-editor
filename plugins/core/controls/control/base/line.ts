@@ -234,7 +234,7 @@ export default {
     },
     {
       name: "属性",
-      icon: 'icon-a-ziyuan409',
+      icon: 'icon-edit-properies',
       subGroups: [
         {
           name: "属性",
@@ -248,7 +248,7 @@ export default {
   ],
 
   icon: `<svg class="icon" style="width:28px;height:28px;" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan430"></use>
+        <use xlink:href="#icon-link-line"></use>
       </svg>`,
   filters:{
     LINE_OBI_FILTER: (model, params)=>{

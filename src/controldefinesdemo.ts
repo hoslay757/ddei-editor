@@ -26,7 +26,7 @@ const controls: object[] = [
         groups: [
           {
             name: "数据",
-            icon: 'icon-a-ziyuan409',
+            icon: 'icon-edit-properies',
             subGroups: [
               {
                 name: "分组1",
@@ -89,7 +89,7 @@ const controls: object[] = [
         groups: [
           {
             name: "数据",
-            icon: 'icon-a-ziyuan409',
+            icon: 'icon-edit-properies',
             subGroups: [
               {
                 name: "分组1",

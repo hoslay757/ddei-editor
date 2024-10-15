@@ -4,7 +4,7 @@
     <div v-show="this.editor?.leftWidth == 0 " class="ddei-core-panel-openfilesview-expandbox"
       @click="expandToolBox">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan474"></use>
+        <use xlink:href="#icon-expand4"></use>
       </svg>
     </div>
     <div class="ddei-core-panel-openfilesview-item" v-if="!editor?.files"></div>
@@ -14,7 +14,7 @@
       @mousemove="drag && fileDragOver($event)" v-for="(item, i) in editor?.files"
       v-show="i >= openIndex && ((i - openIndex + 1) * unitFileWidth + 120) <= width" :title="item.name">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-wenjian01"></use>
+        <use xlink:href="#icon-file"></use>
       </svg>
 
       <span class="textcontent">
@@ -22,24 +22,24 @@
         <div class="dirty" v-show="item.state != 0">ꔷ</div>
       </span>
       <svg @click.prevent.stop="closeFile(item, $event)" v-if="close" class="icon close" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan422"></use>
+        <use xlink:href="#icon-close"></use>
       </svg>
     </div>
     <svg class="icon addfile" aria-hidden="true" v-if="create && (!max || editor?.files?.length < max)"
       @click="newFile">
-      <use xlink:href="#icon-a-ziyuan376"></use>
+      <use xlink:href="#icon-add"></use>
     </svg>
     <div style="flex:1 1 1px"></div>
     <div class="ddei-core-panel-openfilesview-movebox" v-show="editor?.files?.length > maxOpenSize"
       @click="moveItem(-1)">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan481"></use>
+        <use xlink:href="#icon-left"></use>
       </svg>
     </div>
     <div class="ddei-core-panel-openfilesview-movebox" v-show="editor?.files?.length > maxOpenSize"
       @click="moveItem(1)">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan480"></use>
+        <use xlink:href="#icon-right"></use>
       </svg>
     </div>
   </div>
