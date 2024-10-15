@@ -20,49 +20,91 @@ export default defineComponent({
   data() {
     
     const options = markRaw({
-      
+      currentLayout: "ddei-core-layout-simple",
       config: {
-        ratio: 1.3, //默认缩放比例为150%
+        ratio: 1, //默认缩放比例为150%
         paper:"A6",
         "mark": "水印文本",
         // EXT_STAGE_WIDTH: false,
         // EXT_STAGE_HEIGHT: false,
         // 自定义控件，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        // controlDefines: ControlDefinesDemo,
+        controlDefines: ControlDefinesDemo,
         // 自定义分组，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        // groupDefines: GroupDefinesDemo,
+        groupDefines: GroupDefinesDemo,
         initData: {
           controls: [
             // {
             //   model: "9999002"
             // },
-            {
-              id: "act_1",
-              model: "102010",
-              type: "emp_1",
-              text: "第一步",
-              border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
-              fill: { color: "grey" },
-            }
+            // {
+            //   id: "act_1",
+            //   model: "102010",
+            //   type: "emp_1",
+            //   text: "第一步",
+            //   border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
+            //   fill: { color: "grey" },
+            // }
+              {
+                id: "act_1",
+                model: "102010",
+                type: "emp_1",
+                text: "第一步",
+                border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
+                fill: { color: "grey" },
+              },
+              {
+                id: "act_2",
+                model: "102010",
+                type: "emp_2",
+                width: 200,
+                height: 100,
+                text: "第二步",
+                offsetY: -70,
+              }
+            
           ]
         }
       },
       extensions: [
-        //布局的配置
-        DDeiCoreStandLayout.configuration({
-          //配置插件
-          // 'top': [],
-          'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],// [!code ++]
-          // 'bottom': [],
-          // 'left': [],
-          // 'right': []
+        // //布局的配置
+        // DDeiCoreStandLayout.configuration({
+        //   //配置插件
+        //   // 'top': [],
+        //   'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],// [!code ++]
+        //   // 'bottom': [],
+        //   // 'left': [],
+        //   // 'right': []
+        // }),
+        DDeiCoreSimpleLayout.configuration({
+          other: ['ddei-core-panel-toolbox-simple', 'ddei-core-panel-topmenu-simple'],
+          middle: ['ddei-core-panel-canvasview'],
+          right: [],
+          bottom: []
         }),
-        DDeiCoreSimpleLayout,
         DDeiExtUML,
         DDeiExtSearch,
         DDeiExtTooltip,
         DDeiExtQuickStyle,
         DDeiExtQuickControl,
+        //配置htmlviewer插件，matchField用于声明图形控件中的属性与config中的key对应字段
+        DDeiExtHtmlViewer.configuration({
+          matchField: "type", //匹配字段
+          "emp_1": {          //key-value
+            type: "emp_1",
+            name: "张三",
+            viewer: ReplaceDivDemo  //HTML模板控件
+          },
+          "emp_2": {
+            type: "emp_2",
+            name: "李四",
+            viewer: ReplaceDivDemo
+          },
+          "emp_3": {
+            type: "emp_3",
+            name: "王五",
+            viewer: ReplaceDivDemo
+          }
+        })
         // QuickChooseControlDialog.configuration({ customGroups: ['101', '102'] }),
         // DDeiExtTooltip.configuration({
         //   'ddei-ext-dialog-tooltip':{

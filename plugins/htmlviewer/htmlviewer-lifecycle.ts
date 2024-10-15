@@ -1,5 +1,5 @@
 import { DDeiLifeCycle, DDeiFuncData, DDeiEditorUtil, DDeiUtil, DDeiFuncCallResult, DDeiEditorState, DDeiEditorEnumBusCommandType } from "ddei-framework";
-import { createVNode,render ,markRaw } from "vue";
+import { createVNode,toRaw ,markRaw } from "vue";
 
 class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
   
@@ -49,7 +49,7 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
             if (model.render.tempCanvas){
               model.render.tempCanvas.remove()
             }
-            if (model.render.viewerOption != option){
+            if (model.render.viewerOption != option && toRaw(model.render.viewerOption) != option){
               //如果已存在则销毁
               DDeiUtil.removeRenderViewer(model)
               model.render.viewerOption = option
