@@ -119,9 +119,17 @@ export default {
 
 <style lang="less" scoped>
 .ddei-core-panel-bottom-suitratio {
-    flex: 0 0 50px;
+    flex: 0 0 30px;
     display: flex;
     align-items: center;
     justify-content: center;
+    .icon {
+      font-size: 20px;
+    }
+  
+    &:hover {
+      background-color: var(--panel-hover);
+      cursor: pointer;
+    }
 }
 </style>

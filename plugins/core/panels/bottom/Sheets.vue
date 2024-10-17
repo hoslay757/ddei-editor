@@ -501,9 +501,13 @@ export default {
   justify-content: center;
   align-items: center;
   margin-left: 10px;
+  .icon{
+    font-size: 20px;
+  }
 }
 
 .ddei-core-panel-bottom-pages {
+  font-size: 15px;
   flex: 1;
   display: block;
   text-align: center;
@@ -513,6 +517,9 @@ export default {
     height: 27px;
     float: left;
     text-align: center;
+    .icon {
+      font-size: 20px;
+    }
 
     &:hover {
       background: rgb(235, 235, 239);
@@ -527,6 +534,7 @@ export default {
   &-page {
     float: left;
     height: 27px;
+
     border-right: 1px solid var(--panel-border);
     padding: 0 10px;
     text-align: center;
@@ -534,6 +542,8 @@ export default {
     span {
       height: 27px;
       width: 80px;
+      padding-left:3px;
+          
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -557,6 +567,7 @@ export default {
       span {    
         height: 27px;
         width: 80px;
+        padding-left: 3px;
         background: var(--panel-selected);
         white-space: nowrap;
         text-overflow: ellipsis;

@@ -203,18 +203,20 @@ export default {
   font-size: 14px;
 }
 .icon {
-  font-size: 22px;
-  width:22px;
-  height:22px;
+  font-size: 20px;
+  width:20px;
+  height:20px;
 }
 .ddei-core-panel-bottom-changeratio {
     flex: 0 0 157px;
     display: flex;
     justify-content: center;
     align-items: center;
-  
+    font-size: 15px;
     span {
       float: left;
+      width:36px;
+      text-align: center;
       margin-left: 5px;
       margin-right: 5px;
     }
