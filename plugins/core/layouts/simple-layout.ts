@@ -14,8 +14,8 @@ class DDeiCoreSimpleLayout extends DDeiPluginBase{
   defaultOptions: object = {
     other: ['ddei-core-panel-toolbox-simple', 'ddei-core-panel-topmenu-simple'],
     middle: ['ddei-core-panel-canvasview'],
-    right: [],
-    bottom: ['ddei-core-panel-bottommenu']
+    top: [],
+    bottom: []
   }
 
 

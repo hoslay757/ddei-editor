@@ -114,7 +114,7 @@ export default {
   methods: {
     //强制刷新下层组件
     forceRefreshParts(parts){
-      let arr = [this.$refs.topComponents, this.$refs.leftComponents, this.$refs.middleComponents, this.$refs.rightComponents, this.$refs.bottomComponents]
+      let arr = [this.$refs.topComponents, this.$refs.middleComponents, this.$refs.otherComponents, this.$refs.bottomComponents]
       arr.forEach(comps=>{
         if (comps){
           if(Array.isArray(comps)){

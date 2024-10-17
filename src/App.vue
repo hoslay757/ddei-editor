@@ -20,7 +20,7 @@ export default defineComponent({
   data() {
     
     const options = markRaw({
-      //currentLayout: "ddei-core-layout-simple",
+      currentLayout: "ddei-core-layout-simple",
       config: {
         ratio: 1, //默认缩放比例为150%
         paper:"A6",
