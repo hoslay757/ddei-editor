@@ -58,6 +58,7 @@ export default {
   },
   data() {
     return {
+      groups:null,
       forceRefresh: true,
       forceRefreshGroup: true,
     };
@@ -76,7 +77,8 @@ export default {
         // 获取宽度和高度
         const { width, height } = entry.contentRect;
         if (width != 0 && height != 0) {
-          
+          this.width = width
+          this.height = height
           this.resetPosition(width,height)
           
         }
@@ -182,29 +184,27 @@ export default {
         this.editor.ddInstance.initRender()
       }
       //根据初始化参数，初始化groups
-      let groups = []
-      for(let i = 0;i < this.options?.groups?.length;i++){
-        let group = clone(this.options.groups[i])
-        let controls = []
-        group.controls?.forEach(controlid => {
-          let control = this.editor.controls.get(controlid)
-          if(control){
-            controls.push(control)
+      if(!this.groups){
+        let groups = []
+        for(let i = 0;i < this.options?.groups?.length;i++){
+          let group = clone(this.options.groups[i])
+          let controls = []
+          group.controls?.forEach(controlid => {
+            let control = this.editor.controls.get(controlid)
+            if(control){
+              controls.push(control)
+            }
+          });
+          if (controls.length > 0){
+            group.controls = controls;
           }
-        });
-        if (controls.length > 0){
-          group.controls = controls;
+          groups.push(group)
+          
         }
-        groups.push(group)
         
+        this.groups = groups
       }
       
-      this.groups = groups
-      this.forceRefresh = false
-      this.$nextTick(() => {
-        this.forceRefresh = true;
-        
-      });
     },
 
     //强制刷新当前以及下层组件
@@ -214,7 +214,9 @@ export default {
         this.$nextTick(() => {
           this.forceRefresh = true;
           if (this.refreshData) {
-            this.refreshData();
+            this.$nextTick(() => {
+              this.resetPosition(this.width,this.height)
+            });
           }
         });
       }

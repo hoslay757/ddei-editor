@@ -73,7 +73,8 @@ export default {
         // 获取宽度和高度
         const { width, height } = entry.contentRect;
         if (width != 0 && height != 0) {
-          
+          this.width = width
+          this.height = height
           this.resetPosition(width,height)
           
         }
@@ -428,6 +429,9 @@ export default {
           this.forceRefresh = true;
           if (this.refreshData) {
             this.refreshData();
+            this.$nextTick(() => {
+              this.resetPosition(this.width, this.height)
+            })
           }
         });
       }
