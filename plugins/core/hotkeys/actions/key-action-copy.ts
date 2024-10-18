@@ -27,6 +27,17 @@ class DDeiKeyActionCopy extends DDeiKeyAction {
     ]
   }
 
+  isActive(element: object): boolean {
+    if (!element) {
+      return true
+    }
+    if (element.tagName == 'BODY' || element.tagName == 'HEAD' || element.tagName == 'HTML') {
+      return true
+    }
+
+    return false
+  }
+
   getHotKeys(editor) {
     return [this];
   }
@@ -57,9 +68,9 @@ class DDeiKeyActionCopy extends DDeiKeyAction {
 
 
   // ============================ 方法 ===============================
-  async action(evt: Event, ddInstance: DDei, editor: DDeiEditor): void {
+  async action(evt: Event, ddInstance: DDei, editor: DDeiEditor): boolean {
     //修改当前操作控件坐标
-    if (ddInstance && ddInstance.stage) {
+    if (ddInstance && ddInstance.stage && this.isActive(document.activeElement)) {
       //当前激活的图层
       let selectedControls = ddInstance.stage.selectedModels;
       let rsState = DDeiUtil.invokeCallbackFunc("EVENT_COPY_BEFORE", "COPY", { models: selectedControls}, ddInstance)
@@ -214,9 +225,12 @@ class DDeiKeyActionCopy extends DDeiKeyAction {
           if (!DDeiConfig.ALLOW_CLIPBOARD) {
             window.DDEI_CLIPBOARD = blob
           }
+          return true;
         }
       }
     }
+
+    return false
   }
 
 }

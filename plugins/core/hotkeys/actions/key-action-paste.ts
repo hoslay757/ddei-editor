@@ -60,11 +60,21 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     return DDeiKeyActionPaste;
   }
 
+  isActive(element: object): boolean {
+    if (!element) {
+      return true
+    }
+    if (element.tagName == 'BODY' || element.tagName == 'HEAD' || element.tagName == 'HTML') {
+      return true
+    }
+
+    return false
+  }
 
   // ============================ 方法 ===============================
-  action(evt: Event, ddInstance: DDei): void {
+  action(evt: Event, ddInstance: DDei): boolean {
     //修改当前操作控件坐标
-    if (ddInstance && ddInstance.stage) {
+    if (ddInstance && ddInstance.stage && this.isActive(document.activeElement)) {
       let modeName = DDeiUtil.getConfigValue("MODE_NAME", ddInstance);
       let accessCreate = DDeiUtil.isAccess(
         DDeiEnumOperateType.CREATE, null, null, modeName,
@@ -73,8 +83,11 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
       //校验权限
       if (accessCreate) {
         this.doPaste(evt, ddInstance);
+        return true;
       }
     }
+
+    return false
   }
 
   /**
