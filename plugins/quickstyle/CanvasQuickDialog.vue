@@ -156,7 +156,7 @@
         </div>
         <div class="panel1-split-3 panel1-content-4 panel1-split-4">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
-            :is="editor?.panels['ddei-core-btn-color']" attrCode="textStyle.bgcolor" img="icon-a-ziyuan452">
+            :is="editor?.panels['ddei-core-btn-color']" attrCode="textStyle.bgcolor" img="icon-fill">
           </component>
         </div>
         <div class="panel1-content-4 ">
