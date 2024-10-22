@@ -533,6 +533,9 @@ export default {
     border-right: 0.5px solid #e2dede;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
+    >div{
+      width:100%;
+    }
 
     &:hover {
       background-color: #e2dede;

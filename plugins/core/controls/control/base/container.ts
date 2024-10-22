@@ -501,7 +501,7 @@ export default {
   groups: [
     {
       name: "样式",
-      icon: 'icon-a-ziyuan375',
+      icon: 'icon-fill',
       subGroups: [
         {
           name: "布局",

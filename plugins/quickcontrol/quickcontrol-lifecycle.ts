@@ -113,7 +113,7 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
           width: width,
           height: height,
           offset:offset
-        }, { type: 99, left: left, top: top, hiddenMask: true }, null, true, true)
+        }, { type: 99, left: left, top: top, ignoreOutSide:1, hiddenMask: true }, null, true, true)
       }
     }
   }
