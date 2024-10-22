@@ -28,9 +28,9 @@ export default defineComponent({
         // EXT_STAGE_WIDTH: false,
         // EXT_STAGE_HEIGHT: false,
         // 自定义控件，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        controlDefines: ControlDefinesDemo,
+        // controlDefines: ControlDefinesDemo,
         // 自定义分组，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        groupDefines: GroupDefinesDemo,
+        // groupDefines: GroupDefinesDemo,
         initData: {
           controls: [
             // {
@@ -87,24 +87,24 @@ export default defineComponent({
         DDeiExtQuickStyle,
         DDeiExtQuickControl,
         //配置htmlviewer插件，matchField用于声明图形控件中的属性与config中的key对应字段
-        DDeiExtHtmlViewer.configuration({
-          matchField: "type", //匹配字段
-          "emp_1": {          //key-value
-            type: "emp_1",
-            name: "张三",
-            viewer: ReplaceDivDemo  //HTML模板控件
-          },
-          "emp_2": {
-            type: "emp_2",
-            name: "李四",
-            viewer: ReplaceDivDemo
-          },
-          "emp_3": {
-            type: "emp_3",
-            name: "王五",
-            viewer: ReplaceDivDemo
-          }
-        })
+        // DDeiExtHtmlViewer.configuration({
+        //   matchField: "type", //匹配字段
+        //   "emp_1": {          //key-value
+        //     type: "emp_1",
+        //     name: "张三",
+        //     viewer: ReplaceDivDemo  //HTML模板控件
+        //   },
+        //   "emp_2": {
+        //     type: "emp_2",
+        //     name: "李四",
+        //     viewer: ReplaceDivDemo
+        //   },
+        //   "emp_3": {
+        //     type: "emp_3",
+        //     name: "王五",
+        //     viewer: ReplaceDivDemo
+        //   }
+        // })
         // QuickChooseControlDialog.configuration({ customGroups: ['101', '102'] }),
         // DDeiExtTooltip.configuration({
         //   'ddei-ext-dialog-tooltip':{
