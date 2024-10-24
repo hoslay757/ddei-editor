@@ -6,32 +6,39 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "1615636",
-      "name": "查找替换",
-      "font_class": "replace",
-      "unicode": "e615",
-      "unicode_decimal": 58901
-    },
-    {
-      "icon_id": "1630982",
-      "name": "替换图片",
-      "font_class": "replace-all",
-      "unicode": "e6dd",
-      "unicode_decimal": 59101
-    },
-    {
-      "icon_id": "31190539",
+      "icon_id": "42187195",
       "name": "全字匹配",
       "font_class": "all-match",
-      "unicode": "e633",
-      "unicode_decimal": 58931
+      "unicode": "e6ef",
+      "unicode_decimal": 59119
     },
     {
-      "icon_id": "15727001",
+      "icon_id": "42187201",
+      "name": "寻找替换",
+      "font_class": "replace",
+      "unicode": "e6ea",
+      "unicode_decimal": 59114
+    },
+    {
+      "icon_id": "42187204",
+      "name": "收藏",
+      "font_class": "shoucang",
+      "unicode": "e6e8",
+      "unicode_decimal": 59112
+    },
+    {
+      "icon_id": "42187207",
+      "name": "替换图片",
+      "font_class": "replace-all",
+      "unicode": "e6e3",
+      "unicode_decimal": 59107
+    },
+    {
+      "icon_id": "42187210",
       "name": "置换",
       "font_class": "zhihuan",
-      "unicode": "e6dc",
-      "unicode_decimal": 59100
+      "unicode": "e6e0",
+      "unicode_decimal": 59104
     },
     {
       "icon_id": "38790387",
@@ -39,13 +46,6 @@
       "font_class": "shapes",
       "unicode": "e63a",
       "unicode_decimal": 58938
-    },
-    {
-      "icon_id": "658040",
-      "name": "收藏",
-      "font_class": "shoucang",
-      "unicode": "e6db",
-      "unicode_decimal": 59099
     },
     {
       "icon_id": "39184664",

@@ -13,7 +13,7 @@
         autocomplete="off" />
       <div @click="changeMatchCase()"
         :class="{ 'ddei-ext-panel-search-box-btn': true, 'ddei-ext-panel-search-box-btn__selected': editor.search?.matchCase == 1 }">
-        <svg class="icon" aria-hidden="true">
+        <svg class="icon" style="width:16px;height:16px;" aria-hidden="true">
           <use xlink:href="#icon-lock-case"></use>
         </svg>
       </div>
@@ -375,9 +375,9 @@ export default {
     
     .icon{
       color:var(--icon);
-      font-size: 16px;
-      width:16px;
-      height:16px;
+      font-size: 18px;
+      width:18px;
+      height:18px;
     }
   
     &-mode {
@@ -529,9 +529,9 @@ export default {
           }
 
           .icon {
-            font-size: 16px;
-            width: 16px;
-            height: 16px
+            font-size: 18px;
+            width: 18px;
+            height: 18px
           }
         }
       }
