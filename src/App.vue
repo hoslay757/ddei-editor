@@ -22,9 +22,10 @@ export default defineComponent({
     const options = markRaw({
       // currentLayout: "ddei-core-layout-simple",
       config: {
-        ratio: 1.2, //默认缩放比例为150%
-        paper:"A6",
-        "mark": "水印文本",
+        ratio: 1.2, //默认缩放比例为120%
+        pixel:2, //调整渲染质量
+        // paper:"A6",
+        // "mark": "水印文本",
         // EXT_STAGE_WIDTH: false,
         // EXT_STAGE_HEIGHT: false,
         // 自定义控件，接收一个object[]。由于定义内容较多，提取到外部，便于维护

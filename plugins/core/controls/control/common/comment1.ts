@@ -43,11 +43,14 @@ export default {
             }
             pvs.push({begin:start,end:end,x:sample.x,y:sample.y,r:sample.r,select:1,clip:1,op2close:op2close,align:1,stroke:1,fill:1});
         }`,
+
         `(i, sample, pvs, model, ovs){
-          pvs.push({type:0,x:50,y:0,oppoint:1});
-          pvs.push({type:0,x:0,y:50,oppoint:1});
-          pvs.push({type:0,x:-50,y:0,oppoint:1});
-          pvs.push({type:0,x:0,y:-50,oppoint:1});
+          if(i == 0){
+            pvs.push({type:0,x:50,y:0,oppoint:1});
+            pvs.push({type:0,x:0,y:50,oppoint:1});
+            pvs.push({type:0,x:-50,y:0,oppoint:1});
+            pvs.push({type:0,x:0,y:-50,oppoint:1});
+          }
         }`,
 
 
