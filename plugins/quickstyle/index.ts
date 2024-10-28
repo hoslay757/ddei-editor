@@ -5,6 +5,9 @@ import DDeiCoreCanvasLifeCycle from "./quickstyle-lifecycle"
 class DDeiExtQuickStyle extends DDeiPluginBase {
   type: string = "package"
 
+  order: number = 2
+
+  static order: number = 2
   
   /**
    * 缺省实例

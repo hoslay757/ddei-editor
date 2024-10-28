@@ -23,11 +23,11 @@ import {DDeiEditorCommandAddHistroy} from "ddei-framework";
 import MenuDialog from "./MenuDialog.vue";
 import {DDeiEditorUtil} from "ddei-framework";
 import DDeiCore from "@ddei/core";
-import { loadControlByFrom, loadAndSortGroup } from "./grouputil";
+import { loadControlByFrom, loadAndSortGroup, loadControlDefineExt } from "./grouputil";
 
 import ICONS from "./icon";
 import { markRaw } from "vue";
-
+import { getCurrentInstance, render,createVNode } from "vue"
 import '@/assets/ddei.css'
 import '@/assets/fonts/iconfont/iconfont.css'
 import '@/assets/fonts/iconfont/iconfont.js'
@@ -65,6 +65,8 @@ export default {
   computed: {},
   watch: {},
   created() {
+    DDeiUtil.createRenderViewer = this.createRenderViewer
+    DDeiUtil.removeRenderViewer = this.removeRenderViewer
     autoLoadCommand();
     
     // if (DDeiEditor.ACTIVE_INSTANCE) {
@@ -82,6 +84,8 @@ export default {
     this.options.extensions.splice(0,0,DDeiCore)
     let editor = DDeiEditor.newInstance(this.id, this.id, true, this.options);
     this.editor = editor
+
+    editor.appContext = getCurrentInstance().appContext
     // }
     //载入局部配置
     if (this.options){
@@ -103,6 +107,7 @@ export default {
                 oldControl.define[n] = control.define[n]
               }
             }
+            loadControlDefineExt(oldControl)
           }
           control = oldControl
         }
@@ -170,35 +175,40 @@ export default {
   },
   mounted() {
     this.editor.editorViewer = this;
+    
     this.editor.htmlElement = this.$refs.editor_div;
     //设置默认风格
     this.editor.bindEvent();
     this.editor.changeTheme('');
     
     //初始化大小
-    if (this.options?.config?.width) {
-      this.$refs.editor_div.style.width = this.options?.config?.width + "px";
+    let options = this.editor.options;
+    if (options?.config?.width) {
+      this.$refs.editor_div.style.width = options?.config?.width + "px";
     }
-    if (this.options?.config?.height) {
-      this.$refs.editor_div.style.height = this.options?.config?.height + "px";
+    if (options?.config?.height) {
+      this.$refs.editor_div.style.height = options?.config?.height + "px";
     }
     
     //初始化控件
-    if(this.options?.config?.initData){
+    if (options?.config?.initData){
       //调用转换器，将输入内容转换为设计器能够识别的格式
-      let initData = this.options?.config?.initData
+      let initData = options.config.initData
       let converters = this.editor.getEnabledConverters(initData, 1);
       //依次调用converters
       converters?.forEach(converter => {
         initData = converter.input(initData)
       });
-      this.editor.addControls(initData.controls)
+      let controlInitJSON = DDeiEditorUtil.getModelInitJSON(this.editor.ddInstance, null, initData.controls)
+      if (controlInitJSON){
+        this.editor.addControls(controlInitJSON)
+      }
     }
     
-    if (this.options?.config?.access){
-      this.editor.setAccessInfo(this.options?.config?.access)
-    } else if (this.options?.config?.readonly == true || this.options?.config?.readonly == false) {
-      this.editor.setEditable(!this.options?.config?.readonly)
+    if (options?.config?.access){
+      this.editor.setAccessInfo(options.config.access)
+    } else if (options?.config?.readonly == true || options?.config?.readonly == false) {
+      this.editor.setEditable(!options.config.readonly)
     }
 
     //初始化拦截器
@@ -276,6 +286,57 @@ export default {
       this.editor.bus.executeAll();
     },
 
+    createRenderViewer(model, operate, tempShape, composeRender) {
+      //识别是否需要添加控件
+      let editor = this.editor
+      // let modelDefine = DDeiEditorUtil.getControlDefine(model);
+      let vNode = editor.viewerMap.get(model.id)
+      if (vNode) {
+        if (operate == 'VIEW') {
+          model.render.refreshView(editor,vNode, tempShape, composeRender)
+        } else if (operate == 'VIEW-HIDDEN') {
+          vNode.el.style.display = 'none'
+        }
+      } else {
+        let parentNode = model.layer.render.containerViewer;
+        let div = document.createElement("div")
+        div.setAttribute("mid", model.id)
+        parentNode.appendChild(div)
+        let opts = { editor: editor, model: model }
+        if(model.render.viewerOption){
+          for (let k in model.render.viewerOption){
+            if(k != 'viewer'){
+              opts[k] = model.render.viewerOption[k]
+            }
+          }
+        }
+        let vNode = createVNode(model.render.viewer, opts);
+        let appContext = editor.appContext;
+
+        vNode.appContext = appContext;
+        
+        //渲染并挂载组件
+        render(vNode, div);
+
+        editor.viewerMap.set(model.id, vNode)
+        if (operate == 'VIEW') {
+          model.render.refreshView(editor,vNode, tempShape, composeRender)
+        }
+      }
+
+
+    },
+
+    removeRenderViewer(model) {
+      let editor = this.editor
+      let vNode = editor.viewerMap.get(model.id)
+      if (vNode) {
+        vNode.component.isUnmounted = true
+        vNode.component.update()
+        vNode.el.parentElement.remove()
+        editor.viewerMap.delete(model.id)
+      }
+    }
     
   },
 };
@@ -283,17 +344,24 @@ export default {
 
 <style lang="less">
 .ddei-editor {
-  position:relative;
+  position: relative;
   width: 100%;
-  height:100%;
-  // overflow: auto;
+  height: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   background-color: var(--background);
-  
+
+
   .icon {
     color: var(--icon);
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
   }
+
 
   img {
     -webkit-user-drag: none;
@@ -312,6 +380,10 @@ export default {
   }
 
   *> {
+    box-sizing: border-box;
+    margin: 0;
+    font-weight: normal;
+
     &::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -360,4 +432,3 @@ export default {
   position: absolute;
 }
 </style>
-../icon

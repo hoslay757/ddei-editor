@@ -3,8 +3,7 @@ export default {
   'name': '单元格',
   'code': 'table-cell',
   'desc': '表格的单元格',
-  'type': 'DDeiTableCell',
-  'icon': 'toolbox-shape-rect'
+  'type': 'DDeiTableCell'
 }
 
 

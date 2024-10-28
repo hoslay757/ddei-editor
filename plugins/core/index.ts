@@ -7,11 +7,15 @@ import DDeiCoreHotkeys from "./hotkeys";
 import DDeiCoreControls from "./controls";
 import DDeiCoreMenus from "./menus";
 import DDeiCoreThemes from "./themes"
+import DDeiCoreLifeCycles from "./lifecycles"
 import {DDeiPluginBase} from "ddei-framework";
-import DDeiCoreLifeCycle from "./lifecycle";
 
 class DDeiCore extends DDeiPluginBase {
   type: string = "package"
+
+  order:number = 0
+
+  static order: number = 0
 
   
   /**
@@ -38,7 +42,7 @@ class DDeiCore extends DDeiPluginBase {
 
   themes: object = DDeiCoreThemes;
 
-  lifecycles: object = DDeiCoreLifeCycle;
+  lifecycles: object = DDeiCoreLifeCycles
 
   getOptions(): object {
     let options = {}
@@ -77,7 +81,7 @@ class DDeiCore extends DDeiPluginBase {
     }
   }
 
-  getLifeCyclies(editor: DDeiEditor) {
+  getLifeCyclies(editor) {
     if (DDeiPluginBase.isSubclass(this.lifecycles, DDeiPluginBase)) {
       return this.lifecycles.defaultIns.getLifeCyclies(editor);
     } else if (this.lifecycles instanceof DDeiPluginBase) {
@@ -154,7 +158,7 @@ class DDeiCore extends DDeiPluginBase {
     core.controls = core.controls.configuration(options, true)
     core.menus = core.menus.configuration(options, true)
     core.themes = core.themes.configuration(options, true)
-    core.lifecycles = core.lifecycles.configuration(options,true)
+    core.lifecycles = core.lifecycles.configuration(options, true)
     return core;
   }
 }
@@ -168,6 +172,6 @@ export * from "./hotkeys";
 export * from "./menus"
 export * from "./controls"
 export * from "./themes"
-export * from "./lifecycle"
+export * from "./lifecycles"
 export {DDeiCore}
 export default DDeiCore;

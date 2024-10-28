@@ -5,12 +5,12 @@
       <svg aria-hidden="true" v-if="expand"
         :class="{ 'icon': true, 'header-7': propertyViewShow, 'header-7-expand': !propertyViewShow }"
         @click="hidOrShowPV">
-        <use v-if="propertyViewShow" xlink:href="#icon-a-ziyuan474"></use>
-        <use v-if="!propertyViewShow" xlink:href="#icon-a-ziyuan475"></use>
+        <use v-if="propertyViewShow" xlink:href="#icon-expand4"></use>
+        <use v-if="!propertyViewShow" xlink:href="#icon-expand3"></use>
       </svg>
       <div style="flex:1"></div>
       <svg class="icon ding" aria-hidden="true" v-if="propertyViewShow">
-        <use xlink:href="#icon-a-ziyuan410"></use>
+        <use xlink:href="#icon-ding"></use>
       </svg>
     </div>
     <div class="content">
@@ -22,7 +22,7 @@
             @mouseup="changeSubGroup(subGroup)">{{
             subGroup.name }}</div>
         </div>
-        <div class="propertyview-subgroup-tabpanel" @mousewheel="mouseWheel($event)" :style="panelStyle">
+        <div class="propertyview-subgroup-tabpanel" @mousewheel="mouseWheel($event)">
           <div
             :class="{ 'propertyview-subgroup-tabpanel-editors-column': attrDefine.display == 'column', 'propertyview-subgroup-tabpanel-editors-row': attrDefine.display != 'column', 'empty-value': attrDefine.value ? false : true }"
             v-for="attrDefine in currentSubGroup?.children" :title="attrDefine.desc"
@@ -100,7 +100,6 @@ export default {
       propertyDisabled: false,
       propertyViewShow: true,
       pvGroupWidth: 0,
-      panelStyle: "height:calc(100vh - 202px)",
       rightRate: 0,//右边部分所占的比例
       forceRefresh:true,
     };
@@ -459,6 +458,7 @@ export default {
   background: var(--panel-background);
   display: flex;
   user-select: none;
+  height:100%;
 
   &-header {
     background: var(--panel-header);
@@ -542,7 +542,7 @@ export default {
       flex: 1 1 auto;
       color: var(--panel-title);
       font-size: 15px;
-
+      height: 100px;
       span {
         color: red;
       }

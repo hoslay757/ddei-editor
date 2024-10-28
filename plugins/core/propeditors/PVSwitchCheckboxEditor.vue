@@ -154,6 +154,7 @@ export default {
 .ddei-pv-editor-switch-excheckbox {
   border-radius: 4px;
   margin-right: 10px;
+  box-sizing: border-box;
 }
 
 .ddei-pv-editor-switch-excheckbox--disabled {
@@ -167,11 +168,12 @@ export default {
 
 .ddei-pv-editor-switch-excheckbox .chk_state {
   border: 1px solid var(--panel-title);
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   margin-right: 10px;
-  margin-top: 5px;
+  margin-top: 4px;
   float: left;
+  box-sizing: border-box;
 }
 
 .ddei-pv-editor-switch-excheckbox:hover .chk_state {
@@ -180,17 +182,18 @@ export default {
 
 .ddei-pv-editor-switch-excheckbox .chk_state_checked {
   border: 1px solid var(--panel-title);
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   margin-right: 10px;
-  margin-top: 5px;
+  margin-top: 4px;
   float: left;
   background-color: var(--dot);
+  box-sizing: border-box;
   color: #fff;
 }
 
 .ddei-pv-editor-switch-excheckbox .chk_state_checked span {
-  margin-top: -5.5px;
+  margin-top: -4.5px;
   margin-left: 0.5px;
   display: block;
 }

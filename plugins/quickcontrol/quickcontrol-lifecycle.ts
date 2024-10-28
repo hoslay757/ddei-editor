@@ -18,13 +18,26 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
   
   EVENT_MOUSE_OPERATING: DDeiFuncData | null = new DDeiFuncData("quickstyle-ext-close", 1, this.mouseOperating);
   
-  EVENT_AFTER_CLOSE_FILE: DDeiFuncData | null = new DDeiFuncData("quickcontrol-ext-close", 1, this.closeDialogs);
+  EVENT_CLOSE_FILE_AFTER: DDeiFuncData | null = new DDeiFuncData("quickcontrol-ext-close", 1, this.closeDialogs);
 
   moveInControl(operateType, data, ddInstance, evt){
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"] && data?.models?.length > 0) {
-      data.model = data.models[0]
+      
       let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
       if (editor.state == 'designing'){
+        let model = data.models[0]
+        
+        //如果存在选中控件，则重新定位到选中控件
+        if (editor.ddInstance.stage.selectedModels?.size > 0) {
+          if (!editor.ddInstance.stage.selectedModels.has(model.id)) {
+            if (editor.ddInstance.stage.selectedModels?.size == 1) {
+              model = Array.from(editor.ddInstance.stage.selectedModels.values())[0]
+            } else {
+              return;
+            }
+          }
+        }
+        data.model = model
         DDeiExtSearchLifeCycle.showQuickControlDialog(operateType, data, ddInstance, evt)
       }
     }
@@ -100,7 +113,7 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
           width: width,
           height: height,
           offset:offset
-        }, { type: 99, left: left, top: top, hiddenMask: true }, null, true, true)
+        }, { type: 99, left: left, top: top, ignoreOutSide:1, hiddenMask: true }, null, true, true)
       }
     }
   }

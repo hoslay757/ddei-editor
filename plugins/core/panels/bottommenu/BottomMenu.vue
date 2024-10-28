@@ -73,7 +73,7 @@ export default {
 <style lang="less" scoped>
 
 .ddei-core-panel-bottommenu {
-  height: 50px;
+  height:30px;
   display: flex;
   color: var(--text);
   background: var(--background);

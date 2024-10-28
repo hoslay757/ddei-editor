@@ -4,7 +4,7 @@ export default {
   'code': 'his',
   'desc': 'UML状态机简略历史',
   'from': '100003',
-  'icon': 'toolbox-shape-circle',
+  
   'define': {
     width: 40,
     height: 40,
@@ -68,7 +68,7 @@ export default {
       groups: [
         {
           name: "属性",
-          icon: 'icon-a-ziyuan375',
+          icon: 'icon-fill',
           subGroups: [
             {
               name: "填充",

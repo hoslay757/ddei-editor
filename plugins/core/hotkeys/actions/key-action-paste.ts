@@ -12,7 +12,7 @@ import {DDeiEnumOperateType} from "ddei-framework";
 import {DDeiPolygon} from "ddei-framework";
 import {DDeiLink} from "ddei-framework";
 import {DDeiLineLink} from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
+import { DDeiEditorState, DDeiEditorUtil } from "ddei-framework";
 /**
  * 键行为:粘贴
  * 粘贴剪切板内容
@@ -60,11 +60,21 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     return DDeiKeyActionPaste;
   }
 
+  isActive(element: object): boolean {
+    if (!element) {
+      return true
+    }
+    if (element.tagName == 'BODY' || element.tagName == 'HEAD' || element.tagName == 'HTML') {
+      return true
+    }
+
+    return false
+  }
 
   // ============================ 方法 ===============================
-  action(evt: Event, ddInstance: DDei): void {
+  action(evt: Event, ddInstance: DDei): boolean {
     //修改当前操作控件坐标
-    if (ddInstance && ddInstance.stage) {
+    if (ddInstance && ddInstance.stage && this.isActive(document.activeElement)) {
       let modeName = DDeiUtil.getConfigValue("MODE_NAME", ddInstance);
       let accessCreate = DDeiUtil.isAccess(
         DDeiEnumOperateType.CREATE, null, null, modeName,
@@ -73,8 +83,11 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
       //校验权限
       if (accessCreate) {
         this.doPaste(evt, ddInstance);
+        return true;
       }
     }
+
+    return false
   }
 
   /**
@@ -390,6 +403,11 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
           DDeiUtil.convertChildrenJsonUnit(model, stage, unit);
         });
       }
+      //创建并初始化控件以及关系
+      let controlInitJSON = DDeiEditorUtil.getModelInitJSON(stage.ddInstance, null, jsonArray)
+      if (!controlInitJSON) {
+        return;
+      }
       
       //当前选中控件是否为1且有表格，且选中表格的单元格，则作为表格单元格的内容粘贴
       let createControl = true;
@@ -400,7 +418,7 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
           let cells = model.getSelectedCells();
           if (cells.length > 0) {
             cells.forEach(cell => {
-              this.createControl(jsonArray, jsonLinkArray, offsetX, offsetY, stage, cell, mode, evt)
+              this.createControl(controlInitJSON, jsonLinkArray, offsetX, offsetY, stage, cell, mode, evt)
             })
             hasChange = true;
             createControl = false
@@ -408,14 +426,14 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
         }
         //添加到容器
         else if (model.baseModelType == 'DDeiContainer') {
-          this.createControl(jsonArray, jsonLinkArray, offsetX, offsetY, stage, model, mode, evt)
+          this.createControl(controlInitJSON, jsonLinkArray, offsetX, offsetY, stage, model, mode, evt)
           createControl = false
           hasChange = true;
         }
       }
       //如果没有粘贴到表格在最外层容器的鼠标位置，反序列化控件，重新设置ID，其他信息保留
       if (createControl) {
-        this.createControl(jsonArray, jsonLinkArray, offsetX, offsetY, stage, layer, mode, evt)
+        this.createControl(controlInitJSON, jsonLinkArray, offsetX, offsetY, stage, layer, mode, evt)
         hasChange = true;
       }
       if (hasChange) {
@@ -957,7 +975,7 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
 
 
   //创建新的控件
-  createControl(jsonArray: [], jsonLinkArray: [], x: number, y: number, stage: DDeiStage, container: object, mode: string, evt: Event): void {
+  createControl(jsonArray: [], jsonLinkArray: [] = [], x: number, y: number, stage: DDeiStage, container: object, mode: string, evt: Event): void {
     //当前激活的图层
     let layer = stage.layers[stage.layerIndex];
     let models: DDeiAbstractShape[] = []
@@ -979,9 +997,9 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     //加载事件的配置
     let rsState = -1
     if(mode == 'copy'){
-      rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { models: models }, stage.ddInstance)
+      rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { models: models, links: jsonLinkArray }, stage.ddInstance)
     } else if (mode == 'cut') {
-      rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_DRAG_BEFORE", DDeiEnumOperateType.DRAG, { models: models }, stage.ddInstance)
+      rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_DRAG_BEFORE", DDeiEnumOperateType.DRAG, { models: models, links: jsonLinkArray }, stage.ddInstance)
     }
     //选中前
     if (rsState != -1) {
@@ -992,34 +1010,37 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
       if (mode == 'copy') {
         let appendExPvs = {}
         jsonLinkArray?.forEach(lk => {
-          let sm = null;
-          let dm = null;
-          if (lk.smid) {
-            sm = oldIdMap[lk.smid]
-          }
-          if (lk.dmid) {
-            dm = oldIdMap[lk.dmid]
-          }
-          //重命名关联的smpath以及点
-          if (lk.smpath) {
-            let sourcePV = DDeiUtil.getDataByPathList(sm, lk.smpath)
-            let newId = "_" + DDeiUtil.getUniqueCode()
-            sourcePV.id = newId
-            if (!appendExPvs[sm.id]) {
-              appendExPvs[sm.id] = {}
+          if (!lk.disabled){
+            let sm = lk.sm;
+            let dm = lk.dm;
+            if (!sm && lk.smid) {
+              sm = oldIdMap[lk.smid]
             }
-            appendExPvs[sm.id][newId] = sourcePV
-            lk.smpath = "exPvs." + newId
+            if (!dm && lk.dmid) {
+              dm = oldIdMap[lk.dmid]
+            }
+            //重命名关联的smpath以及点
+            if (lk.smpath) {
+              let sourcePV = DDeiUtil.getDataByPathList(sm, lk.smpath)
+              let newId = "_" + DDeiUtil.getUniqueCode()
+              sourcePV.id = newId
+
+              if (!appendExPvs[sm.id]) {
+                appendExPvs[sm.id] = {}
+              }
+              appendExPvs[sm.id][newId] = sourcePV
+              lk.smpath = "exPvs." + newId
+            }
+            let link = new DDeiLink({
+              group: lk.group,
+              smpath: lk.smpath,
+              dmpath: lk.dmpath,
+              stage: stage,
+              sm: sm,
+              dm: dm
+            });
+            stage.links.push(link);
           }
-          let link = new DDeiLink({
-            group: lk.group,
-            smpath: lk.smpath,
-            dmpath: lk.dmpath,
-            stage: stage,
-            sm: sm,
-            dm: dm
-          });
-          stage.links.push(link);
         })
         
         for (let m in oldIdMap) {
@@ -1084,13 +1105,20 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
    * @return 新的ID
    */
   changeModelId(stage: DDeiStage, item: DDeiAbstractShape): string {
-    stage.idIdx++
     let newId = ""
-    if (item.id.indexOf("_") != -1) {
-      newId = item.id.substring(0, item.id.lastIndexOf("_")) + "_" + stage.idIdx;
-    } else {
-      newId = item.id + "_cp_" + stage.idIdx;
+    while(true){
+      stage.idIdx++
+      
+      if (item.id.indexOf("_") != -1) {
+        newId = item.id.substring(0, item.id.lastIndexOf("_")) + "_" + stage.idIdx;
+      } else {
+        newId = item.id + "_cp_" + stage.idIdx;
+      }
+      if(!stage.getModelById(newId)){
+        break;
+      }
     }
+    item.oldId = item.id
     item.id = newId
     item.unicode = DDeiUtil.getUniqueCode()
     let accuContainer = item.getAccuContainer()

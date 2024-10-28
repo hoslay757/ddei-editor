@@ -4,7 +4,6 @@ export default {
   'code': 'line',
   'desc': '直线、折线、曲线三种连接线',
   'type': 'DDeiLine',
-  'icon': 'icon-line-fold',
   /**
    * 定义组件属性
    * 样式属性会影响图形的显示，修改样式属性也会刷新图形
@@ -222,7 +221,7 @@ export default {
   groups: [
     {
       name: "样式",
-      icon: 'icon-a-ziyuan375',
+      icon: 'icon-fill',
       subGroups: [
 
         {
@@ -235,7 +234,7 @@ export default {
     },
     {
       name: "属性",
-      icon: 'icon-a-ziyuan409',
+      icon: 'icon-edit-properies',
       subGroups: [
         {
           name: "属性",
@@ -246,5 +245,14 @@ export default {
     },
 
 
-  ]
+  ],
+
+  icon: `<svg class="icon" style="width:28px;height:28px;" aria-hidden="true">
+        <use xlink:href="#icon-link-line"></use>
+      </svg>`,
+  filters:{
+    LINE_OBI_FILTER: (model, params)=>{
+      return false
+    }
+  }
 }

@@ -34,7 +34,7 @@
 import { DDeiEditor, DDeiEnumControlState, DDeiUtil } from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
 import { DDeiAbstractShape } from "ddei-framework";
-import {DDeiEditorState} from "ddei-framework";
+import { clone } from "lodash";
 import { DDeiEnumBusCommandType } from "ddei-framework";
 
 export default {
@@ -121,9 +121,6 @@ export default {
     mouseEnter(type,el,evt) {
       if(this.editor.state == 'designing'){
         if (this.editor.tempPopData['ddei-ext-dialog-quickcontrol']){
-          //显示弹出框
-          let elPos = evt.currentTarget.getBoundingClientRect()
-          // let elPos = DDeiUtil.getDomAbsPosition(evt.currentTarget)
           //向上区间寻找，是否有控件
           let existsControl = null;
           let model = this.editor.tempPopData['ddei-ext-dialog-quickcontrol'].model
@@ -131,22 +128,26 @@ export default {
           let outRect = DDeiAbstractShape.getOutRectByPV([model])
           if (type == 1) {
             let controls = layer.getSubModels([model.id], 100, { x: outRect.x, y: outRect.y-150, x1: outRect.x1, y1: outRect.y})
-            if (this.validControls(controls)){
+            controls = this.filtControls(model,controls)
+            if (controls.length > 0){
               existsControl = controls[0];
             }
           } else if (type == 2) {
             let controls = layer.getSubModels([model.id], 100, { x: outRect.x1, y: outRect.y, x1: outRect.x1+150, y1: outRect.y1 })
-            if (this.validControls(controls)) {
+            controls = this.filtControls(model,controls)
+            if (controls.length > 0) {
               existsControl = controls[0];
             }
           } else if (type == 3) {
             let controls = layer.getSubModels([model.id], 100, { x: outRect.x, y: outRect.y1, x1: outRect.x1, y1: outRect.y1+150 })
-            if (this.validControls(controls)) {
+            controls = this.filtControls(model,controls)
+            if (controls.length > 0) {
               existsControl = controls[0];
             }
           } else if (type == 4) {
             let controls = layer.getSubModels([model.id], 100, { x: outRect.x-150, y: outRect.y, x1: outRect.x, y1: outRect.y1 })
-            if (this.validControls(controls)) {
+            controls = this.filtControls(model,controls)
+            if (controls.length > 0) {
               existsControl = controls[0];
             }
           }
@@ -242,21 +243,41 @@ export default {
               endSita = 0
             }
             //创建连线
-            let lines = this.editor.addLines([
-              {
-                model: '100401',
-                type: 2,
-                dash:[10,5],
-                startPoint: { x: sx, y: sy },
-                endPoint: { x: ex, y: ey },
-                smodel: { id: model.id, x: sx, y: sy, rate: 0.5, sita: startSita },
-                emodel: { id: existsControl.id, x: ex, y: ey, rate: 0.5, sita: endSita }
-              },
-            ],true,true,false)
-            this.editor.tempLineModel = lines[0];
-            DDeiEditorUtil.closeDialog(this.editor, 'ddei-ext-dialog-quickchoosecontrol', true)
-            this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape);
-            this.editor.bus.executeAll();
+            let smodel = { id: model.id, x: sx, y: sy, rate: 0.5, sita: startSita }
+            let emodel = { id: existsControl.id, x: ex, y: ey, rate: 0.5, sita: endSita }
+            let initLine = DDeiEditorUtil.getLineInitJSON(this.editor.ddInstance,smodel, emodel)
+            if (initLine){
+              let initJson = clone(initLine)
+              initJson.model = initLine.modelCode ? initLine.modelCode : initLine.model ? initLine.model : initLine.id ? initLine.id : '100401'
+              if (!initJson.type) {
+                initJson.type = 2
+              }
+              if (!initJson.dash) {
+                initJson.dash = [10, 5]
+                this.lockDash = false
+              }else{
+                this.lockDash = true
+              }
+              if (!initJson.startPoint) {
+                initJson.startPoint = { x: sx, y: sy }
+              }
+              if (!initJson.endPoint) {
+                initJson.endPoint = { x: ex, y: ey }
+              }
+              if (!initJson.smodel) {
+                initJson.smodel = smodel
+              }
+              if (!initJson.emodel) {
+                initJson.emodel = emodel
+              }
+              let lines = this.editor.addLines([
+                initJson
+              ],true,true,false)
+              this.editor.tempLineModel = lines[0];
+              DDeiEditorUtil.closeDialog(this.editor, 'ddei-ext-dialog-quickchoosecontrol', true)
+              this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape);
+              this.editor.bus.executeAll();
+            }
           }
         }
       }
@@ -264,7 +285,10 @@ export default {
 
     createLineOk(){
       if (this.editor.tempLineModel){
-        delete this.editor.tempLineModel.dash
+        if (!this.lockDash){
+          delete this.editor.tempLineModel.dash
+        }
+        delete this.lockDash
         this.editor.tempLineModel.render?.clearCachedValue()
         delete this.editor.tempLineModel
         this.refreshData();
@@ -278,15 +302,24 @@ export default {
       }
     },
 
-    validControls(controls){
+    filtControls(model,controls){
+      let returnControls = []
       if(controls?.length > 0){
         for(let i = 0;i < controls.length;i++){
           if (controls[i].baseModelType != 'DDeiLine'){
-            return true;
+            let define = DDeiUtil.getControlDefine(controls[i])
+            let filterMethod = null
+            if (define && define.filters && define.filters["LINE_OBI_FILTER"]) {
+              filterMethod = define.filters["LINE_OBI_FILTER"];
+            }
+            if (!filterMethod || filterMethod(model,{model:controls[i]})) {
+              returnControls.push(controls[i]);
+            }
           }
+          
         }
       }
-      return false
+      return returnControls
     }
   }
 };

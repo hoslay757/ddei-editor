@@ -20,7 +20,7 @@ export default {
       groups: [
         {
           name: "样式",
-          icon: 'icon-a-ziyuan375',
+          icon: 'icon-fill',
           subGroups: [
             {
               name: "文本",
@@ -41,7 +41,7 @@ export default {
         },
         {
           name: "数据",
-          icon: 'icon-a-ziyuan409',
+          icon: 'icon-edit-properies',
           subGroups: [
             {
               name: "数据属性",
@@ -55,6 +55,17 @@ export default {
       ],
       attrs: [
         {
+          'code': 'textStyle.paddingWeight',
+          'name': '间隔大小',
+          'desc': '超范围自动扩展的情况下保留的宽度',
+          'controlType': 'text',
+          'dataType': 'integer',
+          'defaultValue': 10,
+          'hiddenTitle': true,
+          'display': 'column',
+          'type': [1, 2]
+        },
+        {
           'code': 'textStyle.scale',
           'name': '超出范围',
           'desc': '文本的超出范围后的策略',
@@ -62,7 +73,7 @@ export default {
           'dataType': 'string',
           'dataSource': [{ 'text': '隐藏', 'value': '0' }, { 'text': '省略', 'value': '2' }, { 'text': '缩小', 'value': '1' }, { 'text': '扩展', 'value': '3' }],
           'defaultValue': '3',
-          'cascadeDisplay': { 3: { show: ['textStyle.lockWidth'], hidden: [] }, default: { hidden: ['textStyle.lockWidth'] }, empty: { hidden: ['textStyle.lockWidth'] }, notempty: { hidden: ['textStyle.lockWidth'] } }
+          'cascadeDisplay': { 3: { show: ['textStyle.lockWidth', "textStyle.paddingWeight"], hidden: [] }, default: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] }, empty: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] }, notempty: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] } }
         }
       ]
     }

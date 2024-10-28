@@ -12,6 +12,7 @@ export default {
       'name': '文本',
       'orderNo': 0,
     },
+   
     {
       'id': '100001',
       'name': '正方形',
@@ -200,6 +201,18 @@ export default {
       'text': '',
       'orderNo': 94
     },
+
+   
+    {
+      'id': '103005',
+      'name': '注释',
+      'orderNo': 305
+    },
+    {
+      'id': '103008',
+      'name': '注释',
+      'orderNo': 308
+    }
 
 
 

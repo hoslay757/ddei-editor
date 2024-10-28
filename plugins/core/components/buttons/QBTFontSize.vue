@@ -8,7 +8,7 @@
       <div class="ddei-editor-quick-fat-item-fontsize_combox"
         @click="attrDefine && !attrDefine.readonly && showDialog($event)">
         <svg class="icon iconfont-45" aria-hidden="true">
-          <use xlink:href="#icon-a-ziyuan478"></use>
+          <use xlink:href="#icon-expand2"></use>
         </svg>
       </div>
     </div>
@@ -317,7 +317,6 @@ export default {
 
   &:hover {
     border: 0.5px solid var(--dot);
-    box-sizing: border-box;
   }
 
   &--disabled:hover {

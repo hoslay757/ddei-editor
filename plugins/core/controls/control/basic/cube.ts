@@ -4,7 +4,7 @@ export default {
   'code': 'cube',
   'desc': '正方体',
   'from': '100500',
-  'icon': 'toolbox-shape-square',
+  
   'define': {
     width: 100,
     height: 100,

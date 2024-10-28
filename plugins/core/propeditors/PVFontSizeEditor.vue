@@ -223,6 +223,7 @@ export default {
   color:var(--panel-title);
   border: 0.5px solid var(--panel-title);
   border-radius: 4px;
+  box-sizing: border-box;
   display: flex;
 }
 
@@ -240,11 +241,11 @@ export default {
   border: 0.5px solid var(--panel-disabled);
   border-radius: 4px;
   display: flex;
+  
 }
 
 .ddei-pv-editor-fontsize--disabled .textinput:hover {
   border: 1px solid var(--panel-disabled) !important;
-  box-sizing: border-box;
 }
 
 .ddei-pv-editor-fontsize .textinput input {

@@ -4,8 +4,17 @@ import SearchPanel from "./searchpanel"
 import DDeiExtSearchHotkeys from "./hotkeys"
 import DDeiExtSearchLifeCycle from "./search-lifecycle"
 
+import DDeiExtQuickStyle from "@ddei/quickstyle"
+import { DDeiExtQuickControl } from "@ddei/quickcontrol"
+import { DDeiCoreToolboxSimplePanel } from "@ddei/core"
+
+
 class DDeiExtSearch extends DDeiPluginBase {
   type: string = "package"
+
+  order: number = 2
+
+  static order: number = 2
 
   
   /**
@@ -20,6 +29,8 @@ class DDeiExtSearch extends DDeiPluginBase {
   hotkeys: object = DDeiExtSearchHotkeys;
 
   lifecyclies: object = DDeiExtSearchLifeCycle;
+
+  
 
   getDialogs(editor) {
     if (DDeiPluginBase.isSubclass(this.dialogs, DDeiPluginBase)) {
@@ -52,6 +63,8 @@ class DDeiExtSearch extends DDeiPluginBase {
       return this.lifecyclies.getLifeCyclies(editor);
     }
   }
+
+  
   
 
 

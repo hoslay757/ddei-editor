@@ -1,7 +1,7 @@
 <template>
   <div class="ddei-core-panel-bottom-play">
     <svg class="icon" aria-hidden="true">
-      <use xlink:href="#icon-a-ziyuan379"></use>
+      <use xlink:href="#icon-btn-play"></use>
     </svg>
   </div>
 </template>

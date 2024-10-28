@@ -7,11 +7,11 @@
           :class="{ 'button-v--disabled': !canEdit || !isButtonEnable(), 'button-v--selected': canEdit && isButtonEnable() && dialogShow == 'ddei-core-panel-sort-ddei-core-dialog-changeposition', 'button-v': canEdit && isButtonEnable() }"
           @click="canEdit && isButtonEnable() && showPositionDialog($event)">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan429"></use>
+            <use xlink:href="#icon-position"></use>
           </svg>
           <div class="text">位置</div>
           <svg class="icon extbtn" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan466"></use>
+            <use xlink:href="#icon-btn-down"></use>
           </svg>
         </div>
       </div>
@@ -20,11 +20,11 @@
           :class="{ 'button-v--disabled': !canEdit || !isButtonEnable(2), 'button-v--selected': canEdit && isButtonEnable(2) && dialogShow == 'ddei-core-panel-sort-align-dialog', 'button-v': canEdit && isButtonEnable(2) }"
           @click="canEdit && isButtonEnable(2) && showAlignDialog($event)">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan428"></use>
+            <use xlink:href="#icon-align"></use>
           </svg>
           <div class="text">对齐</div>
           <svg class="icon extbtn" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan466"></use>
+            <use xlink:href="#icon-btn-down"></use>
           </svg>
         </div>
       </div>
@@ -33,11 +33,11 @@
           :class="{ 'button-v--disabled': !canEdit || !isButtonEnable(), 'button-v--selected': canEdit && isButtonEnable() && dialogShow == 'ddei-core-panel-sort-merge-dialog', 'button-v': canEdit && isButtonEnable() }"
           @click="canEdit && isButtonEnable() && showMergeDialog($event)">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan427"></use>
+            <use xlink:href="#icon-merge1"></use>
           </svg>
           <div class="text">组合</div>
           <svg class="icon extbtn" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan466"></use>
+            <use xlink:href="#icon-btn-down"></use>
           </svg>
         </div>
       </div>
@@ -47,11 +47,11 @@
           :class="{ 'button-v--disabled': !canEdit || !isButtonEnable(), 'button-v--selected': canEdit && isButtonEnable() && dialogShow == 'ddei-core-panel-sort-ddei-core-dialog-changerotate', 'button-v': canEdit && isButtonEnable() }"
           @click="canEdit && isButtonEnable() && showRotateDialog($event)">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan426"></use>
+            <use xlink:href="#icon-flip"></use>
           </svg>
           <div class="text">翻转</div>
           <svg class="icon extbtn" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan466"></use>
+            <use xlink:href="#icon-btn-down"></use>
           </svg>
         </div>
       </div>

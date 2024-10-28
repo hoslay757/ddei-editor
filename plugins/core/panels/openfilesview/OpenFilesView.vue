@@ -1,10 +1,10 @@
 <template>
   <div @mousedown="changeEditorFocus()" v-if="forceRefresh" @mouseup="drag && fileDragDrop($event)" ref="openFilesView"
     class="ddei-core-panel-openfilesview">
-    <div v-show="this.editor?.leftWidth == 0 && expand" class="ddei-core-panel-openfilesview-expandbox"
+    <div v-show="this.editor?.leftWidth == 0 " class="ddei-core-panel-openfilesview-expandbox"
       @click="expandToolBox">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan474"></use>
+        <use xlink:href="#icon-expand4"></use>
       </svg>
     </div>
     <div class="ddei-core-panel-openfilesview-item" v-if="!editor?.files"></div>
@@ -14,7 +14,7 @@
       @mousemove="drag && fileDragOver($event)" v-for="(item, i) in editor?.files"
       v-show="i >= openIndex && ((i - openIndex + 1) * unitFileWidth + 120) <= width" :title="item.name">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-wenjian01"></use>
+        <use xlink:href="#icon-file"></use>
       </svg>
 
       <span class="textcontent">
@@ -22,24 +22,24 @@
         <div class="dirty" v-show="item.state != 0">ꔷ</div>
       </span>
       <svg @click.prevent.stop="closeFile(item, $event)" v-if="close" class="icon close" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan422"></use>
+        <use xlink:href="#icon-close"></use>
       </svg>
     </div>
     <svg class="icon addfile" aria-hidden="true" v-if="create && (!max || editor?.files?.length < max)"
       @click="newFile">
-      <use xlink:href="#icon-a-ziyuan376"></use>
+      <use xlink:href="#icon-add"></use>
     </svg>
     <div style="flex:1 1 1px"></div>
     <div class="ddei-core-panel-openfilesview-movebox" v-show="editor?.files?.length > maxOpenSize"
       @click="moveItem(-1)">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan481"></use>
+        <use xlink:href="#icon-left"></use>
       </svg>
     </div>
     <div class="ddei-core-panel-openfilesview-movebox" v-show="editor?.files?.length > maxOpenSize"
       @click="moveItem(1)">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan480"></use>
+        <use xlink:href="#icon-right"></use>
       </svg>
     </div>
   </div>
@@ -205,7 +205,7 @@ export default {
      */
     newFile(evt) {
       if (this.editor?.ddInstance) {
-        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_ADD_FILE", "ADD_FILE", null, this.editor.ddInstance, null)
+        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_ADD_FILE_BEFORE", "ADD_FILE", null, this.editor.ddInstance, null)
         if (rsState != -1) {
           let ddInstance = this.editor.ddInstance;
           let file = DDeiFile.loadFromJSON(
@@ -237,7 +237,9 @@ export default {
           let sheets = file?.sheets;
           
           if (file && sheets && ddInstance) {
+            ddInstance.stage.destroyRender()
             let stage = sheets[0].stage;
+            
             stage.ddInstance = ddInstance;
             //刷新页面
             ddInstance.stage = stage;
@@ -263,7 +265,7 @@ export default {
             this.editor.changeState(DDeiEditorState.DESIGNING);
             ddInstance?.bus?.executeAll();
           }
-          DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_ADD_FILE", "ADD_FILE", null, this.editor.ddInstance, null)
+          DDeiEditorUtil.invokeCallbackFunc("EVENT_ADD_FILE_AFTER", "ADD_FILE", null, this.editor.ddInstance, null)
           if (this.editor.files.length == 0) {
             ddInstance.disabled = true
           } else {
@@ -287,6 +289,7 @@ export default {
         input = document.createElement("input");
         input.setAttribute("id", editor.id +"_change_file_name_input");
         input.style.position = "absolute";
+        input.style.fontSize = "16px"
         editorEle.appendChild(input);
         input.onblur = function () {
           //设置属性值
@@ -483,10 +486,10 @@ export default {
         ddInstance.bus.executeAll();
       }else{
         if (this.editor.files.indexOf(file) != this.editor.currentFileIndex){
-          let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_CHANGE_FILE", "CHANGE_FILE", null, ddInstance, null)
+          let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_CHANGE_FILE_BEFORE", "CHANGE_FILE", null, ddInstance, null)
           if (rsState != -1) {
             this.editor.changeFile(this.editor.files.indexOf(file))
-            DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_CHANGE_FILE", "CHANGE_FILE", null, ddInstance, null)
+            DDeiEditorUtil.invokeCallbackFunc("EVENT_CHANGE_FILE_AFTER", "CHANGE_FILE", null, ddInstance, null)
             ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
             ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
             ddInstance.bus.executeAll();
@@ -552,7 +555,7 @@ export default {
      
       if(canClose){
         let ddInstance = this.editor.ddInstance;
-        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_CLOSE_FILE", "CLOSE_FILE", null, ddInstance, evt)
+        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_CLOSE_FILE_BEFORE", "CLOSE_FILE", null, ddInstance, evt)
         if (rsState != -1) {
     
         // if (
@@ -596,7 +599,7 @@ export default {
             }
           }
 
-          DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_CLOSE_FILE", "CLOSE_FILE", null, ddInstance, evt)
+          DDeiEditorUtil.invokeCallbackFunc("EVENT_CLOSE_FILE_AFTER", "CLOSE_FILE", null, ddInstance, evt)
           ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
           ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {
             parts: ["bottommenu", "topmenu"],
@@ -659,18 +662,18 @@ export default {
   align-items: center;
 
   &-expandbox {
-    flex: 0 0 30px;
+    flex: 0 0 28px;
     display: flex;
     justify-content: center;
     align-items: center;
-
+    height:100%;
+    
     &:hover {
       background: var(--panel-hover);
       cursor: pointer;
     }
-    img {
-      filter: brightness(60%);
-      margin-top: 3px;
+    .icon{
+      font-size:18px;
     }
   }
   .addfile {

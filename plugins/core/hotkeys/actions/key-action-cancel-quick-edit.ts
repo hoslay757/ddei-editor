@@ -59,7 +59,12 @@ class DDeiKeyActionCancelQuickEdit extends DDeiKeyAction {
       let editor = DDeiEditor.ACTIVE_INSTANCE;
       let inputEle = editor.quickEditorInput;
       inputEle.value = "";
+      if (ddInstance.stage.render.editorShadowControl?.isShadowControl){
+        ddInstance.stage.render.editorShadowControl.destroyed()
+      }
       ddInstance.stage.render.editorShadowControl = null;
+      
+      ddInstance.stage.render.editorShadowControl.destr
       editor.quickEditorModel = null
       delete ddInstance.stage.brushDataText
       editor.changeState(DDeiEditorState.DESIGNING);

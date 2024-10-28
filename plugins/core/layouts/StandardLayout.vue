@@ -230,7 +230,7 @@ export default {
   .body {
     display: flex;
     overflow:hidden;
-    flex: 1 1 calc(100vh - 153px);
+    flex: 1 1 calc(100vh - 134px);
 
     .left {
       flex: 0 1 292px;

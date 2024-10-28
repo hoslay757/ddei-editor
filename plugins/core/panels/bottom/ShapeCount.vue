@@ -40,6 +40,7 @@ export default {
 .ddei-core-panel-bottom-shapecount {
     flex: 0 0 100px;
     display: block;
+    font-size:15px;
     text-align: center;
 }
 </style>

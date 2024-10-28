@@ -6,7 +6,7 @@
         <div :class="{ 'button-v--selected': editor?.editMode == 1, 'button-v': editor?.editMode != 1 }" title="选择"
           @click="changeEditMode(1)">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan432"></use>
+            <use xlink:href="#icon-selector"></use>
           </svg>
           <div class="text">选择</div>
         </div>
@@ -15,7 +15,7 @@
         <div :class="{ 'button-v--selected': editor?.editMode == 2, 'button-v': editor?.editMode != 2 }" title="平移画布"
           @click="changeEditMode(2)">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan431"></use>
+            <use xlink:href="#icon-hand"></use>
           </svg>
           <div class="text">平移画布</div>
         </div>
@@ -25,7 +25,7 @@
           :class="{ 'button-v--selected': canEdit && editor?.editMode == 4, 'button-v': canEdit && editor?.editMode != 4, 'button-v--disabled': !canEdit }"
           title="连接线" @click="canEdit && changeEditMode(4)">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan430"></use>
+            <use xlink:href="#icon-link-line"></use>
           </svg>
           <div class="text">连接线</div>
         </div>

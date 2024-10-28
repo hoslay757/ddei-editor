@@ -7,7 +7,7 @@
           <div class="item" @click="createNewLayer(0)" v-show="allowAddLayer">
             <span style="grid-column:1/8;">新建图层</span>
             <svg class="icon extbtn" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan374"></use>
+              <use xlink:href="#icon-add-layer"></use>
             </svg>
           </div>
           <div :class="{ 'item': true, 'current': currentStage?.layerIndex === index }"
@@ -19,20 +19,20 @@
               ? layer.name :
               '图层' }}</span>
             <svg class="icon" aria-hidden="true" v-show="allowEditLayes" @click="removeLayer(index)">
-              <use xlink:href="#icon-a-ziyuan401"></use>
+              <use xlink:href="#icon-remove"></use>
             </svg>
             <span style="grid-column:1/4;font-weight:normal">形状:{{ layer.modelNumber }}</span>
             <svg class="icon" aria-hidden="true" @click="createNewLayer(index)" v-show="allowAddLayer">
-              <use xlink:href="#icon-a-ziyuan374"></use>
+              <use xlink:href="#icon-add-layer"></use>
             </svg>
             <svg class="icon" @click="displayOrShowLayer(layer)">
-              <use xlink:href="#icon-a-ziyuan387" v-if="layer.display == 0 && !layer.tempDisplay"></use>
-              <use xlink:href="#icon-a-ziyuan383" v-if="!(layer.display == 0 && !layer.tempDisplay)"></use>
+              <use xlink:href="#icon-close-eye" v-if="layer.display == 0 && !layer.tempDisplay"></use>
+              <use xlink:href="#icon-open-eye" v-if="!(layer.display == 0 && !layer.tempDisplay)"></use>
             </svg>
 
             <svg class="icon" @click="lockOrUnLockLayer(layer)">
-              <use xlink:href="#icon-a-ziyuan415" v-if="layer.lock"></use>
-              <use xlink:href="#icon-a-ziyuan499" v-if="!layer.lock"></use>
+              <use xlink:href="#icon-lock" v-if="layer.lock"></use>
+              <use xlink:href="#icon-unlock" v-if="!layer.lock"></use>
             </svg>
 
             <input type="radio" :class="{ 'not_temp_display': !layer.tempDisplay }" name="rdo_layers" :value="layer.id"
@@ -40,8 +40,8 @@
               autocomplete="off" />
 
             <svg class="icon" @click="printOrNoPrintLayer(layer)">
-              <use xlink:href="#icon-a-ziyuan500" v-if="!layer.print"></use>
-              <use xlink:href="#icon-a-ziyuan501" v-if="layer.print"></use>
+              <use xlink:href="#icon-print-disabled" v-if="!layer.print"></use>
+              <use xlink:href="#icon-print" v-if="layer.print"></use>
             </svg>
 
           </div>
@@ -310,6 +310,8 @@ export default {
         input = document.createElement("input");
         input.setAttribute("id", editor.id +"_change_layer_name_input");
         input.style.position = "absolute";
+        input.style.fontSize = "14px";
+        input.style.zIndex = 999;
         editorEle.appendChild(input);
         const that = this;
         input.onblur = ()=> {
@@ -353,13 +355,13 @@ export default {
       input.style.width = ele.offsetWidth + "px";
       input.style.height = ele.offsetHeight + "px";
       input.style.left = (domPos.left - editorDomPos.left) + "px";
-      input.style.fontSize = "16px";
+     
       input.style.top = (domPos.top - editorDomPos.top) + "px";
       input.style.outline = "1px solid #017fff";
       input.style.border = "none";
       input.style.borderRadius = "1px";
       input.value = layer.name;
-      input.style.zIndex = 999;
+      
       input.style.display = "block";
       input.selectionStart = 0; // 选中开始位置
       input.selectionEnd = input.value.length; // 获取输入框里的长度。

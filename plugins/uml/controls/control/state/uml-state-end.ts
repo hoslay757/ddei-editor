@@ -4,7 +4,7 @@ export default {
   'code': 'end',
   'desc': 'UML流程终止',
   'from': '100500',
-  'icon': 'toolbox-shape-circle',
+  
   'define': {
     width: 40,
     height: 40,
@@ -63,7 +63,7 @@ export default {
       groups: [
         {
           name: "样式",
-          icon: 'icon-a-ziyuan375',
+          icon: 'icon-fill',
           subGroups: [
             {
               name: "填充",

@@ -5,7 +5,7 @@
         :placeholder="attrDefine.defaultValue" :name="'ddei-pv-editor-image-' + attrDefine.code" autocomplete="off" />
 
       <svg @click="attrDefine && !attrDefine.readonly && chooseFile()" class="icon" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan389"></use>
+        <use xlink:href="#icon-link"></use>
       </svg>
 
 
@@ -211,7 +211,6 @@ export default {
 
 .ddei-pv-editor-image .textinput:hover {
   border: 1px solid var(--dot);
-  box-sizing: border-box;
 }
 
 .ddei-pv-editor-image--disabled .textinput {

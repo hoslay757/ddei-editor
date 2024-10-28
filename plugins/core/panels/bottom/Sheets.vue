@@ -2,7 +2,7 @@
   <div class="ddei-core-panel-bottom-addpage" @click="newSheet"
     v-if="allowEditSheet && create && (!max || (editor?.files[editor?.currentFileIndex]?.sheets?.length < max))">
     <svg class="icon" aria-hidden="true">
-      <use xlink:href="#icon-a-ziyuan376"></use>
+      <use xlink:href="#icon-add"></use>
     </svg>
   </div>
   <div class="ddei-core-panel-bottom-pages" ref="bottomSheets" @mouseup="drag && sheetDragDrop($event)">
@@ -21,13 +21,13 @@
     <div class="ddei-core-panel-bottom-pages-movebox"
       v-show="editor?.files[editor?.currentFileIndex]?.sheets?.length > maxOpenSize" @click="moveItem(-1)">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan481"></use>
+        <use xlink:href="#icon-left"></use>
       </svg>
     </div>
     <div class="ddei-core-panel-bottom-pages-movebox"
       v-show="editor?.files[editor?.currentFileIndex]?.sheets?.length > maxOpenSize" @click="moveItem(1)">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan480"></use>
+        <use xlink:href="#icon-right"></use>
       </svg>
     </div>
   </div>
@@ -266,6 +266,7 @@ export default {
         input = document.createElement("input");
         input.setAttribute("id", editor.id +"_change_sheet_name_input");
         input.style.position = "absolute";
+        input.style.fontSize = "16px"
         editorEle.appendChild(input);
         input.onblur = function () {
           //设置属性值
@@ -348,7 +349,8 @@ export default {
       }
       let ddInstance = this.editor?.ddInstance;
       if (file && sheets && ddInstance) {
-        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_ADD_SHEET", "ADD_SHEET", null, ddInstance, null)
+        
+        let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_ADD_SHEET_BEFORE", "ADD_SHEET", null, ddInstance, null)
         if (rsState != -1) {
           let i = sheets.length + 1;
 
@@ -365,8 +367,10 @@ export default {
           );
           file.changeSheet(sheets.length - 1);
           //刷新页面
+          ddInstance.stage.destroyRender();
           ddInstance.stage = stage;
           this.editor.currentStage = stage;
+          
           //加载场景渲染器
           stage.initRender();
           //设置视窗位置到中央
@@ -378,7 +382,7 @@ export default {
               z: 0,
             };
           }
-          DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_ADD_SHEET", "ADD_SHEET", null, ddInstance, null)
+          DDeiEditorUtil.invokeCallbackFunc("EVENT_ADD_SHEET_AFTER", "ADD_SHEET", null, ddInstance, null)
           this.editor.changeState(DDeiEditorState.DESIGNING);
           this.editor.editorViewer?.changeFileModifyDirty();
           ddInstance.bus?.push(DDeiEditorEnumBusCommandType.AddFileHistroy);
@@ -414,19 +418,21 @@ export default {
         (index >= 0 || index < sheets.length)
       ) {
         if (index != file.currentSheetIndex){
-          let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_CHANGE_SHEET", "CHANGE_SHEET", null, ddInstance, null)
+          let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_CHANGE_SHEET_BEFORE", "CHANGE_SHEET", null, ddInstance, null)
           if (rsState != -1) {
             this.tempSheetChange = true;
             file.changeSheet(index);
             let stage = sheets[index].stage;
             stage.ddInstance = ddInstance;
             //刷新页面
+            ddInstance.stage.destroyRender()
             ddInstance.stage = stage;
             this.editor.currentStage = stage;
             //加载场景渲染器
             stage.initRender();
+            
 
-            DDeiEditorUtil.invokeCallbackFunc("EVENT_AFTER_CHANGE_SHEET", "CHANGE_SHEET", null, ddInstance, null)
+            DDeiEditorUtil.invokeCallbackFunc("EVENT_CHANGE_SHEET_AFTER", "CHANGE_SHEET", null, ddInstance, null)
             ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
             ddInstance.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
             ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts, {});
@@ -495,9 +501,13 @@ export default {
   justify-content: center;
   align-items: center;
   margin-left: 10px;
+  .icon{
+    font-size: 20px;
+  }
 }
 
 .ddei-core-panel-bottom-pages {
+  font-size: 15px;
   flex: 1;
   display: block;
   text-align: center;
@@ -507,6 +517,9 @@ export default {
     height: 27px;
     float: left;
     text-align: center;
+    .icon {
+      font-size: 20px;
+    }
 
     &:hover {
       background: rgb(235, 235, 239);
@@ -521,6 +534,7 @@ export default {
   &-page {
     float: left;
     height: 27px;
+
     border-right: 1px solid var(--panel-border);
     padding: 0 10px;
     text-align: center;
@@ -528,6 +542,8 @@ export default {
     span {
       height: 27px;
       width: 80px;
+      padding-left:3px;
+          
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -551,6 +567,7 @@ export default {
       span {    
         height: 27px;
         width: 80px;
+        padding-left: 3px;
         background: var(--panel-selected);
         white-space: nowrap;
         text-overflow: ellipsis;

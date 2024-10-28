@@ -167,6 +167,7 @@ export default {
   margin-right: 10px;
   padding: 0 5px;
   display: flex;
+  box-sizing: border-box;
 }
 
 .ddei-pv-editor-textarea--disabled {

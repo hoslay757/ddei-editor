@@ -3,8 +3,8 @@
     <div :class="{ 'ddei-ext-panel-search-mode': true, 'ddei-ext-panel-search-mode__expand':editor.search?.mode== 2}"
       @click="changeReplace">
       <svg class="icon" aria-hidden="true">
-        <use v-if="editor.search?.mode==1" xlink:href="#icon-a-ziyuan477"></use>
-        <use v-if="editor.search?.mode==2" xlink:href="#icon-a-ziyuan478"></use>
+        <use v-if="editor.search?.mode==1" xlink:href="#icon-btn-right1"></use>
+        <use v-if="editor.search?.mode==2" xlink:href="#icon-expand2"></use>
       </svg>
     </div>
     <div class="ddei-ext-panel-search-box">
@@ -13,8 +13,8 @@
         autocomplete="off" />
       <div @click="changeMatchCase()"
         :class="{ 'ddei-ext-panel-search-box-btn': true, 'ddei-ext-panel-search-box-btn__selected': editor.search?.matchCase == 1 }">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-a-ziyuan454"></use>
+        <svg class="icon" style="width:16px;height:16px;" aria-hidden="true">
+          <use xlink:href="#icon-lock-case"></use>
         </svg>
       </div>
       <div @click="changeMatchAll()"
@@ -33,19 +33,19 @@
         :class="{ 'ddei-ext-panel-search-buttons-btn': true, 'ddei-ext-panel-search-buttons-btn__disabled': !editor.search || editor.search?.resultIndex >= editor.search?.result?.length - 1}"
         @click="moveToNextResult()">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-a-ziyuan483"></use>
+          <use xlink:href="#icon-down"></use>
         </svg>
       </div>
       <div
         :class="{ 'ddei-ext-panel-search-buttons-btn': true, 'ddei-ext-panel-search-buttons-btn__disabled': !editor.search || editor.search?.resultIndex == 0 || editor.search?.result?.length == 0 }"
         @click="moveToUpResult()">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-a-ziyuan482"></use>
+          <use xlink:href="#icon-up"></use>
         </svg>
       </div>
       <div class="ddei-ext-panel-search-buttons-btn" @click="closeDialog">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-a-ziyuan422"></use>
+          <use xlink:href="#icon-close"></use>
         </svg>
       </div>
     </div>
@@ -375,9 +375,9 @@ export default {
     
     .icon{
       color:var(--icon);
-      font-size: 16px;
-      width:16px;
-      height:16px;
+      font-size: 18px;
+      width:18px;
+      height:18px;
     }
   
     &-mode {
@@ -529,9 +529,9 @@ export default {
           }
 
           .icon {
-            font-size: 16px;
-            width: 16px;
-            height: 16px
+            font-size: 18px;
+            width: 18px;
+            height: 18px
           }
         }
       }

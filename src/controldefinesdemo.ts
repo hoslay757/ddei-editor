@@ -21,7 +21,25 @@ const controls: object[] = [
         color: "#e1b348"
       },
       width:150,
-      height:100
+      height:100,
+      ext: {
+        groups: [
+          {
+            name: "数据",
+            icon: 'icon-edit-properies',
+            subGroups: [
+              {
+                name: "分组1",
+                attrs: ["code", "text1"]
+              },
+              {
+                name: "分组2",
+                attrs: ["text"]
+              },
+            ]
+          },
+        ]
+      }
     }
   },
   {
@@ -29,7 +47,7 @@ const controls: object[] = [
     'name': '自定义2',
     'code': 'cust_2',
     'desc': '自定义节点2',
-    'from': '302006',
+    'from': '100001',
     'define': {
       fill: {
         color: "#ffc0be"
@@ -49,15 +67,33 @@ const controls: object[] = [
             'type': [1, 2], //类别，1图形，2业务，3事件
             'readonly': true,
           },
+          {
+            'code': 'bpmnSubType',
+            'name': '类型',
+            'desc': '控件的主体显示文本',
+            'controlType': 'combox',
+            'dataType': 'integer',
+            'dataSource': [
+              { 'text': '默认', 'value': 1 }, { 'text': '中断-消息', 'value': 2 }, { 'text': '非中断-消息', 'value': 3 },
+              { 'text': '中断-定时器', 'value': 4 }, { 'text': '非中断-定时器', 'value': 5 }, { 'text': '中断-条件', 'value': 6 },
+              { 'text': '非中断-条件', 'value': 7 }, { 'text': '中断-信号', 'value': 8 }, { 'text': '非中断-信号', 'value': 9 },
+              { 'text': '中断-多次', 'value': 10 }, { 'text': '非中断-多次', 'value': 11 }, { 'text': '中断-并行', 'value': 12 },
+              { 'text': '非中断-并行', 'value': 13 }, { 'text': '中断-升级', 'value': 14 }, { 'text': '非中断-升级', 'value': 15 },
+              { 'text': '中断-错误', 'value': 16 }, { 'text': '中断-补偿', 'value': 17 }
+            ],
+            'itemStyle': { width: 100, height: 25, col: 2, row: 0 },
+            'defaultValue': 1,
+            'type': [1, 2], //类别，1图形，2业务，3事件
+          },
         ],
         groups: [
           {
             name: "数据",
-            icon: 'icon-a-ziyuan409',
+            icon: 'icon-edit-properies',
             subGroups: [
               {
                 name: "分组1",
-                attrs: ["code", "text1"]
+                attrs: ["code", "text1","bpmnSubType"]
               },
               {
                 name: "分组2",

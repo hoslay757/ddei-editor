@@ -40,7 +40,7 @@ class DDeiExtTooltipLifeCycle extends DDeiLifeCycle {
 
   EVENT_MOUSE_OPERATING: DDeiFuncData | null = new DDeiFuncData("tooltip-hidden", 1, this.mouseOperating);
 
-  EVENT_AFTER_CLOSE_FILE: DDeiFuncData | null = new DDeiFuncData("tooltip-close", 1, this.mouseOperating);
+  EVENT_CLOSE_FILE_AFTER: DDeiFuncData | null = new DDeiFuncData("tooltip-close", 1, this.mouseOperating);
   
   showTooltip(operateType, data, ddInstance, evt): DDeiFuncCallResult {
     

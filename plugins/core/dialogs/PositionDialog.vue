@@ -7,28 +7,28 @@
           <div :class="{ 'item_disabled': !canPush('top'), 'item': canPush('top') }"
             @click="canPush('top') && doPush('top')">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan435"></use>
+              <use xlink:href="#icon-move-top"></use>
             </svg>
             <div class="text">置于顶层</div>
           </div>
           <div :class="{ 'item_disabled': !canPush('bottom'), 'item': canPush('bottom') }"
             @click="canPush('top') && doPush('bottom')">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan436"></use>
+              <use xlink:href="#icon-move-bottom"></use>
             </svg>
             <div class="text">置于底层</div>
           </div>
           <div :class="{ 'item_disabled': !canPush('up'), 'item': canPush('up') }"
             @click="canPush('up') && doPush('up')">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan433"></use>
+              <use xlink:href="#icon-move-up"></use>
             </svg>
             <div class="text">上移一层</div>
           </div>
           <div :class="{ 'item_disabled': !canPush('down'), 'item': canPush('down') }"
             @click="canPush('down') && doPush('down')">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-a-ziyuan434"></use>
+              <use xlink:href="#icon-move-down"></use>
             </svg>
             <div class="text">下移一层</div>
           </div>

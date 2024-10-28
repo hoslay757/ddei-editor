@@ -5,7 +5,7 @@
       <div class="part">
         <div class="button-v" @click="download">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan424"></use>
+            <use xlink:href="#icon-download"></use>
           </svg>
           <div class="text">下载</div>
         </div>
@@ -13,7 +13,7 @@
       <!-- <div class="part">
         <div class="button-v" @click="showExportDialog($event)">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan501"></use>
+            <use xlink:href="#icon-print"></use>
           </svg>
           <div class="text">打印</div>
         </div>

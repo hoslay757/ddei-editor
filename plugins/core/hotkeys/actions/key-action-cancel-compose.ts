@@ -62,7 +62,7 @@ class DDeiKeyActionCancelCompose extends DDeiKeyAction {
       //当前激活的图层
       let layer = ddInstance.stage.layers[ddInstance.stage.layerIndex]
       let selectedModels = layer.getSelectedModels();
-      if (selectedModels.size > 0) {
+      if (selectedModels?.size > 0) {
         ddInstance.bus.push(DDeiEnumBusCommandType.ModelCancelMerge);
         ddInstance.bus.executeAll();
       }

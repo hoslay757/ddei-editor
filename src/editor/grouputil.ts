@@ -1,6 +1,7 @@
 import {DDeiEditorArrtibute} from 'ddei-framework';
 import { cloneDeep } from 'lodash'
 import {DDeiUtil} from 'ddei-framework';
+import { markRaw } from "vue"
 
 const ToDefaultPropertys = ["fill.type", "fill.color", "fill.image", "fill.opacity", "border.type", "border.color", "borderOpacity", "borderWidth", "borderDash", "borderRound",
   "font.family", "font.size", "font.color", "fontAlign", "textStyle.feed"
@@ -48,7 +49,9 @@ const parseAttrsToGroup = function (control) {
 }
 
 const loadControlByFrom = function (controlOriginDefinies: Map<string, object>, control: object) {
+  
   if (control.from && !control.def) {
+    
     let fromControl = controlOriginDefinies.get(control.from)
     if (fromControl.from) {
       loadControlByFrom(controlOriginDefinies, fromControl)
@@ -57,6 +60,7 @@ const loadControlByFrom = function (controlOriginDefinies: Map<string, object>, 
     control.groups = cloneDeep(fromControl.groups)
     let fromMenus = cloneDeep(fromControl.menus)
     let fromDefine = cloneDeep(fromControl.define)
+    let fromFilters = cloneDeep(fromControl.filters)
     //合并控件自身与from组件的define、menu
     if (fromDefine) {
       if (!control.define) {
@@ -67,115 +71,28 @@ const loadControlByFrom = function (controlOriginDefinies: Map<string, object>, 
           control.define[i] = fromDefine[i]
         }
       }
+      
     }
-    //处理ext
-    if (control.define?.ext) {
-
-      for (let i in control.define.ext) {
-        switch (i) {
-          case "composes": {
-            let extComps = control.define?.ext.composes
-            let defineComps = control.define.composes
-            for (let j = 0; j < extComps.length; j++) {
-              let extComp = extComps[j]
-              let defComp = defineComps[j]
-              //替换当前部分值
-              if (defComp && !extComp.type) {
-                for (let k in extComp) {
-                  defComp[k] = extComp[k]
-                }
-              }
-            }
-            break;
-          }
-          case "ovs": {
-            let extOVS = control.define?.ext.ovs
-            let defineOVS = control.define.ovs
-            for (let j = 0; j < extOVS.length; j++) {
-              let extComp = extOVS[j]
-              let defComp = defineOVS[j]
-              //替换当前部分值
-              if (defComp && extComp) {
-                for (let k in extComp) {
-                  defComp[k] = extComp[k]
-                }
-              }
-            }
-            break;
-          }
-          case "sample": {
-            if (!control.define?.sample) {
-              control.define.sample = {}
-            }
-            for (let j in control.define.ext.sample) {
-
-              if (j != 'rules') {
-                control.define.sample[j] = control.define.ext.sample[j]
-              } else {
-                if (!control.define.sample.rules) {
-                  control.define.sample.rules = []
-                }
-                control.define.ext.sample[j].forEach(rule => {
-                  control.define.sample.rules.push(rule)
-                });
-              }
-            }
-            break;
-          }
-          case "attrs": {
-            let extAttrs = control.define.ext.attrs;
-            extAttrs?.forEach(extAttr => {
-              let append = true
-              for (let x = 0; x < control.attrs.length; x++) {
-                //覆盖
-                if (control.attrs[x].code == extAttr.code) {
-                  control.attrs[x] = extAttr
-                  append = false;
-                  break;
-                }
-              }
-              if (append) {
-                control.attrs.push(extAttr)
-              }
-            });
-            break;
-          }
-          case "groups": {
-            //覆盖
-            let extGroups = control.define.ext.groups;
-            control.groups = extGroups
-            break;
-          }
-          default: {
-            control.define[i] = control.define.ext[i]
-            break;
+    if (fromFilters){
+      if (!control.filters) {
+        control.filters = fromFilters
+      }else{
+        for (let k in fromFilters){
+          if (!control.filters[k]){
+            control.filters[k] = fromFilters[k]
           }
         }
-
       }
-      delete control.define.ext
     }
+
+    //处理ext
+    loadControlDefineExt(control)
+    
+    
 
     //处理composes
-    if (control.define?.composes) {
-      control.define?.composes.forEach(compose => {
-        let composeControlDefine = controlOriginDefinies.get(compose.id)
-        if (composeControlDefine.from) {
-          loadControlByFrom(controlOriginDefinies, composeControlDefine)
-        }
-        compose.attrs = cloneDeep(composeControlDefine.attrs)
-        let composeDefine = cloneDeep(composeControlDefine.define)
-        //合并控件自身与from组件的define、menu
-        if (composeDefine) {
-
-          for (let i in composeDefine) {
-            if (!(compose[i] || compose[i] == 0)) {
-              compose[i] = composeDefine[i]
-            }
-          }
-        }
-      });
-    }
+    loadControlDefineComposes(controlOriginDefinies,control)
+   
 
     //处理others
     loadControlOthers(controlOriginDefinies, control)
@@ -193,10 +110,19 @@ const loadControlByFrom = function (controlOriginDefinies: Map<string, object>, 
 
     control.menus = fromMenus
     control.attrDefineMap = new Map()
-    control.type = fromControl.type
+    if (!control.type && control.type != fromControl.type) {
+      control.type = fromControl.type
+    }
+    
+    
+   
 
+    
 
     controlOriginDefinies.set(control.id, control);
+  }
+  if (control.viewer) {
+    control.viewer = markRaw(control.viewer)
   }
   parseAttrsToGroup(control)
   control.def = true;
@@ -272,8 +198,117 @@ const loadAndSortGroup = function (groups, controlOriginDefinies){
   return groupOriginDefinies;
 }
 
+const loadControlDefineComposes = function (controlOriginDefinies,control){
+  if (control.define?.composes) {
+    control.define?.composes.forEach(compose => {
+      let composeControlDefine = controlOriginDefinies.get(compose.id)
+      if (composeControlDefine.from) {
+        loadControlByFrom(controlOriginDefinies, composeControlDefine)
+      }
+      compose.attrs = cloneDeep(composeControlDefine.attrs)
+      let composeDefine = cloneDeep(composeControlDefine.define)
+      //合并控件自身与from组件的define、menu
+      if (composeDefine) {
+
+        for (let i in composeDefine) {
+          if (!(compose[i] || compose[i] == 0)) {
+            compose[i] = composeDefine[i]
+          }
+        }
+      }
+    });
+  }
+}
+
+const loadControlDefineExt = function(control){
+  if (control.define?.ext) {
+
+    for (let i in control.define.ext) {
+      switch (i) {
+        case "composes": {
+          let extComps = control.define?.ext.composes
+          let defineComps = control.define.composes
+          for (let j = 0; j < extComps.length; j++) {
+            let extComp = extComps[j]
+            let defComp = defineComps[j]
+            //替换当前部分值
+            if (defComp && !extComp.type) {
+              for (let k in extComp) {
+                defComp[k] = extComp[k]
+              }
+            }
+          }
+          break;
+        }
+        case "ovs": {
+          let extOVS = control.define?.ext.ovs
+          let defineOVS = control.define.ovs
+          for (let j = 0; j < extOVS.length; j++) {
+            let extComp = extOVS[j]
+            let defComp = defineOVS[j]
+            //替换当前部分值
+            if (defComp && extComp) {
+              for (let k in extComp) {
+                defComp[k] = extComp[k]
+              }
+            }
+          }
+          break;
+        }
+        case "sample": {
+          if (!control.define?.sample) {
+            control.define.sample = {}
+          }
+          for (let j in control.define.ext.sample) {
+
+            if (j != 'rules') {
+              control.define.sample[j] = control.define.ext.sample[j]
+            } else {
+              if (!control.define.sample.rules) {
+                control.define.sample.rules = []
+              }
+              control.define.ext.sample[j].forEach(rule => {
+                control.define.sample.rules.push(rule)
+              });
+            }
+          }
+          break;
+        }
+        case "attrs": {
+          let extAttrs = control.define.ext.attrs;
+          extAttrs?.forEach(extAttr => {
+            let append = true
+            for (let x = 0; x < control.attrs.length; x++) {
+              //覆盖
+              if (control.attrs[x].code == extAttr.code) {
+                control.attrs[x] = extAttr
+                append = false;
+                break;
+              }
+            }
+            if (append) {
+              control.attrs.push(extAttr)
+            }
+          });
+          break;
+        }
+        case "groups": {
+          //覆盖
+          let extGroups = control.define.ext.groups;
+          control.groups = extGroups
+          break;
+        }
+        default: {
+          control.define[i] = control.define.ext[i]
+          break;
+        }
+      }
+
+    }
+    delete control.define.ext
+  }
+}
 
 
 
-
-export { loadControlByFrom, loadAndSortGroup };
+export { loadControlByFrom, loadAndSortGroup, loadControlDefineExt, loadControlDefineComposes };

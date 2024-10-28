@@ -8,6 +8,7 @@ import DDeiCoreCanvasViewPanel from './canvasview';
 import DDeiCoreBottomMenuPanel from './bottommenu';
 import DDeiCoreCommonPanels from './common';
 import DDeiCoreBottomPanels from './bottom';
+import DDeiCoreSimplePanels from './simple';
 
 class DDeiCorePanels extends DDeiPluginBase{
   
@@ -18,7 +19,7 @@ class DDeiCorePanels extends DDeiPluginBase{
   static defaultIns:DDeiCorePanels = new DDeiCorePanels(null);
 
   plugins: object[] = [DDeiCoreTopMenuPanel, DDeiCoreToolboxPanel, DDeiCoreQuickColorViewPanel, DDeiCorePropertyViewPanel, 
-    DDeiCoreOpenFilesViewPanel, DDeiCoreCanvasViewPanel, DDeiCoreBottomMenuPanel, DDeiCoreCommonPanels, DDeiCoreBottomPanels]
+    DDeiCoreOpenFilesViewPanel, DDeiCoreCanvasViewPanel, DDeiCoreBottomMenuPanel, DDeiCoreCommonPanels, DDeiCoreBottomPanels, DDeiCoreSimplePanels]
 
   getPanels(editor){
     let panels = []
@@ -61,8 +62,9 @@ export * from './canvasview'
 export * from './bottommenu'
 export * from './common'
 export * from './bottom'
+export * from './simple'
 export {
   DDeiCorePanels, DDeiCoreTopMenuPanel, DDeiCoreToolboxPanel, DDeiCoreQuickColorViewPanel, DDeiCorePropertyViewPanel,
-  DDeiCoreOpenFilesViewPanel, DDeiCoreCanvasViewPanel, DDeiCoreBottomMenuPanel, DDeiCoreCommonPanels, DDeiCoreBottomPanels
+  DDeiCoreOpenFilesViewPanel, DDeiCoreCanvasViewPanel, DDeiCoreBottomMenuPanel, DDeiCoreCommonPanels, DDeiCoreBottomPanels, DDeiCoreSimplePanels
 }
 export default DDeiCorePanels

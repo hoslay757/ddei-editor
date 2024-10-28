@@ -8,13 +8,13 @@
         {{ parseInt(currentStage?.ratio * 100) }}%
       </span>
       <svg v-if="dialog" class="icon expbtn" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan466"></use>
+        <use xlink:href="#icon-btn-down"></use>
       </svg>
     </div>
 
     <div @click="addRatio(-delta)">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan420"></use>
+        <use xlink:href="#icon-reduce"></use>
       </svg>
     </div>
     <div v-if="!range"
@@ -24,14 +24,14 @@
         {{ parseInt(currentStage?.ratio * 100) }}%
       </span>
       <svg v-if="dialog" class="icon expbtn" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan466"></use>
+        <use xlink:href="#icon-btn-down"></use>
       </svg>
     </div>
     <input v-show="range" type="range" :min="min" :max="max" :step="delta" v-model="stageRatio" autocomplete="off"
       name="ddei-core-panel-bottom-changeratio__range" />
     <div @click="addRatio(delta)">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan376"></use>
+        <use xlink:href="#icon-add"></use>
       </svg>
     </div>
   </div>
@@ -203,18 +203,20 @@ export default {
   font-size: 14px;
 }
 .icon {
-  font-size: 22px;
-  width:22px;
-  height:22px;
+  font-size: 20px;
+  width:20px;
+  height:20px;
 }
 .ddei-core-panel-bottom-changeratio {
     flex: 0 0 157px;
     display: flex;
     justify-content: center;
     align-items: center;
-  
+    font-size: 15px;
     span {
       float: left;
+      width:36px;
+      text-align: center;
       margin-left: 5px;
       margin-right: 5px;
     }

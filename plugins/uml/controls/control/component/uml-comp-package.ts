@@ -6,7 +6,7 @@ export default {
   'code': 'pkg',
   'desc': '包',
   'from': '100500',
-  'icon': 'toolbox-shape-square',
+  
   'define': {
     width: 200,
     height: 160,
@@ -138,7 +138,7 @@ export default {
       groups: [
         {
           name: "样式",
-          icon: 'icon-a-ziyuan375',
+          icon: 'icon-fill',
           subGroups: [
             {
               name: "填充",

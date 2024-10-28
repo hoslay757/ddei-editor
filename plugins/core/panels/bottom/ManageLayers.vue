@@ -1,7 +1,7 @@
 <template>
   <div class="ddei-core-panel-bottom-managelayers" v-if="allowOpenMultLayers" @click="showLayersDialog($event)">
     <svg class="icon" aria-hidden="true">
-      <use xlink:href="#icon-a-ziyuan402"></use>
+      <use xlink:href="#icon-layers"></use>
     </svg>
   </div>
 </template>
@@ -59,9 +59,16 @@ export default {
 
 <style lang="less" scoped>
 .ddei-core-panel-bottom-managelayers {
-    flex: 0 0 35px;
+    flex: 0 0 30px;
     display: flex;
     align-items: center;
     justify-content: center;
+    .icon{
+      font-size: 20px;
+    }
+    &:hover{
+      background-color: var(--panel-hover);
+        cursor: pointer;
+    }
 }
 </style>

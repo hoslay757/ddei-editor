@@ -1,6 +1,6 @@
 <script lang="ts">
 import DDeiEditorView from "./editor/Editor.vue";
-import { DDeiCoreTopMenuPanel, DDeiCoreThemeBlack, DDeiCoreControls, DDeiCoreHotkeys, DDeiKeyActionAllSelect, DDeiCorePropertyViewPanel, DDeiCoreToolboxPanel, DDeiCoreSheetsPanel, DDeiCoreChangeRatioPanel, DDeiCoreChangeRatioDialog, DDeiCoreShapeCountPanel, DDeiCoreBottomMenuPanel, DDeiCoreStandLayout, DDeiCoreOpenFilesViewPanel, DDeiCoreThemeDefault } from "@ddei/core";
+import { DDeiCoreToolboxSimplePanel, DDeiCoreTopMenuSimplePanel, DDeiCoreThemeBlack, DDeiCoreControls, DDeiCoreHotkeys, DDeiKeyActionAllSelect, DDeiCorePropertyViewPanel, DDeiCoreToolboxPanel, DDeiCoreSheetsPanel, DDeiCoreChangeRatioPanel, DDeiCoreChangeRatioDialog, DDeiCoreShapeCountPanel, DDeiCoreBottomMenuPanel, DDeiCoreStandLayout, DDeiCoreSimpleLayout,DDeiCoreOpenFilesViewPanel, DDeiCoreThemeDefault } from "@ddei/core";
 import { DDeiExtUML } from "@ddei/uml"
 import { DDeiExtSearch } from "@ddei/search"
 import { DDeiFuncCallResult, DDeiUtil, DDeiEditorUtil } from "ddei-framework";
@@ -12,6 +12,7 @@ import DDeiExtHtmlViewer from "@ddei/htmlviewer"
 import ReplaceDivDemo  from "./ReplaceDivDemo.vue";
 import HtmlTooltipDemo from "./HtmlTooltipDemo.vue";
 import {controls as ControlDefinesDemo,groups as GroupDefinesDemo} from "./controldefinesdemo"
+import TopMenuViewerDemo from "./TopMenuViewerDemo.vue"
 
 export default defineComponent({
   name: "APP",
@@ -19,51 +20,98 @@ export default defineComponent({
   data() {
     
     const options = markRaw({
+      // currentLayout: "ddei-core-layout-simple",
       config: {
-        paper:"A6",
-        "mark": "水印文本",
+        ratio: 1.2, //默认缩放比例为120%
+        pixel:2, //调整渲染质量
+        // paper:"A6",
+        // "mark": "水印文本",
         // EXT_STAGE_WIDTH: false,
         // EXT_STAGE_HEIGHT: false,
         // 自定义控件，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        controlDefines: ControlDefinesDemo,
+        // controlDefines: ControlDefinesDemo,
         // 自定义分组，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        groupDefines: GroupDefinesDemo,
+        // groupDefines: GroupDefinesDemo,
         initData: {
           controls: [
-            {
-              model: "9999002"
-            },
-            {
-              id: "act_1",
-              model: "102010",
-              type: "emp_1",
-              text: "第一步",
-              border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
-              fill: { color: "grey" },
-            }
+            // {
+            //   model: "9999002"
+            // },
+            // {
+            //   id: "act_1",
+            //   model: "102010",
+            //   type: "emp_1",
+            //   text: "第一步",
+            //   border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
+            //   fill: { color: "grey" },
+            // }
+              {
+                id: "act_1",
+              model: "103011",
+                type: "emp_1",
+                text: "第一步",
+                border: { color: "yellow", width: 2 },
+                fill: { color: "grey" },
+              },
+              {
+                id: "act_2",
+                model: "103010",
+                type: "emp_2",
+                width: 200,
+                height: 100,
+                text: "第二步",
+                offsetY: -100,
+              }
+            
           ]
         }
       },
       extensions: [
-        //布局的配置
-        DDeiCoreStandLayout.configuration({
-          //配置插件
-          // 'top': [],
-          'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],// [!code ++]
-          // 'bottom': [],
-          // 'left': [],
-          // 'right': []
+        // //布局的配置
+        // DDeiCoreStandLayout.configuration({
+        //   //配置插件
+        //   // 'top': [],
+        //   'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],// [!code ++]
+        //   // 'bottom': [],
+        //   // 'left': [],
+        //   // 'right': []
+        // }),
+        DDeiCoreSimpleLayout.configuration({
+          other: ['ddei-core-panel-toolbox-simple', 'ddei-core-panel-topmenu-simple'],
+          middle: ['ddei-core-panel-canvasview'],
+          right: [],
+          bottom: []
         }),
         DDeiExtUML,
         DDeiExtSearch,
+        DDeiExtTooltip,
         DDeiExtQuickStyle,
         DDeiExtQuickControl,
-        QuickChooseControlDialog.configuration({ customGroups: ['101', '102'] }),
-        DDeiExtTooltip.configuration({
-          'ddei-ext-dialog-tooltip':{
-            viewer: HtmlTooltipDemo
-          }
-        })
+        //配置htmlviewer插件，matchField用于声明图形控件中的属性与config中的key对应字段
+        // DDeiExtHtmlViewer.configuration({
+        //   matchField: "type", //匹配字段
+        //   "emp_1": {          //key-value
+        //     type: "emp_1",
+        //     name: "张三",
+        //     viewer: ReplaceDivDemo  //HTML模板控件
+        //   },
+        //   "emp_2": {
+        //     type: "emp_2",
+        //     name: "李四",
+        //     viewer: ReplaceDivDemo
+        //   },
+        //   "emp_3": {
+        //     type: "emp_3",
+        //     name: "王五",
+        //     viewer: ReplaceDivDemo
+        //   }
+        // })
+        // QuickChooseControlDialog.configuration({ customGroups: ['101', '102'] }),
+        // DDeiExtTooltip.configuration({
+        //   'ddei-ext-dialog-tooltip':{
+        //     viewer: HtmlTooltipDemo
+        //   }
+        // })
         // QuickChooseControlDialog.configuration({ customControls: ['100001', '100002','100003']})
         // DDeiCoreThemeBlack.configuration({
         //   default: true
@@ -72,6 +120,7 @@ export default defineComponent({
       ]
     })
     const options1 = markRaw({
+      // currentLayout: "ddei-core-layout-simple",
       config: {
         // "readonly":true,
         "mark": "水印文本",
@@ -82,54 +131,63 @@ export default defineComponent({
         "background": {color:"#123456",opacity:0.1},
         // "theme": "ddei-core-theme-black",
         initData: {
-          controls:[
-            {
-              id: "act_1",
-              model: "102010",
-              type: "emp_1",
-              text: "第一步",
-              border:{color:"yellow",dash:[10,10,5,5],width:5},
-              fill:{color:"grey"},
-            },
-            {
-              id: "act_2",
-              model: "102010",
-              type: "emp_2",
-              width: 200,
-              height: 100,
-              text: "第二步",
-              offsetY: -70,
-            }
-          ]
+          // controls:[
+          //   {
+          //     id: "act_1",
+          //     model: "102010",
+          //     type: "emp_1",
+          //     text: "第一步",
+          //     border:{color:"yellow",dash:[10,10,5,5],width:5},
+          //     fill:{color:"grey"},
+          //   },
+          //   {
+          //     id: "act_2",
+          //     model: "102010",
+          //     type: "emp_2",
+          //     width: 200,
+          //     height: 100,
+          //     text: "第二步",
+          //     offsetY: -70,
+          //   }
+          // ]
         }
       },
       //配置扩展插件
       extensions: [
         DDeiExtUML,
-        //使用插件，配置每个子插件
-        DDeiCoreTopMenuPanel.configuration({
-          'panels': ["ddei-core-panel-fileinfo",
-             "ddei-core-panel-operate", "ddei-core-panel-fontandtext", "ddei-core-panel-tool"
-            , "ddei-core-panel-sort"]
-        }),
-        DDeiExtHtmlViewer.configuration({
-          matchField: "type",
-          "emp_1": {
-            type: "emp_1",
-            name: "张三",
-            viewer: ReplaceDivDemo
-          },
-          "emp_2": {
-            type: "emp_2",
-            name: "李四",
-            viewer: ReplaceDivDemo
-          },
-          "emp_3": {
-            type: "emp_3",
-            name: "王五",
-            viewer: ReplaceDivDemo
-          }
-        })
+        DDeiExtQuickStyle,
+        DDeiExtSearch,
+        DDeiExtQuickControl,
+        // DDeiCoreTopMenuSimplePanel.configuration({
+        //   direct: 2,//方向，1纵向，2横向
+        //   position: 3,//位置1-9顺时针，1为左上角，9为中心
+        //   drag: 1,//是否允许拖拽位置
+        //   items:[//自定义菜单
+        //     {
+        //       id:"ddei-core-save",
+        //       name:"Save"
+        //     },
+        //     {
+        //       id: "ddei-core-open",
+        //       name: "打开"
+        //     },
+        //     {
+        //       viewer: TopMenuViewerDemo
+        //     },
+        //     {
+        //       id: "ddei-core-new",
+        //       name: "新建"
+        //     },
+        //     {
+        //       name: "测试",
+        //       action: function (editor) {
+        //         console.log("测试:" + editor.id)
+        //       }
+        //     }
+        //   ]
+        // }),
+        
+    
 
         // DDeiCoreStandLayout.configuration({
           //配置插件
@@ -318,23 +376,6 @@ export default defineComponent({
 </template>
 
 <style>
-body {
-  display: block;
-}
 
-#app {
-  padding: 0;
-  margin: 0;
-  display: block;
-  max-width: 100%;
-  touch-action: none;
-}
 
-.icon {
-  width: 1em;
-  height: 1em;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
-}
 </style>

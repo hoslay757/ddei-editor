@@ -4,25 +4,25 @@
     <div class="ddei-core-panel-toolbox-header">
       <div class="header-1"></div>
       <svg class="icon icon1" v-if="custom" aria-hidden="true">
-        <use xlink:href="#icon-a-ziyuan417"></use>
+        <use xlink:href="#icon-control-icon"></use>
       </svg>
       <div class="header-3" v-if="custom"></div>
       <div class="ddei-core-panel-toolbox-header-morecontrol" v-if="custom" @click="showChooseDialog($event)">
         <div class="header-4">更多图形</div>
         <div class="header-3"></div>
         <svg class="icon icon2" aria-hidden="true">
-          <use xlink:href="#icon-a-ziyuan466"></use>
+          <use xlink:href="#icon-btn-down"></use>
         </svg>
       </div>
       <div style="flex:1"></div>
       <svg class="icon header-7" aria-hidden="true" v-if="expand" @click="hiddenToolBox">
-        <use xlink:href="#icon-a-ziyuan475"></use>
+        <use xlink:href="#icon-expand3"></use>
       </svg>
     </div>
     <div class="ddei-core-panel-toolbox-searchbox" v-if="search">
       <div class="ddei-core-panel-toolbox-searchbox-group">
         <svg class="icon" aria-hidden="true" @click="searchControl" title="搜索">
-          <use xlink:href="#icon-a-ziyuan416"></use>
+          <use xlink:href="#icon-search"></use>
         </svg>
         <input v-model="searchText" class="input" @keypress="searchInputEnter" placeholder="搜索控件" autocomplete="off"
           name="ddei_toolbox_search_input">
@@ -38,13 +38,14 @@
           <span class="title">{{ group.name }}</span>
           <svg v-if="custom && !group.cannotClose" class="icon close" aria-hidden="true" @click="groupBoxClose(group)"
             title="关闭">
-            <use xlink:href="#icon-a-ziyuan422"></use>
+            <use xlink:href="#icon-close"></use>
           </svg>
         </div>
         <div class="ddei-core-panel-toolbox-groups-group-itempanel" v-if="group.expand == true">
           <div class="ddei-core-panel-toolbox-groups-group-itempanel-item" :title="control.desc"
             @mousedown="createControlPrepare(control, $event)" v-for="control in group.controls">
-            <img class="icon" :src="editor?.icons[control.id]" />
+            <img class="icon" v-if="!control.icon" :src="editor?.icons[control.id]" />
+            <div v-if="control.icon" v-html="control.icon"></div>
             <div class="text">{{ control.name }}</div>
           </div>
         </div>
@@ -197,7 +198,7 @@ export default {
           let ddInstance: DDei = this.editor.ddInstance;
           let layer = ddInstance.stage.layers[ddInstance.stage.layerIndex];
           //从layer中移除控件
-          layer.removeModels(this.editor.creatingControls);
+          layer.removeModels(this.editor.creatingControls,true,false);
 
           //清除临时变量
           this.editor.bus.push(DDeiEnumBusCommandType.ClearTemplateVars);
@@ -330,10 +331,12 @@ export default {
       if ((layer.display == 0 && !layer.tempDisplay) || layer.lock) {
         return;
       }
-
+      let controlInitJSON = DDeiEditorUtil.getModelInitJSON(this.editor.ddInstance, null, [control])
+      if (!controlInitJSON) {
+        return;
+      }
       //创建并初始化控件以及关系
-      let models = DDeiEditorUtil.createControl(control,this.editor)
-      
+      let models = DDeiEditorUtil.createControl(controlInitJSON[0],this.editor)
       //加载事件的配置
       
       let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { models: models }, ddInstance, e)

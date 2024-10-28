@@ -4,7 +4,7 @@ export default {
   'code': 'node',
   'desc': 'UML的组件节点',
   'from': '100501',
-  'icon': 'toolbox-shape-square',
+  
   'define': {
     width: 200,
     height: 160,

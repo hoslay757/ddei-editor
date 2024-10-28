@@ -4,7 +4,7 @@ export default {
   'code': 'switch',
   'desc': 'UML的状态分支',
   'from': '100040',
-  'icon': 'toolbox-shape-circle',
+  
   'define': {
     width: 40,
     height: 40,
@@ -12,7 +12,7 @@ export default {
       groups: [
         {
           name: "属性",
-          icon: 'icon-a-ziyuan375',
+          icon: 'icon-fill',
           subGroups: [
             {
               name: "填充",

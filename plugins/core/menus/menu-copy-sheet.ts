@@ -21,7 +21,7 @@ class MenuCopySheet extends DDeiMenuBase {
   
   defaultOptions: object = {
     'label': '复制',
-    'icon': '#icon-a-ziyuan488',
+    'icon': '#icon-paste',
     'models': ["DDeiSheet"],
     'disabled': false
   }
@@ -58,7 +58,7 @@ class MenuCopySheet extends DDeiMenuBase {
       let editor = DDeiEditor.ACTIVE_INSTANCE
       let file = editor?.files[editor.currentFileIndex];
       let ddInstance = model.stage.ddInstance
-      let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_BEFORE_ADD_SHEET", "ADD_SHEET", null, ddInstance, null)
+      let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_ADD_SHEET_BEFORE", "ADD_SHEET", null, ddInstance, null)
       if (rsState != -1) {
         
         let sheetJson = model.toJSON()

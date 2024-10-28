@@ -9,7 +9,7 @@
       <div class="ddei-editor-quick-fat-item-fontfamily_combox"
         @click="attrDefine && !attrDefine.readonly && showDialog($event)">
         <svg class="icon iconfont-45" aria-hidden="true">
-          <use xlink:href="#icon-a-ziyuan478"></use>
+          <use xlink:href="#icon-expand2"></use>
         </svg>
       </div>
     </div>
@@ -287,6 +287,7 @@ export default {
   align-items: center;
   border: 1px solid var(--panel-border);//darken(var(--panel-header), 13%);
   border-right: none;
+  box-sizing:border-box;
 
   &:hover {
     border: 0.5px solid var(--dot);

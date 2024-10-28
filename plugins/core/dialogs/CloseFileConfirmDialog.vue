@@ -3,12 +3,12 @@
     <div class="content">
       <div class="header">
         <svg class="icon warn" aria-hidden="true">
-          <use xlink:href="#icon-a-ziyuan411"></use>
+          <use xlink:href="#icon-warn"></use>
         </svg>
         <span>是否保存文件？</span>
         <div style="flex:1"></div>
         <svg class="icon close" aria-hidden="true" @click="cancel">
-          <use xlink:href="#icon-a-ziyuan422"></use>
+          <use xlink:href="#icon-close"></use>
         </svg>
       </div>
       <div class="msg">

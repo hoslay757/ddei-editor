@@ -225,13 +225,24 @@ export default {
       'dataType': 'string',
       'dataSource': [{ 'text': '隐藏', 'value': '0' }, { 'text': '省略', 'value': '2' }, { 'text': '缩小', 'value': '1' }, { 'text': '扩展', 'value': '3' }],
       'defaultValue': '0',
-      'cascadeDisplay': { 3: { show: ['textStyle.lockWidth'], hidden: [] }, default: { hidden: ['textStyle.lockWidth'] }, empty: { hidden: ['textStyle.lockWidth'] }, notempty: { hidden: ['textStyle.lockWidth'] } }
+      'cascadeDisplay': { 3: { show: ['textStyle.lockWidth', "textStyle.paddingWeight"], hidden: [] }, default: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] }, empty: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] }, notempty: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] } }
     },
     {
       'code': 'textStyle.lockWidth',
       'name': '锁定宽度',
       'desc': '超范围自动扩展的情况下锁定宽度',
       'controlType': 'switch-checkbox',
+      'dataType': 'integer',
+      'defaultValue': 0,
+      'hiddenTitle': true,
+      'display': 'column',
+      'type': [1, 2]
+    },
+    {
+      'code': 'textStyle.paddingWeight',
+      'name': '间隔大小',
+      'desc': '超范围自动扩展的情况下保留的宽度',
+      'controlType': 'text',
       'dataType': 'integer',
       'defaultValue': 0,
       'hiddenTitle': true,
@@ -496,7 +507,7 @@ export default {
   groups: [
     {
       name: "样式",
-      icon: 'icon-a-ziyuan375',
+      icon: 'icon-fill',
       subGroups: [
         {
           name: "填充",
@@ -510,14 +521,14 @@ export default {
         {
           name: "文本",
           attrs: ["font.family", "font.size", "font.color", "fontAlign", "textStyle.feed"
-            , "textStyle.scale", "textStyle.lockWidth", "textStyle.hollow", "textStyle.bold", "textStyle.italic"
+            , "textStyle.scale", "textStyle.lockWidth","textStyle.paddingWeight", "textStyle.hollow", "textStyle.bold", "textStyle.italic"
             , "textStyle.underline", "textStyle.deleteline", "textStyle.topline", "textStyle.hspace", "textStyle.vspace"]
         },
       ]
     },
     {
       name: "数据",
-      icon: 'icon-a-ziyuan409',
+      icon: 'icon-edit-properies',
       subGroups: [
         {
           name: "基础信息",

@@ -19,6 +19,7 @@ import DDeiCoreSelectColorDialog from "./selectcolordialog"
 import DDeiCoreSelectFontDialog from "./selectfontdialog"
 import DDeiCoreSelectFontSizeDialog from "./selectfontsizedialog"
 import DDeiCoreTextAlignDialog from "./textaligndialog"
+import DDeiCoreChooseControlDialog from "./choosecontroldialog"
 
 class DDeiCoreDialogs extends DDeiPluginBase {
 
@@ -34,7 +35,7 @@ class DDeiCoreDialogs extends DDeiPluginBase {
     DDeiCoreLineTypeDialog, DDeiCoreManageLayersDialog, DDeiCoreMergeComposeDialog, DDeiCorePositionDialog,
     DDeiCorePublishFileConfirmDialog, DDeiCoreQCViewDialog, DDeiCoreQuickSetStyleDialog,
     DDeiCoreRotateDialog, DDeiCoreSelectBorderDashDialog, DDeiCoreSelectBorderWeightDialog, DDeiCoreSelectColorDialog,
-    DDeiCoreSelectFontDialog, DDeiCoreSelectFontSizeDialog, DDeiCoreTextAlignDialog
+    DDeiCoreSelectFontDialog, DDeiCoreSelectFontSizeDialog, DDeiCoreTextAlignDialog, DDeiCoreChooseControlDialog
   ]
 
   getDialogs(editor) {
@@ -75,6 +76,6 @@ export {DDeiCoreDialogs,DDeiCoreAlignDialog, DDeiCoreChangeRatioDialog,
   DDeiCoreLineTypeDialog, DDeiCoreManageLayersDialog, DDeiCoreMergeComposeDialog, DDeiCorePositionDialog,
   DDeiCorePublishFileConfirmDialog, DDeiCoreQCViewDialog, DDeiCoreQuickSetStyleDialog,
   DDeiCoreRotateDialog, DDeiCoreSelectBorderDashDialog, DDeiCoreSelectBorderWeightDialog, DDeiCoreSelectColorDialog,
-  DDeiCoreSelectFontDialog, DDeiCoreSelectFontSizeDialog, DDeiCoreTextAlignDialog
+  DDeiCoreSelectFontDialog, DDeiCoreSelectFontSizeDialog, DDeiCoreTextAlignDialog, DDeiCoreChooseControlDialog
 }
 export default DDeiCoreDialogs

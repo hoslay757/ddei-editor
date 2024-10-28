@@ -53,7 +53,7 @@ class DDeiExtUMLControls extends DDeiPluginBase{
       groups.push(group_ctx[path].default);
     }
     
-    loadAndSortGroup(groups, this.controls)
+    loadAndSortGroup(groups, editor.controls)
     return groups;
   } 
 
