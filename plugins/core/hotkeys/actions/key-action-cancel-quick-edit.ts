@@ -63,8 +63,6 @@ class DDeiKeyActionCancelQuickEdit extends DDeiKeyAction {
         ddInstance.stage.render.editorShadowControl.destroyed()
       }
       ddInstance.stage.render.editorShadowControl = null;
-      
-      ddInstance.stage.render.editorShadowControl.destr
       editor.quickEditorModel = null
       delete ddInstance.stage.brushDataText
       editor.changeState(DDeiEditorState.DESIGNING);
