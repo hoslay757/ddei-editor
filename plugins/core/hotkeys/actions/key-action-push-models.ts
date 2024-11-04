@@ -60,42 +60,62 @@ class DDeiKeyActionPushModels extends DDeiKeyAction {
     return DDeiKeyActionPushModels;
   }
   // ============================ 方法 ===============================
-  action(evt: Event, ddInstance: DDei): void {
+
+  isActive(element: object): boolean {
+    if (!element) {
+      return true
+    }
+    if (element.tagName == 'BODY' || element.tagName == 'HEAD' || element.tagName == 'HTML') {
+      return true
+    }
+
+    return false
+  }
+
+
+  action(evt: Event, ddInstance: DDei): boolean {
     //修改当前操作控件坐标
     if (ddInstance && ddInstance.stage) {
-      let stageRender = ddInstance.stage.render;
-      let optContainer = stageRender.currentOperateContainer;
-      if (optContainer) {
-        let isCtrl = DDei.KEY_DOWN_STATE.get("ctrl");
-        let isShift = DDei.KEY_DOWN_STATE.get("shift");
-        //同时按下ctrl和shift
-        if (isCtrl && isShift) {
-          //上
-          if (evt.keyCode == 38) {
-            ddInstance.bus.push(DDeiEnumBusCommandType.ModelPush, { container: optContainer, type: "top" }, evt);
+      //必须是canvas的子控件
+      if (this.isActive(document.activeElement)) {
+        let stageRender = ddInstance.stage.render;
+        let optContainer = stageRender.currentOperateContainer;
+        if (optContainer) {
+          let isCtrl = DDei.KEY_DOWN_STATE.get("ctrl");
+          let isShift = DDei.KEY_DOWN_STATE.get("shift");
+          //同时按下ctrl和shift
+          if (isCtrl && isShift) {
+            //上
+            if (evt.keyCode == 38) {
+              ddInstance.bus.push(DDeiEnumBusCommandType.ModelPush, { container: optContainer, type: "top" }, evt);
+            }
+            //下
+            else if (evt.keyCode == 40) {
+              ddInstance.bus.push(DDeiEnumBusCommandType.ModelPush, { container: optContainer, type: "bottom" }, evt);
+            }
           }
-          //下
-          else if (evt.keyCode == 40) {
-            ddInstance.bus.push(DDeiEnumBusCommandType.ModelPush, { container: optContainer, type: "bottom" }, evt);
+          //只按下了ctrl
+          else if (isCtrl) {
+            //上
+            if (evt.keyCode == 38) {
+              ddInstance.bus.push(DDeiEnumBusCommandType.ModelPush, { container: optContainer, type: "up" }, evt);
+            }
+            //下
+            else if (evt.keyCode == 40) {
+              ddInstance.bus.push(DDeiEnumBusCommandType.ModelPush, { container: optContainer, type: "down" }, evt);
+            }
           }
         }
-        //只按下了ctrl
-        else if (isCtrl) {
-          //上
-          if (evt.keyCode == 38) {
-            ddInstance.bus.push(DDeiEnumBusCommandType.ModelPush, { container: optContainer, type: "up" }, evt);
-          }
-          //下
-          else if (evt.keyCode == 40) {
-            ddInstance.bus.push(DDeiEnumBusCommandType.ModelPush, { container: optContainer, type: "down" }, evt);
-          }
-        }
-      }
-      //渲染图形
-      ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape, null, evt);
+        //渲染图形
+        ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape, null, evt);
 
-      ddInstance.bus.executeAll();
+        ddInstance.bus.executeAll();
+
+        return true;
+      }
     }
+
+    return false;
   }
 
 }

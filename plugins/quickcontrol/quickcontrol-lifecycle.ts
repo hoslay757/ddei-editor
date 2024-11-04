@@ -9,8 +9,13 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
    */
   static defaultIns: DDeiExtSearchLifeCycle = new DDeiExtSearchLifeCycle(null);
 
+  // static{
+  //   DDeiExtSearchLifeCycle.changeQuickControlDialogPos = debounce(DDeiExtSearchLifeCycle.changeQuickControlDialogPos,200)
+  // }
 
   EVENT_MOUSE_MOVE_IN_CONTROL: DDeiFuncData | null = new DDeiFuncData("quickcontrol-ext-show", 1, this.moveInControl);
+
+  EVENT_CONTROL_DRAG_AFTER: DDeiFuncData | null = new DDeiFuncData("quickcontrol-ext-changepos", 1, this.changeQuickControlDialogPos);
 
   EVENT_MOUSE_MOVE_IN_LAYER: DDeiFuncData | null = new DDeiFuncData("quickcontrol-ext-close", 1, this.closeQuickControlDialog);
   
@@ -42,6 +47,30 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
       }
     }
   }
+
+  changeQuickControlDialogPos(operateType, data, ddInstance, evt) {
+    if (ddInstance && ddInstance["AC_DESIGN_EDIT"] && data?.models?.length > 0) {
+
+      let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
+      if (editor.state == 'designing') {
+        let model = data.models[0]
+
+        //如果存在选中控件，则重新定位到选中控件
+        if (editor.ddInstance.stage.selectedModels?.size > 0) {
+          if (!editor.ddInstance.stage.selectedModels.has(model.id)) {
+            if (editor.ddInstance.stage.selectedModels?.size == 1) {
+              model = Array.from(editor.ddInstance.stage.selectedModels.values())[0]
+            } else {
+              return;
+            }
+          }
+        }
+        data.model = model
+        DDeiExtSearchLifeCycle.changeQuickControlDialogPos(operateType, data, ddInstance, evt)
+      }
+    }
+  }
+
 
   /**
      * 正在进行鼠标操作
@@ -83,7 +112,7 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
   static showQuickControlDialog(operateType, data, ddInstance, evt): DDeiFuncCallResult {
     if (ddInstance && ddInstance["AC_DESIGN_EDIT"] && data?.model) {
       let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
-      if (!data.model?.rotate && data.model?.baseModelType != 'DDeiLine' && (!editor.tempPopData || !editor.tempPopData['ddei-ext-dialog-quickcontrol'] || editor.tempPopData['ddei-ext-dialog-quickcontrol'].model != data.model)){
+      if (!data.model?.rotate && data.model?.baseModelType != 'DDeiLine' && (!editor.tempPopData || !editor.tempPopData['ddei-ext-dialog-quickcontrol'] || editor.tempPopData['ddei-ext-dialog-quickcontrol'].model != data.model)) {
         //隐藏弹出框
         DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickcontrol', true)
         DDeiEditorUtil.closeDialog(editor, 'ddei-ext-dialog-quickchoosecontrol', true)
@@ -91,30 +120,67 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
         let editorEle = document.getElementById(editor.id);
         let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
         let modelPos = DDeiUtil.getModelsDomAbsPosition([data.model])
-        
-        let stageRatio = ddInstance.stage.getStageRatio()
+
         let width = 50
         let height = 50
-        let left = modelPos.left - editorDomPos.left - width/2
-        let top = modelPos.top - editorDomPos.top - height/2
-        
+        let left = modelPos.left - editorDomPos.left - width / 2
+        let top = modelPos.top - editorDomPos.top - height / 2
+
         let offset = null
         if (data.model.state == DDeiEnumControlState.SELECTED) {
           height = 70
-          top-=20
-          offset =  {
+          top -= 20
+          offset = {
             'left': "margin-top:20px",
             'right': "margin-top:20px"
           }
         }
         DDeiEditorUtil.showDialog(editor, 'ddei-ext-dialog-quickcontrol', {
           group: "canvas-pop-quickcontrol",
-          model:data.model,
+          model: data.model,
           width: width,
           height: height,
-          offset:offset
-        }, { type: 99, left: left, top: top, ignoreOutSide:1, hiddenMask: true }, null, true, true)
+          offset: offset
+        }, { type: 99, left: left, top: top, ignoreOutSide: 1, hiddenMask: true }, null, true, true)
       }
+    }
+  }
+
+
+  /**
+   * 修改坐标
+   */
+  static changeQuickControlDialogPos(operateType, data, ddInstance, evt): DDeiFuncCallResult {
+    if (ddInstance && ddInstance["AC_DESIGN_EDIT"] && data?.model) {
+      let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);
+
+      //显示弹出框
+      let editorEle = document.getElementById(editor.id);
+      let editorDomPos = DDeiUtil.getDomAbsPosition(editorEle);
+      let modelPos = DDeiUtil.getModelsDomAbsPosition([data.model])
+
+      let width = 50
+      let height = 50
+      let left = modelPos.left - editorDomPos.left - width / 2
+      let top = modelPos.top - editorDomPos.top - height / 2
+
+      let offset = null
+      if (data.model.state == DDeiEnumControlState.SELECTED) {
+        height = 70
+        top -= 20
+        offset = {
+          'left': "margin-top:20px",
+          'right': "margin-top:20px"
+        }
+      }
+      DDeiEditorUtil.displayDialog(editor, 'ddei-ext-dialog-quickcontrol', {
+        group: "canvas-pop-quickcontrol",
+        model: data.model,
+        width: width,
+        height: height,
+        offset: offset
+      }, { type: 99, left: left, top: top, ignoreOutSide: 1, hiddenMask: true }, null, true, true)
+      
     }
   }
 

@@ -56,69 +56,88 @@ class DDeiKeyActionBrushData extends DDeiKeyAction {
     return DDeiKeyActionBrushData;
   }
   // ============================ 方法 ===============================
-  action(evt: Event, ddInstance: DDei): void {
+
+  isActive(element: object): boolean {
+    if (!element) {
+      return true
+    }
+    if (element.tagName == 'BODY' || element.tagName == 'HEAD' || element.tagName == 'HTML') {
+      return true
+    }
+
+    return false
+  }
+
+
+  action(evt: Event, ddInstance: DDei): boolean {
     //记录当前格式信息，修改状态为刷子状态
     if (ddInstance && ddInstance.stage) {
-      let stage = ddInstance.stage
-      let editor = DDeiEditor.ACTIVE_INSTANCE;
-      let models = Array.from(ddInstance.stage.selectedModels?.values());
-      stage.brushData = null
-      if (models?.length == 1) {
-        if (models[0].baseModelType == 'DDeiTable') {
-          let table = models[0]
-          let selectedCells = table.getSelectedCells();
-          let minMaxColRow = table.getMinMaxRowAndCol(selectedCells);
-          stage.brushData = []
-          for (let i = minMaxColRow.minRow; i <= minMaxColRow.maxRow; i++) {
-            let rowObj = table.rows[i];
-            let rowData = []
+      //必须是canvas的子控件
+      if (this.isActive(document.activeElement)) {
+        let stage = ddInstance.stage
+        let editor = DDeiEditor.ACTIVE_INSTANCE;
+        let models = Array.from(ddInstance.stage.selectedModels?.values());
+        stage.brushData = null
+        if (models?.length == 1) {
+          if (models[0].baseModelType == 'DDeiTable') {
+            let table = models[0]
+            let selectedCells = table.getSelectedCells();
+            let minMaxColRow = table.getMinMaxRowAndCol(selectedCells);
+            stage.brushData = []
+            for (let i = minMaxColRow.minRow; i <= minMaxColRow.maxRow; i++) {
+              let rowObj = table.rows[i];
+              let rowData = []
 
-            for (let j = minMaxColRow.minCol; j <= minMaxColRow.maxCol; j++) {
-              let cellObj = rowObj[j];
-              rowData.push(cellObj);
-            }
-            stage.brushData.push(rowData);
-          }
-          if (stage.brushData.length > 0) {
-            editor.changeState(DDeiEditorState.DESIGNING)
-            editor.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
-            editor.bus.executeAll();
-          }
-        } else {
-
-          if (editor.state == DDeiEditorState.QUICK_EDITING) {
-            let shadowControl = editor.ddInstance.stage.render.editorShadowControl
-            if (shadowControl?.render.isEditoring) {
-              let editorText = DDeiUtil.getEditorText();
-              //开始光标与结束光标
-              let curSIdx = -1
-              let curEIdx = -1
-              if (editorText) {
-                curSIdx = editorText.selectionStart
-                curEIdx = editorText.selectionEnd
+              for (let j = minMaxColRow.minCol; j <= minMaxColRow.maxCol; j++) {
+                let cellObj = rowObj[j];
+                rowData.push(cellObj);
               }
-              stage.brushDataText = cloneDeep(shadowControl.getSptAllStyles(curSIdx, curEIdx))
+              stage.brushData.push(rowData);
             }
-
-
-            delete stage.brushData
-            editor.bus?.push(DDeiEnumBusCommandType.ChangeCursor, { image: 'cursor-brush' })
-            editor.bus?.executeAll();
+            if (stage.brushData.length > 0) {
+              editor.changeState(DDeiEditorState.DESIGNING)
+              editor.bus.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
+              editor.bus.executeAll();
+            }
           } else {
-            let model = models[0]
-            stage.brushData = [model]
-            delete stage.brushDataText
-            editor.changeState(DDeiEditorState.DESIGNING)
-            editor.bus?.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
-            editor.bus?.push(DDeiEnumBusCommandType.ChangeCursor, { image: 'cursor-brush' })
-            editor.bus?.executeAll();
+
+            if (editor.state == DDeiEditorState.QUICK_EDITING) {
+              let shadowControl = editor.ddInstance.stage.render.editorShadowControl
+              if (shadowControl?.render.isEditoring) {
+                let editorText = DDeiUtil.getEditorText();
+                //开始光标与结束光标
+                let curSIdx = -1
+                let curEIdx = -1
+                if (editorText) {
+                  curSIdx = editorText.selectionStart
+                  curEIdx = editorText.selectionEnd
+                }
+                stage.brushDataText = cloneDeep(shadowControl.getSptAllStyles(curSIdx, curEIdx))
+              }
+
+
+              delete stage.brushData
+              editor.bus?.push(DDeiEnumBusCommandType.ChangeCursor, { image: 'cursor-brush' })
+              editor.bus?.executeAll();
+            } else {
+              let model = models[0]
+              stage.brushData = [model]
+              delete stage.brushDataText
+              editor.changeState(DDeiEditorState.DESIGNING)
+              editor.bus?.push(DDeiEditorEnumBusCommandType.ClearTemplateUI);
+              editor.bus?.push(DDeiEnumBusCommandType.ChangeCursor, { image: 'cursor-brush' })
+              editor.bus?.executeAll();
+            }
+            return true;
+
           }
 
         }
-
       }
 
     }
+
+    return false
   }
 
 }
