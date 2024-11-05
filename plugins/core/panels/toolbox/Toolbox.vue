@@ -66,8 +66,6 @@ import {DDeiEnumControlState} from "ddei-framework";
 import { Matrix3 } from "three";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 import {DDeiUtil} from "ddei-framework";
-import {DDeiRectContainer} from "ddei-framework";
-import {DDeiLineLink} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import { clone } from 'lodash'
 import {DDeiEnumOperateState} from "ddei-framework";

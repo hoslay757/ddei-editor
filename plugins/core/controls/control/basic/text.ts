@@ -7,7 +7,12 @@ export default {
   'define': {
     borderType: 0,
     border: {
-      type: 0
+      type: 0,
+      selected: {
+        type: 1,
+        dash: [5, 5],
+        width: 1
+      }
     },
     fill: {
       type: 0
@@ -25,7 +30,7 @@ export default {
             {
               name: "文本",
               attrs: ["font.family", "font.size", "font.color", "fontAlign", "textStyle.feed"
-                , "textStyle.scale", "textStyle.lockWidth", "textStyle.hollow", "textStyle.bold", "textStyle.italic"
+                , "textStyle.scale", "textStyle.lockWidth","textStyle.paddingWeight", "textStyle.hollow", "textStyle.bold", "textStyle.italic"
                 , "textStyle.underline", "textStyle.deleteline", "textStyle.topline", "textStyle.hspace", "textStyle.vspace"]
             },
             {
@@ -72,8 +77,8 @@ export default {
           'controlType': 'radio',
           'dataType': 'string',
           'dataSource': [{ 'text': '隐藏', 'value': '0' }, { 'text': '省略', 'value': '2' }, { 'text': '缩小', 'value': '1' }, { 'text': '扩展', 'value': '3' }],
-          'defaultValue': '3',
-          'cascadeDisplay': { 3: { show: ['textStyle.lockWidth', "textStyle.paddingWeight"], hidden: [] }, default: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] }, empty: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] }, notempty: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] } }
+          'defaultValue': 3,
+          'cascadeDisplay': { 3: { show: ['textStyle.lockWidth', "textStyle.paddingWeight"], hidden: [] }, default: { show: ['textStyle.lockWidth', "textStyle.paddingWeight"] }, empty: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] }, notempty: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] } }
         }
       ]
     }

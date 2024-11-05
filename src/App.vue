@@ -30,9 +30,9 @@ export default defineComponent({
         // EXT_STAGE_WIDTH: false,
         // EXT_STAGE_HEIGHT: false,
         // 自定义控件，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        // controlDefines: ControlDefinesDemo,
+        controlDefines: ControlDefinesDemo,
         // 自定义分组，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        // groupDefines: GroupDefinesDemo,
+        groupDefines: GroupDefinesDemo,
         initData: {
           controls: [
             // {

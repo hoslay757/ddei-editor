@@ -13,6 +13,10 @@ export default {
     cIndex: 2,
     //采样信息
     sample: {
+      //依附图形的初始化配置，如果产生依附图形，则会在配置的位置生成
+      depPos: {
+        type: 9
+      },
       //一圈采样次数
       loop: 4,
       //半径距离

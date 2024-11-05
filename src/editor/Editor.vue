@@ -136,12 +136,12 @@ export default {
       })
       this.options.config.groupDefines.forEach(group => {
         group.controls.forEach(control => {
-          if (control.define) {
-            delete control.define.font
-            delete control.define.textStyle
-            delete control.define.border
-            delete control.define.fill
-          }
+          // if (control.define) {
+          //   delete control.define.font
+          //   delete control.define.textStyle
+          //   delete control.define.border
+          //   delete control.define.fill
+          // }
           delete control.attrs
         });
       })
@@ -162,18 +162,19 @@ export default {
           }
         }
       }
-      if (control.define) {
-        delete control.define.font
-        delete control.define.textStyle
-        delete control.define.border
-        delete control.define.fill
-      }
+      // if (control.define) {
+      //   delete control.define.font
+      //   delete control.define.textStyle
+      //   delete control.define.border
+      //   delete control.define.fill
+      // }
       delete control.attrs
     })
     DDeiEditorUtil.ICONS = ICONS;
 
   },
   mounted() {
+    
     this.editor.editorViewer = this;
     
     this.editor.htmlElement = this.$refs.editor_div;

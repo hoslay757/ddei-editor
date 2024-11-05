@@ -1,8 +1,8 @@
 import {DDeiConfig} from "ddei-framework";
 import { DDei, DDeiEnumOperateType } from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
-import {DDeiLineLink} from "ddei-framework";
-import {DDeiUtil} from "ddei-framework";
+import {DDeiModelLink} from "ddei-framework";
+import { DDeiUtil, DDeiEditorUtil } from "ddei-framework";
 import { Matrix3, Vector3 } from 'three';
 import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
@@ -104,19 +104,17 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
                     ey = ey / stageRatio
 
                   }
-                  if (model.baseModelType == 'DDeiTable') {
-                    let selectCells = model.getSelectedCells();
-                    if (selectCells?.length == 1) {
-                      model = selectCells[0];
-                      editor.quickEditorModel = model;
-                    } else {
-                      editor.quickEditorModel = null;
-                      return;
-                    }
-                  } else if (model.baseModelType == 'DDeiLine') {
-                    //计算事件发生在线的哪个位置,键盘为中间，鼠标则需要判断位置
-                    let type = 3;
-                    let linePoint = null;
+                  //判断是否已存在快捷编辑图形
+                  let realModel = null;
+                  //参考点位
+                  let posPoint = null;
+                  //位置类型
+                  let posType;
+                  let isCreateRealModel = false
+                  let isLineLM = false
+                  //如果当前图形为线，或配置了depPos则创建
+                  if (model.baseModelType == 'DDeiLine') {
+                    posType = 3
                     //鼠标事件
                     if (evt.offsetX || evt.offsetY) {
                       let cdist = DDeiUtil.getPointDistance(model.pvs[0].x, model.pvs[1].y, model.pvs[model.pvs.length - 1].x, model.pvs[model.pvs.length - 1].y);
@@ -124,85 +122,145 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
                       let edist = DDeiUtil.getPointDistance(ex, ey, model.pvs[model.pvs.length - 1].x, model.pvs[model.pvs.length - 1].y);
                       //开始
                       if (sdist < cdist / 5) {
-                        type = 1;
+                        posType = 1;
                       }
                       //结束
                       else if (edist < cdist / 5) {
-                        type = 2;
+                        posType = 2;
                       }
                     }
-                    if (type == 1) {
-                      linePoint = model.startPoint;
+                    if (posType == 1) {
+                      posPoint = model.startPoint;
                     }
-                    else if (type == 2) {
-                      linePoint = model.endPoint;
+                    else if (posType == 2) {
+                      posPoint = model.endPoint;
                     }
-                    else if (type == 3) {
+                    else if (posType == 3) {
                       //奇数，取正中间
                       let pi = Math.floor(model.pvs.length / 2)
                       if (model.pvs.length % 3 == 0) {
-                        linePoint = model.pvs[pi];
+                        posPoint = model.pvs[pi];
                       }
                       //偶数，取两边的中间点
                       else {
-                        linePoint = {
+                        posPoint = {
                           x: (model.pvs[pi - 1].x + model.pvs[pi].x) / 2,
                           y: (model.pvs[pi - 1].y + model.pvs[pi].y) / 2
                         }
                       }
                     }
-                    let realModel = null;
-
                     model.linkModels.forEach(lm => {
-                      if (lm.type == type) {
+                      if (lm.type == posType) {
                         realModel = lm.dm;
                       }
                     });
-
-                    //如果控件不存在，则创建控件并创建链接
-                    if (!realModel) {
-
-                      //根据control的定义，初始化临时控件，并推送至上层Editor
-                      let dataJson = {
-
-                        modelCode: "100200",
-
-                      };
-                      let controlDefine = DDeiUtil.getControlDefine(dataJson)
-                      for (let i in controlDefine?.define) {
-                        dataJson[i] = controlDefine.define[i];
-                      }
-                      dataJson["id"] = "lsm_" + (stage.idIdx++)
-                      dataJson["width"] = 80
-                      dataJson["height"] = 25
-                      dataJson["font"] = { size: 12 }
-                      realModel = ddInstance.controlModelClasses["DDeiPolygon"].initByJSON(
-                        dataJson,
-                        { currentStage: stage, currentDdInstance: ddInstance, currentContainer: model.pModel }
-                      );
-                      let move1Matrix = new Matrix3(
-                        1, 0, linePoint.x,
-                        0, 1, linePoint.y,
-                        0, 0, 1);
-                      realModel.transVectors(move1Matrix)
-                      model.layer.addModel(realModel);
-
-                      realModel.initRender()
-                      let lineLink = new DDeiLineLink({
-                        line: model,
-                        type: type,
-                        dm: realModel,
-                        dx: 0,
-                        dy: 0
-                      })
-                      model.linkModels.set(realModel.id, lineLink);
+                    if (!realModel){
+                      isCreateRealModel = true;
+                      isLineLM = true;
                     }
+                  } else {
+                    model.linkModels.forEach(lm => {
+                      posType = lm.type;
+                      realModel = lm.dm;
+                    });
+                    if (!realModel){
+                      let modelDefine = DDeiEditorUtil.getControlDefine(model);
+                      //如果存在配置，则直接采用配置，如果不存在配置则读取文本区域
+                      if (modelDefine?.define?.sample?.depPos) {
+                        let depPos = modelDefine.define.sample.depPos;
+                        let essBounds = model.essBounds;
+                        let dmEssBounds = {width:80,height:18}
+                        posType = depPos.type;
+                        if (depPos.type == 5) {
+                          posPoint = model.cpv;
+                        } //上
+                        else if (depPos.type == 6) {
+                          posPoint = {
+                            x: model.cpv.x,
+                            y: essBounds.y - dmEssBounds.height / 2
+                          }
+                        }
+                        //右
+                        else if (depPos.type == 7) {
+                          posPoint = {
+                            x: essBounds.x1 + dmEssBounds.width / 2,
+                            y: model.cpv.y
+                          }
+                        }
+                        //下
+                        else if (depPos.type == 8) {
+                          posPoint = {
+                            x: model.cpv.x,
+                            y: essBounds.y1 + dmEssBounds.height / 2
+                          }
+                        }
+                        //左
+                        else if (depPos.type == 9) {
+                          posPoint = {
+                            x: essBounds.x - dmEssBounds.width / 2,
+                            y: model.cpv.y
+                          }
+                        }
+                        isCreateRealModel = true
+                      }
+                    }
+                  }
+                  if (isCreateRealModel){
+                    //根据control的定义，初始化临时控件，并推送至上层Editor
+                    let dataJson = {
+
+                      modelCode: "100200",
+
+                    };
+                    
+                    let controlDefine = DDeiUtil.getControlDefine(dataJson)
+                    for (let i in controlDefine?.define) {
+                      dataJson[i] = controlDefine.define[i];
+                    }
+                    dataJson["id"] = "lsm_" + (stage.idIdx++)
+                    dataJson["width"] = 80
+                    dataJson["height"] = 28
+                    dataJson["font"] = { size: 12 }
+                    dataJson["textStyle"] = { paddingWeight: 0 }
+                    if (isLineLM){
+                      
+                      dataJson["fill"] = {type:1 ,color: 'white' }
+                    }
+                    realModel = ddInstance.controlModelClasses["DDeiPolygon"].initByJSON(
+                      dataJson,
+                      { currentStage: stage, currentDdInstance: ddInstance, currentContainer: model.pModel }
+                    );
+                    let move1Matrix = new Matrix3(
+                      1, 0, posPoint.x,
+                      0, 1, posPoint.y,
+                      0, 0, 1);
+                    realModel.transVectors(move1Matrix)
+                    model.layer.addModel(realModel);
+
+                    realModel.initRender()
+                    let lineLink = new DDeiModelLink({
+                      depModel: model,
+                      type: posType,
+                      dm: realModel,
+                      dx: 0,
+                      dy: 0
+                    })
+                    realModel.depModel = model
+                    model.linkModels.set(realModel.id, lineLink);
+                  }
+                  
+                  //存在快捷编辑图形
+                  if (realModel){
                     model = realModel;
                     editor.quickEditorModel = model;
                   }
 
+                
+                 
+                  
+
+                  
                   //获取控件所占区域
-                  //判断控件是否有composes，如果被composes拦截了，则启用componses的编辑
                   model = DDeiAbstractShape.findBottomComponseByArea(model, ex, ey);
 
                   let fillArea = model.textArea
@@ -277,6 +335,7 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
 
                     return true;
                   }
+                  
                 }
               }
             }
