@@ -9,7 +9,7 @@
           v-for="control in group.controls">
           <img class="icon" v-if="!control.icon" :src="editor?.icons[control.id]" />
           <div class="icon-html" v-if="control.icon" v-html="control.icon"></div>
-          <div class="text">{{ control.name }}</div>
+          <div class="text">{{ editor.i18n(control.name) }}</div>
         </div>
       </div>
     </div>

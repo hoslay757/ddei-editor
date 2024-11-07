@@ -34,11 +34,11 @@ class DDeiExtTooltipLifeCycle extends DDeiLifeCycle {
     return DDeiExtTooltipLifeCycle;
   }
 
-  EVENT_MOUSE_IN_AREA: DDeiFuncData | null = new DDeiFuncData("tooltip-show", 1, (operateType, data, ddInstance, evt)=>{
+  EVENT_MOUSE_MOVE_IN_CONTROL: DDeiFuncData | null = new DDeiFuncData("tooltip-show", 1, (operateType, data, ddInstance, evt)=>{
     this.showTooltip(operateType, data, ddInstance, evt)
   });
 
-  EVENT_MOUSE_OPERATING: DDeiFuncData | null = new DDeiFuncData("tooltip-hidden", 1, this.mouseOperating);
+  EVENT_MOUSE_MOVE_IN_LAYER: DDeiFuncData | null = new DDeiFuncData("tooltip-hidden", 1, this.mouseOperating);
 
   EVENT_CLOSE_FILE_AFTER: DDeiFuncData | null = new DDeiFuncData("tooltip-close", 1, this.mouseOperating);
   

@@ -9,10 +9,10 @@
         </svg>
       </div>
       <div v-if="menu.code != 'split'" class="ddei-editor-menu-dialog-item-content">
-        {{ menu.label }}
+        {{ editor.i18n(menu.label) }}
       </div>
       <div v-if="menu.code != 'split'" class="ddei-editor-menu-dialog-item-desc">
-        {{ menu.desc }}
+        {{ editor.i18n(menu.desc) }}
       </div>
     </div>
   </div>

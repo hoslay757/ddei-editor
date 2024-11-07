@@ -523,8 +523,8 @@ export default {
   align-items: center;
 
   .item {
-    width: 60px;
-
+    min-width: 60px;
+    padding:0 10px;
     height: 24px;
     border-radius: 3px;
     display: flex;

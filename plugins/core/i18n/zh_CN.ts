@@ -4,6 +4,8 @@ export default {
     new: '新建',
     open: '打开',
     save: '保存',
+    abort:'放弃',
+    publish: '发布',
     download: '下载',
     export: '导出',
     import: '导入',
@@ -34,6 +36,7 @@ export default {
     setting: '设置',
     cut:'剪切',
     copy:'复制',
+    delete:'删除',
     paste:'粘贴',
     more: '更多',
     page: '页面',
@@ -53,7 +56,8 @@ export default {
     choose: "选择",
     moveStage: "移动画布",
     linkLine: "连接线",
-    search:"搜索",
+    search: "搜索",
+    replace: "替换",
     fileDescription: "DDei设计文件",
     wholePage: "整页",
     precent: "百分比",
@@ -286,6 +290,8 @@ export default {
       "standard": "标准颜色",
       "recently": "最近使用",
       "choosed": "已选颜色",
-    }
+    },
+
+    "confirm-save-file":"是否保存文件？",
   }
 };

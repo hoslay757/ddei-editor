@@ -521,8 +521,8 @@ export default {
     align-items: center;
 
     >img {
-      margin-top: -1px;
-      margin-left: -1px;
+      margin-top: 2px;
+      margin-left: 2px;
     }
 
     &:hover {
