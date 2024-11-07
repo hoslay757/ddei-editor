@@ -5,39 +5,39 @@
       <div class="ddei-pv-editor-aligntype-items">
         <div :class="{ 'ddei-pv-editor-aligntype-item': true, 'ddei-pv-editor-aligntype-item--selected': value == 1 }"
           style="text-align:left" @click="valueChange(1, $event)">
-          <div style="vertical-align: top;">左上</div>
+          <div style="vertical-align: top;">{{ editor.i18n('ddei.property.ds.pos1') }}</div>
         </div>
         <div :class="{ 'ddei-pv-editor-aligntype-item': true, 'ddei-pv-editor-aligntype-item--selected': value == 2 }"
           style="text-align:center" @click="valueChange(2, $event)">
-          <div style="vertical-align: top;">中上</div>
+          <div style="vertical-align: top;">{{ editor.i18n('ddei.property.ds.pos2') }}</div>
         </div>
         <div :class="{ 'ddei-pv-editor-aligntype-item': true, 'ddei-pv-editor-aligntype-item--selected': value == 3 }"
           style="text-align:right" @click="valueChange(3, $event)">
-          <div style="vertical-align: top;">右上</div>
+          <div style="vertical-align: top;">{{ editor.i18n('ddei.property.ds.pos3') }}</div>
         </div>
         <div :class="{ 'ddei-pv-editor-aligntype-item': true, 'ddei-pv-editor-aligntype-item--selected': value == 4 }"
           style="text-align:left" @click="valueChange(4, $event)">
-          <div style="vertical-align: middle;">左中</div>
+          <div style="vertical-align: middle;">{{ editor.i18n('ddei.property.ds.pos4') }}</div>
         </div>
         <div :class="{ 'ddei-pv-editor-aligntype-item': true, 'ddei-pv-editor-aligntype-item--selected': value == 5 }"
           style="text-align:center" @click="valueChange(5, $event)">
-          <div style="vertical-align: middle;">正中</div>
+          <div style="vertical-align: middle;">{{ editor.i18n('ddei.property.ds.pos5') }}</div>
         </div>
         <div :class="{ 'ddei-pv-editor-aligntype-item': true, 'ddei-pv-editor-aligntype-item--selected': value == 6 }"
           style="text-align:right" @click="valueChange(6, $event)">
-          <div style="vertical-align: middle;">右中</div>
+          <div style="vertical-align: middle;">{{ editor.i18n('ddei.property.ds.pos6') }}</div>
         </div>
         <div :class="{ 'ddei-pv-editor-aligntype-item': true, 'ddei-pv-editor-aligntype-item--selected': value == 7 }"
           style="text-align:left" @click="valueChange(7, $event)">
-          <div style="vertical-align: bottom;">左下</div>
+          <div style="vertical-align: bottom;">{{ editor.i18n('ddei.property.ds.pos7') }}</div>
         </div>
         <div :class="{ 'ddei-pv-editor-aligntype-item': true, 'ddei-pv-editor-aligntype-item--selected': value == 8 }"
           style="text-align:center" @click="valueChange(8, $event)">
-          <div style="vertical-align: bottom;">中下</div>
+          <div style="vertical-align: bottom;">{{ editor.i18n('ddei.property.ds.pos8') }}</div>
         </div>
         <div :class="{ 'ddei-pv-editor-aligntype-item': true, 'ddei-pv-editor-aligntype-item--selected': value == 9 }"
           style="text-align:right" @click="valueChange(9, $event)">
-          <div style="vertical-align: bottom;">右下</div>
+          <div style="vertical-align: bottom;">{{ editor.i18n('ddei.property.ds.pos9') }}</div>
         </div>
       </div>
     </PVBaseCombox>
@@ -118,26 +118,7 @@ export default {
   },
   methods: {
     getTypeText(type) {
-      switch (type) {
-        case 1:
-          return "左上";
-        case 2:
-          return "中上";
-        case 3:
-          return "右上";
-        case 4:
-          return "左中";
-        case 5:
-          return "正中";
-        case 6:
-          return "右中";
-        case 7:
-          return "右下";
-        case 8:
-          return "中下";
-        case 9:
-          return "右下";
-      }
+      return  this.editor.i18n('ddei.property.ds.pos'+type)
     },
 
     getTypeValue() {

@@ -2,7 +2,7 @@
   <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-selectcolor" v-if="forceRefresh">
     <div class="content">
       <div class="group">
-        <div class="title">最近使用的颜色</div>
+        <div class="title">{{ editor.i18n('ddei.selectColor.recently') }}</div>
         <div class="group_content color1">
           <div :class="{ 'item': true, 'item-selected': color == value }" v-for="color in ds1"
             @click="selectColor($event)" :style="{ 'background': color }" @dblclick="selectConfirmColor($event)">
@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="group">
-        <div class="title">标准颜色</div>
+        <div class="title">{{ editor.i18n('ddei.selectColor.standard') }}</div>
         <div class="group_content color1">
           <div :class="{ 'item': true, 'item-selected': color == value }" v-for="color in ds3"
             @click="selectColor($event)" :style="{ 'background': color }" @dblclick="selectConfirmColor($event)">
@@ -25,16 +25,16 @@
         </div>
       </div>
       <div class="group">
-        <div class="title">已选颜色</div>
+        <div class="title">{{ editor.i18n('ddei.selectColor.choosed') }}</div>
         <div class=".group_content color3">
           <input type="color" v-model="value" class="colorinput" autocomplete="off">
           <input type="text" v-model="value" autocomplete="off">
-          <div class="button button-small" @click="clear">清空</div>
+          <div class="button button-small" @click="clear">{{ editor.i18n('ddei.clear') }}</div>
         </div>
       </div>
       <div class="tail">
-        <div class="button button-main" @click="ok">确定</div>
-        <div class="button" @click="cancel">取消</div>
+        <div class="button button-main" @click="ok">{{ editor.i18n('ddei.confirm') }}</div>
+        <div class="button" @click="cancel">{{ editor.i18n('ddei.cancel') }}</div>
       </div>
     </div>
   </div>
@@ -345,6 +345,7 @@ export default {
 
   .button {
     flex: 0 0 70px;
+    white-space: nowrap;
     height: 32px;
     background: var(--panel-background);
     border: 1px solid var(--panel-title);

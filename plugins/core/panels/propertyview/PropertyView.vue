@@ -20,14 +20,14 @@
             :class="currentTopGroup?.subGroups.length > 1 && subGroup.selected ? 'propertyview-subgroup-tabtitle-item--selected' : 'propertyview-subgroup-tabtitle-item'"
             v-show="!subGroup.empty" v-for="subGroup in currentTopGroup?.subGroups" :title="subGroup.name"
             @mouseup="changeSubGroup(subGroup)">{{
-            subGroup.name }}</div>
+            editor.i18n(subGroup.name) }}</div>
         </div>
         <div class="propertyview-subgroup-tabpanel" @mousewheel="mouseWheel($event)">
           <div
             :class="{ 'propertyview-subgroup-tabpanel-editors-column': attrDefine.display == 'column', 'propertyview-subgroup-tabpanel-editors-row': attrDefine.display != 'column', 'empty-value': attrDefine.value ? false : true }"
             v-for="attrDefine in currentSubGroup?.children" :title="attrDefine.desc"
             v-show="attrDefine?.visiable && !attrDefine?.forceHidden">
-            <div class="title" v-if="!attrDefine.hiddenTitle && attrDefine?.visiable != false">{{ attrDefine.name
+            <div class="title" v-if="!attrDefine.hiddenTitle && attrDefine?.visiable != false">{{ editor.i18n(attrDefine.name)
               }}<span v-if="attrDefine.notNull">*</span>：
             </div>
             <div class="editor" v-if="attrDefine.visiable != false">

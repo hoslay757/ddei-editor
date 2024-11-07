@@ -1,9 +1,9 @@
 <template>
   <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-align" v-if="forceRefresh">
     <div class="content">
-      <div class="title">对齐</div>
+      <div class="title">{{ editor.i18n('ddei.align') }}</div>
       <div class="group">
-        <div class="title">对齐:</div>
+        <div class="title">{{ editor.i18n('ddei.align') }}:</div>
         <div class="group_content">
           <div class="item" @click="changeAlign('left')">
             <svg class="icon" aria-hidden="true">
@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="group">
-        <div class="title">等距分布:</div>
+        <div class="title">{{ editor.i18n('ddei.sort') }}:</div>
         <div class="group_content">
           <div class="item" @click="doAutoPos(2)">
             <svg class="icon" aria-hidden="true">

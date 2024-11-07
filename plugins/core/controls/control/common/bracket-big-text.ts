@@ -101,11 +101,11 @@ export default {
        */
       groups: [
         {
-          name: "样式",
+          name: "ddei.style",
           icon: 'icon-fill',
           subGroups: [
             {
-              name: "线条",
+              name: "ddei.line",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash", "borderRound"]
             },
 

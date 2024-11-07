@@ -1,6 +1,6 @@
 export default {
   'id': '100001',
-  'name': '正方形-带文本',
+  'name': 'ddei.control.square',
   'code': 'square',
   'desc': '由4个点组成的正方形',
   'from': '100000',

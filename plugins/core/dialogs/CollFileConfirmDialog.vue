@@ -5,7 +5,7 @@
         <svg class="icon warn" aria-hidden="true">
           <use xlink:href="#icon-shoucang"></use>
         </svg>
-        <span>收藏文件</span>
+        <span>{{ editor.i18n('ddei.collection') }}</span>
         <div style="flex:1"></div>
         <svg class="icon close" aria-hidden="true" @click="cancel">
           <use xlink:href="#icon-close"></use>
@@ -14,8 +14,8 @@
       <div class="msg">
       </div>
       <div class="tail">
-        <div class="button button-main" @click="ok">确定</div>
-        <div class="button" @click="cancel">取消</div>
+        <div class="button button-main" @click="ok">{{ editor.i18n('ddei.confirm') }}</div>
+        <div class="button" @click="cancel">{{ editor.i18n('ddei.cancel') }}</div>
       </div>
     </div>
   </div>
@@ -132,6 +132,7 @@ export default {
     .button {
       flex: 0 0 70px;
       height: 32px;
+      white-space:nowrap;
       background: var(--panel-header);
       border: 1px solid var(--panel-border);
       border-radius: 6px;

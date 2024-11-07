@@ -7,7 +7,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-download"></use>
           </svg>
-          <div class="text">下载</div>
+          <div class="text">{{ editor.i18n('ddei.download') }}</div>
         </div>
       </div>
       <!-- <div class="part">

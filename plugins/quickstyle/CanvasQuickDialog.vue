@@ -18,14 +18,14 @@
         </div>
         <div class="panel12-content-5">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
-            :is="editor?.panels['ddei-core-btn-addfontsize']" :addValue="-1" attrCode="font.size" img="icon-reduce-fontsize"
-            extcls="magtop-1"></component>
+            :is="editor?.panels['ddei-core-btn-addfontsize']" :addValue="-1" attrCode="font.size"
+            img="icon-reduce-fontsize" extcls="magtop-1"></component>
         </div>
 
         <div class="panel12-content-3">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
-            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.bold"
-            img="icon-bold"></component>
+            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.bold" img="icon-bold">
+          </component>
         </div>
         <div class="panel12-content-3">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
@@ -61,12 +61,12 @@
         </div>
       </div>
 
-      <div class="panel2" title="格式刷" style="border-right:none" @click="execBrushAction($event)">
+      <div class="panel2" :title="editor.i18n('ddei.brush')" style="border-right:none" @click="execBrushAction($event)">
         <div :class="{ 'panel2-content': true, 'brush-selected': editor?.ddInstance?.stage?.brushDataText }">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-brush"></use>
           </svg>
-          <div class="text">格式刷</div>
+          <div class="text">{{ editor.i18n('ddei.brush') }}</div>
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-linepointtype']" attrCode="sp.type">
           </component>
-          <div class="text">起点</div>
+          <div class="text">{{ editor.i18n('ddei.startPoint') }}</div>
         </div>
         <div class="panel6-content1 exchange" @click="exchangeLinePoint">
           <svg class="icon" aria-hidden="true">
@@ -87,7 +87,7 @@
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-linepointtype']" attrCode="ep.type">
           </component>
-          <div class="text">终点</div>
+          <div class="text">{{ editor.i18n('ddei.endPoint') }}</div>
         </div>
       </div>
       <div class="panel6" style="border-left:1px solid #E2E2EB;">
@@ -95,26 +95,26 @@
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-linetype']" attrCode="type" img="icon-link-line">
           </component>
-          <div class="text">类型</div>
+          <div class="text">{{ editor.i18n('ddei.lineType') }}</div>
         </div>
         <div class="panel6-content color2">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-color']" attrCode="color" img="icon-border-pencil">
           </component>
-          <div class="text">颜色</div>
+          <div class="text">{{ editor.i18n('ddei.lineColor') }}</div>
         </div>
         <div class="panel6-content dash">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-borderweight']" attrCode="weight" hiddenCombo="1">
           </component>
 
-          <div class="text">粗细</div>
+          <div class="text">{{ editor.i18n('ddei.lineWeight') }}</div>
         </div>
         <div class="panel6-content dash">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-borderdash']" attrCode="dash" hiddenCombo="1">
           </component>
-          <div class="text">虚线</div>
+          <div class="text">{{ editor.i18n('ddei.lineDash') }}</div>
         </div>
       </div>
       <div class="panel6" style="border-left:1px solid #E2E2EB;">
@@ -123,7 +123,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-brush"></use>
           </svg>
-          <div class="text">格式刷</div>
+          <div class="text">{{ editor.i18n('ddei.brush') }}</div>
         </div>
       </div>
 
@@ -140,8 +140,8 @@
         </div>
         <div class="panel1-content-3">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
-            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.bold"
-            img="icon-bold"></component>
+            :is="editor?.panels['ddei-core-btn-editbox']" selectedValue="1" attrCode="textStyle.bold" img="icon-bold">
+          </component>
         </div>
         <div class="panel1-content-3">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
@@ -165,12 +165,12 @@
           </component>
         </div>
       </div>
-      <div class="panel2" title="格式刷" @click="execBrushAction($event)">
+      <div class="panel2" :title="editor.i18n('ddei.brush') " @click="execBrushAction($event)">
         <div :class="{ 'panel2-content': true, 'brush-selected': editor?.ddInstance?.stage?.brushData }">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-brush"></use>
           </svg>
-          <div class="text">格式刷</div>
+          <div class="text">{{ editor.i18n('ddei.brush') }}</div>
         </div>
       </div>
       <div class="panel3">
@@ -178,19 +178,19 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shapes"></use>
           </svg>
-          <div class="text">样式</div>
+          <div class="text">{{ editor.i18n('ddei.style') }}</div>
         </div>
         <div class="panel3-content i2">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-color']" attrCode="fill.color" img="icon-background">
           </component>
-          <div class="text">填充</div>
+          <div class="text">{{ editor.i18n('ddei.fill') }}</div>
         </div>
         <div class="panel3-content i3">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-color']" attrCode="border.color" img="icon-border-pencil">
           </component>
-          <div class="text">线条</div>
+          <div class="text">{{ editor.i18n('ddei.border') }}</div>
         </div>
       </div>
       <div class="panel4">
@@ -198,13 +198,13 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-move-top"></use>
           </svg>
-          <div class="text">置于顶层</div>
+          <div class="text">{{ editor.i18n('ddei.pushTop') }}</div>
         </div>
         <div class="panel4-content" @click="doPush('bottom')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-move-bottom"></use>
           </svg>
-          <div class="text">置于底层</div>
+          <div class="text">{{ editor.i18n('ddei.pushBottom') }}</div>
         </div>
 
       </div>
@@ -213,19 +213,19 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-merge"></use>
           </svg>
-          <div class="text">组合</div>
+          <div class="text">{{ editor.i18n('ddei.combina') }}</div>
         </div>
         <div class="panel5-content" v-show="canCancelMerge()" @click="canCancelMerge() && doCancelMerge()">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-cancel-merge"></use>
           </svg>
-          <div class="text">取消组合</div>
+          <div class="text">{{ editor.i18n('ddei.cancelCombina') }}</div>
         </div>
         <div class="panel5-content" v-show="canMerge()" @click="canMerge() && showAlignDialog($event)">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-a-ziyuan450"></use>
+            <use xlink:href="#icon-align"></use>
           </svg>
-          <div class="text">对齐</div>
+          <div class="text">{{ editor.i18n('ddei.align') }}</div>
         </div>
       </div>
     </div>

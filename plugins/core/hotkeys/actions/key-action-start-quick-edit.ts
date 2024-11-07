@@ -226,6 +226,13 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
                       
                       dataJson["fill"] = {type:1 ,color: 'white' }
                     }
+                    for (let i in dataJson) {
+                      let value = dataJson[i]
+                      if (typeof (value) == 'string') {
+                        dataJson[i] = editor.i18n(value);
+                      }
+
+                    }
                     realModel = ddInstance.controlModelClasses["DDeiPolygon"].initByJSON(
                       dataJson,
                       { currentStage: stage, currentDdInstance: ddInstance, currentContainer: model.pModel }

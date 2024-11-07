@@ -198,7 +198,7 @@ export const datas = {
     {
       'id': '100301401',
       'code': 'id',
-      'name': 'id',
+      'name': 'ddei.property.id',
       'desc': '控件在画布的全局唯一ID',
       'group': '基础信息',
       'controlType': 'text',
@@ -210,12 +210,12 @@ export const datas = {
     {
       'id': '100301402',
       'code': 'code',
-      'name': '编码',
+      'name': 'ddei.property.code',
       'desc': '控件在业务上的唯一编码，缺省和控件ID一致',
       'group': '基础信息',
       'controlType': 'text',
       'dataType': 'string',
-      'defaultValue': '编码001',
+      'defaultValue': 'ddei.property.code001',
       'orderNo': 2,
       'visiable': true
     },

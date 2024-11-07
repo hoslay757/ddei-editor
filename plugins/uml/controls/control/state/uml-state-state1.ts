@@ -25,7 +25,7 @@ export default {
           subGroups: [
 
             {
-              name: "样式",
+              name: "ddei.style",
               attrs: ["fill.type", "fill.color", "fill.image", "fill.opacity", "border.type", "border.color", "borderOpacity", "borderWidth", "borderDash"]
             },
             {

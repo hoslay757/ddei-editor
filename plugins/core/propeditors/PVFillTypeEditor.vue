@@ -113,6 +113,7 @@ export default {
      * 获取数据源数据
      */
     getDataSource(attrDefine) {
+      
       let dataSources = DDeiEditorUtil.getDataSource(this.editor, this.attrDefine);
       this.dataSource = dataSources;
       return this.dataSource;

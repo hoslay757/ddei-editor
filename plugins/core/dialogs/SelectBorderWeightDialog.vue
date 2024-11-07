@@ -2,7 +2,7 @@
   <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-selectboderweight" v-if="forceRefresh">
     <div class="content">
       <div class="group">
-        <div class="title">选择线段粗细</div>
+        <div class="title">{{ editor.i18n('ddei.lineWeight') }}</div>
         <div class="group_content">
           <div :class="{ 'item': true, 'item-selected': JSON.stringify(value) == JSON.stringify(data.value) }"
             v-for="data in dataSource" @click="select(data.value)" @dblclick="selectAndConfirm(data.value)">
@@ -14,8 +14,8 @@
         </div>
       </div>
       <div class="tail">
-        <div class="button button-main" @click="ok">确定</div>
-        <div class="button" @click="cancel">取消</div>
+        <div class="button button-main" @click="ok">{{ editor.i18n('ddei.confirm') }}</div>
+        <div class="button" @click="cancel">{{ editor.i18n('ddei.cancel') }}</div>
       </div>
     </div>
   </div>
@@ -182,6 +182,7 @@ export default {
   .button {
     flex: 0 0 70px;
     height: 32px;
+    white-space: nowrap;
     background: #FFFFFF;
     border: 1px solid var(--panel-border);
     border-radius: 6px;

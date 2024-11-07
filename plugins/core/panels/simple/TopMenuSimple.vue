@@ -5,16 +5,16 @@
       @mousedown="options?.drag == 1 && prepareDragBox()">
     </div>
     <div class="item" v-if="!options?.items" @click="newFile">
-      新建
+      {{ editor.i18n('ddei.new') }}
     </div>
     <div class="item" v-if="!options?.items" @click="openFile">
-      打开
+      {{ editor.i18n('ddei.open') }}
     </div>
     <div class="item" v-if="!options?.items" @click="save">
-      保存
+      {{ editor.i18n('ddei.save') }}
     </div>
     <div class="item" v-if="!options?.items" @click="download">
-      下载
+      {{ editor.i18n('ddei.download') }}
     </div>
     <div class="item" v-for="menu in options?.items">
       <div v-if="menu && !menu.viewer && menu.id" @click="internalAction(menu.id,$event)">{{ menu.name }}</div>

@@ -6,7 +6,7 @@
       :class="{ 'chk_state': attrDefine.value != 1, 'chk_state_checked': attrDefine.value == 1 || (attrDefine.value == null && attrDefine.defaultValue == 1) }">
       <span>{{ attrDefine.value == 1 || (attrDefine.value == null && attrDefine.defaultValue == 1) ? '✓' : '' }}</span>
     </div>
-    <div class="title">{{ attrDefine.name }}</div>
+    <div class="title">{{ editor.i18n(attrDefine.name) }}</div>
   </div>
 </template>
 

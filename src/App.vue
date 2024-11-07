@@ -13,6 +13,7 @@ import ReplaceDivDemo  from "./ReplaceDivDemo.vue";
 import HtmlTooltipDemo from "./HtmlTooltipDemo.vue";
 import {controls as ControlDefinesDemo,groups as GroupDefinesDemo} from "./controldefinesdemo"
 import TopMenuViewerDemo from "./TopMenuViewerDemo.vue"
+// import i18nJP from "./langs/ja_JP"
 
 export default defineComponent({
   name: "APP",
@@ -67,16 +68,22 @@ export default defineComponent({
           ]
         }
       },
+      i18n: {  //国际化配置
+        lang: "en_US", //强制设定语言，如果不设置则读取浏览器的语言设置
+        langs: { //导入自定义语言包，可以覆盖自带的语言包中相同的内容
+          // "ja_JP": i18nJP
+        }
+      },
       extensions: [
         // //布局的配置
-        // DDeiCoreStandLayout.configuration({
-        //   //配置插件
-        //   // 'top': [],
-        //   'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],// [!code ++]
-        //   // 'bottom': [],
-        //   // 'left': [],
-        //   // 'right': []
-        // }),
+        DDeiCoreStandLayout.configuration({
+          //配置插件
+          // 'top': [],
+          'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],// [!code ++]
+          // 'bottom': [],
+          // 'left': [],
+          // 'right': []
+        }),
         DDeiCoreSimpleLayout.configuration({
           other: ['ddei-core-panel-toolbox-simple', 'ddei-core-panel-topmenu-simple'],
           middle: ['ddei-core-panel-canvasview'],

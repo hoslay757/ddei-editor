@@ -57,6 +57,17 @@ class DDeiCore extends DDeiPluginBase {
     return options;
   }
 
+  getLangs(editor){
+    const langModules = import.meta.glob('./i18n/*', { eager: true });
+    let langs = {}
+    for (let i in langModules) {
+      let langModule = langModules[i];
+      let newI = i.substring(i.lastIndexOf('/') + 1, i.lastIndexOf('.'))
+      langs[newI] = langModule.default
+    }
+    return langs;
+  }
+
   getComponents(editor) {
     if (DDeiPluginBase.isSubclass(this.components, DDeiPluginBase)) {
       return this.components.defaultIns.getComponents(editor);

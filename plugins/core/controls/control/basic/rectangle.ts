@@ -1,6 +1,6 @@
 export default {
   'id': '100008',
-  'name': '长方形',
+  'name': 'ddei.control.rectangle',
   'code': 'rect',
   'desc': '由4个点组成的长方形',
   'from': '100000',

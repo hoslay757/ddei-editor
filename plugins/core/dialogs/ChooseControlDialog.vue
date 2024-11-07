@@ -17,12 +17,7 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework";
-import {DDeiUtil} from "ddei-framework";
-import {DDeiEditorUtil} from "ddei-framework";
 import DialogBase from "./dialog"
-import { groupBy } from "lodash";
-
 export default {
   name: "ddei-core-dialog-choosecontrol",
   extends: null,

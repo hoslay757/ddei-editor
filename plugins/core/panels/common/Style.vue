@@ -48,7 +48,7 @@
     </div>
     <div class="ddei-core-panel-quickstyle-item" style="grid-column:1/16;">
       <div class="ddei-core-panel-quickstyle-item-text">
-        样式
+        {{ editor.i18n('ddei.style') }}
       </div>
     </div>
   </div>

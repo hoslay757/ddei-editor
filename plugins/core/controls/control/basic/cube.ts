@@ -1,6 +1,6 @@
 export default {
   'id': '100501',
-  'name': '正方体',
+  'name': 'ddei.control.cube',
   'code': 'cube',
   'desc': '正方体',
   'from': '100500',

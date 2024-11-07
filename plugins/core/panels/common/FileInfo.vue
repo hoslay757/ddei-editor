@@ -2,58 +2,42 @@
   <div class="ddei-core-panel-fileinfo">
     <div class="header"></div>
     <div class="content">
-      <!-- <div class="part">
-        <div class="button-h">
-          <div class="button" title="导入">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-import"></use>
-            </svg>
-            <div class="text">导入</div>
-          </div>
-          <div class="button" @click="showExportDialog($event)" title="导出">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-share"></use>
-            </svg>
-            <div class="text">导出</div>
-          </div>
-        </div>
-      </div> -->
       <div class="part">
-        <div class="button-v" @click="newFile" title="新建">
+        <div class="button-v" @click="newFile" :title="editor.i18n('ddei.new') ">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-new-file"></use>
           </svg>
-          <div class="text">新建</div>
+          <div class="text">{{ editor.i18n('ddei.new')}}</div>
         </div>
       </div>
       <div class="part">
-        <div class="button-v" @click="openFile" title="打开">
+        <div class="button-v" @click="openFile" :title="editor.i18n('ddei.open') ">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-folder"></use>
           </svg>
-          <div class="text">打开</div>
+          <div class="text">{{ editor.i18n('ddei.open') }}</div>
         </div>
       </div>
       <div class="part">
-        <div class="button-v" @click="save" title="保存">
+        <div class="button-v" @click="save" :title="editor.i18n('ddei.save') ">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-save"></use>
           </svg>
-          <div class="text">保存</div>
+          <div class="text">{{ editor.i18n('ddei.save') }}</div>
         </div>
       </div>
       <div class="part">
-        <div class="button-v" @click="download" title="下载">
+        <div class="button-v" @click="download" :title="editor.i18n('ddei.download') ">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-download"></use>
           </svg>
-          <div class="text">下载</div>
+          <div class="text">{{ editor.i18n('ddei.download') }}</div>
         </div>
       </div>
 
     </div>
     <div class="tail">
-      文件
+      {{ editor.i18n('ddei.file') }}
     </div>
   </div>
 </template>
@@ -100,24 +84,6 @@ export default {
   },
   methods: {
 
-    // showExportDialog(evt: Event) {
-    //   let srcElement = evt.currentTarget;
-    //   DDeiEditorUtil.showOrCloseDialog("ddei-core-dialog-exportoption", {
-    //     callback: {
-    //     },
-    //     mode: 1,
-    //     group: "top-dialog",
-    //     background: "white",
-    //     opacity: "1%",
-    //     event: -1
-    //   }, {}, srcElement)
-
-    //   if (DDeiEditor.ACTIVE_INSTANCE.tempDialogData && DDeiEditor.ACTIVE_INSTANCE.tempDialogData["ddei-core-dialog-exportoption"]) {
-    //     this.editor.changeState(DDeiEditorState.PROPERTY_EDITING);
-    //   } else {
-    //     this.editor.changeState(DDeiEditorState.DESIGNING);
-    //   }
-    // },
     /**
      * 保存
      * @param evt
@@ -166,7 +132,7 @@ export default {
       let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_ADD_FILE_BEFORE", "LOAD_FILE", null, this.editor.ddInstance, evt)
       if (rsState != -1) {
         let openFileHandle = await showOpenFilePicker({
-          description: "DDei Design File",
+          description: this.editor.i18n('ddei.fileDescription'),
           types: [{
             accept: {
 
@@ -294,14 +260,17 @@ export default {
     newFile(evt) {
       if (this.editor?.ddInstance) {
         let ddInstance = this.editor.ddInstance;
+        let fileText = this.editor.i18n('ddei.file')
+        let newText = this.editor.i18n('ddei.new')
+        let pageText = this.editor.i18n('ddei.page')
         let file = DDeiFile.loadFromJSON(
           {
-            name: "新建文件_NEW",
-            path: "/新建文件_NEW",
+            name: newText+fileText+"_NEW",
+            path: "/"+newText+fileText+"_NEW",
             sheets: [
               new DDeiSheet({
-                name: "页面-1",
-                desc: "页面-1",
+                name: pageText+"-1",
+                desc: pageText+"-1",
                 stage: DDeiStage.initByJSON({ id: "stage_1" }, { currentDdInstance: ddInstance }),
                 active: DDeiActiveType.ACTIVE,
               }),

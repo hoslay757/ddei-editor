@@ -358,10 +358,11 @@ export default {
             { id: "stage" },
             { currentDdInstance: ddInstance }
           );
+          let pageText = this.editor.i18n('ddei.page');
           sheets.push(
             new DDeiSheet({
-              name: "页面-" + i,
-              desc: "页面-" + i,
+              name: pageText+"-" + i,
+              desc: pageText+"-" + i,
               stage: stage,
             })
           );

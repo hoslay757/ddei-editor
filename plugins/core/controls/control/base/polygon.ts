@@ -1,6 +1,6 @@
 export default {
   'id': '100500',
-  'name': '多边形',
+  'name': 'ddei.control.polygon',
   'code': 'polygon',
   'desc': '多个3-N边构成的多边形',
   'type': 'DDeiPolygon',
@@ -20,7 +20,7 @@ export default {
   attrs: [
     {
       'code': 'width',
-      'name': '宽度',
+      'name': 'ddei.property.width',
       'desc': '控件的宽度',
       'controlType': 'text',
       'dataSource': null,
@@ -29,7 +29,7 @@ export default {
     },
     {
       'code': 'height',
-      'name': '高度',
+      'name': 'ddei.property.height',
       'desc': '控件的高度',
       'controlType': 'text',
       'dataSource': null,
@@ -38,11 +38,11 @@ export default {
     },
     {
       'code': 'border.type',
-      'name': '边框类型',
+      'name': 'ddei.property.borderType',
       'desc': '用来快速选择边框的类型，以便于套用相关的样式',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '无线条', 'value': 0 }, { 'text': '实线', 'value': 1 }],
+      'dataSource': [{ 'text': 'ddei.property.ds.none', 'value': 0 }, { 'text': 'ddei.property.ds.line', 'value': 1 }],
       'defaultValue': 1,
       'hiddenTitle': true,
       'display': 'column',
@@ -50,7 +50,7 @@ export default {
     },
     {
       'code': 'border.color',
-      'name': '颜色',
+      'name': 'ddei.property.color',
       'desc': '图形的边框显示颜色，在高级设置中，可以分别设置不同方向边框的样式',
       'controlType': 'color-combo',
 
@@ -59,7 +59,7 @@ export default {
     },
     {
       'code': 'borderOpacity',
-      'name': '透明度',
+      'name': 'ddei.property.opacity',
       'desc': '图形的边框的透明度，0完全透明~1完全不透明',
       'controlType': 'range',
       'min': 0,
@@ -72,7 +72,7 @@ export default {
     },
     {
       'code': 'borderWidth',
-      'name': '粗细',
+      'name': 'ddei.property.width',
       'desc': '图形的边框的粗细，0为无边框',
       'controlType': 'range',
       'min': 0,
@@ -84,7 +84,7 @@ export default {
     },
     {
       'code': 'borderDash',
-      'name': '虚线',
+      'name': 'ddei.property.dash',
       'desc': '图形的边框的是否为虚线样式，虚线由长短不一的线段构成',
       'controlType': 'border-dash',
       'dataSource': [
@@ -108,7 +108,7 @@ export default {
     },
     {
       'code': 'borderRound',
-      'name': '圆角',
+      'name': 'ddei.property.round',
       'desc': '图形的边框的是否为为圆角的弧度',
       'controlType': 'range',
       'mapping': ["border.round"],
@@ -120,11 +120,11 @@ export default {
     },
     {
       'code': 'fill.type',
-      'name': '填充类型',
+      'name': 'ddei.property.fillType',
       'desc': '图形填充的类型快速设置',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '无', 'value': 0 }, { 'text': '纯色', 'value': 1 }, { 'text': '图片', 'value': 2 }],
+      'dataSource': [{ 'text': 'ddei.property.ds.none', 'value': 0 }, { 'text': 'ddei.property.ds.color', 'value': 1 }, { 'text': 'ddei.property.ds.image', 'value': 2 }],
       'defaultValue': 1,
       'type': 1,
       'orderNo': 2,
@@ -134,7 +134,7 @@ export default {
     },
     {
       'code': 'fill.color',
-      'name': '颜色',
+      'name': 'ddei.property.color',
       'desc': '图形的填充颜色',
       'controlType': 'color-combo',
       'dataType': 'string',
@@ -142,7 +142,7 @@ export default {
     },
     {
       'code': 'fill.image',
-      'name': '图片',
+      'name': 'ddei.property.image',
       'desc': '图形的填充图片',
       'controlType': 'image',
       'dataType': 'string',
@@ -151,7 +151,7 @@ export default {
     },
     {
       'code': 'fill.opacity',
-      'name': '透明度',
+      'name': 'ddei.property.opacity',
       'desc': '图形的填充的透明度，0完全透明~1完全不透明',
       'controlType': 'range',
       'min': 0,
@@ -165,7 +165,7 @@ export default {
 
     {
       'code': 'font.family',
-      'name': '字体',
+      'name': 'ddei.property.font',
       'desc': '文本的字体名称',
       'controlType': 'combox',
       'dataType': 'string',
@@ -183,7 +183,7 @@ export default {
     },
     {
       'code': 'font.size',
-      'name': '大小',
+      'name': 'ddei.property.size',
       'desc': '文本的字体大小',
       'max': 50,
       'min': 5,
@@ -194,7 +194,7 @@ export default {
     },
     {
       'code': 'font.color',
-      'name': '颜色',
+      'name': 'ddei.property.color',
       'desc': '文本的颜色',
       'controlType': 'color-combo',
       'dataType': 'string',
@@ -202,7 +202,7 @@ export default {
     },
     {
       'code': 'fontAlign',
-      'name': '对齐',
+      'name': 'ddei.property.align',
       'desc': '文本的对齐，采用九宫格式设置',
       'controlType': 'align-type',
       'mapping': [],
@@ -210,26 +210,26 @@ export default {
     },
     {
       'code': 'textStyle.feed',
-      'name': '换行',
+      'name': 'ddei.property.feed',
       'desc': '自动换行',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '1',
     },
     {
       'code': 'textStyle.scale',
-      'name': '超出范围',
+      'name': 'ddei.property.outSize',
       'desc': '文本的超出范围后的策略',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '隐藏', 'value': '0' }, { 'text': '省略', 'value': '2' }, { 'text': '缩小', 'value': '1' }, { 'text': '扩展', 'value': '3' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.hidden', 'value': '0' }, { 'text': 'ddei.property.ds.ellipsis', 'value': '2' }, { 'text': 'ddei.property.ds.narrow', 'value': '1' }, { 'text': 'ddei.property.ds.ext', 'value': '3' }],
       'defaultValue': '0',
       'cascadeDisplay': { 3: { show: ['textStyle.lockWidth', "textStyle.paddingWeight"], hidden: [] }, default: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] }, empty: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] }, notempty: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] } }
     },
     {
       'code': 'textStyle.lockWidth',
-      'name': '锁定宽度',
+      'name': 'ddei.property.lockWidth',
       'desc': '超范围自动扩展的情况下锁定宽度',
       'controlType': 'switch-checkbox',
       'dataType': 'integer',
@@ -240,7 +240,7 @@ export default {
     },
     {
       'code': 'textStyle.paddingWeight',
-      'name': '间隔大小',
+      'name': 'ddei.property.paddingWeight',
       'desc': '超范围自动扩展的情况下保留的宽度',
       'controlType': 'text',
       'dataType': 'integer',
@@ -251,61 +251,61 @@ export default {
     },
     {
       'code': 'textStyle.hollow',
-      'name': '镂空',
+      'name': 'ddei.property.hollow',
       'desc': '文本的镂空显示',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '0',
     },
     {
       'code': 'textStyle.bold',
-      'name': '粗体',
+      'name': 'ddei.property.bold',
       'desc': '文本的加粗显示',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '0',
     },
     {
       'code': 'textStyle.italic',
-      'name': '斜体',
+      'name': 'ddei.property.italic',
       'desc': '文本的斜体显示',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '0',
     },
     {
       'code': 'textStyle.underline',
-      'name': '下划线',
+      'name': 'ddei.property.underline',
       'desc': '文本的下划线显示',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '0',
     },
     {
       'code': 'textStyle.deleteline',
-      'name': '删除线',
+      'name': 'ddei.property.deleteline',
       'desc': '文本的删除线显示',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '0',
     },
     {
       'code': 'textStyle.topline',
-      'name': '顶部线',
+      'name': 'ddei.property.topline',
       'desc': '文本的删除线显示',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '0',
     },
     {
       'code': 'textStyle.bgcolor',
-      'name': '文字背景',
+      'name': 'ddei.property.textbg',
       'desc': '文本的背景颜色',
       'controlType': 'color-combo',
       'dataType': 'string',
@@ -313,17 +313,17 @@ export default {
     },
     {
       'code': 'textStyle.subtype',
-      'name': '标注类型',
+      'name': 'ddei.property.subtype',
       'desc': '文本的标注类型',
       'controlType': 'radio',
       'dataType': 'integer',
-      'dataSource': [{ 'text': '正常', 'value': 0 }, { 'text': '上标', 'value': 1 }, { 'text': '中标', 'value': 2 }, { 'text': '下标', 'value': 3 }],
+      'dataSource': [{ 'text': 'ddei.property.ds.subType', 'value': 0 }, { 'text': 'ddei.property.ds.subType1', 'value': 1 }, { 'text': 'ddei.property.ds.subType2', 'value': 2 }, { 'text': 'ddei.property.ds.subType3', 'value': 3 }],
       'defaultValue': 0,
     },
 
     {
       'code': 'textStyle.align',
-      'name': '水平对齐',
+      'name': 'ddei.property.textAlign',
       'desc': '文本的水平对齐',
       'controlType': 'text',
       'dataType': 'integer',
@@ -331,7 +331,7 @@ export default {
     },
     {
       'code': 'textStyle.valign',
-      'name': '垂直对齐',
+      'name': 'ddei.property.textValign',
       'desc': '文本的垂直对齐',
       'controlType': 'text',
       'dataType': 'integer',
@@ -339,7 +339,7 @@ export default {
     },
     {
       'code': 'textStyle.hspace',
-      'name': '水平间距',
+      'name': 'ddei.property.hspace',
       'desc': '文本之间的水平间距',
       'controlType': 'range',
       'min': 0,
@@ -350,7 +350,7 @@ export default {
     },
     {
       'code': 'textStyle.vspace',
-      'name': '垂直间距',
+      'name': 'ddei.property.vspace',
       'desc': '文本之间的垂直间距',
       'controlType': 'range',
       'min': 0,
@@ -361,7 +361,7 @@ export default {
     },
     {
       'code': 'borderCreatingOpacity',
-      'name': '透明度',
+      'name': 'ddei.property.opacity',
       'desc': '图形的边框的透明度，0完全透明~1完全不透明',
       'controlType': 'text',
       'mapping': ["border.creating.top.opacity", "border.creating.right.opacity", "border.creating.bottom.opacity", "border.creating.left.opacity"],
@@ -371,7 +371,7 @@ export default {
     },
     {
       'code': 'fillCreatingOpacity',
-      'name': '透明度',
+      'name': 'ddei.property.opacity',
       'desc': '图形的填充的透明度，0完全透明~1完全不透明',
       'controlType': 'text',
       'mapping': ["fill.creating.opacity"],
@@ -381,7 +381,7 @@ export default {
     },
     {
       'code': 'imageCreatingOpacity',
-      'name': '透明度',
+      'name': 'ddei.property.opacity',
       'desc': '图形的填充图片的透明度，0完全透明~1完全不透明',
       'controlType': 'text',
       'mapping': ["fill.creating.opacity"],
@@ -391,7 +391,7 @@ export default {
     },
     {
       'code': 'id',
-      'name': 'id',
+      'name': 'ddei.property.id',
       'desc': '控件在画布的全局唯一ID',
       'controlType': 'text',
       'dataType': 'string',
@@ -399,15 +399,15 @@ export default {
     },
     {
       'code': 'code',
-      'name': '编码',
+      'name': 'ddei.property.code',
       'desc': '控件在业务上的唯一编码，缺省和控件ID一致',
       'controlType': 'text',
       'dataType': 'string',
-      'defaultValue': '编码001',
+      'defaultValue': 'ddei.property.code001',
     },
     {
       'code': 'text',
-      'name': '文本',
+      'name': 'ddei.property.text',
       'desc': '控件的主体显示文本',
       'controlType': 'textarea',
       'defaultValue': '',
@@ -417,18 +417,18 @@ export default {
     },
     {
       'code': 'fmt.type',
-      'name': '格式',
+      'name': 'ddei.format',
       'desc': '文本的显示格式',
       'controlType': 'radio',
       'dataType': 'integer',
-      'dataSource': [{ 'text': '文本', 'value': 0 }, { 'text': '数字', 'value': 1 }, { 'text': '金额', 'value': 2 }, { 'text': '时间', 'value': 3 }],
+      'dataSource': [{ 'text': 'ddei.property.ds.text', 'value': 0 }, { 'text': 'ddei.property.ds.decimal', 'value': 1 }, { 'text': 'ddei.property.ds.money', 'value': 2 }, { 'text': 'ddei.property.ds.time', 'value': 3 }],
       'defaultValue': 0,
       'type': [1, 2],
       'cascadeDisplay': { 1: { show: ['fmt.nscale', 'fmt.tmark'], hidden: ['fmt.mmark', 'fmt.munit', 'fmt.dtype', 'fmt.format', 'fmt.mrmb'] }, 2: { show: ['fmt.nscale', 'fmt.tmark', 'fmt.mmark', 'fmt.munit', 'fmt.mrmb'], hidden: ['fmt.dtype', 'fmt.format'] }, 3: { show: ['fmt.dtype', 'fmt.format'], hidden: ['fmt.mrmb', 'fmt.tmark', 'fmt.mmark', 'fmt.munit', 'fmt.nscale'] }, default: { hidden: ['fmt.tmark', 'fmt.mmark', 'fmt.munit', 'fmt.nscale', 'fmt.dtype', 'fmt.format', 'fmt.mrmb'] }, empty: { hidden: ['fmt.tmark', 'fmt.mmark', 'fmt.munit', 'fmt.nscale', 'fmt.dtype', 'fmt.format', 'fmt.mrmb'] } },
     },
     {
       'code': 'fmt.nscale',
-      'name': '小数位数',
+      'name': 'ddei.property.nscale',
       'desc': '格式化小数位数',
       'controlType': 'range',
       'min': 0,
@@ -439,7 +439,7 @@ export default {
     },
     {
       'code': 'fmt.tmark',
-      'name': '千分符',
+      'name': 'ddei.property.tmark',
       'desc': '显示逗号千分符',
       'controlType': 'switch-checkbox',
       'dataType': 'integer',
@@ -450,10 +450,10 @@ export default {
     },
     {
       'code': 'fmt.mmark',
-      'name': '货币符号',
+      'name': 'ddei.property.mmark',
       'desc': '显示货币符号',
       'controlType': 'combox',
-      'dataSource': [{ 'text': '无', 'value': '' }, { 'text': '人民币', 'value': '¥' }, { 'text': '美元', 'value': '$' }, { 'text': '欧元', 'value': '€' }, { 'text': '英镑', 'value': '£' }, { 'text': '日元', 'value': '￥' }, { 'text': '卢布', 'value': '₽' }, { 'text': '法郎', 'value': '€' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.none', 'value': '' }, { 'text': 'ddei.property.ds.money1', 'value': '¥' }, { 'text': 'ddei.property.ds.money2', 'value': '$' }, { 'text': 'ddei.property.ds.money3', 'value': '€' }, { 'text': 'ddei.property.ds.money4', 'value': '£' }, { 'text': 'ddei.property.ds.money5', 'value': '￥' }, { 'text': 'ddei.property.ds.money6', 'value': '₽' }, { 'text': 'ddei.property.ds.money7', 'value': '€' }],
       'defaultValue': '',
       'dataType': 'string',
       'type': [1, 2],
@@ -461,7 +461,7 @@ export default {
     },
     {
       'code': 'fmt.munit',
-      'name': '货币单位',
+      'name': 'ddei.property.moneyUnit',
       'desc': '显示在后方的货币单位',
       'controlType': 'text',
       'defaultValue': '',
@@ -470,7 +470,7 @@ export default {
     },
     {
       'code': 'fmt.mrmb',
-      'name': '人民币大写',
+      'name': 'ddei.property.moneyUpCase',
       'desc': '显示为人民币大写',
       'controlType': 'switch-checkbox',
       'dataType': 'integer',
@@ -481,10 +481,10 @@ export default {
     },
     {
       'code': 'fmt.dtype',
-      'name': '日期类型',
+      'name': 'ddei.property.dateType',
       'desc': '日期和时间的格式化类型',
       'controlType': 'radio',
-      'dataSource': [{ 'text': '2023-01-01', 'value': 1 }, { 'text': '23:59:59', 'value': 2 }, { 'text': '2023-01-01 23:59:59', 'value': 3 }, { 'text': '自定义', 'value': 99 }],
+      'dataSource': [{ 'text': '2023-01-01', 'value': 1 }, { 'text': '23:59:59', 'value': 2 }, { 'text': '2023-01-01 23:59:59', 'value': 3 }, { 'text': 'ddei.property.ds.custom', 'value': 99 }],
       'dataType': 'integer',
       'defaultValue': 1,
       'hiddenTitle': true,
@@ -493,7 +493,7 @@ export default {
     },
     {
       'code': 'fmt.format',
-      'name': '格式化',
+      'name': 'ddei.property.format',
       'desc': '自定义格式化字符串',
       'controlType': 'text',
       'dataType': 'string',
@@ -506,20 +506,20 @@ export default {
    */
   groups: [
     {
-      name: "样式",
+      name: "ddei.style",
       icon: 'icon-fill',
       subGroups: [
         {
-          name: "填充",
+          name: "ddei.fill",
           attrs: ["fill.type", "fill.color", "fill.image", "fill.opacity"]
         },
         {
-          name: "线条",
+          name: "ddei.border",
           attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash", "borderRound"]
         },
 
         {
-          name: "文本",
+          name: "ddei.text",
           attrs: ["font.family", "font.size", "font.color", "fontAlign", "textStyle.feed"
             , "textStyle.scale", "textStyle.lockWidth","textStyle.paddingWeight", "textStyle.hollow", "textStyle.bold", "textStyle.italic"
             , "textStyle.underline", "textStyle.deleteline", "textStyle.topline", "textStyle.hspace", "textStyle.vspace"]
@@ -527,11 +527,11 @@ export default {
       ]
     },
     {
-      name: "数据",
+      name: "ddei.data",
       icon: 'icon-edit-properies',
       subGroups: [
         {
-          name: "基础信息",
+          name: "ddei.basic",
           attrs: ["code", "text", "fmt.type", "fmt.nscale", "fmt.tmark", "fmt.mmark", "fmt.munit", "fmt.mrmb", "fmt.dtype", "fmt.format"]
         },
 

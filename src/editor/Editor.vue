@@ -83,6 +83,7 @@ export default {
     }
     this.options.extensions.splice(0,0,DDeiCore)
     let editor = DDeiEditor.newInstance(this.id, this.id, true, this.options);
+    editor.setI18nLang(this.options?.i18n?.lang)
     this.editor = editor
 
     editor.appContext = getCurrentInstance().appContext
@@ -189,6 +190,13 @@ export default {
     }
     if (options?.config?.height) {
       this.$refs.editor_div.style.height = options?.config?.height + "px";
+    }
+    //加载语言包
+    
+    if(options?.i18n){
+      if(options.i18n.langs){
+        this.editor.registerLangs(options.i18n.langs)
+      }
     }
     
     //初始化控件

@@ -1,7 +1,7 @@
 <template>
   <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-changeratio" v-if="forceRefresh">
     <div class="content">
-      <div class="title">{{title}}</div>
+      <div class="title">{{ editor.i18n('ddei.scale') }}</div>
       <div class="group">
         <div class="group_content">
           <div v-for="data in dataSource" v-show="data?.value >= iMin && data?.value <=iMax"
@@ -9,8 +9,9 @@
             {{ data.text}}
           </div>
           <div v-if="input" class="item" style="flex:1;border-top: 1px solid var(--panel-border)">
-            百分比：<input type="number" :min="iMin*100" :max="iMax*100" @keydown="ratioInputChange($event)"
-              v-model="ratioInputValue" @blur="ratioInputChange()" autocomplete="off" name="ddei_bottom_input" />%
+            {{ editor.i18n('ddei.precent')}}：<input type="number" :min="iMin*100" :max="iMax*100"
+              @keydown="ratioInputChange($event)" v-model="ratioInputValue" @blur="ratioInputChange()"
+              autocomplete="off" name="ddei_bottom_input" />%
           </div>
         </div>
       </div>
@@ -43,10 +44,6 @@ export default {
     max: {
       type: Number,
       default: 10
-    },
-    title: {
-      type: String,
-      default: "缩放"
     },
     dataSource: {
       type: Array,
@@ -138,13 +135,13 @@ export default {
   border-radius: 6px;
   display: none;
   overflow: hidden;
-  width: 170px;
+  width: 180px;
   position: absolute;
   background-color: var(--panel-background);
   z-index: 999;
 
   .content {
-    width: 170px;
+    width: 180px;
     display: flex;
     flex-direction: column;
     justify-content: center;
