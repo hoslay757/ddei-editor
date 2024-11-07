@@ -1,6 +1,6 @@
 export default {
   'id': '303016',
-  'name': '实体',
+  'name': 'ddei.uml.entity',
   'code': 'entity',
   'desc': '实体',
   'from': '100500',

@@ -1,6 +1,6 @@
 export default {
   'id': '304023',
-  'name': '部署',
+  'name': 'ddei.uml.deploy',
   'code': 'deploy',
   'desc': '部署',
   'from': '100401',

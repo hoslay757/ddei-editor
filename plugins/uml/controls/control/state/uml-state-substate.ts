@@ -1,6 +1,6 @@
 export default {
   'id': '301002',
-  'name': '子状态机',
+  'name': 'ddei.uml.substate',
   'code': 'substate',
   'desc': 'UML的子状态机节点',
   'from': '100500',

@@ -1,6 +1,6 @@
 export default {
   'id': '305017',
-  'name': '聚合',
+  'name': 'ddei.uml.together',
   'code': 'together',
   'desc': '依赖关系',
   'from': '100401',

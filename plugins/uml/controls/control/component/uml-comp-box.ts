@@ -1,6 +1,6 @@
 export default {
   'id': '305005',
-  'name': '组件盒',
+  'name': 'ddei.uml.compbox',
   'code': 'cbox',
   'desc': 'UML的组件盒节点',
   'from': '100008',

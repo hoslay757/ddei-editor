@@ -1,7 +1,7 @@
 import { ov_link_v_split_point, ov_link_h_split_point } from "ddei-framework";
 export default {
   'id': '307004',
-  'name': '接口',
+  'name': 'ddei.uml.interface',
   'code': 'inte',
   'desc': 'UML的接口节点',
   'from': '100008',

@@ -1,6 +1,6 @@
 export default {
   'id': '301007',
-  'name': '判定',
+  'name': 'ddei.uml.switch',
   'code': 'switch',
   'desc': 'UML的状态分支',
   'from': '100040',

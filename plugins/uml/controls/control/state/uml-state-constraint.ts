@@ -1,6 +1,6 @@
 export default {
   'id': '301010',
-  'name': '约束',
+  'name': 'ddei.uml.constraint',
   'code': 'constr',
   'desc': 'UML的约束',
   'from': '103005',

@@ -1,6 +1,6 @@
 export default {
   'id': '301014',
-  'name': '转换',
+  'name': 'ddei.uml.convert',
   'code': 'conv',
   'desc': '转换',
   'from': '100401',

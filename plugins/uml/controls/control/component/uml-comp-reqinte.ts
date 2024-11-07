@@ -1,6 +1,6 @@
 export default {
   'id': '305010',
-  'name': '需求接口',
+  'name': 'ddei.uml.reqinte',
   'code': 'reqinte',
   'desc': '需求接口',
   'from': '100401',

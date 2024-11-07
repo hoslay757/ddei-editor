@@ -1,6 +1,6 @@
 export default {
   'id': '306003',
-  'name': '消息',
+  'name': 'ddei.uml.msg',
   'code': 'msg',
   'desc': '消息',
   'from': '305015',

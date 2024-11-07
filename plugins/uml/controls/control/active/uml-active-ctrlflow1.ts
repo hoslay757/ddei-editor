@@ -1,6 +1,6 @@
 export default {
   'id': '308020',
-  'name': '接收事件',
+  'name': 'ddei.uml.recevent',
   'code': 'ctrlflow',
   'desc': '接收事件',
   'from': '100401',

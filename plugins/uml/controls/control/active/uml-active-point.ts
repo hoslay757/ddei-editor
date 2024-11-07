@@ -1,6 +1,6 @@
 export default {
   'id': '308012',
-  'name': '点',
+  'name': 'ddei.uml.dot',
   'code': 'point',
   'desc': '点',
   'from': '100001',

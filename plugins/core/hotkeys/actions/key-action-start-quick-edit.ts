@@ -233,6 +233,15 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
                       }
 
                     }
+                    dataJson.composes?.forEach(compose => {
+                      for (let i in compose) {
+                        let value = compose[i]
+                        if (typeof (value) == 'string') {
+                          compose[i] = editor.i18n(value);
+                        }
+
+                      }
+                    });
                     realModel = ddInstance.controlModelClasses["DDeiPolygon"].initByJSON(
                       dataJson,
                       { currentStage: stage, currentDdInstance: ddInstance, currentContainer: model.pModel }

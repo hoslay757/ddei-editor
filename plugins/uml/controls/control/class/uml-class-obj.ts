@@ -1,7 +1,7 @@
 import { ov_link_v_split_point } from "ddei-framework";
 export default {
   'id': '307016',
-  'name': '对象',
+  'name': 'ddei.uml.object',
   'code': 'obj',
   'desc': 'UML的对象节点',
   'from': '100008',
@@ -56,7 +56,7 @@ export default {
         height: 30,
         id: '100002',
         cIndex: 1,
-        text: `对象名`,
+        text: `ddei.uml.objname`,
         textStyle: {
           bold: 1,
           feed: 1,

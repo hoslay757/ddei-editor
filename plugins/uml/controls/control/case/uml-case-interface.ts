@@ -1,6 +1,6 @@
 export default {
   'id': '302014',
-  'name': '接口',
+  'name': 'ddei.uml.interface',
   'code': 'inte',
   'desc': '接口',
   'from': '100401',

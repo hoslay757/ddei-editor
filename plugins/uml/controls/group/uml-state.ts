@@ -1,6 +1,6 @@
 export default {
   'id': '301',
-  'name': 'UML-状态图',
+  'name': 'ddei.uml.groups.state',
   'code': 'uml-state',
   'desc': 'UML2.0中的状态图',
   'orderNo': 301,
@@ -9,69 +9,58 @@ export default {
   'controls': [
     {
       'id': '301001',
-      'name': '状态',
 
     },
     {
       'id': '301002',
-      'name': '子状态机',
 
     },
     {
       'id': '301003',
-      'name': '复合状态',
+      'name': 'ddei.uml.compstate',
 
     },
     {
       'id': '102001',
-      'name': '初始状态',
+      'name': 'ddei.uml.initstate',
 
     },
     {
       'id': '102091',
-      'name': '最终状态',
+      'name': 'ddei.uml.finalstate',
 
     },
     {
       'id': '301006',
-      'name': '流终',
 
     },
     {
       'id': '301007',
-      'name': '判定',
 
     },
     {
       'id': '301008',
-      'name': '简略历史',
 
     },
     {
       'id': '301009',
-      'name': '详细历史',
 
     },
     {
       'id': '301010',
-      'name': '约束',
 
     },
     {
       'id': '103005',
-      'name': '注释',
     },
     {
       'id': '301012',
-      'name': '分叉',
     },
     {
       'id': '301013',
-      'name': '汇聚',
     },
     {
       'id': '301014',
-      'name': '转换',
     }
   ]
 }

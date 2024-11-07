@@ -1,6 +1,6 @@
 export default {
   'id': '303020',
-  'name': '过渡',
+  'name': 'ddei.uml.transition',
   'code': 'trans',
   'desc': '过渡',
   'from': '100401',

@@ -1,6 +1,6 @@
 export default {
   'id': '305016',
-  'name': '依赖',
+  'name': 'ddei.uml.dependent',
   'code': 'depen',
   'desc': '依赖关系',
   'from': '305015',

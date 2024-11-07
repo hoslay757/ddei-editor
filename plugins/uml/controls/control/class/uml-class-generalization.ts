@@ -1,6 +1,6 @@
 export default {
   'id': '307019',
-  'name': '泛化',
+  'name': 'ddei.uml.generalization',
   'code': 'gen',
   'desc': '泛化关系',
   'from': '100401',

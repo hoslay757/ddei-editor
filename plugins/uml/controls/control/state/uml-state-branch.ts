@@ -1,6 +1,6 @@
 export default {
   'id': '301012',
-  'name': '分叉',
+  'name': 'ddei.uml.fork',
   'code': 'branch',
   'desc': 'UML的状态的分叉',
   'from': '100002',

@@ -1,6 +1,6 @@
 export default {
   'id': '307013',
-  'name': '概述',
+  'name': 'ddei.uml.overview',
   'code': 'overview',
   'desc': 'UML的概述节点',
   'from': '305003',

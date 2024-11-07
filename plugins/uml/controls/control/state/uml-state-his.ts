@@ -1,6 +1,6 @@
 export default {
   'id': '301008',
-  'name': '简略历史',
+  'name': 'ddei.uml.simplehistory',
   'code': 'his',
   'desc': 'UML状态机简略历史',
   'from': '100003',

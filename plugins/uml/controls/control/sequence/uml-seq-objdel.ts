@@ -1,6 +1,6 @@
 export default {
   'id': '303013',
-  'name': '对象删除',
+  'name': 'ddei.uml.objdel',
   'code': 'objdel',
   'desc': '对象删除',
   'from': '100500',

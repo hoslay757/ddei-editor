@@ -1,6 +1,6 @@
 export default {
   'id': '301009',
-  'name': '详细历史',
+  'name': 'ddei.uml.detailhistroy',
   'code': 'his',
   'desc': 'UML状态机详细历史',
   'from': '100003',

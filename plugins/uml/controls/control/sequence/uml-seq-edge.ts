@@ -1,6 +1,6 @@
 export default {
   'id': '303017',
-  'name': '边界',
+  'name': 'ddei.uml.edge',
   'code': 'edge',
   'desc': '边界',
   'from': '100500',

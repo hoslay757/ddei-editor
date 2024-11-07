@@ -1,6 +1,6 @@
 export default {
   'id': '303021',
-  'name': '异步消息',
+  'name': 'ddei.uml.asyncmsg',
   'code': 'async',
   'desc': '异步消息',
   'from': '100401',

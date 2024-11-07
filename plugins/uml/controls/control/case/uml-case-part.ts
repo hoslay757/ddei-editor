@@ -1,7 +1,7 @@
 export default {
   'id': '302004',
-  'name': '参与者',
-  'code': 'state',
+  'name': 'ddei.uml.participal',
+  'code': 'parti',
   'desc': 'UML的用例图参与者',
   'from': '100009',
 
@@ -78,7 +78,7 @@ export default {
         fill: {
           type: 0,
         },
-        text: "系统参与者",
+        text: "ddei.uml.syspart",
         initCPV: {
           x: 0, y: 13.5
         },

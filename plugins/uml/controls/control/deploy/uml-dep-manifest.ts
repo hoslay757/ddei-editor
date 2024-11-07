@@ -1,6 +1,6 @@
 export default {
   'id': '304022',
-  'name': '表明',
+  'name': 'ddei.uml.manifest',
   'code': 'manifest',
   'desc': '表明',
   'from': '100401',

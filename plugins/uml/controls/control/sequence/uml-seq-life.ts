@@ -1,6 +1,6 @@
 export default {
   'id': '303002',
-  'name': '生命线',
+  'name': 'ddei.uml.life',
   'code': 'life',
   'desc': '生命线',
   'from': '100401',

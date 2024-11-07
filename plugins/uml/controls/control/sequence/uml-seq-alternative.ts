@@ -1,7 +1,7 @@
 import { ov_link_v_split_point, ov_link_h_split_point } from "ddei-framework";
 export default {
   'id': '303007',
-  'name': '替代片段',
+  'name': 'ddei.uml.alternative',
   'code': 'alternative',
   'desc': '替代片段',
   'from': '100008',

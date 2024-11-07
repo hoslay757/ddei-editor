@@ -1,6 +1,6 @@
 export default {
   'id': '308008',
-  'name': '发送信号',
+  'name': 'ddei.uml.sendsignal',
   'code': 'uasm',
   'desc': '发送信号',
   'from': '100500',

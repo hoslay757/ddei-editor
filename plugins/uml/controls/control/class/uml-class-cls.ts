@@ -1,7 +1,7 @@
 import { ov_link_v_split_point, ov_link_h_split_point } from "ddei-framework";
 export default {
   'id': '307001',
-  'name': '类',
+  'name': 'ddei.uml.class',
   'code': 'cls',
   'desc': 'UML的类节点',
   'from': '100008',
@@ -62,7 +62,7 @@ export default {
         height: 30,
         id: '100002',
         cIndex: 1,
-        text: "类名",
+        text: "ddei.uml.classname",
         textStyle: {
           bold: 1,
           scale: 1

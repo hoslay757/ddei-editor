@@ -1,7 +1,7 @@
 export default {
   'id': '302010',
-  'name': '协会',
-  'code': 'coll',
+  'name': 'ddei.uml.assis',
+  'code': 'assis',
   'desc': '协会',
   'from': '100401',
 

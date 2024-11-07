@@ -1,6 +1,6 @@
 export default {
   'id': '307010',
-  'name': '原始',
+  'name': 'ddei.uml.original',
   'code': 'primitive',
   'desc': 'UML的原始',
   'from': '100002',

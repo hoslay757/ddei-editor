@@ -1,6 +1,6 @@
 export default {
   'id': '301006',
-  'name': '流终',
+  'name': 'ddei.uml.flowend',
   'code': 'end',
   'desc': 'UML流程终止',
   'from': '100500',

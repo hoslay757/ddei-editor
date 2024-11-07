@@ -1,6 +1,6 @@
 export default {
   'id': '307008',
-  'name': '数据类型',
+  'name': 'ddei.uml.datatype',
   'code': 'datatype',
   'desc': 'UML的数据类型',
   'from': '100002',

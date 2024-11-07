@@ -1,6 +1,6 @@
 export default {
   'id': '307024',
-  'name': '关联',
+  'name': 'ddei.uml.relation',
   'code': 'erl',
   'desc': 'UML类关联关系',
   'from': '100401',

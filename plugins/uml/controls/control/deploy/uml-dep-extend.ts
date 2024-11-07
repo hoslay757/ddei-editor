@@ -1,6 +1,6 @@
 export default {
   'id': '304019',
-  'name': '继承',
+  'name': 'ddei.uml.extend',
   'code': 'extend',
   'desc': '继承',
   'from': '100401',

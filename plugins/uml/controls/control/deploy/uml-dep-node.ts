@@ -1,6 +1,6 @@
 export default {
   'id': '304010',
-  'name': '节点',
+  'name': 'ddei.uml.node',
   'code': 'node',
   'desc': 'UML的节点',
   'from': '305002',

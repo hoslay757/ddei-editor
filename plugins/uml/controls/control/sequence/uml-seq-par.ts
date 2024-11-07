@@ -1,6 +1,6 @@
 export default {
   'id': '303011',
-  'name': '并行片段',
+  'name': 'ddei.uml.paranative',
   'code': 'par',
   'desc': '并行片段',
   'from': '303008',

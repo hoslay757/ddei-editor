@@ -1,6 +1,6 @@
 export default {
   'id': '307009',
-  'name': '信号',
+  'name': 'ddei.uml.signal',
   'code': 'signal',
   'desc': 'UML的信号',
   'from': '100002',

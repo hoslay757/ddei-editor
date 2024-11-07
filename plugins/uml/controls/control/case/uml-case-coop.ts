@@ -1,6 +1,6 @@
 export default {
   'id': '302005',
-  'name': '协作',
+  'name': 'ddei.uml.coop',
   'code': 'coop',
   'desc': 'UML的用例图-协作',
   'from': '302002',

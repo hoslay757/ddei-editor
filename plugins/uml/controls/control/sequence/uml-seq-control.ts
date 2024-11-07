@@ -1,6 +1,6 @@
 export default {
   'id': '303018',
-  'name': '控制',
+  'name': 'ddei.uml.control',
   'code': 'control',
   'desc': '控制',
   'from': '100500',

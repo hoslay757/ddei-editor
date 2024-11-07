@@ -1,6 +1,6 @@
 export default {
   'id': '307005',
-  'name': '简单界面',
+  'name': 'ddei.uml.ui',
   'code': 'ui',
   'desc': 'UML的界面节点',
   'from': '100002',

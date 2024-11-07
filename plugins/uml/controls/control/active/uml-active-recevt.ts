@@ -1,6 +1,6 @@
 export default {
   'id': '308011',
-  'name': '接收事件',
+  'name': 'ddei.uml.recevent',
   'code': 'recevt',
   'desc': '接收事件',
   'from': '103007',

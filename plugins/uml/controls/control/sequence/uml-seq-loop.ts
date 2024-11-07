@@ -1,7 +1,7 @@
 import { ov_link_v_split_point, ov_link_h_split_point } from "ddei-framework";
 export default {
   'id': '303008',
-  'name': '循环片段',
+  'name': 'ddei.uml.loopnative',
   'code': 'loop',
   'desc': '循环片段',
   'from': '100008',
