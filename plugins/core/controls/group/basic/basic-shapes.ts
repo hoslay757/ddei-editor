@@ -1,6 +1,6 @@
 export default {
   'id': '101',
-  'name': '基础绘图形状',
+  'name': 'ddei.control.groups.basic',
   'code': 'basic-shapes',
   'desc': '基础的绘图形状，包含了正方形、长方形、三角形、圆形、线条等基础形状',
   'orderNo': 1,

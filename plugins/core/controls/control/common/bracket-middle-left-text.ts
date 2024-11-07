@@ -1,6 +1,6 @@
 export default {
   'id': '104114',
-  'name': '中括号',
+  'name': 'ddei.control.middle-bracket',
   'code': 'bmt',
   'desc': '左中括号，带文本编辑',
   'from': '100500',

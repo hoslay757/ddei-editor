@@ -1,6 +1,6 @@
 export default {
   'id': '100040',
-  'name': '菱形',
+  'name': 'ddei.control.diamond',
   'code': 'diamond',
   'desc': '标准的菱形',
   'from': '100500',

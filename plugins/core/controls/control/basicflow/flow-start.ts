@@ -1,6 +1,6 @@
 export default {
   'id': '102001',
-  'name': '开始',
+  'name': 'ddei.control.start',
   'code': 'start',
   'desc': '流程的开始节点',
   'from': '100103',

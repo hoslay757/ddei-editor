@@ -1,6 +1,6 @@
 export default {
   'id': '103008',
-  'name': '注释',
+  'name': 'ddei.control.comment',
   'code': 'comment',
   'desc': '跟随内容变化大小的注释文本',
   'from': '100000',
@@ -17,7 +17,7 @@ export default {
     fill: {
       type: 0
     },
-    text: "注释",
+    text: "ddei.control.comment",
     sample: {
       //一圈4次采样
       loop: 4,

@@ -1,6 +1,6 @@
 export default {
   'id': '102052',
-  'name': '手动输入',
+  'name': 'ddei.control.manualinput',
   'code': 'fhi',
   'desc': '流程的手动输入节点',
   'from': '100500',

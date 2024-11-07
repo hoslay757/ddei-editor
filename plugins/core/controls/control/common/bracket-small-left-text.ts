@@ -1,6 +1,6 @@
 export default {
   'id': '104104',
-  'name': '小括号',
+  'name': 'ddei.control.small-bracket',
   'code': 'bst',
   'desc': '左小括号，带文本编辑',
   'from': '100500',

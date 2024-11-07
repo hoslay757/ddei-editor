@@ -1,6 +1,6 @@
 export default {
   'id': '102057',
-  'name': '手动操作',
+  'name': 'ddei.control.manualoperate',
   'code': 'fmo',
   'desc': '由人工手动完成的节点',
   'from': '100500',

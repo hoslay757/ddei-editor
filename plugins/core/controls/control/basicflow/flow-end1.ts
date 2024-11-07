@@ -1,6 +1,6 @@
 export default {
   'id': '102091',
-  'name': '结束',
+  'name': 'ddei.control.end',
   'code': 'end',
   'desc': '流程的开始节点',
   'from': '100003',

@@ -1,6 +1,6 @@
 export default {
   'id': '102010',
-  'name': '任务',
+  'name': 'ddei.control.task',
   'code': 'task',
   'desc': '流程的任务节点',
   'from': '100002',

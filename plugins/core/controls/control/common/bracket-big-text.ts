@@ -1,6 +1,6 @@
 export default {
   'id': '104125',
-  'name': '大括号',
+  'name': 'ddei.control.big-bracket',
   'code': 'bmt',
   'desc': '左右大括号，带文本编辑',
   'from': '100500',

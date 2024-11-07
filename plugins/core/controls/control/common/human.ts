@@ -1,6 +1,6 @@
 export default {
   'id': '103001',
-  'name': '人',
+  'name': 'ddei.control.human',
   'code': 'human',
   'desc': '人形图标',
   'from': '100500',

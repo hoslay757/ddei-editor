@@ -1,6 +1,6 @@
 export default {
   'id': '102051',
-  'name': '跨页引用',
+  'name': 'ddei.control.pageref',
   'code': 'fpr',
   'desc': '流程的跨页引用',
   'from': '100500',

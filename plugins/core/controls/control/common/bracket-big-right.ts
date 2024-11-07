@@ -1,6 +1,6 @@
 export default {
   'id': '104121',
-  'name': '大括号',
+  'name': 'ddei.control.big-bracket',
   'code': 'bb',
   'desc': '由极坐标系构造的右大括号，不带任何文本',
   'from': '100500',

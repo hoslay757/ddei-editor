@@ -1,6 +1,6 @@
 export default {
   'id': '104001',
-  'name': '角度',
+  'name': 'ddei.control.angle',
   'code': 'angle',
   'desc': '表示一个角度',
   'from': '100500',

@@ -1,8 +1,8 @@
 export default {
   'id': '100120',
-  'name': '左箭头',
+  'name': 'ddei.control.arrow-right',
   'code': 'arr-r',
-  'desc': '指向左边的箭头',
+  'desc': '指向右边的箭头',
   'from': '100500',
 
   'define': {

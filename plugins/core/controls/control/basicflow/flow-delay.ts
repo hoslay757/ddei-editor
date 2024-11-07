@@ -1,6 +1,6 @@
 export default {
   'id': '102055',
-  'name': '推迟',
+  'name': 'ddei.control.delay',
   'code': 'fdy',
   'desc': '数据库图标',
   'from': '100500',

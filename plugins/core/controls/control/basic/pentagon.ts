@@ -1,6 +1,6 @@
 export default {
   'id': '100020',
-  'name': '五边形',
+  'name': 'ddei.control.pentagon',
   'code': 'pentagon',
   'desc': '由五个点构成的五边形',
   'from': '100500',

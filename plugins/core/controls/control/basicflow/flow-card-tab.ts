@@ -1,6 +1,6 @@
 export default {
   'id': '102053',
-  'name': '卡片',
+  'name': 'ddei.control.card',
   'code': 'fct',
   'desc': '流程的卡片',
   'from': '100500',

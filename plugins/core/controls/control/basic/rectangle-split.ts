@@ -1,6 +1,6 @@
 export default {
   'id': '100009',
-  'name': '长方形-切割',
+  'name': 'ddei.control.rectangle-split',
   'code': 'rect',
   'desc': '由4个点组成的长方形，从中间横向/纵向切割开',
   'from': '100008',

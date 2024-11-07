@@ -1,6 +1,6 @@
 export default {
   'id': '103004',
-  'name': '纸带',
+  'name': 'ddei.control.ptap',
   'code': 'ptap',
   'desc': '纸带',
   'from': '100500',

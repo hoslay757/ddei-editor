@@ -1,6 +1,6 @@
 export default {
   'id': '103006',
-  'name': '人',
+  'name': 'ddei.control.human',
   'code': 'human',
   'desc': '人形图标',
   'from': '100500',
@@ -16,6 +16,10 @@ export default {
     },
     //采样信息
     sample: {
+      //依附图形的初始化配置，如果产生依附图形，则会在配置的位置生成
+      depPos: {
+        type: 8
+      },
       //一圈采样次数
       loop: 4,
       //半径距离

@@ -242,7 +242,7 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
                       0, 1, posPoint.y,
                       0, 0, 1);
                     realModel.transVectors(move1Matrix)
-                    model.layer.addModel(realModel);
+                    model.layer.addModel(realModel,false);
 
                     realModel.initRender()
                     let lineLink = new DDeiModelLink({
