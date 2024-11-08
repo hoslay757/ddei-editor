@@ -68,12 +68,12 @@ export default defineComponent({
           ]
         }
       },
-      i18n: {  //国际化配置
-        lang: "en_US", //强制设定语言，如果不设置则读取浏览器的语言设置
-        langs: { //导入自定义语言包，可以覆盖自带的语言包中相同的内容
-          // "ja_JP": i18nJP
-        }
-      },
+      // i18n: {  //国际化配置
+      //   lang: "ja_JP", //强制设定语言，如果不设置则读取浏览器的语言设置
+      //   langs: { //导入自定义语言包，可以覆盖自带的语言包中相同的内容
+      //     "ja_JP": i18nJP
+      //   }
+      // },
       extensions: [
         // //布局的配置
         DDeiCoreStandLayout.configuration({
