@@ -83,6 +83,15 @@ export default {
     }
     this.options.extensions.splice(0,0,DDeiCore)
     let editor = DDeiEditor.newInstance(this.id, this.id, true, this.options);
+    //加载语言包
+
+    if (this.options?.i18n) {
+      if (this.options.i18n.langs) {
+        editor.registerLangs(this.options.i18n.langs)
+      }
+    }
+    editor.setI18nLang(this.options?.i18n?.lang)
+    
     this.editor = editor
 
     editor.appContext = getCurrentInstance().appContext
@@ -136,12 +145,12 @@ export default {
       })
       this.options.config.groupDefines.forEach(group => {
         group.controls.forEach(control => {
-          if (control.define) {
-            delete control.define.font
-            delete control.define.textStyle
-            delete control.define.border
-            delete control.define.fill
-          }
+          // if (control.define) {
+          //   delete control.define.font
+          //   delete control.define.textStyle
+          //   delete control.define.border
+          //   delete control.define.fill
+          // }
           delete control.attrs
         });
       })
@@ -162,18 +171,19 @@ export default {
           }
         }
       }
-      if (control.define) {
-        delete control.define.font
-        delete control.define.textStyle
-        delete control.define.border
-        delete control.define.fill
-      }
+      // if (control.define) {
+      //   delete control.define.font
+      //   delete control.define.textStyle
+      //   delete control.define.border
+      //   delete control.define.fill
+      // }
       delete control.attrs
     })
     DDeiEditorUtil.ICONS = ICONS;
 
   },
   mounted() {
+    
     this.editor.editorViewer = this;
     
     this.editor.htmlElement = this.$refs.editor_div;
@@ -189,6 +199,7 @@ export default {
     if (options?.config?.height) {
       this.$refs.editor_div.style.height = options?.config?.height + "px";
     }
+    
     
     //初始化控件
     if (options?.config?.initData){

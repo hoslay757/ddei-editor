@@ -1,6 +1,6 @@
 export default {
   'id': '307011',
-  'name': '约束',
+  'name': 'ddei.uml.constraint',
   'code': 'constraint',
   'desc': 'UML的类图约束节点',
   'from': '104125',

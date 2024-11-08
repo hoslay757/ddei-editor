@@ -1,6 +1,6 @@
 export default {
   'id': '308023',
-  'name': '分叉',
+  'name': 'ddei.uml.fork',
   'code': 'uc',
   'desc': '分叉',
   'from': '301012',

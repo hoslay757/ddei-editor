@@ -1,5 +1,5 @@
 <template>
-  <div class="ddei-core-panel-bottom-suitratio" v-if="allowStageRatio" @click="autoRatio(1)" title="整页">
+  <div class="ddei-core-panel-bottom-suitratio" v-if="allowStageRatio" @click="autoRatio(1)" :title="editor.i18n('ddei.wholePage')">
     <svg class="icon" aria-hidden="true">
       <use xlink:href="#icon-suit-ratio"></use>
     </svg>

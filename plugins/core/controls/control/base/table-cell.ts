@@ -266,7 +266,7 @@ export const styles = {
       'group': '文本',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '0',
       'orderNo': 10,
       'visiable': true
@@ -274,12 +274,12 @@ export const styles = {
     {
       'id': '100302206',
       'code': 'textStyle.scale',
-      'name': '缩小字体',
+      'name': 'ddei.property.outSize',
       'desc': '文本的自动缩小字体填充',
       'group': '文本',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '0',
       'orderNo': 11,
       'visiable': true
@@ -287,12 +287,12 @@ export const styles = {
     {
       'id': '100302207',
       'code': 'textStyle.hollow',
-      'name': '镂空',
+      'name': 'ddei.property.hollow',
       'desc': '文本的镂空显示',
       'group': '文本',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '0',
       'orderNo': 9,
       'visiable': true
@@ -300,12 +300,12 @@ export const styles = {
     {
       'id': '100302208',
       'code': 'textStyle.bold',
-      'name': '粗体',
+      'name': 'ddei.property.bold',
       'desc': '文本的加粗显示',
       'group': '文本',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '0',
       'orderNo': 5,
       'visiable': true
@@ -313,12 +313,12 @@ export const styles = {
     {
       'id': '100302209',
       'code': 'textStyle.italic',
-      'name': '斜体',
+      'name': 'ddei.property.italic',
       'desc': '文本的斜体显示',
       'group': '文本',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '0',
       'orderNo': 6,
       'visiable': true
@@ -326,12 +326,12 @@ export const styles = {
     {
       'id': '100302210',
       'code': 'textStyle.underline',
-      'name': '下划线',
+      'name': 'ddei.property.underline',
       'desc': '文本的下划线显示',
       'group': '文本',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '0',
       'orderNo': 7,
       'visiable': true
@@ -339,12 +339,12 @@ export const styles = {
     {
       'id': '100302211',
       'code': 'textStyle.deleteline',
-      'name': '删除线',
+      'name': 'ddei.property.deleteline',
       'desc': '文本的删除线显示',
       'group': '文本',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '0',
       'orderNo': 8,
       'visiable': true
@@ -352,12 +352,12 @@ export const styles = {
     {
       'id': '100302212',
       'code': 'textStyle.topline',
-      'name': '顶部线',
+      'name': 'ddei.property.topline',
       'desc': '文本的删除线显示',
       'group': '文本',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '是', 'value': '1' }, { 'text': '否', 'value': '0' }],
+      'dataSource': [{ 'text': 'ddei.property.ds.yes', 'value': '1' }, { 'text': 'ddei.property.ds.no', 'value': '0' }],
       'defaultValue': '0',
       'orderNo': 8,
       'visiable': true
@@ -366,7 +366,7 @@ export const styles = {
     {
       'id': '100302303',
       'code': 'textStyle.align',
-      'name': '水平对齐',
+      'name': 'ddei.property.textAlign',
       'desc': '文本的水平对齐',
       'group': '文本',
       'controlType': 'text',
@@ -377,7 +377,7 @@ export const styles = {
     {
       'id': '100302304',
       'code': 'textStyle.valign',
-      'name': '垂直对齐',
+      'name': 'ddei.property.textValign',
       'desc': '文本的垂直对齐',
       'group': '文本',
       'controlType': 'text',
@@ -400,7 +400,7 @@ export const datas = {
     {
       'id': '100302401',
       'code': 'id',
-      'name': 'id',
+      'name': 'ddei.property.id',
       'desc': '控件在画布的全局唯一ID',
       'group': '布局与文本',
       'controlType': 'text',
@@ -412,11 +412,11 @@ export const datas = {
     {
       'id': '100302403',
       'code': 'text',
-      'name': '文本',
+      'name': 'ddei.property.text',
       'desc': '控件的主体显示文本',
       'group': '布局与文本',
       'controlType': 'textarea',
-      'defaultValue': '文本',
+      'defaultValue': 'ddei.property.text',
       'hiddenTitle': false,
       'display': 'column',
       'dataType': 'string',

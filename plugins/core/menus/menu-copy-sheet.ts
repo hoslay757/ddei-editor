@@ -20,7 +20,7 @@ class MenuCopySheet extends DDeiMenuBase {
   static defaultIns: MenuCopySheet = new MenuCopySheet();
   
   defaultOptions: object = {
-    'label': '复制',
+    'label': 'ddei.copy',
     'icon': '#icon-paste',
     'models': ["DDeiSheet"],
     'disabled': false
@@ -78,9 +78,9 @@ class MenuCopySheet extends DDeiMenuBase {
         
         let newSheet = DDeiSheet.loadFromJSON(sheetJson, { currentDdInstance: ddInstance });
 
-        
+        let pageText = editor.i18n('ddei.page');
         file.sheets.splice(file?.currentSheetIndex + 1, 0, newSheet);
-        newSheet.name = "页面-" + file.sheets.length
+        newSheet.name = pageText+"-" + file.sheets.length
         file.changeSheet(file.currentSheetIndex + 1);
         let stage = newSheet.stage;
         stage.ddInstance = ddInstance;

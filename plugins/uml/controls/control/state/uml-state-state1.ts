@@ -1,6 +1,6 @@
 export default {
   'id': '301003',
-  'name': '状态',
+  'name': 'ddei.uml.state',
   'code': 'state',
   'desc': 'UML的状态机节点',
   'from': '100009',
@@ -25,7 +25,7 @@ export default {
           subGroups: [
 
             {
-              name: "样式",
+              name: "ddei.style",
               attrs: ["fill.type", "fill.color", "fill.image", "fill.opacity", "border.type", "border.color", "borderOpacity", "borderWidth", "borderDash"]
             },
             {

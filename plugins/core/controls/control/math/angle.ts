@@ -1,6 +1,6 @@
 export default {
   'id': '104001',
-  'name': '角度',
+  'name': 'ddei.control.angle',
   'code': 'angle',
   'desc': '表示一个角度',
   'from': '100500',
@@ -142,11 +142,11 @@ export default {
        */
       groups: [
         {
-          name: "样式",
+          name: "ddei.style",
           icon: 'icon-fill',
           subGroups: [
             {
-              name: "线条",
+              name: "ddei.line",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash"]
             },
 

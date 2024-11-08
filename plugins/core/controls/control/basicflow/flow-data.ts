@@ -1,6 +1,6 @@
 export default {
   'id': '102030',
-  'name': '数据',
+  'name': 'ddei.data',
   'code': 'fdata',
   'desc': '流程的数据节点',
   'from': '100500',

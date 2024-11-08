@@ -1,6 +1,6 @@
 export default {
   'id': '102032',
-  'name': '存储数据',
+  'name': 'ddei.control.store-data',
   'code': 'fdata',
   'desc': '流程的数据节点',
   'from': '102030',

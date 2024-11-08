@@ -1,6 +1,6 @@
 export default {
   'id': '103007',
-  'name': '双向漏斗',
+  'name': 'ddei.control.bindfunnel',
   'code': 'bidfunnel',
   'desc': '双向漏斗',
   'from': '100500',

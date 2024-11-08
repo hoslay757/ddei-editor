@@ -1,6 +1,6 @@
 export default {
   'id': '102041',
-  'name': '预定义流程',
+  'name': 'ddei.control.defined-flow',
   'code': 'defflow',
   'desc': '流程的子流程节点',
   'from': '100500',

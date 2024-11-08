@@ -1,7 +1,7 @@
 export default {
   'id': '307014',
-  'name': '模型',
-  'code': 'package',
+  'name': 'ddei.uml.model',
+  'code': 'model',
   'desc': 'UML的模型节点',
   'from': '305003',
 
@@ -21,7 +21,7 @@ export default {
       },
       composes: [
         {
-          text: "模型",
+          text: "ddei.uml.model",
           textStyle: {
             align: 1
           }

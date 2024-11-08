@@ -1,6 +1,6 @@
 export default {
   'id': '302006',
-  'name': '扩展用例',
+  'name': 'ddei.uml.extcase',
   'code': 'case',
   'desc': 'UML的用例节点',
   'from': '100009',
@@ -15,15 +15,15 @@ export default {
       },
       groups: [
         {
-          name: "样式",
+          name: "ddei.style",
           icon: 'icon-fill',
           subGroups: [
             {
-              name: "填充",
+              name: "ddei.fill",
               attrs: ["fill.type", "fill.color", "fill.image", "fill.opacity"]
             },
             {
-              name: "线条",
+              name: "ddei.line",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash", "borderRound"]
             },
             {
@@ -51,7 +51,7 @@ export default {
         fill: {
           type: 0
         },
-        text: "用例",
+        text: "ddei.uml.case",
         initCPV: {
           x: 0, y: -31.5
         },
@@ -75,7 +75,7 @@ export default {
         fill: {
           type: 0,
         },
-        text: "扩展点",
+        text: "ddei.uml.extpoint",
         initCPV: {
           x: 0, y: 16
         },

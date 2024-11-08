@@ -1,6 +1,6 @@
 export default {
   'id': '102058',
-  'name': '控制传递',
+  'name': 'ddei.control.controltran',
   'code': 'ctran',
   'desc': '控制传递',
   'from': '100401',

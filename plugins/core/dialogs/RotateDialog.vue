@@ -1,9 +1,9 @@
 <template>
   <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-changerotate" v-if="forceRefresh">
     <div class="content">
-      <div class="title">翻转</div>
+      <div class="title">{{ editor.i18n('ddei.flip') }}</div>
       <div class="group">
-        <div class="title">镜像:</div>
+        <div class="title">{{ editor.i18n('ddei.mirror') }}:</div>
         <div class="group_content">
           <div :class="{ 'item': canMirror(), 'item_disabled': !canMirror() }" @click="canMirror() && doMirror(1)">
             <svg class="icon" aria-hidden="true">
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="group">
-        <div class="title">旋转:</div>
+        <div class="title">{{ editor.i18n('ddei.rotate') }}:</div>
         <div class="group_content">
           <div :class="{ 'item': canRotate(), 'item_disabled': !canRotate() }" @click="canRotate() && doRotate(90)">
             <svg class="icon" aria-hidden="true">

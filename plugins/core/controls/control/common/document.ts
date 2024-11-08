@@ -1,6 +1,6 @@
 export default {
   'id': '103003',
-  'name': '文档',
+  'name': 'ddei.control.document',
   'code': 'doc',
   'desc': '文档',
   'from': '100500',

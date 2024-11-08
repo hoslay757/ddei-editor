@@ -1,6 +1,6 @@
 export default {
   'id': '100103',
-  'name': '圆形',
+  'name': 'ddei.control.circle',
   'code': 'circle',
   'desc': '由极坐标系构造的圆形',
   'from': '100500',
@@ -48,15 +48,15 @@ export default {
     ext: {
       groups: [
         {
-          name: "样式",
+          name: "ddei.style",
           icon: 'icon-fill',
           subGroups: [
             {
-              name: "填充",
+              name: "ddei.fill",
               attrs: ["fill.type", "fill.color", "fill.image", "fill.opacity"]
             },
             {
-              name: "线条",
+              name: "ddei.line",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash"]
             }
           ]

@@ -2,11 +2,11 @@
   <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-linepointtype" v-if="forceRefresh">
     <div class="content">
       <div class="group">
-        <div class="title">选择端点类型</div>
+        <div class="title">{{ editor.i18n('ddei.property.linePointType') }}</div>
         <div class="group_content">
           <div :class="{ 'item': true, 'item-selected': JSON.stringify(value) == JSON.stringify(data.value) }"
             v-for="data in dataSource" @click="select(data.value)" @dblclick="selectAndConfirm(data.value)">
-            {{ data.text }}
+            {{ editor.i18n(data.text) }}
           </div>
         </div>
       </div>

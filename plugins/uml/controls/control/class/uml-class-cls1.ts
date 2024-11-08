@@ -1,6 +1,6 @@
 export default {
   'id': '307002',
-  'name': '简单类',
+  'name': 'ddei.uml.simpleclass',
   'code': 'cls',
   'desc': 'UML的简单类节点',
   'from': '308005',

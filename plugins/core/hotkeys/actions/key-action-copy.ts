@@ -130,6 +130,16 @@ class DDeiKeyActionCopy extends DDeiKeyAction {
               let json = model.toJSON();
               jsonStr += JSON.stringify(json) + ","
             }
+            //需要进一步复制其依附控件linkModels
+            model.linkModels?.forEach(lineLM => {
+              if (lineLM.dm) {
+                if (!selectedControls.has(lineLM.dm.id) && !selectedSubAllModels.has(lineLM.dm.id)) {
+                  //添加到复制的model中
+                  let json = lineLM.dm.toJSON();
+                  jsonStr += JSON.stringify(json) + ","
+                }
+              }
+            });
           })
           
           modelLines.forEach(line=>{
@@ -142,18 +152,10 @@ class DDeiKeyActionCopy extends DDeiKeyAction {
                 jsonLinksStr += JSON.stringify(link) + ","
               }
             })
-            //需要进一步复制其linkModels
-            line.linkModels?.forEach(lineLM => {
-              if (lineLM.dm) {
-                if (!selectedControls.has(lineLM.dm.id) && !selectedSubAllModels.has(lineLM.dm.id)) {
-                  //添加到复制的model中
-                  let json = lineLM.dm.toJSON();
-                  jsonStr += JSON.stringify(json) + ","
-                }
-              }
-            });
+            
             
           })
+       
           if (jsonStr.length > 1) {
 
             jsonStr = jsonStr.substring(0, jsonStr.length - 1)

@@ -1,7 +1,7 @@
 export default {
   'id': '305015',
-  'name': '方向',
-  'code': 'together',
+  'name': 'ddei.uml.direct',
+  'code': 'direct',
   'desc': '方向关系',
   'from': '100401',
 

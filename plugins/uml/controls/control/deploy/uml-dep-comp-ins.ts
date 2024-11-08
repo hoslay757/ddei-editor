@@ -1,6 +1,6 @@
 export default {
   'id': '304005',
-  'name': '组件实例',
+  'name': 'ddei.uml.compins',
   'code': 'compins',
   'desc': 'UML的组件实例',
   'from': '305001',

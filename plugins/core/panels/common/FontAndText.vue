@@ -123,7 +123,7 @@
       </div>
     </div>
     <div class="tail">
-      文本编辑
+      {{ editor.i18n('ddei.textEdit') }}
     </div>
   </div>
 </template>

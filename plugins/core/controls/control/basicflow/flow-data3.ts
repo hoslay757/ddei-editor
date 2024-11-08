@@ -1,6 +1,6 @@
 export default {
   'id': '102033',
-  'name': '顺序数据',
+  'name': 'ddei.control.seq-data',
   'code': 'sqdata',
   'desc': '流程的顺序数据节点',
   'from': '100500',

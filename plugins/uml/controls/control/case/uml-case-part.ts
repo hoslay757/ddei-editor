@@ -1,7 +1,7 @@
 export default {
   'id': '302004',
-  'name': '参与者',
-  'code': 'state',
+  'name': 'ddei.uml.participal',
+  'code': 'parti',
   'desc': 'UML的用例图参与者',
   'from': '100009',
 
@@ -15,15 +15,15 @@ export default {
       },
       groups: [
         {
-          name: "样式",
+          name: "ddei.style",
           icon: 'icon-fill',
           subGroups: [
             {
-              name: "填充",
+              name: "ddei.fill",
               attrs: ["fill.type", "fill.color", "fill.image", "fill.opacity"]
             },
             {
-              name: "线条",
+              name: "ddei.line",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash", "borderRound"]
             },
             {
@@ -78,7 +78,7 @@ export default {
         fill: {
           type: 0,
         },
-        text: "系统参与者",
+        text: "ddei.uml.syspart",
         initCPV: {
           x: 0, y: 13.5
         },

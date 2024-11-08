@@ -125,9 +125,17 @@ export default {
         let attrEditor = document.getElementById(
           this.getEditorId(this.attrDefine.code)
         );
+        
         let position = DDeiUtil.getDomAbsPosition(attrEditor, this.editor);
+
+        //获取panel滚动条高度
+        let tabPanelEles = this.editor.htmlElement.getElementsByClassName("propertyview-subgroup-tabpanel");
+        let tabPanelTop = 0
+        if (tabPanelEles?.length > 0 ){
+          tabPanelTop = tabPanelEles[0].scrollTop
+        }
         dialog.style.left = position.left - dialog.offsetWidth + attrEditor.offsetWidth -9.5 + "px";
-        dialog.style.top = position.top + attrEditor.offsetHeight + "px";
+        dialog.style.top = position.top + attrEditor.offsetHeight - tabPanelTop + "px";
 
         this.expanded = true;
         if (!DDeiEditor.ACTIVE_INSTANCE.tempDialogData) {

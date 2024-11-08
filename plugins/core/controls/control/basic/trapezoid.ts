@@ -1,6 +1,6 @@
 export default {
   'id': '100060',
-  'name': '梯形',
+  'name': 'ddei.control.trapezoid',
   'code': 'trapezoid',
   'desc': '由4个点组成的梯形',
   'from': '100500',

@@ -1,6 +1,6 @@
 export default {
   'id': '104111',
-  'name': '中括号',
+  'name': 'ddei.control.middle-bracket',
   'code': 'bm',
   'desc': '由极坐标系构造的右中括号，不带任何文本',
   'from': '100500',
@@ -69,11 +69,11 @@ export default {
        */
       groups: [
         {
-          name: "样式",
+          name: "ddei.style",
           icon: 'icon-fill',
           subGroups: [
             {
-              name: "线条",
+              name: "ddei.line",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash", "borderRound"]
             }
           ]

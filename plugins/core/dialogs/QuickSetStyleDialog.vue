@@ -1,13 +1,13 @@
 <template>
   <div :id="editor?.id + '_' + dialogId" class='ddei-core-dialog-setstyle' v-if="forceRefresh">
     <div class="content">
-      <div class="title">快捷设置样式</div>
+      <div class="title">{{ editor.i18n('ddei.style') }}</div>
       <div class="group">
         <div class="group_content">
           <div class="item"
             :style="{ 'color':data.text?data.text:'black','border-radius': data.round ? data.round + 'px' : '', 'border-color': data.border ? data.border : 'transparent', 'background-color': data.fill ? data.fill : 'transparent' }"
             v-for="data in ds" @click="select(data)" @dblclick="ok(data)">
-            文本
+            {{ editor.i18n('ddei.text') }}
           </div>
         </div>
       </div>

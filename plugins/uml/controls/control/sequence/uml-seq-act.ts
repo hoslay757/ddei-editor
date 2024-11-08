@@ -1,6 +1,6 @@
 export default {
   'id': '303004',
-  'name': '激活',
+  'name': 'ddei.uml.active1',
   'code': 'act',
   'desc': '激活',
   'from': '100008',

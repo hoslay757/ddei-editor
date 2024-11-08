@@ -1,6 +1,6 @@
 export default {
   'id': '302012',
-  'name': '包含',
+  'name': 'ddei.uml.include',
   'code': 'inc',
   'desc': '包含',
   'from': '100401',

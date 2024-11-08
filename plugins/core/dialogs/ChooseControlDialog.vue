@@ -9,7 +9,7 @@
           v-for="control in group.controls">
           <img class="icon" v-if="!control.icon" :src="editor?.icons[control.id]" />
           <div class="icon-html" v-if="control.icon" v-html="control.icon"></div>
-          <div class="text">{{ control.name }}</div>
+          <div class="text">{{ editor.i18n(control.name) }}</div>
         </div>
       </div>
     </div>
@@ -17,12 +17,7 @@
 </template>
 
 <script lang="ts">
-import {DDeiEditor} from "ddei-framework";
-import {DDeiUtil} from "ddei-framework";
-import {DDeiEditorUtil} from "ddei-framework";
 import DialogBase from "./dialog"
-import { groupBy } from "lodash";
-
 export default {
   name: "ddei-core-dialog-choosecontrol",
   extends: null,

@@ -1,6 +1,6 @@
 export default {
   'id': '301008',
-  'name': '简略历史',
+  'name': 'ddei.uml.simplehistory',
   'code': 'his',
   'desc': 'UML状态机简略历史',
   'from': '100003',
@@ -71,11 +71,11 @@ export default {
           icon: 'icon-fill',
           subGroups: [
             {
-              name: "填充",
+              name: "ddei.fill",
               attrs: ["fill.type", "fill.color", "fill.image", "fill.opacity"]
             },
             {
-              name: "线条",
+              name: "ddei.line",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash"]
             },
           ]

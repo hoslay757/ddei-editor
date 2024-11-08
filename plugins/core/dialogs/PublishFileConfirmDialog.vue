@@ -5,7 +5,7 @@
         <svg class="icon warn" aria-hidden="true">
           <use xlink:href="#icon-publish"></use>
         </svg>
-        <span>发布文件</span>
+        <span>{{ editor.i18n('ddei.publish') }}{{ editor.i18n('ddei.file') }}</span>
         <div style="flex:1"></div>
         <svg class="icon close" aria-hidden="true" @click="cancel">
           <use xlink:href="#icon-close"></use>
@@ -14,8 +14,8 @@
       <div class="msg">
       </div>
       <div class="tail">
-        <div class="button button-main" @click="ok">发布</div>
-        <div class="button" @click="cancel">取消</div>
+        <div class="button button-main" @click="ok">{{ editor.i18n('ddei.publish') }}</div>
+        <div class="button" @click="cancel">{{ editor.i18n('ddei.cancel') }}</div>
       </div>
     </div>
   </div>

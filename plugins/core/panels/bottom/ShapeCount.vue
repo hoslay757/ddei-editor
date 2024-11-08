@@ -1,6 +1,6 @@
 <template>
   <div class="ddei-core-panel-bottom-shapecount">
-    {{title}} {{ editor?.files[editor?.currentFileIndex]?.modelNumber }}
+    {{ editor.i18n('ddei.shapesCount') }} {{ editor?.files[editor?.currentFileIndex]?.modelNumber }}
   </div>
 </template>
 <script lang="ts">
@@ -15,10 +15,6 @@ export default {
     options: {
       type: Object,
       default: null
-    },
-    title: {
-      type: String,
-      default: "形状数: "
     }
     , editor: {
       type: DDeiEditor,

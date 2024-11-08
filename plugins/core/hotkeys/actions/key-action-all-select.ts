@@ -57,37 +57,57 @@ class DDeiKeyActionAllSelect extends DDeiKeyAction {
   }
 
   // ============================ 方法 ===============================
-  action(evt: Event, ddInstance: DDei): void {
+
+
+  isActive(element: object): boolean {
+    if (!element) {
+      return true
+    }
+    if (element.tagName == 'BODY' || element.tagName == 'HEAD' || element.tagName == 'HTML') {
+      return true
+    }
+
+    return false
+  }
+
+
+  action(evt: Event, ddInstance: DDei): boolean {
     //修改当前操作控件坐标
     if (ddInstance && ddInstance.stage) {
-      
-      let models = []
-      if (ddInstance.stage.selectedModels?.size > 0) {
-        models = Array.from(ddInstance.stage.selectedModels?.values());
-      }
-      if (models?.length == 1 && models[0].baseModelType == 'DDeiTable' && models[0].curRow != -1 && models[0].curCol != -1) {
-        //选中当前表格所有单元格
-        for (let i = 0; i < models[0].rows.length; i++) {
-          let rowObj = models[0].rows[i];
-          for (let j = 0; j < rowObj.length; j++) {
-            rowObj[j].setState(DDeiEnumControlState.SELECTED)
+      //必须是canvas的子控件
+      if (this.isActive(document.activeElement)) {
+        let models = []
+        if (ddInstance.stage.selectedModels?.size > 0) {
+          models = Array.from(ddInstance.stage.selectedModels?.values());
+        }
+        if (models?.length == 1 && models[0].baseModelType == 'DDeiTable' && models[0].curRow != -1 && models[0].curCol != -1) {
+          //选中当前表格所有单元格
+          for (let i = 0; i < models[0].rows.length; i++) {
+            let rowObj = models[0].rows[i];
+            for (let j = 0; j < rowObj.length; j++) {
+              rowObj[j].setState(DDeiEnumControlState.SELECTED)
+            }
+          }
+        } else {
+          //当前激活的图层
+          let layer = ddInstance.stage.layers[ddInstance.stage.layerIndex]
+          //加载事件的配置
+          let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_SELECT_BEFORE", DDeiEnumOperateType.SELECT, { models: Array.from(layer.models.values()) }, ddInstance, evt)
+          if (rsState == 0 || rsState == 1) {
+            ddInstance?.bus?.push(DDeiEnumBusCommandType.ModelChangeSelect, { models: layer.models, value: DDeiEnumControlState.SELECTED }, evt);
+            ddInstance?.bus?.push(DDeiEnumBusCommandType.StageChangeSelectModels, {}, evt);
           }
         }
-      } else {
-        //当前激活的图层
-        let layer = ddInstance.stage.layers[ddInstance.stage.layerIndex]
-        //加载事件的配置
-        let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_SELECT_BEFORE", DDeiEnumOperateType.SELECT, { models: Array.from(layer.models.values()) }, ddInstance, evt)
-        if (rsState == 0 || rsState == 1) {
-          ddInstance?.bus?.push(DDeiEnumBusCommandType.ModelChangeSelect, { models: layer.models, value: DDeiEnumControlState.SELECTED }, evt);
-          ddInstance?.bus?.push(DDeiEnumBusCommandType.StageChangeSelectModels, {}, evt);
-        }
-      }
-      //渲染图形
-      ddInstance?.bus?.push(DDeiEnumBusCommandType.RefreshShape, null, evt);
+        //渲染图形
+        ddInstance?.bus?.push(DDeiEnumBusCommandType.RefreshShape, null, evt);
 
-      ddInstance?.bus?.executeAll();
+        ddInstance?.bus?.executeAll();
+
+        return true;
+      }
     }
+
+    return false
   }
 
 }

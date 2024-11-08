@@ -1,7 +1,7 @@
 <template>
   <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-changeposition" v-if="forceRefresh">
     <div class="content">
-      <div class="title">位置</div>
+      <div class="title">{{ editor.i18n('ddei.position') }}</div>
       <div class="group">
         <div class="group_content">
           <div :class="{ 'item_disabled': !canPush('top'), 'item': canPush('top') }"
@@ -9,28 +9,28 @@
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-move-top"></use>
             </svg>
-            <div class="text">置于顶层</div>
+            <div class="text">{{ editor.i18n('ddei.pushTop') }}</div>
           </div>
           <div :class="{ 'item_disabled': !canPush('bottom'), 'item': canPush('bottom') }"
             @click="canPush('top') && doPush('bottom')">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-move-bottom"></use>
             </svg>
-            <div class="text">置于底层</div>
+            <div class="text">{{ editor.i18n('ddei.pushBottom') }}</div>
           </div>
           <div :class="{ 'item_disabled': !canPush('up'), 'item': canPush('up') }"
             @click="canPush('up') && doPush('up')">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-move-up"></use>
             </svg>
-            <div class="text">上移一层</div>
+            <div class="text">{{ editor.i18n('ddei.pushUp') }}</div>
           </div>
           <div :class="{ 'item_disabled': !canPush('down'), 'item': canPush('down') }"
             @click="canPush('down') && doPush('down')">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-move-down"></use>
             </svg>
-            <div class="text">下移一层</div>
+            <div class="text">{{ editor.i18n('ddei.pushDown') }}</div>
           </div>
         </div>
       </div>

@@ -1,18 +1,23 @@
 export default {
   'id': '103008',
-  'name': '注释',
+  'name': 'ddei.control.comment',
   'code': 'comment',
   'desc': '跟随内容变化大小的注释文本',
   'from': '100000',
   'define': {
     borderType: 0,
     border: {
-      type: 0
+      type: 0,
+      selected:{
+        type:1,
+        dash:[5,5],
+        width:1
+      }
     },
     fill: {
       type: 0
     },
-    text: "注释",
+    text: "ddei.control.comment",
     sample: {
       //一圈4次采样
       loop: 4,
@@ -176,32 +181,32 @@ export default {
        */
       groups: [
         {
-          name: "样式",
+          name: "ddei.style",
           icon: 'icon-fill',
           subGroups: [
             {
               name: "文本",
               attrs: ["font.family", "font.size", "font.color", "fontAlign", "textStyle.feed"
-                , "textStyle.scale", "textStyle.lockWidth", "textStyle.hollow", "textStyle.bold", "textStyle.italic"
+                , "textStyle.scale", "textStyle.paddingWeight", "textStyle.lockWidth", "textStyle.hollow", "textStyle.bold", "textStyle.italic"
                 , "textStyle.underline", "textStyle.deleteline", "textStyle.topline", "textStyle.hspace", "textStyle.vspace"]
             },
             {
-              name: "边框",
+              name: "ddei.border",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash", "borderRound"]
             },
             {
-              name: "填充",
+              name: "ddei.fill",
               attrs: ["fill.type", "fill.color", "fill.image", "fill.opacity"]
             }
 
           ]
         },
         {
-          name: "数据",
+          name: "ddei.data",
           icon: 'icon-edit-properies',
           subGroups: [
             {
-              name: "数据属性",
+              name: "ddei.basic",
               attrs: ["code", "text", "fmt.type", "fmt.nscale", "fmt.tmark", "fmt.mmark", "fmt.munit", "fmt.mrmb", "fmt.dtype", "fmt.format"]
             },
 
@@ -213,7 +218,7 @@ export default {
       attrs: [
         {
           'code': 'textStyle.paddingWeight',
-          'name': '间隔大小',
+      'name': 'ddei.property.paddingWeight',
           'desc': '超范围自动扩展的情况下保留的宽度',
           'controlType': 'text',
           'dataType': 'integer',
@@ -224,13 +229,13 @@ export default {
         },
         {
           'code': 'textStyle.scale',
-          'name': '超出范围',
-          'desc': '文本的超出范围后的策略',
-          'controlType': 'radio',
-          'dataType': 'string',
-          'dataSource': [{ 'text': '隐藏', 'value': '0' }, { 'text': '省略', 'value': '2' }, { 'text': '缩小', 'value': '1' }, { 'text': '扩展', 'value': '3' }],
-          'defaultValue': '3',
-          'cascadeDisplay': { 3: { show: ['textStyle.lockWidth', "textStyle.paddingWeight"], hidden: [] }, default: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] }, empty: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] }, notempty: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] } }
+          'name': 'ddei.property.outSize',
+      'desc': '文本的超出范围后的策略',
+      'controlType': 'radio',
+      'dataType': 'string',
+      'dataSource': [{ 'text': 'ddei.property.ds.hidden', 'value': '0' }, { 'text': 'ddei.property.ds.ellipsis', 'value': '2' }, { 'text': 'ddei.property.ds.narrow', 'value': '1' }, { 'text': 'ddei.property.ds.ext', 'value': '3' }],
+          'defaultValue': 3,
+          'cascadeDisplay': { 3: { show: ['textStyle.lockWidth', "textStyle.paddingWeight"], hidden: [] }, default: { show: ['textStyle.lockWidth', "textStyle.paddingWeight"] }, empty: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] }, notempty: { hidden: ['textStyle.lockWidth', "textStyle.paddingWeight"] } }
         }
       ]
     }

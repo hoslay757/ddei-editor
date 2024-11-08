@@ -1,6 +1,6 @@
 export default {
   'id': '308011',
-  'name': '接收事件',
+  'name': 'ddei.uml.recevent',
   'code': 'recevt',
   'desc': '接收事件',
   'from': '103007',
@@ -11,15 +11,15 @@ export default {
     ext: {
       groups: [
         {
-          name: "样式",
+          name: "ddei.style",
           icon: 'icon-fill',
           subGroups: [
             {
-              name: "填充",
+              name: "ddei.fill",
               attrs: ["fill.type", "fill.color", "fill.image", "fill.opacity"]
             },
             {
-              name: "线条",
+              name: "ddei.line",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash", "borderRound"]
             }
           ]

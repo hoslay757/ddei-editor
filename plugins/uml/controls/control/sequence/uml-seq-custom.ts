@@ -1,6 +1,6 @@
 export default {
   'id': '303012',
-  'name': '自定义片段',
+  'name': 'ddei.uml.customnative',
   'code': 'custom',
   'desc': '自定义片段',
   'from': '303008',

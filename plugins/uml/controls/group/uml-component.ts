@@ -1,6 +1,6 @@
 export default {
   'id': '305',
-  'name': 'UML-组件',
+  'name': 'ddei.uml.groups.component',
   'code': 'uml-component',
   'desc': 'UML2.0中的组件图',
   'orderNo': 305,
@@ -9,75 +9,59 @@ export default {
   'controls': [
     {
       'id': '305001',
-      'name': '组件',
     },
     {
       'id': '305002',
-      'name': '节点',
     },
     {
       'id': '305003',
-      'name': '包',
     },
     {
       'id': '305004',
-      'name': '容器',
+      'name': 'ddei.uml.container',
     },
     {
       'id': '305005',
-      'name': '组件盒',
     },
     {
       'id': '102001',
-      'name': '起点',
+      'name': 'ddei.uml.startnode1',
     },
     {
       'id': '308012',
-      'name': '点',
     },
     {
       'id': '103005',
-      'name': '注释',
     },
     {
       'id': '305009',
-      'name': '接口',
     },
     {
       'id': '305010',
-      'name': '需求接口',
-    },
-    {
-      'id': '305011',
-      'name': '组装',
     },
     {
       'id': '305012',
-      'name': '接口',
+      'name': 'ddei.uml.interface',
     },
     {
       'id': '305013',
-      'name': '需求接口',
+      'name': 'ddei.uml.reqinte',
     },
     {
       'id': '305014',
-      'name': '关系',
+      'name': 'ddei.uml.relationship',
     },
     {
       'id': '305015',
-      'name': '方向',
     },
     {
       'id': '305016',
-      'name': '依赖',
     },
     {
       'id': '305017',
-      'name': '聚合',
     },
     {
       'id': '305018',
-      'name': '组成',
     }
   ]
 

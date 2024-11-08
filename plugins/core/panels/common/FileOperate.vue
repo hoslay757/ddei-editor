@@ -3,24 +3,24 @@
     <div class="ddei-core-panel-fileoperate-item" style="grid-row:1/3">
       <div class="ddei-core-panel-fileoperate-item-box" @click="newFile">
         <img width="16px" height="16px" :src="icons['icon-file']" />
-        <div>新建</div>
+        <div>{{ editor.i18n('ddei.new') }}</div>
       </div>
       <div class="ddei-core-panel-fileoperate-item-box" @click="save">
         <img width="16px" height="16px" :src="icons['icon-save']" />
-        <div>保存</div>
+        <div>{{ editor.i18n('ddei.save') }}</div>
       </div>
       <div class="ddei-core-panel-fileoperate-item-box" @click="openFile">
         <img width="16px" height="16px" :src="icons['icon-open']" />
-        <div>打开</div>
+        <div>{{ editor.i18n('ddei.open') }}</div>
       </div>
       <div class="ddei-core-panel-fileoperate-item-box" @click="download">
         <img width="16px" height="16px" :src="icons['icon-download']" />
-        <div>下载</div>
+        <div>{{ editor.i18n('ddei.download') }}</div>
       </div>
     </div>
     <div class="ddei-core-panel-fileoperate-item">
       <div class="ddei-core-panel-fileoperate-item-text">
-        保存
+        {{ editor.i18n('ddei.save') }}
       </div>
     </div>
   </div>

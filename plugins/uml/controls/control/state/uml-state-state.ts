@@ -1,6 +1,6 @@
 export default {
   'id': '301001',
-  'name': '状态',
+  'name': 'ddei.uml.state',
   'code': 'state',
   'desc': 'UML的状态机节点',
   'from': '100500',

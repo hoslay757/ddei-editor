@@ -9,8 +9,8 @@
     </div>
     <div class="ddei-ext-panel-search-box">
       <input class="ddei-ext-panel-search-box-input" v-model="editor.search.keywords" :id="searchInputId"
-        ref="searchBoxInput" @keydown="executeQuery($event)" @focus="changeEditorState" placeholder="搜索"
-        autocomplete="off" />
+        ref="searchBoxInput" @keydown="executeQuery($event)" @focus="changeEditorState"
+        :placeholder="editor.i18n('ddei.search')" autocomplete="off" />
       <div @click="changeMatchCase()"
         :class="{ 'ddei-ext-panel-search-box-btn': true, 'ddei-ext-panel-search-box-btn__selected': editor.search?.matchCase == 1 }">
         <svg class="icon" style="width:16px;height:16px;" aria-hidden="true">
@@ -24,8 +24,11 @@
         </svg>
       </div>
     </div>
-    <div class="ddei-ext-panel-search-result">
-      第{{ editor.search?.resultIndex+1 }}项，共{{ editor.search?.result?.length }}项
+    <div class="ddei-ext-panel-search-result" v-if="editor.lang == 'zh_CN'">
+      第{{ editor.search?.resultIndex + 1 }}项，共{{ editor.search?.result?.length }}项
+    </div>
+    <div class="ddei-ext-panel-search-result" v-if="editor.lang != 'zh_CN'">
+      {{editor.search?.resultIndex + 1}}/{{editor.search?.result?.length }}
     </div>
 
     <div class="ddei-ext-panel-search-buttons">
@@ -52,7 +55,8 @@
 
     <div v-if="editor.search?.mode==2" class="ddei-ext-panel-search-box">
       <input :id="replaceInputId" ref="searchReplaceBoxInput" class="ddei-ext-panel-search-box-input"
-        v-model="replaceText" @focus="changeEditorState" placeholder="替换" autocomplete="off" />
+        v-model="replaceText" @focus="changeEditorState" :placeholder="editor.i18n('ddei.replace')"
+        autocomplete="off" />
     </div>
     <div v-if="editor.search?.mode == 2" class="ddei-ext-panel-search-replace-buttons">
       <div class="ddei-ext-panel-search-replace-buttons-btn" @click="executeReplace(editor)">

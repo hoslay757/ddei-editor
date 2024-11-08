@@ -3,36 +3,36 @@
     <div class="header"></div>
     <div class="content">
       <div class="part">
-        <div :class="{ 'button-v--selected': editor?.editMode == 1, 'button-v': editor?.editMode != 1 }" title="选择"
-          @click="changeEditMode(1)">
+        <div :class="{ 'button-v--selected': editor?.editMode == 1, 'button-v': editor?.editMode != 1 }"
+          :title="editor.i18n('ddei.choose') " @click="changeEditMode(1)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-selector"></use>
           </svg>
-          <div class="text">选择</div>
+          <div class="text">{{ editor.i18n('ddei.choose') }}</div>
         </div>
       </div>
       <div class="part">
-        <div :class="{ 'button-v--selected': editor?.editMode == 2, 'button-v': editor?.editMode != 2 }" title="平移画布"
-          @click="changeEditMode(2)">
+        <div :class="{ 'button-v--selected': editor?.editMode == 2, 'button-v': editor?.editMode != 2 }"
+          :title="editor.i18n('ddei.moveStage') " @click="changeEditMode(2)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-hand"></use>
           </svg>
-          <div class="text">平移画布</div>
+          <div class="text">{{ editor.i18n('ddei.moveStage') }}</div>
         </div>
       </div>
       <div class="part">
         <div
           :class="{ 'button-v--selected': canEdit && editor?.editMode == 4, 'button-v': canEdit && editor?.editMode != 4, 'button-v--disabled': !canEdit }"
-          title="连接线" @click="canEdit && changeEditMode(4)">
+          :title="editor.i18n('ddei.linkLine')" @click="canEdit && changeEditMode(4)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-link-line"></use>
           </svg>
-          <div class="text">连接线</div>
+          <div class="text">{{ editor.i18n('ddei.linkLine') }}</div>
         </div>
       </div>
     </div>
     <div class="tail">
-      工具
+      {{ editor.i18n('ddei.tools') }}
     </div>
   </div>
 </template>

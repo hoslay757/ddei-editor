@@ -1,6 +1,6 @@
 export default {
   'id': '100110',
-  'name': '半圆',
+  'name': 'ddei.control.half-circle',
   'code': 'hcircle',
   'desc': '由极坐标系构造的半圆形',
   'from': '100500',

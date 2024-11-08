@@ -1,6 +1,6 @@
 export default {
   'id': '103013',
-  'name': '数据库',
+  'name': 'ddei.database',
   'code': 'database',
   'desc': '数据库图标',
   'from': '100500',

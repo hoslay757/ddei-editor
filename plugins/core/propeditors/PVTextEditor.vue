@@ -1,7 +1,7 @@
 <template>
   <div :class="{ 'ddei-pv-editor-text': true, 'ddei-pv-editor-text--disabled': attrDefine.readonly }">
     <input :type="attrDefine?.itemStyle?.type ? attrDefine?.itemStyle?.type : 'input'" v-model="attrDefine.value"
-      :disabled="attrDefine.readonly" :placeholder="attrDefine.defaultValue" autocomplete="off" />
+      :disabled="attrDefine.readonly" :placeholder="editor.i18n(attrDefine.defaultValue)" autocomplete="off" />
   </div>
 </template>
 

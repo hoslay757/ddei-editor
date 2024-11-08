@@ -5,20 +5,20 @@
       @mousedown="options?.drag == 1 && prepareDragBox()">
     </div>
     <div class="item" v-if="!options?.items" @click="newFile">
-      新建
+      {{ editor.i18n('ddei.new') }}
     </div>
     <div class="item" v-if="!options?.items" @click="openFile">
-      打开
+      {{ editor.i18n('ddei.open') }}
     </div>
     <div class="item" v-if="!options?.items" @click="save">
-      保存
+      {{ editor.i18n('ddei.save') }}
     </div>
     <div class="item" v-if="!options?.items" @click="download">
-      下载
+      {{ editor.i18n('ddei.download') }}
     </div>
     <div class="item" v-for="menu in options?.items">
-      <div v-if="menu && !menu.viewer && menu.id" @click="internalAction(menu.id,$event)">{{ menu.name }}</div>
-      <div v-if="menu && !menu.viewer && !menu.id" @click="menu.action(editor,$event)">{{ menu.name }}</div>
+      <div v-if="menu && !menu.viewer && menu.id" @click="internalAction(menu.id,$event)">{{ editor.i18n(menu.name) }}</div>
+      <div v-if="menu && !menu.viewer && !menu.id" @click="menu.action(editor,$event)">{{ editor.i18n(menu.name) }}</div>
       <component v-if="menu && menu.viewer" :is="menu.viewer" :options="options" :editor="editor"></component>
     </div>
 
@@ -523,8 +523,8 @@ export default {
   align-items: center;
 
   .item {
-    width: 60px;
-
+    min-width: 60px;
+    padding:0 10px;
     height: 24px;
     border-radius: 3px;
     display: flex;

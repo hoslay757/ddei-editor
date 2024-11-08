@@ -1,6 +1,6 @@
 export default {
   'id': '307003',
-  'name': '活动类',
+  'name': 'ddei.uml.activeclass',
   'code': 'cls',
   'desc': 'UML的活动类节点',
   'from': '102040',

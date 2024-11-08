@@ -1,6 +1,6 @@
 export default {
   'id': '303001',
-  'name': '对象生命线',
+  'name': 'ddei.uml.objlife',
   'code': 'obj',
   'desc': '对象生命线',
   'from': '100000',

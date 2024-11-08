@@ -28,15 +28,11 @@ import {DDeiEditor} from "ddei-framework";
 import {DDeiEnumOperateType} from "ddei-framework";
 import {DDei} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
-import { cloneDeep, trim } from "lodash";
-import {DDeiAbstractShape} from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
 import {DDeiEnumControlState} from "ddei-framework";
 import { Matrix3 } from "three";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 import {DDeiUtil} from "ddei-framework";
-import {DDeiRectContainer} from "ddei-framework";
-import {DDeiLineLink} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import { clone } from 'lodash'
 import {DDeiEnumOperateState} from "ddei-framework";
@@ -523,8 +519,8 @@ export default {
     align-items: center;
 
     >img {
-      margin-top: -1px;
-      margin-left: -1px;
+      margin-top: 2px;
+      margin-left: 2px;
     }
 
     &:hover {

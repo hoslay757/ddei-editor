@@ -1,6 +1,6 @@
 export default {
   'id': '305001',
-  'name': '组件',
+  'name': 'ddei.uml.component',
   'code': 'cmp',
   'desc': 'UML的组件节点',
   'from': '100500',

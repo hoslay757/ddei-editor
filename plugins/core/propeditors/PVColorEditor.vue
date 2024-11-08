@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { has, throttle } from "lodash";
+import {  throttle } from "lodash";
 import {DDeiEditorArrtibute } from "ddei-framework";
 import {DDeiEditor} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";

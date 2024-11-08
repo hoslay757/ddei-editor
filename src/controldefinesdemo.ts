@@ -25,7 +25,7 @@ const controls: object[] = [
       ext: {
         groups: [
           {
-            name: "数据",
+            name: "ddei.data",
             icon: 'icon-edit-properies',
             subGroups: [
               {
@@ -88,7 +88,7 @@ const controls: object[] = [
         ],
         groups: [
           {
-            name: "数据",
+            name: "ddei.data",
             icon: 'icon-edit-properies',
             subGroups: [
               {

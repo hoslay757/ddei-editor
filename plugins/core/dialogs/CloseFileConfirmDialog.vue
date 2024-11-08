@@ -5,7 +5,7 @@
         <svg class="icon warn" aria-hidden="true">
           <use xlink:href="#icon-warn"></use>
         </svg>
-        <span>是否保存文件？</span>
+        <span>{{ editor.i18n('ddei.confirm-save-file') }}</span>
         <div style="flex:1"></div>
         <svg class="icon close" aria-hidden="true" @click="cancel">
           <use xlink:href="#icon-close"></use>
@@ -15,9 +15,9 @@
 
       </div>
       <div class="tail">
-        <div class="button button-main" @click="ok">保存</div>
-        <div class="button" @click="abort">不保存</div>
-        <div class="button" @click="cancel">取消</div>
+        <div class="button button-main" @click="ok">{{ editor.i18n('ddei.save') }}</div>
+        <div class="button" @click="abort">{{ editor.i18n('ddei.abort') }}</div>
+        <div class="button" @click="cancel">{{ editor.i18n('ddei.cancel') }}</div>
       </div>
     </div>
   </div>

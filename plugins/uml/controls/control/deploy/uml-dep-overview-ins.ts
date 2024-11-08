@@ -1,6 +1,6 @@
 export default {
   'id': '304014',
-  'name': '部署概述实例',
+  'name': 'ddei.uml.depdesins',
   'code': 'ovins',
   'desc': 'UML的部署概述实例',
   'from': '100002',

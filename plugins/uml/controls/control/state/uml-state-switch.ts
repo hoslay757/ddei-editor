@@ -1,6 +1,6 @@
 export default {
   'id': '301007',
-  'name': '判定',
+  'name': 'ddei.uml.switch',
   'code': 'switch',
   'desc': 'UML的状态分支',
   'from': '100040',
@@ -15,11 +15,11 @@ export default {
           icon: 'icon-fill',
           subGroups: [
             {
-              name: "填充",
+              name: "ddei.fill",
               attrs: ["fill.type", "fill.color", "fill.image", "fill.opacity"]
             },
             {
-              name: "线条",
+              name: "ddei.line",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash"]
             },
           ]

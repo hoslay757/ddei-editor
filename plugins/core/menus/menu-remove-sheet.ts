@@ -21,7 +21,7 @@ class MenuRemoveSheet extends DDeiMenuBase {
   static defaultIns: MenuRemoveSheet = new MenuRemoveSheet();
 
   defaultOptions: object = {
-    'label': '删除',
+    'label': 'ddei.delete',
     'icon': '#icon-remove',
     'models':["DDeiSheet"],
     'disabled': false

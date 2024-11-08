@@ -1,6 +1,6 @@
 export default {
   'id': '303019',
-  'name': '调用',
+  'name': 'ddei.uml.invoke',
   'code': 'inv',
   'desc': '调用',
   'from': '100401',

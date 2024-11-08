@@ -1,6 +1,6 @@
 export default {
   'id': '302013',
-  'name': '扩展',
+  'name': 'ddei.uml.ext',
   'code': 'ext',
   'desc': '扩展',
   'from': '100401',

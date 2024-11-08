@@ -98,6 +98,7 @@ const loadControlByFrom = function (controlOriginDefinies: Map<string, object>, 
     loadControlOthers(controlOriginDefinies, control)
 
     if (fromMenus) {
+      
       if (!control.menus) {
         control.menus = {};
       }
@@ -109,6 +110,7 @@ const loadControlByFrom = function (controlOriginDefinies: Map<string, object>, 
     }
 
     control.menus = fromMenus
+    
     control.attrDefineMap = new Map()
     if (!control.type && control.type != fromControl.type) {
       control.type = fromControl.type

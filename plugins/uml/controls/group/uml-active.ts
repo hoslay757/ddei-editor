@@ -1,6 +1,6 @@
 export default {
   'id': '308',
-  'name': 'UML-活动',
+  'name': 'ddei.uml.groups.active',
   'code': 'uml-active',
   'desc': 'UML2.0中的活动图',
   'subject': 'uml',
@@ -9,93 +9,82 @@ export default {
   'controls': [
     {
       'id': '308001',
-      'name': '活动',
     },
     {
       'id': '301001',
-      'name': '状态',
     },
     {
       'id': '301002',
-      'name': '状态',
+      'name': 'ddei.uml.state',
     },
     {
       'id': '308004',
-      'name': '状态',
     },
     {
       'id': '308005',
-      'name': '对象',
     },
     {
       'id': '308006',
-      'name': '水平交叉',
     },
     {
       'id': '308007',
-      'name': '垂直交叉',
     },
     {
       'id': '308008',
-      'name': '发送信号',
     },
     {
       'id': '308009',
-      'name': '接收信号',
     },
     {
       'id': '308010',
-      'name': '暂停',
+      'name': 'ddei.uml.pause',
     },
     {
       'id': '308011',
-      'name': '接收事件',
     },
     {
       'id': '308012',
-      'name': '点',
     },
     {
       'id': '103005',
-      'name': '注释',
     },
     {
       'id': '308014',
-      'name': '状态容器',
+      'name': 'ddei.uml.statecontainer',
     },
     
     {
       'id': '308016',
-      'name': '水平泳道',
+      'name': 'ddei.uml.hlane',
     },
     {
       'id': '308017',
-      'name': '垂直泳道',
+      'name': 'ddei.uml.vlane',
     },
     {
       'id': '308018',
-      'name': '矩阵',
+      'name': 'ddei.uml.matrix',
     },
 
     {
       'id': '308019',
-      'name': '控制流',
+      'name': 'ddei.uml.controlflow',
     },
     {
       'id': '308020',
-      'name': '控制流',
+      'name': 'ddei.uml.controlflow',
     },
     {
       'id': '102001',
-      'name': '初始节点',
+      'name': 'ddei.uml.initnode',
     },
     {
       'id': '102093',
-      'name': '终止节点',
+      'name': 'ddei.uml.endnode',
     },
     {
       'id': '308023',
-      'name': '分叉节点',
+      'name': 'ddei.uml.forknode',
     }
   ]
 

@@ -1,13 +1,13 @@
 <template>
   <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-choosecontrolgroup" v-if="forceRefresh">
     <div class="content">
-      <div class="title">选择需要的图形</div>
+      <div class="title">{{ editor.i18n('ddei.chooseShapeGroups') }}</div>
       <div class="group">
         <div class="item" @mousemove="expandSubMenu('basic', $event)">
           <svg class="icon groupicon" aria-hidden="true">
             <use xlink:href="#icon-shapes-catalogy"></use>
           </svg>
-          <div class="groupname">基本</div>
+          <div class="groupname">{{ editor.i18n('ddei.basic') }}</div>
           <svg class="icon expand" aria-hidden="true">
             <use xlink:href="#icon-btn-right"></use>
           </svg>
@@ -16,19 +16,20 @@
           <svg class="icon groupicon" aria-hidden="true">
             <use xlink:href="#icon-groups"></use>
           </svg>
-          <div class="groupname">UML</div>
+          <div class="groupname">{{ editor.i18n('ddei.uml') }}</div>
           <svg class="icon expand" aria-hidden="true">
             <use xlink:href="#icon-btn-right"></use>
           </svg>
         </div>
       </div>
     </div>
-    <div class="subcontent" v-show="subGroups?.length > 0" :id="editor?.id + '_ddei-core-dialog-choosecontrolgroup_subcontent'">
+    <div class="subcontent" v-show="subGroups?.length > 0"
+      :id="editor?.id + '_ddei-core-dialog-choosecontrolgroup_subcontent'">
       <div class="group">
         <div class="item" v-for="group in subGroups" @click="chooseGroup(group.id)">
           <input type="checkbox" v-model="group.selected" style="pointer-events: none;" :name="group.id"
             autocomplete="off">
-          <div class="groupname">{{ group.name }}</div>
+          <div class="groupname">{{ editor.i18n(group.name) }}</div>
         </div>
       </div>
     </div>

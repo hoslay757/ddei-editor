@@ -13,6 +13,7 @@ import ReplaceDivDemo  from "./ReplaceDivDemo.vue";
 import HtmlTooltipDemo from "./HtmlTooltipDemo.vue";
 import {controls as ControlDefinesDemo,groups as GroupDefinesDemo} from "./controldefinesdemo"
 import TopMenuViewerDemo from "./TopMenuViewerDemo.vue"
+// import i18nJP from "./langs/ja_JP"
 
 export default defineComponent({
   name: "APP",
@@ -22,16 +23,17 @@ export default defineComponent({
     const options = markRaw({
       // currentLayout: "ddei-core-layout-simple",
       config: {
-        ratio: 1.2, //默认缩放比例为120%
+        // ratio: 1.2, //默认缩放比例为120%
         pixel:2, //调整渲染质量
+       
         // paper:"A6",
         // "mark": "水印文本",
         // EXT_STAGE_WIDTH: false,
         // EXT_STAGE_HEIGHT: false,
         // 自定义控件，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        // controlDefines: ControlDefinesDemo,
+        controlDefines: ControlDefinesDemo,
         // 自定义分组，接收一个object[]。由于定义内容较多，提取到外部，便于维护
-        // groupDefines: GroupDefinesDemo,
+        groupDefines: GroupDefinesDemo,
         initData: {
           controls: [
             // {
@@ -66,16 +68,22 @@ export default defineComponent({
           ]
         }
       },
+      // i18n: {  //国际化配置
+      //   lang: "ja_JP", //强制设定语言，如果不设置则读取浏览器的语言设置
+      //   langs: { //导入自定义语言包，可以覆盖自带的语言包中相同的内容
+      //     "ja_JP": i18nJP
+      //   }
+      // },
       extensions: [
         // //布局的配置
-        // DDeiCoreStandLayout.configuration({
-        //   //配置插件
-        //   // 'top': [],
-        //   'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],// [!code ++]
-        //   // 'bottom': [],
-        //   // 'left': [],
-        //   // 'right': []
-        // }),
+        DDeiCoreStandLayout.configuration({
+          //配置插件
+          // 'top': [],
+          'middle': ['ddei-core-panel-openfilesview', 'ddei-core-panel-canvasview', 'ddei-core-panel-quickcolorview'],// [!code ++]
+          // 'bottom': [],
+          // 'left': [],
+          // 'right': []
+        }),
         DDeiCoreSimpleLayout.configuration({
           other: ['ddei-core-panel-toolbox-simple', 'ddei-core-panel-topmenu-simple'],
           middle: ['ddei-core-panel-canvasview'],

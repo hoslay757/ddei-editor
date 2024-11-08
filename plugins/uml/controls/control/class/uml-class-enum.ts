@@ -1,6 +1,6 @@
 export default {
   'id': '307007',
-  'name': '枚举',
+  'name': 'ddei.uml.enum',
   'code': 'enum',
   'desc': 'UML的枚举',
   'from': '100002',

@@ -1,6 +1,6 @@
 export default {
   'id': 'DDeiLayer',
-  'name': '图层',
+  'name': 'ddei.layerName',
   'code': 'layer',
   'desc': '整体图层的属性',
   'type': 'DDeiLayer',
@@ -19,11 +19,11 @@ export default {
   attrs: [
     {
       'code': 'bg.type',
-      'name': '背景',
+      'name': 'ddei.property.background',
       'desc': '背景的类型',
       'controlType': 'radio',
       'dataType': 'string',
-      'dataSource': [{ 'text': '无', 'value': -1 }, { 'text': '纯色', 'value': 1 }, { 'text': '图片', 'value': 2 }],
+      'dataSource': [{ 'text': 'ddei.property.ds.none', 'value': -1 }, { 'text': 'ddei.property.ds.color', 'value': 1 }, { 'text': 'ddei.property.ds.image', 'value': 2 }],
       'defaultValue': 1,
       'type': 1,
       'cascadeDisplay': { 1: { show: ['bg.color', 'bg.opacity'], hidden: ['bg.image', 'bg.imageMode', 'bg.imageScale', 'bg.imageAlign'] }, 2: { show: ['bg.image', 'bg.imageMode', 'bg.imageScale', 'bg.imageAlign'], hidden: ['bg.color'] }, 0: { hidden: ['bg.opacity', 'bg.color', 'bg.image', 'bg.imageMode', 'bg.imageScale', 'bg.imageAlign'] }, default: { show: ['bg.color', 'bg.opacity'], hidden: ['bg.image', 'bg.imageMode', 'bg.imageScale', 'bg.imageAlign'] } },
@@ -33,7 +33,7 @@ export default {
     },
     {
       'code': 'bg.color',
-      'name': '背景颜色',
+      'name': 'ddei.property.backgroundColor',
       'desc': '背景的颜色',
       'controlType': 'color-combo',
       'dataType': 'string',
@@ -42,7 +42,7 @@ export default {
     },
     {
       'code': 'bg.image',
-      'name': '背景图片',
+      'name': 'ddei.property.backgroundImage',
       'desc': '背景的图片',
       'controlType': 'image',
       'dataType': 'string',
@@ -51,7 +51,7 @@ export default {
     },
     {
       'code': 'bg.opacity',
-      'name': '透明度',
+      'name': 'ddei.property.opacity',
       'desc': '背景的透明度',
       'controlType': 'range',
       'min': 0,
@@ -64,18 +64,18 @@ export default {
     },
     {
       'code': 'bg.imageMode',
-      'name': '模式',
+      'name': 'ddei.property.bgImageMode',
       'desc': '背景的图片的模式',
       'controlType': 'radio',
       'dataType': 'integer',
-      'dataSource': [{ 'text': '原始', 'value': 0 }, { 'text': '缩放', 'value': 1 }, { 'text': '填充', 'value': 2 }],
+      'dataSource': [{ 'text': 'ddei.property.ds.original', 'value': 0 }, { 'text': 'ddei.property.ds.scale', 'value': 1 }, { 'text': 'ddei.property.ds.fill', 'value': 2 }],
       'cascadeDisplay': { 1: { show: ['bg.imageScale', 'bg.imageAlign'] }, 2: { hidden: ['bg.imageScale', 'bg.imageAlign'] }, empty: { hidden: ['bg.imageScale'], show: ['bg.imageAlign'] } },
       'defaultValue': 2,
       'type': 1
     },
     {
       'code': 'bg.imageScale',
-      'name': '缩放比例',
+      'name': 'ddei.property.bgImageScale',
       'desc': '背景的图片的缩放比例',
       'controlType': 'range',
       'min': 0.01,
@@ -88,7 +88,7 @@ export default {
 
     {
       'code': 'bg.imageAlign',
-      'name': '位置',
+      'name': 'ddei.property.bgImagePosition',
       'desc': '背景的图片布局方位',
       'controlType': 'align-type',
       'dataType': 'string',
@@ -102,11 +102,11 @@ export default {
    */
   groups: [
     {
-      name: "背景",
+      name: "ddei.background",
       icon: 'icon-background',
       subGroups: [
         {
-          name: "背景",
+          name: "ddei.background",
           attrs: ["bg.type", "bg.color", "bg.image", "bg.opacity", "bg.imageMode", "bg.imageScale", "bg.imageAlign"]
         },
       ]

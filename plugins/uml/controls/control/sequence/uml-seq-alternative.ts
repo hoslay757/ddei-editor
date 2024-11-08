@@ -1,7 +1,7 @@
 import { ov_link_v_split_point, ov_link_h_split_point } from "ddei-framework";
 export default {
   'id': '303007',
-  'name': '替代片段',
+  'name': 'ddei.uml.alternative',
   'code': 'alternative',
   'desc': '替代片段',
   'from': '100008',
@@ -37,15 +37,15 @@ export default {
       },
       groups: [
         {
-          name: "样式",
+          name: "ddei.style",
           icon: 'icon-fill',
           subGroups: [
             {
-              name: "填充",
+              name: "ddei.fill",
               attrs: ["fill.type", "fill.color", "fill.image", "fill.opacity"]
             },
             {
-              name: "线条",
+              name: "ddei.line",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash", "borderRound"]
             },
             {

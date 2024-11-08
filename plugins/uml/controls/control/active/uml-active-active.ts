@@ -1,6 +1,6 @@
 export default {
   'id': '308001',
-  'name': '活动',
+  'name': 'ddei.uml.active',
   'code': 'act',
   'desc': 'UML的活动节点',
   'from': '100500',

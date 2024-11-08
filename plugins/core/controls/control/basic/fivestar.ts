@@ -1,6 +1,6 @@
 export default {
   'id': '100070',
-  'name': '五角星',
+  'name': 'ddei.control.fivestar',
   'code': 'fivestar',
   'desc': '由极坐标系构造的五角星',
   'from': '100500',

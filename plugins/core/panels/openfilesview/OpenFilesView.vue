@@ -208,14 +208,17 @@ export default {
         let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_ADD_FILE_BEFORE", "ADD_FILE", null, this.editor.ddInstance, null)
         if (rsState != -1) {
           let ddInstance = this.editor.ddInstance;
+          let fileText = this.editor.i18n('ddei.file')
+          let newText = this.editor.i18n('ddei.new')
+          let pageText = this.editor.i18n('ddei.page')
           let file = DDeiFile.loadFromJSON(
             {
-              name: "新建文件_NEW",
-              path: "/新建文件_NEW",
+              name: newText + fileText + "_NEW",
+              path: "/" + newText + fileText + "_NEW",
               sheets: [
                 new DDeiSheet({
-                  name: "页面-1",
-                  desc: "页面-1",
+                  name: pageText + "-1",
+                  desc: pageText + "-1",
                   stage: DDeiStage.initByJSON({ id: "stage_1" }, { currentDdInstance :ddInstance}),
                   active: DDeiActiveType.ACTIVE,
                 }),

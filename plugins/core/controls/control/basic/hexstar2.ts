@@ -1,6 +1,6 @@
 export default {
   'id': '100077',
-  'name': '六芒星',
+  'name': 'ddei.control.hexstar',
   'code': 'hexstar',
   'desc': '由极坐标系构造的六芒星',
   'from': '100500',

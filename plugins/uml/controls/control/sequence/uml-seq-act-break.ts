@@ -1,6 +1,6 @@
 export default {
   'id': '303005',
-  'name': '激活中断',
+  'name': 'ddei.uml.activebreak',
   'code': 'actbreak',
   'desc': '激活中断',
   'from': '100500',

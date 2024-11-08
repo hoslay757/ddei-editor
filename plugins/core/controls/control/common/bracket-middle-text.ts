@@ -1,6 +1,6 @@
 export default {
   'id': '104115',
-  'name': '中括号',
+  'name': 'ddei.control.middle-bracket',
   'code': 'bmt',
   'desc': '左右中括号，带文本编辑',
   'from': '100500',
@@ -101,11 +101,11 @@ export default {
        */
       groups: [
         {
-          name: "样式",
+          name: "ddei.style",
           icon: 'icon-fill',
           subGroups: [
             {
-              name: "线条",
+              name: "ddei.line",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash", "borderRound"]
             },
 

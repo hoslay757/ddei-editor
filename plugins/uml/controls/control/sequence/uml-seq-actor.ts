@@ -1,6 +1,6 @@
 export default {
   'id': '303014',
-  'name': '角色',
+  'name': 'ddei.uml.role',
   'code': 'actor',
   'desc': '角色',
   'from': '103006',

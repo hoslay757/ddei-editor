@@ -1,6 +1,6 @@
 export default {
   'id': '100050',
-  'name': '平行四边形',
+  'name': 'ddei.control.paralgram',
   'code': 'paralgram',
   'desc': '由4个点组成的平行四边形',
   'from': '100500',

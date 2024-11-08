@@ -1,36 +1,35 @@
 <template>
-  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-textalign"
-    v-if="forceRefresh">
+  <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-textalign" v-if="forceRefresh">
     <div class="content">
-      <div class="title">文本对齐</div>
+      <div class="title">{{ editor.i18n('ddei.align') }}</div>
       <div class="group">
         <div class="group_content">
           <div :class="{ 'item': true, 'selected': value == 1 }" @click="changeAlign(1)" @dblclick="ok(1)">
-            左上
+            {{ editor.i18n('ddei.property.ds.pos1') }}
           </div>
           <div :class="{ 'item': true, 'selected': value == 2 }" @click="changeAlign(2)" @dblclick="ok(2)">
-            中上
+            {{ editor.i18n('ddei.property.ds.pos2') }}
           </div>
           <div :class="{ 'item': true, 'selected': value == 3 }" @click="changeAlign(3)" @dblclick="ok(3)">
-            右上
+            {{ editor.i18n('ddei.property.ds.pos3') }}
           </div>
           <div :class="{ 'item': true, 'selected': value == 4 }" @click="changeAlign(4)" @dblclick="ok(4)">
-            左中
+            {{ editor.i18n('ddei.property.ds.pos4') }}
           </div>
           <div :class="{ 'item': true, 'selected': value == 5 }" @click="changeAlign(5)" @dblclick="ok(5)">
-            正中
+            {{ editor.i18n('ddei.property.ds.pos5') }}
           </div>
           <div :class="{ 'item': true, 'selected': value == 6 }" @click="changeAlign(6)" @dblclick="ok(6)">
-            右中
+            {{ editor.i18n('ddei.property.ds.pos6') }}
           </div>
           <div :class="{ 'item': true, 'selected': value == 7 }" @click="changeAlign(7)" @dblclick="ok(7)">
-            左下
+            {{ editor.i18n('ddei.property.ds.pos7') }}
           </div>
           <div :class="{ 'item': true, 'selected': value == 8 }" @click="changeAlign(8)" @dblclick="ok(8)">
-            中下
+            {{ editor.i18n('ddei.property.ds.pos8') }}
           </div>
           <div :class="{ 'item': true, 'selected': value == 9 }" @click="changeAlign(9)" @dblclick="ok(9)">
-            右下
+            {{ editor.i18n('ddei.property.ds.pos9') }}
           </div>
         </div>
       </div>

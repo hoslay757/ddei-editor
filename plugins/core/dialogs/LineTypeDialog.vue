@@ -1,17 +1,17 @@
 <template>
   <div :id="editor?.id + '_' + dialogId" class="ddei-core-dialog-linetype" v-if="forceRefresh">
     <div class="content">
-      <div class="title">线段类型</div>
+      <div class="title">{{ editor.i18n('ddei.lineType') }}</div>
       <div class="group">
         <div class="group_content">
           <div :class="{ 'item': true, 'selected': value == 1 }" @click="changeType(1)" @dblclick="ok(1)">
-            直线
+            {{ editor.i18n('ddei.property.ds.lineType1') }}
           </div>
           <div :class="{ 'item': true, 'selected': value == 2 }" @click="changeType(2)" @dblclick="ok(2)">
-            折线
+            {{ editor.i18n('ddei.property.ds.lineType2') }}
           </div>
           <div :class="{ 'item': true, 'selected': value == 3 }" @click="changeType(3)" @dblclick="ok(3)">
-            曲线
+            {{ editor.i18n('ddei.property.ds.lineType3') }}
           </div>
         </div>
       </div>

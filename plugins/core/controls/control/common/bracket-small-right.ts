@@ -1,6 +1,6 @@
 export default {
   'id': '104101',
-  'name': '小括号',
+  'name': 'ddei.control.small-bracket',
   'code': 'bs',
   'desc': '由极坐标系构造的右小括号，不带任何文本',
   'from': '100500',
@@ -67,11 +67,11 @@ export default {
        */
       groups: [
         {
-          name: "样式",
+          name: "ddei.style",
           icon: 'icon-fill',
           subGroups: [
             {
-              name: "线条",
+              name: "ddei.line",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash", "borderRound"]
             }
           ]

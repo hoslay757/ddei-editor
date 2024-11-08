@@ -1,6 +1,6 @@
 export default {
   'id': '100006',
-  'name': '椭圆',
+  'name': 'ddei.control.ellipse',
   'code': 'ellipse',
   'desc': '由极坐标系构造的椭圆形',
   'from': '100500',

@@ -1,6 +1,6 @@
 export default {
   'id': '304004',
-  'name': '组件',
+  'name': 'ddei.uml.component',
   'code': 'comp',
   'desc': 'UML的组件',
   'from': '305001',

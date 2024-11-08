@@ -1,6 +1,6 @@
 export default {
   'id': '100121',
-  'name': '左箭头',
+  'name': 'ddei.control.arrow-left',
   'code': 'arr-l',
   'desc': '指向左边的箭头',
   'from': '100120',

@@ -1,6 +1,6 @@
 export default {
   'id': '103005',
-  'name': '注释',
+  'name': 'ddei.control.comment',
   'code': 'comment',
   'desc': '注释备注',
   'from': '100500',

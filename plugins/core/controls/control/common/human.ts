@@ -1,6 +1,6 @@
 export default {
   'id': '103001',
-  'name': '人',
+  'name': 'ddei.control.human',
   'code': 'human',
   'desc': '人形图标',
   'from': '100500',
@@ -13,6 +13,10 @@ export default {
     cIndex: 1,
     //采样信息
     sample: {
+      //依附图形的初始化配置，如果产生依附图形，则会在配置的位置生成
+      depPos:{
+        type:8
+      },
       //一圈采样次数
       loop: 4,
       //半径距离
@@ -94,15 +98,15 @@ export default {
     ext: {
       groups: [
         {
-          name: "样式",
+          name: "ddei.style",
           icon: 'icon-fill',
           subGroups: [
             {
-              name: "填充",
+              name: "ddei.fill",
               attrs: ["fill.type", "fill.color", "fill.image", "fill.opacity"]
             },
             {
-              name: "线条",
+              name: "ddei.line",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash"]
             },
 

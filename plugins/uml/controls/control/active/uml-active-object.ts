@@ -1,6 +1,6 @@
 export default {
   'id': '308005',
-  'name': '对象',
+  'name': 'ddei.uml.object',
   'code': 'act',
   'desc': 'UML的对象节点',
   'from': '102010',

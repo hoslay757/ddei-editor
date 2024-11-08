@@ -1,6 +1,6 @@
 export default {
   'id': '100007',
-  'name': '矩形边框',
+  'name': 'ddei.control.rectangle',
   'code': 'rect',
   'desc': '带边框的矩形',
   'from': '100002',

@@ -1,6 +1,6 @@
 export default {
   'id': '102050',
-  'name': '循环界限',
+  'name': 'ddei.control.looparea',
   'code': 'fla',
   'desc': '流程的循环界限',
   'from': '100500',

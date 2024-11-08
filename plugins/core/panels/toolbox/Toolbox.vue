@@ -8,7 +8,7 @@
       </svg>
       <div class="header-3" v-if="custom"></div>
       <div class="ddei-core-panel-toolbox-header-morecontrol" v-if="custom" @click="showChooseDialog($event)">
-        <div class="header-4">更多图形</div>
+        <div class="header-4">{{editor.i18n('ddei.more')}}</div>
         <div class="header-3"></div>
         <svg class="icon icon2" aria-hidden="true">
           <use xlink:href="#icon-btn-down"></use>
@@ -21,11 +21,11 @@
     </div>
     <div class="ddei-core-panel-toolbox-searchbox" v-if="search">
       <div class="ddei-core-panel-toolbox-searchbox-group">
-        <svg class="icon" aria-hidden="true" @click="searchControl" title="搜索">
+        <svg class="icon" aria-hidden="true" @click="searchControl" :title="editor.i18n('ddei.search')">
           <use xlink:href="#icon-search"></use>
         </svg>
-        <input v-model="searchText" class="input" @keypress="searchInputEnter" placeholder="搜索控件" autocomplete="off"
-          name="ddei_toolbox_search_input">
+        <input v-model="searchText" class="input" @keypress="searchInputEnter" :placeholder="editor.i18n('ddei.search')"
+          autocomplete="off" name="ddei_toolbox_search_input">
       </div>
     </div>
 
@@ -35,9 +35,9 @@
         <div
           :class="{ 'ddei-core-panel-toolbox-groups-group-box': true, 'ddei-core-panel-toolbox-groups-group--expanded': group.expand }"
           @click="groupBoxExpand(group)">
-          <span class="title">{{ group.name }}</span>
+          <span class="title">{{ editor.i18n(group.name) }}</span>
           <svg v-if="custom && !group.cannotClose" class="icon close" aria-hidden="true" @click="groupBoxClose(group)"
-            title="关闭">
+            :title="editor.i18n('ddei.close') ">
             <use xlink:href="#icon-close"></use>
           </svg>
         </div>
@@ -46,7 +46,7 @@
             @mousedown="createControlPrepare(control, $event)" v-for="control in group.controls">
             <img class="icon" v-if="!control.icon" :src="editor?.icons[control.id]" />
             <div v-if="control.icon" v-html="control.icon"></div>
-            <div class="text">{{ control.name }}</div>
+            <div class="text">{{ editor.i18n(control.name) }}</div>
           </div>
         </div>
       </div>
@@ -66,8 +66,6 @@ import {DDeiEnumControlState} from "ddei-framework";
 import { Matrix3 } from "three";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 import {DDeiUtil} from "ddei-framework";
-import {DDeiRectContainer} from "ddei-framework";
-import {DDeiLineLink} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import { clone } from 'lodash'
 import {DDeiEnumOperateState} from "ddei-framework";

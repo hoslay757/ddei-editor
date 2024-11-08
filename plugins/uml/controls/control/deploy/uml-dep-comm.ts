@@ -1,6 +1,6 @@
 export default {
   'id': '304018',
-  'name': '通信',
+  'name': 'ddei.uml.communication',
   'code': 'comm',
   'desc': '通信',
   'from': '100401',

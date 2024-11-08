@@ -1,6 +1,6 @@
 export default {
   'id': '306',
-  'name': 'UML-协作',
+  'name': 'ddei.uml.groups.cooperate',
   'code': 'uml-cooperate',
   'desc': 'UML2.0中的协作图',
   'orderNo': 306,
@@ -9,40 +9,31 @@ export default {
   'controls': [
     {
       'id': '308005',
-      'name': '对象',
     },
     {
       'id': '303014',
-      'name': '角色',
 
     },
     {
       'id': '306003',
-      'name': '消息',
     },
     {
       'id': '306004',
-      'name': '消息',
     },
     {
       'id': '306005',
-      'name': '消息',
     },
     {
       'id': '306006',
-      'name': '消息',
     },
     {
       'id': '306007',
-      'name': '消息',
     },
     {
       'id': '306008',
-      'name': '消息',
     },
     {
       'id': '306009',
-      'name': '消息',
     }
   ]
 

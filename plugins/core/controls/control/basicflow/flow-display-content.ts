@@ -1,6 +1,6 @@
 export default {
   'id': '102056',
-  'name': '显示内容',
+  'name': 'ddei.control.display',
   'code': 'fdc',
   'desc': '显示内容',
   'from': '100500',

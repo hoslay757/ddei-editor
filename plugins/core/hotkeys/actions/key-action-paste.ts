@@ -11,7 +11,7 @@ import { Matrix3 } from 'three';
 import {DDeiEnumOperateType} from "ddei-framework";
 import {DDeiPolygon} from "ddei-framework";
 import {DDeiLink} from "ddei-framework";
-import {DDeiLineLink} from "ddei-framework";
+import {DDeiModelLink} from "ddei-framework";
 import { DDeiEditorState, DDeiEditorUtil } from "ddei-framework";
 /**
  * 键行为:粘贴
@@ -1050,16 +1050,20 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
             item.exPvs = appendExPvs[item.id]
           }
           //处理linkmodels
-          if (item.baseModelType == 'DDeiLine') {
-            let linkModels: Map<string, DDeiLineLink> = new Map<string, DDeiLineLink>();
+          if (item.linkModels) {
+            let linkModels: Map<string, DDeiModelLink> = new Map<string, DDeiModelLink>();
             for (let key in item.linkModels) {
+              
               let lkItem = item.linkModels[key];
               if (lkItem?.dmid) {
                 let dm = oldIdMap[lkItem.dmid]
-                lkItem.dm = dm
-                lkItem.line = item;
-                let lm = new DDeiLineLink(lkItem);
-                linkModels.set(dm.id, lm)
+                if (dm){
+                  lkItem.dm = dm
+                  lkItem.depModel = item;
+                  dm.depModel = item;
+                  let lm = new DDeiModelLink(lkItem);
+                  linkModels.set(dm.id, lm)
+                }
               }
             }
             item.linkModels = linkModels

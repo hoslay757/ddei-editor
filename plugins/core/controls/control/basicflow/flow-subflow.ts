@@ -1,6 +1,6 @@
 export default {
   'id': '102040',
-  'name': '子流程',
+  'name': 'ddei.control.subflow',
   'code': 'subflow',
   'desc': '流程的子流程节点',
   'from': '100500',

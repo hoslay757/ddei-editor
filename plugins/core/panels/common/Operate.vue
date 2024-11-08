@@ -5,46 +5,49 @@
       <div class="part">
         <div
           :class="{ 'button-v--selected': editor?.ddInstance?.stage?.copyMode == 'cut', 'button-v': editor?.ddInstance?.stage?.selectedModels?.size > 0, 'button-v--disabled': !canEdit || editor?.ddInstance?.stage?.selectedModels?.size == 0 || !editor?.ddInstance?.stage?.selectedModels }"
-          title="剪切" @click="canEdit && editor?.ddInstance?.stage?.selectedModels?.size > 0 && execShearAction($event)">
+          :title="editor.i18n('ddei.cut')"
+          @click="canEdit && editor?.ddInstance?.stage?.selectedModels?.size > 0 && execShearAction($event)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-cut"></use>
           </svg>
-          <div class="text">剪切</div>
+          <div class="text">{{editor.i18n('ddei.cut')}}</div>
         </div>
       </div>
 
       <div class="part">
         <div
           :class="{ 'button-v--selected': editor?.ddInstance?.stage?.copyMode == 'copy', 'button-v': editor?.ddInstance?.stage?.selectedModels?.size > 0, 'button-v--disabled': editor?.ddInstance?.stage?.selectedModels?.size == 0 || !editor?.ddInstance?.stage?.selectedModels }"
-          title="复制" @click="editor?.ddInstance?.stage?.selectedModels?.size > 0 && execCopyAction($event)">
+          :title="editor.i18n('ddei.new')"
+          @click="editor?.ddInstance?.stage?.selectedModels?.size > 0 && execCopyAction($event)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-copy-file"></use>
           </svg>
-          <div class="text">复制</div>
+          <div class="text">{{ editor.i18n('ddei.copy') }}</div>
         </div>
       </div>
       <div class="part">
-        <div :class="{ 'button-v': hasClipData, 'button-v--disabled': !canEdit || !hasClipData }" title="粘贴">
+        <div :class="{ 'button-v': hasClipData, 'button-v--disabled': !canEdit || !hasClipData }"
+          :title="editor.i18n('ddei.paste') ">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-paste"></use>
           </svg>
-          <div class="text">粘贴</div>
+          <div class="text">{{ editor.i18n('ddei.paste') }}</div>
         </div>
       </div>
       <div class="part">
         <div
           :class="{ 'button-v--selected': canEdit && editor?.ddInstance?.stage?.brushData, 'button-v': canEdit && displayBrush, 'button-v--disabled': !canEdit || !displayBrush }"
-          title="格式刷"
+          :title="editor.i18n('ddei.brush') "
           @click="canEdit && editor?.ddInstance?.stage?.selectedModels?.size == 1 && execBrushAction($event)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-brush"></use>
           </svg>
-          <div class="text">格式刷</div>
+          <div class="text">{{ editor.i18n('ddei.brush') }}</div>
         </div>
       </div>
     </div>
     <div class="tail">
-      剪切板
+      {{editor.i18n('ddei.cutBoard')}}
     </div>
   </div>
 </template>

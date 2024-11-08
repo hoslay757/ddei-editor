@@ -1,6 +1,6 @@
 export default {
   'id': '308009',
-  'name': '接收信号',
+  'name': 'ddei.uml.recsignal',
   'code': 'uarm',
   'desc': '接收信号',
   'from': '100500',

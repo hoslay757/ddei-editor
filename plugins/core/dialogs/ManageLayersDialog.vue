@@ -1,27 +1,27 @@
 <template>
   <div :id="editor?.id+'_'+dialogId" v-if="forceRefresh && allowOpenMultLayers" class="ddei-core-dialog-managerlayers">
     <div class="content">
-      <div class="title">图层</div>
+      <div class="title">{{ editor.i18n('ddei.layerName') }}</div>
       <div class="group">
         <div class="group_content">
           <div class="item" @click="createNewLayer(0)" v-show="allowAddLayer">
-            <span style="grid-column:1/8;">新建图层</span>
+            <span style="grid-column:1/8;">{{ editor.i18n('ddei.newLayer') }}</span>
             <svg class="icon extbtn" aria-hidden="true">
               <use xlink:href="#icon-add-layer"></use>
             </svg>
           </div>
           <div :class="{ 'item': true, 'current': currentStage?.layerIndex === index }"
             v-for="(layer, index) in currentStage?.layers" :draggable="allowEditLayes"
-            @dragstart="layerDragStart(index, $event)" @dragover="layerDragOver($event)"
-            @drop="layerDragDrop($event)" @dragleave="layerDragCancel($event)">
+            @dragstart="layerDragStart(index, $event)" @dragover="layerDragOver($event)" @drop="layerDragDrop($event)"
+            @dragleave="layerDragCancel($event)">
             <span style="grid-column:1/8;" @dblclick="allowEditLayes && startChangeLayerName(layer, $event)">{{
-              layer.name
-              ? layer.name :
-              '图层' }}</span>
+              layer.name ? layer.name : editor.i18n('ddei.layerName') }}
+            </span>
             <svg class="icon" aria-hidden="true" v-show="allowEditLayes" @click="removeLayer(index)">
               <use xlink:href="#icon-remove"></use>
             </svg>
-            <span style="grid-column:1/4;font-weight:normal">形状:{{ layer.modelNumber }}</span>
+            <span style="grid-column:1/4;font-weight:normal">{{ editor.i18n('ddei.shapes') }}:{{ layer.modelNumber
+              }}</span>
             <svg class="icon" aria-hidden="true" @click="createNewLayer(index)" v-show="allowAddLayer">
               <use xlink:href="#icon-add-layer"></use>
             </svg>

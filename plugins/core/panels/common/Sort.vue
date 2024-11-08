@@ -9,7 +9,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-position"></use>
           </svg>
-          <div class="text">位置</div>
+          <div class="text">{{ editor.i18n('ddei.position') }}</div>
           <svg class="icon extbtn" aria-hidden="true">
             <use xlink:href="#icon-btn-down"></use>
           </svg>
@@ -22,7 +22,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-align"></use>
           </svg>
-          <div class="text">对齐</div>
+          <div class="text">{{ editor.i18n('ddei.align') }}</div>
           <svg class="icon extbtn" aria-hidden="true">
             <use xlink:href="#icon-btn-down"></use>
           </svg>
@@ -35,7 +35,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-merge1"></use>
           </svg>
-          <div class="text">组合</div>
+          <div class="text">{{ editor.i18n('ddei.combina') }}</div>
           <svg class="icon extbtn" aria-hidden="true">
             <use xlink:href="#icon-btn-down"></use>
           </svg>
@@ -49,14 +49,14 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-flip"></use>
           </svg>
-          <div class="text">翻转</div>
+          <div class="text">{{ editor.i18n('ddei.flip') }}</div>
           <svg class="icon extbtn" aria-hidden="true">
             <use xlink:href="#icon-btn-down"></use>
           </svg>
         </div>
       </div>
     </div>
-    <div class="tail">排列</div>
+    <div class="tail">{{ editor.i18n('ddei.sortAndAlign') }}</div>
   </div>
 </template>
 <script lang="ts">

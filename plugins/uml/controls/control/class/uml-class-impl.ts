@@ -1,6 +1,6 @@
 export default {
   'id': '307020',
-  'name': '实现',
+  'name': 'ddei.uml.implement',
   'code': 'impl',
   'desc': '实现关系',
   'from': '100401',

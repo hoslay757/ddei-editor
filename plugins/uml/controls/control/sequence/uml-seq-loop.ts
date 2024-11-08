@@ -1,7 +1,7 @@
 import { ov_link_v_split_point, ov_link_h_split_point } from "ddei-framework";
 export default {
   'id': '303008',
-  'name': '循环片段',
+  'name': 'ddei.uml.loopnative',
   'code': 'loop',
   'desc': '循环片段',
   'from': '100008',
@@ -29,15 +29,15 @@ export default {
       },
       groups: [
         {
-          name: "样式",
+          name: "ddei.style",
           icon: 'icon-fill',
           subGroups: [
             {
-              name: "填充",
+              name: "ddei.fill",
               attrs: ["fill.type", "fill.color", "fill.image", "fill.opacity"]
             },
             {
-              name: "线条",
+              name: "ddei.line",
               attrs: ["border.type", "border.color", "borderOpacity", "borderWidth", "borderDash", "borderRound"]
             },
             {

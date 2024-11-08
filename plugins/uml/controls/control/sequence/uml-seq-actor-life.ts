@@ -1,6 +1,6 @@
 export default {
   'id': '303015',
-  'name': '角色生命线',
+  'name': 'ddei.uml.rolelife',
   'code': 'actor',
   'desc': '角色生命线',
   'from': '100000',

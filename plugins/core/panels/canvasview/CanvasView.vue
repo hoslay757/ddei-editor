@@ -77,7 +77,28 @@ export default {
         middleCanvasPos.left + 5 <= evt.clientX &&
         middleCanvasPos.left + middleCanvas.offsetWidth - 5 >= evt.clientX
       ) {
-        this.editor?.hotkeys['ddei-core-keyaction-quickedit-start']?.action(evt,this.editor.ddInstance);
+        let ddInstance = this.editor.ddInstance;
+        let stage = ddInstance.stage
+        //判断是否在某个控件上
+        let ex = evt.offsetX;
+        let ey = evt.offsetY;
+        ex /= window.remRatio
+        ey /= window.remRatio
+
+        ex -= stage.wpv.x;
+        ey -= stage.wpv.y;
+
+        let stageRatio = stage.getStageRatio()
+        let ex2 = ex / stageRatio
+        let ey2 = ey / stageRatio
+
+        let operateControls = DDeiAbstractShape.findBottomModelsByArea(stage.layers[stage.layerIndex], ex2, ey2, true, true);
+        if (operateControls != null && operateControls.length > 0) {
+          let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_DBL_CLICK", "DBL_CLICK", { models: operateControls, ex: ex, ey: ey }, ddInstance, null)
+          if (rsState == 0 || rsState == 1) {
+            this.editor?.hotkeys['ddei-core-keyaction-quickedit-start']?.action(evt,this.editor.ddInstance);
+          }
+        }
       }
     },
     /**
