@@ -306,7 +306,7 @@ export default {
       let returnControls = []
       if(controls?.length > 0){
         for(let i = 0;i < controls.length;i++){
-          if (controls[i].baseModelType != 'DDeiLine'){
+          if (controls[i].baseModelType != 'DDeiLine' && controls[i].depModel != model){
             let define = DDeiUtil.getControlDefine(controls[i])
             let filterMethod = null
             if (define && define.filters && define.filters["LINE_OBI_FILTER"]) {
