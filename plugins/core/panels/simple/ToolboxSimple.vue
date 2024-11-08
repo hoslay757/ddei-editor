@@ -28,8 +28,6 @@ import {DDeiEditor} from "ddei-framework";
 import {DDeiEnumOperateType} from "ddei-framework";
 import {DDei} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
-import { cloneDeep, trim } from "lodash";
-import {DDeiAbstractShape} from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
 import {DDeiEnumControlState} from "ddei-framework";
 import { Matrix3 } from "three";

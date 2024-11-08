@@ -17,8 +17,8 @@
       {{ editor.i18n('ddei.download') }}
     </div>
     <div class="item" v-for="menu in options?.items">
-      <div v-if="menu && !menu.viewer && menu.id" @click="internalAction(menu.id,$event)">{{ menu.name }}</div>
-      <div v-if="menu && !menu.viewer && !menu.id" @click="menu.action(editor,$event)">{{ menu.name }}</div>
+      <div v-if="menu && !menu.viewer && menu.id" @click="internalAction(menu.id,$event)">{{ editor.i18n(menu.name) }}</div>
+      <div v-if="menu && !menu.viewer && !menu.id" @click="menu.action(editor,$event)">{{ editor.i18n(menu.name) }}</div>
       <component v-if="menu && menu.viewer" :is="menu.viewer" :options="options" :editor="editor"></component>
     </div>
 
