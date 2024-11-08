@@ -1,6 +1,6 @@
 {
   "name": "ddei-editor",
-  "version": "1.2.42-9",
+  "version": "1.2.42",
   "private": false,
   "type": "module",
   "author": "hoslay <3697355039@qq.com>",
@@ -16,7 +16,7 @@
     "插件扩展",
     "在线设计器"
   ],
-  "homepage": "https://www.ddei.top",
+  "homepage": "http://docs.ddei.top",
   "repository": {
     "type": "git",
     "url": "https://gitee.com/hoslay/ddei-editor.git"
@@ -49,7 +49,7 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
-    "ddei-framework": "file:///Users/hoslay/work/ddei/ddei-framework/ddei-framework-1.2.42-9.tgz"
+    "ddei-framework": "^1.2.42"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.0",
