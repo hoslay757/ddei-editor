@@ -215,7 +215,7 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
                     
                     let controlDefine = DDeiUtil.getControlDefine(dataJson)
                     for (let i in controlDefine?.define) {
-                      dataJson[i] = controlDefine.define[i];
+                      dataJson[i] = cloneDeep(controlDefine.define[i]);
                     }
                     dataJson["id"] = "lsm_" + (stage.idIdx++)
                     dataJson["width"] = 80

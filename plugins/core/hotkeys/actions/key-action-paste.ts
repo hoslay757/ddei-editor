@@ -13,6 +13,7 @@ import {DDeiPolygon} from "ddei-framework";
 import {DDeiLink} from "ddei-framework";
 import {DDeiModelLink} from "ddei-framework";
 import { DDeiEditorState, DDeiEditorUtil } from "ddei-framework";
+import {cloneDeep} from "lodash"
 /**
  * 键行为:粘贴
  * 粘贴剪切板内容
@@ -315,7 +316,7 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
       });
 
       for (let i in ccDefine?.define) {
-        dataJson[i] = ccDefine?.define[i];
+        dataJson[i] = cloneDeep(ccDefine?.define[i]);
       }
       dataJson.text = textData;
       dataJson.border = { type: 0 };
@@ -1172,7 +1173,7 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
 
     let ccDefine = DDeiUtil.getControlDefine(dataJson)
     for (let i in ccDefine?.define) {
-      dataJson[i] = ccDefine?.define[i];
+      dataJson[i] = cloneDeep(ccDefine?.define[i]);
     }
     dataJson.text = "";
     dataJson.border = { type: 0 };
