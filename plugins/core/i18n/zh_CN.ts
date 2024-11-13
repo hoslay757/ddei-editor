@@ -62,8 +62,8 @@ export default {
     wholePage: "整页",
     precent: "百分比",
     chooseShapeGroups: "选择图形",
-    basic:"基本",
-    uml:"UML",
+    basicSubject:"基本",
+    umlSubject:"UML",
     brush:"格式刷",
     startPoint: "起点",
     endPoint: "终点",
@@ -80,6 +80,7 @@ export default {
     mark: '水印',
     paper: '纸张',
     propertyName:"属性",
+    searchResult: "搜索结果",
     property:{
       id:'id',
       code:'编码',
@@ -141,6 +142,8 @@ export default {
       bgImagePosition: '位置',
       code001: "编码001",
       linePointType:"端点类型",
+
+      
       
       ds:{
         none: '无',

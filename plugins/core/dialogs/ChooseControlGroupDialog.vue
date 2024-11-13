@@ -7,7 +7,7 @@
           <svg class="icon groupicon" aria-hidden="true">
             <use xlink:href="#icon-shapes-catalogy"></use>
           </svg>
-          <div class="groupname">{{ editor.i18n('ddei.basic') }}</div>
+          <div class="groupname">{{ editor.i18n('ddei.basicSubject') }}</div>
           <svg class="icon expand" aria-hidden="true">
             <use xlink:href="#icon-btn-right"></use>
           </svg>
@@ -16,7 +16,7 @@
           <svg class="icon groupicon" aria-hidden="true">
             <use xlink:href="#icon-groups"></use>
           </svg>
-          <div class="groupname">{{ editor.i18n('ddei.uml') }}</div>
+          <div class="groupname">{{ editor.i18n('ddei.umlSubject') }}</div>
           <svg class="icon expand" aria-hidden="true">
             <use xlink:href="#icon-btn-right"></use>
           </svg>

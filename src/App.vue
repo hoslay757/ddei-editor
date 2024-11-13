@@ -21,11 +21,11 @@ export default defineComponent({
   data() {
     
     const options = markRaw({
-      currentLayout: "ddei-core-layout-simple",
+      // currentLayout: "ddei-core-layout-simple",
       config: {
-        // ratio: 1.2, //默认缩放比例为120%
+        ratio: 1.2, //默认缩放比例为120%
         pixel:2, //调整渲染质量
-       
+        // readonly:1,
         // paper:"A6",
         // "mark": "水印文本",
         // EXT_STAGE_WIDTH: false,
@@ -49,7 +49,7 @@ export default defineComponent({
             // }
               {
                 id: "act_1",
-              model: "103011",
+              model: "103001",
                 type: "emp_1",
                 text: "第一步",
                 border: { color: "yellow", width: 2 },

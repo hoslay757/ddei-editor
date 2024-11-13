@@ -196,6 +196,7 @@ export default {
                 startSita = 180
                 endSita = 0
               }
+              
               controls[0].setPosition({x:x,y:y})
               //创建连线
               let smodel ={ id: model.id, x: sx, y: sy, rate: 0.5, sita: startSita }

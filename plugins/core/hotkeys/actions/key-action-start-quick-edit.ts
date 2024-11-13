@@ -10,7 +10,7 @@ import {DDeiEditorState} from "ddei-framework";
 import {DDeiKeyAction} from "ddei-framework";
 import {DDeiEnumOperateState} from "ddei-framework";
 import {DDeiAbstractShape} from "ddei-framework";
-
+import { cloneDeep } from 'lodash';
 /**
  * 键行为:开启快捷编辑
  * 开启快捷编辑
@@ -271,11 +271,6 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
                     editor.quickEditorModel = model;
                   }
 
-                
-                 
-                  
-
-                  
                   //获取控件所占区域
                   model = DDeiAbstractShape.findBottomComponseByArea(model, ex, ey);
 

@@ -392,13 +392,13 @@ export default {
       else {
         let searchControls = [];
         let gp = {};
-        gp.name = "搜索结果";
+        gp.name = this.editor.i18n("ddei.searchResult");
         this.searchOriginGroups.forEach((group) => {
           if (group.controls) {
             group.controls.forEach((control) => {
               if (
                 control.code.indexOf(text) != -1 ||
-                control.name.indexOf(text) != -1
+                this.editor.i18n(control.name).indexOf(text) != -1
               ) {
                 searchControls.push(control);
               }

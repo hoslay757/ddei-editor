@@ -17,6 +17,10 @@ export default {
       depPos: {
         type: 8
       },
+      //一圈
+      depProps: {
+        "8": "text"   //映射属性
+      },
       //一圈采样次数
       loop: 4,
       //半径距离
@@ -51,6 +55,9 @@ export default {
     },
     iconPos: {
       dy: 20
+    },
+    depProps: {
+      "8": "text"   //映射属性
     },
     //组合控件
     composes: [
@@ -98,7 +105,18 @@ export default {
 
 
           ]
-        }
+        },
+        {
+          name: "ddei.data",
+          icon: 'icon-edit-properies',
+          subGroups: [
+            {
+              name: "ddei.basic",
+              attrs: ["code", "text"]
+            },
+
+          ]
+        },
       ]
     }
   }

@@ -17,6 +17,9 @@ export default {
       depPos:{
         type:8
       },
+      depProps: {
+        "8": "text"   //映射属性
+      },
       //一圈采样次数
       loop: 4,
       //半径距离
@@ -112,7 +115,18 @@ export default {
 
 
           ]
-        }
+        },
+        {
+          name: "ddei.data",
+          icon: 'icon-edit-properies',
+          subGroups: [
+            {
+              name: "ddei.basic",
+              attrs: ["code", "text"]
+            },
+
+          ]
+        },
       ]
     }
   }

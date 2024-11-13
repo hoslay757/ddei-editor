@@ -6,30 +6,17 @@ export default {
   'from': '103006',
 
   'define': {
-    //初始化时合并
-    initMerges: [0],
+    text: "Actor",
     iconPos: {
       dy: -10
-    }
-  },
-  //其它同时创建的平级控件
-  others: [
-    {
-      'id': '100002',
-      'define': {
-        width: 100,
-        height: 25,
-        font: {
-          size: 16,
-        },
-        text: "Actor",
-        fill: { type: 0 },
-        border: { type: 0 },
-        initCPV: {
-          x: 0, y: 60
-        }
-      }
     },
-  ]
+    depPos: {
+      type: 8
+    },
+    //一圈
+    depProps: {
+      "8": "text"   //映射属性
+    },
+  }
 
 }

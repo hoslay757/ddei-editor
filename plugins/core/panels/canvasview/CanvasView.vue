@@ -455,6 +455,23 @@ export default {
                 );
               }
             }
+            this.editor.creatingControls.forEach(model => {
+              let controlDefine = this.editor.controls.get(model.modelCode);
+              //如果存在配置，则直接采用配置，如果不存在配置则读取文本区域
+              if (controlDefine?.define?.sample?.depProps) {
+                let depProps = controlDefine.define.sample.depProps;
+
+                //判断是修改的哪个属性
+                for (let type in depProps) {
+                  let property = depProps[type]
+                  let modelPropValue = model[property];
+                  if (modelPropValue) {
+                    DDeiUtil.createDepLinkModel(model, modelPropValue, type)
+                  }
+                }
+              }
+              model.refreshLinkModels()
+            });
             //移除其他选中
             this.editor.bus.push(
               DDeiEnumBusCommandType.CancelCurLevelSelectedModels,
