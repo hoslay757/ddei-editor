@@ -238,7 +238,6 @@ export default {
      */
     createControlPrepare(group, e) {
       let control = group.currentControl ? group.currentControl : group.controls?.length > 0 ? group.controls[0] : null
-      
 
       let editMode = group.editMode
       //获取当前实例
@@ -458,23 +457,23 @@ export default {
           if ((layer.display == 0 && !layer.tempDisplay) || layer.lock) {
             return;
           }
-          let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { models: [control] }, ddInstance, e)
-          if (rsState == 0 || rsState == 1) {
-            let controlInitJSON = DDeiEditorUtil.getModelInitJSON(this.editor.ddInstance, null, [{ model: control.id }])
+          let controlInitJSON = DDeiEditorUtil.getModelInitJSON(this.editor.ddInstance, null, [{ model: control.id }])
             if (controlInitJSON){
               let models = this.editor.addControls(controlInitJSON)
-              let pushDatas = []
-              models.forEach((model, key) => {
-                pushDatas.push({ id: model.id, value: DDeiEnumControlState.SELECTED });
-              });
-              this.editor.ddInstance?.bus?.push(DDeiEnumBusCommandType.CancelCurLevelSelectedModels, null, e);
-              this.editor.ddInstance?.bus?.push(DDeiEnumBusCommandType.ModelChangeSelect, pushDatas, e);
-              this.editor.ddInstance?.bus?.push(DDeiEnumBusCommandType.StageChangeSelectModels);
-              this.editor.bus.executeAll()
-              this.editor.changeState(DDeiEditorState.DESIGNING);
-              DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_AFTER", DDeiEnumOperateType.CREATE, { models: models }, ddInstance, e)
-            }
-            
+              let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_BEFORE", DDeiEnumOperateType.CREATE, { models: models }, ddInstance, e)
+              if (rsState == 0 || rsState == 1) {
+                let pushDatas = []
+                models.forEach((model, key) => {
+                  pushDatas.push({ id: model.id, value: DDeiEnumControlState.SELECTED });
+                });
+                this.editor.ddInstance?.bus?.push(DDeiEnumBusCommandType.CancelCurLevelSelectedModels, null, e);
+                this.editor.ddInstance?.bus?.push(DDeiEnumBusCommandType.ModelChangeSelect, pushDatas, e);
+                this.editor.ddInstance?.bus?.push(DDeiEnumBusCommandType.StageChangeSelectModels);
+                this.editor.bus.executeAll()
+                this.editor.changeState(DDeiEditorState.DESIGNING);
+                DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_CREATE_AFTER", DDeiEnumOperateType.CREATE, { models: models }, ddInstance, e)
+              }
+          
           }
         }
       }
