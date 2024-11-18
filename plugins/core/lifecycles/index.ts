@@ -27,6 +27,10 @@ class DDeiCoreLifeCycles extends DDeiPluginBase {
     core.lifecyclies = core.lifecyclies.configuration(options, true)
     return core;
   }
+
+  static modify(fn) {
+    return DDeiCoreLifeCycles.defaultIns.modify(fn)
+  }
 }
 
 export {DDeiCoreLifeCycles}

@@ -41,6 +41,10 @@ class DDeiCoreTextAreaPropEditor extends DDeiPluginBase{
     }
     return DDeiCoreTextAreaPropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreTextAreaPropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreTextAreaPropEditor

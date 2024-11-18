@@ -66,6 +66,10 @@ class DDeiKeyActionCopy extends DDeiKeyAction {
     return DDeiKeyActionCopy;
   }
 
+  static modify(fn) {
+    return DDeiKeyActionCopy.defaultIns.modify(fn)
+  }
+
 
   // ============================ 方法 ===============================
   async action(evt: Event, ddInstance: DDei, editor: DDeiEditor): boolean {

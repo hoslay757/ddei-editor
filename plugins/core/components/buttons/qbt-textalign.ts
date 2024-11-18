@@ -37,6 +37,10 @@ class DDeiCoreEditTextAlignButton extends DDeiPluginBase{
     }
     return DDeiCoreEditTextAlignButton;
   }
+
+  static modify(fn) {
+    return DDeiCoreEditTextAlignButton.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreEditTextAlignButton

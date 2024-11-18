@@ -37,6 +37,10 @@ class DDeiCoreChangeRatioDialog extends DDeiPluginBase{
     }
     return DDeiCoreChangeRatioDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreChangeRatioDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreChangeRatioDialog

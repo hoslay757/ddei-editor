@@ -55,6 +55,10 @@ class DDeiKeyActionCompose extends DDeiKeyAction {
     }
     return DDeiKeyActionCompose;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionCompose.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei): void {
     //修改当前操作控件坐标

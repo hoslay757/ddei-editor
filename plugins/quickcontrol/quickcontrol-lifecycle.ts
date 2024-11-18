@@ -286,6 +286,10 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
     }
     return DDeiExtSearchLifeCycle;
   }
+
+  static modify(fn) {
+    return DDeiExtSearchLifeCycle.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiExtSearchLifeCycle

@@ -41,6 +41,10 @@ class DDeiCoreFileOperatePanel extends DDeiPluginBase{
     }
     return DDeiCoreFileOperatePanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreFileOperatePanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreFileOperatePanel

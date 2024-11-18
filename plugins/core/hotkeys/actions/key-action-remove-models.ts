@@ -53,6 +53,10 @@ class DDeiKeyActionRemoveModels extends DDeiKeyAction {
     return DDeiKeyActionRemoveModels;
   }
 
+  static modify(fn) {
+    return DDeiKeyActionRemoveModels.defaultIns.modify(fn)
+  }
+
   isActive(element: object): boolean {
     if (!element) {
       return true

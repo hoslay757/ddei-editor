@@ -41,6 +41,10 @@ class DDeiCoreLayouts extends DDeiPluginBase{
     }
     return layouts;
   }
+
+  static modify(fn) {
+    return DDeiCoreLayouts.defaultIns.modify(fn)
+  }
 }
 
 export { DDeiCoreLayouts, DDeiCoreStandLayout, DDeiCoreSimpleLayout }

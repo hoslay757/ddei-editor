@@ -37,6 +37,10 @@ class DDeiCoreSelectBorderWeightDialog extends DDeiPluginBase{
     }
     return DDeiCoreSelectBorderWeightDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreSelectBorderWeightDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreSelectBorderWeightDialog

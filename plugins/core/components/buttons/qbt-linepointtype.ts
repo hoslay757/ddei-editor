@@ -39,6 +39,10 @@ class DDeiCoreEditLinePointTypeButton extends DDeiPluginBase{
     }
     return DDeiCoreEditLinePointTypeButton;
   }
+
+  static modify(fn) {
+    return DDeiCoreEditLinePointTypeButton.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreEditLinePointTypeButton

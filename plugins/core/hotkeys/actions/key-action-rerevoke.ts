@@ -60,6 +60,10 @@ class DDeiKeyActionReRevoke extends DDeiKeyAction {
     }
     return DDeiKeyActionReRevoke;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionReRevoke.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
 
   isActive(element: object): boolean {

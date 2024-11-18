@@ -43,6 +43,10 @@ class DDeiCoreSwitchCheckboxPropEditor extends DDeiPluginBase{
     }
     return DDeiCoreSwitchCheckboxPropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreSwitchCheckboxPropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreSwitchCheckboxPropEditor

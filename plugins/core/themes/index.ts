@@ -43,6 +43,10 @@ class DDeiCoreThemes extends DDeiPluginBase{
     }
     return themes;
   }
+
+  static modify(fn) {
+    return DDeiCoreThemes.defaultIns.modify(fn)
+  }
 }
 export { DDeiCoreThemeBlack, DDeiCoreThemeDefault ,DDeiCoreThemes}
 export default DDeiCoreThemes

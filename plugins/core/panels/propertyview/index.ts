@@ -40,6 +40,10 @@ class DDeiCorePropertyViewPanel extends DDeiPluginBase{
     }
     return DDeiCorePropertyViewPanel;
   }
+
+  static modify(fn) {
+    return DDeiCorePropertyViewPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCorePropertyViewPanel

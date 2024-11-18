@@ -51,6 +51,10 @@ class MenuRemoveSheet extends DDeiMenuBase {
     return MenuRemoveSheet;
   }
 
+  static modify(fn) {
+    return MenuRemoveSheet.defaultIns.modify(fn)
+  }
+
 
   action(model: object, evt: Event): void {
     if (model.modelType == 'DDeiSheet') {

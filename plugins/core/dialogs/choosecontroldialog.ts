@@ -37,6 +37,10 @@ class DDeiCoreChooseControlDialog extends DDeiPluginBase{
     }
     return DDeiCoreChooseControlDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreChooseControlDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreChooseControlDialog

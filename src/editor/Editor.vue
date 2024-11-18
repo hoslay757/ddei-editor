@@ -245,6 +245,9 @@ export default {
     if(this.editor.needControlIcon){
       DDeiEditorUtil.getControlIcons(this.editor);
     }
+    if (options?.onMounted) {
+      options.onMounted(this.editor)
+    }
   },
   methods: {
 

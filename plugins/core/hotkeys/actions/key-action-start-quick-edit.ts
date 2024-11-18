@@ -59,6 +59,10 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
     }
     return DDeiKeyActionStartQuickEdit;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionStartQuickEdit.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
 
   isActive(element: object): boolean {

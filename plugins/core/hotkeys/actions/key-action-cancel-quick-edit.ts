@@ -51,6 +51,10 @@ class DDeiKeyActionCancelQuickEdit extends DDeiKeyAction {
     }
     return DDeiKeyActionCancelQuickEdit;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionCancelQuickEdit.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei): void {
     if (ddInstance.stage.brushDataText) {

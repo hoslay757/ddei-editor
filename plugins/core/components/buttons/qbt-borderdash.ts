@@ -37,6 +37,10 @@ class DDeiCoreBorderDashButton extends DDeiPluginBase{
     }
     return DDeiCoreBorderDashButton;
   }
+
+  static modify(fn) {
+    return DDeiCoreBorderDashButton.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreBorderDashButton

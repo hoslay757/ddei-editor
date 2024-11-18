@@ -5,6 +5,7 @@ import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
 import {DDeiKeyAction} from "ddei-framework";
+import { DDeiKeyActionSearch } from ".";
 
 /**
  * 键行为:关闭搜索框架，退出搜索状态
@@ -51,6 +52,10 @@ class DDeiKeyActionSearchEsc extends DDeiKeyAction {
       }
     }
     return DDeiKeyActionSearchEsc;
+  }
+
+  static modify(fn) {
+    return DDeiKeyActionSearchEsc.defaultIns.modify(fn)
   }
 
   // ============================ 方法 ===============================

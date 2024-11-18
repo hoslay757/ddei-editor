@@ -37,6 +37,10 @@ class DDeiCoreEditColorButton extends DDeiPluginBase{
     }
     return DDeiCoreEditColorButton;
   }
+
+  static modify(fn) {
+    return DDeiCoreEditColorButton.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreEditColorButton

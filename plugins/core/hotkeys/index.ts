@@ -73,6 +73,10 @@ class DDeiCoreHotkeys extends DDeiPluginBase{
     }
     return hotkeys;
   }
+
+  static modify(fn) {
+    return DDeiCoreHotkeys.defaultIns.modify(fn)
+  }
 }
 export {
   DDeiCoreHotkeys, DDeiKeyActionAllSelect, DDeiKeyActionBrushData, DDeiKeyActionCancelCompose, DDeiKeyActionCancelControlCreate,

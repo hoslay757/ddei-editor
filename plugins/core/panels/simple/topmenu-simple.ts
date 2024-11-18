@@ -1,5 +1,6 @@
 import {DDeiPluginBase} from "ddei-framework";
 import TopMenuSimple from './TopMenuSimple.vue';
+import { DDeiCoreToolboxSimplePanel } from ".";
 
 class DDeiCoreTopMenuSimplePanel extends DDeiPluginBase{
   name: string = TopMenuSimple.name
@@ -41,6 +42,10 @@ class DDeiCoreTopMenuSimplePanel extends DDeiPluginBase{
       }
     }
     return DDeiCoreTopMenuSimplePanel;
+  }
+
+  static modify(fn) {
+    return DDeiCoreToolboxSimplePanel.defaultIns.modify(fn)
   }
 }
 

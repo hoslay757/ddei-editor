@@ -38,6 +38,10 @@ class DDeiCoreQuickColorViewPanel extends DDeiPluginBase{
     }
     return DDeiCoreQuickColorViewPanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreQuickColorViewPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreQuickColorViewPanel

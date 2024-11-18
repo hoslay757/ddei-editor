@@ -38,6 +38,10 @@ class DDeiCoreToolboxPanel extends DDeiPluginBase{
     }
     return DDeiCoreToolboxPanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreToolboxPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreToolboxPanel

@@ -41,6 +41,10 @@ class DDeiExtQuickControlHotkeys extends DDeiPluginBase {
     }
     return hotkeys;
   }
+
+  static modify(fn) {
+    return DDeiExtQuickControlHotkeys.defaultIns.modify(fn)
+  }
 }
 export {
   DDeiExtQuickControlHotkeys, DDeiKeyActionQuickControlEsc

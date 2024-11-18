@@ -61,6 +61,10 @@ class DDeiKeyActionPaste extends DDeiKeyAction {
     return DDeiKeyActionPaste;
   }
 
+  static modify(fn) {
+    return DDeiKeyActionPaste.defaultIns.modify(fn)
+  }
+
   isActive(element: object): boolean {
     if (!element) {
       return true

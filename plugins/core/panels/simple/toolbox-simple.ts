@@ -91,6 +91,10 @@ class DDeiCoreToolboxSimplePanel extends DDeiPluginBase{
     }
     return DDeiCoreToolboxSimplePanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreToolboxSimplePanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreToolboxSimplePanel

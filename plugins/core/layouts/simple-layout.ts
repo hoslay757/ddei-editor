@@ -49,6 +49,10 @@ class DDeiCoreSimpleLayout extends DDeiPluginBase{
     }
     return DDeiCoreSimpleLayout;
   }
+
+  static modify(fn) {
+    return DDeiCoreSimpleLayout.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreSimpleLayout

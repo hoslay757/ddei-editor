@@ -43,6 +43,10 @@ class DDeiCoreRangePropEditor extends DDeiPluginBase{
     }
     return DDeiCoreRangePropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreRangePropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreRangePropEditor

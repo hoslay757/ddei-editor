@@ -65,6 +65,10 @@ class DDeiCoreThemeDefault extends DDeiThemeBase {
     }
     return DDeiCoreThemeDefault;
   }
+
+  static modify(fn) {
+    return DDeiCoreThemeDefault.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreThemeDefault;

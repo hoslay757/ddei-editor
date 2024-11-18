@@ -41,6 +41,10 @@ class DDeiCoreStylePanel extends DDeiPluginBase{
     }
     return DDeiCoreStylePanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreStylePanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreStylePanel

@@ -37,6 +37,10 @@ class DDeiCoreCollFileConfirmDialog extends DDeiPluginBase{
     }
     return DDeiCoreCollFileConfirmDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreCollFileConfirmDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreCollFileConfirmDialog

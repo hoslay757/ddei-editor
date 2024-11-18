@@ -41,6 +41,10 @@ class DDeiCoreFontAndTextPanel extends DDeiPluginBase{
     }
     return DDeiCoreFontAndTextPanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreFontAndTextPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreFontAndTextPanel

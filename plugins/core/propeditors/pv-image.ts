@@ -43,6 +43,10 @@ class DDeiCoreImagePropEditor extends DDeiPluginBase{
     }
     return DDeiCoreImagePropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreImagePropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreImagePropEditor

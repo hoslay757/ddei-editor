@@ -37,6 +37,10 @@ class DDeiCoreAddFontSizeButton extends DDeiPluginBase{
     }
     return DDeiCoreAddFontSizeButton;
   }
+
+  static modify(fn) {
+    return DDeiCoreAddFontSizeButton.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreAddFontSizeButton

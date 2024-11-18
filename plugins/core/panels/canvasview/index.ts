@@ -40,6 +40,10 @@ class DDeiCoreCanvasViewPanel extends DDeiPluginBase{
     }
     return DDeiCoreCanvasViewPanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreCanvasViewPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreCanvasViewPanel

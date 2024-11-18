@@ -41,6 +41,10 @@ class DDeiCoreToolPanel extends DDeiPluginBase{
     }
     return DDeiCoreToolPanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreToolPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreToolPanel

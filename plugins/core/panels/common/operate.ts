@@ -41,6 +41,10 @@ class DDeiCoreOperatePanel extends DDeiPluginBase{
     }
     return DDeiCoreOperatePanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreOperatePanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreOperatePanel

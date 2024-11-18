@@ -53,6 +53,10 @@ class DDeiKeyActionQuickControlEsc extends DDeiKeyAction {
     return DDeiKeyActionQuickControlEsc;
   }
 
+  static modify(fn) {
+    return DDeiKeyActionQuickControlEsc.defaultIns.modify(fn)
+  }
+
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei, editor: DDeiEditor): void {
     

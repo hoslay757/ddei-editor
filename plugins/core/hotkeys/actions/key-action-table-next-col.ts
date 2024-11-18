@@ -52,6 +52,10 @@ class DDeiKeyActionTableNextCol extends DDeiKeyAction {
     }
     return DDeiKeyActionTableNextCol;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionTableNextCol.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei): void {
     //修改当前操作控件坐标

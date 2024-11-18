@@ -41,6 +41,10 @@ class DDeiCoreChangeRatioPanel extends DDeiPluginBase{
     }
     return DDeiCoreChangeRatioPanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreChangeRatioPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreChangeRatioPanel

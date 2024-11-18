@@ -37,6 +37,10 @@ class DDeiCoreSelectFontSizeDialog extends DDeiPluginBase{
     }
     return DDeiCoreSelectFontSizeDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreSelectFontSizeDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreSelectFontSizeDialog

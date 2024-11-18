@@ -64,6 +64,10 @@ class DDeiCoreControls extends DDeiPluginBase{
     }
     return DDeiCoreControls;
   }
+
+  static modify(fn) {
+    return DDeiCoreControls.defaultIns.modify(fn)
+  }
 }
 
 export {DDeiCoreControls}

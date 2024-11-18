@@ -54,6 +54,10 @@ class DDeiKeyActionCancelControlCreate extends DDeiKeyAction {
     }
     return DDeiKeyActionCancelControlCreate;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionCancelControlCreate.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei, editor: DDeiEditor): void {
     if (editor.state == DDeiEditorState.CONTROL_CREATING) {

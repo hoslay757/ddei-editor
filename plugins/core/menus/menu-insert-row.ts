@@ -47,6 +47,10 @@ class MenuInsertRow extends DDeiMenuBase {
     return MenuInsertRow;
   }
 
+  static modify(fn) {
+    return MenuInsertRow.defaultIns.modify(fn)
+  }
+
 
   /**
    * 执行的方法

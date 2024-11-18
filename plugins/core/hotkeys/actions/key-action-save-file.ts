@@ -54,6 +54,10 @@ class DDeiKeyActionSaveFile extends DDeiKeyAction {
     }
     return DDeiKeyActionSaveFile;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionSaveFile.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei): void {
     ddInstance.bus?.push(DDeiEditorEnumBusCommandType.SaveFile, {}, evt)

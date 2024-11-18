@@ -36,6 +36,9 @@ class DDeiExtSearchHotkeys extends DDeiPluginBase {
     return hotkeys
   }
 
+  static modify(fn) {
+    return DDeiExtSearchHotkeys.defaultIns.modify(fn)
+  }
 
   static configuration(options) {
     let hotkeys = new DDeiExtSearchHotkeys(options);

@@ -41,6 +41,10 @@ class DDeiCoreSortPanel extends DDeiPluginBase{
     }
     return DDeiCoreSortPanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreSortPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreSortPanel

@@ -41,6 +41,10 @@ class DDeiCoreFileInfoPanel extends DDeiPluginBase{
     }
     return DDeiCoreFileInfoPanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreFileInfoPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreFileInfoPanel

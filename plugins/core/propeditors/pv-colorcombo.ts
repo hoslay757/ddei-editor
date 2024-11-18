@@ -43,6 +43,10 @@ class DDeiCoreColorComboPropEditor extends DDeiPluginBase{
     }
     return DDeiCoreColorComboPropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreColorComboPropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreColorComboPropEditor

@@ -55,6 +55,10 @@ class DDeiKeyActionCancelCompose extends DDeiKeyAction {
     }
     return DDeiKeyActionCancelCompose;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionCancelCompose.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei): void {
     //修改当前操作控件坐标

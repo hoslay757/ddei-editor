@@ -37,6 +37,10 @@ class DDeiCoreSelectColorDialog extends DDeiPluginBase{
     }
     return DDeiCoreSelectColorDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreSelectColorDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreSelectColorDialog

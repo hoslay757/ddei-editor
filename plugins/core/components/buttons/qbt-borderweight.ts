@@ -36,6 +36,10 @@ class DDeiCoreBorderWeightButton extends DDeiPluginBase{
     }
     return DDeiCoreBorderWeightButton;
   }
+
+  static modify(fn) {
+    return DDeiCoreBorderWeightButton.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreBorderWeightButton

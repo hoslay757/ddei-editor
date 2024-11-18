@@ -41,6 +41,9 @@ class DDeiCoreShapeCountPanel extends DDeiPluginBase{
     }
     return DDeiCoreShapeCountPanel;
   }
+  static modify(fn) {
+    return DDeiCoreShapeCountPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreShapeCountPanel

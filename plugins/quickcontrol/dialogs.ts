@@ -42,6 +42,10 @@ class DDeiExtQuickControlDialogs extends DDeiPluginBase {
     }
     return DDeiExtQuickControlDialogs;
   }
+
+  static modify(fn) {
+    return DDeiExtQuickControlDialogs.defaultIns.modify(fn)
+  }
 }
 
 

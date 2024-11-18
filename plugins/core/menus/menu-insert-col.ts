@@ -44,6 +44,10 @@ class MenuInsertCol extends DDeiMenuBase {
     }
     return MenuInsertCol;
   }
+
+  static modify(fn) {
+    return MenuInsertCol.defaultIns.modify(fn)
+  }
   /**
    * 执行的方法
    */

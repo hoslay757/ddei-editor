@@ -59,6 +59,10 @@ class DDeiKeyActionPushModels extends DDeiKeyAction {
     }
     return DDeiKeyActionPushModels;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionPushModels.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
 
   isActive(element: object): boolean {

@@ -37,6 +37,10 @@ class DDeiCoreTextAlignDialog extends DDeiPluginBase{
     }
     return DDeiCoreTextAlignDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreTextAlignDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreTextAlignDialog

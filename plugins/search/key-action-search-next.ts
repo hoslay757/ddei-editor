@@ -54,6 +54,10 @@ class DDeiKeyActionSearchNext extends DDeiKeyAction {
     return DDeiKeyActionSearchNext;
   }
 
+  static modify(fn) {
+    return DDeiKeyActionSearchNext.defaultIns.modify(fn)
+  }
+
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei, editor: DDeiEditor,item:object): void {
     if (editor.tempPopData && editor.tempPopData['ddei-ext-dialog-search']){

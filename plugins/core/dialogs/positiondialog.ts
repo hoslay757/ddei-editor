@@ -37,6 +37,10 @@ class DDeiCorePositionDialog extends DDeiPluginBase{
     }
     return DDeiCorePositionDialog;
   }
+
+  static modify(fn) {
+    return DDeiCorePositionDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCorePositionDialog

@@ -62,6 +62,10 @@ class DDeiCoreThemeBlack extends DDeiThemeBase {
     }
     return DDeiCoreThemeBlack;
   }
+
+  static modify(fn) {
+    return DDeiCoreThemeBlack.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreThemeBlack;

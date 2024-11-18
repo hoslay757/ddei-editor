@@ -31,6 +31,9 @@ class DDeiKeyActionSearch extends DDeiKeyAction {
     return [this];
   }
 
+  static modify(fn) {
+    return DDeiKeyActionSearch.defaultIns.modify(fn)
+  }
 
   static configuration(options, fullConfig: boolean = false) {
     //解析options，只使用自己相关的

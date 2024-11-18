@@ -43,6 +43,10 @@ class DDeiCoreFillTypePropEditor extends DDeiPluginBase{
     }
     return DDeiCoreFillTypePropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreFillTypePropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreFillTypePropEditor

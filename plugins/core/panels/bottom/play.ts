@@ -41,6 +41,10 @@ class DDeiCorePlayPanel extends DDeiPluginBase{
     }
     return DDeiCorePlayPanel;
   }
+
+  static modify(fn) {
+    return DDeiCorePlayPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCorePlayPanel
