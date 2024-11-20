@@ -364,12 +364,15 @@ export default {
                 );
                 let lastOnContainer = layer;
                 if (isAlt) {
+                  let stageRatio = stage.getStageRatio()
+                  let ex2 = ex / stageRatio
+                  let ey2 = ey / stageRatio
                   //寻找鼠标落点当前所在的容器
                   let mouseOnContainers =
                     DDeiAbstractShape.findBottomContainersByArea(
                       layer,
-                      ex,
-                      ey
+                      ex2,
+                      ey2
                     );
                   if (mouseOnContainers && mouseOnContainers.length > 0) {
                     lastOnContainer =

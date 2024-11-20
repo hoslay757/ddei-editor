@@ -3,7 +3,11 @@ export default {
   'name': '矩形容器',
   'code': 'rectange_container',
   'desc': '矩形形状的容器，能够包含其他容器',
-  'type': 'DDeiRectContainer',
+  'type': 'DDeiPolygonContainer',
+  'from':'100008',
+  'define': {
+    poly:2
+  },
 
   /**
    * 定义组件属性

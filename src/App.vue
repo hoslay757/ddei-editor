@@ -23,7 +23,7 @@ export default defineComponent({
     const options = markRaw({
       // currentLayout: "ddei-core-layout-simple",
       config: {
-        ratio: 1.2, //默认缩放比例为120%
+        // ratio: 1.2, //默认缩放比例为120%
         pixel:2, //调整渲染质量
         // readonly:1,
         // paper:"A6",
@@ -39,31 +39,31 @@ export default defineComponent({
             // {
             //   model: "9999002"
             // },
-            // {
-            //   id: "act_1",
-            //   model: "102010",
-            //   type: "emp_1",
-            //   text: "第一步",
-            //   border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
-            //   fill: { color: "grey" },
-            // }
-              {
-                id: "act_1",
-              model: "103001",
-                type: "emp_1",
-                text: "第一步",
-                border: { color: "yellow", width: 2 },
-                fill: { color: "grey" },
-              },
-              {
-                id: "act_2",
-                model: "103010",
-                type: "emp_2",
-                width: 200,
-                height: 100,
-                text: "第二步",
-                offsetY: -100,
-              }
+            {
+              id: "act_1",
+              model: "102010",
+              type: "emp_1",
+              text: "第一步",
+              border: { color: "yellow", dash: [10, 10, 5, 5], width: 5 },
+              fill: { color: "grey" },
+            }
+              // {
+              //   id: "act_1",
+              // model: "103001",
+              //   type: "emp_1",
+              //   text: "第一步",
+              //   border: { color: "yellow", width: 2 },
+              //   fill: { color: "grey" },
+              // },
+              // {
+              //   id: "act_2",
+              //   model: "103010",
+              //   type: "emp_2",
+              //   width: 200,
+              //   height: 100,
+              //   text: "第二步",
+              //   offsetY: -100,
+              // }
             
           ]
         }
@@ -91,7 +91,9 @@ export default defineComponent({
           bottom: []
         }),
         DDeiExtUML,
-        DDeiExtSearch,
+        DDeiExtSearch.modify((plugin)=>{
+          plugin.a = 1
+        }),
         DDeiExtTooltip,
         DDeiExtQuickStyle,
         DDeiExtQuickControl,
@@ -128,7 +130,7 @@ export default defineComponent({
       ]
     })
     const options1 = markRaw({
-      // currentLayout: "ddei-core-layout-simple",
+      currentLayout: "ddei-core-layout-simple",
       config: {
         // "readonly":true,
         "mark": "水印文本",
@@ -139,15 +141,15 @@ export default defineComponent({
         "background": {color:"#123456",opacity:0.1},
         // "theme": "ddei-core-theme-black",
         initData: {
-          // controls:[
-          //   {
-          //     id: "act_1",
-          //     model: "102010",
-          //     type: "emp_1",
-          //     text: "第一步",
-          //     border:{color:"yellow",dash:[10,10,5,5],width:5},
-          //     fill:{color:"grey"},
-          //   },
+          controls:[
+            {
+              id: "act_1",
+              model: "102010",
+              type: "emp_1",
+              text: "第一步",
+              border:{color:"yellow",dash:[10,10,5,5],width:5},
+              fill:{color:"grey"},
+            },
           //   {
           //     id: "act_2",
           //     model: "102010",
@@ -157,12 +159,14 @@ export default defineComponent({
           //     text: "第二步",
           //     offsetY: -70,
           //   }
-          // ]
+          ]
         }
       },
       //配置扩展插件
       extensions: [
-        DDeiExtUML,
+        DDeiExtSearch.modify((plugin) => {
+          plugin.b = 1
+        }),
         DDeiExtQuickStyle,
         DDeiExtSearch,
         DDeiExtQuickControl,
@@ -361,9 +365,9 @@ export default defineComponent({
   <DDeiEditorView ref="editorViewer1" :options="options" id="ddei_editor_1"></DDeiEditorView>
 
 
-  <!--
-  <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView>
-
+  
+  <!-- <DDeiEditorView ref="editorViewer2" :options="options1" id="ddei_editor_2"></DDeiEditorView> -->
+<!--
   <div style="width:400px;height:400px;float:left">
     <DDeiEditorView ref="editorViewer3" :options="options2" id="ddei_editor_3"></DDeiEditorView>
   </div>
