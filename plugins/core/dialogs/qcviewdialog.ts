@@ -37,6 +37,10 @@ class DDeiCoreQCViewDialog extends DDeiPluginBase{
     }
     return DDeiCoreQCViewDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreQCViewDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreQCViewDialog

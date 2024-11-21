@@ -11,6 +11,10 @@ class DDeiExtTooltipLifeCycle extends DDeiLifeCycle {
     time:400
   });
 
+  static modify(fn) {
+    return DDeiExtTooltipLifeCycle.defaultIns.modify(fn)
+  }
+
   static configuration(options, fullConfig: boolean = false) {
     //解析options，只使用自己相关的
     if (options) {

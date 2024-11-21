@@ -43,6 +43,10 @@ class DDeiCoreFontSizePropEditor extends DDeiPluginBase{
     }
     return DDeiCoreFontSizePropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreFontSizePropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreFontSizePropEditor

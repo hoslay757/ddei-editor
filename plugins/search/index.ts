@@ -66,7 +66,9 @@ class DDeiExtSearch extends DDeiPluginBase {
 
   
   
-
+  static modify(fn) {
+    return DDeiExtSearch.defaultIns.modify(fn)
+  }
 
   static configuration(options) {
     let core = new DDeiExtSearch(options);

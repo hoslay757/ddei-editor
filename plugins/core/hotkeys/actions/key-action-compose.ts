@@ -1,9 +1,4 @@
-import {DDeiConfig} from "ddei-framework";
 import {DDei} from "ddei-framework";
-import {DDeiEnumControlState} from "ddei-framework";
-import {DDeiEnumOperateState} from "ddei-framework";
-import {DDeiRectContainer} from "ddei-framework";
-import {DDeiAbstractShape} from "ddei-framework";
 import {DDeiKeyAction} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
@@ -54,6 +49,10 @@ class DDeiKeyActionCompose extends DDeiKeyAction {
       }
     }
     return DDeiKeyActionCompose;
+  }
+
+  static modify(fn) {
+    return DDeiKeyActionCompose.defaultIns.modify(fn)
   }
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei): void {

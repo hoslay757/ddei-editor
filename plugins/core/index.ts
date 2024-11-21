@@ -172,6 +172,10 @@ class DDeiCore extends DDeiPluginBase {
     core.lifecycles = core.lifecycles.configuration(options, true)
     return core;
   }
+
+  static modify(fn) {
+    return DDeiCore.defaultIns.modify(fn)
+  }
 }
 
 export * from "./panels"

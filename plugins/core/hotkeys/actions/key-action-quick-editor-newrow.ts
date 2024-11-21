@@ -42,6 +42,10 @@ class DDeiKeyActionNewRowQuickEdit extends DDeiKeyAction {
     }
     return DDeiKeyActionNewRowQuickEdit;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionNewRowQuickEdit.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei): void {
     let editor = DDeiEditor.ACTIVE_INSTANCE;

@@ -37,6 +37,10 @@ class DDeiCoreCloseFileConfirmDialog extends DDeiPluginBase{
     }
     return DDeiCoreCloseFileConfirmDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreCloseFileConfirmDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreCloseFileConfirmDialog

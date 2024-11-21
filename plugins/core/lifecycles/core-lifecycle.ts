@@ -48,6 +48,10 @@ class DDeiCoreLifeCycle extends DDeiLifeCycle {
     }
     return DDeiCoreLifeCycle;
   }
+
+  static modify(fn) {
+    return DDeiCoreLifeCycle.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreLifeCycle

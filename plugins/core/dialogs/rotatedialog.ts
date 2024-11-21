@@ -37,6 +37,10 @@ class DDeiCoreRotateDialog extends DDeiPluginBase{
     }
     return DDeiCoreRotateDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreRotateDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreRotateDialog

@@ -18,6 +18,9 @@ class DDeiExtSearchPanel extends DDeiPluginBase{
     return this.plugins;
   }
 
+  static modify(fn) {
+    return DDeiExtSearchPanel.defaultIns.modify(fn)
+  }
 
   static configuration(options, fullConfig: boolean = false) {
     //解析options，只使用自己相关的

@@ -40,6 +40,10 @@ class DDeiCoreEditFontSizeButton extends DDeiPluginBase{
     }
     return DDeiCoreEditFontSizeButton;
   }
+
+  static modify(fn) {
+    return DDeiCoreEditFontSizeButton.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreEditFontSizeButton

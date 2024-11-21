@@ -48,6 +48,10 @@ class DDeiCoreTopMenuPanel extends DDeiPluginBase{
     }
     return DDeiCoreTopMenuPanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreTopMenuPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreTopMenuPanel

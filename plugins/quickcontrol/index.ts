@@ -67,6 +67,10 @@ class DDeiExtQuickControl extends DDeiPluginBase {
     core.lifecyclies = core.lifecyclies.configuration(options, true)
     return core;
   }
+
+  static modify(fn) {
+    return DDeiExtQuickControl.defaultIns.modify(fn)
+  }
 }
 
 export {DDeiExtQuickControl}

@@ -50,6 +50,10 @@ class DDeiCoreStandLayout extends DDeiPluginBase{
     }
     return DDeiCoreStandLayout;
   }
+
+  static modify(fn) {
+    return DDeiCoreStandLayout.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreStandLayout

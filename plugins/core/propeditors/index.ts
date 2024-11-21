@@ -61,6 +61,10 @@ class DDeiCorePVEditors extends DDeiPluginBase {
     }
     return DDeiCorePVEditors;
   }
+
+  static modify(fn) {
+    return DDeiCorePVEditors.defaultIns.modify(fn)
+  }
 }
 
 

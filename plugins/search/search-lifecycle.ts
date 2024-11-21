@@ -40,6 +40,10 @@ class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
     DDeiEditorUtil.displayDialog(editor, 'ddei-ext-dialog-search', null, { type: 99, left: left, top: top, hiddenMask: true })
   }
 
+  static modify(fn) {
+    return DDeiExtSearchLifeCycle.defaultIns.modify(fn)
+  }
+
   static configuration(options, fullConfig: boolean = false) {
     //解析options，只使用自己相关的
     if (options) {

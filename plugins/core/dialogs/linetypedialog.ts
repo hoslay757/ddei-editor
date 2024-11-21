@@ -37,6 +37,10 @@ class DDeiCoreLineTypeDialog extends DDeiPluginBase{
     }
     return DDeiCoreLineTypeDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreLineTypeDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreLineTypeDialog

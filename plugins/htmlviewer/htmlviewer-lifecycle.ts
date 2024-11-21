@@ -36,6 +36,11 @@ class DDeiExtHtmlViewerLifeCycle extends DDeiLifeCycle {
     return DDeiExtHtmlViewerLifeCycle;
   }
   
+
+  static modify(fn) {
+    return DDeiExtHtmlViewerLifeCycle.defaultIns.modify(fn)
+  }
+  
   htmlDrawShape(operate, data, ddInstance, evt){
     let models = data?.models
     let editor = DDeiEditorUtil.getEditorInsByDDei(ddInstance);

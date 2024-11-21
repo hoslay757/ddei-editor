@@ -55,6 +55,10 @@ class DDeiKeyActionCancelCurrentAction extends DDeiKeyAction {
     return DDeiKeyActionCancelCurrentAction;
   }
 
+  static modify(fn) {
+    return DDeiKeyActionCancelCurrentAction.defaultIns.modify(fn)
+  }
+
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei, editor: DDeiEditor): void {
     if (editor.state == DDeiEditorState.DESIGNING) {

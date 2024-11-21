@@ -37,6 +37,10 @@ class DDeiCoreSelectFontDialog extends DDeiPluginBase{
     }
     return DDeiCoreSelectFontDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreSelectFontDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreSelectFontDialog

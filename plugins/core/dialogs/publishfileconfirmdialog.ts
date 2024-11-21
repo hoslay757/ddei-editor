@@ -37,6 +37,10 @@ class DDeiCorePublishFileConfirmDialog extends DDeiPluginBase{
     }
     return DDeiCorePublishFileConfirmDialog;
   }
+
+  static modify(fn) {
+    return DDeiCorePublishFileConfirmDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCorePublishFileConfirmDialog

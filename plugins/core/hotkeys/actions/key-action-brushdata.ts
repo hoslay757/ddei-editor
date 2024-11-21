@@ -55,6 +55,10 @@ class DDeiKeyActionBrushData extends DDeiKeyAction {
     }
     return DDeiKeyActionBrushData;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionBrushData.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
 
   isActive(element: object): boolean {

@@ -43,6 +43,10 @@ class MenuMergeCell extends DDeiMenuBase {
     }
     return MenuMergeCell;
   }
+
+  static modify(fn) {
+    return MenuMergeCell.defaultIns.modify(fn)
+  }
   /**
    * 执行的方法
    */

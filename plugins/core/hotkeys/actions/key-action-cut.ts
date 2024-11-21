@@ -54,6 +54,10 @@ class DDeiKeyActionCut extends DDeiKeyAction {
     return DDeiKeyActionCut;
   }
 
+  static modify(fn) {
+    return DDeiKeyActionCut.defaultIns.modify(fn)
+  }
+
   // ============================ 方法 ===============================
   async action(evt: Event, ddInstance: DDei, editor: DDeiEditor): void {
     //修改当前操作控件坐标

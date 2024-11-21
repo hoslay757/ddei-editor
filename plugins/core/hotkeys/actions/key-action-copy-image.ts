@@ -53,6 +53,10 @@ class DDeiKeyActionCopyImage extends DDeiKeyAction {
     }
     return DDeiKeyActionCopyImage;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionCopyImage.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei, editor: DDeiEditor): void {
     if (DDeiConfig.ALLOW_CLIPBOARD || DDeiConfig.ALLOW_CLIPBOARD == undefined) {

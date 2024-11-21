@@ -38,6 +38,9 @@ class DDeiExtTooltip extends DDeiPluginBase {
     }
   }
 
+  static modify(fn) {
+    return DDeiExtTooltip.defaultIns.modify(fn)
+  }
 
   static configuration(options) {
     let core = new DDeiExtTooltip(options);

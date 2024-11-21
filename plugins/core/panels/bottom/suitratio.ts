@@ -41,6 +41,10 @@ class DDeiCoreSuitRatioPanel extends DDeiPluginBase{
     }
     return DDeiCoreSuitRatioPanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreSuitRatioPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreSuitRatioPanel

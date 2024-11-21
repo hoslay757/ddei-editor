@@ -39,6 +39,10 @@ class DDeiCoreOpenFilesViewPanel extends DDeiPluginBase{
     }
     return DDeiCoreOpenFilesViewPanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreOpenFilesViewPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreOpenFilesViewPanel

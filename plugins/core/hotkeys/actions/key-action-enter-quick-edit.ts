@@ -51,6 +51,10 @@ class DDeiKeyActionEnterQuickEdit extends DDeiKeyAction {
     return DDeiKeyActionEnterQuickEdit;
   }
 
+  static modify(fn) {
+    return DDeiKeyActionEnterQuickEdit.defaultIns.modify(fn)
+  }
+
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei): void {
     let editor = DDeiEditor.ACTIVE_INSTANCE;

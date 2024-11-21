@@ -43,6 +43,10 @@ class DDeiCoreBorderDashComboPropEditor extends DDeiPluginBase{
     }
     return DDeiCoreBorderDashComboPropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreBorderDashComboPropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreBorderDashComboPropEditor

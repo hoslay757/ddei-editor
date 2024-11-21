@@ -57,6 +57,10 @@ class DDeiExtUMLControls extends DDeiPluginBase{
     return groups;
   } 
 
+  static modify(fn) {
+    return DDeiExtUMLControls.defaultIns.modify(fn)
+  }
+
   static configuration(options) {
     if (options){
       let controls = new DDeiExtUMLControls(options);

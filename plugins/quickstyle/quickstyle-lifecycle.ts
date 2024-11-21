@@ -141,6 +141,7 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
 
   
 
+  
   static configuration(options, fullConfig: boolean = false) {
     //解析options，只使用自己相关的
     if (options) {
@@ -168,6 +169,10 @@ class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
       }
     }
     return DDeiCoreCanvasLifeCycle;
+  }
+
+  static modify(fn) {
+    return DDeiCoreCanvasLifeCycle.defaultIns.modify(fn)
   }
 }
 

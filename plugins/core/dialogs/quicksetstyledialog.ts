@@ -37,6 +37,10 @@ class DDeiCoreQuickSetStyleDialog extends DDeiPluginBase{
     }
     return DDeiCoreQuickSetStyleDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreQuickSetStyleDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreQuickSetStyleDialog

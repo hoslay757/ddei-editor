@@ -43,6 +43,10 @@ class DDeiCoreBorderTypePropEditor extends DDeiPluginBase{
     }
     return DDeiCoreBorderTypePropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreBorderTypePropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreBorderTypePropEditor

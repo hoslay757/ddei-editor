@@ -37,6 +37,10 @@ class DDeiCoreMergeComposeDialog extends DDeiPluginBase{
     }
     return DDeiCoreMergeComposeDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreMergeComposeDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreMergeComposeDialog

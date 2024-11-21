@@ -62,6 +62,10 @@ class DDeiKeyActionMoveModels extends DDeiKeyAction {
     }
     return DDeiKeyActionMoveModels;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionMoveModels.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
 
 
@@ -184,24 +188,26 @@ class DDeiKeyActionMoveModels extends DDeiKeyAction {
           }
           let stage = ddInstance.stage
 
-          DDeiAbstractShape.moveModels(models, deltaX, deltaY, moveOriginLines);
+          let rsState = DDeiEditorUtil.invokeCallbackFunc("EVENT_CONTROL_DRAG_BEFORE", DDeiEnumOperateType.DRAG, { models: models }, ddInstance, evt)
+          if (rsState == 0 || rsState == 1){
+            DDeiAbstractShape.moveModels(models, deltaX, deltaY, moveOriginLines);
 
-          stage.layers[stage.layerIndex].opPoints = []
-          if (stage.layers[stage.layerIndex].opLine?.render) {
-            stage.layers[stage.layerIndex].opLine.render.enableRefreshShape()
-          }
-          delete stage.layers[stage.layerIndex].opLine;
-          stage.render.refreshJumpLine = false
-          ddInstance.bus.push(DDeiEnumBusCommandType.UpdateSelectorBounds);
-          ddInstance.bus.push(DDeiEnumBusCommandType.NodifyChange);
-          ddInstance.bus.push(DDeiEnumBusCommandType.AddHistroy, null, evt);
-          ddInstance.bus.push(DDeiEnumBusCommandType.ClearTemplateVars);
-          //渲染图形
-          ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape, null, evt);
+            stage.layers[stage.layerIndex].opPoints = []
+            if (stage.layers[stage.layerIndex].opLine?.render) {
+              stage.layers[stage.layerIndex].opLine.render.enableRefreshShape()
+            }
+            delete stage.layers[stage.layerIndex].opLine;
+            stage.render.refreshJumpLine = false
+            ddInstance.bus.push(DDeiEnumBusCommandType.UpdateSelectorBounds);
+            ddInstance.bus.push(DDeiEnumBusCommandType.NodifyChange);
+            ddInstance.bus.push(DDeiEnumBusCommandType.AddHistroy, null, evt);
+            ddInstance.bus.push(DDeiEnumBusCommandType.ClearTemplateVars);
+            //渲染图形
+            ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape, null, evt);
 
-          ddInstance.bus.executeAll();
-          DDeiEditorUtil.invokeCallbackFunc("EVENT_CONTROL_DRAG_AFTER", DDeiEnumOperateType.DRAG, { models: models }, ddInstance, evt)
-        
+            ddInstance.bus.executeAll();
+            DDeiEditorUtil.invokeCallbackFunc("EVENT_CONTROL_DRAG_AFTER", DDeiEnumOperateType.DRAG, { models: models }, ddInstance, evt)
+            }
           return true
 
         }

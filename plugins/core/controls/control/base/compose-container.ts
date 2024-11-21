@@ -3,7 +3,7 @@ export default {
   'name': '组合容器',
   'code': 'comp',
   'desc': '用于组合关系的容器',
-  'type': 'DDeiRectContainer',
+  'type': 'DDeiPolygonContainer',
   'from': '100201',
 
   'define': {

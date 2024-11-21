@@ -43,6 +43,10 @@ class DDeiCoreComboxPropEditor extends DDeiPluginBase{
     }
     return DDeiCoreComboxPropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreComboxPropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreComboxPropEditor

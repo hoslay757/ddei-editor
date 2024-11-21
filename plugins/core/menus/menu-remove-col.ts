@@ -43,6 +43,10 @@ class MenuRemoveCol extends DDeiMenuBase {
     }
     return MenuRemoveCol;
   }
+
+  static modify(fn) {
+    return MenuRemoveCol.defaultIns.modify(fn)
+  }
   /**
    * 执行的方法
    */

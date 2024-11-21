@@ -41,6 +41,10 @@ class DDeiCoreExportAndImportPanel extends DDeiPluginBase{
     }
     return DDeiCoreExportAndImportPanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreExportAndImportPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreExportAndImportPanel

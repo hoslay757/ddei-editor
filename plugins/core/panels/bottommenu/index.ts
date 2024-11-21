@@ -43,6 +43,10 @@ class DDeiCoreBottomMenuPanel extends DDeiPluginBase{
     }
     return DDeiCoreBottomMenuPanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreBottomMenuPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreBottomMenuPanel

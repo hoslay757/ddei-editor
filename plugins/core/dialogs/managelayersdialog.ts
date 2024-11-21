@@ -37,6 +37,10 @@ class DDeiCoreManageLayersDialog extends DDeiPluginBase{
     }
     return DDeiCoreManageLayersDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreManageLayersDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreManageLayersDialog

@@ -43,6 +43,10 @@ class DDeiCoreColorPropEditor extends DDeiPluginBase{
     }
     return DDeiCoreColorPropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreColorPropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreColorPropEditor

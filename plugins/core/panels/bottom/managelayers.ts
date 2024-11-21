@@ -41,6 +41,10 @@ class DDeiCoreManageLayersPanel extends DDeiPluginBase{
     }
     return DDeiCoreManageLayersPanel;
   }
+
+  static modify(fn) {
+    return  DDeiCoreManageLayersPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreManageLayersPanel

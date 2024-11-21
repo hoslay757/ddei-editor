@@ -37,6 +37,10 @@ class DDeiCoreSelectBorderDashDialog extends DDeiPluginBase{
     }
     return DDeiCoreSelectBorderDashDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreSelectBorderDashDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreSelectBorderDashDialog

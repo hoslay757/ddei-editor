@@ -52,6 +52,10 @@ class DDeiKeyActionClearBrushData extends DDeiKeyAction {
     }
     return DDeiKeyActionClearBrushData;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionClearBrushData.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei): void {
     //记录当前格式信息，修改状态为刷子状态

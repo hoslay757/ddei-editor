@@ -38,6 +38,10 @@ class DDeiCoreCanvasQuickDialog extends DDeiPluginBase {
     }
     return DDeiCoreCanvasQuickDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreCanvasQuickDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreCanvasQuickDialog

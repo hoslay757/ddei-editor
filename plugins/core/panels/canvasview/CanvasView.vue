@@ -364,12 +364,15 @@ export default {
                 );
                 let lastOnContainer = layer;
                 if (isAlt) {
+                  let stageRatio = stage.getStageRatio()
+                  let ex2 = ex / stageRatio
+                  let ey2 = ey / stageRatio
                   //寻找鼠标落点当前所在的容器
                   let mouseOnContainers =
                     DDeiAbstractShape.findBottomContainersByArea(
                       layer,
-                      ex,
-                      ey
+                      ex2,
+                      ey2
                     );
                   if (mouseOnContainers && mouseOnContainers.length > 0) {
                     lastOnContainer =
@@ -455,6 +458,23 @@ export default {
                 );
               }
             }
+            this.editor.creatingControls.forEach(model => {
+              let controlDefine = this.editor.controls.get(model.modelCode);
+              //如果存在配置，则直接采用配置，如果不存在配置则读取文本区域
+              if (controlDefine?.define?.sample?.depProps) {
+                let depProps = controlDefine.define.sample.depProps;
+
+                //判断是修改的哪个属性
+                for (let type in depProps) {
+                  let property = depProps[type]
+                  let modelPropValue = model[property];
+                  if (modelPropValue) {
+                    DDeiUtil.createDepLinkModel(model, modelPropValue, type)
+                  }
+                }
+              }
+              model.refreshLinkModels()
+            });
             //移除其他选中
             this.editor.bus.push(
               DDeiEnumBusCommandType.CancelCurLevelSelectedModels,

@@ -65,8 +65,7 @@ export default {
   computed: {},
   watch: {},
   created() {
-    DDeiUtil.createRenderViewer = this.createRenderViewer
-    DDeiUtil.removeRenderViewer = this.removeRenderViewer
+    
     autoLoadCommand();
     
     // if (DDeiEditor.ACTIVE_INSTANCE) {
@@ -91,8 +90,9 @@ export default {
       }
     }
     editor.setI18nLang(this.options?.i18n?.lang)
-    
     this.editor = editor
+    this.editor.createRenderViewer = this.createRenderViewer
+    this.editor.removeRenderViewer = this.removeRenderViewer
 
     editor.appContext = getCurrentInstance().appContext
     // }
@@ -244,6 +244,9 @@ export default {
     }
     if(this.editor.needControlIcon){
       DDeiEditorUtil.getControlIcons(this.editor);
+    }
+    if (options?.onMounted) {
+      options.onMounted(this.editor)
     }
   },
   methods: {

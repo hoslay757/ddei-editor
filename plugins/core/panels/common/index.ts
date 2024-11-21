@@ -51,6 +51,10 @@ class DDeiCoreCommonPanels extends DDeiPluginBase{
     }
     return DDeiCoreCommonPanels;
   }
+
+  static modify(fn) {
+    return DDeiCoreCommonPanels.defaultIns.modify(fn)
+  }
 }
 
 

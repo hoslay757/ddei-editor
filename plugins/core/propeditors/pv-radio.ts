@@ -43,6 +43,10 @@ class DDeiCoreRadioPropEditor extends DDeiPluginBase{
     }
     return DDeiCoreRadioPropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreRadioPropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreRadioPropEditor

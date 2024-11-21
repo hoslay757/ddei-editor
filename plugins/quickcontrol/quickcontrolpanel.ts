@@ -41,6 +41,10 @@ class DDeiExtQuickControlPanel extends DDeiPluginBase{
     }
     return DDeiExtQuickControlPanel;
   }
+
+  static modify(fn) {
+    return DDeiExtQuickControlPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiExtQuickControlPanel

@@ -54,6 +54,10 @@ class DDeiCoreComponents extends DDeiPluginBase{
     }
     return DDeiCoreComponents;
   }
+
+  static modify(fn) {
+    return DDeiCoreComponents.defaultIns.modify(fn)
+  }
 }
 
 export {DDeiCoreComponents,DDeiCoreAddFontSizeButton, DDeiCoreBorderDashButton, DDeiCoreBorderWeightButton

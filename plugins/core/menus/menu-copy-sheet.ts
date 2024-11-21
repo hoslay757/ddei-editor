@@ -49,6 +49,10 @@ class MenuCopySheet extends DDeiMenuBase {
     }
     return MenuCopySheet;
   }
+
+  static modify(fn) {
+    return MenuCopySheet.defaultIns.modify(fn)
+  }
   /**
    * 执行的方法
    */

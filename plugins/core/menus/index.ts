@@ -50,6 +50,10 @@ class DDeiCoreMenus extends DDeiPluginBase{
     }
     return menus;
   }
+
+  static modify(fn) {
+    return DDeiCoreMenus.defaultIns.modify(fn)
+  }
 }
 export {
   DDeiCoreMenus, MenuCancelMergeCell, MenuCopySheet, MenuInsertCol, MenuInsertRow,

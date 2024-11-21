@@ -43,6 +43,10 @@ class DDeiCoreExCheckboxPropEditor extends DDeiPluginBase{
     }
     return DDeiCoreExCheckboxPropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreExCheckboxPropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreExCheckboxPropEditor

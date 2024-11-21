@@ -37,6 +37,10 @@ class DDeiCoreLinePointTypeDialog extends DDeiPluginBase{
     }
     return DDeiCoreLinePointTypeDialog;
   }
+
+  static modify(fn) {
+    return DDeiCoreLinePointTypeDialog.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreLinePointTypeDialog

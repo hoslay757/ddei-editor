@@ -37,6 +37,10 @@ class DDeiCoreEditFontFamilyButton extends DDeiPluginBase{
     }
     return DDeiCoreEditFontFamilyButton;
   }
+
+  static modify(fn) {
+    return DDeiCoreEditFontFamilyButton.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreEditFontFamilyButton

@@ -10,7 +10,7 @@ import {DDeiEditorState} from "ddei-framework";
 import {DDeiKeyAction} from "ddei-framework";
 import {DDeiEnumOperateState} from "ddei-framework";
 import {DDeiAbstractShape} from "ddei-framework";
-
+import { cloneDeep } from 'lodash';
 /**
  * 键行为:开启快捷编辑
  * 开启快捷编辑
@@ -58,6 +58,10 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
       }
     }
     return DDeiKeyActionStartQuickEdit;
+  }
+
+  static modify(fn) {
+    return DDeiKeyActionStartQuickEdit.defaultIns.modify(fn)
   }
   // ============================ 方法 ===============================
 
@@ -215,7 +219,7 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
                     
                     let controlDefine = DDeiUtil.getControlDefine(dataJson)
                     for (let i in controlDefine?.define) {
-                      dataJson[i] = controlDefine.define[i];
+                      dataJson[i] = cloneDeep(controlDefine.define[i]);
                     }
                     dataJson["id"] = "lsm_" + (stage.idIdx++)
                     dataJson["width"] = 80
@@ -271,11 +275,6 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
                     editor.quickEditorModel = model;
                   }
 
-                
-                 
-                  
-
-                  
                   //获取控件所占区域
                   model = DDeiAbstractShape.findBottomComponseByArea(model, ex, ey);
 

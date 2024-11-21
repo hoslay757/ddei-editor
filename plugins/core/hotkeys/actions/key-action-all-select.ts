@@ -56,6 +56,10 @@ class DDeiKeyActionAllSelect extends DDeiKeyAction {
     return DDeiKeyActionAllSelect;
   }
 
+  static modify(fn) {
+    return DDeiKeyActionAllSelect.defaultIns.modify(fn)
+  }
+
   // ============================ 方法 ===============================
 
 

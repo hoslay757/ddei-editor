@@ -41,6 +41,10 @@ class DDeiExtQuickStyle extends DDeiPluginBase {
     core.lifecyclies = core.lifecyclies.configuration(options, true)
     return core;
   }
+
+  static modify(fn) {
+    return DDeiExtQuickStyle.defaultIns.modify(fn)
+  }
 }
 
 export {DDeiExtQuickStyle}

@@ -41,6 +41,10 @@ class DDeiCoreSheetsPanel extends DDeiPluginBase{
     }
     return DDeiCoreSheetsPanel;
   }
+
+  static modify(fn) {
+    return DDeiCoreSheetsPanel.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreSheetsPanel

@@ -1,6 +1,6 @@
 {
   "name": "ddei-editor",
-  "version": "1.2.42-1",
+  "version": "1.2.43",
   "private": false,
   "type": "module",
   "author": "hoslay <3697355039@qq.com>",
@@ -10,6 +10,7 @@
     "ddei",
     "ddei-plugin",
     "ddei-editor",
+    "ddei-flow",
     "图形框架",
     "流程图",
     "思维导图",
@@ -49,7 +50,9 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
-    "ddei-framework": "^1.2.42"
+    "ddei-framework": "^1.2.43",
+    "lodash": "^4.17.21",
+    "three": "^0.156.1"
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.0",

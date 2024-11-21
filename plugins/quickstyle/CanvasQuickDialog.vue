@@ -331,7 +331,7 @@ export default {
 
     showAlignDialog(evt: Event) {
       let srcElement = evt.currentTarget;
-      DDeiEditorUtil.showOrCloseDialog(this.editor, "ddei-core-align_dialog", {
+      DDeiEditorUtil.showOrCloseDialog(this.editor, "ddei-core-dialog-align", {
         group: "top-dialog"
       }, { type: 5 }, srcElement, false, true)
     },

@@ -51,6 +51,10 @@ class DDeiKeyActionCancelSelect extends DDeiKeyAction {
     }
     return DDeiKeyActionCancelSelect;
   }
+
+  static modify(fn) {
+    return DDeiKeyActionCancelSelect.defaultIns.modify(fn)
+  }
   // ============================ 方法 ===============================
   action(evt: Event, ddInstance: DDei): void {
     //修改当前操作控件坐标

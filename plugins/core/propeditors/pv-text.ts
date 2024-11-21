@@ -43,6 +43,10 @@ class DDeiCoreTextPropEditor extends DDeiPluginBase{
     }
     return DDeiCoreTextPropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreTextPropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreTextPropEditor

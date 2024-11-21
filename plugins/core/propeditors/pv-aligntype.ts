@@ -43,6 +43,10 @@ class DDeiCoreAlignTypePropEditor extends DDeiPluginBase{
     }
     return DDeiCoreAlignTypePropEditor;
   }
+
+  static modify(fn) {
+    return DDeiCoreAlignTypePropEditor.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreAlignTypePropEditor

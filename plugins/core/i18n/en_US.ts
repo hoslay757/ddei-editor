@@ -61,8 +61,8 @@ export default {
     wholePage: "Whole Page",
     precent: "Pre",
     chooseShapeGroups: "Choose Shapes",
-    basic: "Basic",
-    uml: "UML",
+    basicSubject: "Basic",
+    umlSubject: "UML",
     brush: "Brush",
     startPoint: 'Start',
     endPoint: 'End',
@@ -78,6 +78,7 @@ export default {
     mark: 'Mark',
     paper: 'Paper',
     propertyName: "Property",
+    searchResult: "Search Result",
     property: {
       id: 'id',
       code: 'Code',

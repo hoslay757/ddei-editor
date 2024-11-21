@@ -36,6 +36,10 @@ class DDeiCoreEditBoxButton extends DDeiPluginBase{
     }
     return DDeiCoreEditBoxButton;
   }
+
+  static modify(fn) {
+    return DDeiCoreEditBoxButton.defaultIns.modify(fn)
+  }
 }
 
 export default DDeiCoreEditBoxButton

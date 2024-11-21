@@ -67,6 +67,10 @@ class DDeiCoreDialogs extends DDeiPluginBase {
     }
     return DDeiCoreDialogs;
   }
+
+  static modify(fn) {
+    return DDeiCoreDialogs.defaultIns.modify(fn)
+  }
 }
 
 

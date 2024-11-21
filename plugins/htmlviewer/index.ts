@@ -40,6 +40,10 @@ class DDeiExtHtmlViewer extends DDeiPluginBase {
     core.lifecyclies = core.lifecyclies.configuration(options)
     return core;
   }
+
+  static modify(fn) {
+    return DDeiExtHtmlViewer.defaultIns.modify(fn)
+  }
 }
 
 export { DDeiExtHtmlViewer }

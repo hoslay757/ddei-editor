@@ -45,6 +45,10 @@ class MenuCancelMergeCell extends DDeiMenuBase {
     return MenuCancelMergeCell;
   }
 
+  static modify(fn) {
+    return MenuCancelMergeCell.defaultIns.modify(fn)
+  }
+
   // ============================ 方法 ===============================
   /**
    * 执行的方法

@@ -47,6 +47,10 @@ class DDeiCoreBottomPanels extends DDeiPluginBase{
     }
     return DDeiCoreBottomPanels;
   }
+
+  static modify(fn) {
+    return DDeiCoreBottomPanels.defaultIns.modify(fn)
+  }
 }
 
 
