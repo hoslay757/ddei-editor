@@ -1,6 +1,6 @@
 {
   "name": "ddei-editor",
-  "version": "1.2.43",
+  "version": "1.2.44-4",
   "private": false,
   "type": "module",
   "author": "hoslay <3697355039@qq.com>",
@@ -50,13 +50,10 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
   "dependencies": {
-    "ddei-framework": "^1.2.43",
-    "lodash": "^4.17.21",
-    "three": "^0.156.1"
+    
   },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.0",
-    "@types/lodash": "^4.14.197",
     "@types/node": "^18.17.6",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vue/tsconfig": "^0.4.0",
@@ -65,6 +62,7 @@
     "typescript": "~5.1.6",
     "vite": "^4.4.6",
     "vite-plugin-compression": "^0.5.1",
-    "vue-tsc": "^1.8.6"
+    "vue-tsc": "^1.8.6",
+    "ddei-framework": "file:///Users/hoslay/work/ddei/ddei-framework/ddei-framework-1.2.44-4.tgz"
   }
 }

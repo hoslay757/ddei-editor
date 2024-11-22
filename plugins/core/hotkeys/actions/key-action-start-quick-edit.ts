@@ -3,14 +3,14 @@ import { DDei, DDeiEnumOperateType } from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiModelLink} from "ddei-framework";
 import { DDeiUtil, DDeiEditorUtil } from "ddei-framework";
-import { Matrix3, Vector3 } from 'three';
+import { Matrix3, Vector3 } from 'ddei-framework';
 import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
 import {DDeiKeyAction} from "ddei-framework";
 import {DDeiEnumOperateState} from "ddei-framework";
 import {DDeiAbstractShape} from "ddei-framework";
-import { cloneDeep } from 'lodash';
+import { cloneDeep } from 'ddei-framework';
 /**
  * 键行为:开启快捷编辑
  * 开启快捷编辑

@@ -59,7 +59,7 @@
 <script lang="ts">
 import {DDeiEditorUtil} from "ddei-framework";
 import {DDeiEditor} from "ddei-framework";
-import { cloneDeep, first } from "lodash";
+import { cloneDeep } from "ddei-framework";
 import {DDeiUtil} from "ddei-framework";
 import {DDeiAbstractShape} from "ddei-framework";
 import {DDeiEditorArrtibute } from "ddei-framework";

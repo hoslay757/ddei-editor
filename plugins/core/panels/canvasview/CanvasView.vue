@@ -16,7 +16,7 @@ import {DDeiEnumOperateState} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiEnumState} from "ddei-framework";
 import {DDeiUtil} from "ddei-framework";
-import { throttle } from "lodash";
+import { throttle } from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 
 export default {

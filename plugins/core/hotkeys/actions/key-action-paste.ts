@@ -7,13 +7,13 @@ import {DDeiStage} from "ddei-framework";
 import {DDeiConfig} from "ddei-framework";
 import {DDeiAbstractShape} from "ddei-framework";
 import {DDeiTable} from "ddei-framework";
-import { Matrix3 } from 'three';
+import { Matrix3 } from 'ddei-framework';
 import {DDeiEnumOperateType} from "ddei-framework";
 import {DDeiPolygon} from "ddei-framework";
 import {DDeiLink} from "ddei-framework";
 import {DDeiModelLink} from "ddei-framework";
 import { DDeiEditorState, DDeiEditorUtil } from "ddei-framework";
-import {cloneDeep} from "lodash"
+import {cloneDeep} from "ddei-framework"
 /**
  * 键行为:粘贴
  * 粘贴剪切板内容

@@ -77,7 +77,7 @@ import { DDeiEditor, DDeiEditorEnumBusCommandType, DDeiUtil } from "ddei-framewo
 import {DDeiEditorUtil} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
-import { debounce } from "lodash";
+import { debounce } from "ddei-framework";
 
 export default {
   name: "ddei-ext-panel-search",

@@ -34,7 +34,7 @@
 import { DDeiEditor, DDeiEnumControlState, DDeiUtil } from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
 import { DDeiAbstractShape } from "ddei-framework";
-import { clone } from "lodash";
+import { clone } from "ddei-framework";
 import { DDeiEnumBusCommandType } from "ddei-framework";
 
 export default {

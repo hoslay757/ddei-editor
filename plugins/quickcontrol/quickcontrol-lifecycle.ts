@@ -1,5 +1,5 @@
 import { DDeiLifeCycle, DDeiEnumControlState,DDeiFuncData, DDeiEditorUtil, DDeiUtil, DDeiFuncCallResult } from "ddei-framework";
-import {debounce} from 'lodash';
+import {debounce} from 'ddei-framework';
 
 class DDeiExtSearchLifeCycle extends DDeiLifeCycle {
   

@@ -18,7 +18,7 @@
 <script lang="ts">
 import { DDeiAbstractShape } from "ddei-framework";
 import { DDeiEditorUtil, DDeiEnumOperateType, DDeiEnumBusCommandType } from "ddei-framework";
-import { clone } from "lodash"
+import { clone } from "ddei-framework"
 import DialogBase from "./dialog"
 
 export default {
