@@ -120,7 +120,7 @@ class DDeiKeyActionRevoke extends DDeiKeyAction {
                   ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
                   ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts)
                   ddInstance.bus.executeAll();
-
+                  DDeiEditorUtil.invokeCallbackFunc("EVENT_CONTENT_CHANGE_AFTER", "CHANGE", null, ddInstance)
                   return true;
                 }
               }

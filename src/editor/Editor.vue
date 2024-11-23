@@ -272,6 +272,7 @@ export default {
 
    
     changeFileModifyDirty() {
+      DDeiUtil.invokeCallbackFunc("EVENT_CONTENT_CHANGE_AFTER", "CHANGE", null, this.editor.ddInstance)
       let action: DDeiEditorCommandFileDirty =
         DDeiEditorCommandFileDirty.newInstance();
       return action.action(
