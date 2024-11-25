@@ -122,7 +122,7 @@ export default {
       //读取缓存位置
       let cachePos = null;
       if (this.options?.drag == 1) {
-        cachePos = localStorage.getItem("pos-" + this.editor.id + "-ddei-core-panel-toolbox-simple")
+        cachePos = DDeiUtil.getLocalStorageData("pos-" + this.editor.id + "-ddei-core-panel-toolbox-simple")
       }
       if (!cachePos) {
         //位置
@@ -430,7 +430,7 @@ export default {
     boxDragEnd(e) {
       if (this.editor.dragPart) {
         let posJson = { left: this.$refs['toolbox'].offsetLeft, top: this.$refs['toolbox'].offsetTop}
-        localStorage.setItem("pos-" + this.editor.id + "-ddei-core-panel-toolbox-simple", JSON.stringify(posJson))
+        DDeiUtil.setLocalStorageData("pos-" + this.editor.id + "-ddei-core-panel-toolbox-simple", JSON.stringify(posJson))
         this.$refs['toolbox'].style.userSelect = "";
         this.$refs['toolbox'].style.pointerEvents = "";
         this.$refs['toolbox'].children[0].style.backgroundColor = "";

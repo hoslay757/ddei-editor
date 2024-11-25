@@ -1335,7 +1335,7 @@ var __publicField3 = (obj, key, value) => {
   display: inline-flex;
   align-items: center;
 }
-.ddei-core-panel-toolbox-simple[data-v-bd214554] {
+.ddei-core-panel-toolbox-simple[data-v-a92a1427] {
   text-align: center;
   position: absolute;
   z-index: 99999;
@@ -1348,7 +1348,7 @@ var __publicField3 = (obj, key, value) => {
   justify-content: start;
   align-items: center;
 }
-.ddei-core-panel-toolbox-simple .item[data-v-bd214554] {
+.ddei-core-panel-toolbox-simple .item[data-v-a92a1427] {
   width: 30px;
   height: 30px;
   border-radius: 3px;
@@ -1356,51 +1356,51 @@ var __publicField3 = (obj, key, value) => {
   justify-content: center;
   align-items: center;
 }
-.ddei-core-panel-toolbox-simple .item > img[data-v-bd214554] {
+.ddei-core-panel-toolbox-simple .item > img[data-v-a92a1427] {
   margin-top: 2px;
   margin-left: 2px;
 }
-.ddei-core-panel-toolbox-simple .item[data-v-bd214554]:hover {
+.ddei-core-panel-toolbox-simple .item[data-v-a92a1427]:hover {
   background-color: #e2dede;
   cursor: pointer;
 }
-.ddei-core-panel-toolbox-simple .item-icon-html[data-v-bd214554] {
+.ddei-core-panel-toolbox-simple .item-icon-html[data-v-a92a1427] {
   width: 30px;
   height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.ddei-core-panel-toolbox-simple .item-icon-html[data-v-bd214554] > * {
+.ddei-core-panel-toolbox-simple .item-icon-html[data-v-a92a1427] > * {
   width: 28px !important;
   height: 28px !important;
 }
-.ddei-core-panel-toolbox-simple .item-selected[data-v-bd214554] {
+.ddei-core-panel-toolbox-simple .item-selected[data-v-a92a1427] {
   background-color: #e2dede;
 }
-.ddei-core-panel-toolbox-simple .item-block[data-v-bd214554] {
+.ddei-core-panel-toolbox-simple .item-block[data-v-a92a1427] {
   width: 10px;
   height: 10px;
 }
-.ddei-core-panel-toolbox-simple .item-drag[data-v-bd214554] {
+.ddei-core-panel-toolbox-simple .item-drag[data-v-a92a1427] {
   width: 100%;
   height: 10px;
   background-color: #efefef;
 }
-.ddei-core-panel-toolbox-simple .item-drag[data-v-bd214554]:hover {
+.ddei-core-panel-toolbox-simple .item-drag[data-v-a92a1427]:hover {
   background-color: var(--dot);
   cursor: grab;
 }
-.ddei-core-panel-toolbox-simple .item-drag-2[data-v-bd214554] {
+.ddei-core-panel-toolbox-simple .item-drag-2[data-v-a92a1427] {
   height: 100%;
   width: 10px;
   background-color: #efefef;
 }
-.ddei-core-panel-toolbox-simple .item-drag-2[data-v-bd214554]:hover {
+.ddei-core-panel-toolbox-simple .item-drag-2[data-v-a92a1427]:hover {
   background-color: var(--dot);
   cursor: grab;
 }
-.ddei-core-panel-topmenu-simple[data-v-52f75ccc] {
+.ddei-core-panel-topmenu-simple[data-v-62fb5b38] {
   text-align: center;
   position: absolute;
   color: var(--text);
@@ -1415,7 +1415,7 @@ var __publicField3 = (obj, key, value) => {
   justify-content: start;
   align-items: center;
 }
-.ddei-core-panel-topmenu-simple .item[data-v-52f75ccc] {
+.ddei-core-panel-topmenu-simple .item[data-v-62fb5b38] {
   min-width: 60px;
   padding: 0 10px;
   height: 24px;
@@ -1427,37 +1427,37 @@ var __publicField3 = (obj, key, value) => {
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
-.ddei-core-panel-topmenu-simple .item > div[data-v-52f75ccc] {
+.ddei-core-panel-topmenu-simple .item > div[data-v-62fb5b38] {
   width: 100%;
 }
-.ddei-core-panel-topmenu-simple .item[data-v-52f75ccc]:hover {
+.ddei-core-panel-topmenu-simple .item[data-v-62fb5b38]:hover {
   background-color: #e2dede;
   cursor: pointer;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
-.ddei-core-panel-topmenu-simple .item-selected[data-v-52f75ccc] {
+.ddei-core-panel-topmenu-simple .item-selected[data-v-62fb5b38] {
   background-color: #e2dede;
 }
-.ddei-core-panel-topmenu-simple .item-block[data-v-52f75ccc] {
+.ddei-core-panel-topmenu-simple .item-block[data-v-62fb5b38] {
   width: 10px;
   height: 10px;
 }
-.ddei-core-panel-topmenu-simple .item-drag[data-v-52f75ccc] {
+.ddei-core-panel-topmenu-simple .item-drag[data-v-62fb5b38] {
   width: 100%;
   height: 10px;
   background-color: #efefef;
 }
-.ddei-core-panel-topmenu-simple .item-drag[data-v-52f75ccc]:hover {
+.ddei-core-panel-topmenu-simple .item-drag[data-v-62fb5b38]:hover {
   background-color: var(--dot);
   cursor: grab;
 }
-.ddei-core-panel-topmenu-simple .item-drag-2[data-v-52f75ccc] {
+.ddei-core-panel-topmenu-simple .item-drag-2[data-v-62fb5b38] {
   height: 100%;
   width: 10px;
   background-color: #efefef;
 }
-.ddei-core-panel-topmenu-simple .item-drag-2[data-v-52f75ccc]:hover {
+.ddei-core-panel-topmenu-simple .item-drag-2[data-v-62fb5b38]:hover {
   background-color: var(--dot);
   cursor: grab;
 }
@@ -8517,6 +8517,49 @@ to {
   const chromeReg = /Chrome/;
   const ytestReg = /(y+)/;
   const _DDeiUtil = class _DDeiUtil2 {
+    //用于接管存取方法
+    static setLocalStorageData(key, value) {
+      if (window.setLocalStorageData) {
+        window.setLocalStorageData(key, value);
+      } else {
+        try {
+          if (localStorage) {
+            localStorage.setItem(key, value);
+          }
+        } catch (e) {
+          console.warn("No Access LocalStorage");
+        }
+      }
+    }
+    static getLocalStorageData(key) {
+      if (window.getLocalStorageData) {
+        return window.getLocalStorageData(key);
+      } else {
+        try {
+          if (localStorage) {
+            return localStorage.getItem(key);
+          } else {
+            return null;
+          }
+        } catch (e) {
+          console.warn("No Access LocalStorage");
+          return null;
+        }
+      }
+    }
+    static removeLocalStorageData(key) {
+      if (window.removeLocalStorageData) {
+        window.removeLocalStorageData(key);
+      } else {
+        try {
+          if (localStorage) {
+            localStorage.removeItem(key);
+          }
+        } catch (e) {
+          console.warn("No Access LocalStorage");
+        }
+      }
+    }
     /**
      * 计算文字的高度和宽度
      */
@@ -9788,7 +9831,7 @@ to {
     // 16进制编码转rgb
     static hex2rgb(hex) {
       let hexNum = hex.substring(1);
-      hexNum = "0x" + (hexNum.length < 6 ? repeatLetter(hexNum, 2) : hexNum);
+      hexNum = "0x" + (hexNum.length < 6 ? _DDeiUtil2.repeatLetter(hexNum, 2) : hexNum);
       let r = hexNum >> 16;
       let g = hexNum >> 8 & "0xff";
       let b = hexNum & "0xff";
@@ -9796,7 +9839,7 @@ to {
     }
     static hex2ddeicolor(hex) {
       let hexNum = hex.substring(1);
-      hexNum = "0x" + (hexNum.length < 6 ? repeatLetter(hexNum, 2) : hexNum);
+      hexNum = "0x" + (hexNum.length < 6 ? _DDeiUtil2.repeatLetter(hexNum, 2) : hexNum);
       let r = hexNum >> 16;
       let g = hexNum >> 8 & "0xff";
       let b = hexNum & "0xff";
@@ -9819,6 +9862,7 @@ to {
     // rgb转16进制
     static rgb2hex(color) {
       if (color) {
+        color = color.trim();
         if (color.toLowerCase().startsWith("rgb")) {
           let rgb = color.split(",");
           let r = parseInt(rgb[0].split("(")[1]);
@@ -10965,7 +11009,7 @@ to {
      * 读取最近写入颜色
      */
     static readRecentlyChooseColors() {
-      let colorStrs = localStorage.getItem("ddei-recently-choose-colors");
+      let colorStrs = _DDeiUtil2.getLocalStorageData("ddei-recently-choose-colors");
       if (colorStrs) {
         let colors = colorStrs.split(",");
         _DDeiUtil2.recentlyChooseColors = colors;
@@ -10985,7 +11029,7 @@ to {
       if (_DDeiUtil2.recentlyChooseColors.length > 10) {
         _DDeiUtil2.recentlyChooseColors.splice(10, 1);
       }
-      localStorage.setItem("ddei-recently-choose-colors", _DDeiUtil2.recentlyChooseColors.toString());
+      _DDeiUtil2.setLocalStorageData("ddei-recently-choose-colors", _DDeiUtil2.recentlyChooseColors.toString());
     }
     static canvasToImage(canvas) {
       return new Promise((resolve, rejected) => {
@@ -11031,7 +11075,7 @@ to {
           if (outRect.height * rat1 > height * rat1) {
             scaleH = height / outRect.height;
           }
-          canvas.setAttribute("style", "-webkit-font-smoothing:antialiased;-moz-transform-origin:left top;-moz-transform:scale(" + 1 / rat2 + ");display:block;zoom:" + 1 / rat2);
+          canvas.setAttribute("style", "-webkit-font-smoothing:antialiased;-moz-transform-origin:left top;-moz-transform:scale(" + 1 / rat2 + ");display:block;-webkit-transform:scale(" + 1 / rat2 + ")");
           if (scaleW != 1 || scaleH != 1) {
             canvas.setAttribute("width", width * rat1 + addWidth);
             canvas.setAttribute("height", height * rat1 + addWidth);
@@ -11070,7 +11114,7 @@ to {
           ddInstance.render.ratio = rat1;
           let editorId = _DDeiUtil2.getEditorId(ddInstance);
           let containerDiv = document.getElementById(editorId + "_ddei_cut_img_div");
-          canvas.setAttribute("style", "-webkit-font-smoothing:antialiased;-moz-transform-origin:left top;-moz-transform:scale(" + 1 / rat1 + ");display:block;zoom:" + 1 / rat1);
+          canvas.setAttribute("style", "-webkit-font-smoothing:antialiased;-moz-transform-origin:left top;-moz-transform:scale(" + 1 / rat1 + ");display:block;-webkit-transform:scale(" + 1 / rat1 + ")");
           canvas.setAttribute("width", width * rat1);
           canvas.setAttribute("height", height * rat1);
           containerDiv.appendChild(canvas);
@@ -20502,7 +20546,7 @@ to {
         let addWidth = 2 * lineOffset;
         let editorId = DDeiUtil$1.getEditorId(ddInstance);
         let containerDiv = document.getElementById(editorId + "_ddei_cut_img_div");
-        canvas.setAttribute("style", "-webkit-font-smoothing:antialiased;-moz-transform-origin:left top;-moz-transform:scale(" + 1 / rat1 + ");display:block;zoom:" + 1 / rat1);
+        canvas.setAttribute("style", "-webkit-font-smoothing:antialiased;-moz-transform-origin:left top;-moz-transform:scale(" + 1 / rat1 + ");display:block;-webkit-transform:scale(" + 1 / rat1 + ")");
         let cW = (outRect.width + addWidth) * rat1;
         let cH = (outRect.height + addWidth) * rat1;
         canvas.setAttribute("width", cW);
@@ -26839,7 +26883,7 @@ to {
       let rat1 = this.ddRender.ratio;
       if (!this.tempCanvas) {
         this.tempCanvas = document.createElement("canvas");
-        this.tempCanvas.setAttribute("style", "pointer-events:none;position:absolute;-webkit-font-smoothing:antialiased;-moz-transform-origin:left top;-moz-transform:scale(" + 1 / rat1 + ");display:block;scale:" + 1 / rat1);
+        this.tempCanvas.setAttribute("style", "pointer-events:none;position:absolute;-webkit-font-smoothing:antialiased;-moz-transform-origin:left top;-moz-transform:scale(" + 1 / rat1 + ");-webkit-transform:scale(" + 1 / rat1 + ");display:block;");
       }
       let stageRatio2 = (_a3 = this.stage) == null ? void 0 : _a3.getStageRatio();
       let tempCanvas = this.tempCanvas;
@@ -27769,7 +27813,7 @@ to {
       let rat1 = this.ddRender.ratio;
       if (!this.tempCanvas) {
         this.tempCanvas = document.createElement("canvas");
-        this.tempCanvas.setAttribute("style", "pointer-events:none;position:absolute;-webkit-font-smoothing:antialiased;-moz-transform-origin:left top;-moz-transform:scale(" + 1 / rat1 + ");display:block;scale:" + 1 / rat1);
+        this.tempCanvas.setAttribute("style", "pointer-events:none;position:absolute;-webkit-font-smoothing:antialiased;-moz-transform-origin:left top;-moz-transform:scale(" + 1 / rat1 + ");-webkit-transform:scale(" + 1 / rat1 + ");display:block;");
       }
       let tempCanvas = this.tempCanvas;
       let pvs2 = this.model.operatePVS ? this.model.operatePVS : this.model.pvs;
@@ -27781,8 +27825,6 @@ to {
       outRect.y1 += weight;
       outRect.width += 2 * weight;
       outRect.height += 2 * weight;
-      tempCanvas.style.width = outRect.width;
-      tempCanvas.style.height = outRect.height;
       tempCanvas.setAttribute("width", outRect.width * rat1);
       tempCanvas.setAttribute("height", outRect.height * rat1);
       let tempCtx = tempCanvas.getContext("2d", { willReadFrequently: true });
@@ -27911,7 +27953,8 @@ to {
           this.tempCanvas.style.zIndex = this.tempZIndex;
           this.tempCanvas.style.left = this.model.cpv.x * stageRatio2 + this.model.stage.wpv.x - this.tempCanvas.offsetWidth / 2 - ruleWeight + "px";
           this.tempCanvas.style.top = this.model.cpv.y * stageRatio2 + this.model.stage.wpv.y - this.tempCanvas.offsetHeight / 2 - ruleWeight + "px";
-          let transform = "";
+          let rat1 = this.ddRender.ratio;
+          let transform = " scale(" + 1 / rat1 + ")";
           if (this.model.mirrorX) {
             transform += " rotateY(180deg)";
           }
@@ -33252,7 +33295,7 @@ to {
   const FONTS = [];
   const loadFonts = function() {
     let fontData = null;
-    let fontJSON = localStorage.getItem("DDEI-CACHE-FONT");
+    let fontJSON = DDeiUtil$1.getLocalStorageData("DDEI-CACHE-FONT");
     if (fontJSON) {
       fontData = JSON.parse(fontJSON);
       fontData.forEach((fd) => {
@@ -33270,16 +33313,13 @@ to {
                 font.isSystemDefault = true;
               }
               FONTS.push(font);
-              localStorage.setItem("DDEI-CACHE-FONT", JSON.stringify(FONTS));
+              DDeiUtil$1.setLocalStorageData("DDEI-CACHE-FONT", JSON.stringify(FONTS));
             }
           });
         });
       }
     }
   };
-  setTimeout(() => {
-    loadFonts();
-  }, 500);
   class DDeiFuncData {
     constructor(name, sort, func) {
       __publicField2(this, "name", "");
@@ -34133,7 +34173,7 @@ to {
       var _a3;
       if (!themeName) {
         if (this.GLOBAL_LOCAL_CACHE_THEME) {
-          themeName = localStorage.getItem("ddei-theme-" + this.id);
+          themeName = DDeiUtil$1.getLocalStorageData("ddei-theme-" + this.id);
         }
       }
       let finded = false;
@@ -34181,9 +34221,9 @@ to {
         this.ddInstance.stage.render.refresh = true;
       }
       if (this.GLOBAL_LOCAL_CACHE_THEME) {
-        let curInsTheme = localStorage.getItem("ddei-theme-" + this.id);
+        let curInsTheme = DDeiUtil$1.getLocalStorageData("ddei-theme-" + this.id);
         if (!curInsTheme || curInsTheme != name) {
-          localStorage.setItem("ddei-theme-" + this.id, name);
+          DDeiUtil$1.setLocalStorageData("ddei-theme-" + this.id, name);
         }
       }
     }
@@ -34832,7 +34872,7 @@ to {
      * 读取最近工具栏
      */
     static readRecentlyToolGroups() {
-      let groups = localStorage.getItem("ddei-recently-tool-groups");
+      let groups = DDeiUtil$1.getLocalStorageData("ddei-recently-tool-groups");
       if (groups) {
         try {
           _DDeiEditorUtil2.recentlyToolGroups = JSON.parse(groups);
@@ -34850,7 +34890,7 @@ to {
           _DDeiEditorUtil2.recentlyToolGroups.push({ id: group2.id, expand: group2.expand });
         }
       });
-      localStorage.setItem("ddei-recently-tool-groups", JSON.stringify(_DDeiEditorUtil2.recentlyToolGroups));
+      DDeiUtil$1.setLocalStorageData("ddei-recently-tool-groups", JSON.stringify(_DDeiEditorUtil2.recentlyToolGroups));
     }
     /**
     * 获取线的初始化JSON定义
@@ -35717,8 +35757,8 @@ to {
             let promiseArr = [];
             let ddInstance = editor.ddInstance;
             editor.icons = {};
-            editor == null ? void 0 : editor.controls.forEach((controlDefine) => {
-              let cacheData = localStorage.getItem("ICON-CACHE-" + controlDefine.id);
+            editor.controls.forEach((controlDefine) => {
+              let cacheData = DDeiUtil$1.getLocalStorageData("ICON-CACHE-" + controlDefine.id);
               if (cacheData) {
                 editor.icons[controlDefine.id] = cacheData;
                 return;
@@ -35771,7 +35811,7 @@ to {
                     let canvas = document.createElement("canvas");
                     _DDeiEditorUtil2.drawModelsToCanvas(models, outRect, canvas);
                     let dataURL = canvas.toDataURL("image/png");
-                    localStorage.setItem("ICON-CACHE-" + controlDefine.id, dataURL);
+                    DDeiUtil$1.setLocalStorageData("ICON-CACHE-" + controlDefine.id, dataURL);
                     editor.icons[controlDefine.id] = dataURL;
                   } catch (e) {
                     if (editor.debug) {
@@ -35801,7 +35841,7 @@ to {
       if ((models == null ? void 0 : models.length) > 0) {
         let stage2 = models[0].stage;
         let rat1 = (_a3 = stage2.ddInstance) == null ? void 0 : _a3.render.ratio;
-        canvas.setAttribute("style", "-webkit-font-smoothing:antialiased;-moz-transform-origin:left top;-moz-transform:scale(" + 1 / rat1 + ");display:block;zoom:" + 1 / rat1);
+        canvas.setAttribute("style", "-webkit-font-smoothing:antialiased;-moz-transform-origin:left top;-moz-transform:scale(" + 1 / rat1 + ");display:block;-webkit-transform:scale(" + 1 / rat1 + ");");
         let ctx = canvas.getContext("2d", { willReadFrequently: true });
         let width = (outRect.width + 4) * rat1;
         let height = (outRect.height + 4) * rat1;
@@ -35854,7 +35894,7 @@ to {
     static clearControlIcons(editor) {
       editor.icons = {};
       editor == null ? void 0 : editor.controls.forEach((controlDefine) => {
-        localStorage.removeItem("ICON-CACHE-" + controlDefine.id);
+        DDeiUtil$1.removeLocalStorageData("ICON-CACHE-" + controlDefine.id);
       });
     }
     /**
@@ -37936,6 +37976,7 @@ to {
               }
             });
             bus.executeAll();
+            DDeiUtil$1.invokeCallbackFunc("EVENT_CONTENT_CHANGE_AFTER", "CHANGE", null, bus.ddInstance);
           }
         }
         return true;
@@ -40619,7 +40660,7 @@ to {
      * @returns 
      */
     static newInstance() {
-      return new DDeiEditorCommandFileDirty({ code: DDeiEditorEnumBusCommandType.RefreshEditorParts, name: "", desc: "" });
+      return new DDeiEditorCommandFileDirty({ code: DDeiEditorEnumBusCommandType.FileDirty, name: "", desc: "" });
     }
   }
   const __vite_glob_0_3$4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
@@ -47814,7 +47855,7 @@ to {
         }
         let cachePos = null;
         if (((_f = this.options) == null ? void 0 : _f.drag) == 1) {
-          cachePos = localStorage.getItem("pos-" + this.editor.id + "-ddei-core-panel-toolbox-simple");
+          cachePos = DDeiUtil.getLocalStorageData("pos-" + this.editor.id + "-ddei-core-panel-toolbox-simple");
         }
         if (!cachePos) {
           switch ((_g = this.options) == null ? void 0 : _g.position) {
@@ -48087,7 +48128,7 @@ to {
       boxDragEnd(e) {
         if (this.editor.dragPart) {
           let posJson = { left: this.$refs["toolbox"].offsetLeft, top: this.$refs["toolbox"].offsetTop };
-          localStorage.setItem("pos-" + this.editor.id + "-ddei-core-panel-toolbox-simple", JSON.stringify(posJson));
+          DDeiUtil.setLocalStorageData("pos-" + this.editor.id + "-ddei-core-panel-toolbox-simple", JSON.stringify(posJson));
           this.$refs["toolbox"].style.userSelect = "";
           this.$refs["toolbox"].style.pointerEvents = "";
           this.$refs["toolbox"].children[0].style.backgroundColor = "";
@@ -48141,7 +48182,7 @@ to {
       }
     }
   };
-  const ToolboxSimple_vue_vue_type_style_index_0_scoped_bd214554_lang = "";
+  const ToolboxSimple_vue_vue_type_style_index_0_scoped_a92a1427_lang = "";
   const _hoisted_1$W = ["title", "onMouseenter", "onMousedown", "onClick"];
   const _hoisted_2$G = ["innerHTML"];
   const _hoisted_3$D = ["src"];
@@ -48192,7 +48233,7 @@ to {
       _cache[2] || (_cache[2] = vue.createElementVNode("div", { class: "item-block" }, null, -1))
     ], 544)) : vue.createCommentVNode("", true);
   }
-  const ToolboxSimple = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["render", _sfc_render$W], ["__scopeId", "data-v-bd214554"]]);
+  const ToolboxSimple = /* @__PURE__ */ _export_sfc(_sfc_main$W, [["render", _sfc_render$W], ["__scopeId", "data-v-a92a1427"]]);
   const _DDeiCoreToolboxSimplePanel = class _DDeiCoreToolboxSimplePanel extends DDeiPluginBase {
     constructor() {
       super(...arguments);
@@ -48566,7 +48607,7 @@ to {
         }
         let cachePos = null;
         if (((_f = this.options) == null ? void 0 : _f.drag) == 1) {
-          cachePos = localStorage.getItem("pos-" + this.editor.id + "-ddei-core-panel-topmenu-simple");
+          cachePos = DDeiUtil.getLocalStorageData("pos-" + this.editor.id + "-ddei-core-panel-topmenu-simple");
         }
         if (!cachePos) {
           switch ((_g = this.options) == null ? void 0 : _g.position) {
@@ -48675,7 +48716,7 @@ to {
       boxDragEnd(e) {
         if (this.editor.dragPart) {
           let posJson = { left: this.$refs["topmenu"].offsetLeft, top: this.$refs["topmenu"].offsetTop };
-          localStorage.setItem("pos-" + this.editor.id + "-ddei-core-panel-topmenu-simple", JSON.stringify(posJson));
+          DDeiUtil.setLocalStorageData("pos-" + this.editor.id + "-ddei-core-panel-topmenu-simple", JSON.stringify(posJson));
           this.$refs["topmenu"].style.userSelect = "";
           this.$refs["topmenu"].style.pointerEvents = "";
           this.$refs["topmenu"].children[0].style.backgroundColor = "";
@@ -48692,7 +48733,7 @@ to {
       }
     }
   };
-  const TopMenuSimple_vue_vue_type_style_index_0_scoped_52f75ccc_lang = "";
+  const TopMenuSimple_vue_vue_type_style_index_0_scoped_62fb5b38_lang = "";
   const _hoisted_1$V = { class: "item" };
   const _hoisted_2$F = ["onClick"];
   const _hoisted_3$C = ["onClick"];
@@ -48751,7 +48792,7 @@ to {
       _cache[6] || (_cache[6] = vue.createElementVNode("div", { class: "item-block" }, null, -1))
     ], 544)) : vue.createCommentVNode("", true);
   }
-  const TopMenuSimple = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["render", _sfc_render$V], ["__scopeId", "data-v-52f75ccc"]]);
+  const TopMenuSimple = /* @__PURE__ */ _export_sfc(_sfc_main$V, [["render", _sfc_render$V], ["__scopeId", "data-v-62fb5b38"]]);
   const _DDeiCoreTopMenuSimplePanel = class _DDeiCoreTopMenuSimplePanel extends DDeiPluginBase {
     constructor() {
       super(...arguments);
@@ -62659,6 +62700,7 @@ to {
                 ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape, null, evt);
                 ddInstance.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts);
                 ddInstance.bus.executeAll();
+                DDeiEditorUtil.invokeCallbackFunc("EVENT_CONTENT_CHANGE_AFTER", "CHANGE", null, ddInstance);
                 return true;
               }
             }
@@ -62757,6 +62799,7 @@ to {
                     ddInstance2.bus.push(DDeiEnumBusCommandType.RefreshShape);
                     ddInstance2.bus.push(DDeiEditorEnumBusCommandType.RefreshEditorParts);
                     ddInstance2.bus.executeAll();
+                    DDeiEditorUtil.invokeCallbackFunc("EVENT_CONTENT_CHANGE_AFTER", "CHANGE", null, ddInstance2);
                     return true;
                   }
                 }
@@ -73632,6 +73675,7 @@ to {
         }
         delete control.attrs;
       });
+      loadFonts();
       DDeiEditorUtil.ICONS = ICONS;
     },
     mounted() {
@@ -73703,6 +73747,7 @@ to {
         });
       },
       changeFileModifyDirty() {
+        DDeiUtil.invokeCallbackFunc("EVENT_CONTENT_CHANGE_AFTER", "CHANGE", null, this.editor.ddInstance);
         let action = DDeiEditorCommandFileDirty.newInstance();
         return action.action(
           { state: DDeiFileState.MODIFY },
@@ -84102,6 +84147,7 @@ Body`,
   exports.loadControlByFrom = loadControlByFrom;
   exports.loadControlDefineComposes = loadControlDefineComposes;
   exports.loadControlDefineExt = loadControlDefineExt;
+  exports.loadFonts = loadFonts;
   exports.merge = merge$1;
   exports.ov_link_h_split_point = ov_link_h_split_point;
   exports.ov_link_v_split_point = ov_link_v_split_point;
