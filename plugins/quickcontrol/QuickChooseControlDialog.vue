@@ -281,7 +281,7 @@ export default {
           .text {
             white-space: nowrap;
             text-align: center;
-            font-size: 0.7vw;
+            font-size: 12px;
             font-weight: 400;
             color: var(--toolbox-control-title);
           }

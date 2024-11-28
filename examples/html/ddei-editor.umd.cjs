@@ -1717,16 +1717,16 @@ var __publicField3 = (obj, key, value) => {
   background-color: var(--panel-hover);
   border-radius: 4px;
 }
-.ddei_pv_line_point_combox[data-v-5b25a083] {
+.ddei_pv_line_point_combox[data-v-2dc9ad73] {
   height: 28px;
 }
-.ddei_pv_line_point_combox_disabled .textinput[data-v-5b25a083] {
+.ddei_pv_line_point_combox_disabled .textinput[data-v-2dc9ad73] {
   background-color: var(--panel-background);
   height: 28px;
   justify-content: center;
   align-items: center;
 }
-.ddei_pv_line_point_combox .textinput[data-v-5b25a083] {
+.ddei_pv_line_point_combox .textinput[data-v-2dc9ad73] {
   width: 100%;
   padding-right: 5px;
   border: 0.5px solid var(--panel-border);
@@ -1737,20 +1737,20 @@ var __publicField3 = (obj, key, value) => {
   padding-left: 5px;
   height: 28px;
 }
-.ddei_pv_line_point_combox .textinput[data-v-5b25a083]:hover {
+.ddei_pv_line_point_combox .textinput[data-v-2dc9ad73]:hover {
   border: 1px solid var(--dot);
   box-sizing: border-box;
 }
-.ddei_pv_line_point_combox .textinput .div_input[data-v-5b25a083] {
+.ddei_pv_line_point_combox .textinput .div_input[data-v-2dc9ad73] {
   flex: 1 1 calc(100% - 10px);
   width: calc(100% - 10px);
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.ddei_pv_line_point_combox .textinput div[data-v-5b25a083] {
+.ddei_pv_line_point_combox .textinput div[data-v-2dc9ad73] {
   flex: 0 0 20px;
 }
-.icon[data-v-5b25a083] {
+.icon[data-v-2dc9ad73] {
   font-size: 16px;
 }
 .ddei-pv-line-type-combox[data-v-739c83c3] {
@@ -3514,7 +3514,7 @@ var __publicField3 = (obj, key, value) => {
 .ddei-core-dialog-textalign .content .group .group_content .icon[data-v-fe33bdea] {
   font-size: 28px;
 }
-.ddei-core-dialog-choosecontrol[data-v-5962d4b2] {
+.ddei-core-dialog-choosecontrol[data-v-3576381a] {
   display: none;
   overflow: hidden;
   max-width: 220px;
@@ -3522,7 +3522,7 @@ var __publicField3 = (obj, key, value) => {
   max-height: 220px;
   z-index: 999999;
 }
-.ddei-core-dialog-choosecontrol-content[data-v-5962d4b2] {
+.ddei-core-dialog-choosecontrol-content[data-v-3576381a] {
   max-width: 220px;
   border: 1px solid var(--panel-border);
   background-color: var(--panel-background);
@@ -3533,13 +3533,13 @@ var __publicField3 = (obj, key, value) => {
   overflow-x: hidden;
   user-select: none;
 }
-.ddei-core-dialog-choosecontrol-content-itempanel[data-v-5962d4b2] {
+.ddei-core-dialog-choosecontrol-content-itempanel[data-v-3576381a] {
   display: flex;
   flex-flow: row wrap;
   background: var(--toolbox-background);
   padding: 5px 5px 5px 5px;
 }
-.ddei-core-dialog-choosecontrol-content-itempanel-item[data-v-5962d4b2] {
+.ddei-core-dialog-choosecontrol-content-itempanel-item[data-v-3576381a] {
   flex: 0 0 50px !important;
   height: 45px;
   margin: 5px 0px;
@@ -3549,24 +3549,24 @@ var __publicField3 = (obj, key, value) => {
   align-items: center;
   flex-flow: column;
 }
-.ddei-core-dialog-choosecontrol-content-itempanel-item[data-v-5962d4b2]:hover {
+.ddei-core-dialog-choosecontrol-content-itempanel-item[data-v-3576381a]:hover {
   background: var(--toolbox-control-hover);
   outline: var(--toolbox-control-hover-outline);
   cursor: all-scroll;
 }
-.ddei-core-dialog-choosecontrol-content-itempanel-item .text[data-v-5962d4b2] {
+.ddei-core-dialog-choosecontrol-content-itempanel-item .text[data-v-3576381a] {
   white-space: nowrap;
   text-align: center;
-  font-size: 0.7vw;
+  font-size: 12px;
   font-weight: 400;
   color: var(--toolbox-control-title);
 }
-.ddei-core-dialog-choosecontrol-content-itempanel-item .icon[data-v-5962d4b2] {
+.ddei-core-dialog-choosecontrol-content-itempanel-item .icon[data-v-3576381a] {
   width: 90%;
   height: 90%;
   object-fit: contain;
 }
-.ddei-core-dialog-choosecontrol-content-itempanel-item .icon-html[data-v-5962d4b2] {
+.ddei-core-dialog-choosecontrol-content-itempanel-item .icon-html[data-v-3576381a] {
   width: 50px;
   height: 45px;
   object-fit: contain;
@@ -3574,7 +3574,7 @@ var __publicField3 = (obj, key, value) => {
   justify-content: center;
   align-items: center;
 }
-.ddei-core-dialog-choosecontrol-content-itempanel-item .icon-html[data-v-5962d4b2] > * {
+.ddei-core-dialog-choosecontrol-content-itempanel-item .icon-html[data-v-3576381a] > * {
   width: 28px !important;
   height: 28px !important;
   object-fit: contain;
@@ -5660,7 +5660,7 @@ var __publicField3 = (obj, key, value) => {
   pointer-events: none;
   z-index: 999;
 }
-.ddei-ext-dialog-quickchoosecontrol[data-v-5bda071e] {
+.ddei-ext-dialog-quickchoosecontrol[data-v-6efaf3c8] {
   border: 1px solid var(--panel-border);
   box-shadow: 0px 2px 24px 0px hsla(0, 0%, 0%, 0.25);
   border-radius: 6px;
@@ -5674,13 +5674,13 @@ var __publicField3 = (obj, key, value) => {
   user-select: none;
   color: var(--panel-title);
 }
-.ddei-ext-dialog-quickchoosecontrol-group-itempanel[data-v-5bda071e] {
+.ddei-ext-dialog-quickchoosecontrol-group-itempanel[data-v-6efaf3c8] {
   display: flex;
   flex-flow: row wrap;
   background: var(--toolbox-background);
   padding: 15px 15px 15px 15px;
 }
-.ddei-ext-dialog-quickchoosecontrol-group-itempanel-item[data-v-5bda071e] {
+.ddei-ext-dialog-quickchoosecontrol-group-itempanel-item[data-v-6efaf3c8] {
   flex: 0 0 50px !important;
   height: 45px;
   margin: 5px 0px;
@@ -5690,24 +5690,24 @@ var __publicField3 = (obj, key, value) => {
   align-items: center;
   flex-flow: column;
 }
-.ddei-ext-dialog-quickchoosecontrol-group-itempanel-item[data-v-5bda071e]:hover {
+.ddei-ext-dialog-quickchoosecontrol-group-itempanel-item[data-v-6efaf3c8]:hover {
   background: var(--toolbox-control-hover);
   outline: var(--toolbox-control-hover-outline);
   cursor: all-scroll;
 }
-.ddei-ext-dialog-quickchoosecontrol-group-itempanel-item .text[data-v-5bda071e] {
+.ddei-ext-dialog-quickchoosecontrol-group-itempanel-item .text[data-v-6efaf3c8] {
   white-space: nowrap;
   text-align: center;
-  font-size: 0.7vw;
+  font-size: 12px;
   font-weight: 400;
   color: var(--toolbox-control-title);
 }
-.ddei-ext-dialog-quickchoosecontrol-group-itempanel-item .icon[data-v-5bda071e] {
+.ddei-ext-dialog-quickchoosecontrol-group-itempanel-item .icon[data-v-6efaf3c8] {
   width: 90%;
   height: 90%;
   object-fit: contain;
 }
-.ddei-ext-dialog-quickchoosecontrol-group-itempanel-item .icon-html[data-v-5bda071e] {
+.ddei-ext-dialog-quickchoosecontrol-group-itempanel-item .icon-html[data-v-6efaf3c8] {
   width: 50px;
   height: 45px;
   object-fit: contain;
@@ -5715,7 +5715,7 @@ var __publicField3 = (obj, key, value) => {
   justify-content: center;
   align-items: center;
 }
-.ddei-ext-dialog-quickchoosecontrol-group-itempanel-item .icon-html[data-v-5bda071e] > * {
+.ddei-ext-dialog-quickchoosecontrol-group-itempanel-item .icon-html[data-v-6efaf3c8] > * {
   width: 28px !important;
   height: 28px !important;
   object-fit: contain;
@@ -34558,7 +34558,7 @@ to {
                 initJSON.pvs.push(new Vector3(pvx - sx, pvy - sy, 1));
               });
             } else {
-              initJSON.pvs = [new Vector3(0, 0, 1), new Vector3(ex - sx, ey - sx, 1)];
+              initJSON.pvs = [new Vector3(0, 0, 1), new Vector3(ex - sx, ey - sy, 1)];
             }
             (_d2 = control.spvs) == null ? void 0 : _d2.forEach((spv) => {
               spv.x = (spv.x - sx) * stageRatio2;
@@ -50866,7 +50866,7 @@ to {
       }
     }
   };
-  const QBTLinePointType_vue_vue_type_style_index_0_scoped_5b25a083_lang = "";
+  const QBTLinePointType_vue_vue_type_style_index_0_scoped_2dc9ad73_lang = "";
   const _hoisted_1$N = { class: "div_input" };
   function _sfc_render$N(_ctx, _cache, $props, $setup, $data, $options) {
     return vue.openBlock(), vue.createElementBlock("div", {
@@ -50876,7 +50876,7 @@ to {
         class: "textinput",
         onClick: _cache[0] || (_cache[0] = ($event) => $data.attrDefine && !$data.attrDefine.readonly && $options.showDialog($event))
       }, [
-        vue.createElementVNode("div", _hoisted_1$N, vue.toDisplayString($data.text), 1),
+        vue.createElementVNode("div", _hoisted_1$N, vue.toDisplayString($props.editor.i18n($data.text)), 1),
         _cache[1] || (_cache[1] = vue.createElementVNode("div", { style: { "display": "flex", "justify-content": "center", "align-items": "center" } }, [
           vue.createElementVNode("svg", {
             class: "icon",
@@ -50888,7 +50888,7 @@ to {
       ])
     ], 2);
   }
-  const QBTLinePointType = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$N], ["__scopeId", "data-v-5b25a083"]]);
+  const QBTLinePointType = /* @__PURE__ */ _export_sfc(_sfc_main$N, [["render", _sfc_render$N], ["__scopeId", "data-v-2dc9ad73"]]);
   const _DDeiCoreEditLinePointTypeButton = class _DDeiCoreEditLinePointTypeButton extends DDeiPluginBase {
     constructor() {
       super(...arguments);
@@ -55828,7 +55828,7 @@ to {
       }
     }
   };
-  const ChooseControlDialog_vue_vue_type_style_index_0_scoped_5962d4b2_lang = "";
+  const ChooseControlDialog_vue_vue_type_style_index_0_scoped_3576381a_lang = "";
   const _hoisted_1$o = ["id"];
   const _hoisted_2$g = { class: "ddei-core-dialog-choosecontrol-content" };
   const _hoisted_3$d = {
@@ -55874,7 +55874,7 @@ to {
       ])
     ], 8, _hoisted_1$o)) : vue.createCommentVNode("", true);
   }
-  const ChooseControlDialog = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$o], ["__scopeId", "data-v-5962d4b2"]]);
+  const ChooseControlDialog = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$o], ["__scopeId", "data-v-3576381a"]]);
   const _DDeiCoreChooseControlDialog = class _DDeiCoreChooseControlDialog extends DDeiPluginBase {
     constructor() {
       super(...arguments);
@@ -82883,7 +82883,7 @@ Body`,
       }
     }
   };
-  const QuickChooseControlDialog_vue_vue_type_style_index_0_scoped_5bda071e_lang = "";
+  const QuickChooseControlDialog_vue_vue_type_style_index_0_scoped_6efaf3c8_lang = "";
   const _hoisted_1$1 = ["id"];
   const _hoisted_2$1 = { class: "ddei-ext-dialog-quickchoosecontrol-group" };
   const _hoisted_3$1 = {
@@ -82931,7 +82931,7 @@ Body`,
       }), 256))
     ], 8, _hoisted_1$1)) : vue.createCommentVNode("", true);
   }
-  const QuickChooseControlDialog = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__scopeId", "data-v-5bda071e"]]);
+  const QuickChooseControlDialog = /* @__PURE__ */ _export_sfc(_sfc_main$1, [["render", _sfc_render$1], ["__scopeId", "data-v-6efaf3c8"]]);
   const _DDeiExtQuickChooseControlDialog = class _DDeiExtQuickChooseControlDialog extends DDeiPluginBase {
     constructor() {
       super(...arguments);
