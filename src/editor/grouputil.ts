@@ -1,5 +1,5 @@
 import {DDeiEditorArrtibute} from 'ddei-framework';
-import { cloneDeep } from 'lodash'
+import { cloneDeep } from 'ddei-framework'
 import {DDeiUtil} from 'ddei-framework';
 import { markRaw } from "vue"
 

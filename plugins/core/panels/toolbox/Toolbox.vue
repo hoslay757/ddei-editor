@@ -59,15 +59,14 @@ import {DDeiEditor} from "ddei-framework";
 import {DDeiEnumOperateType} from "ddei-framework";
 import {DDei} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
-import { cloneDeep, trim } from "lodash";
-import {DDeiAbstractShape} from "ddei-framework";
+import { cloneDeep, trim } from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
 import {DDeiEnumControlState} from "ddei-framework";
-import { Matrix3 } from "three";
+import { Matrix3 } from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 import {DDeiUtil} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
-import { clone } from 'lodash'
+import { clone } from 'ddei-framework'
 import {DDeiEnumOperateState} from "ddei-framework";
 
 export default {

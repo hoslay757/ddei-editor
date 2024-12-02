@@ -26,6 +26,7 @@ import DDeiCore from "@ddei/core";
 import { loadControlByFrom, loadAndSortGroup, loadControlDefineExt } from "./grouputil";
 
 import ICONS from "./icon";
+import { loadFonts } from "ddei-framework";
 import { markRaw } from "vue";
 import { getCurrentInstance, render,createVNode } from "vue"
 import '@/assets/ddei.css'
@@ -179,6 +180,7 @@ export default {
       // }
       delete control.attrs
     })
+    loadFonts();
     DDeiEditorUtil.ICONS = ICONS;
 
   },
@@ -272,6 +274,7 @@ export default {
 
    
     changeFileModifyDirty() {
+      DDeiUtil.invokeCallbackFunc("EVENT_CONTENT_CHANGE_AFTER", "CHANGE", null, this.editor.ddInstance)
       let action: DDeiEditorCommandFileDirty =
         DDeiEditorCommandFileDirty.newInstance();
       return action.action(

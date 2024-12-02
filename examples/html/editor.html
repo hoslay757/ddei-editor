@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDeiEditor-HTML直接引用</title>
+    <script src="./vue.js"></script>
+    <script src="./ddei-editor.umd.cjs"></script>
+</head>
+ 
+<body>
+    <div id="app">
+       <component id="ddei_editor_1" :is="editor" :options="options"></component>
+    </div>
+</body>
+ <script>
+        // 创建 Vue 应用
+       const app = Vue.createApp({
+        data () {
+          return {
+            editor: window["ddei-editor"].DDeiEditorView,
+            options:options = {
+              currentLayout: "ddei-core-layout-simple",
+              config: { 
+                 "grid": 0,
+                 "background": { color: "blue", opacity: 0.1 }, 
+                 initData: {
+                   controls: [
+                     {
+                       model: "102010",
+                       text: "初始化图形",
+                     }
+                   ]
+                 }
+               }
+            }
+          }
+        }
+       });
+        
+        app.mount('#app');
+    </script>
+</html>
+
+    

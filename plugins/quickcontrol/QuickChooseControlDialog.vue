@@ -18,7 +18,7 @@
 <script lang="ts">
 import { DDeiAbstractShape } from "ddei-framework";
 import { DDeiEditorUtil, DDeiEnumOperateType, DDeiEnumBusCommandType } from "ddei-framework";
-import { clone } from "lodash"
+import { clone } from "ddei-framework"
 import DialogBase from "./dialog"
 
 export default {
@@ -281,7 +281,7 @@ export default {
           .text {
             white-space: nowrap;
             text-align: center;
-            font-size: 0.7vw;
+            font-size: 12px;
             font-weight: 400;
             color: var(--toolbox-control-title);
           }

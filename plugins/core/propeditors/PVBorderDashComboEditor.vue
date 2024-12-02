@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { debounce } from "lodash";
+import { debounce } from "ddei-framework";
 import {DDeiEditorArrtibute } from "ddei-framework";
 import {DDeiEditor} from "ddei-framework";
 import {DDeiUtil} from "ddei-framework";

@@ -1,6 +1,6 @@
 import {DDeiPluginBase} from "ddei-framework";
 import { loadControlByFrom, loadAndSortGroup } from "@/editor/grouputil"
-import { cloneDeep } from "lodash"
+import { cloneDeep } from "ddei-framework"
 const control_ctx = import.meta.glob('./control/**', { eager: true })
 const group_ctx = import.meta.glob('./group/**', { eager: true })
 

@@ -5,7 +5,7 @@ import {DDeiEditor} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 import {DDeiUtil} from "ddei-framework";
-import { cloneDeep } from 'lodash'
+import { cloneDeep } from 'ddei-framework'
 
 /**
  * 键行为:记录当前控件的格式

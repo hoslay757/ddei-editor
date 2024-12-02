@@ -46,7 +46,7 @@
 import { DDeiEditor, DDei, DDeiEnumOperateType } from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiConfig} from "ddei-framework";
-import { Matrix3 } from 'three';
+import { Matrix3 } from 'ddei-framework';
 import DialogBase from "./dialog"
 
 export default {

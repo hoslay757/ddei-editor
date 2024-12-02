@@ -3,7 +3,7 @@
     :class="{ 'ddei_pv_line_point_combox': true, 'ddei_pv_line_point_combox_disabled': !attrDefine || attrDefine.readonly }">
     <div class="textinput" @click="attrDefine && !attrDefine.readonly && showDialog($event)">
       <div class="div_input">
-        {{ text }}
+        {{ editor.i18n(text) }}
       </div>
       <div style="display:flex;justify-content: center;align-items: center;">
         <svg class="icon" aria-hidden="true">

@@ -30,11 +30,11 @@ import {DDei} from "ddei-framework";
 import {DDeiEditorState} from "ddei-framework";
 import {DDeiEditorUtil} from "ddei-framework";
 import {DDeiEnumControlState} from "ddei-framework";
-import { Matrix3 } from "three";
+import { Matrix3 } from "ddei-framework";
 import {DDeiEditorEnumBusCommandType} from "ddei-framework";
 import {DDeiUtil} from "ddei-framework";
 import {DDeiEnumBusCommandType} from "ddei-framework";
-import { clone } from 'lodash'
+import { clone } from 'ddei-framework'
 import {DDeiEnumOperateState} from "ddei-framework";
 
 export default {
@@ -122,7 +122,7 @@ export default {
       //读取缓存位置
       let cachePos = null;
       if (this.options?.drag == 1) {
-        cachePos = localStorage.getItem("pos-" + this.editor.id + "-ddei-core-panel-toolbox-simple")
+        cachePos = DDeiUtil.getLocalStorageData("pos-" + this.editor.id + "-ddei-core-panel-toolbox-simple")
       }
       if (!cachePos) {
         //位置
@@ -430,7 +430,7 @@ export default {
     boxDragEnd(e) {
       if (this.editor.dragPart) {
         let posJson = { left: this.$refs['toolbox'].offsetLeft, top: this.$refs['toolbox'].offsetTop}
-        localStorage.setItem("pos-" + this.editor.id + "-ddei-core-panel-toolbox-simple", JSON.stringify(posJson))
+        DDeiUtil.setLocalStorageData("pos-" + this.editor.id + "-ddei-core-panel-toolbox-simple", JSON.stringify(posJson))
         this.$refs['toolbox'].style.userSelect = "";
         this.$refs['toolbox'].style.pointerEvents = "";
         this.$refs['toolbox'].children[0].style.backgroundColor = "";

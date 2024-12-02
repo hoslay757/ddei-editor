@@ -1,5 +1,5 @@
 import { DDeiLifeCycle, DDeiFuncData, DDeiEditorUtil, DDeiUtil, DDeiFuncCallResult, DDeiEditorState } from "ddei-framework";
-import { debounce } from "lodash";
+import { debounce } from "ddei-framework";
 
 class DDeiCoreCanvasLifeCycle extends DDeiLifeCycle {
   
