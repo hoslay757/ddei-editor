@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" ref="editor_div" class="ddei-editor" @contextmenu.prevent @mousedown="mouseDown($event)">
+  <div :id="id" ref="editor_div" class="ddei-editor" @contextmenu.prevent @mousedown="mouseDown($event)" @touchstart="mouseDown($event)">
     <component :is="editor?.getLayout()" :editor="editor" :options="editor?.getLayoutOptions()">
     </component>
     <component :editor="editor" v-for="(item, index) in editor?.getDialogs()" :is="item.dialog" :options="item.options"
