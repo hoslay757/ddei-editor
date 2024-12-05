@@ -1,8 +1,8 @@
 <template>
   <div :id="editor?.id+'_canvas'" ref="middleCanvas" class="ddei-editor-canvasview" @mousedown="mouseDown($event)"
     ondragstart="return false;" @wheel="mouseWheel($event)" @touchstart="touchStart($event)"
-    @touchmove="touchMove($event)" @mousemove="mouseMove($event)" @mouseup="mouseUp($event)" @touchend="touchEnd($event)"
-    @dblclick="canvasDBClick" @contextmenu.prevent>
+    @touchmove="touchMove($event)" @touchend="touchEnd($event)" @mousemove="mouseMove($event)"
+    @mouseup="mouseUp($event)" @dblclick="canvasDBClick" @contextmenu.prevent>
   </div>
 </template>
 
@@ -72,34 +72,36 @@ export default {
      * 画布双击
      */
     canvasDBClick(evt) {
-      let middleCanvas = this.$refs.middleCanvas
-      let middleCanvasPos = DDeiUtil.getDomAbsPosition(middleCanvas);
-      let clientX = evt.clientX || evt.clientX == 0 ? evt.clientX : evt.touches[0].clientX;
-      if (
-        middleCanvasPos.left + 5 <= clientX &&
-        middleCanvasPos.left + middleCanvas.offsetWidth - 5 >= clientX
-      ) {
-        let ddInstance = this.editor.ddInstance;
-        let stage = ddInstance.stage
-        //判断是否在某个控件上
-        
-        let ex = evt.offsetX || evt.offsetX == 0 ? evt.offsetX : evt.touches[0].clientX;
-        let ey = evt.offsetY || evt.offsetY == 0 ? evt.offsetY : evt.touches[0].clientY;
-        ex /= window.remRatio
-        ey /= window.remRatio
+      if(!DDeiUtil.isMobile()){
+        let middleCanvas = this.$refs.middleCanvas
+        let middleCanvasPos = DDeiUtil.getDomAbsPosition(middleCanvas);
+        let clientX = evt.clientX || evt.clientX == 0 ? evt.clientX : evt.touches[0].pageX;
+        if (
+          middleCanvasPos.left + 5 <= clientX &&
+          middleCanvasPos.left + middleCanvas.offsetWidth - 5 >= clientX
+        ) {
+          let ddInstance = this.editor.ddInstance;
+          let stage = ddInstance.stage
+          //判断是否在某个控件上
+          
+          let ex = evt.offsetX || evt.offsetX == 0 ? evt.offsetX : evt.touches[0].pageX;
+          let ey = evt.offsetY || evt.offsetY == 0 ? evt.offsetY : evt.touches[0].pageY;
+          ex /= window.remRatio
+          ey /= window.remRatio
 
-        ex -= stage.wpv.x;
-        ey -= stage.wpv.y;
+          ex -= stage.wpv.x;
+          ey -= stage.wpv.y;
 
-        let stageRatio = stage.getStageRatio()
-        let ex2 = ex / stageRatio
-        let ey2 = ey / stageRatio
+          let stageRatio = stage.getStageRatio()
+          let ex2 = ex / stageRatio
+          let ey2 = ey / stageRatio
 
-        let operateControls = DDeiAbstractShape.findBottomModelsByArea(stage.layers[stage.layerIndex], ex2, ey2, true, true);
-        if (operateControls != null && operateControls.length > 0) {
-          let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_DBL_CLICK", "DBL_CLICK", { models: operateControls, ex: ex, ey: ey }, ddInstance, null)
-          if (rsState == 0 || rsState == 1) {
-            this.editor?.hotkeys['ddei-core-keyaction-quickedit-start']?.action(evt,this.editor.ddInstance);
+          let operateControls = DDeiAbstractShape.findBottomModelsByArea(stage.layers[stage.layerIndex], ex2, ey2, true, true);
+          if (operateControls != null && operateControls.length > 0) {
+            let rsState = DDeiUtil.invokeCallbackFunc("EVENT_CONTROL_DBL_CLICK", "DBL_CLICK", { models: operateControls, ex: ex, ey: ey }, ddInstance, null)
+            if (rsState == 0 || rsState == 1) {
+              this.editor?.hotkeys['ddei-core-keyaction-quickedit-start']?.action(evt,this.editor.ddInstance);
+            }
           }
         }
       }
@@ -141,7 +143,7 @@ export default {
       
       let middleCanvas = this.$refs.middleCanvas
       let middleCanvasPos = DDeiUtil.getDomAbsPosition(middleCanvas);
-      let clientX = evt.clientX || evt.clientX == 0 ? evt.clientX : evt.touches[0].clientX;
+      let clientX = evt.clientX || evt.clientX == 0 ? evt.clientX : evt.touches[0].pageX;
       
       if (
         middleCanvasPos.left + 5 <= clientX &&
@@ -156,8 +158,8 @@ export default {
             let stageRatio = stage.getStageRatio()
             //由于绘制缓存中的文本位置乘以了调整系数，因此这里判断时，需要利用这个系数反向判断
             let scaleSize = DDeiUtil.DRAW_TEMP_CANVAS && rat1 < 2 ? 2 / rat1 : 1
-            let ex = evt.offsetX || evt.offsetX == 0 ? evt.offsetX : evt.touches[0].clientX;
-            let ey = evt.offsetY || evt.offsetY == 0 ? evt.offsetY : evt.touches[0].clientY;
+            let ex = evt.offsetX || evt.offsetX == 0 ? evt.offsetX : evt.touches[0].pageX;
+            let ey = evt.offsetY || evt.offsetY == 0 ? evt.offsetY : evt.touches[0].pageY;
             ex /= window.remRatio
             ey /= window.remRatio
             ex -= stage.wpv.x;
@@ -259,21 +261,21 @@ export default {
           ddInstance.touchData = {
             count:1,
             start:[{
-              clientX: evt.touches[0].clientX,
-              clientY: evt.touches[0].clientY,
+              clientX: evt.touches[0].pageX,
+              clientY: evt.touches[0].pageY,
               pageX: evt.touches[0].pageX,
               pageY: evt.touches[0].pageY,
             }]
           }
           this.mouseDown(evt)
         } else if (evt.touches.length == 2) {
-          let distance = DDeiUtil.getPointDistance(evt.touches[0].clientX, evt.touches[0].clientY, evt.touches[1].clientX, evt.touches[1].clientY)
+          let distance = DDeiUtil.getPointDistance(evt.touches[0].pageX, evt.touches[0].pageY, evt.touches[1].clientX, evt.touches[1].clientY)
           ddInstance.touchData = {
             count: 2,
             strDist: distance,
             start: [{
-              clientX: evt.touches[0].clientX,
-              clientY: evt.touches[0].clientY,
+              clientX: evt.touches[0].pageX,
+              clientY: evt.touches[0].pageY,
               pageX: evt.touches[0].pageX,
               pageY: evt.touches[0].pageY,
             }, {
@@ -288,41 +290,43 @@ export default {
     },
 
     touchMove(evt) {
-      let ddInstance = this.editor.ddInstance;
-      if (ddInstance.touchData?.count == 1) {
-        ddInstance.touchData.current = [
-          {
-            clientX: evt.touches[0].clientX,
-            clientY: evt.touches[0].clientY,
-            pageX: evt.touches[0].pageX,
-            pageY: evt.touches[0].pageY,
-          }
-        ]
-        this.mouseMove(evt)
-      } 
-      //移动画布
-      else if (ddInstance.touchData?.count == 2) {
-        let distance = DDeiUtil.getPointDistance(evt.touches[0].clientX, evt.touches[0].clientY, evt.touches[1].clientX, evt.touches[1].clientY)
-        ddInstance.touchData.upDist = ddInstance.touchData.curDist ? ddInstance.touchData.curDist : ddInstance.touchData.strDist
-        ddInstance.touchData.curDist = distance
-        
-        ddInstance.touchData.up = ddInstance.touchData.current ? ddInstance.touchData.current : ddInstance.touchData.start;
-        ddInstance.touchData.current = [
-          {
-            clientX: evt.touches[0].clientX,
-            clientY: evt.touches[0].clientY,
-            pageX: evt.touches[0].pageX,
-            pageY: evt.touches[0].pageY,
-          },
-          {
-            clientX: evt.touches[1].clientX,
-            clientY: evt.touches[1].clientY,
-            pageX: evt.touches[1].pageX,
-            pageY: evt.touches[1].pageY,
-          }
-        ]
-        this.editor.ddInstance.render.touchWheel(evt);
-        evt.preventDefault();
+      if(DDeiUtil.isMobile()){
+        let ddInstance = this.editor.ddInstance;
+        if (ddInstance.touchData?.count == 1) {
+          ddInstance.touchData.current = [
+            {
+              clientX: evt.touches[0].pageX,
+              clientY: evt.touches[0].pageY,
+              pageX: evt.touches[0].pageX,
+              pageY: evt.touches[0].pageY,
+            }
+          ]
+          this.mouseMove(evt)
+        } 
+        //移动画布
+        else if (ddInstance.touchData?.count == 2) {
+          let distance = DDeiUtil.getPointDistance(evt.touches[0].pageX, evt.touches[0].pageY, evt.touches[1].clientX, evt.touches[1].clientY)
+          ddInstance.touchData.upDist = ddInstance.touchData.curDist ? ddInstance.touchData.curDist : ddInstance.touchData.strDist
+          ddInstance.touchData.curDist = distance
+          
+          ddInstance.touchData.up = ddInstance.touchData.current ? ddInstance.touchData.current : ddInstance.touchData.start;
+          ddInstance.touchData.current = [
+            {
+              clientX: evt.touches[0].pageX,
+              clientY: evt.touches[0].pageY,
+              pageX: evt.touches[0].pageX,
+              pageY: evt.touches[0].pageY,
+            },
+            {
+              clientX: evt.touches[1].clientX,
+              clientY: evt.touches[1].clientY,
+              pageX: evt.touches[1].pageX,
+              pageY: evt.touches[1].pageY,
+            }
+          ]
+          this.editor.ddInstance.render.touchWheel(evt);
+          evt.preventDefault();
+        }
       }
     },
     touchEnd(evt){
@@ -338,15 +342,18 @@ export default {
      * 拖拽元素移动
      */
     mouseMove(e) {
+      
       if (this.editor.state == DDeiEditorState.CONTROL_CREATING) {
         DDeiKeyAction.updateKeyState(e);
 
         let ddInstance = this.editor.ddInstance;
         let stage = ddInstance.stage;
-        let ex = e.offsetX || e.offsetX == 0 ? e.offsetX : e.touches[0].clientX;
-        let ey = e.offsetY || e.offsetY == 0 ? e.offsetY : e.touches[0].clientY;
+        let ex = e.offsetX || e.offsetX == 0 ? e.offsetX : e.touches[0].pageX;
+        let ey = e.offsetY || e.offsetY == 0 ? e.offsetY : e.touches[0].pageY;
         ex /= window.remRatio
         ey /= window.remRatio
+        let ex1 = ex
+        let ey1 = ey
         ex -= stage.wpv.x;
         ey -= stage.wpv.y;
         if (this.editor.creatingControls) {
@@ -400,10 +407,6 @@ export default {
 
               this.editor.bus.push(DDeiEnumBusCommandType.RefreshShape);
             } else {
-              let ex = e.offsetX || e.offsetX == 0 ? e.offsetX : e.touches[0].clientX;
-              let ey = e.offsetY || e.offsetY == 0 ? e.offsetY : e.touches[0].clientY;
-              let ex1 = ex / window.remRatio;
-              let ey1 = ey / window.remRatio;
 
               let rat1 = ddInstance.render?.ratio;
               let canvasWidth = ddInstance.render.canvas.width / rat1;
@@ -436,7 +439,6 @@ export default {
                   { models: selectedModels },
                   e
                 );
-
                 this.editor.bus.push(
                   DDeiEnumBusCommandType.ModelChangePosition,
                   {
@@ -518,8 +520,8 @@ export default {
       if (this.editor.state == DDeiEditorState.CONTROL_CREATING) {
         let ddInstance = this.editor.ddInstance;
         let stage = ddInstance.stage;
-        let ex = (e.offsetX || e.offsetX == 0 ? e.offsetX : e.touches[0].clientX) / window.remRatio;
-        let ey = (e.offsetY || e.offsetY == 0 ? e.offsetY : e.touches[0].clientY) / window.remRatio;
+        let ex = (e.offsetX || e.offsetX == 0 ? e.offsetX : e.touches[0].pageX) / window.remRatio;
+        let ey = (e.offsetY || e.offsetY == 0 ? e.offsetY : e.touches[0].pageY) / window.remRatio;
         ex -= stage.wpv.x;
         ey -= stage.wpv.y;
         let stageRatio = stage.getStageRatio()

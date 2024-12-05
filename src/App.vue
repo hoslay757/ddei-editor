@@ -19,9 +19,19 @@ export default defineComponent({
   name: "APP",
   components: { DDeiEditorView },
   data() {
-    
+    const isMobile = DDeiUtil.isMobile()
+    let exts = []
+    let currentLayout = "ddei-core-layout-simple"
+    if (isMobile){
+      exts = [
+        ]
+      currentLayout = "ddei-core-layout-mobile"
+    }else{
+      exts = [DDeiExtTooltip,
+      DDeiExtQuickStyle]
+    }
     const options = markRaw({
-      currentLayout: "ddei-core-layout-simple",
+      currentLayout: currentLayout,
       config: {
         // ratio: 1.2, //默认缩放比例为120%
         pixel:2, //调整渲染质量
@@ -94,9 +104,10 @@ export default defineComponent({
         DDeiExtSearch.modify((plugin)=>{
           plugin.a = 1
         }),
-        DDeiExtTooltip,
-        DDeiExtQuickStyle,
+        // DDeiExtTooltip,
+        // DDeiExtQuickStyle,
         DDeiExtQuickControl,
+        ...exts
         //配置htmlviewer插件，matchField用于声明图形控件中的属性与config中的key对应字段
         // DDeiExtHtmlViewer.configuration({
         //   matchField: "type", //匹配字段
