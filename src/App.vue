@@ -35,6 +35,7 @@ export default defineComponent({
       config: {
         // ratio: 1.2, //默认缩放比例为120%
         pixel:2, //调整渲染质量
+        // readonly:true,
         // readonly:1,
         // paper:"A6",
         // "mark": "水印文本",

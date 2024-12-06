@@ -103,21 +103,10 @@ export default {
     this.editor.middleWidth = this.$refs.middle.offsetWidth;
     this.editor.middleHeight = this.$refs.middle.offsetHeight;
 
-    let ddInstance = this.editor.ddInstance;
-    if (ddInstance) {
-      let modeName = DDeiUtil.getConfigValue("MODE_NAME", ddInstance);
-      let accessCreate = DDeiUtil.isAccess(
-        DDeiEnumOperateType.CREATE, null, null, modeName,
-        ddInstance
-      );
-      this.toolboxShow = accessCreate
-      let accessEdit = DDeiUtil.isAccess(
-        DDeiEnumOperateType.EDIT, null, null, modeName,
-        ddInstance
-      );
-      this.propertyViewShow = accessEdit
-  
-    }
+    setTimeout(() => {
+      this.editor.ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
+      this.editor.ddInstance.bus.executeAll();
+    }, 100);
   },
   methods: {
     
