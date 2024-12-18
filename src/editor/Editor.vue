@@ -214,6 +214,7 @@ export default {
       });
       let controlInitJSON = DDeiEditorUtil.getModelInitJSON(this.editor.ddInstance, null, initData.controls)
       if (controlInitJSON){
+        debugger
         this.editor.addControls(controlInitJSON)
       }
     }
@@ -247,6 +248,9 @@ export default {
     if(this.editor.needControlIcon){
       DDeiEditorUtil.getControlIcons(this.editor);
     }
+
+    //初始化回调函数
+    DDeiUtil.invokeCallbackFunc("EVENT_EDITOR_INIT", "INIT", null, this.editor.ddInstance)
     if (options?.onMounted) {
       options.onMounted(this.editor)
     }
