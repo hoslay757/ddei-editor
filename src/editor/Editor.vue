@@ -214,7 +214,6 @@ export default {
       });
       let controlInitJSON = DDeiEditorUtil.getModelInitJSON(this.editor.ddInstance, null, initData.controls)
       if (controlInitJSON){
-        debugger
         this.editor.addControls(controlInitJSON)
       }
     }
