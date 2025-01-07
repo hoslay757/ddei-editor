@@ -30,17 +30,18 @@ export default defineComponent({
     }else{
       exts = [DDeiExtTooltip,
         DDeiExtQuickStyle,
-        DDeiCoreCanvasQuickDialog.configuration({
-          changeLevel:{
-            viewer:QuickStyleDemo
-          }
-        }),
+        DDeiCoreCanvasQuickDialog
+        // .configuration({
+        //   changeLevel:{
+        //     viewer:QuickStyleDemo
+        //   }
+        // }),
       ]
     }
     const options = markRaw({
       currentLayout: currentLayout,
       config: {
-        ratio: 0.6, //默认缩放比例为120%
+        ratio: 0.7, //默认缩放比例为120%
         pixel:2, //调整渲染质量
         // readonly:true,
         // readonly:1,
