@@ -1,6 +1,6 @@
 {
   "name": "ddei-editor",
-  "version": "1.2.44",
+  "version": "1.2.45",
   "private": false,
   "type": "module",
   "author": "hoslay <3697355039@qq.com>",
@@ -49,9 +49,6 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
   },
-  "dependencies": {
-    
-  },
   "devDependencies": {
     "@tsconfig/node18": "^18.2.0",
     "@types/node": "^18.17.6",
@@ -63,6 +60,6 @@
     "vite": "^4.4.6",
     "vite-plugin-compression": "^0.5.1",
     "vue-tsc": "^1.8.6",
-    "ddei-framework": "^1.2.44"
+    "ddei-framework": "^1.2.45"
   }
 }

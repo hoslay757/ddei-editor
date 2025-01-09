@@ -4,7 +4,7 @@ import { DDeiCoreToolboxSimplePanel, DDeiCoreTopMenuSimplePanel, DDeiCoreThemeBl
 import { DDeiExtUML } from "@ddei/uml"
 import { DDeiExtSearch } from "@ddei/search"
 import { DDeiFuncCallResult, DDeiUtil, DDeiEditorUtil } from "ddei-framework";
-import DDeiExtQuickStyle from "@ddei/quickstyle"
+import {DDeiExtQuickStyle,DDeiCoreCanvasQuickDialog} from "@ddei/quickstyle"
 import DDeiExtTooltip from "@ddei/tooltip"
 import { DDeiExtQuickControl, QuickChooseControlDialog } from "@ddei/quickcontrol"
 import { defineComponent, markRaw } from "vue";
@@ -13,18 +13,37 @@ import ReplaceDivDemo  from "./ReplaceDivDemo.vue";
 import HtmlTooltipDemo from "./HtmlTooltipDemo.vue";
 import {controls as ControlDefinesDemo,groups as GroupDefinesDemo} from "./controldefinesdemo"
 import TopMenuViewerDemo from "./TopMenuViewerDemo.vue"
+import QuickStyleDemo from "./QuickStyleDemo.vue"
 // import i18nJP from "./langs/ja_JP"
 
 export default defineComponent({
   name: "APP",
   components: { DDeiEditorView },
   data() {
-    
+    const isMobile = DDeiUtil.isMobile()
+    let exts = []
+    let currentLayout = "ddei-core-layout-simple"
+    if (isMobile){
+      exts = [
+        ]
+      currentLayout = "ddei-core-layout-mobile"
+    }else{
+      exts = [DDeiExtTooltip,
+        DDeiExtQuickStyle,
+        DDeiCoreCanvasQuickDialog
+        // .configuration({
+        //   changeLevel:{
+        //     viewer:QuickStyleDemo
+        //   }
+        // }),
+      ]
+    }
     const options = markRaw({
-      currentLayout: "ddei-core-layout-simple",
+      currentLayout: currentLayout,
       config: {
-        // ratio: 1.2, //默认缩放比例为120%
+        ratio: 0.7, //默认缩放比例为120%
         pixel:2, //调整渲染质量
+        // readonly:true,
         // readonly:1,
         // paper:"A6",
         // "mark": "水印文本",
@@ -66,7 +85,13 @@ export default defineComponent({
               // }
             
           ]
-        }
+        },
+        
+      },
+      onMounted: (editor) => {
+        
+        let file = editor.files[editor.currentFileIndex]
+        file.sheets[file.currentSheetIndex].stage.mark = {type:1,data:'新值' }
       },
       // i18n: {  //国际化配置
       //   lang: "ja_JP", //强制设定语言，如果不设置则读取浏览器的语言设置
@@ -94,9 +119,10 @@ export default defineComponent({
         DDeiExtSearch.modify((plugin)=>{
           plugin.a = 1
         }),
-        DDeiExtTooltip,
-        DDeiExtQuickStyle,
+        // DDeiExtTooltip,
+        // DDeiExtQuickStyle,
         DDeiExtQuickControl,
+        ...exts
         //配置htmlviewer插件，matchField用于声明图形控件中的属性与config中的key对应字段
         // DDeiExtHtmlViewer.configuration({
         //   matchField: "type", //匹配字段

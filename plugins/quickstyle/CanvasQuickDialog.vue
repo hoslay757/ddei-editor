@@ -2,7 +2,7 @@
   <div :id="editor?.id + '_' + dialogId" v-show="selectedModels?.size > 0" v-if="forceRefresh"
     @mousedown="closeAllDialog()" class='ddei-core-dialog-quickpop'>
     <div v-if="operateState == 50" class="content">
-      <div class="panel12">
+      <div class="panel12" v-if="validItemCondition(options?.setStyle) && (!options || !options.setStyle || !options.setStyle.viewer)">
         <div class="panel12-content-1">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-fontfamily']"></component>
@@ -60,8 +60,12 @@
           </component>
         </div>
       </div>
-
-      <div class="panel2" :title="editor.i18n('ddei.brush')" style="border-right:none" @click="execBrushAction($event)">
+      <component v-if="validItemCondition(options?.setStyle) && options?.setStyle?.viewer" :is="options.setStyle.viewer"
+        :editor="editor" :options="options" v-bind="options.setStyle">
+      </component>
+      <div class="panel2"
+        v-if="validItemCondition(options?.brush) && (!options || !options.brush || !options.brush.viewer)"
+        :title="editor.i18n('ddei.brush')" style="border-right:none" @click="execBrushAction($event)">
         <div :class="{ 'panel2-content': true, 'brush-selected': editor?.ddInstance?.stage?.brushDataText }">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-brush"></use>
@@ -69,9 +73,13 @@
           <div class="text">{{ editor.i18n('ddei.brush') }}</div>
         </div>
       </div>
+      <component v-if="validItemCondition(options?.brush) && options?.brush?.viewer" :is="options.brush.viewer"
+        :editor="editor" :options="options" v-bind="options.brush">
+      </component>
     </div>
     <div v-if="operateState != 50 && allLine" class="content">
-      <div class="panel6">
+      <div class="panel6"
+        v-if="validItemCondition(options?.linePoint) && (!options || !options.linePoint || !options.linePoint.viewer)">
         <div class="panel6-content1 pointtype">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-linepointtype']" attrCode="sp.type">
@@ -90,7 +98,12 @@
           <div class="text">{{ editor.i18n('ddei.endPoint') }}</div>
         </div>
       </div>
-      <div class="panel6" style="border-left:1px solid #E2E2EB;">
+      <component v-if="validItemCondition(options?.linePoint) && options?.linePoint?.viewer"
+        :is="options.linePoint.viewer" :editor="editor" :options="options" v-bind="options.linePoint">
+      </component>
+      <div class="panel6"
+        v-if="validItemCondition(options?.setStyle) && (!options || !options.setStyle || !options.setStyle.viewer)"
+        style="border-left:1px solid #E2E2EB;">
         <div class="panel6-content type">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-linetype']" attrCode="type" img="icon-link-line">
@@ -117,7 +130,12 @@
           <div class="text">{{ editor.i18n('ddei.lineDash') }}</div>
         </div>
       </div>
-      <div class="panel6" style="border-left:1px solid #E2E2EB;">
+      <component v-if="validItemCondition(options?.setStyle) && options?.setStyle?.viewer" :is="options.setStyle.viewer"
+        :editor="editor" :options="options" v-bind="options.setStyle">
+      </component>
+      <div class="panel6"
+        v-if="validItemCondition(options?.brush) && (!options || !options.brush || !options.brush.viewer)"
+        style="border-left:1px solid #E2E2EB;">
         <div :class="{ 'panel6-content brush': true, 'brush-selected': editor?.ddInstance?.stage?.brushData }"
           @click="execBrushAction($event)">
           <svg class="icon" aria-hidden="true">
@@ -126,10 +144,14 @@
           <div class="text">{{ editor.i18n('ddei.brush') }}</div>
         </div>
       </div>
+      <component v-if="validItemCondition(options?.brush) && options?.brush?.viewer" :is="options.brush.viewer"
+        :editor="editor" :options="options" v-bind="options.brush">
+      </component>
 
     </div>
     <div v-if="operateState != 50 && !allLine" class="content">
-      <div class="panel1">
+      <div class="panel1"
+        v-if="validItemCondition(options?.fontAndText) && (!options || !options.fontAndText || !options.fontAndText.viewer)">
         <div class="panel1-content-1">
           <component :editor="editor" :controlDefine="editor.currentControlDefine"
             :is="editor?.panels['ddei-core-btn-fontfamily']"></component>
@@ -165,7 +187,12 @@
           </component>
         </div>
       </div>
-      <div class="panel2" :title="editor.i18n('ddei.brush') " @click="execBrushAction($event)">
+      <component v-if="validItemCondition(options?.fontAndText) && options?.fontAndText?.viewer"
+        :is="options.fontAndText.viewer" :editor="editor" :options="options" v-bind="options.fontAndText">
+      </component>
+      <div class="panel2"
+        v-if="validItemCondition(options?.brush) && (!options || !options.brush || !options.brush.viewer)"
+        :title="editor.i18n('ddei.brush') " @click="execBrushAction($event)">
         <div :class="{ 'panel2-content': true, 'brush-selected': editor?.ddInstance?.stage?.brushData }">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-brush"></use>
@@ -173,7 +200,11 @@
           <div class="text">{{ editor.i18n('ddei.brush') }}</div>
         </div>
       </div>
-      <div class="panel3">
+      <component v-if="validItemCondition(options?.brush) && options?.brush?.viewer" :is="options.brush.viewer"
+        :editor="editor" :options="options" v-bind="options.brush">
+      </component>
+      <div class="panel3"
+        v-if="validItemCondition(options?.setStyle) && (!options || !options.setStyle || !options.setStyle.viewer)">
         <div class="panel3-content i1" @click="showSetStyleDialog($event)">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shapes"></use>
@@ -193,7 +224,11 @@
           <div class="text">{{ editor.i18n('ddei.border') }}</div>
         </div>
       </div>
-      <div class="panel4">
+      <component v-if="validItemCondition(options?.setStyle) && options?.setStyle?.viewer" :is="options.setStyle.viewer"
+        :editor="editor" :options="options" v-bind="options.setStyle">
+      </component>
+      <div class="panel4"
+        v-if="validItemCondition(options?.changeLevel) && (!options || !options.changeLevel || !options.changeLevel.viewer)">
         <div class="panel4-content" @click="doPush('top')">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-move-top"></use>
@@ -206,9 +241,12 @@
           </svg>
           <div class="text">{{ editor.i18n('ddei.pushBottom') }}</div>
         </div>
-
       </div>
-      <div class="panel5" :style="{ 'display': canMerge() || canCancelMerge() ? '' : 'none' }">
+      <component v-if="validItemCondition(options?.changeLevel) && options?.changeLevel?.viewer"
+        :is="options.changeLevel.viewer" :editor="editor" :options="options" v-bind="options.changeLevel">
+      </component>
+      <div v-if="validItemCondition(options?.merge) && (!options || !options.merge || !options.merge.viewer)"
+        class="panel5" :style="{ 'display': canMerge() || canCancelMerge() ? '' : 'none' }">
         <div class="panel5-content" v-show="canMerge()" @click="canMerge() && doMerge()">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-merge"></use>
@@ -228,6 +266,9 @@
           <div class="text">{{ editor.i18n('ddei.align') }}</div>
         </div>
       </div>
+      <component v-if="validItemCondition(options?.merge) && options?.merge?.viewer" :is="options.merge.viewer"
+        :editor="editor" :options="options" v-bind="options.merge">
+      </component>
     </div>
   </div>
 </template>
@@ -276,6 +317,16 @@ export default {
     this.refreshData()
   },
   methods: {
+
+    validItemCondition(item) {
+      if (!item || !item.condition) {
+        return true;
+      } else {
+        let func = new Function("models", "item", "editor", "component", "return " + item.condition)
+        let rs = func(this.selectedModels, item, this.editor, this)
+        return rs
+      }
+    },
 
     forceRefreshView: function () {
       this.forceRefresh = false

@@ -539,5 +539,31 @@ export default {
     },
 
 
-  ]
+  ],
+
+  filters: {
+    LINE_OBI_FILTER: (model, params) => {
+      let line = params.line
+      if (line) {
+
+        let distLinks = line.stage.getDistModelLinks(line.id);
+        if (distLinks) {
+          for (let i = 0; i < distLinks.length;i++){
+            if(distLinks[i].sm == model){
+              return true;
+            }
+          }
+        }
+        //线段的端点如果在图形整个图形的内部，且不为distLinks，则忽略
+        let pvs = [line.startPoint,line.endPoint]
+        for (let i = 0; i < pvs.length; i++) {
+          let lPoint = pvs[i];
+          if (model.isInAreaLoose(lPoint.x, lPoint.y,true)){
+            return false;
+          }
+        }
+      }
+      return true
+    }
+  }
 }

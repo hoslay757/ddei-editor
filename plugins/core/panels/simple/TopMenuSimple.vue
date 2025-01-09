@@ -332,89 +332,91 @@ export default {
 
     resetPosition(width,height){
       
-      //横向
-      if (this.options?.direct == 2) {
-        this.$refs['topmenu'].style.maxWidth = (width - 80) + "px"
-        this.$refs['topmenu'].style.flexDirection = ""
-        if (this.options?.width) {
-          this.$refs['topmenu'].style.width = this.options.width
-        } else {
-          this.$refs['topmenu'].style.width = ""
-        }
-        if (this.options?.height) {
-          this.$refs['topmenu'].style.height = this.options.height
-        } else {
-          this.$refs['topmenu'].style.height = "32px"
-        }
+      if (this.$refs['topmenu']){
+        //横向
+        if (this.options?.direct == 2) {
+          this.$refs['topmenu'].style.maxWidth = (width - 80) + "px"
+          this.$refs['topmenu'].style.flexDirection = ""
+          if (this.options?.width) {
+            this.$refs['topmenu'].style.width = this.options.width
+          } else {
+            this.$refs['topmenu'].style.width = ""
+          }
+          if (this.options?.height) {
+            this.$refs['topmenu'].style.height = this.options.height
+          } else {
+            this.$refs['topmenu'].style.height = "32px"
+          }
 
-      }
-      //纵向
-      else {
-        this.$refs['topmenu'].style.flexDirection = "column";
-        this.$refs['topmenu'].style.maxHeight = (height - 80) + "px"
-        if (this.options?.width) {
-          this.$refs['topmenu'].style.width = this.options.width
-        } else {
-          this.$refs['topmenu'].style.width = "32px"
         }
-        if (this.options?.height) {
-          this.$refs['topmenu'].style.height = this.options.height
-        } else {
-          this.$refs['topmenu'].style.height = ""
+        //纵向
+        else {
+          this.$refs['topmenu'].style.flexDirection = "column";
+          this.$refs['topmenu'].style.maxHeight = (height - 80) + "px"
+          if (this.options?.width) {
+            this.$refs['topmenu'].style.width = this.options.width
+          } else {
+            this.$refs['topmenu'].style.width = "32px"
+          }
+          if (this.options?.height) {
+            this.$refs['topmenu'].style.height = this.options.height
+          } else {
+            this.$refs['topmenu'].style.height = ""
+          }
         }
-      }
-      //读取缓存位置
-      let cachePos = null;
-      if (this.options?.drag == 1) {
-        cachePos = DDeiUtil.getLocalStorageData("pos-" + this.editor.id + "-ddei-core-panel-topmenu-simple")
-      }
-      if (!cachePos) {
-        //位置
-        switch (this.options?.position) {
-          case 2:
-            this.$refs['topmenu'].style.left = (width - this.$refs['topmenu'].clientWidth) / 2 + "px";
-            this.$refs['topmenu'].style.top = "30px";
-            break;
-          case 3:
-            this.$refs['topmenu'].style.left = (width - this.$refs['topmenu'].clientWidth - 30) + "px";
-            this.$refs['topmenu'].style.top = "30px";
-            break;
-          case 4:
-            this.$refs['topmenu'].style.left = (width - this.$refs['topmenu'].clientWidth - 30) + "px";
-            this.$refs['topmenu'].style.top = (height - this.$refs['topmenu'].clientHeight) / 2 + "px";
-            break;
-          case 5:
-            this.$refs['topmenu'].style.left = (width - this.$refs['topmenu'].clientWidth - 30) + "px";
-            this.$refs['topmenu'].style.top = (height - this.$refs['topmenu'].clientHeight - 30) + "px";
-            break;
-          case 6:
-            this.$refs['topmenu'].style.left = (width - this.$refs['topmenu'].clientWidth) / 2 + "px";
-            this.$refs['topmenu'].style.top = (height - this.$refs['topmenu'].clientHeight - 30) + "px";
-            break;
-          case 7:
-            this.$refs['topmenu'].style.left = "30px";
-            this.$refs['topmenu'].style.top = (height - this.$refs['topmenu'].clientHeight - 30) + "px";
-            break;
-          case 8:
-            this.$refs['topmenu'].style.left = "30px";
-            this.$refs['topmenu'].style.top = (height - this.$refs['topmenu'].clientHeight) / 2 + "px";
-            break;
-          case 9:
-            this.$refs['topmenu'].style.left = (width - this.$refs['topmenu'].clientWidth) / 2 + "px";
-            this.$refs['topmenu'].style.top = (height - this.$refs['topmenu'].clientHeight) / 2 + "px";
-            break;
-          default:
-            this.$refs['topmenu'].style.left = "30px";
-            this.$refs['topmenu'].style.top = "30px";
-            break;
+        //读取缓存位置
+        let cachePos = null;
+        if (this.options?.drag == 1) {
+          cachePos = DDeiUtil.getLocalStorageData("pos-" + this.editor.id + "-ddei-core-panel-topmenu-simple")
         }
+        if (!cachePos) {
+          //位置
+          switch (this.options?.position) {
+            case 2:
+              this.$refs['topmenu'].style.left = (width - this.$refs['topmenu'].clientWidth) / 2 + "px";
+              this.$refs['topmenu'].style.top = "30px";
+              break;
+            case 3:
+              this.$refs['topmenu'].style.left = (width - this.$refs['topmenu'].clientWidth - 30) + "px";
+              this.$refs['topmenu'].style.top = "30px";
+              break;
+            case 4:
+              this.$refs['topmenu'].style.left = (width - this.$refs['topmenu'].clientWidth - 30) + "px";
+              this.$refs['topmenu'].style.top = (height - this.$refs['topmenu'].clientHeight) / 2 + "px";
+              break;
+            case 5:
+              this.$refs['topmenu'].style.left = (width - this.$refs['topmenu'].clientWidth - 30) + "px";
+              this.$refs['topmenu'].style.top = (height - this.$refs['topmenu'].clientHeight - 30) + "px";
+              break;
+            case 6:
+              this.$refs['topmenu'].style.left = (width - this.$refs['topmenu'].clientWidth) / 2 + "px";
+              this.$refs['topmenu'].style.top = (height - this.$refs['topmenu'].clientHeight - 30) + "px";
+              break;
+            case 7:
+              this.$refs['topmenu'].style.left = "30px";
+              this.$refs['topmenu'].style.top = (height - this.$refs['topmenu'].clientHeight - 30) + "px";
+              break;
+            case 8:
+              this.$refs['topmenu'].style.left = "30px";
+              this.$refs['topmenu'].style.top = (height - this.$refs['topmenu'].clientHeight) / 2 + "px";
+              break;
+            case 9:
+              this.$refs['topmenu'].style.left = (width - this.$refs['topmenu'].clientWidth) / 2 + "px";
+              this.$refs['topmenu'].style.top = (height - this.$refs['topmenu'].clientHeight) / 2 + "px";
+              break;
+            default:
+              this.$refs['topmenu'].style.left = "30px";
+              this.$refs['topmenu'].style.top = "30px";
+              break;
+          }
 
-      } else {
-        let posJson = JSON.parse(cachePos)
-        this.$refs['topmenu'].style.left = posJson.left + "px";
-        this.$refs['topmenu'].style.top = posJson.top + "px";
+        } else {
+          let posJson = JSON.parse(cachePos)
+          this.$refs['topmenu'].style.left = posJson.left + "px";
+          this.$refs['topmenu'].style.top = posJson.top + "px";
+        }
+        this.$refs['topmenu'].style.display="flex"
       }
-      this.$refs['topmenu'].style.display="flex"
     },
 
     refreshData() {

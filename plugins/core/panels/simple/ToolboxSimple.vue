@@ -87,90 +87,91 @@ export default {
   },
   methods: {
     resetPosition(width,height){
-      
-      //横向
-      if (this.options?.direct == 2) {
-        this.$refs['toolbox'].style.maxWidth = (width - 80) + "px"
-        this.$refs['toolbox'].style.flexDirection = ""
-        if (this.options?.width) {
-          this.$refs['toolbox'].style.width = this.options.width
-        } else {
-          this.$refs['toolbox'].style.width = ""
-        }
-        if (this.options?.height) {
-          this.$refs['toolbox'].style.height = this.options.height
-        } else {
-          this.$refs['toolbox'].style.height = "40px"
-        }
+      if(this.$refs['toolbox']){
+        //横向
+        if (this.options?.direct == 2) {
+          this.$refs['toolbox'].style.maxWidth = (width - 80) + "px"
+          this.$refs['toolbox'].style.flexDirection = ""
+          if (this.options?.width) {
+            this.$refs['toolbox'].style.width = this.options.width
+          } else {
+            this.$refs['toolbox'].style.width = ""
+          }
+          if (this.options?.height) {
+            this.$refs['toolbox'].style.height = this.options.height
+          } else {
+            this.$refs['toolbox'].style.height = "40px"
+          }
 
-      }
-      //纵向
-      else {
-        this.$refs['toolbox'].style.flexDirection = "column";
-        this.$refs['toolbox'].style.maxHeight = (height - 80) + "px"
-        if (this.options?.width) {
-          this.$refs['toolbox'].style.width = this.options.width
-        } else {
-          this.$refs['toolbox'].style.width = "40px"
         }
-        if (this.options?.height) {
-          this.$refs['toolbox'].style.height = this.options.height
-        } else {
-          this.$refs['toolbox'].style.height = ""
+        //纵向
+        else {
+          this.$refs['toolbox'].style.flexDirection = "column";
+          this.$refs['toolbox'].style.maxHeight = (height - 80) + "px"
+          if (this.options?.width) {
+            this.$refs['toolbox'].style.width = this.options.width
+          } else {
+            this.$refs['toolbox'].style.width = "40px"
+          }
+          if (this.options?.height) {
+            this.$refs['toolbox'].style.height = this.options.height
+          } else {
+            this.$refs['toolbox'].style.height = ""
+          }
         }
-      }
-      //读取缓存位置
-      let cachePos = null;
-      if (this.options?.drag == 1) {
-        cachePos = DDeiUtil.getLocalStorageData("pos-" + this.editor.id + "-ddei-core-panel-toolbox-simple")
-      }
-      if (!cachePos) {
-        //位置
-        switch (this.options?.position) {
-          case 2:
-            this.$refs['toolbox'].style.left = (width - this.$refs['toolbox'].clientWidth) / 2 + "px";
-            this.$refs['toolbox'].style.top = "30px";
-            break;
-          case 3:
-            this.$refs['toolbox'].style.left = (width - this.$refs['toolbox'].clientWidth - 30) + "px";
-            this.$refs['toolbox'].style.top = "30px";
-            break;
-          case 4:
-            this.$refs['toolbox'].style.left = (width - this.$refs['toolbox'].clientWidth - 30) + "px";
-            this.$refs['toolbox'].style.top = (height - this.$refs['toolbox'].clientHeight) / 2 + "px";
-            break;
-          case 5:
-            this.$refs['toolbox'].style.left = (width - this.$refs['toolbox'].clientWidth - 30) + "px";
-            this.$refs['toolbox'].style.top = (height - this.$refs['toolbox'].clientHeight - 30) + "px";
-            break;
-          case 6:
-            this.$refs['toolbox'].style.left = (width - this.$refs['toolbox'].clientWidth) / 2 + "px";
-            this.$refs['toolbox'].style.top = (height - this.$refs['toolbox'].clientHeight - 30) + "px";
-            break;
-          case 7:
-            this.$refs['toolbox'].style.left = "30px";
-            this.$refs['toolbox'].style.top = (height - this.$refs['toolbox'].clientHeight - 30) + "px";
-            break;
-          case 8:
-            this.$refs['toolbox'].style.left = "30px";
-            this.$refs['toolbox'].style.top = (height - this.$refs['toolbox'].clientHeight) / 2 + "px";
-            break;
-          case 9:
-            this.$refs['toolbox'].style.left = (width - this.$refs['toolbox'].clientWidth) / 2 + "px";
-            this.$refs['toolbox'].style.top = (height - this.$refs['toolbox'].clientHeight) / 2 + "px";
-            break;
-          default:
-            this.$refs['toolbox'].style.left = "30px";
-            this.$refs['toolbox'].style.top = "30px";
-            break;
+        //读取缓存位置
+        let cachePos = null;
+        if (this.options?.drag == 1) {
+          cachePos = DDeiUtil.getLocalStorageData("pos-" + this.editor.id + "-ddei-core-panel-toolbox-simple")
         }
+        if (!cachePos) {
+          //位置
+          switch (this.options?.position) {
+            case 2:
+              this.$refs['toolbox'].style.left = (width - this.$refs['toolbox'].clientWidth) / 2 + "px";
+              this.$refs['toolbox'].style.top = "30px";
+              break;
+            case 3:
+              this.$refs['toolbox'].style.left = (width - this.$refs['toolbox'].clientWidth - 30) + "px";
+              this.$refs['toolbox'].style.top = "30px";
+              break;
+            case 4:
+              this.$refs['toolbox'].style.left = (width - this.$refs['toolbox'].clientWidth - 30) + "px";
+              this.$refs['toolbox'].style.top = (height - this.$refs['toolbox'].clientHeight) / 2 + "px";
+              break;
+            case 5:
+              this.$refs['toolbox'].style.left = (width - this.$refs['toolbox'].clientWidth - 30) + "px";
+              this.$refs['toolbox'].style.top = (height - this.$refs['toolbox'].clientHeight - 30) + "px";
+              break;
+            case 6:
+              this.$refs['toolbox'].style.left = (width - this.$refs['toolbox'].clientWidth) / 2 + "px";
+              this.$refs['toolbox'].style.top = (height - this.$refs['toolbox'].clientHeight - 30) + "px";
+              break;
+            case 7:
+              this.$refs['toolbox'].style.left = "30px";
+              this.$refs['toolbox'].style.top = (height - this.$refs['toolbox'].clientHeight - 30) + "px";
+              break;
+            case 8:
+              this.$refs['toolbox'].style.left = "30px";
+              this.$refs['toolbox'].style.top = (height - this.$refs['toolbox'].clientHeight) / 2 + "px";
+              break;
+            case 9:
+              this.$refs['toolbox'].style.left = (width - this.$refs['toolbox'].clientWidth) / 2 + "px";
+              this.$refs['toolbox'].style.top = (height - this.$refs['toolbox'].clientHeight) / 2 + "px";
+              break;
+            default:
+              this.$refs['toolbox'].style.left = "30px";
+              this.$refs['toolbox'].style.top = "30px";
+              break;
+          }
 
-      } else {
-        let posJson = JSON.parse(cachePos)
-        this.$refs['toolbox'].style.left = posJson.left + "px";
-        this.$refs['toolbox'].style.top = posJson.top + "px";
+        } else {
+          let posJson = JSON.parse(cachePos)
+          this.$refs['toolbox'].style.left = posJson.left + "px";
+          this.$refs['toolbox'].style.top = posJson.top + "px";
+        }
+        this.$refs['toolbox'].style.display="flex"
       }
-      this.$refs['toolbox'].style.display="flex"
     },
 
     refreshData() {

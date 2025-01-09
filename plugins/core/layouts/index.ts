@@ -1,6 +1,7 @@
 import {DDeiPluginBase} from "ddei-framework";
 import DDeiCoreStandLayout from "./stand-layout";
 import DDeiCoreSimpleLayout from "./simple-layout";
+import DDeiCoreMobileLayout from "./mobile-layout";
 
 
 
@@ -13,7 +14,7 @@ class DDeiCoreLayouts extends DDeiPluginBase{
   static defaultIns:DDeiCoreLayouts = new DDeiCoreLayouts(null);
 
 
-  plugins: object[] = [DDeiCoreStandLayout, DDeiCoreSimpleLayout]
+  plugins: object[] = [DDeiCoreStandLayout, DDeiCoreSimpleLayout, DDeiCoreMobileLayout]
 
 
   getLayouts(editor){
@@ -47,5 +48,5 @@ class DDeiCoreLayouts extends DDeiPluginBase{
   }
 }
 
-export { DDeiCoreLayouts, DDeiCoreStandLayout, DDeiCoreSimpleLayout }
+export { DDeiCoreLayouts, DDeiCoreStandLayout, DDeiCoreSimpleLayout, DDeiCoreMobileLayout }
 export default DDeiCoreLayouts
