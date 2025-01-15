@@ -39,10 +39,11 @@ export default defineComponent({
       ]
     }
     const options = markRaw({
-      currentLayout: currentLayout,
+      // currentLayout: currentLayout,
       config: {
         ratio: 0.7, //默认缩放比例为120%
         pixel:2, //调整渲染质量
+        // GLOBAL_AUTO_OBI:false,
         // readonly:true,
         // readonly:1,
         // paper:"A6",

@@ -9,6 +9,7 @@ import MenuRemoveRow from "./menu-remove-row"
 import MenuRemoveSheet from "./menu-remove-sheet"
 import MenuDisabledAutoObi from "./menu-disabled-autoobi"
 import MenuEnableAutoObi from "./menu-enable-autoobi"
+import MenuSysDefaultAutoObi from "./menu-sysdefault-autoobi"
 
 
 /**
@@ -24,7 +25,7 @@ class DDeiCoreMenus extends DDeiPluginBase{
 
 
   plugins: object[] = [MenuCancelMergeCell, MenuCopySheet, MenuInsertCol, MenuInsertRow,
-    MenuMergeCell, MenuRemoveCol, MenuRemoveRow, MenuRemoveSheet, MenuDisabledAutoObi,MenuEnableAutoObi]
+    MenuMergeCell, MenuRemoveCol, MenuRemoveRow, MenuRemoveSheet, MenuDisabledAutoObi, MenuEnableAutoObi, MenuSysDefaultAutoObi]
 
 
   getMenus(editor){
@@ -59,6 +60,6 @@ class DDeiCoreMenus extends DDeiPluginBase{
 }
 export {
   DDeiCoreMenus, MenuCancelMergeCell, MenuCopySheet, MenuInsertCol, MenuInsertRow,
-  MenuMergeCell, MenuRemoveCol, MenuRemoveRow, MenuRemoveSheet, MenuDisabledAutoObi, MenuEnableAutoObi
+  MenuMergeCell, MenuRemoveCol, MenuRemoveRow, MenuRemoveSheet, MenuDisabledAutoObi, MenuEnableAutoObi, MenuSysDefaultAutoObi
 }
 export default DDeiCoreMenus

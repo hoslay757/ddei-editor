@@ -52,9 +52,9 @@ class MenuEnableAutoObi extends DDeiMenuBase {
    */
   action(model: object, evt: Event): void {
     if (model?.baseModelType == 'DDeiLine') {
-      delete model.disabledAutoObi
+      model.autoObiPolicy = 2
       let ddInstance = model.stage.ddInstance
-      
+
       model.refreshLinePoints()
       ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
       ddInstance.bus.executeAll();
@@ -67,7 +67,8 @@ class MenuEnableAutoObi extends DDeiMenuBase {
    */
   isVisiable(model: object): boolean {
     //当前控件为表格控件，TODO 或者布局方式为表格的容器控件
-    if (!this.disabled && model?.baseModelType == 'DDeiLine' && model.disabledAutoObi) {
+    
+    if (!this.disabled && model?.baseModelType == 'DDeiLine' && ((model.stage.ddInstance.GLOBAL_AUTO_OBI && model.autoObiPolicy == 1) || (!model.stage.ddInstance.GLOBAL_AUTO_OBI && !model.autoObiPolicy))) {
       return true
     }
     return false;

@@ -1,21 +1,21 @@
 import {DDeiEnumBusCommandType} from "ddei-framework";
 import {DDeiMenuBase} from "ddei-framework";
 /**
- * 取消/开启 自动避障
+ * 采用系统避障策略
  */
-class MenuDisabledAutoObi extends DDeiMenuBase {
+class MenuSysDefaultAutoObi extends DDeiMenuBase {
 
 
-  name: string = "ddei-core-menu-disabled-auto-obi"
+  name: string = "ddei-core-menu-sysdefault-auto-obi"
 
 
   /**
    * 缺省实例
    */
-  static defaultIns: MenuDisabledAutoObi = new MenuDisabledAutoObi();
+  static defaultIns: MenuSysDefaultAutoObi = new MenuSysDefaultAutoObi();
 
   defaultOptions: object = {
-    'label': 'ddei.disabledAutoObi',
+    'label': 'ddei.sysDefaultAutoObi',
     'disabled': false
   }
 
@@ -27,9 +27,9 @@ class MenuDisabledAutoObi extends DDeiMenuBase {
       let newOptions = {}
       if (fullConfig) {
         if (fullConfig) {
-          if (options[MenuDisabledAutoObi.defaultIns.name]) {
-            for (let i in options[MenuDisabledAutoObi.defaultIns.name]) {
-              newOptions[i] = options[MenuDisabledAutoObi.defaultIns.name][i]
+          if (options[MenuSysDefaultAutoObi.defaultIns.name]) {
+            for (let i in options[MenuSysDefaultAutoObi.defaultIns.name]) {
+              newOptions[i] = options[MenuSysDefaultAutoObi.defaultIns.name][i]
             }
           }
         }
@@ -37,24 +37,24 @@ class MenuDisabledAutoObi extends DDeiMenuBase {
         newOptions = options
       }
       if (newOptions && Object.keys(newOptions).length !== 0) {
-        let panels = new MenuDisabledAutoObi(newOptions);
+        let panels = new MenuSysDefaultAutoObi(newOptions);
         return panels;
       }
     }
-    return MenuDisabledAutoObi;
+    return MenuSysDefaultAutoObi;
   }
 
   static modify(fn) {
-    return MenuDisabledAutoObi.defaultIns.modify(fn)
+    return MenuSysDefaultAutoObi.defaultIns.modify(fn)
   }
   /**
    * 执行的方法
    */
   action(model: object, evt: Event): void {
     if (model?.baseModelType == 'DDeiLine') {
-      model.autoObiPolicy = 1
+      delete model.autoObiPolicy
       let ddInstance = model.stage.ddInstance
-      
+
       model.refreshLinePoints()
       ddInstance.bus.push(DDeiEnumBusCommandType.RefreshShape);
       ddInstance.bus.executeAll();
@@ -66,11 +66,8 @@ class MenuDisabledAutoObi extends DDeiMenuBase {
    * 判定是否显示的方法
    */
   isVisiable(model: object): boolean {
-    //当前控件为表格控件，TODO 或者布局方式为表格的容器控件
-    
     if (!this.disabled && model?.baseModelType == 'DDeiLine' 
-      && ((model.stage.ddInstance.GLOBAL_AUTO_OBI && !model.autoObiPolicy) || (!model.stage.ddInstance.GLOBAL_AUTO_OBI && model.autoObiPolicy == 2))
-    ) {
+      && ((model.stage.ddInstance.GLOBAL_AUTO_OBI && model.autoObiPolicy == 2) || (!model.stage.ddInstance.GLOBAL_AUTO_OBI && model.autoObiPolicy == 1))) {
       return true
     }
     return false;
@@ -78,4 +75,4 @@ class MenuDisabledAutoObi extends DDeiMenuBase {
 
 }
 
-export default MenuDisabledAutoObi;
+export default MenuSysDefaultAutoObi;

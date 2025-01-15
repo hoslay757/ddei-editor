@@ -562,9 +562,11 @@ export default {
             return false;
           }
         }
-        //如果取消了避障，则忽略
-        if (line.disabledAutoObi) {
-          
+        //如果没有设置自动避障，并且全局也取消自动避障
+        
+        if (!line.autoObiPolicy && !model.stage.ddInstance.GLOBAL_AUTO_OBI) { 
+          return false;
+        } else if (line.autoObiPolicy == 1){
           return false;
         }
       }

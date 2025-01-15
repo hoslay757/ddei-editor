@@ -257,6 +257,7 @@ export default {
   },
   menus:[
     { name: "ddei-core-menu-disabled-auto-obi" },
-    { name: "ddei-core-menu-enable-auto-obi" }
+    { name: "ddei-core-menu-enable-auto-obi" },
+    { name: "ddei-core-menu-sysdefault-auto-obi" }
   ]
 }

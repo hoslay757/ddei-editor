@@ -80,7 +80,8 @@ export default {
     propertyName: "Property",
     searchResult: "Search Result",
     enableAutoObi: "Avoiding Obstacles",
-    disabledAutoObi: "Cancel Avoiding Obstacles",
+    disabledAutoObi: "Disable Avoiding Obstacles",
+    sysDefaultAutoObi: "Default Avoiding Obstacles",
     property: {
       id: 'id',
       code: 'Code',

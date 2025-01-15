@@ -228,7 +228,7 @@ class DDeiKeyActionStartQuickEdit extends DDeiKeyAction {
                     dataJson["textStyle"] = { paddingWeight: 0 }
                     if (isLineLM){
                       
-                      dataJson["fill"] = {type:1 ,color: 'white' }
+                      // dataJson["fill"] = {type:1 ,color: 'white' }
                     }
                     for (let i in dataJson) {
                       let value = dataJson[i]
