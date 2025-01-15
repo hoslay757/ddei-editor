@@ -545,7 +545,7 @@ export default {
     LINE_OBI_FILTER: (model, params) => {
       let line = params.line
       if (line) {
-
+        
         let distLinks = line.stage.getDistModelLinks(line.id);
         if (distLinks) {
           for (let i = 0; i < distLinks.length;i++){
@@ -561,6 +561,11 @@ export default {
           if (model.isInAreaLoose(lPoint.x, lPoint.y,true)){
             return false;
           }
+        }
+        //如果取消了避障，则忽略
+        if (line.disabledAutoObi) {
+          
+          return false;
         }
       }
       return true

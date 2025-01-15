@@ -28,7 +28,7 @@ export default defineComponent({
         ]
       currentLayout = "ddei-core-layout-mobile"
     }else{
-      exts = [DDeiExtTooltip,
+      exts = [
         DDeiExtQuickStyle,
         DDeiCoreCanvasQuickDialog
         // .configuration({
@@ -113,7 +113,7 @@ export default defineComponent({
           other: ['ddei-core-panel-toolbox-simple', 'ddei-core-panel-topmenu-simple'],
           middle: ['ddei-core-panel-canvasview'],
           right: [],
-          bottom: []
+          bottom: ['ddei-core-panel-bottommenu']
         }),
         DDeiExtUML,
         DDeiExtSearch.modify((plugin)=>{
@@ -121,7 +121,7 @@ export default defineComponent({
         }),
         // DDeiExtTooltip,
         // DDeiExtQuickStyle,
-        DDeiExtQuickControl,
+        // DDeiExtQuickControl,
         ...exts
         //配置htmlviewer插件，matchField用于声明图形控件中的属性与config中的key对应字段
         // DDeiExtHtmlViewer.configuration({

@@ -254,5 +254,9 @@ export default {
     LINE_OBI_FILTER: (model, params)=>{
       return false
     }
-  }
+  },
+  menus:[
+    { name: "ddei-core-menu-disabled-auto-obi" },
+    { name: "ddei-core-menu-enable-auto-obi" }
+  ]
 }

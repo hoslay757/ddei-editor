@@ -119,6 +119,9 @@ export default {
             }
             loadControlDefineExt(oldControl)
           }
+          if (control.viewer) {
+            oldControl.viewer = control.viewer
+          }
           control = oldControl
         }
         this.editor.controls.set(control.id, control);
@@ -157,16 +160,18 @@ export default {
       })
     }
 
+    
     this.editor.controls?.forEach(control => {
       if (control.menus) {
-        if (!editorInstance.menuMapping[control.id]) {
-          editorInstance.menuMapping[control.id] = control.menus
+        
+        if (!this.editor.menuMapping[control.id]) {
+          this.editor.menuMapping[control.id] = control.menus
         }
-        let menus = editorInstance.menuMapping[control.id];
+        let menus = this.editor.menuMapping[control.id];
         for (let i = 0; i < menus.length; i++) {
-          for (let j in editorInstance.menus) {
-            if (editorInstance.menus[j].name == menus[i].name) {
-              menus[i] = editorInstance.menus[j];
+          for (let j in this.editor.menus) {
+            if (this.editor.menus[j].name == menus[i].name) {
+              menus[i] = this.editor.menus[j];
               break;
             }
           }

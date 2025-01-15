@@ -81,6 +81,8 @@ export default {
     paper: '纸张',
     propertyName:"属性",
     searchResult: "搜索结果",
+    enableAutoObi: "开启避障",
+    disabledAutoObi: "取消避障",
     property:{
       id:'id',
       code:'编码',
