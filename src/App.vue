@@ -39,7 +39,7 @@ export default defineComponent({
       ]
     }
     const options = markRaw({
-      // currentLayout: currentLayout,
+      currentLayout: currentLayout,
       config: {
         ratio: 0.7, //默认缩放比例为120%
         pixel:2, //调整渲染质量
@@ -122,7 +122,7 @@ export default defineComponent({
         }),
         // DDeiExtTooltip,
         // DDeiExtQuickStyle,
-        // DDeiExtQuickControl,
+        DDeiExtQuickControl,
         ...exts
         //配置htmlviewer插件，matchField用于声明图形控件中的属性与config中的key对应字段
         // DDeiExtHtmlViewer.configuration({
